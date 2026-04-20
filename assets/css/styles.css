@@ -410,6 +410,171 @@ section {
     font-size: 1rem;
 }
 
+/* Portal splash (homepage — image with 2 clickable zones) */
+.portal-body {
+    margin: 0;
+    background: var(--night);
+}
+
+.portal-splash {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem 2rem;
+    color: #fff;
+    background: var(--night);
+}
+
+.portal-splash__lang {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.4rem;
+    z-index: 5;
+}
+
+.portal-splash__lang a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    transition: background var(--transition), color var(--transition);
+}
+
+.portal-splash__lang a:hover,
+.portal-splash__lang a[aria-current="true"] {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.portal-splash__frame {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+}
+
+.portal-splash__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Invisible clickable hotspots over the 2 badges in the image.
+   The badges sit in the lower half of the image (starry part).
+   Coordinates are in % of the image — fine-tuned against the JPG (1200x660). */
+.portal-splash__hotspot {
+    position: absolute;
+    top: 58%;
+    width: 17%;
+    height: 26%;
+    border-radius: 50%;
+    text-decoration: none;
+    color: transparent;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.portal-splash__hotspot--left {
+    left: 24%;
+}
+
+.portal-splash__hotspot--right {
+    right: 24%;
+}
+
+.portal-splash__hotspot:hover,
+.portal-splash__hotspot:focus-visible {
+    outline: none;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 0 30px 4px rgba(255, 215, 145, 0.4);
+}
+
+/* Accessible label — visually hidden unless focus/hover */
+.portal-splash__hotspot-label {
+    position: absolute;
+    left: 50%;
+    bottom: -3.2rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.5rem 0.9rem;
+    background: rgba(7, 6, 26, 0.85);
+    border: 1px solid rgba(255, 215, 145, 0.35);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition);
+}
+
+.portal-splash__hotspot-label strong {
+    color: var(--gold-soft, #e6c98a);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.portal-splash__hotspot-label span {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    text-transform: none;
+}
+
+.portal-splash__hotspot:hover .portal-splash__hotspot-label,
+.portal-splash__hotspot:focus-visible .portal-splash__hotspot-label {
+    opacity: 1;
+}
+
+.portal-splash__footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.portal-splash__footer a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+}
+
+.portal-splash__footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .portal-splash__hotspot-label {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.6rem;
+    }
+    .portal-splash__lang {
+        top: 0.5rem;
+        right: 0.6rem;
+    }
+}
+
 /* Portal (homepage) */
 .portal {
     min-height: 100vh;
