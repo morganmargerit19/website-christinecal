@@ -1,8 +1,8 @@
 # Session state — Refonte christinecal.com
 
 > Fichier de reprise pour le prochain chat Claude Code. Lu au démarrage.
-> Branche de travail : `claude/christine-cal-website-OIZPX`
-> Dernière mise à jour : 2026-04-20
+> Branche de travail : `claude/continue-session-state-a0X9q`
+> Dernière mise à jour : 2026-04-20 (après Vagues 2-3-4)
 
 ## Contexte général
 
@@ -51,9 +51,23 @@ b163da6 Rebuild christinecal.com as static site
 **Automation :**
 - `.github/workflows/fetch-wp-media.yml` — télécharge les 261 images sur un runner GitHub (le sandbox Claude Code bloque `coach.christkal5d.com` et `www.christinecal-coach-quantique.com` via allowlist). À vérifier dans l'onglet Actions que le run a réussi et commité les images dans `assets/images/wp/`.
 
+**Vagues 2-3-4 (session du 2026-04-20) :**
+- `sources/scripts/generate_pages.py` — générateur avec manifest portfolio + pages
+- Vague 2 : 19 pages portfolio générées + hub-grids branchés
+- Vague 3 : 21 pages secondaires (coaching/faq/presse/partages/témoignages/calendrier)
+- Vague 4 : sitemap.xml étendu (~47 URLs)
+
 ### ⏳ Ce qui reste à faire
 
-**Vague 2 — ~19 pages portfolio (ateliers/stages/conférences)**
+**Relecture éditoriale** — les pages générées auto contiennent encore :
+- des balises `<h3>` utilisées comme gras/souligné WP (à convertir en `<p><strong>` selon cas)
+- quelques résidus `<img>` avec URLs WP non téléchargées (voir workflow `fetch-wp-media.yml`)
+- des liens vers `jeanneracaud.fr`, `debowska.fr`, `christine-coach.com` à valider
+- le fichier `coaching-professionnel.html` a été nettoyé mais le contenu éditorial mériterait une passe humaine
+
+**Images WP** — vérifier que le workflow `.github/workflows/fetch-wp-media.yml` a bien rapatrié les 261 images dans `assets/images/wp/` (si non, relancer manuellement depuis l'onglet Actions).
+
+**Ancienne liste — Vague 2 (maintenant faite)**
 
 Créer un script Python `sources/scripts/generate_pages.py` qui :
 1. Lit un fichier `.md` dans `sources/wp-extract/`
