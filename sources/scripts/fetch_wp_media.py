@@ -102,7 +102,11 @@ def main() -> int:
         print("\nFailed URLs:")
         for url, reason in failures:
             print(f"  [{reason}] {url}")
-    return 0 if failed < len(urls) else 2
+    # Always return 0 — individual download failures are logged but must not
+    # kill the workflow, otherwise the commit step never runs and we can't
+    # observe what happened. A true fatal error (missing URL list) already
+    # returned early above.
+    return 0
 
 
 if __name__ == "__main__":
