@@ -153,7 +153,10 @@ def clean_html(html: str) -> str:
     html = re.sub(r'href="/contact/?"', 'href="../contact.html"', html)
     html = re.sub(r'href="/partages/?"', 'href="partages.html"', html)
 
-    # 8. Drop empty anchors that were wrapping images
+    # 8. Drop <img> tags with base64 data URLs (pollution from WP exports)
+    html = re.sub(r'<img[^>]*src="data:[^"]*"[^>]*/?>', "", html)
+
+    # 9. Drop empty anchors that were wrapping images
     html = re.sub(r"<a[^>]*>\s*</a>", "", html)
 
     # 9. Drop empty headings
