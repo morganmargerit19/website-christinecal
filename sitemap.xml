@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
     <url>
         <loc>https://www.christinecal.com/</loc>
         <changefreq>monthly</changefreq>
@@ -15,35 +16,62 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://www.christinecal.com/consultations.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.christinecal.com/corps-lumiere-vortex.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.christinecal.com/retour-du-futur.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.christinecal.com/mont-shasta-telos.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
-        <loc>https://www.christinecal.com/bugarach.html</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.9</priority>
-    </url>
-    <url>
         <loc>https://www.christinecal.com/contact.html</loc>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
+
+    <!-- Éveil à Soi -->
+    <url><loc>https://www.christinecal.com/eveil-a-soi/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/consultations.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/corps-lumiere-vortex.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/estime-de-soi.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/depasser-sa-peur.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/feminin-sacre.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/couple-mode-emploi.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/couple-ame-soeur.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/merkaba.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/champ-multidimensionnel.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/triple-flamme.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/voyage-de-l-ame.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/passage-5eme-dimension.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/humain-spiritualise.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/flammes-sacrees-7-rayons.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/ia-ethique-humaine.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/conference-nouveaute.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/coaching-quantique.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/coaching-multidimensionnel.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/coaching-eveil.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/coaching-professionnel.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/conferences.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/calendrier.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/faq.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/presse.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/partages.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/temoignages.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/centre-expansion.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-a-soi/nouvelle-ere-5d.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+
+    <!-- Éveil au Soi -->
+    <url><loc>https://www.christinecal.com/eveil-au-soi/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/mont-shasta-telos.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/retour-du-futur.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/bugarach.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/stage-telos-5d.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/shasta-a-plazac.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/voyage-telos.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/voyage-telos-conscient.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/voyage-telos-2.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/voyage-mont-shasta.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/ascension-planetaire-5d.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/intra-terrestres-5d.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/ateliers-stages.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/calendrier.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/temoignages.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/news-presse.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/partages.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+    <url><loc>https://www.christinecal.com/eveil-au-soi/reseau-telos.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
+
     <url>
         <loc>https://www.christinecal.com/en/</loc>
         <changefreq>yearly</changefreq>
