@@ -29,7 +29,22 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Diagnose legacy WordPress hosts
+        continue-on-error: true
+        run: |
+          set -x
+          for host in coach.christkal5d.com www.christinecal-coach-quantique.com; do
+            echo "--- $host ---"
+            getent hosts "$host" || echo "DNS lookup FAILED"
+            curl -sS -o /dev/null -w "HTTP %{http_code}  connect=%{time_connect}s  total=%{time_total}s\n" --max-time 15 "http://$host/" || echo "curl FAILED"
+          done
+          echo "--- first image from each host ---"
+          head -n 5 sources/wp-extract/image-urls.txt || true
+          awk -F/ '/christkal5d/ {print; exit}' sources/wp-extract/image-urls.txt | xargs -r -I{} curl -sS -o /dev/null -w "HEAD {} -> %{http_code}\n" -I --max-time 15 "{}" || true
+          awk -F/ '/christinecal-coach-quantique/ {print; exit}' sources/wp-extract/image-urls.txt | xargs -r -I{} curl -sS -o /dev/null -w "HEAD {} -> %{http_code}\n" -I --max-time 15 "{}" || true
+
       - name: Download WordPress media
+        continue-on-error: true
         run: python3 sources/scripts/fetch_wp_media.py
 
       - name: Commit fetched media
