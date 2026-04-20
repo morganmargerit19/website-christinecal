@@ -73,15 +73,15 @@ e909ecd Extract image URL inventory from WP exports + document media rehydration
 
 ### ⏳ Ce qui reste à faire
 
-**EN PRIORITÉ au redémarrage :**
+**EN PRIORITÉ au redémarrage :** _(mise à jour 2026-04-20 tard soirée — les 3 points ci-dessous sont FAITS)_
 
-1. **Vérifier que le workflow `fetch-wp-media.yml` a rapatrié les 261 images** sur `main` :
-   - Un commit `github-actions[bot]` ("Rehydrate N WordPress media files") doit apparaître sur `main`
-   - À la fin de la session 2026-04-20, le workflow a été poussé sur `main` mais on n'avait pas encore confirmation du run (monitor lancé, pas de commit bot confirmé avant coupure)
-   - Si pas de commit bot → aller sur `github.com/morganmargerit19/website-christinecal/actions` onglet "Fetch WordPress media", voir le log, et/ou relancer via "Run workflow"
-   - Si succès → **il faudra merger `main` dans la branche de travail** (ou rebaser) pour récupérer le dossier `assets/images/wp/` avec les ~261 images sous `coach-christkal5d/YYYY/MM/` et `coach-quantique/YYYY/MM/`
+1. ✅ Workflow `fetch-wp-media.yml` : **209/261 images rehydratées** (commits `68aec04` sur main + `7a2b459` sur la branche, mergés dans `ebbd6bc`/`702f561`). Les 52 autres sont des URLs 404 mortes — acceptable.
+2. ✅ 17 `<img>` brisés retirés automatiquement des pages (10 images manquantes, référencées 17 fois) — commit `ce83539`.
+3. ✅ CSS `alignright`/`alignleft`/`aligncenter`/`alignnone` de WordPress ajouté à `styles.css` — commit `5914dc5`.
 
-2. **Relecture éditoriale des pages générées auto** (Vagues 2 et 3) — elles sont publiables en l'état mais contiennent :
+**Reste à faire au redémarrage :**
+
+1. **Relecture éditoriale des pages générées auto** (Vagues 2 et 3) — elles sont publiables en l'état mais contiennent :
    - des balises `<h3>` utilisées comme gras/souligné WP (à convertir en `<p><strong>` selon cas)
    - quelques résidus `<img>` pointant vers `../assets/images/wp/...` — si les images ne sont pas là, l'alt text s'affichera (pas critique)
    - des liens vers `jeanneracaud.fr`, `debowska.fr`, `christine-coach.com` à valider ou remplacer
