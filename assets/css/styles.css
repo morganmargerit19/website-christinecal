@@ -1155,6 +1155,100 @@ section {
     font-weight: 500;
 }
 
+/* Hub cards (eveil-a-soi / eveil-au-soi landing grids) */
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.hub-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #fff;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.hub-card:hover,
+.hub-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(63, 61, 156, 0.3);
+    border-color: var(--indigo-500);
+    text-decoration: none;
+}
+
+.hub-card__eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--indigo-500);
+}
+
+.hub-card h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.25;
+}
+
+.hub-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    flex: 1;
+}
+
+.hub-card__cta {
+    margin-top: var(--space-2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--indigo-500);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.hub-card__cta::after {
+    content: "→";
+    transition: transform var(--transition);
+}
+
+.hub-card:hover .hub-card__cta::after {
+    transform: translateX(4px);
+}
+
+.hub-card--coming {
+    background: var(--paper-soft);
+    border-style: dashed;
+    cursor: default;
+}
+
+.hub-card--coming:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--border);
+}
+
+.hub-card--coming .hub-card__cta {
+    color: var(--ink-soft);
+    font-style: italic;
+}
+
+.hub-card--coming .hub-card__cta::after {
+    content: "";
+}
+
 /* Footer */
 .site-footer {
     margin-top: var(--space-7);
