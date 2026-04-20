@@ -1,0 +1,46 @@
+name: Fetch WordPress media
+
+# Downloads every image URL listed in sources/wp-extract/image-urls.txt from the
+# two legacy WordPress hosts and commits the result to assets/images/wp/.
+# Runs on GitHub-hosted runners because the Claude Code sandbox blocks outbound
+# HTTP to those hosts via an allowlist.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "sources/wp-extract/image-urls.txt"
+      - ".github/workflows/fetch-wp-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Download WordPress media
+        run: python3 sources/scripts/fetch_wp_media.py
+
+      - name: Commit fetched media
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/wp/
+          if git diff --cached --quiet; then
+            echo "No new media to commit."
+            exit 0
+          fi
+          count=$(git diff --cached --name-only | wc -l | tr -d ' ')
+          git commit -m "Rehydrate ${count} WordPress media files from legacy hosts"
+          git push
