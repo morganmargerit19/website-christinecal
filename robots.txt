@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /sources/
+Disallow: /merci.html
+
+Sitemap: https://www.christinecal.com/sitemap.xml
