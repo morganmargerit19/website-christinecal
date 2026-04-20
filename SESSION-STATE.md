@@ -14,9 +14,15 @@ Refonte du site de Christine CAL (coach médium) en **site statique unifié** su
 - Formulaire : Netlify Forms
 - Pas de boutique ni blog
 
-## État actuel (commits sur la branche)
+## État actuel (commits sur la branche `claude/continue-session-state-a0X9q`)
 
 ```
+2ca94ab Update SESSION-STATE for Waves 2-3-4 completion
+ac33641 Wave 4 — update sitemap with all new sub-section pages
+58c6ad5 Wave 3 — generate 21 secondary pages from WP extracts
+71dab4c Wire hub-grids to new Wave 2 portfolio pages
+1113829 Wave 2 — generate 19 portfolio pages from WP extracts
+ba18974 Add SESSION-STATE.md for handoff to next chat session
 277a0e3 Add GitHub Actions workflow to rehydrate WordPress media
 b7ca99f Extract image URL inventory from WP exports + document media rehydration
 bf1be9e Wave 1 — enrich 7 pages with real WordPress content
@@ -24,6 +30,14 @@ bf1be9e Wave 1 — enrich 7 pages with real WordPress content
 f426d8f Restructure into 2 unified sub-sections (eveil-a-soi + eveil-au-soi)
 2a236cf Fix portal: remove overlay text, 2 hotspots
 b163da6 Rebuild christinecal.com as static site
+```
+
+**main** a reçu (cherry-pick) les commits workflow + image-urls.txt pour qu'il se déclenche automatiquement :
+```
+af9287e Add GitHub Actions workflow to rehydrate WordPress media
+e909ecd Extract image URL inventory from WP exports + document media rehydration
+611b33b exports wordpress des 2 sites (Morgan)
+026f553 Add files via upload
 ```
 
 ### ✅ Ce qui est fait
@@ -59,13 +73,47 @@ b163da6 Rebuild christinecal.com as static site
 
 ### ⏳ Ce qui reste à faire
 
-**Relecture éditoriale** — les pages générées auto contiennent encore :
-- des balises `<h3>` utilisées comme gras/souligné WP (à convertir en `<p><strong>` selon cas)
-- quelques résidus `<img>` avec URLs WP non téléchargées (voir workflow `fetch-wp-media.yml`)
-- des liens vers `jeanneracaud.fr`, `debowska.fr`, `christine-coach.com` à valider
-- le fichier `coaching-professionnel.html` a été nettoyé mais le contenu éditorial mériterait une passe humaine
+**EN PRIORITÉ au redémarrage :**
 
-**Images WP** — vérifier que le workflow `.github/workflows/fetch-wp-media.yml` a bien rapatrié les 261 images dans `assets/images/wp/` (si non, relancer manuellement depuis l'onglet Actions).
+1. **Vérifier que le workflow `fetch-wp-media.yml` a rapatrié les 261 images** sur `main` :
+   - Un commit `github-actions[bot]` ("Rehydrate N WordPress media files") doit apparaître sur `main`
+   - À la fin de la session 2026-04-20, le workflow a été poussé sur `main` mais on n'avait pas encore confirmation du run (monitor lancé, pas de commit bot confirmé avant coupure)
+   - Si pas de commit bot → aller sur `github.com/morganmargerit19/website-christinecal/actions` onglet "Fetch WordPress media", voir le log, et/ou relancer via "Run workflow"
+   - Si succès → **il faudra merger `main` dans la branche de travail** (ou rebaser) pour récupérer le dossier `assets/images/wp/` avec les ~261 images sous `coach-christkal5d/YYYY/MM/` et `coach-quantique/YYYY/MM/`
+
+2. **Relecture éditoriale des pages générées auto** (Vagues 2 et 3) — elles sont publiables en l'état mais contiennent :
+   - des balises `<h3>` utilisées comme gras/souligné WP (à convertir en `<p><strong>` selon cas)
+   - quelques résidus `<img>` pointant vers `../assets/images/wp/...` — si les images ne sont pas là, l'alt text s'affichera (pas critique)
+   - des liens vers `jeanneracaud.fr`, `debowska.fr`, `christine-coach.com` à valider ou remplacer
+   - le fichier `eveil-a-soi/coaching-professionnel.html` avait du contenu pollué (images base64 inline de 400k chars) → nettoyé par le script mais mérite une passe humaine
+   - les sections sans contenu significatif (pages `partages`, `presse`, `news-presse` : certaines sont vides ou très courtes)
+
+3. **Pages "calendrier" et "temoignages"** — ces pages existent en FR mais pointent souvent vers l'ancien calendrier WordPress vide. Christine devra fournir les vraies dates/témoignages.
+
+**Bugs potentiels à tester en survolant le site :**
+- Les hub-cards de `eveil-a-soi/index.html` pointent désormais vers 13 pages — vérifier que toutes sont accessibles et que la mise en page grid reste correcte (13 cartes = 4 lignes de 3 + 1 ou répartition différente selon CSS)
+- Le lang-switch dans les pages générées a un href relatif vers le nom de fichier (`estime-de-soi.html`) : OK pour "FR" sur la même page, mais aucune version EN n'existe — acceptable à ce stade
+- La section CTA finale (bouton "Me contacter") alterne le background via un calcul `len(sections) % 2`, ce qui peut donner 2 bg identiques consécutifs pour certaines pages — cosmétique, à polir
+
+**Travail de fond encore à faire (hors portée des 4 vagues) :**
+- Version EN du site (scaffolding `/en/` existe mais vide)
+- Pages 404 personnalisée
+- Calendly embed + handles réseaux sociaux (en attente des réponses de Christine)
+- Logo (en attente)
+
+## Points techniques à retenir pour la reprise
+
+- Le **générateur** `sources/scripts/generate_pages.py` est idempotent : il peut être relancé (`python3 sources/scripts/generate_pages.py all`) pour régénérer tout, ou par catégorie (`portfolio`, `pages`).
+- Il a 2 manifests Python inline : `PORTFOLIO_MANIFEST` (19 entrées) et `PAGES_MANIFEST` (21 entrées). Pour ajouter une page, éditer le manifest.
+- Le script strippe : WPBakery shortcodes, `style=""`, `<span>` nus, tables-autour-d'iframes, images `data:base64`, anchors vides, headings vides. Il réécrit les URLs d'images et les liens cross-domain.
+- Le cleaner **n'utilise pas** de vrai parseur HTML (uniquement regex) — si un jour il faut un fidélité plus haute, passer à BeautifulSoup.
+
+## Branche et git
+
+- **Branche de travail** : `claude/continue-session-state-a0X9q` (tout est poussé, rien en local non commité à la fin de la session)
+- **main** a été mis à jour avec le workflow (2 cherry-picks) — NE PAS supprimer ces commits
+- **Ancienne branche** `claude/christine-cal-website-OIZPX` : peut être supprimée après validation, elle est antérieure et moins complète
+- Règle : ne pas créer de PR tant que Morgan n'a pas demandé explicitement
 
 **Ancienne liste — Vague 2 (maintenant faite)**
 
