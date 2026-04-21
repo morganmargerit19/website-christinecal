@@ -89,6 +89,12 @@ def clean_html(html: str) -> str:
     # Any remaining [vc_xxx ...] or [/vc_xxx]
     html = re.sub(r"\[/?vc_[a-z_]+(?:\s+[^\]]*)?\]", "", html)
 
+    # 1b. Strip generic WordPress shortcodes we don't render (TablePress,
+    #     Contact Form 7, caption, etc.). Conservative: only strip shortcodes
+    #     that are self-closing `[name ... /]` or pairs on one line.
+    html = re.sub(r"\[[a-z_]+(?:\s+[^\[\]]*)?/\]", "", html)
+    html = re.sub(r"\[/?(?:table|caption|gallery|embed|audio|video|playlist|contact-form-7|cf7)[^\]]*\]", "", html)
+
     # 2. Strip style attributes
     html = re.sub(r"\s+style=\"[^\"]*\"", "", html)
     html = re.sub(r"\s+style='[^']*'", "", html)
@@ -245,12 +251,24 @@ def clean_html(html: str) -> str:
     # 10. Drop empty headings
     html = re.sub(r"<h[1-6][^>]*>\s*</h[1-6]>", "", html)
 
+    # 10b. Testimonial-style runs: split adjacent quoted passages so each
+    #      becomes its own paragraph. WP exports often concatenate them.
+    html = re.sub(r'""\s*(?=[A-Z«"])', '"\n\n"', html)       # ""X → new para
+    html = re.sub(r'"\."\s*(?=[A-Z«"])', '".\n\n"', html)   # "."X → split on period-between-quotes
+    html = re.sub(r'(\w\.)"(?=[A-Z«"])', r'\1"\n\n', html)  # word."X → new para
+    html = re.sub(r'(!")\s+"(?=[A-Z])', r'\1\n\n"', html)   # !" "X → new para
+    html = re.sub(r'(\?")\s+"(?=[A-Z])', r'\1\n\n"', html)   # ?" "X → new para
+
     # 11. Normalize whitespace
     html = re.sub(r"\n{3,}", "\n\n", html).strip()
 
     # 12. Auto-wrap loose text in <p> (simplified wpautop). WP exports often
     #     contain bare lines separated by blank lines that should be paragraphs.
     html = wpautop(html)
+
+    # 13. Drop empty / near-empty paragraphs: <p>"</p>, <p>&nbsp;</p>, <p></p>
+    html = re.sub(r'<p>\s*(?:"|&nbsp;|\s)*\s*</p>', "", html)
+    html = re.sub(r"\n{3,}", "\n\n", html)
 
     return html
 
@@ -260,6 +278,7 @@ BLOCK_TAGS = (
     "p", "ul", "ol", "li", "table", "thead", "tbody", "tr", "td", "th",
     "section", "div", "blockquote", "figure", "iframe", "pre",
     "header", "footer", "article", "aside", "nav",
+    "hr",
 )
 
 
