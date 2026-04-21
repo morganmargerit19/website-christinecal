@@ -114,6 +114,16 @@ img, svg, video {
     clear: both;
 }
 
+/* Inline iframes (YouTube embeds) imported from WP: center and fit. */
+.prose iframe {
+    display: block;
+    max-width: 100%;
+    margin: 1.5rem auto;
+    border-radius: var(--radius-sm);
+    aspect-ratio: 16 / 9;
+    height: auto;
+}
+
 a {
     color: var(--indigo-500);
     text-decoration: none;

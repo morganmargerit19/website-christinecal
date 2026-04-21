@@ -214,6 +214,14 @@ def clean_html(html: str) -> str:
     # 8c. Remove inline <h1> — the page hero already provides the single H1
     html = re.sub(r"<h1[^>]*>(.*?)</h1>", r"<h2>\1</h2>", html, flags=re.S)
 
+    # 8c-bis. Unwrap headings that contain only an <img> (WP sometimes
+    #     does `<h2><img></h2>` purely for layout).
+    html = re.sub(
+        r"<h([1-6])[^>]*>\s*(<img[^>]*/?>)\s*</h\1>",
+        r"\2",
+        html,
+    )
+
     # 8d. Convert "pseudo-H3" into a paragraph when WP used h3 as a bold
     #     emphasis block rather than a real subheading. Heuristics:
     #     - fully wrapped in <strong>/<b> → unwrap into <p><strong>
