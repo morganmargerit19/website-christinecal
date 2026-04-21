@@ -79,27 +79,29 @@ e909ecd Extract image URL inventory from WP exports + document media rehydration
 2. ✅ 17 `<img>` brisés retirés automatiquement des pages (10 images manquantes, référencées 17 fois) — commit `ce83539`.
 3. ✅ CSS `alignright`/`alignleft`/`aligncenter`/`alignnone` de WordPress ajouté à `styles.css` — commit `5914dc5`.
 
-**Reste à faire au redémarrage :**
+**Vague 5 — polish auto du 2026-04-20 nuit (FAIT) :**
 
-1. **Relecture éditoriale des pages générées auto** (Vagues 2 et 3) — elles sont publiables en l'état mais contiennent :
-   - des balises `<h3>` utilisées comme gras/souligné WP (à convertir en `<p><strong>` selon cas)
-   - quelques résidus `<img>` pointant vers `../assets/images/wp/...` — si les images ne sont pas là, l'alt text s'affichera (pas critique)
-   - des liens vers `jeanneracaud.fr`, `debowska.fr`, `christine-coach.com` à valider ou remplacer
-   - le fichier `eveil-a-soi/coaching-professionnel.html` avait du contenu pollué (images base64 inline de 400k chars) → nettoyé par le script mais mérite une passe humaine
-   - les sections sans contenu significatif (pages `partages`, `presse`, `news-presse` : certaines sont vides ou très courtes)
+1. ✅ Générateur amélioré : wpautop, pseudo-H3 démotés en `<p>`, inline `<h1>` → `<h2>`, classes WP `wp-image-*` / `size-*` strippées, liens cross-domain (17 slugs) mappés, `<a>` qui wrappent un `<img>` déballés — commit `6924f5d`.
+2. ✅ Shortcodes non-vc strippés (`[table id=1 /]`, `[caption]`, `[gallery]`) + testimonials splittés en paragraphes + `<p>` vides retirés — commit `661d23d`.
+3. ✅ Bannières hero ajoutées à `eveil-a-soi/` et `eveil-au-soi/` (classe CSS `.page-hero__banner`) — commit `041e1f9`.
+4. ✅ a11y : H1 caché (`.sr-only`) sur le portail, unwrap `<h2><img></h2>`, iframes YouTube ratio 16/9 par CSS — commit `0fda37a`.
+5. ✅ Back-link "← Retour à Éveil à Soi/au Soi" au bas de chaque page générée — commit `eb5db99`.
+6. ✅ **Page 404 personnalisée** (`/404.html`) avec hub-grid de rattrapage — commit `e213dc3`.
 
-3. **Pages "calendrier" et "temoignages"** — ces pages existent en FR mais pointent souvent vers l'ancien calendrier WordPress vide. Christine devra fournir les vraies dates/témoignages.
+**Reste à faire :**
 
-**Bugs potentiels à tester en survolant le site :**
-- Les hub-cards de `eveil-a-soi/index.html` pointent désormais vers 13 pages — vérifier que toutes sont accessibles et que la mise en page grid reste correcte (13 cartes = 4 lignes de 3 + 1 ou répartition différente selon CSS)
-- Le lang-switch dans les pages générées a un href relatif vers le nom de fichier (`estime-de-soi.html`) : OK pour "FR" sur la même page, mais aucune version EN n'existe — acceptable à ce stade
-- La section CTA finale (bouton "Me contacter") alterne le background via un calcul `len(sections) % 2`, ce qui peut donner 2 bg identiques consécutifs pour certaines pages — cosmétique, à polir
+1. **Relecture éditoriale par Christine** — les pages générées auto sont lisibles mais certains détails restent à polir :
+   - Les liens vers `jeanneracaud.fr`, `debowska.fr` et domaines tiers externes sont conservés (pas cassants mais à valider — certains sites n'existent peut-être plus)
+   - Les sections vides/thin (`calendrier`, `conferences`, `partages`, `presse`) n'ont que le contenu minimal que WP fournissait → contenu à enrichir par Christine
+   - Le fichier `eveil-a-soi/coaching-professionnel.html` est lisible mais mérite une passe humaine (contenu WP pollué originellement)
 
-**Travail de fond encore à faire (hors portée des 4 vagues) :**
-- Version EN du site (scaffolding `/en/` existe mais vide)
-- Pages 404 personnalisée
-- Calendly embed + handles réseaux sociaux (en attente des réponses de Christine)
-- Logo (en attente)
+2. **Hub-grid** : `eveil-a-soi/index.html` a maintenant **15 hub-cards** (2 d'origine + 13 ajoutées), `eveil-au-soi/index.html` en a 8. Responsive OK (auto-fit minmax(260px, 1fr)), mais à tester visuellement sur desktop 1440+, tablette et mobile.
+
+3. **Travail de fond (hors portée) :**
+   - Version EN du site (scaffolding `/en/` existe — uniquement index placeholder)
+   - Calendly embed + handles réseaux sociaux (en attente des réponses de Christine)
+   - Logo (en attente)
+   - Revoir titres SEO des ~40 pages avec Christine pour optimiser le ranking FR
 
 ## Points techniques à retenir pour la reprise
 
