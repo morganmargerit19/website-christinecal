@@ -351,10 +351,21 @@ def build_page(target: str, eyebrow: str, title: str, excerpt: str, content_html
         section_html_parts.append(
             f'<section{bg}>\n  <div class="container container--narrow prose">\n{part}\n  </div>\n</section>'
         )
-    # CTA at the end
+    # CTA at the end — include a back-link to the sub-section hub.
+    slug_dir_cta = target.split("/")[0] if "/" in target else ""
+    hub_label = {
+        "eveil-a-soi": "Éveil à Soi",
+        "eveil-au-soi": "Éveil au Soi",
+    }.get(slug_dir_cta, "Accueil")
     bg_final = " style=\"background: var(--paper-soft);\"" if len(sections) % 2 == 1 else ""
     section_html_parts.append(
-        f'<section{bg_final}>\n  <div class="container container--narrow text-center">\n    <h2>Envie d\'en savoir plus&nbsp;?</h2>\n    <p><a href="{base}contact.html" class="btn btn--primary btn--large">Me contacter</a></p>\n  </div>\n</section>'
+        f'<section{bg_final}>\n'
+        f'  <div class="container container--narrow text-center">\n'
+        f'    <h2>Envie d\'en savoir plus&nbsp;?</h2>\n'
+        f'    <p><a href="{base}contact.html" class="btn btn--primary btn--large">Me contacter</a></p>\n'
+        f'    <p class="back-link"><a href="./">← Retour à {hub_label}</a></p>\n'
+        f'  </div>\n'
+        f'</section>'
     )
 
     body_sections = "\n\n".join(section_html_parts)

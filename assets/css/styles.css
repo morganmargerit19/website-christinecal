@@ -114,6 +114,22 @@ img, svg, video {
     clear: both;
 }
 
+/* "← Retour" back-link at the bottom of content pages. */
+.back-link {
+    margin-top: var(--space-3);
+    font-size: 0.95rem;
+}
+.back-link a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 2px;
+}
+.back-link a:hover {
+    color: var(--indigo-500);
+    border-bottom-color: var(--indigo-500);
+}
+
 /* Inline iframes (YouTube embeds) imported from WP: center and fit. */
 .prose iframe {
     display: block;
