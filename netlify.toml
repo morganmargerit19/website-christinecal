@@ -1,0 +1,89 @@
+# Netlify deployment config — Christine CAL
+# Site statique pur, aucun build. Netlify sert les fichiers tels quels.
+
+[build]
+  publish = "."
+  # No command — static site, nothing to build.
+
+# ---- Preview mode (staging / review par Christine) ----
+# Tant que le site est en preview, on interdit l'indexation via X-Robots-Tag.
+# Pour passer en prod : retirer ce bloc headers ou remplacer "noindex" par "index".
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache aggressif sur les assets (CSS/JS/images) — ils ont un hash ou un chemin stable
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Les HTML ne sont jamais mis en cache longtemps (contenu qui évolue)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ---- 404 page ----
+# Netlify utilise automatiquement /404.html pour les routes introuvables
+# (déjà présent à la racine du repo).
+
+# ---- Legacy WordPress URL redirects ----
+# Quand le DNS de christinecal.com basculera, les liens WP seront redirigés.
+[[redirects]]
+  from = "/portfolio/estime-de-soi-estime-du-soi/*"
+  to = "/eveil-a-soi/estime-de-soi.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/atelier-depasser-sa-peur-et-developper-ses-qualites/*"
+  to = "/eveil-a-soi/depasser-sa-peur.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/atelier-rencontre-feminine/*"
+  to = "/eveil-a-soi/feminin-sacre.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/le-voyage-de-l-ame/*"
+  to = "/eveil-a-soi/voyage-de-l-ame.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/stage-telos-et-la-5d/*"
+  to = "/eveil-au-soi/stage-telos-5d.html"
+  status = 301
+
+[[redirects]]
+  from = "/portfolio/atelier-shasta-a-plazac/*"
+  to = "/eveil-au-soi/shasta-a-plazac.html"
+  status = 301
+
+[[redirects]]
+  from = "/une-nouvelle-ere-pour-la-terre-de-5eme-dimension/*"
+  to = "/eveil-a-soi/nouvelle-ere-5d.html"
+  status = 301
+
+[[redirects]]
+  from = "/le-mont-shasta/*"
+  to = "/eveil-au-soi/mont-shasta-telos.html"
+  status = 301
+
+[[redirects]]
+  from = "/coaching-mediumnique-lecture-d-ame/*"
+  to = "/eveil-a-soi/consultations.html"
+  status = 301
+
+[[redirects]]
+  from = "/calendrier-conferences-ateliers/*"
+  to = "/eveil-a-soi/calendrier.html"
+  status = 301
+
+[[redirects]]
+  from = "/calendrier-des-activites-d-eveil-au-soi-mont-shasta/*"
+  to = "/eveil-au-soi/calendrier.html"
+  status = 301
