@@ -150,30 +150,167 @@ def clean_html(html: str) -> str:
         r"\1.html",
         html,
     )
+    # 7b. Common page slug mappings (WP → new site)
+    WP_PAGE_MAP = {
+        "une-nouvelle-ere-pour-la-terre-de-5eme-dimension": "nouvelle-ere-5d.html",
+        "coaching-d-eveil-quantique": "coaching-quantique.html",
+        "coaching-d-eveil-multidimensionnel": "coaching-multidimensionnel.html",
+        "coaching-d-eveil": "coaching-eveil.html",
+        "coaching-professionnel-medium": "coaching-professionnel.html",
+        "conferences-rencontres": "conferences.html",
+        "faq-coaching-mediumnite": "faq.html",
+        "temoignages-christine-cal": "temoignages.html",
+        "centre-dexpansion-de-conscience": "centre-expansion.html",
+        "reseau-telos-mondial": "reseau-telos.html",
+        "voyage-initiatique-au-mont-shasta-2017": "voyage-mont-shasta.html",
+        "ateliers-stages-conferences": "ateliers-stages.html",
+        "news-presse": "news-presse.html",
+        "presse": "presse.html",
+        "partages": "partages.html",
+        "temoignages": "temoignages.html",
+        "le-mont-shasta": "../eveil-au-soi/mont-shasta-telos.html",
+        "qui-est-christine-cal-medium-5d-telos": "../qui-suis-je.html",
+    }
+    for slug, target in WP_PAGE_MAP.items():
+        html = re.sub(
+            rf"https?://(?:www\.)?christinecal-coach-(?:medium|quantique)\.com/{re.escape(slug)}/?",
+            target,
+            html,
+        )
     html = re.sub(r'href="/contact/?"', 'href="../contact.html"', html)
     html = re.sub(r'href="/partages/?"', 'href="partages.html"', html)
+    # Drop any remaining christinecal-coach-*.com links that we couldn't map —
+    # convert them to plain text (unwrap the anchor).
+    html = re.sub(
+        r'<a[^>]*href="https?://(?:www\.)?christinecal-coach-(?:medium|quantique)\.com[^"]*"[^>]*>(.*?)</a>',
+        r"\1",
+        html,
+        flags=re.S,
+    )
+    # Same for the old christine-coach.com sub-pages.
+    html = re.sub(
+        r'<a[^>]*href="https?://(?:www\.)?christine-coach\.com[^"]*"[^>]*>(.*?)</a>',
+        r"\1",
+        html,
+        flags=re.S,
+    )
 
     # 8. Drop <img> tags with base64 data URLs (pollution from WP exports)
     html = re.sub(r'<img[^>]*src="data:[^"]*"[^>]*/?>', "", html)
 
+    # 8b. Strip WP-specific <img> cruft classes ("wp-image-NNN", "size-...",
+    #     "align..." is kept because our CSS uses it). Also drop width/height
+    #     attributes so the CSS max-width rules apply cleanly.
+    html = re.sub(r'\s*(?:wp-image-\d+|size-(?:thumbnail|medium|large|full))', "", html)
+    html = re.sub(r'\s+class="\s*"', "", html)
+    html = re.sub(r'<img([^>]*)\s+(?:width|height)="[^"]*"', r'<img\1', html)
+
+    # 8c. Remove inline <h1> — the page hero already provides the single H1
+    html = re.sub(r"<h1[^>]*>(.*?)</h1>", r"<h2>\1</h2>", html, flags=re.S)
+
+    # 8d. Convert "pseudo-H3" into a paragraph when WP used h3 as a bold
+    #     emphasis block rather than a real subheading. Heuristics:
+    #     - fully wrapped in <strong>/<b> → unwrap into <p><strong>
+    #     - plain-text content longer than 100 chars → demote to <p>
+    #     - contains a sentence-like pattern (". " mid-text) → demote to <p>
+    def pseudo_h3_to_p(m: re.Match) -> str:
+        inner = m.group(1).strip()
+        only_strong = re.fullmatch(r"<(?:strong|b)>(.*)</(?:strong|b)>", inner, re.S)
+        if only_strong:
+            return f"<p><strong>{only_strong.group(1).strip()}</strong></p>"
+        plain = re.sub(r"<[^>]+>", "", inner).strip()
+        if len(plain) > 100 or re.search(r"[a-zéèàù],? [a-zéèàù]", plain, re.I) and ". " in plain:
+            return f"<p>{inner}</p>"
+        return m.group(0)
+    html = re.sub(r"<h3[^>]*>(.*?)</h3>", pseudo_h3_to_p, html, flags=re.S)
+
     # 9. Drop empty anchors that were wrapping images
     html = re.sub(r"<a[^>]*>\s*</a>", "", html)
 
-    # 9. Drop empty headings
+    # 9b. Unwrap <a> that only wraps an <img> and points to the same image
+    #     (WP "click to view full size") — keep just the img.
+    html = re.sub(
+        r'<a[^>]*href="([^"]+)"[^>]*>\s*(<img[^>]*src="\1"[^>]*/?>)\s*</a>',
+        r"\2",
+        html,
+    )
+    # General unwrap: <a href="...image..."><img ...></a> → <img ...>
+    html = re.sub(
+        r'<a[^>]*href="[^"]+\.(?:jpg|jpeg|png|gif|webp)"[^>]*>\s*(<img[^>]*/?>)\s*</a>',
+        r"\1",
+        html,
+        flags=re.IGNORECASE,
+    )
+
+    # 10. Drop empty headings
     html = re.sub(r"<h[1-6][^>]*>\s*</h[1-6]>", "", html)
 
-    # 10. Normalize whitespace
+    # 11. Normalize whitespace
     html = re.sub(r"\n{3,}", "\n\n", html).strip()
+
+    # 12. Auto-wrap loose text in <p> (simplified wpautop). WP exports often
+    #     contain bare lines separated by blank lines that should be paragraphs.
+    html = wpautop(html)
 
     return html
 
 
+BLOCK_TAGS = (
+    "h1", "h2", "h3", "h4", "h5", "h6",
+    "p", "ul", "ol", "li", "table", "thead", "tbody", "tr", "td", "th",
+    "section", "div", "blockquote", "figure", "iframe", "pre",
+    "header", "footer", "article", "aside", "nav",
+)
+
+
+_BLOCK_OPEN_RE = re.compile(
+    r"^\s*<(?:" + "|".join(BLOCK_TAGS) + r")(?:\s|>|/>)",
+    re.IGNORECASE,
+)
+_BLOCK_CLOSE_RE = re.compile(
+    r"</(?:" + "|".join(BLOCK_TAGS) + r")>\s*$",
+    re.IGNORECASE,
+)
+
+
+def wpautop(html: str) -> str:
+    """Wrap loose text in <p>. A "loose" line is one that neither starts with
+    a block-level opening tag nor ends with a block-level closing tag. Blank
+    lines separate paragraphs. Never wrap block elements in <p>."""
+    lines = html.split("\n")
+    out: list[str] = []
+    buf: list[str] = []
+
+    def flush() -> None:
+        if not buf:
+            return
+        text = " ".join(l.strip() for l in buf if l.strip())
+        if text:
+            out.append(f"<p>{text}</p>")
+        buf.clear()
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped:
+            flush()
+            continue
+        is_block = bool(_BLOCK_OPEN_RE.match(stripped) or _BLOCK_CLOSE_RE.search(stripped))
+        if is_block:
+            flush()
+            out.append(stripped)
+        else:
+            buf.append(stripped)
+    flush()
+    return "\n".join(out)
+
+
 def split_sections(content_html: str) -> list[str]:
-    """Split cleaned HTML into logical sections on <h2>."""
-    # Wrap content into sections; each <h2> starts a new section.
-    parts = re.split(r"(?=<h2[\s>])", content_html)
+    """Split cleaned HTML into logical sections on <h2>. Fallback to <h3> if
+    no <h2> exists so the page doesn't render as one giant block."""
+    has_h2 = re.search(r"<h2[\s>]", content_html) is not None
+    splitter = r"(?=<h2[\s>])" if has_h2 else r"(?=<h3[\s>])"
+    parts = re.split(splitter, content_html)
     parts = [p.strip() for p in parts if p.strip()]
-    # If there's an intro before first h2, it becomes its own section
     return parts
 
 
