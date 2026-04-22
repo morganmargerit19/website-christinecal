@@ -108,8 +108,8 @@ body::before {
 }
 
 @keyframes bodyTwinkle {
-    0%, 100% { opacity: 0.55; }
-    50%      { opacity: 0.9;  }
+    0%, 100% { opacity: 0.75; }
+    50%      { opacity: 1;    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -118,15 +118,40 @@ body::before {
 
 /* Sections de contenu : fond blanc/paper explicite pour flotter sur
    le fond indigo étoilé. Les sections qui ont déjà leur propre style
-   (ex: style="background: var(--paper-soft)") conservent leur bg. */
+   (ex: style="background: var(--paper-soft)") conservent leur bg.
+   Espace indigo visible entre chaque section pour laisser le ciel
+   cosmique respirer à travers la page. */
 main > section {
     position: relative;
     z-index: 1;
     background: var(--paper);
 }
 
-main > section[style*="background"] {
-    /* Sections avec style inline explicite : laisse le inline gagner. */
+/* Crée des "bandes" indigo étoilées visibles entre les sections :
+   on réduit légèrement la largeur des sections et on ajoute un gap.
+   Sur mobile on laisse les sections pleine largeur pour garder
+   la lisibilité sur petit écran. */
+@media (min-width: 900px) {
+    main > section:not(.page-hero) {
+        margin: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 3vw, 2rem);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 20px 60px -30px rgba(7, 6, 26, 0.45);
+    }
+    main > section.page-hero {
+        /* Hero reste pleine largeur mais devient semi-transparent
+           pour laisser voir les étoiles derrière. */
+        background: linear-gradient(180deg,
+            rgba(123, 121, 198, 0.18) 0%,
+            rgba(248, 247, 244, 0.9) 100%);
+    }
+}
+
+/* Sur mobile, les sections restent pleine largeur mais avec un espace
+   vertical qui révèle le fond indigo entre elles. */
+@media (max-width: 899px) {
+    main > section:not(:first-child) {
+        margin-top: clamp(0.5rem, 2vw, 1rem);
+    }
 }
 
 /* Variante "transparente" — sections qui laissent voir les étoiles à travers.
@@ -220,6 +245,60 @@ img {
     border-radius: var(--radius-sm);
     aspect-ratio: 16 / 9;
     height: auto;
+}
+
+/* Grille 2 vidéos côte à côte (qui-suis-je, vidéos de présentation). */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin: 1.5rem auto 0;
+}
+
+.video-card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.video-card__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: var(--indigo-900);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.video-card__frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+}
+
+.video-card figcaption {
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.video-card figcaption strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+}
+
+.video-card figcaption span {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
 }
 
 a {
