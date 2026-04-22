@@ -490,11 +490,275 @@ section {
     font-size: 1rem;
 }
 
-/* Portal splash (homepage — image with 2 clickable zones) */
+/* ==========================================================================
+   Portail nuit étoilée (homepage) — fond indigo profond, étoiles en CSS,
+   rayon bleu en fond. Deux portes d'entrée "Éveil à Soi / au Soi".
+   ========================================================================== */
 .portal-body {
     margin: 0;
     background: var(--night);
+    color: #fff;
+    overflow-x: hidden;
 }
+
+.portal-night {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 4vw, 2rem);
+    background:
+        radial-gradient(ellipse at 50% 35%, rgba(63, 61, 156, 0.55) 0%, rgba(26, 22, 66, 0.95) 55%, #07061a 100%),
+        #07061a;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Rayon bleu vertical doux derrière le contenu */
+.portal-night__ray {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, transparent 0%, rgba(123, 121, 198, 0.18) 30%, rgba(123, 121, 198, 0.28) 50%, rgba(123, 121, 198, 0.18) 70%, transparent 100%),
+        radial-gradient(circle at 50% 50%, rgba(201, 169, 97, 0.08) 0%, transparent 40%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+    animation: portalRayBreath 14s ease-in-out infinite;
+}
+
+@keyframes portalRayBreath {
+    0%, 100% { opacity: 0.75; }
+    50%      { opacity: 1;    }
+}
+
+/* Starfield — box-shadow trick: one tiny dot multiplied across the sky.
+   Two layers at different speeds for parallax feel. */
+.portal-night__stars,
+.portal-night__stars--slow {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.portal-night__stars::before,
+.portal-night__stars--slow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 28% 62%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 37% 11%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 54% 28%, #cfd8ff 50%, transparent 51%),
+        radial-gradient(1px 1px at 68% 72%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 81% 38%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 91% 9%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 5% 82%, #e6d49a 50%, transparent 51%),
+        radial-gradient(1px 1px at 44% 95%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 61% 55%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 76% 18%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 19% 48%, #dcdbf0 50%, transparent 51%),
+        radial-gradient(1px 1px at 88% 89%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 33% 78%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 50% 42%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 70% 47%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 24% 30%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 96% 68%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 8% 12%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 58% 85%, #cfd8ff 50%, transparent 51%);
+    background-size: 100% 100%;
+    opacity: 0.85;
+    animation: portalTwinkle 4s ease-in-out infinite;
+}
+
+.portal-night__stars--slow::before {
+    background-image:
+        radial-gradient(2px 2px at 15% 25%, #fff 50%, transparent 51%),
+        radial-gradient(2px 2px at 47% 72%, #fff 50%, transparent 51%),
+        radial-gradient(2px 2px at 73% 14%, #e6d49a 50%, transparent 51%),
+        radial-gradient(2px 2px at 85% 57%, #fff 50%, transparent 51%),
+        radial-gradient(2px 2px at 31% 89%, #fff 50%, transparent 51%),
+        radial-gradient(2.5px 2.5px at 62% 35%, #fff 50%, transparent 51%),
+        radial-gradient(2px 2px at 92% 80%, #dcdbf0 50%, transparent 51%);
+    opacity: 0.9;
+    animation: portalTwinkleSlow 9s ease-in-out infinite;
+}
+
+@keyframes portalTwinkle {
+    0%, 100% { opacity: 0.4; }
+    50%      { opacity: 1;   }
+}
+@keyframes portalTwinkleSlow {
+    0%, 100% { opacity: 0.6; transform: translateY(0); }
+    50%      { opacity: 1;   transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .portal-night__stars::before,
+    .portal-night__stars--slow::before,
+    .portal-night__ray {
+        animation: none;
+    }
+}
+
+/* Lang switch */
+.portal-night__lang {
+    position: absolute;
+    top: clamp(1rem, 3vw, 2rem);
+    right: clamp(1rem, 3vw, 2rem);
+    display: flex;
+    gap: 0.3rem;
+    z-index: 2;
+}
+.portal-night__lang a {
+    padding: 0.4rem 0.7rem;
+    color: rgba(220, 219, 240, 0.75);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: all var(--transition);
+}
+.portal-night__lang a:hover,
+.portal-night__lang a[aria-current="true"] {
+    color: #fff;
+    border-color: rgba(220, 219, 240, 0.4);
+}
+
+/* Inner block — tagline + name + subtitle + doors */
+.portal-night__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 900px;
+    width: 100%;
+}
+
+.portal-night__tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--indigo-100);
+    opacity: 0.85;
+    margin: 0 0 1rem;
+    letter-spacing: 0.05em;
+}
+
+.portal-night__name {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(3rem, 10vw, 6.5rem);
+    color: #fff;
+    margin: 0;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    text-shadow: 0 0 24px rgba(220, 219, 240, 0.35), 0 0 48px rgba(63, 61, 156, 0.4);
+}
+
+.portal-night__subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    color: var(--indigo-100);
+    opacity: 0.9;
+    margin: 1.2rem 0 2.4rem;
+    letter-spacing: 0.04em;
+}
+
+.portal-night__cta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+.portal-night__door {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(220, 219, 240, 0.25);
+    border-radius: var(--radius);
+    color: #fff;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.portal-night__door:hover,
+.portal-night__door:focus-visible {
+    background: rgba(220, 219, 240, 0.15);
+    border-color: rgba(220, 219, 240, 0.55);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -20px rgba(123, 121, 198, 0.8);
+    text-decoration: none;
+}
+.portal-night__door-label {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+.portal-night__door-sub {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--indigo-100);
+    opacity: 0.85;
+}
+
+.portal-night__who {
+    margin-top: 2.2rem;
+    font-size: 0.9rem;
+    color: rgba(220, 219, 240, 0.8);
+}
+.portal-night__who a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(220, 219, 240, 0.4);
+    padding-bottom: 2px;
+    transition: color var(--transition), border-color var(--transition);
+}
+.portal-night__who a:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+
+.portal-night__footer {
+    position: absolute;
+    bottom: clamp(1rem, 3vw, 1.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(220, 219, 240, 0.55);
+    z-index: 2;
+}
+.portal-night__footer a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 0.4rem;
+}
+.portal-night__footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Legacy portal-splash kept for reference but unused on the new index. */
 
 .portal-splash {
     min-height: 100vh;
