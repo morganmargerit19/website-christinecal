@@ -2,43 +2,72 @@
 
 > Fichier de reprise pour le prochain chat Claude Code. Lu au démarrage.
 > Branche de travail : `claude/continue-session-state-a0X9q`
-> Dernière mise à jour : 2026-04-20 (après Vagues 2-3-4)
+> Dernière mise à jour : 2026-04-21 (session soir — retours Christine #2 intégrés)
+> **Preview en ligne** : https://astounding-cannoli-c11c6a.netlify.app/
 
 ## Contexte général
 
-Refonte du site de Christine CAL (coach médium) en **site statique unifié** sur `www.christinecal.com` à partir de 3 sites WordPress legacy + contenus `.odt`. Stack : HTML5 + CSS custom + vanilla JS, zéro build, déploiement GitHub Pages / Netlify.
+Refonte du site de Christine CAL (coach médium) en **site statique unifié** sur `www.christinecal.com` à partir de 3 sites WordPress legacy + contenus `.odt`. Stack : HTML5 + CSS custom + vanilla JS, zéro build, déployé sur Netlify.
 
 - Architecture : 1 site unifié avec 2 sous-sections `/eveil-a-soi/` (coach médium) et `/eveil-au-soi/` (TELOS/Shasta/multidim)
-- Palette : bleu indigo `#3f3d9c`, fond clair `#f8f7f4`
+- Palette : bleu indigo `#3f3d9c`, fond clair `#f8f7f4`, fond cosmique indigo étoilé site-wide
 - Typo : Cormorant Garamond (titres) + Inter (corps), via Google Fonts
-- Formulaire : Netlify Forms
+- Formulaire : Netlify Forms (câblé, OK)
 - Pas de boutique ni blog
 
-## État actuel (commits sur la branche `claude/continue-session-state-a0X9q`)
+## État actuel (derniers commits sur `claude/continue-session-state-a0X9q`)
 
 ```
-2ca94ab Update SESSION-STATE for Waves 2-3-4 completion
-ac33641 Wave 4 — update sitemap with all new sub-section pages
-58c6ad5 Wave 3 — generate 21 secondary pages from WP extracts
-71dab4c Wire hub-grids to new Wave 2 portfolio pages
-1113829 Wave 2 — generate 19 portfolio pages from WP extracts
-ba18974 Add SESSION-STATE.md for handoff to next chat session
-277a0e3 Add GitHub Actions workflow to rehydrate WordPress media
-b7ca99f Extract image URL inventory from WP exports + document media rehydration
-bf1be9e Wave 1 — enrich 7 pages with real WordPress content
-7c78bf7 Import WordPress XML exports and extract 52 items
-f426d8f Restructure into 2 unified sub-sections (eveil-a-soi + eveil-au-soi)
-2a236cf Fix portal: remove overlay text, 2 hotspots
-b163da6 Rebuild christinecal.com as static site
+04cee04 Strengthen cosmic theme + add 2 YouTube videos to Qui suis-je
+befd91f Revert portal to original image + apply site-wide cosmic theme
+8f97d6a Rewrite Qui suis-je with Christine's new concise bullet-style text
+2e6388c Redesign portal: indigo night-sky with CSS stars, no rose/yellow
+7c345d2 Address Christine's feedback: RGPD, copy deterrents, SEO
+431d24a Replace /en/ placeholder with a clean coming-soon page
+74c9adf Fix qui-suis-je nav highlight + replace portrait with pro Sony shot
+a66821e Add Netlify config + deploy notice for staging preview
+5b8d6ab Update SESSION-STATE with Wave 5 polish checklist
+e213dc3 Add a custom 404 page with hub-style navigation fallback
+eb5db99 Add back-link from generated pages to their sub-section hub + CSS
+0fda37a Polish: a11y H1 on portal, unwrap h2><img>, center iframes
+041e1f9 Add hero banner image to the two sub-section hub pages
+661d23d Further generator cleanup: strip non-vc shortcodes, split testimonials
+6924f5d Improve generator: wpautop, demote pseudo-H3/H1, strip WP class cruft
+5914dc5 Add CSS rules for WP-imported image alignment
+ce83539 Strip 17 broken <img> tags pointing to 10 unfetchable legacy URLs
+702f561 Merge branch's rehydrated media (github-actions[bot])
+ebbd6bc Merge main + remove duplicate root-level WP XML files
 ```
 
-**main** a reçu (cherry-pick) les commits workflow + image-urls.txt pour qu'il se déclenche automatiquement :
+**main** a reçu les commits workflow + image-urls.txt + le workflow a tourné avec succès (209/261 images rapatriées) et ses améliorations :
 ```
+0cdc666 Soften fetch-wp-media workflow + add host diagnostics
 af9287e Add GitHub Actions workflow to rehydrate WordPress media
-e909ecd Extract image URL inventory from WP exports + document media rehydration
+e909ecd Extract image URL inventory from WP exports
 611b33b exports wordpress des 2 sites (Morgan)
 026f553 Add files via upload
 ```
+Et le run bot a produit `68aec04 Rehydrate 209 WordPress media files from legacy hosts` sur `main`.
+
+## Déploiement Netlify (en cours)
+
+- Repo connecté à Netlify (via dashboard Morgan), branche `claude/continue-session-state-a0X9q` = branche de production sur Netlify
+- URL preview : `https://astounding-cannoli-c11c6a.netlify.app/`
+- `netlify.toml` à la racine : `X-Robots-Tag: noindex` sur toute la preview, 11 redirects 301 WP→nouveau, cache sur /assets/
+- Formulaire Netlify Forms actif (contact.html a `data-netlify="true"`)
+- **DNS** non basculé — `christinecal.com` reste sur l'ancien hébergeur tant que Christine n'a pas validé
+
+## Contact / entreprise (intégré partout)
+
+Christine a fourni ses infos pro (commit `7c345d2`) :
+- **EURL Christine CAL — Coach Consultant**
+- Coach d'Éveil à la Multidimensionnalité de l'Être
+- 254 Chemin de la Terre Pointue — Castelgirou — 24 580 PLAZAC
+- Tél : 06 80 42 85 91
+- Email : cc.christinecal@gmail.com
+- SIRET : 393 691 993 00033
+
+Intégré : mentions-legales, Schema.org JSON-LD (Person + LocalBusiness), footer des 51 pages (email ajouté sous le téléphone).
 
 ### ✅ Ce qui est fait
 
@@ -88,36 +117,74 @@ e909ecd Extract image URL inventory from WP exports + document media rehydration
 5. ✅ Back-link "← Retour à Éveil à Soi/au Soi" au bas de chaque page générée — commit `eb5db99`.
 6. ✅ **Page 404 personnalisée** (`/404.html`) avec hub-grid de rattrapage — commit `e213dc3`.
 
-**Reste à faire :**
+**Vague 6 — retours Christine #1 (2026-04-21 jour) :**
 
-1. **Relecture éditoriale par Christine** — les pages générées auto sont lisibles mais certains détails restent à polir :
-   - Les liens vers `jeanneracaud.fr`, `debowska.fr` et domaines tiers externes sont conservés (pas cassants mais à valider — certains sites n'existent peut-être plus)
-   - Les sections vides/thin (`calendrier`, `conferences`, `partages`, `presse`) n'ont que le contenu minimal que WP fournissait → contenu à enrichir par Christine
-   - Le fichier `eveil-a-soi/coaching-professionnel.html` est lisible mais mérite une passe humaine (contenu WP pollué originellement)
+1. ✅ **RGPD complet** : mentions légales + politique de confidentialité réécrites aux standards CNIL, références Art. RGPD 2016/679 + Loi 78-17, 7 droits listés, base légale Art. 6-1.a/b, Netlify déclaré comme sous-traitant avec DPA, adresse postale CNIL pour réclamation — commit `7c345d2`.
+2. ✅ **Copy deterrents** : `<img>` non droppables/sélectionnables (CSS `user-select:none` + `-webkit-user-drag:none` + iOS `touch-callout:none`), clic-droit bloqué UNIQUEMENT sur les `<img>` via JS (pas tout le site), avertissement contrefaçon Art. L.335-2 CPI renforcé — commit `7c345d2`.
+3. ✅ **Schema.org JSON-LD** injecté sur portail (Person + LocalBusiness Castelgirou + WebSite) — commit `7c345d2`.
+4. ✅ **Page EN** : remplacement du portail V1 (superposition de texte) par une vraie page "coming soon" cohérente avec le design — commit `431d24a`.
+5. ✅ **Nav `qui-suis-je`** : `aria-current` corrigé (pointait sur Éveil au Soi au lieu de Qui suis-je) — commit `74c9adf`.
+6. ✅ **Portrait Christine** : remplacé par le shooting Sony haute qualité (3178×3812 → redimensionné à 1200 × 1439, 188 KB) trouvé dans les archives WP — commit `74c9adf`.
 
-2. **Hub-grid** : `eveil-a-soi/index.html` a maintenant **15 hub-cards** (2 d'origine + 13 ajoutées), `eveil-au-soi/index.html` en a 8. Responsive OK (auto-fit minmax(260px, 1fr)), mais à tester visuellement sur desktop 1440+, tablette et mobile.
+**Vague 7 — retours Christine #2 (2026-04-21 soir) :**
 
-3. **Travail de fond (hors portée) :**
-   - Version EN du site (scaffolding `/en/` existe — uniquement index placeholder)
-   - Calendly embed + handles réseaux sociaux (en attente des réponses de Christine)
-   - Logo (en attente)
-   - Revoir titres SEO des ~40 pages avec Christine pour optimiser le ranking FR
+1. ✅ **Mentions légales** complétées avec les infos EURL Christine CAL (commit `7c345d2` revu intégrant l'adresse complète `254 Chemin de la Terre Pointue`, email `cc.christinecal@gmail.com`, SIRET `393 691 993 00033`).
+2. ✅ **Email dans le footer des 51 pages** — ajout de `cc.christinecal@gmail.com` sous le téléphone.
+3. ⚠️ **Portail** : Christine veut GARDER l'image d'origine (mains + cercles) mais supprimer les couleurs rose et jaune sur les cercles. J'ai tenté un full-redesign "ciel étoilé" mais Morgan m'a corrigé — j'ai remis l'image d'origine (commit `befd91f`). **À clarifier avec Christine** : comment on traite le changement de couleurs ?
+   - Option A : Christine envoie une version retouchée de l'image (son graphiste)
+   - Option B : je tente un traitement PIL global (teinte indigo) mais résultat incertain sans voir l'image
+   - Option C : elle m'envoie un brief précis des couleurs à remplacer (ex : "rose #ff88aa → indigo #3f3d9c", "jaune #ffdd22 → blanc #fff")
+4. ✅ **Thème cosmique site-wide** : fond indigo profond avec étoiles (twinkle animation) sur toutes les pages sauf portail. Sur desktop, sections de contenu flottent en cartes avec marges latérales laissant voir l'indigo autour. Page-hero semi-transparent — commits `befd91f` + `04cee04`.
+5. ✅ **Qui suis-je** :
+   - Nouveau texte concis fourni par Christine (bullet points rapides au lieu de récit long) — commit `8f97d6a`.
+   - 2 vidéos YouTube intégrées sous la photo (youtube-nocookie) avec captions dates/durées — commit `04cee04` :
+     - `0QL8ive6NuU` — "Qui est Christine CAL" — Juillet 2016 · 10:42
+     - `2oEYgOGBH7o` — "Témoignage de vie de C.C." — Juillet 2016 · 4:39
+   - Grille `.video-grid` + `.video-card` pour layout 2-col responsive.
 
-## Points techniques à retenir pour la reprise
+## ⏳ Ce qui reste à faire (au redémarrage)
 
-- Le **générateur** `sources/scripts/generate_pages.py` est idempotent : il peut être relancé (`python3 sources/scripts/generate_pages.py all`) pour régénérer tout, ou par catégorie (`portfolio`, `pages`).
-- Il a 2 manifests Python inline : `PORTFOLIO_MANIFEST` (19 entrées) et `PAGES_MANIFEST` (21 entrées). Pour ajouter une page, éditer le manifest.
-- Le script strippe : WPBakery shortcodes, `style=""`, `<span>` nus, tables-autour-d'iframes, images `data:base64`, anchors vides, headings vides. Il réécrit les URLs d'images et les liens cross-domain.
-- Le cleaner **n'utilise pas** de vrai parseur HTML (uniquement regex) — si un jour il faut un fidélité plus haute, passer à BeautifulSoup.
+**EN ATTENTE DE CHRISTINE (retours à venir) :**
+
+1. **Portail — décision couleurs** : rose/jaune à faire disparaître sur l'image d'origine. 3 options à lui soumettre (voir Vague 7 point 3).
+2. **2 photos DVD** à intégrer sous les vidéos dans `qui-suis-je.html` — Christine refait les photos samedi avec une meilleure caméra (les siennes prises sur son iPhone ne rendent pas bien). Placement : **à confirmer** avec elle (sur qui-suis-je, ou sur une page dédiée DVD / stages).
+3. **Relecture suite** du site : Christine va continuer à survoler les autres sections (`eveil-a-soi`, `eveil-au-soi`, sous-pages). Prévoir intégration de corrections éditoriales au fil de l'eau.
+
+**Chantiers techniques encore à faire :**
+
+1. **Relecture éditoriale** des pages auto-générées (Vagues 2-3) :
+   - Liens vers `jeanneracaud.fr`, `debowska.fr`, sites tiers — valider qu'ils existent encore
+   - Sections thin (`calendrier`, `conferences`, `partages`, `presse`) — contenu à enrichir
+   - `eveil-a-soi/coaching-professionnel.html` — passe humaine recommandée
+2. **Décap CMS** : une fois le site validé par Christine, intégrer Decap CMS (`/admin`) pour qu'elle gère agenda / témoignages / pages depuis un dashboard Netlify Identity. Setup ~1-2j de boulot (refactor des pages sensibles en templates + données markdown).
+3. **DNS switchover** : basculer `christinecal.com` + `www.christinecal.com` sur Netlify quand Christine valide. Retirer `noindex` de `netlify.toml`.
+4. **Google Search Console** : soumettre le sitemap après mise en prod pour accélérer l'indexation.
+
+**Travail de fond (hors portée immédiate) :**
+- Version EN du site (placeholder en place, traduction complète à prévoir)
+- Calendly embed pour prise de rendez-vous
+- Handles réseaux sociaux (YouTube à créer selon Christine)
+- Logo définitif (en attente)
+
+## Points techniques à retenir
+
+- **Preview Netlify** : `https://astounding-cannoli-c11c6a.netlify.app/` (branche de prod Netlify = `claude/continue-session-state-a0X9q`)
+- **Auto-déploiement** : chaque push sur la branche déclenche un build Netlify en ~30-60 sec
+- Le générateur `sources/scripts/generate_pages.py` est idempotent — le relancer (`python3 sources/scripts/generate_pages.py all`) régénère les 40 pages à partir de `sources/wp-extract/*.md` selon les 2 manifests inline (`PORTFOLIO_MANIFEST` + `PAGES_MANIFEST`)
+- Pour regenerate + restrip les `<img>` brisés : il y a un snippet Python inline dans l'historique de chat qui scanne `assets/images/wp/` et retire les `<img>` dont le src n'existe pas
+- Le CSS cosmique est dans `assets/css/styles.css` (body::before starfield + gradient indigo, sections avec margin+radius+shadow sur desktop)
 
 ## Branche et git
 
-- **Branche de travail** : `claude/continue-session-state-a0X9q` (tout est poussé, rien en local non commité à la fin de la session)
-- **main** a été mis à jour avec le workflow (2 cherry-picks) — NE PAS supprimer ces commits
-- **Ancienne branche** `claude/christine-cal-website-OIZPX` : peut être supprimée après validation, elle est antérieure et moins complète
+- **Branche de travail** : `claude/continue-session-state-a0X9q` = branche déployée sur Netlify
+- **main** : workflow WP-media déployé (déjà tourné avec succès, 209 images rapatriées)
 - Règle : ne pas créer de PR tant que Morgan n'a pas demandé explicitement
 
-**Ancienne liste — Vague 2 (maintenant faite)**
+## Personne à l'autre bout
+
+**Morgan** (intermédiaire technique bénévole, non professionnel web — son SIRET n'a aucune place sur le site) pour **Christine CAL** (coach médium, ~60 ans, EURL Christine CAL Coach Consultant, SIRET 393 691 993 00033).
+
+Christine lit le site en preview chez elle, remonte ses retours à Morgan qui les paste ici. Elle est précise et pointilleuse (bon signe), veut un site propre conforme RGPD, avec son identité visuelle (indigo + étoiles), contenu concis.
 
 Créer un script Python `sources/scripts/generate_pages.py` qui :
 1. Lit un fichier `.md` dans `sources/wp-extract/`
