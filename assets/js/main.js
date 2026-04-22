@@ -1,6 +1,15 @@
 (function () {
     "use strict";
 
+    // Dissuasion: bloque le menu contextuel SUR LES IMAGES uniquement
+    // (clic-droit "Enregistrer l'image sous…"). Le reste du site conserve
+    // le clic-droit normal pour ne pas frustrer les visiteurs légitimes.
+    document.addEventListener("contextmenu", function (e) {
+        if (e.target && e.target.tagName === "IMG") {
+            e.preventDefault();
+        }
+    });
+
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".main-nav");
 

@@ -74,6 +74,20 @@ img, svg, video {
     display: block;
 }
 
+/* Dissuasion copie d'images — empêche le drag-and-drop et la sélection.
+   Ne protège pas des captures d'écran (impossible en web), mais suffit
+   contre la majorité des copies opportunistes. */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; /* iOS: bloque le long-press "Enregistrer l'image" */
+    pointer-events: auto;
+}
+
 /* WordPress-imported alignment classes (used by rehydrated images in prose). */
 .prose img.alignright,
 .prose img.alignleft,
