@@ -1323,6 +1323,59 @@ section {
     padding: var(--space-4) 0 var(--space-3);
 }
 
+/* Bandeau cliquable (full-bleed banner with overlay text, used on
+   stages-eveil-quantique to give direct access to the 3 stages). */
+.bandeau-link {
+    display: block;
+    position: relative;
+    margin: 0 auto var(--space-3);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+    max-width: 1100px;
+    text-decoration: none;
+}
+.bandeau-link:hover,
+.bandeau-link:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 60px -25px rgba(63, 61, 156, 0.6);
+    text-decoration: none;
+}
+.bandeau-link img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.bandeau-link__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(7, 6, 26, 0.15) 0%, rgba(7, 6, 26, 0.4) 100%);
+    padding: 1rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+.bandeau-link__eyebrow {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+    opacity: 0.95;
+}
+.bandeau-link__title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+}
+
 /* Rubrique grid — 3 large cards visible above the fold on the hub page. */
 .rubrique-grid {
     display: grid;
