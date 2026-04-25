@@ -1442,6 +1442,45 @@ section {
     transform: translateX(5px);
 }
 
+/* Variante avec image de fond — texte blanc + overlay assombri pour lisibilité */
+.rubrique-card--bg {
+    position: relative;
+    background-image: var(--card-bg-image);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+    border-color: transparent;
+}
+.rubrique-card--bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(7, 6, 26, 0.45) 0%, rgba(7, 6, 26, 0.75) 100%);
+    z-index: -1;
+    transition: opacity var(--transition);
+}
+.rubrique-card--bg:hover::before,
+.rubrique-card--bg:focus-visible::before {
+    opacity: 0.85;
+}
+.rubrique-card--bg .rubrique-card__eyebrow {
+    color: var(--gold-soft);
+}
+.rubrique-card--bg h2 {
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.rubrique-card--bg p {
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.rubrique-card--bg .rubrique-card__cta {
+    color: var(--gold-soft);
+}
+
 /* Content blocks */
 .prose {
     max-width: var(--container-narrow);
