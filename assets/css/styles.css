@@ -1318,6 +1318,77 @@ section {
     display: block;
 }
 
+/* Compact hero used on the new Éveil à Soi hub — short, no banner. */
+.page-hero--compact {
+    padding: var(--space-4) 0 var(--space-3);
+}
+
+/* Rubrique grid — 3 large cards visible above the fold on the hub page. */
+.rubrique-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin: 0 auto var(--space-4);
+}
+
+.rubrique-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: linear-gradient(180deg, #ffffff 0%, var(--paper-soft) 100%);
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.2rem, 2.5vw, 2rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    min-height: 260px;
+}
+.rubrique-card:hover,
+.rubrique-card:focus-visible {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -25px rgba(63, 61, 156, 0.45);
+    border-color: var(--indigo-500);
+    text-decoration: none;
+}
+.rubrique-card__eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--indigo-500);
+}
+.rubrique-card h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    margin: 0;
+    color: var(--ink);
+    line-height: 1.2;
+}
+.rubrique-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    flex: 1;
+}
+.rubrique-card__cta {
+    margin-top: var(--space-2);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--indigo-500);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.rubrique-card__cta::after {
+    content: "→";
+    transition: transform var(--transition);
+}
+.rubrique-card:hover .rubrique-card__cta::after {
+    transform: translateX(5px);
+}
+
 /* Content blocks */
 .prose {
     max-width: var(--container-narrow);
