@@ -1,0 +1,40 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/portfolio/estime-de-soi-estime-du-soi/:path*", "destination": "/eveil-a-soi/estime-de-soi.html", "permanent": true },
+    { "source": "/portfolio/atelier-depasser-sa-peur-et-developper-ses-qualites/:path*", "destination": "/eveil-a-soi/depasser-sa-peur.html", "permanent": true },
+    { "source": "/portfolio/atelier-rencontre-feminine/:path*", "destination": "/eveil-a-soi/feminin-sacre.html", "permanent": true },
+    { "source": "/portfolio/le-voyage-de-l-ame/:path*", "destination": "/eveil-a-soi/voyage-de-l-ame.html", "permanent": true },
+    { "source": "/portfolio/stage-telos-et-la-5d/:path*", "destination": "/eveil-au-soi/stage-telos-5d.html", "permanent": true },
+    { "source": "/portfolio/atelier-shasta-a-plazac/:path*", "destination": "/eveil-au-soi/shasta-a-plazac.html", "permanent": true },
+    { "source": "/une-nouvelle-ere-pour-la-terre-de-5eme-dimension/:path*", "destination": "/eveil-a-soi/nouvelle-ere-5d.html", "permanent": true },
+    { "source": "/le-mont-shasta/:path*", "destination": "/eveil-au-soi/mont-shasta-telos.html", "permanent": true },
+    { "source": "/coaching-mediumnique-lecture-d-ame/:path*", "destination": "/eveil-a-soi/consultations.html", "permanent": true },
+    { "source": "/calendrier-conferences-ateliers/:path*", "destination": "/eveil-a-soi/calendrier.html", "permanent": true },
+    { "source": "/calendrier-des-activites-d-eveil-au-soi-mont-shasta/:path*", "destination": "/eveil-au-soi/calendrier.html", "permanent": true }
+  ]
+}
