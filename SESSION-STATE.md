@@ -1,18 +1,19 @@
 # Session state — Refonte christinecal.com
 
 > Fichier de reprise pour le prochain chat Claude Code. Lu au démarrage.
-> Branche de travail : `claude/continue-session-state-a0X9q`
-> Dernière mise à jour : 2026-04-21 (session soir — retours Christine #2 intégrés)
-> **Preview en ligne** : https://astounding-cannoli-c11c6a.netlify.app/
+> Branche de travail : `main` (depuis 2026-04-27 — tout a été mergé dans main pour simplifier la migration Vercel)
+> Dernière mise à jour : 2026-04-27 (migration Netlify → Vercel suite à limite de bande passante atteinte)
+> **Preview en ligne** : https://website-christinecal.vercel.app/ (Vercel, branche prod = `main`)
+> **Ancienne preview Netlify** : https://astounding-cannoli-c11c6a.netlify.app/ (limite atteinte, abandonnée)
 
 ## Contexte général
 
-Refonte du site de Christine CAL (coach médium) en **site statique unifié** sur `www.christinecal.com` à partir de 3 sites WordPress legacy + contenus `.odt`. Stack : HTML5 + CSS custom + vanilla JS, zéro build, déployé sur Netlify.
+Refonte du site de Christine CAL (coach médium) en **site statique unifié** sur `www.christinecal.com` à partir de 3 sites WordPress legacy + contenus `.odt`. Stack : HTML5 + CSS custom + vanilla JS, zéro build, déployé sur Vercel (preview temporaire — l'hébergeur final sera choisi quand le site sera validé par Christine).
 
 - Architecture : 1 site unifié avec 2 sous-sections `/eveil-a-soi/` (coach médium) et `/eveil-au-soi/` (TELOS/Shasta/multidim)
 - Palette : bleu indigo `#3f3d9c`, fond clair `#f8f7f4`, fond cosmique indigo étoilé site-wide
 - Typo : Cormorant Garamond (titres) + Inter (corps), via Google Fonts
-- Formulaire : Netlify Forms (câblé, OK)
+- Formulaire : Netlify Forms toujours câblé dans `contact.html` (`data-netlify="true"`) — **inerte sur Vercel**, à remplacer par Formspree/Web3Forms/serverless quand on choisira l'hébergeur final
 - Pas de boutique ni blog
 
 ## État actuel (derniers commits sur `claude/continue-session-state-a0X9q`)
@@ -49,13 +50,19 @@ e909ecd Extract image URL inventory from WP exports
 ```
 Et le run bot a produit `68aec04 Rehydrate 209 WordPress media files from legacy hosts` sur `main`.
 
-## Déploiement Netlify (en cours)
+## Déploiement Vercel (preview en cours)
 
-- Repo connecté à Netlify (via dashboard Morgan), branche `claude/continue-session-state-a0X9q` = branche de production sur Netlify
-- URL preview : `https://astounding-cannoli-c11c6a.netlify.app/`
-- `netlify.toml` à la racine : `X-Robots-Tag: noindex` sur toute la preview, 11 redirects 301 WP→nouveau, cache sur /assets/
-- Formulaire Netlify Forms actif (contact.html a `data-netlify="true"`)
+- Repo connecté à Vercel (via dashboard Morgan), branche **`main`** = Production Branch
+- URL preview : **https://website-christinecal.vercel.app/**
+- `vercel.json` à la racine : `X-Robots-Tag: noindex` sur toute la preview, cache long sur `/assets/`, 11 redirects 301 WP→nouveau (équivalent du `netlify.toml`)
+- `netlify.toml` conservé au cas où on revienne sur Netlify (Vercel l'ignore)
+- Voir `DEPLOY-VERCEL.md` pour la procédure de setup
+- ⚠️ **Formulaire contact KO** sur Vercel (Netlify Forms non disponible) — acceptable en preview, à fixer quand on choisira l'hébergeur final
 - **DNS** non basculé — `christinecal.com` reste sur l'ancien hébergeur tant que Christine n'a pas validé
+
+### Historique des hébergeurs preview
+- Netlify (jusqu'au 2026-04-27) : limite de bande passante atteinte → migration vers Vercel
+- Vercel (depuis 2026-04-27) : preview gratuite, plan Hobby
 
 ## Contact / entreprise (intégré partout)
 
@@ -156,8 +163,9 @@ Intégré : mentions-legales, Schema.org JSON-LD (Person + LocalBusiness), foote
    - Liens vers `jeanneracaud.fr`, `debowska.fr`, sites tiers — valider qu'ils existent encore
    - Sections thin (`calendrier`, `conferences`, `partages`, `presse`) — contenu à enrichir
    - `eveil-a-soi/coaching-professionnel.html` — passe humaine recommandée
-2. **Décap CMS** : une fois le site validé par Christine, intégrer Decap CMS (`/admin`) pour qu'elle gère agenda / témoignages / pages depuis un dashboard Netlify Identity. Setup ~1-2j de boulot (refactor des pages sensibles en templates + données markdown).
-3. **DNS switchover** : basculer `christinecal.com` + `www.christinecal.com` sur Netlify quand Christine valide. Retirer `noindex` de `netlify.toml`.
+2. **Décap CMS** : une fois le site validé par Christine, intégrer Decap CMS (`/admin`) pour qu'elle gère agenda / témoignages / pages depuis un dashboard. Setup ~1-2j de boulot (refactor des pages sensibles en templates + données markdown). NB : l'auth Netlify Identity n'existe pas sur Vercel — basculer sur GitHub OAuth via Decap si on reste sur Vercel.
+3. **DNS switchover** : basculer `christinecal.com` + `www.christinecal.com` sur l'hébergeur final quand Christine valide. Retirer `noindex` de `vercel.json` (et `netlify.toml` si on revient dessus).
+4. **Choix de l'hébergeur final** : Vercel n'est qu'une preview gratuite. Quand Christine valide, on choisit (Netlify avec plan payant, Vercel Pro, OVH/Gandi pour héberger un static, Cloudflare Pages, etc.). Décision à prendre avec Morgan le moment venu.
 4. **Google Search Console** : soumettre le sitemap après mise en prod pour accélérer l'indexation.
 
 **Travail de fond (hors portée immédiate) :**
@@ -168,16 +176,16 @@ Intégré : mentions-legales, Schema.org JSON-LD (Person + LocalBusiness), foote
 
 ## Points techniques à retenir
 
-- **Preview Netlify** : `https://astounding-cannoli-c11c6a.netlify.app/` (branche de prod Netlify = `claude/continue-session-state-a0X9q`)
-- **Auto-déploiement** : chaque push sur la branche déclenche un build Netlify en ~30-60 sec
+- **Preview Vercel** : https://website-christinecal.vercel.app/ (Production Branch = `main`)
+- **Auto-déploiement** : chaque push sur `main` déclenche un build Vercel en ~30 sec
 - Le générateur `sources/scripts/generate_pages.py` est idempotent — le relancer (`python3 sources/scripts/generate_pages.py all`) régénère les 40 pages à partir de `sources/wp-extract/*.md` selon les 2 manifests inline (`PORTFOLIO_MANIFEST` + `PAGES_MANIFEST`)
 - Pour regenerate + restrip les `<img>` brisés : il y a un snippet Python inline dans l'historique de chat qui scanne `assets/images/wp/` et retire les `<img>` dont le src n'existe pas
 - Le CSS cosmique est dans `assets/css/styles.css` (body::before starfield + gradient indigo, sections avec margin+radius+shadow sur desktop)
 
 ## Branche et git
 
-- **Branche de travail** : `claude/continue-session-state-a0X9q` = branche déployée sur Netlify
-- **main** : workflow WP-media déployé (déjà tourné avec succès, 209 images rapatriées)
+- **Branche de travail** : `main` (depuis 2026-04-27 — tout a été fast-forward mergé pour faciliter Vercel)
+- Anciennes branches de dev archivées sur le remote : `claude/continue-session-state-a0X9q`, `claude/migrate-to-vercel-LsIF0`, `claude/christine-cal-website-OIZPX`
 - Règle : ne pas créer de PR tant que Morgan n'a pas demandé explicitement
 
 ## Personne à l'autre bout
