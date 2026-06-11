@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+import { about } from '../../i18n/pages/about';
+import type { Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = about[locale];
+---
+<Base locale={locale} routeKey="about" title={t.meta.title} description={t.meta.description}>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow" data-reveal>{t.hero.eyebrow}</span>
+      <h1 data-reveal>{t.hero.title}</h1>
+      <p class="lede" data-reveal>{t.hero.lede}</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose" data-reveal>
+        <h2>{t.galactic.heading}</h2>
+        <ul>
+          {t.galactic.items.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2>{t.videos.heading}</h2>
+        <div class="video-grid">
+          {t.videos.list.map((v) => (
+            <figure class="video-card">
+              <div class="frame">
+                <iframe
+                  src={`https://www.youtube-nocookie.com/embed/${v.id}`}
+                  title={v.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                />
+              </div>
+              <figcaption>
+                <strong>{v.title}</strong>
+                <span>{v.meta}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section paper-section--soft">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose" data-reveal>
+        <h2>{t.journey.heading}</h2>
+        <ul>
+          {t.journey.items.map((item) => (
+            <li>
+              <strong>{item.lead}</strong> — {item.text}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose" data-reveal>
+        <h2>{t.activities.heading}</h2>
+        {t.activities.items.map((item) => (
+          <>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section paper-section--soft">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose" data-reveal>
+        <h2>{t.news.heading}</h2>
+        <ul>
+          {t.news.items.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <div class="highlight">
+          <h3>{t.clients.heading}</h3>
+          <p>{t.clients.text}</p>
+        </div>
+
+        <p>
+          <a href={t.press.href} target="_blank" rel="noopener">{t.press.text}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduceMotion) {
+    gsap.registerPlugin(ScrollTrigger);
+    for (const el of gsap.utils.toArray<HTMLElement>('[data-reveal]')) {
+      gsap.from(el, {
+        y: 40,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      });
+    }
+  }
+</script>

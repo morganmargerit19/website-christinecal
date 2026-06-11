@@ -1,0 +1,57 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Starfield from '../components/Starfield.astro';
+import { ui } from '../i18n/ui';
+import { base, locales, pathFor, type Locale, type RouteKey } from '../i18n/utils';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  title: string;
+  description: string;
+}
+
+const { locale, routeKey, title, description } = Astro.props;
+const t = ui[locale];
+const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+const canonical = site + pathFor(routeKey, locale);
+const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL' };
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#100d2e" />
+    <link rel="canonical" href={canonical} />
+    {locales.map((l) => (
+      <link rel="alternate" hreflang={l} href={site + pathFor(routeKey, l)} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={site + pathFor(routeKey, 'fr')} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocales[locale]} />
+    <link rel="icon" href={base + "/favicon.svg"} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
+    <Starfield />
+    <Header locale={locale} routeKey={routeKey} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>
