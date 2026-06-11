@@ -1,5 +1,12 @@
 # Session state — Refonte christinecal.com
 
+> ⚠️ **2026-06-11 — NOUVELLE PHASE : refonte V2.** Christine a fait refaire le site
+> en WordPress par un ami ; on va le remplacer par une V2 moderne (Astro, trilingue
+> FR/EN/PL, GSAP). **Toute la marche à suivre est dans `REFONTE-V2.md`** — le lire
+> en premier. Prototype V2 : code dans `v2-src/`, build servi sur
+> https://website-christinecal.vercel.app/v2/. Le contenu de ce fichier ci-dessous
+> documente la v1 (contexte, contacts, décisions) et reste valable comme référence.
+
 > Fichier de reprise pour le prochain chat Claude Code. Lu au démarrage.
 > Branche de travail : `main` (depuis 2026-04-27 — tout a été mergé dans main pour simplifier la migration Vercel)
 > Dernière mise à jour : 2026-04-27 (migration Netlify → Vercel suite à limite de bande passante atteinte)

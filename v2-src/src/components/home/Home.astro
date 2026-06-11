@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { ui } from '../../i18n/ui';
-import { pathFor, type Locale } from '../../i18n/utils';
+import { base, pathFor, type Locale } from '../../i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -60,7 +60,7 @@ const t = ui[locale];
         <div class="about-teaser__grid">
           <div class="about-teaser__portrait">
             <img
-              src="/images/christine-portrait.jpg"
+              src={base + "/images/christine-portrait.jpg"}
               alt="Portrait de Christine CAL"
               width="600"
               height="719"

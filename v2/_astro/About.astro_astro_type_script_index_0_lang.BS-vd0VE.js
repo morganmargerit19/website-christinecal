@@ -1,0 +1,1 @@
+import{g as r,S as o}from"./ScrollTrigger.C8IefbVz.js";const t=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(!t){r.registerPlugin(o);for(const e of r.utils.toArray("[data-reveal]"))r.from(e,{y:40,opacity:0,duration:.9,ease:"power3.out",scrollTrigger:{trigger:e,start:"top 88%"}})}

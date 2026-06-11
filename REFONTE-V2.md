@@ -6,25 +6,32 @@
 
 ## TL;DR
 
-Un **prototype fonctionnel de la V2 est déjà en place dans `v2/`** : site Astro moderne,
-trilingue (FR / EN / PL), animé au GSAP, avec la direction artistique « Cosmos intérieur »
-(évolution de l'indigo étoilé que Christine a déjà validé sur la v1). Il se build en
-1,4 s et se déploie tel quel sur Vercel. Quand le contenu WordPress arrive, on le coule
-dans ce moule — l'architecture est prête.
+Un **prototype fonctionnel de la V2 est en place** : site Astro moderne, trilingue
+(FR / EN / PL), animé au GSAP, avec la direction artistique « Cosmos intérieur »
+(évolution de l'indigo étoilé que Christine a déjà validé sur la v1). Quand le
+contenu WordPress arrive, on le coule dans ce moule — l'architecture est prête.
+
+- **`v2-src/`** = le code source (Astro).
+- **`v2/`** = le build statique commité, servi par Vercel sous
+  **https://website-christinecal.vercel.app/v2/** (le site v1 reste à la racine).
+- Sélecteur de langue FR / EN / PL dans le header de chaque page.
 
 ```bash
-cd v2
+cd v2-src
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # site statique dans v2/dist/
+npm run dev      # http://localhost:4321/v2/
+npm run build    # régénère ../v2/ → commiter + pusher pour mettre en ligne
 ```
 
-Pages du prototype :
+Pages du prototype (préfixe `/v2` pendant la phase aperçu) :
 
 | Page | FR | EN | PL |
 |---|---|---|---|
-| Accueil | `/` | `/en/` | `/pl/` |
-| Qui suis-je | `/qui-suis-je/` | `/en/about/` | `/pl/o-mnie/` |
+| Accueil | `/v2/` | `/v2/en/` | `/v2/pl/` |
+| Qui suis-je | `/v2/qui-suis-je/` | `/v2/en/about/` | `/v2/pl/o-mnie/` |
+
+À la bascule finale (quand la V2 remplacera la v1) : retirer `base` et `outDir`
+de `v2-src/astro.config.mjs` et déployer `dist/` à la racine.
 
 ## Pourquoi cette stack
 
@@ -53,7 +60,9 @@ Pages du prototype :
 - Les deux univers **Éveil à Soi / Éveil au Soi** restent le cœur de la narration :
   deux cartes-portails sur l'accueil (l'équivalent moderne de l'image-portail v1).
 
-## Le jour où le WordPress est « fini » — quoi récupérer
+## ★ MARCHE À SUIVRE le jour où le WordPress est « fini »
+
+### Étape 1 — Morgan récupère le contenu
 
 Dans l'ordre de préférence :
 
@@ -70,7 +79,17 @@ Dans l'ordre de préférence :
 l'ami reprend les mêmes textes, on n'a presque rien à attendre — seuls les contenus
 *nouveaux* nous intéressent.
 
-## Plan de production (une fois le contenu reçu)
+### Étape 2 — Morgan dépose le contenu et relance Claude
+
+1. Commiter les fichiers récupérés dans `sources/wp-v2/` (ou les uploader via GitHub
+   → « Add files via upload », comme pour la v1). Peu importe le format exact.
+2. Ouvrir une session Claude Code sur ce repo et dire simplement :
+   > « Le contenu WordPress est dans `sources/wp-v2/`. Lis `REFONTE-V2.md` et
+   > lance la production de la V2. »
+3. Claude lit ce fichier + `SESSION-STATE.md`, et déroule le plan de production
+   ci-dessous.
+
+### Étape 3 — Plan de production (une fois le contenu reçu)
 
 1. **Inventaire** : diff entre le contenu WordPress reçu et `sources/wp-extract/` →
    liste des pages nouvelles / modifiées / supprimées.
@@ -97,8 +116,11 @@ l'ami reprend les mêmes textes, on n'a presque rien à attendre — seuls les c
 
 ## État du repo
 
-- `v2/` — le nouveau site (Astro). **C'est ici que tout se passe désormais.**
+- `v2-src/` — le code source du nouveau site (Astro). **C'est ici que tout se passe.**
+- `v2/` — le build statique de la V2, commité, servi sous `/v2/` sur Vercel.
+  Ne pas éditer à la main : régénéré par `npm run build` dans `v2-src/`.
 - Racine + `eveil-a-soi/` + `eveil-au-soi/` — le site v1 statique, intact (toujours
-  déployé sur Vercel en preview).
+  déployé sur Vercel, racine du domaine preview).
 - `sources/` — exports WordPress 2026-04, extraits Markdown, scripts de parsing.
+- `sources/wp-v2/` — (à créer) le futur contenu récupéré du WordPress de l'ami.
 - `SESSION-STATE.md` — historique de la v1 (contexte, décisions, contacts).

@@ -1,23 +1,28 @@
-# christinecal.com — V2
+# christinecal.com — V2 (code source)
 
 Site Astro statique, trilingue (FR par défaut, EN, PL), animations GSAP,
-DA « Cosmos intérieur ». Voir `../REFONTE-V2.md` pour le cadrage complet.
+DA « Cosmos intérieur ». Voir `../REFONTE-V2.md` pour le cadrage complet
+et la marche à suivre.
 
 ## Commandes
 
 ```bash
 npm install
-npm run dev      # serveur de dev — http://localhost:4321
-npm run build    # build statique dans dist/
-npm run preview  # prévisualiser le build
+npm run dev      # serveur de dev — http://localhost:4321/v2/
+npm run build    # build statique dans ../v2/ (servi sous /v2/ sur Vercel)
 ```
+
+⚠️ Phase aperçu : `astro.config.mjs` définit `base: '/v2'` et `outDir: '../v2'`.
+Le dossier `../v2/` est **commité** (le déploiement Vercel est statique, sans
+build). Après toute modification ici : `npm run build`, puis commit + push de
+`v2/`. À la bascule finale, retirer `base`/`outDir` et déployer à la racine.
 
 ## Organisation
 
 ```
 src/
   i18n/
-    utils.ts        # locales, table des slugs par langue (sélecteur de langue)
+    utils.ts        # locales, préfixe base, table des slugs par langue
     ui.ts           # chaînes d'interface + contenu accueil (fr/en/pl)
     pages/about.ts  # contenu de la page Qui suis-je (fr/en/pl)
   layouts/Base.astro      # <head> SEO (canonical, hreflang, OG), header, footer

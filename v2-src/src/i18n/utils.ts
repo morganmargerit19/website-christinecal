@@ -20,6 +20,9 @@ export const routes: Record<RouteKey, Record<Locale, string>> = {
   about: { fr: '/qui-suis-je/', en: '/en/about/', pl: '/pl/o-mnie/' },
 };
 
+/** Préfixe `base` d'Astro (ex. « /v2 » pendant la phase aperçu), sans slash final. */
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 export function pathFor(key: RouteKey, locale: Locale): string {
-  return routes[key][locale];
+  return base + routes[key][locale];
 }
