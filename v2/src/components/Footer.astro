@@ -1,0 +1,51 @@
+---
+import { ui } from '../i18n/ui';
+import { pathFor, type Locale } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui[locale];
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Christine CAL</h4>
+        <p>{t.footer.role}</p>
+      </div>
+      <div>
+        <h4>{t.footer.navTitle}</h4>
+        <ul>
+          <li><a href={pathFor('about', locale)}>{t.nav.about}</a></li>
+          <li><a href={pathFor('home', locale) + '#eveil-a-soi'}>{t.nav.eveilASoi}</a></li>
+          <li><a href={pathFor('home', locale) + '#eveil-au-soi'}>{t.nav.eveilAuSoi}</a></li>
+          <li><a href={pathFor('home', locale) + '#contact'}>{t.nav.contact}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{t.footer.contactTitle}</h4>
+        <p>
+          <a href="tel:+33680428591">06 80 42 85 91</a><br />
+          <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a>
+        </p>
+      </div>
+      <div>
+        <h4>{t.footer.followTitle}</h4>
+        <ul>
+          <li><a href="#" title="YouTube — lien à venir">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} Christine CAL — {t.footer.rights}</span>
+      <span>
+        <a href="/mentions-legales.html">{t.footer.legal}</a> ·
+        <a href="/politique-confidentialite.html">{t.footer.privacy}</a>
+      </span>
+    </div>
+  </div>
+</footer>
