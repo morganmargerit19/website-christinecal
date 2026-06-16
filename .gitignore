@@ -1,0 +1,14 @@
+# Dépendances / build des projets Astro (V2 et V3)
+node_modules/
+dist/
+.astro/
+
+# Dump WordPress brut (source de travail locale, trop lourd pour git : ~1,1 Go)
+# On garde le XML (WXR) et les extraits Markdown ; les images utiles sont copiées
+# (sélectionnées + optimisées) dans v3-src/public/images/.
+sources/wp-v2/wp-content/
+
+# Divers
+.DS_Store
+Thumbs.db
+*.log

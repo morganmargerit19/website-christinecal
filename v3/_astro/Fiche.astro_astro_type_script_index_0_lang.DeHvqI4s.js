@@ -1,0 +1,1 @@
+import{g as e,S as i}from"./ScrollTrigger.C8IefbVz.js";const o=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(!o){e.registerPlugin(i);for(const r of e.utils.toArray(".paper-section__inner, .fiche-meta, .fiche-image, .video-grid"))e.from(r,{y:40,opacity:0,duration:.9,ease:"power3.out",scrollTrigger:{trigger:r,start:"top 88%"}})}

@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { pathFor } from '../i18n/utils';
+
+const locale = 'fr';
+---
+<Base
+  locale={locale}
+  routeKey="cookies"
+  title="Politique de cookies — Christine CAL"
+  description="Ce site n'utilise aucun cookie de traçage. Détail de l'usage des cookies et des vidéos YouTube."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Vie privée</span>
+      <h1>Politique de cookies</h1>
+      <p class="lede">Ce site ne vous piste pas.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Aucun cookie de traçage</h2>
+        <p>
+          Ce site est volontairement sobre&nbsp;: il ne dépose <strong>aucun cookie</strong>
+          publicitaire, de traçage ou de mesure d'audience. Aucun consentement n'est donc requis
+          pour le consulter, et vous n'êtes pas suivi d'une page à l'autre.
+        </p>
+
+        <h2>Vidéos YouTube</h2>
+        <p>
+          Les vidéos ne se chargent <strong>qu'au moment où vous cliquez</strong> sur le bouton de
+          lecture. Tant que vous ne lancez pas une vidéo, aucun cookie YouTube n'est déposé. Au
+          clic, la vidéo est servie via le mode renforçant la confidentialité
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google peut alors déposer ses propres
+          cookies, soumis à
+          <a href="https://policies.google.com/privacy" rel="noopener">la politique de Google</a>.
+        </p>
+
+        <h2>Cookies techniques</h2>
+        <p>
+          Aucun cookie n'est nécessaire au fonctionnement du site. Votre navigateur peut
+          conserver localement des préférences d'affichage&nbsp;; ces informations restent sur
+          votre appareil et ne nous sont jamais transmises.
+        </p>
+
+        <h2>En savoir plus</h2>
+        <p>
+          Le traitement de vos données est décrit dans la
+          <a href={pathFor('confidentialite', locale)}>politique de confidentialité</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

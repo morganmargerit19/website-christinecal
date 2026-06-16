@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { pathFor } from '../i18n/utils';
+
+const locale = 'fr';
+---
+<Base
+  locale={locale}
+  routeKey="mentions"
+  title="Mentions légales — Christine CAL"
+  description="Mentions légales du site de Christine CAL — EURL Christine CAL, éditeur, hébergeur et propriété intellectuelle."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Informations légales</span>
+      <h1>Mentions légales</h1>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Éditeur du site</h2>
+        <p>
+          <strong>EURL Christine CAL</strong> — Coach Consultant, Coach d'Éveil à la
+          Multidimensionnalité de l'Être.<br />
+          254 Chemin de la Terre Pointue — Castelgirou — 24 580 PLAZAC, France.<br />
+          Téléphone : <a href="tel:+33680428591">06 80 42 85 91</a><br />
+          E-mail : <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a><br />
+          SIRET : 393 691 993 00033.
+        </p>
+        <p><strong>Directrice de la publication :</strong> Christine CAL.</p>
+
+        <h2>Hébergement</h2>
+        <p>
+          Le site est hébergé par <strong>Vercel Inc.</strong>, 340 S Lemon Ave #4133,
+          Walnut, CA 91789, États-Unis — <a href="https://vercel.com" rel="noopener">vercel.com</a>.
+        </p>
+
+        <h2>Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus du site (textes, photographies, vidéos, enseignements,
+          éléments graphiques) est la propriété exclusive de Christine CAL ou de leurs auteurs
+          respectifs et est protégé par le Code de la propriété intellectuelle
+          (art. L.111-1 et L.335-2 et suivants).
+        </p>
+        <p>
+          Toute reproduction, représentation, diffusion ou exploitation, totale ou partielle,
+          sans autorisation écrite préalable, est interdite et constitue une contrefaçon
+          sanctionnée par la loi. Les photographies de Christine CAL ne peuvent être
+          téléchargées, enregistrées ou réutilisées.
+        </p>
+
+        <h2>Données personnelles & cookies</h2>
+        <p>
+          Le traitement de vos données est décrit dans la
+          <a href={pathFor('confidentialite', locale)}>politique de confidentialité</a>, et l'usage
+          des cookies dans la <a href={pathFor('cookies', locale)}>politique de cookies</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

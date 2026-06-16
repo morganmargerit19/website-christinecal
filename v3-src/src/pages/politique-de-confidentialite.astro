@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { pathFor } from '../i18n/utils';
+
+const locale = 'fr';
+---
+<Base
+  locale={locale}
+  routeKey="confidentialite"
+  title="Politique de confidentialité — Christine CAL"
+  description="Comment vos données personnelles sont traitées sur le site de Christine CAL, conformément au RGPD."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">RGPD</span>
+      <h1>Politique de confidentialité</h1>
+      <p class="lede">Vos données vous appartiennent. Voici comment elles sont traitées.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Responsable du traitement</h2>
+        <p>
+          Les données collectées sur ce site sont traitées par <strong>EURL Christine CAL</strong>,
+          254 Chemin de la Terre Pointue, Castelgirou, 24 580 PLAZAC —
+          <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a>.
+        </p>
+
+        <h2>Données collectées et finalité</h2>
+        <p>
+          Le site est vitrine : il ne crée pas de compte et ne collecte aucune donnée à votre insu.
+          Seules les informations que vous transmettez volontairement via le formulaire de contact
+          ou par e-mail (nom, adresse e-mail, contenu de votre message) sont traitées, dans
+          l'unique but de <strong>répondre à votre demande</strong>.
+        </p>
+        <p>
+          Base légale : votre <strong>consentement</strong> et l'intérêt légitime à répondre à
+          votre sollicitation (art. 6 du RGPD — Règlement UE 2016/679).
+        </p>
+
+        <h2>Destinataires & conservation</h2>
+        <p>
+          Vos données ne sont <strong>ni vendues, ni cédées, ni transmises</strong> à des tiers à
+          des fins commerciales. Elles sont conservées le temps nécessaire au traitement de votre
+          demande, puis supprimées (au plus tard 3 ans après le dernier contact).
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>Conformément au RGPD et à la loi « Informatique et Libertés » (loi 78-17 du 6 janvier 1978), vous disposez des droits suivants :</p>
+        <ul>
+          <li>droit d'accès et d'information ;</li>
+          <li>droit de rectification ;</li>
+          <li>droit à l'effacement (« droit à l'oubli ») ;</li>
+          <li>droit à la limitation du traitement ;</li>
+          <li>droit d'opposition ;</li>
+          <li>droit à la portabilité de vos données ;</li>
+          <li>droit de définir des directives post-mortem.</li>
+        </ul>
+        <p>
+          Pour exercer ces droits, écrivez à
+          <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a>. En cas de
+          difficulté, vous pouvez introduire une réclamation auprès de la
+          <strong>CNIL</strong> (3 place de Fontenoy, 75007 Paris —
+          <a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          L'usage des cookies est détaillé dans la
+          <a href={pathFor('cookies', locale)}>politique de cookies</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

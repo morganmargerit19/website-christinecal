@@ -1,0 +1,26 @@
+---
+title: Sortir de sa matrice personnelle
+kicker: Atelier
+hub: eveil-a-soi
+category: atelier
+order: 5
+lang: fr
+lede: Transmuter sa peur de base pour passer d'une vie réactive à une vie créative.
+dates:
+  - "24–25 octobre 2026"
+  - "23–24 janvier 2027"
+format: Via Zoom
+---
+
+> « Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus. »
+
+La peur de base est le moteur d'incarnation n°1 — et la source de souffrances
+permanentes. Cet atelier propose une approche différente de cet outil connu pour
+la transmuter en énergie positive.
+
+## Objectifs
+
+- Découvrir cette source de souffrances permanentes
+- Récupérer le continuum d'énergie dépensé à lutter contre la peur, et le mettre au service de sa mission
+- Reconsidérer sa vie et ses relations passées, dans le présent et pour le futur
+- S'offrir des relations harmonieuses et joyeuses, avec soi et avec les autres

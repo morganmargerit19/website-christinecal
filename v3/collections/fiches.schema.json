@@ -1,0 +1,114 @@
+{
+  "$ref": "#/definitions/fiches",
+  "definitions": {
+    "fiches": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "kicker": {
+          "type": "string"
+        },
+        "hub": {
+          "type": "string",
+          "enum": [
+            "eveil-a-soi",
+            "eveil-au-soi"
+          ]
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "consultation",
+            "stage",
+            "atelier",
+            "conference",
+            "voyage",
+            "parcours"
+          ]
+        },
+        "order": {
+          "type": "number",
+          "default": 50
+        },
+        "lang": {
+          "type": "string",
+          "enum": [
+            "fr",
+            "en",
+            "pl"
+          ],
+          "default": "fr"
+        },
+        "lede": {
+          "type": "string"
+        },
+        "dates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "duration": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "imageAlt": {
+          "type": "string"
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "meta": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "kicker",
+        "hub",
+        "category",
+        "lede"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

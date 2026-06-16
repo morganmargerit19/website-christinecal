@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui } from '../i18n/ui';
+
+const locale = 'fr';
+const t = ui[locale];
+---
+<Base
+  locale={locale}
+  routeKey="contact"
+  title="Contact — Christine CAL"
+  description="Contacter Christine CAL pour une consultation médiumnique, un stage ou une question — par e-mail ou téléphone."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contact</span>
+      <h1>Entrer en contact</h1>
+      <p class="lede">Une question, une consultation, un stage&nbsp;? Écrivez-moi ou appelez-moi.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner">
+        <div class="contact-cols">
+          <div class="prose">
+            <h2>Me joindre directement</h2>
+            <p>
+              <strong>E-mail :</strong>
+              <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a><br />
+              <strong>Téléphone :</strong> <a href="tel:+33680428591">06&nbsp;80&nbsp;42&nbsp;85&nbsp;91</a>
+            </p>
+            <p class="contact-card">
+              EURL&nbsp;Christine&nbsp;CAL — Coach Consultant<br />
+              254&nbsp;Chemin de la Terre Pointue<br />
+              Castelgirou — 24&nbsp;580&nbsp;PLAZAC
+            </p>
+          </div>
+
+          <form class="contact-form" id="contact-form">
+            <h2>M'écrire un message</h2>
+            <label>
+              Votre nom
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              Votre e-mail
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label>
+              Votre message
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--gold">Envoyer</button>
+            <p class="contact-form__note">
+              Votre messagerie s'ouvrira avec le message pré-rempli, prêt à m'être envoyé.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-cols { display: grid; gap: var(--space-5); }
+  @media (min-width: 720px) { .contact-cols { grid-template-columns: 1fr 1fr; } }
+  .contact-card {
+    border-left: 3px solid var(--indigo-500);
+    padding-left: var(--space-3); color: var(--ink-soft);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-2); }
+  .contact-form h2 { color: var(--indigo-800); }
+  .contact-form label {
+    display: flex; flex-direction: column; gap: 0.4em;
+    font-size: var(--text-sm); color: var(--ink-soft);
+  }
+  .contact-form input, .contact-form textarea {
+    font: inherit; color: var(--ink);
+    border: 1px solid var(--indigo-300); border-radius: var(--radius);
+    padding: 0.7em 0.9em; background: #fff;
+  }
+  .contact-form input:focus, .contact-form textarea:focus {
+    outline: 2px solid var(--gold); border-color: var(--gold);
+  }
+  .contact-form button { align-self: flex-start; margin-top: var(--space-1); }
+  .contact-form__note { font-size: var(--text-xs); color: var(--ink-muted); margin: 0; }
+</style>
+
+<script>
+  // Sans backend : on compose un lien mailto pré-rempli (zéro dépendance, zéro cookie).
+  // Quand l'hébergeur final sera choisi, on pourra brancher Web3Forms/Formspree.
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '');
+    const email = String(data.get('email') ?? '');
+    const message = String(data.get('message') ?? '');
+    const subject = encodeURIComponent(`Message du site — ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:cc.christinecal@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>

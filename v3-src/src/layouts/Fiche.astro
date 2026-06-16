@@ -1,0 +1,114 @@
+---
+import Base from './Base.astro';
+import VideoEmbed from '../components/VideoEmbed.astro';
+import { ui } from '../i18n/ui';
+import { base, hubs, pathFor, type Locale } from '../i18n/utils';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'fiches'>;
+  locale: Locale;
+}
+
+const { entry, locale } = Astro.props;
+const t = ui[locale];
+const f = entry.data;
+const hub = hubs[f.hub];
+
+// Lignes d'infos pratiques (uniquement celles renseignées).
+const facts = [
+  f.format && { label: 'Format', value: f.format },
+  f.duration && { label: 'Durée', value: f.duration },
+  f.price && { label: 'Tarif', value: f.price },
+].filter(Boolean) as { label: string; value: string }[];
+---
+<Base locale={locale} routeKey={hub.key} title={`${f.title} — Christine CAL`} description={f.lede}>
+  <article class="fiche">
+    <section class="page-hero fiche-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+          <a href={pathFor('home', locale)}>{t.nav.home}</a>
+          <span aria-hidden="true">/</span>
+          <a href={pathFor(hub.key, locale)}>{hub.label}</a>
+        </nav>
+        <span class="eyebrow">{f.kicker}</span>
+        <h1>{f.title}</h1>
+        <p class="lede">{f.lede}</p>
+      </div>
+    </section>
+
+    {(facts.length > 0 || f.dates.length > 0) && (
+      <section class="container">
+        <div class="fiche-meta">
+          {f.dates.length > 0 && (
+            <div class="fiche-meta__dates">
+              <span class="fiche-meta__label">Prochaines dates</span>
+              <ul>
+                {f.dates.map((d) => <li>{d}</li>)}
+              </ul>
+            </div>
+          )}
+          {facts.length > 0 && (
+            <dl class="fiche-meta__facts">
+              {facts.map((fact) => (
+                <div>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+      </section>
+    )}
+
+    {f.image && (
+      <section class="container">
+        <figure class="fiche-image">
+          <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
+        </figure>
+      </section>
+    )}
+
+    <section class="paper-section">
+      <div class="container container--narrow">
+        <div class="paper-section__inner">
+          <div class="prose">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {f.videos.length > 0 && (
+      <section class="container">
+        <div class="video-grid">
+          {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} />)}
+        </div>
+      </section>
+    )}
+
+    <section class="contact-band">
+      <div class="container">
+        <h2>{f.category === 'consultation' ? 'Réserver une consultation' : 'Participer ou en savoir plus'}</h2>
+        <p>{t.contact.body}</p>
+        <div class="contact-band__actions">
+          <a class="btn btn--gold" href="mailto:cc.christinecal@gmail.com">{t.contact.cta}</a>
+          <a class="btn btn--ghost" href={pathFor(hub.key, locale)}>← {hub.label}</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</Base>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    gsap.registerPlugin(ScrollTrigger);
+    for (const el of gsap.utils.toArray<HTMLElement>('.paper-section__inner, .fiche-meta, .fiche-image, .video-grid')) {
+      gsap.from(el, { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+    }
+  }
+</script>

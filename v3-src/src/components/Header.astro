@@ -1,0 +1,59 @@
+---
+import { ui } from '../i18n/ui';
+import { locales, pathFor, type Locale, type RouteKey } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+}
+
+const { locale, routeKey } = Astro.props;
+const t = ui[locale];
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href={pathFor('home', locale)}>Christine <em>CAL</em></a>
+
+    <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Menu</span>
+      ☰
+    </button>
+
+    <nav class="site-nav" id="site-nav" data-nav aria-label="Navigation principale">
+      <a href={pathFor('home', locale)} aria-current={routeKey === 'home' ? 'page' : undefined}>{t.nav.home}</a>
+      <a href={pathFor('eveilASoi', locale)} aria-current={routeKey === 'eveilASoi' ? 'page' : undefined}>{t.nav.eveilASoi}</a>
+      <a href={pathFor('eveilAuSoi', locale)} aria-current={routeKey === 'eveilAuSoi' ? 'page' : undefined}>{t.nav.eveilAuSoi}</a>
+      <a href={pathFor('about', locale)} aria-current={routeKey === 'about' ? 'page' : undefined}>{t.nav.about}</a>
+      <a href={pathFor('contact', locale)} aria-current={routeKey === 'contact' ? 'page' : undefined}>{t.nav.contact}</a>
+    </nav>
+
+    <nav class="lang-switch" aria-label={t.nav.langLabel}>
+      {locales.map((l) => (
+        <a href={pathFor(routeKey, l)} aria-current={l === locale ? 'true' : undefined} lang={l} hreflang={l}>
+          {l.toUpperCase()}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]');
+  const toggle = document.querySelector('[data-nav-toggle]');
+  const nav = document.querySelector('[data-nav]');
+
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  toggle?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(open)));
+  });
+  nav?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).tagName === 'A') {
+      nav.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
