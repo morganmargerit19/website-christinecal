@@ -5,6 +5,8 @@ hub: eveil-a-soi
 category: stage
 order: 22
 lang: fr
+image: /images/wp/stage-construction-merkaba-cristalline.jpg
+imageAlt: "Stage Construction de la Merkaba cristalline"
 lede: Construire la géométrie de l'Âme sur la base de la Merkaba cristalline.
 format: Présentiel ou Zoom
 videos:

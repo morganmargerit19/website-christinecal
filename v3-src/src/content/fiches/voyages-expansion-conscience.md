@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: conference
 order: 30
 lang: fr
+image: /images/wp/expansion-conscience.jpg
+imageAlt: "Voyages en expansion de conscience"
 lede: Des soirées de connexion via Zoom pendant l'hiver.
 dates:
   - "À partir de septembre 2026"

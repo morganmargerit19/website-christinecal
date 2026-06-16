@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: stage
 order: 21
 lang: fr
+image: /images/wp/les-7-rayons.jpg
+imageAlt: "Les 7 rayons : 7 jours initiatiques"
 lede: Une approche scientifique et pragmatique des Rayons des Maîtres Ascensionnés.
 dates:
   - "À partir de 2027"

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../../i18n/ui';
-import { fichePath, pathFor } from '../../i18n/utils';
+import { base, fichePath, pathFor } from '../../i18n/utils';
 
 const locale = 'fr';
 const t = ui[locale];
@@ -29,6 +29,9 @@ const fiches = (
   </section>
 
   <section class="container">
+    <figure class="hub-banner">
+      <img src={base + '/images/wp/bandeau-eveil-au-soi.jpg'} alt="Éveil au Soi" loading="lazy" />
+    </figure>
     <div class="hub-grid">
       {fiches.map((f) => (
         <a class="portal-card" href={fichePath('eveil-au-soi', f.id)}>

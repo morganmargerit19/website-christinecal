@@ -5,7 +5,9 @@ hub: eveil-a-soi
 category: stage
 order: 23
 lang: fr
-draft: true
+image: /images/wp/stage-construction-vortex-ascentionnel.jpg
+imageAlt: "Stage Vortex ascensionnel de l'Âme"
+draft: false
 lede: Créer le vaisseau intergalactique de l'Âme et son vortex ascensionnel.
 ---
 

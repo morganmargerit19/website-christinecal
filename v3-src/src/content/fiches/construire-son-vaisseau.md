@@ -5,6 +5,8 @@ hub: eveil-a-soi
 category: parcours
 order: 20
 lang: fr
+image: /images/wp/eveil-quantique.jpg
+imageAlt: "Construire son vaisseau multidimensionnel de l'Âme"
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
 format: Présentiel ou Zoom
 ---

@@ -5,6 +5,8 @@ hub: eveil-a-soi
 category: atelier
 order: 5
 lang: fr
+image: /images/wp/eneagramme.jpg
+imageAlt: "Sortir de sa matrice personnelle"
 lede: Transmuter sa peur de base pour passer d'une vie réactive à une vie créative.
 dates:
   - "24–25 octobre 2026"

@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: stage
 order: 10
 lang: fr
+image: /images/wp/multidimensionnalite.jpg
+imageAlt: "Retrouver sa mémoire galactique"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
 ---
 

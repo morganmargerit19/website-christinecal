@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: stage
 order: 11
 lang: fr
+image: /images/wp/chris-shasta.jpg
+imageAlt: "Christine au Mont Shasta — les intra de Telos"
 lede: En connexion avec la cité intra-terrestre de Telos depuis 2003.
 ---
 

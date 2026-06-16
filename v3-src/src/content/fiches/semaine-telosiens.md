@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: stage
 order: 20
 lang: fr
+image: /images/wp/shasta1.jpg
+imageAlt: "Semaine initiatique avec l'énergie des Télosiens"
 lede: Renaître à votre Être originel, au fil d'une semaine d'exercices et de rituels.
 dates:
   - "3–9 juillet 2027"

@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: stage
 order: 12
 lang: fr
+image: /images/wp/les-freres-des-etoiles.jpg
+imageAlt: "La team galactique de la Nouvelle Terre"
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
 dates:
   - "6–9 mai 2027"

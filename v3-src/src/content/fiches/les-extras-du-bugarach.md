@@ -5,6 +5,8 @@ hub: eveil-au-soi
 category: conference
 order: 13
 lang: fr
+image: /images/wp/bugarach.jpg
+imageAlt: "Le Bugarach et ses nouvelles énergies"
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
 ---
 

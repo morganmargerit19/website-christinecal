@@ -1,5 +1,23 @@
 # Refonte V2 — christinecal.com
 
+> ⚠️ **2026-06-16 — LA V3 EST EN LIGNE (`/v3/`, surprise).** Le WordPress de Christophe a été
+> extrait (XML + `wp-content` complet, déposés dans `sources/wp-v2/`, dump gitignoré). Le site
+> complet a été reconstruit dans **`v3-src/`** (Astro, servi sous **`/v3/`** — invisible pour
+> Christine tant qu'elle n'a pas le lien). `/v2/` reste le teaser qu'elle connaît.
+>
+> **État V3** : architecture complète FR — home portail (image Terre + point lumineux conservée),
+> 2 hubs (Éveil à Soi / au Soi avec bandeaux), consultation médiumnique mise en avant (70 €/1h30/Zoom),
+> **17 fiches** stages/ateliers/conférences (collection Markdown éditable `v3-src/src/content/fiches/`),
+> qui-suis-je (portrait + 2 vidéos + presse), contact (formulaire mailto), 3 pages légales RGPD
+> (vidéos en façade « clic-pour-lire » = zéro cookie YouTube avant action). 73 images WP intégrées
+> dans `v3-src/public/images/wp/`. Build : `cd v3-src && npm run build` → sort dans `../v3/`.
+>
+> **Reste à faire** (non bloquant) : traductions EN/PL des nouvelles pages (FR-only pour l'instant,
+> en/pl pointent sur FR dans `i18n/utils.ts`) ; section DVD (jaquettes `dvd-*.jpg` déjà copiées) +
+> page Mission (contenu dans `sources/wp-v2/pages/mission.md`, 3 vidéos) ; backend du formulaire
+> contact (Web3Forms/Formspree) au choix de l'hébergeur final ; fignolage visuel des images par fiche
+> selon retours Christine. Désirs détaillés : `sources/wp-v2/DESIRS-CHRISTINE.md`.
+
 > Document de cadrage pour Morgan. Rédigé le 2026-06-11 en préparation de la refonte
 > complète du site de Christine CAL (en remplacement de la version WordPress en cours
 > chez son ami).

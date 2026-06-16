@@ -14,6 +14,15 @@ const t = ui[locale];
   <section class="hero">
     <div class="hero__halo"></div>
     <div class="container">
+      <div class="hero__portal" data-hero="portal">
+        <img
+          src={base + '/images/wp/fond-portail-2021-bleu1200-V2.jpg'}
+          alt="La Terre et le point lumineux — portail de Christine CAL"
+          width="420"
+          height="420"
+          fetchpriority="high"
+        />
+      </div>
       <p class="hero__eyebrow" data-hero="eyebrow">{t.hero.eyebrow}</p>
       <h1 class="hero__title" data-hero="title">
         Christine <span class="light">CAL</span>
@@ -120,7 +129,8 @@ const t = ui[locale];
 
     gsap
       .timeline({ defaults: { ease: 'power3.out' } })
-      .from('[data-hero="eyebrow"]', { y: 24, opacity: 0, duration: 0.9 })
+      .from('[data-hero="portal"]', { scale: 0.85, opacity: 0, duration: 1.1 })
+      .from('[data-hero="eyebrow"]', { y: 24, opacity: 0, duration: 0.9 }, '-=0.5')
       .from('[data-hero="title"]', { y: 40, opacity: 0, duration: 1.1 }, '-=0.5')
       .from('[data-hero="tagline"]', { y: 24, opacity: 0, duration: 0.9 }, '-=0.6')
       .from('[data-hero="cta"]', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5')

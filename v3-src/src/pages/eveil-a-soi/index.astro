@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../../i18n/ui';
-import { fichePath, pathFor } from '../../i18n/utils';
+import { base, fichePath, pathFor } from '../../i18n/utils';
 
 const locale = 'fr';
 const t = ui[locale];
@@ -33,6 +33,9 @@ const rest = fiches.filter((f) => !f.data.featured);
   </section>
 
   <section class="container">
+    <figure class="hub-banner">
+      <img src={base + '/images/wp/bandeau-eveil-a-soi.jpg'} alt="Éveil à Soi" loading="lazy" />
+    </figure>
     <div class="hub-grid">
       {featured.map((f) => (
         <a class="portal-card portal-card--featured" href={fichePath('eveil-a-soi', f.id)}>

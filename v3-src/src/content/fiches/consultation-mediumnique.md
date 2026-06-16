@@ -5,6 +5,8 @@ hub: eveil-a-soi
 category: consultation
 order: 1
 lang: fr
+image: /images/wp/mediumnite.jpg
+imageAlt: "Lecture d'Âme — consultation médiumnique"
 featured: true
 lede: Une lecture d'Âme qui révèle vos ressources et votre mission de vie.
 format: Séance via Zoom

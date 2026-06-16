@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { about } from '../../i18n/pages/about';
-import type { Locale } from '../../i18n/utils';
+import { base, type Locale } from '../../i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -17,6 +17,16 @@ const t = about[locale];
       <h1 data-reveal>{t.hero.title}</h1>
       <p class="lede" data-reveal>{t.hero.lede}</p>
     </div>
+  </section>
+
+  <section class="container">
+    <figure class="about-portrait" data-reveal>
+      <img
+        src={base + '/images/wp/ccal-portrait-2.jpg'}
+        alt="Portrait de Christine CAL"
+        loading="lazy"
+      />
+    </figure>
   </section>
 
   <section class="paper-section">
