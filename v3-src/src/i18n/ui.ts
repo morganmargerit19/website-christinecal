@@ -31,6 +31,7 @@ export interface UIDict {
     tagline: string;
     scrollHint: string;
     portalBaseline: string;
+    portalEyebrow: string;
   };
   paths: {
     heading: string;
@@ -117,6 +118,7 @@ export const ui: Record<Locale, UIDict> = {
       tagline: 'Une galactique venue du futur — éveil à sa multidimensionnalité',
       scrollHint: 'Découvrir',
       portalBaseline: 'Éveil à sa multidimensionnalité',
+      portalEyebrow: 'Une galactique venue du futur',
     },
     paths: {
       heading: "Deux portes d'entrée",
@@ -206,6 +208,7 @@ export const ui: Record<Locale, UIDict> = {
       tagline: 'Guiding you through your awakening of consciousness',
       scrollHint: 'Discover',
       portalBaseline: 'Awakening to your multidimensionality',
+      portalEyebrow: 'A galactic soul from the future',
     },
     paths: {
       heading: 'Two gateways',
@@ -295,6 +298,7 @@ export const ui: Record<Locale, UIDict> = {
       tagline: 'Towarzyszę Ci w przebudzeniu świadomości',
       scrollHint: 'Odkryj',
       portalBaseline: 'Przebudzenie do swojej wielowymiarowości',
+      portalEyebrow: 'Istota galaktyczna z przyszłości',
     },
     paths: {
       heading: 'Dwie bramy',
@@ -384,6 +388,7 @@ export const ui: Record<Locale, UIDict> = {
       tagline: 'Te acompaño en tu despertar de conciencia',
       scrollHint: 'Descubrir',
       portalBaseline: 'Despertar a tu multidimensionalidad',
+      portalEyebrow: 'Una galáctica venida del futuro',
     },
     paths: {
       heading: 'Dos puertas de entrada',
@@ -473,6 +478,7 @@ export const ui: Record<Locale, UIDict> = {
       tagline: 'Ti accompagno nel tuo risveglio di coscienza',
       scrollHint: 'Scopri',
       portalBaseline: 'Risveglio alla tua multidimensionalità',
+      portalEyebrow: 'Una galattica venuta dal futuro',
     },
     paths: {
       heading: "Due porte d'ingresso",

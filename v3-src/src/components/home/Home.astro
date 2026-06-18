@@ -28,6 +28,8 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="container hero__content">
+      <div class="portal-emblem" data-hero="emblem" aria-hidden="true"><span>CC</span></div>
+      <p class="portal-eyebrow" data-hero="eyebrow">{t.hero.portalEyebrow}</p>
       <h1 class="portal-brand" data-hero="brand">Christine <span class="light">CAL</span></h1>
       <p class="portal-baseline" data-hero="baseline">{t.hero.portalBaseline}</p>
 
@@ -75,6 +77,23 @@ const year = new Date().getFullYear();
         var(--indigo-950) 100%);
   }
   .hero__content { position: relative; z-index: 1; }
+  .portal-emblem {
+    width: clamp(74px, 9vw, 104px); aspect-ratio: 1; margin: 0 auto 1.1rem;
+    display: grid; place-items: center; border-radius: 50%;
+    border: 1px solid rgba(230, 212, 154, 0.6);
+    background: radial-gradient(circle, rgba(16, 13, 46, 0.5) 0%, rgba(7, 6, 26, 0.18) 75%);
+    box-shadow: 0 0 32px rgba(201, 169, 97, 0.32), inset 0 0 22px rgba(123, 121, 198, 0.28);
+  }
+  .portal-emblem span {
+    font-family: var(--font-serif); font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: 0.12em; color: var(--gold-soft);
+    text-shadow: 0 1px 12px rgba(7, 6, 26, 0.85);
+  }
+  .portal-eyebrow {
+    font-size: var(--text-xs); letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold-soft); margin: 0 0 0.7rem;
+    text-shadow: 0 1px 14px rgba(7, 6, 26, 0.95);
+  }
   .portal-brand {
     font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; letter-spacing: 0.04em;
     margin: 0; color: #fff; text-shadow: 0 2px 40px rgba(7, 6, 26, 0.7);
@@ -165,7 +184,9 @@ const year = new Date().getFullYear();
     gsap
       .timeline({ defaults: { ease: 'power3.out' } })
       .from('[data-hero="bg"]', { scale: 1.12, opacity: 0, duration: 1.6 })
-      .from('[data-hero="brand"]', { y: 24, opacity: 0, duration: 1.0 }, '-=0.9')
+      .from('[data-hero="emblem"]', { scale: 0.6, opacity: 0, duration: 0.9 }, '-=0.9')
+      .from('[data-hero="eyebrow"]', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5')
+      .from('[data-hero="brand"]', { y: 24, opacity: 0, duration: 1.0 }, '-=0.4')
       .from('[data-hero="baseline"]', { y: 18, opacity: 0, duration: 0.9 }, '-=0.6')
       .from('[data-hero="doors"] > *', { y: 28, opacity: 0, duration: 0.9, stagger: 0.18 }, '-=0.4')
       .from('[data-hero="lang"]', { opacity: 0, duration: 0.8 }, '-=0.7')
