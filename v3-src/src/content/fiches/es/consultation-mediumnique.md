@@ -9,6 +9,8 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Lectura del Alma — consulta mediúmnica"
 featured: true
 lede: Una lectura del Alma que revela tus recursos y tu misión de vida.
+banner: /images/wp/bandeau-mediumnique.jpg
+bannerAlt: "Una mirada vuelta hacia lo invisible"
 format: Sesión por Zoom
 duration: 1h30
 price: 70 €

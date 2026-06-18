@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import VideoEmbed from '../VideoEmbed.astro';
 import { about } from '../../i18n/pages/about';
+import { ui } from '../../i18n/ui';
 import { base, type Locale } from '../../i18n/utils';
 
 interface Props {
@@ -9,6 +11,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = about[locale];
+const u = ui[locale];
 ---
 <Base locale={locale} routeKey="about" title={t.meta.title} description={t.meta.description}>
   <section class="page-hero">
@@ -106,10 +109,32 @@ const t = about[locale];
         <p>
           <a href={t.press.href} target="_blank" rel="noopener">{t.press.text}</a>
         </p>
+
+        <h3>{t.dvd.heading}</h3>
+        <div class="about-dvd">
+          <figure class="about-dvd__poster">
+            <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
+          </figure>
+          <div class="about-dvd__media">
+            <p>{t.dvd.body}</p>
+            <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </Base>
+
+<style>
+  .about-dvd { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
+  @media (min-width: 640px) { .about-dvd { grid-template-columns: 170px 1fr; } }
+  .about-dvd__poster {
+    margin: 0; border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--border-light); box-shadow: var(--shadow-md);
+  }
+  .about-dvd__poster img { width: 100%; display: block; }
+  .about-dvd__media p { margin-top: 0; }
+</style>
 
 <script>
   import { gsap } from 'gsap';

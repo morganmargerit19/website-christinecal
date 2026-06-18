@@ -9,6 +9,8 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Soul reading — mediumistic consultation"
 featured: true
 lede: A Soul reading that reveals your resources and your life mission.
+banner: /images/wp/bandeau-mediumnique.jpg
+bannerAlt: "A gaze turned towards the invisible"
 format: Session via Zoom
 duration: 1h30
 price: 70 €

@@ -18,6 +18,7 @@ export interface AboutDict {
   news: { heading: string; items: string[] };
   clients: { heading: string; text: string };
   press: { text: string; href: string };
+  dvd: { heading: string; body: string; posterAlt: string; trailerTitle: string };
 }
 
 export const about: Record<Locale, AboutDict> = {
@@ -100,6 +101,12 @@ export const about: Record<Locale, AboutDict> = {
       text: 'Lire l’article dans Sud Ouest du 2 juin 2017 — « Cette comptable qui est devenue coach de vie… »',
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
     },
+    dvd: {
+      heading: 'Presse & DVD',
+      body: 'Christine figure dans le film documentaire « Les Acteurs de la Vie » de Peter Müller et Angélique Piro (2017), qui donne la parole à celles et ceux qui voient le monde autrement.',
+      posterAlt: 'Affiche du film « Les Acteurs de la Vie »',
+      trailerTitle: 'Bande-annonce — Les Acteurs de la Vie',
+    },
   },
 
   en: {
@@ -180,6 +187,12 @@ export const about: Record<Locale, AboutDict> = {
     press: {
       text: 'Read the article in Sud Ouest, 2 June 2017 — “The accountant who became a life coach…” (in French)',
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
+    },
+    dvd: {
+      heading: 'Press & DVD',
+      body: 'Christine appears in the documentary film “Les Acteurs de la Vie” by Peter Müller and Angélique Piro (2017), which gives a voice to those who see the world differently.',
+      posterAlt: 'Poster of the film “Les Acteurs de la Vie”',
+      trailerTitle: 'Trailer — Les Acteurs de la Vie',
     },
   },
 
@@ -262,6 +275,12 @@ export const about: Record<Locale, AboutDict> = {
       text: 'Przeczytaj artykuł w Sud Ouest z 2 czerwca 2017 — „Księgowa, która została life coachem…” (po francusku)',
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
     },
+    dvd: {
+      heading: 'Prasa i DVD',
+      body: 'Christine występuje w filmie dokumentalnym „Les Acteurs de la Vie” Petera Müllera i Angélique Piro (2017), który oddaje głos tym, którzy widzą świat inaczej.',
+      posterAlt: 'Plakat filmu „Les Acteurs de la Vie”',
+      trailerTitle: 'Zwiastun — Les Acteurs de la Vie',
+    },
   },
 
   es: {
@@ -343,6 +362,12 @@ export const about: Record<Locale, AboutDict> = {
       text: 'Lee el artículo en Sud Ouest del 2 de junio de 2017 — «Esta contable que se convirtió en coach de vida…» (en francés)',
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
     },
+    dvd: {
+      heading: 'Prensa y DVD',
+      body: 'Christine aparece en el documental «Les Acteurs de la Vie» de Peter Müller y Angélique Piro (2017), que da voz a quienes ven el mundo de otra manera.',
+      posterAlt: 'Cartel de la película «Les Acteurs de la Vie»',
+      trailerTitle: 'Tráiler — Les Acteurs de la Vie',
+    },
   },
 
   it: {
@@ -423,6 +448,12 @@ export const about: Record<Locale, AboutDict> = {
     press: {
       text: "Leggi l'articolo su Sud Ouest del 2 giugno 2017 — «Questa contabile diventata coach di vita…» (in francese)",
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
+    },
+    dvd: {
+      heading: 'Stampa e DVD',
+      body: 'Christine compare nel documentario «Les Acteurs de la Vie» di Peter Müller e Angélique Piro (2017), che dà voce a chi vede il mondo in modo diverso.',
+      posterAlt: 'Locandina del film «Les Acteurs de la Vie»',
+      trailerTitle: 'Trailer — Les Acteurs de la Vie',
     },
   },
 };

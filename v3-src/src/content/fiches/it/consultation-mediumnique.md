@@ -9,6 +9,8 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Lettura dell'Anima — consulto medianico"
 featured: true
 lede: Una lettura dell'Anima che rivela le tue risorse e la tua missione di vita.
+banner: /images/wp/bandeau-mediumnique.jpg
+bannerAlt: "Uno sguardo rivolto verso l'invisibile"
 format: Seduta tramite Zoom
 duration: 1h30
 price: 70 €

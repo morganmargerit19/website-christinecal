@@ -9,6 +9,8 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Odczyt Duszy — konsultacja mediumiczna"
 featured: true
 lede: Odczyt Duszy, który ujawnia twoje zasoby i twoją misję życiową.
+banner: /images/wp/bandeau-mediumnique.jpg
+bannerAlt: "Spojrzenie zwrócone ku niewidzialnemu"
 format: Sesja przez Zoom
 duration: 1h30
 price: 70 €
