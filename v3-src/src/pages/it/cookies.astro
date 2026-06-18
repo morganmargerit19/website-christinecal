@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'it';
+---
+<Base
+  locale={locale}
+  routeKey="cookies"
+  title="Informativa sui cookie — Christine CAL"
+  description="Questo sito non utilizza cookie di tracciamento. Dettagli sull'uso dei cookie e dei video di YouTube."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Privacy</span>
+      <h1>Informativa sui cookie</h1>
+      <p class="lede">Questo sito non ti traccia.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Nessun cookie di tracciamento</h2>
+        <p>
+          Questo sito è volutamente minimale&nbsp;: non installa <strong>alcun</strong>
+          cookie pubblicitario, di tracciamento o di misurazione del pubblico. Non è quindi richiesto alcun consenso
+          per navigarvi, e non vieni tracciato da una pagina all'altra.
+        </p>
+
+        <h2>Video di YouTube</h2>
+        <p>
+          I video si caricano solo <strong>quando fai clic</strong> sul pulsante di riproduzione.
+          Finché non avvii un video, non viene installato alcun cookie di YouTube. Al
+          clic, il video viene erogato tramite la modalità di privacy avanzata
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google possono quindi installare i propri
+          cookie, conformemente alla
+          <a href="https://policies.google.com/privacy" rel="noopener">politica di Google</a>.
+        </p>
+
+        <h2>Cookie tecnici</h2>
+        <p>
+          Nessun cookie è necessario per il funzionamento del sito. Il tuo browser può
+          memorizzare localmente le preferenze di visualizzazione&nbsp;; queste informazioni rimangono sul
+          tuo dispositivo e non ci vengono mai trasmesse.
+        </p>
+
+        <h2>Per saperne di più</h2>
+        <p>
+          Il trattamento dei tuoi dati è descritto nell'
+          <a href={pathFor('confidentialite', locale)}>informativa sulla privacy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

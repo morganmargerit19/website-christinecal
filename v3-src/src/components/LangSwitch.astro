@@ -1,0 +1,105 @@
+---
+import { ui } from '../i18n/ui';
+import { locales, localeNames, pathFor, type Locale, type RouteKey } from '../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  routeKey: RouteKey;
+  align?: 'left' | 'right';
+}
+
+const { locale, routeKey, align = 'right' } = Astro.props;
+const t = ui[locale];
+---
+<details class="lang" data-lang data-align={align}>
+  <summary class="lang__btn" aria-label={t.nav.langLabel}>
+    <svg class="lang__globe" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z" />
+    </svg>
+    <span class="lang__cur">{locale.toUpperCase()}</span>
+    <svg class="lang__chev" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </summary>
+  <ul class="lang__menu" role="list">
+    {locales.map((l) => (
+      <li>
+        <a href={pathFor(routeKey, l)} hreflang={l} lang={l} aria-current={l === locale ? 'true' : undefined}>
+          <span class="lang__code">{l.toUpperCase()}</span>
+          <span class="lang__name">{localeNames[l]}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</details>
+
+<style>
+  .lang { position: relative; }
+  .lang__btn {
+    list-style: none; cursor: pointer; user-select: none;
+    display: inline-flex; align-items: center; gap: 0.45em;
+    padding: 0.4em 0.7em;
+    font-size: var(--text-xs); letter-spacing: 0.1em; font-weight: 500;
+    color: var(--indigo-100);
+    border: 1px solid rgba(201, 169, 97, 0.35); border-radius: 999px;
+    background: rgba(16, 13, 46, 0.4);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+  }
+  .lang__btn::-webkit-details-marker { display: none; }
+  .lang__btn:hover { border-color: var(--gold); color: #fff; }
+  .lang__globe { color: var(--gold); flex: none; }
+  .lang__cur { line-height: 1; }
+  .lang__chev { opacity: 0.7; transition: transform 0.3s; }
+  .lang[open] .lang__chev { transform: rotate(180deg); }
+  .lang[open] .lang__btn { border-color: var(--gold); color: #fff; }
+
+  .lang__menu {
+    position: absolute; top: calc(100% + 0.5rem); right: 0;
+    min-width: 11.5rem; margin: 0; padding: 0.4rem; list-style: none;
+    background: rgba(16, 13, 46, 0.92);
+    border: 1px solid rgba(201, 169, 97, 0.3); border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(7, 6, 26, 0.6);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    z-index: 60;
+    animation: lang-in 0.18s ease;
+  }
+  .lang[data-align='left'] .lang__menu { right: auto; left: 0; }
+  @keyframes lang-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .lang__menu a {
+    display: flex; align-items: baseline; gap: 0.7em;
+    padding: 0.5em 0.7em; border-radius: 9px;
+    text-decoration: none; color: var(--indigo-100);
+    transition: background 0.2s, color 0.2s;
+  }
+  .lang__menu a:hover { background: rgba(123, 121, 198, 0.18); color: #fff; }
+  .lang__menu a[aria-current='true'] { color: var(--gold-soft); }
+  .lang__menu a[aria-current='true'] .lang__code { background: var(--gold); color: var(--indigo-950); }
+  .lang__code {
+    flex: none; min-width: 2.1em; text-align: center;
+    font-size: 0.7rem; letter-spacing: 0.08em; font-weight: 600;
+    padding: 0.25em 0.4em; border-radius: 6px;
+    border: 1px solid rgba(201, 169, 97, 0.3); color: var(--gold-soft);
+  }
+  .lang__name { font-size: var(--text-sm); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lang__menu { animation: none; }
+    .lang__chev { transition: none; }
+  }
+</style>
+
+<script>
+  // Ferme le menu langue au clic extérieur ou sur Échap.
+  for (const el of document.querySelectorAll<HTMLDetailsElement>('[data-lang]')) {
+    document.addEventListener('click', (e) => {
+      if (el.open && !el.contains(e.target as Node)) el.open = false;
+    });
+    el.addEventListener('keydown', (e) => {
+      if ((e as KeyboardEvent).key === 'Escape') el.open = false;
+    });
+  }
+</script>

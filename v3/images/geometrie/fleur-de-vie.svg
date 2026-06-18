@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-210 -210 420 420" width="420" height="420" role="img" aria-label="Fleur de Vie">
+ <style>
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .trace { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 2.8s ease forwards; }
+  @media (prefers-reduced-motion: reduce){ .trace { animation: none; stroke-dashoffset: 0; } }
+</style>
+ <defs>
+  <radialGradient id="gFlower" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="#fffdf5"/><stop offset="0.28" stop-color="#f4e3a8"/><stop offset="0.7" stop-color="#d9b45f"/><stop offset="1" stop-color="#b6863a"/></radialGradient>
+  <radialGradient id="gCore" cx="50%" cy="50%" r="40%"><stop offset="0" stop-color="#fffdf5" stop-opacity="0.9"/><stop offset="1" stop-color="#fffdf5" stop-opacity="0"/></radialGradient>
+ </defs>
+ <circle cx="0" cy="0" r="171.0" fill="url(#gCore)"/>
+ <g fill="none" stroke="url(#gFlower)" stroke-width="1.6"><circle class="trace" pathLength="1" cx="0.00" cy="0.00" r="60.00" style="animation-delay:0.00s"/><circle class="trace" pathLength="1" cx="60.00" cy="0.00" r="60.00" style="animation-delay:0.04s"/><circle class="trace" pathLength="1" cx="30.00" cy="51.96" r="60.00" style="animation-delay:0.08s"/><circle class="trace" pathLength="1" cx="-30.00" cy="51.96" r="60.00" style="animation-delay:0.12s"/><circle class="trace" pathLength="1" cx="-60.00" cy="0.00" r="60.00" style="animation-delay:0.16s"/><circle class="trace" pathLength="1" cx="-30.00" cy="-51.96" r="60.00" style="animation-delay:0.20s"/><circle class="trace" pathLength="1" cx="30.00" cy="-51.96" r="60.00" style="animation-delay:0.24s"/><circle class="trace" pathLength="1" cx="120.00" cy="0.00" r="60.00" style="animation-delay:0.28s"/><circle class="trace" pathLength="1" cx="60.00" cy="103.92" r="60.00" style="animation-delay:0.32s"/><circle class="trace" pathLength="1" cx="-60.00" cy="103.92" r="60.00" style="animation-delay:0.36s"/><circle class="trace" pathLength="1" cx="-120.00" cy="0.00" r="60.00" style="animation-delay:0.40s"/><circle class="trace" pathLength="1" cx="-60.00" cy="-103.92" r="60.00" style="animation-delay:0.44s"/><circle class="trace" pathLength="1" cx="60.00" cy="-103.92" r="60.00" style="animation-delay:0.48s"/><circle class="trace" pathLength="1" cx="90.00" cy="51.96" r="60.00" style="animation-delay:0.52s"/><circle class="trace" pathLength="1" cx="0.00" cy="103.92" r="60.00" style="animation-delay:0.56s"/><circle class="trace" pathLength="1" cx="-90.00" cy="51.96" r="60.00" style="animation-delay:0.60s"/><circle class="trace" pathLength="1" cx="-90.00" cy="-51.96" r="60.00" style="animation-delay:0.64s"/><circle class="trace" pathLength="1" cx="-0.00" cy="-103.92" r="60.00" style="animation-delay:0.68s"/><circle class="trace" pathLength="1" cx="90.00" cy="-51.96" r="60.00" style="animation-delay:0.72s"/></g>
+ <circle class="trace" pathLength="1" cx="0" cy="0" r="180.0" fill="none" stroke="url(#gFlower)" stroke-width="2.4" style="animation-delay:.9s"/>
+ <circle class="trace" pathLength="1" cx="0" cy="0" r="188.0" fill="none" stroke="url(#gFlower)" stroke-width="1.6" style="animation-delay:1s"/>
+</svg>

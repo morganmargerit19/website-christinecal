@@ -1,6 +1,7 @@
 ---
 import { ui } from '../i18n/ui';
-import { locales, pathFor, type Locale, type RouteKey } from '../i18n/utils';
+import LangSwitch from './LangSwitch.astro';
+import { pathFor, type Locale, type RouteKey } from '../i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -23,17 +24,12 @@ const t = ui[locale];
       <a href={pathFor('home', locale)} aria-current={routeKey === 'home' ? 'page' : undefined}>{t.nav.home}</a>
       <a href={pathFor('eveilASoi', locale)} aria-current={routeKey === 'eveilASoi' ? 'page' : undefined}>{t.nav.eveilASoi}</a>
       <a href={pathFor('eveilAuSoi', locale)} aria-current={routeKey === 'eveilAuSoi' ? 'page' : undefined}>{t.nav.eveilAuSoi}</a>
+      <a href={pathFor('mission', locale)} aria-current={routeKey === 'mission' ? 'page' : undefined}>Mission</a>
       <a href={pathFor('about', locale)} aria-current={routeKey === 'about' ? 'page' : undefined}>{t.nav.about}</a>
       <a href={pathFor('contact', locale)} aria-current={routeKey === 'contact' ? 'page' : undefined}>{t.nav.contact}</a>
     </nav>
 
-    <nav class="lang-switch" aria-label={t.nav.langLabel}>
-      {locales.map((l) => (
-        <a href={pathFor(routeKey, l)} aria-current={l === locale ? 'true' : undefined} lang={l} hreflang={l}>
-          {l.toUpperCase()}
-        </a>
-      ))}
-    </nav>
+    <LangSwitch locale={locale} routeKey={routeKey} align="right" />
   </div>
 </header>
 

@@ -21,7 +21,7 @@ const fiches = defineCollection({
     category: z.enum(['consultation', 'stage', 'atelier', 'conference', 'voyage', 'parcours']),
     // Ordre d'affichage dans la grille du hub (petit = en premier)
     order: z.number().default(50),
-    lang: z.enum(['fr', 'en', 'pl']).default('fr'),
+    lang: z.enum(['fr', 'en', 'pl', 'es', 'it']).default('fr'),
     // Résumé court (carte + chapeau de page). Christine : « pas de blabla ».
     lede: z.string(),
     // Infos pratiques (toutes optionnelles)
@@ -29,6 +29,9 @@ const fiches = defineCollection({
     duration: z.string().optional(),
     price: z.string().optional(),
     format: z.string().optional(),
+    // Bandeau large en tête de page (full-bleed, ratio ~3.2:1), optionnel
+    banner: z.string().optional(),
+    bannerAlt: z.string().optional(),
     // Visuel principal (chemin sous /images/… ; vraies images intégrées demain)
     image: z.string().optional(),
     imageAlt: z.string().optional(),

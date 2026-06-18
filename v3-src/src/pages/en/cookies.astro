@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'en';
+---
+<Base
+  locale={locale}
+  routeKey="cookies"
+  title="Cookie policy — Christine CAL"
+  description="This site uses no tracking cookies. Details on the use of cookies and YouTube videos."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Privacy</span>
+      <h1>Cookie policy</h1>
+      <p class="lede">This site does not track you.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>No tracking cookies</h2>
+        <p>
+          This site is deliberately minimal&nbsp;: it places <strong>no</strong>
+          advertising, tracking or audience-measurement cookies. No consent is therefore required
+          to browse it, and you are not tracked from one page to another.
+        </p>
+
+        <h2>YouTube videos</h2>
+        <p>
+          Videos only load <strong>when you click</strong> the play button.
+          As long as you do not start a video, no YouTube cookie is placed. On
+          click, the video is served via the privacy-enhanced mode
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google may then place its own
+          cookies, subject to
+          <a href="https://policies.google.com/privacy" rel="noopener">Google's policy</a>.
+        </p>
+
+        <h2>Technical cookies</h2>
+        <p>
+          No cookie is required for the site to function. Your browser may
+          locally store display preferences&nbsp;; this information remains on
+          your device and is never transmitted to us.
+        </p>
+
+        <h2>Learn more</h2>
+        <p>
+          The processing of your data is described in the
+          <a href={pathFor('confidentialite', locale)}>privacy policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

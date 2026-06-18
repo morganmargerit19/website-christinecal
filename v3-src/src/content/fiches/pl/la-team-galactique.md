@@ -1,0 +1,32 @@
+---
+title: Galaktyczny Zespół Nowej Ziemi
+kicker: Warsztat
+hub: eveil-au-soi
+category: stage
+order: 12
+lang: pl
+image: /images/wp/les-freres-des-etoiles.jpg
+imageAlt: "Galaktyczny zespół Nowej Ziemi"
+lede: Ponowne spotkanie Dusz galaktycznych, by ustabilizować nową linię czasową.
+dates:
+  - "6–9 maja 2027"
+format: Vallée de l'Homme, Dordogne (24)
+---
+
+Nowa Ziemia ujawnia się stopniowo, dając możliwość stania się
+Człowiekiem-twórcą 5D. Ujawnienia odsłaniają rzeczywistości długo ukrywane —
+oraz technologię, którą trzeba będzie oswoić.
+
+## Nasza misja: stworzyć most
+
+Nieść wibrację podczas Przejścia. Co za szczęście dla Duszy, która we
+wcieleniu uczestniczy ze swoimi galaktycznymi braćmi i siostrami w misji
+zbiorowej dla Pokoju, po długich walkach.
+
+## Warsztat — Spotkania galaktyków na ziemi
+
+Ponowne spotkania wokół narzędzi ponownego połączenia i pacyfikacji w liniach
+czasowych. Duch przewodni: ponowne spotkania Dusz.
+
+> Zaproszenie do stawiania pytań: zasięgnąć informacji przed osądzeniem i zachować
+> szacunek dla wolnej myśli każdego.

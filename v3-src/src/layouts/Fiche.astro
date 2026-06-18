@@ -14,22 +14,28 @@ const { entry, locale } = Astro.props;
 const t = ui[locale];
 const f = entry.data;
 const hub = hubs[f.hub];
+const hubLabel = f.hub === 'eveil-a-soi' ? t.nav.eveilASoi : t.nav.eveilAuSoi;
 
 // Lignes d'infos pratiques (uniquement celles renseignées).
 const facts = [
-  f.format && { label: 'Format', value: f.format },
-  f.duration && { label: 'Durée', value: f.duration },
-  f.price && { label: 'Tarif', value: f.price },
+  f.format && { label: t.fiche.format, value: f.format },
+  f.duration && { label: t.fiche.duration, value: f.duration },
+  f.price && { label: t.fiche.price, value: f.price },
 ].filter(Boolean) as { label: string; value: string }[];
 ---
 <Base locale={locale} routeKey={hub.key} title={`${f.title} — Christine CAL`} description={f.lede}>
   <article class="fiche">
+    {f.banner && (
+      <figure class="fiche-banner">
+        <img src={base + f.banner} alt={f.bannerAlt ?? f.imageAlt ?? f.title} fetchpriority="high" />
+      </figure>
+    )}
     <section class="page-hero fiche-hero">
       <div class="container">
         <nav class="breadcrumb" aria-label="Fil d'Ariane">
           <a href={pathFor('home', locale)}>{t.nav.home}</a>
           <span aria-hidden="true">/</span>
-          <a href={pathFor(hub.key, locale)}>{hub.label}</a>
+          <a href={pathFor(hub.key, locale)}>{hubLabel}</a>
         </nav>
         <span class="eyebrow">{f.kicker}</span>
         <h1>{f.title}</h1>
@@ -42,7 +48,7 @@ const facts = [
         <div class="fiche-meta">
           {f.dates.length > 0 && (
             <div class="fiche-meta__dates">
-              <span class="fiche-meta__label">Prochaines dates</span>
+              <span class="fiche-meta__label">{t.fiche.dates}</span>
               <ul>
                 {f.dates.map((d) => <li>{d}</li>)}
               </ul>
@@ -90,16 +96,27 @@ const facts = [
 
     <section class="contact-band">
       <div class="container">
-        <h2>{f.category === 'consultation' ? 'Réserver une consultation' : 'Participer ou en savoir plus'}</h2>
+        <h2>{f.category === 'consultation' ? t.fiche.ctaConsult : t.fiche.ctaDefault}</h2>
         <p>{t.contact.body}</p>
         <div class="contact-band__actions">
           <a class="btn btn--gold" href="mailto:cc.christinecal@gmail.com">{t.contact.cta}</a>
-          <a class="btn btn--ghost" href={pathFor(hub.key, locale)}>← {hub.label}</a>
+          <a class="btn btn--ghost" href={pathFor(hub.key, locale)}>← {hubLabel}</a>
         </div>
       </div>
     </section>
   </article>
 </Base>
+
+<style>
+  .fiche-banner {
+    margin: 0; width: 100%; max-height: 44vh; overflow: hidden;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .fiche-banner img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    max-height: 44vh;
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';

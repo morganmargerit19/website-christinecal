@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'es';
+---
+<Base
+  locale={locale}
+  routeKey="cookies"
+  title="Política de cookies — Christine CAL"
+  description="Este sitio no utiliza cookies de seguimiento. Detalles sobre el uso de cookies y los vídeos de YouTube."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Privacidad</span>
+      <h1>Política de cookies</h1>
+      <p class="lede">Este sitio no le rastrea.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Sin cookies de seguimiento</h2>
+        <p>
+          Este sitio es deliberadamente minimalista&nbsp;: no instala <strong>ninguna</strong>
+          cookie publicitaria, de seguimiento ni de medición de audiencia. Por lo tanto, no se requiere ningún consentimiento
+          para navegar por él, y no se le rastrea de una página a otra.
+        </p>
+
+        <h2>Vídeos de YouTube</h2>
+        <p>
+          Los vídeos solo se cargan <strong>cuando hace clic</strong> en el botón de reproducción.
+          Mientras no inicie un vídeo, no se instala ninguna cookie de YouTube. Al
+          hacer clic, el vídeo se sirve mediante el modo de privacidad mejorada
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google pueden entonces instalar sus propias
+          cookies, conforme a la
+          <a href="https://policies.google.com/privacy" rel="noopener">política de Google</a>.
+        </p>
+
+        <h2>Cookies técnicas</h2>
+        <p>
+          No se requiere ninguna cookie para que el sitio funcione. Su navegador puede
+          almacenar localmente preferencias de visualización&nbsp;; esta información permanece en
+          su dispositivo y nunca se nos transmite.
+        </p>
+
+        <h2>Más información</h2>
+        <p>
+          El tratamiento de sus datos se describe en la
+          <a href={pathFor('confidentialite', locale)}>política de privacidad</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

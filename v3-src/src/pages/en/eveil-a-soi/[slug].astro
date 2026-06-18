@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import Fiche from '../../../layouts/Fiche.astro';
+
+export async function getStaticPaths() {
+  const fiches = await getCollection(
+    'fiches',
+    (e) => e.data.hub === 'eveil-a-soi' && e.data.lang === 'en' && !e.data.draft,
+  );
+  return fiches.map((entry) => ({
+    params: { slug: entry.id.replace(/^en\//, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Fiche entry={entry} locale="en">
+  <Content />
+</Fiche>

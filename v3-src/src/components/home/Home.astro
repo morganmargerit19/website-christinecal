@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import LangSwitch from '../LangSwitch.astro';
 import { ui } from '../../i18n/ui';
 import { base, pathFor, type Locale } from '../../i18n/utils';
 
@@ -9,114 +10,144 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = ui[locale];
+const year = new Date().getFullYear();
 ---
-<Base locale={locale} routeKey="home" title={t.meta.homeTitle} description={t.meta.homeDescription}>
-  <section class="hero">
-    <div class="hero__halo"></div>
-    <div class="container">
-      <div class="hero__portal" data-hero="portal">
-        <img
-          src={base + '/images/wp/fond-portail-2021-bleu1200-V2.jpg'}
-          alt="La Terre et le point lumineux — portail de Christine CAL"
-          width="420"
-          height="420"
-          fetchpriority="high"
-        />
-      </div>
-      <p class="hero__eyebrow" data-hero="eyebrow">{t.hero.eyebrow}</p>
-      <h1 class="hero__title" data-hero="title">
-        Christine <span class="light">CAL</span>
-      </h1>
-      <p class="hero__tagline" data-hero="tagline">{t.hero.tagline}</p>
-      <a class="btn btn--gold" href="#paths" data-hero="cta">{t.hero.scrollHint}</a>
-    </div>
-    <a class="hero__scroll" href="#paths" aria-hidden="true" tabindex="-1">{t.hero.scrollHint}</a>
-  </section>
+<Base locale={locale} routeKey="home" title={t.meta.homeTitle} description={t.meta.homeDescription} portal>
+  <section class="hero hero--portal">
+    <img
+      class="hero__bg"
+      data-hero="bg"
+      src={base + '/images/wp/portail-terre.png'}
+      alt="La Terre vue de l'espace et le lever de lumière — portail de Christine CAL"
+      fetchpriority="high"
+    />
+    <div class="hero__veil"></div>
 
-  <section class="paths" id="paths">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">✦</span>
-        <h2>{t.paths.heading}</h2>
-        <p class="lede">{t.paths.lede}</p>
-      </div>
-      <div class="portal-grid">
-        <a class="portal-card" id="eveil-a-soi" href={pathFor('eveilASoi', locale)} data-reveal>
-          <span class="portal-card__kicker">{t.paths.aSoi.kicker}</span>
-          <h3>{t.paths.aSoi.title}</h3>
-          <p>{t.paths.aSoi.desc}</p>
-          <ul>
-            {t.paths.aSoi.items.map((item) => <li>{item}</li>)}
-          </ul>
-          <span class="portal-card__cta">{t.paths.cta}</span>
+    <div class="portal-lang" data-hero="lang">
+      <LangSwitch locale={locale} routeKey="home" align="right" />
+    </div>
+
+    <div class="container hero__content">
+      <h1 class="portal-brand" data-hero="brand">Christine <span class="light">CAL</span></h1>
+      <p class="portal-baseline" data-hero="baseline">{t.hero.portalBaseline}</p>
+
+      <div class="hero__doors" data-hero="doors">
+        <a class="door" id="eveil-a-soi" href={pathFor('eveilASoi', locale)}>
+          <span class="door__title">{t.paths.aSoi.title}</span>
+          <span class="door__sub">{t.paths.aSoi.sub}</span>
         </a>
-        <a class="portal-card" id="eveil-au-soi" href={pathFor('eveilAuSoi', locale)} data-reveal>
-          <span class="portal-card__kicker">{t.paths.auSoi.kicker}</span>
-          <h3>{t.paths.auSoi.title}</h3>
-          <p>{t.paths.auSoi.desc}</p>
-          <ul>
-            {t.paths.auSoi.items.map((item) => <li>{item}</li>)}
-          </ul>
-          <span class="portal-card__cta">{t.paths.cta}</span>
+        <a class="door" id="eveil-au-soi" href={pathFor('eveilAuSoi', locale)}>
+          <span class="door__title">{t.paths.auSoi.title}</span>
+          <span class="door__sub">{t.paths.auSoi.sub}</span>
         </a>
       </div>
     </div>
-  </section>
 
-  <section class="paper-section">
-    <div class="container">
-      <div class="paper-section__inner" data-reveal>
-        <div class="about-teaser__grid">
-          <div class="about-teaser__portrait">
-            <img
-              src={base + "/images/christine-portrait.jpg"}
-              alt="Portrait de Christine CAL"
-              width="600"
-              height="719"
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <span class="eyebrow" style="color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; font-size: var(--text-xs);">
-              {t.aboutTeaser.eyebrow}
-            </span>
-            <h2>{t.aboutTeaser.heading}</h2>
-            <p>{t.aboutTeaser.body}</p>
-            <div class="stats">
-              {t.aboutTeaser.stats.map((s) => (
-                <div class="stat">
-                  <div class="stat__value">{s.value}</div>
-                  <div class="stat__label">{s.label}</div>
-                </div>
-              ))}
-            </div>
-            <p style="margin-top: var(--space-4);">
-              <a class="btn btn--ghost" href={pathFor('about', locale)}>{t.aboutTeaser.cta}</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="quote" data-reveal>
-    <div class="container">
-      <blockquote>{t.quote.text}</blockquote>
-      <cite>{t.quote.author}</cite>
-    </div>
-  </section>
-
-  <section class="contact-band" id="contact" data-reveal>
-    <div class="container">
-      <h2>{t.contact.heading}</h2>
-      <p>{t.contact.body}</p>
-      <div class="contact-band__actions">
-        <a class="btn btn--gold" href="mailto:cc.christinecal@gmail.com">{t.contact.cta}</a>
-        <a class="btn btn--ghost" href="tel:+33680428591">06 80 42 85 91</a>
-      </div>
-    </div>
+    <footer class="portal-legal" data-hero="legal">
+      <span>© {year} Christine CAL — {t.footer.rights}</span>
+      <span class="portal-legal__links">
+        <a href={pathFor('mentions', locale)}>{t.footer.legal}</a> ·
+        <a href={pathFor('confidentialite', locale)}>{t.footer.privacy}</a> ·
+        <a href={pathFor('cookies', locale)}>Cookies</a>
+      </span>
+    </footer>
   </section>
 </Base>
+
+<style>
+  .hero--portal { position: relative; overflow: hidden; }
+  .hero__bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 82%;
+    z-index: -2;
+    transform-origin: center 70%;
+  }
+  .hero__veil {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(70% 45% at 50% 34%, rgba(7, 6, 26, 0) 0%, rgba(7, 6, 26, 0.28) 72%),
+      linear-gradient(180deg,
+        rgba(7, 6, 26, 0.6) 0%,
+        rgba(7, 6, 26, 0.18) 30%,
+        rgba(7, 6, 26, 0.35) 62%,
+        rgba(7, 6, 26, 0.82) 86%,
+        var(--indigo-950) 100%);
+  }
+  .hero__content { position: relative; z-index: 1; }
+  .portal-brand {
+    font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 400; letter-spacing: 0.04em;
+    margin: 0; color: #fff; text-shadow: 0 2px 40px rgba(7, 6, 26, 0.7);
+  }
+  .portal-brand .light { font-weight: 300; font-style: italic; color: var(--gold-soft); }
+  .portal-baseline {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(1.05rem, 2.4vw, 1.5rem); color: var(--indigo-100);
+    margin: 0.4rem 0 0; text-shadow: 0 1px 24px rgba(7, 6, 26, 0.85);
+  }
+
+  /* Boutons-portails ovales (esprit /welcome) */
+  .hero__doors {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: clamp(2rem, 9vw, 7rem);
+    margin-top: clamp(2.4rem, 7vh, 5rem);
+  }
+  .door {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.3rem; text-align: center; text-decoration: none;
+    width: clamp(188px, 22vw, 238px); height: clamp(150px, 17vw, 186px);
+    border: 1px solid rgba(230, 212, 154, 0.5);
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(16, 13, 46, 0.32) 0%, rgba(7, 6, 26, 0.10) 72%);
+    color: #fff;
+    transition: transform 0.45s ease, border-color 0.45s, box-shadow 0.45s, background 0.45s;
+  }
+  .door:hover, .door:focus-visible {
+    transform: translateY(-5px) scale(1.03);
+    border-color: var(--gold);
+    background: radial-gradient(ellipse at center, rgba(63, 61, 156, 0.35) 0%, rgba(16, 13, 46, 0.22) 72%);
+    box-shadow: 0 0 44px rgba(201, 169, 97, 0.35), inset 0 0 30px rgba(123, 121, 198, 0.25);
+  }
+  .door__title {
+    font-family: var(--font-serif); font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    letter-spacing: 0.04em; line-height: 1.05;
+  }
+  .door__sub {
+    font-size: var(--text-xs); letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold-soft); margin-top: 0.5rem;
+  }
+
+  /* Sélecteur de langue flottant (pas de barre) */
+  .portal-lang {
+    position: absolute; top: clamp(1rem, 3vh, 2rem); right: clamp(1rem, 3vw, 2.4rem);
+    z-index: 4;
+  }
+
+  @media (max-width: 560px) {
+    .hero__doors { gap: 2.4rem; }
+  }
+
+  /* ----- Portail pur : un seul écran, liseré légal en bas ----- */
+  :global(body.is-portal) { overflow: hidden; }
+  :global(body.is-portal main) { min-height: 0; }
+  .hero--portal {
+    min-height: 100svh;
+    padding-block: 0;
+  }
+  .portal-legal {
+    position: absolute; inset: auto 0 0 0; z-index: 2;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: 0.4rem 1.2rem;
+    padding: clamp(0.9rem, 2vh, 1.4rem) var(--space-4);
+    font-size: var(--text-xs); letter-spacing: 0.04em;
+    color: var(--indigo-300); text-align: center;
+  }
+  .portal-legal a { color: var(--indigo-100); text-decoration: none; }
+  .portal-legal a:hover { color: var(--gold-soft); }
+  @media (max-width: 560px) {
+    :global(body.is-portal) { overflow: auto; }
+  }
+</style>
 
 <script>
   import { gsap } from 'gsap';
@@ -129,12 +160,12 @@ const t = ui[locale];
 
     gsap
       .timeline({ defaults: { ease: 'power3.out' } })
-      .from('[data-hero="portal"]', { scale: 0.85, opacity: 0, duration: 1.1 })
-      .from('[data-hero="eyebrow"]', { y: 24, opacity: 0, duration: 0.9 }, '-=0.5')
-      .from('[data-hero="title"]', { y: 40, opacity: 0, duration: 1.1 }, '-=0.5')
-      .from('[data-hero="tagline"]', { y: 24, opacity: 0, duration: 0.9 }, '-=0.6')
-      .from('[data-hero="cta"]', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5')
-      .from('.hero__scroll', { opacity: 0, duration: 0.8 }, '-=0.2');
+      .from('[data-hero="bg"]', { scale: 1.12, opacity: 0, duration: 1.6 })
+      .from('[data-hero="brand"]', { y: 24, opacity: 0, duration: 1.0 }, '-=0.9')
+      .from('[data-hero="baseline"]', { y: 18, opacity: 0, duration: 0.9 }, '-=0.6')
+      .from('[data-hero="doors"] > *', { y: 28, opacity: 0, duration: 0.9, stagger: 0.18 }, '-=0.4')
+      .from('[data-hero="lang"]', { opacity: 0, duration: 0.8 }, '-=0.7')
+      .from('[data-hero="legal"]', { opacity: 0, duration: 0.8 }, '-=0.5');
 
     for (const el of gsap.utils.toArray<HTMLElement>('[data-reveal]')) {
       gsap.from(el, {

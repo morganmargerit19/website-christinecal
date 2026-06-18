@@ -1,0 +1,180 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { ui } from '../../i18n/ui';
+import { base, fichePath, pathFor, type Locale } from '../../i18n/utils';
+
+type Hub = 'eveil-a-soi' | 'eveil-au-soi';
+
+interface Props {
+  locale: Locale;
+  hub: Hub;
+}
+
+const { locale, hub } = Astro.props;
+const t = ui[locale];
+const routeKey = hub === 'eveil-a-soi' ? 'eveilASoi' : 'eveilAuSoi';
+
+// Contenu d'introduction par hub et par langue.
+const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: string; h1: string; lede: string; section: string }>> = {
+  'eveil-a-soi': {
+    fr: {
+      title: 'Éveil à Soi — Christine CAL',
+      desc: "Se rencontrer, se libérer du passé et devenir créateur de sa vie : consultations médiumniques, sortie de sa matrice et stages d'éveil quantique (École 5D).",
+      eyebrow: 'Éveil à Soi',
+      h1: 'Devenez créateur de votre vie',
+      lede: "Se rencontrer, se libérer des blessures du passé et transmuter la peur en énergie au service de votre mission — par la consultation médiumnique, les outils de sortie de sa matrice personnelle et l'enseignement de l'École 5D.",
+      section: "Stages & ateliers d'éveil quantique",
+    },
+    en: {
+      title: 'Self-Awakening — Christine CAL',
+      desc: 'Meet yourself, heal the past and become the creator of your life: mediumship consultations, stepping out of your matrix and quantum awakening retreats (5D School).',
+      eyebrow: 'Self-Awakening',
+      h1: 'Become the creator of your life',
+      lede: 'Meet yourself, heal the wounds of the past and transmute fear into energy in service of your mission — through mediumship consultation, the tools for stepping out of your personal matrix, and the teaching of the 5D School.',
+      section: 'Quantum awakening retreats & workshops',
+    },
+    pl: {
+      title: 'Przebudzenie Siebie — Christine CAL',
+      desc: 'Spotkać siebie, uwolnić się od przeszłości i zostać twórcą swojego życia: konsultacje mediumiczne, wyjście z matrycy i warsztaty przebudzenia kwantowego (Szkoła 5D).',
+      eyebrow: 'Przebudzenie Siebie',
+      h1: 'Zostań twórcą swojego życia',
+      lede: 'Spotkać siebie, uwolnić się od ran przeszłości i przekształcić lęk w energię w służbie swojej misji — poprzez konsultację mediumiczną, narzędzia wyjścia z osobistej matrycy i nauczanie Szkoły 5D.',
+      section: 'Warsztaty przebudzenia kwantowego',
+    },
+    es: {
+      title: 'Despertar a Sí — Christine CAL',
+      desc: 'Encontrarse, liberarse del pasado y convertirse en creador de tu vida: consultas de médium, salir de tu matriz y talleres de despertar cuántico (Escuela 5D).',
+      eyebrow: 'Despertar a Sí',
+      h1: 'Conviértete en creador de tu vida',
+      lede: 'Encontrarse, liberarse de las heridas del pasado y transmutar el miedo en energía al servicio de tu misión — mediante la consulta de médium, las herramientas para salir de tu matriz personal y la enseñanza de la Escuela 5D.',
+      section: 'Talleres de despertar cuántico',
+    },
+    it: {
+      title: 'Risveglio a Sé — Christine CAL',
+      desc: 'Incontrarsi, liberarsi dal passato e diventare creatore della propria vita: consulti medianici, uscita dalla propria matrice e seminari di risveglio quantico (Scuola 5D).',
+      eyebrow: 'Risveglio a Sé',
+      h1: 'Diventa il creatore della tua vita',
+      lede: "Incontrarsi, liberarsi dalle ferite del passato e trasmutare la paura in energia al servizio della tua missione — attraverso il consulto medianico, gli strumenti per uscire dalla propria matrice personale e l'insegnamento della Scuola 5D.",
+      section: 'Seminari di risveglio quantico',
+    },
+  },
+  'eveil-au-soi': {
+    fr: {
+      title: 'Éveil au Soi — Christine CAL',
+      desc: 'Explorer plus grand que soi : mémoire galactique, Mont Shasta & nouveau TELOS, énergies du Bugarach et la team galactique de la Nouvelle Terre.',
+      eyebrow: 'Éveil au Soi',
+      h1: 'Explorer plus grand que soi',
+      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer le Mont Shasta, le nouveau TELOS et les nouvelles énergies du Bugarach.',
+      section: '',
+    },
+    en: {
+      title: 'Awakening to the Self — Christine CAL',
+      desc: 'Exploring beyond yourself: galactic memory, Mount Shasta & the new TELOS, the energies of Bugarach and the galactic team of the New Earth.',
+      eyebrow: 'Awakening to the Self',
+      h1: 'Exploring beyond yourself',
+      lede: 'Reconnect with your galactic memory, take part in the creation of the New Earth, and explore Mount Shasta, the new TELOS and the new energies of Bugarach.',
+      section: '',
+    },
+    pl: {
+      title: 'Przebudzenie do Jaźni — Christine CAL',
+      desc: 'Odkrywać to, co większe: pamięć galaktyczna, Mount Shasta i nowe TELOS, energie Bugarach oraz galaktyczny zespół Nowej Ziemi.',
+      eyebrow: 'Przebudzenie do Jaźni',
+      h1: 'Odkrywać to, co większe',
+      lede: 'Odzyskać pamięć galaktyczną, uczestniczyć w tworzeniu Nowej Ziemi oraz odkrywać Mount Shasta, nowe TELOS i nowe energie Bugarach.',
+      section: '',
+    },
+    es: {
+      title: 'Despertar al Sí — Christine CAL',
+      desc: 'Explorar más allá de uno mismo: memoria galáctica, Monte Shasta y el nuevo TELOS, energías del Bugarach y el equipo galáctico de la Nueva Tierra.',
+      eyebrow: 'Despertar al Sí',
+      h1: 'Explorar más allá de uno mismo',
+      lede: 'Reencontrar tu memoria galáctica, participar en la creación de la Nueva Tierra y explorar el Monte Shasta, el nuevo TELOS y las nuevas energías del Bugarach.',
+      section: '',
+    },
+    it: {
+      title: 'Risveglio al Sé — Christine CAL',
+      desc: 'Esplorare oltre se stessi: memoria galattica, Monte Shasta e il nuovo TELOS, energie del Bugarach e il team galattico della Nuova Terra.',
+      eyebrow: 'Risveglio al Sé',
+      h1: 'Esplorare oltre se stessi',
+      lede: 'Ritrovare la propria memoria galattica, partecipare alla creazione della Nuova Terra ed esplorare il Monte Shasta, il nuovo TELOS e le nuove energie del Bugarach.',
+      section: '',
+    },
+  },
+};
+
+const discover: Record<Locale, string> = { fr: 'Découvrir', en: 'Discover', pl: 'Odkryj', es: 'Descubrir', it: 'Scopri' };
+const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn more', pl: 'Dowiedz się więcej', es: 'Saber más', it: 'Scopri di più' };
+
+const c = intro[hub][locale];
+
+const fiches = (
+  await getCollection('fiches', (e) => e.data.hub === hub && e.data.lang === locale && !e.data.draft)
+).sort((a, b) => a.data.order - b.data.order);
+
+const slugOf = (id: string) => id.replace(/^(en|pl)\//, '');
+const featured = fiches.filter((f) => f.data.featured);
+const rest = fiches.filter((f) => !f.data.featured);
+---
+<Base locale={locale} routeKey={routeKey} title={c.title} description={c.desc}>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">{c.eyebrow}</span>
+      <h1>{c.h1}</h1>
+      <p class="lede">{c.lede}</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <figure class="hub-banner">
+      <img src={base + `/images/wp/bandeau-${hub}.jpg`} alt={c.eyebrow} loading="lazy" />
+    </figure>
+
+    {featured.length > 0 && (
+      <div class="hub-grid">
+        {featured.map((f) => (
+          <a class="portal-card portal-card--featured" href={fichePath(hub, slugOf(f.id), locale)}>
+            <span class="portal-card__kicker">{f.data.kicker}</span>
+            <h3>{f.data.title}</h3>
+            <p>{f.data.lede}</p>
+            <div class="portal-card__meta">
+              {f.data.format && <span>{f.data.format}</span>}
+              {f.data.duration && <span>{f.data.duration}</span>}
+              {f.data.price && <span>{f.data.price}</span>}
+            </div>
+            <span class="portal-card__cta">{discover[locale]}</span>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {featured.length > 0 && rest.length > 0 && c.section && (
+      <p class="hub-section-title">{c.section}</p>
+    )}
+
+    <div class="hub-grid">
+      {rest.map((f) => (
+        <a class="portal-card" href={fichePath(hub, slugOf(f.id), locale)}>
+          <span class="portal-card__kicker">{f.data.kicker}</span>
+          <h3>{f.data.title}</h3>
+          <p>{f.data.lede}</p>
+          {f.data.dates.length > 0 && (
+            <div class="portal-card__meta"><span>{f.data.dates[0]}</span></div>
+          )}
+          <span class="portal-card__cta">{learnMore[locale]}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="contact-band">
+    <div class="container">
+      <h2>{t.contact.heading}</h2>
+      <p>{t.contact.body}</p>
+      <div class="contact-band__actions">
+        <a class="btn btn--gold" href="mailto:cc.christinecal@gmail.com">{t.contact.cta}</a>
+        <a class="btn btn--ghost" href={pathFor('home', locale)}>← {t.nav.home}</a>
+      </div>
+    </div>
+  </section>
+</Base>

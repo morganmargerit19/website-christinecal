@@ -263,4 +263,166 @@ export const about: Record<Locale, AboutDict> = {
       href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
     },
   },
+
+  es: {
+    meta: {
+      title: 'Quién soy — Christine CAL',
+      description:
+        'La trayectoria de Christine CAL: censora jurada de cuentas convertida en médium clarividente y clariaudiente, coach de despertar, conferenciante, creadora de una enseñanza iniciática.',
+    },
+    hero: {
+      eyebrow: 'Quién soy',
+      title: 'Un espíritu libre atípico en contacto con sus versiones del futuro',
+      lede: 'El Espacio-Tiempo se contrae cada vez más, así que seamos breves pero precisos.',
+    },
+    galactic: {
+      heading: 'Un alma galáctica venida de un futuro',
+      items: [
+        'Habiendo dejado a su lejana familia para participar en la liberación de esta humanidad en este magnífico planeta Tierra, en esta galaxia tan codiciada y recientemente liberada.',
+      ],
+    },
+    videos: {
+      heading: 'Dos vídeos de presentación',
+      list: [
+        { id: '0QL8ive6NuU', title: 'Quién es Christine CAL (en francés)', meta: 'Julio de 2016 · 10 min 42' },
+        { id: '2oEYgOGBH7o', title: 'Testimonio de vida de C.C. (en francés)', meta: 'Julio de 2016 · 4 min 39' },
+      ],
+    },
+    journey: {
+      heading: 'Una trayectoria en breve',
+      items: [
+        { lead: 'Una niña pequeña', text: 'conmocionada por un mundo invertido.' },
+        {
+          lead: 'Una adolescente',
+          text: 'consciente del Juego de la Matrix, apasionada por la psicología humana y las religiones creadas por los hombres, en busca de su SER Superior.',
+        },
+        { lead: 'Un hemisferio izquierdo bien entrenado', text: 'Censora jurada de cuentas en ejercicio libre de 1993 a 2013.' },
+        {
+          lead: 'Un hemisferio derecho plenamente desplegado',
+          text: 'Médium clarividente y clariaudiente en contacto con numerosos mundos paralelos.',
+        },
+      ],
+    },
+    activities: {
+      heading: 'Actividades actuales',
+      items: [
+        {
+          title: 'Coach y consultora',
+          text: 'Creación y dirección de retiros psicoespirituales de Despertar desde hace más de 20 años. Canalización de diversos Maestros.',
+        },
+        { title: 'Consultas mediúmnicas', text: 'Desde 2013.' },
+        { title: 'Conferenciante', text: 'Temas diversos en Francia y a través de Zoom o de asociaciones.' },
+        {
+          title: 'Creadora de una enseñanza iniciática',
+          text: 'CONSTRUIR TU NAVE MULTIDIMENSIONAL — más de 950 personas formadas desde 2013.',
+        },
+        {
+          title: 'Organizadora',
+          text: 'Seminarios iniciáticos en el Monte Shasta de 2014 a 2019 y Encuentros Internacionales con la Red TELOS Mundial.',
+        },
+        {
+          title: 'Especialista',
+          text: 'En el viaje astral y los contactos con diversos pueblos intra y extraterrestres desde 2003.',
+        },
+      ],
+    },
+    news: {
+      heading: 'Novedades',
+      items: [
+        'Desde 2024 — Creación de retiros sobre la multidimensionalidad del Ser.',
+        '2025 / 2026 — Monte Shasta. Visita al nuevo TELOS tras la invasión de 2021, confirmada a raíz de mi encuentro con Elena Danaan en agosto de 2024 y 2025.',
+        '2026 — Monte Bugarach. Contactos con ET Guardianes. Misión en curso.',
+        'Varios libros en proceso de escritura.',
+      ],
+    },
+    clients: {
+      heading: 'Una clientela variada',
+      text: 'Psicólogos, médicos diversos, una psiquiatra infantil, enfermeras, osteópatas, naturópatas, kinesiólogos, un farmacéutico, una directora de residencia de ancianos, numerosos terapeutas energéticos, artistas diversos, inspectores y controladores de Hacienda, un arquitecto, un agente judicial… y tantos otros.',
+    },
+    press: {
+      text: 'Lee el artículo en Sud Ouest del 2 de junio de 2017 — «Esta contable que se convirtió en coach de vida…» (en francés)',
+      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
+    },
+  },
+
+  it: {
+    meta: {
+      title: 'Chi sono — Christine CAL',
+      description:
+        'Il percorso di Christine CAL: dottore commercialista diventata medium chiaroveggente e chiarudente, coach del risveglio, conferenziera, creatrice di un insegnamento iniziatico.',
+    },
+    hero: {
+      eyebrow: 'Chi sono',
+      title: 'Uno spirito libero atipico in contatto con le sue versioni del futuro',
+      lede: 'Lo Spazio-Tempo si contrae sempre di più, quindi siamo brevi ma precisi.',
+    },
+    galactic: {
+      heading: "Un'anima galattica venuta da un futuro",
+      items: [
+        'Avendo lasciato la sua lontana famiglia per partecipare alla liberazione di questa umanità su questo magnifico pianeta Terra, in questa galassia tanto ambita e da poco liberata.',
+      ],
+    },
+    videos: {
+      heading: 'Due video di presentazione',
+      list: [
+        { id: '0QL8ive6NuU', title: 'Chi è Christine CAL (in francese)', meta: 'Luglio 2016 · 10 min 42' },
+        { id: '2oEYgOGBH7o', title: 'Testimonianza di vita di C.C. (in francese)', meta: 'Luglio 2016 · 4 min 39' },
+      ],
+    },
+    journey: {
+      heading: 'Un percorso in breve',
+      items: [
+        { lead: 'Una bambina', text: 'sconvolta da un mondo capovolto.' },
+        {
+          lead: "Un'adolescente",
+          text: 'consapevole del Gioco della Matrice, appassionata di psicologia umana e delle religioni create dagli uomini, alla ricerca del suo SÉ Superiore.',
+        },
+        { lead: 'Un emisfero sinistro ben allenato', text: 'Dottore commercialista in libera professione dal 1993 al 2013.' },
+        {
+          lead: 'Un emisfero destro pienamente dispiegato',
+          text: 'Medium chiaroveggente e chiarudente in contatto con numerosi mondi paralleli.',
+        },
+      ],
+    },
+    activities: {
+      heading: 'Attività attuali',
+      items: [
+        {
+          title: 'Coach e consulente',
+          text: 'Creazione e conduzione di ritiri psico-spirituali di Risveglio da oltre 20 anni. Canalizzazione di vari Maestri.',
+        },
+        { title: 'Consulti medianici', text: 'Dal 2013.' },
+        { title: 'Conferenziera', text: 'Argomenti vari in Francia e tramite Zoom o associazioni.' },
+        {
+          title: 'Creatrice di un insegnamento iniziatico',
+          text: 'COSTRUIRE LA TUA NAVE MULTIDIMENSIONALE — oltre 950 persone formate dal 2013.',
+        },
+        {
+          title: 'Organizzatrice',
+          text: 'Seminari Iniziatici al Monte Shasta dal 2014 al 2019 e Incontri Internazionali con la Rete TELOS Mondiale.',
+        },
+        {
+          title: 'Specialista',
+          text: 'Del viaggio astrale e dei contatti con diversi popoli intra ed extraterrestri dal 2003.',
+        },
+      ],
+    },
+    news: {
+      heading: 'Novità',
+      items: [
+        "Dal 2024 — Creazione di ritiri sulla multidimensionalità dell'Essere.",
+        '2025 / 2026 — Monte Shasta. Visita al nuovo TELOS dopo l’invasione del 2021, confermata in seguito al mio incontro con Elena Danaan ad agosto 2024 e 2025.',
+        '2026 — Monte Bugarach. Contatti con ET Guardiani. Missione in corso.',
+        'Vari libri in fase di scrittura.',
+      ],
+    },
+    clients: {
+      heading: 'Una clientela variegata',
+      text: 'Psicologi, medici vari, una neuropsichiatra infantile, infermiere, osteopati, naturopati, kinesiologi, un farmacista, una direttrice di casa di riposo, numerosi terapeuti energetici, artisti vari, ispettori e controllori delle Imposte, un architetto, un ufficiale giudiziario… e tanti altri.',
+    },
+    press: {
+      text: "Leggi l'articolo su Sud Ouest del 2 giugno 2017 — «Questa contabile diventata coach di vita…» (in francese)",
+      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
+    },
+  },
 };

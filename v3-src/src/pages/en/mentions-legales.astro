@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'en';
+---
+<Base
+  locale={locale}
+  routeKey="mentions"
+  title="Legal notice — Christine CAL"
+  description="Legal notice for Christine CAL's website — EURL Christine CAL, publisher, host and intellectual property."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Legal information</span>
+      <h1>Legal notice</h1>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Site publisher</h2>
+        <p>
+          <strong>EURL Christine CAL</strong> — Consultant Coach, Awakening Coach for the
+          Multidimensionality of Being.<br />
+          254 Chemin de la Terre Pointue — Castelgirou — 24 580 PLAZAC, France.<br />
+          Phone: <a href="tel:+33680428591">06 80 42 85 91</a><br />
+          E-mail: <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a><br />
+          SIRET: 393 691 993 00033.
+        </p>
+        <p><strong>Publication director:</strong> Christine CAL.</p>
+
+        <h2>Hosting</h2>
+        <p>
+          The site is hosted by <strong>Vercel Inc.</strong>, 340 S Lemon Ave #4133,
+          Walnut, CA 91789, United States — <a href="https://vercel.com" rel="noopener">vercel.com</a>.
+        </p>
+
+        <h2>Intellectual property</h2>
+        <p>
+          All content on the site (texts, photographs, videos, teachings,
+          graphic elements) is the exclusive property of Christine CAL or of their respective
+          authors and is protected by the French Intellectual Property Code
+          (art. L.111-1 and L.335-2 et seq.).
+        </p>
+        <p>
+          Any reproduction, representation, distribution or use, in whole or in part,
+          without prior written authorisation, is prohibited and constitutes an infringement
+          punishable by law. Photographs of Christine CAL may not be
+          downloaded, saved or reused.
+        </p>
+
+        <h2>Personal data & cookies</h2>
+        <p>
+          The processing of your data is described in the
+          <a href={pathFor('confidentialite', locale)}>privacy policy</a>, and the use
+          of cookies in the <a href={pathFor('cookies', locale)}>cookie policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

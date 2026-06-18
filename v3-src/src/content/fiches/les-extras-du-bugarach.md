@@ -8,6 +8,8 @@ lang: fr
 image: /images/wp/bugarach.jpg
 imageAlt: "Le Bugarach et ses nouvelles énergies"
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
+banner: /images/wp/bugarach-1280x400-1.jpg
+bannerAlt: "Le Pic de Bugarach au crépuscule"
 ---
 
 Le Pic de Bugarach, dans le sud de la France près de Rennes-le-Château, a

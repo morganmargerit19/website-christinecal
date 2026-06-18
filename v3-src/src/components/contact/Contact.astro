@@ -1,0 +1,200 @@
+---
+import Base from '../../layouts/Base.astro';
+import { type Locale } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const tr: Record<Locale, {
+  title: string; desc: string; eyebrow: string; h1: string; lede: string;
+  directHeading: string; emailLabel: string; phoneLabel: string; role: string;
+  formHeading: string; nameLabel: string; emailFieldLabel: string; messageLabel: string;
+  send: string; note: string; subject: string;
+}> = {
+  fr: {
+    title: 'Contact — Christine CAL',
+    desc: 'Contacter Christine CAL pour une consultation médiumnique, un stage ou une question — par e-mail ou téléphone.',
+    eyebrow: 'Contact',
+    h1: 'Entrer en contact',
+    lede: 'Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi.',
+    directHeading: 'Me joindre directement',
+    emailLabel: 'E-mail :',
+    phoneLabel: 'Téléphone :',
+    role: 'Coach Consultant',
+    formHeading: "M'écrire un message",
+    nameLabel: 'Votre nom',
+    emailFieldLabel: 'Votre e-mail',
+    messageLabel: 'Votre message',
+    send: 'Envoyer',
+    note: "Votre messagerie s'ouvrira avec le message pré-rempli, prêt à m'être envoyé.",
+    subject: 'Message du site',
+  },
+  en: {
+    title: 'Contact — Christine CAL',
+    desc: 'Contact Christine CAL for a mediumship consultation, a retreat or any question — by e-mail or phone.',
+    eyebrow: 'Contact',
+    h1: 'Get in touch',
+    lede: 'A question, a consultation, a retreat? Write to me or call me.',
+    directHeading: 'Reach me directly',
+    emailLabel: 'E-mail:',
+    phoneLabel: 'Phone:',
+    role: 'Coach & Consultant',
+    formHeading: 'Send me a message',
+    nameLabel: 'Your name',
+    emailFieldLabel: 'Your e-mail',
+    messageLabel: 'Your message',
+    send: 'Send',
+    note: 'Your e-mail app will open with the message pre-filled, ready to send to me.',
+    subject: 'Message from the website',
+  },
+  pl: {
+    title: 'Kontakt — Christine CAL',
+    desc: 'Skontaktuj się z Christine CAL w sprawie konsultacji mediumicznej, warsztatu lub pytania — e-mailem lub telefonicznie.',
+    eyebrow: 'Kontakt',
+    h1: 'Skontaktuj się',
+    lede: 'Pytanie, konsultacja, warsztat? Napisz do mnie lub zadzwoń.',
+    directHeading: 'Skontaktuj się bezpośrednio',
+    emailLabel: 'E-mail:',
+    phoneLabel: 'Telefon:',
+    role: 'Coach i Konsultant',
+    formHeading: 'Napisz do mnie wiadomość',
+    nameLabel: 'Twoje imię',
+    emailFieldLabel: 'Twój e-mail',
+    messageLabel: 'Twoja wiadomość',
+    send: 'Wyślij',
+    note: 'Twój program pocztowy otworzy się z gotową wiadomością do wysłania.',
+    subject: 'Wiadomość ze strony',
+  },
+  es: {
+    title: 'Contacto — Christine CAL',
+    desc: 'Contactar con Christine CAL para una consulta de médium, un taller o cualquier pregunta — por correo electrónico o teléfono.',
+    eyebrow: 'Contacto',
+    h1: 'Ponte en contacto',
+    lede: '¿Una pregunta, una consulta, un taller? Escríbeme o llámame.',
+    directHeading: 'Contactarme directamente',
+    emailLabel: 'Correo electrónico:',
+    phoneLabel: 'Teléfono:',
+    role: 'Coach y Consultora',
+    formHeading: 'Enviarme un mensaje',
+    nameLabel: 'Tu nombre',
+    emailFieldLabel: 'Tu correo electrónico',
+    messageLabel: 'Tu mensaje',
+    send: 'Enviar',
+    note: 'Tu aplicación de correo se abrirá con el mensaje ya redactado, listo para enviármelo.',
+    subject: 'Mensaje desde el sitio web',
+  },
+  it: {
+    title: 'Contatto — Christine CAL',
+    desc: 'Contattare Christine CAL per un consulto medianico, un seminario o qualsiasi domanda — via e-mail o telefono.',
+    eyebrow: 'Contatto',
+    h1: 'Mettiti in contatto',
+    lede: 'Una domanda, un consulto, un seminario? Scrivimi o chiamami.',
+    directHeading: 'Contattarmi direttamente',
+    emailLabel: 'E-mail:',
+    phoneLabel: 'Telefono:',
+    role: 'Coach e Consulente',
+    formHeading: 'Inviami un messaggio',
+    nameLabel: 'Il tuo nome',
+    emailFieldLabel: 'La tua e-mail',
+    messageLabel: 'Il tuo messaggio',
+    send: 'Invia',
+    note: 'La tua app di posta si aprirà con il messaggio già pronto da inviarmi.',
+    subject: 'Messaggio dal sito',
+  },
+};
+
+const c = tr[locale];
+---
+<Base locale={locale} routeKey="contact" title={c.title} description={c.desc}>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">{c.eyebrow}</span>
+      <h1>{c.h1}</h1>
+      <p class="lede">{c.lede}</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner">
+        <div class="contact-cols">
+          <div class="prose">
+            <h2>{c.directHeading}</h2>
+            <p>
+              <strong>{c.emailLabel}</strong>
+              <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a><br />
+              <strong>{c.phoneLabel}</strong> <a href="tel:+33680428591">06&nbsp;80&nbsp;42&nbsp;85&nbsp;91</a>
+            </p>
+            <p class="contact-card">
+              EURL&nbsp;Christine&nbsp;CAL — {c.role}<br />
+              254&nbsp;Chemin de la Terre Pointue<br />
+              Castelgirou — 24&nbsp;580&nbsp;PLAZAC
+            </p>
+          </div>
+
+          <form class="contact-form" id="contact-form" data-subject={c.subject}>
+            <h2>{c.formHeading}</h2>
+            <label>
+              {c.nameLabel}
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
+            <label>
+              {c.emailFieldLabel}
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
+            <label>
+              {c.messageLabel}
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <button type="submit" class="btn btn--gold">{c.send}</button>
+            <p class="contact-form__note">{c.note}</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-cols { display: grid; gap: var(--space-5); }
+  @media (min-width: 720px) { .contact-cols { grid-template-columns: 1fr 1fr; } }
+  .contact-card {
+    border-left: 3px solid var(--indigo-500);
+    padding-left: var(--space-3); color: var(--ink-soft);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-2); }
+  .contact-form h2 { color: var(--indigo-800); }
+  .contact-form label {
+    display: flex; flex-direction: column; gap: 0.4em;
+    font-size: var(--text-sm); color: var(--ink-soft);
+  }
+  .contact-form input, .contact-form textarea {
+    font: inherit; color: var(--ink);
+    border: 1px solid var(--indigo-300); border-radius: var(--radius);
+    padding: 0.7em 0.9em; background: #fff;
+  }
+  .contact-form input:focus, .contact-form textarea:focus {
+    outline: 2px solid var(--gold); border-color: var(--gold);
+  }
+  .contact-form button { align-self: flex-start; margin-top: var(--space-1); }
+  .contact-form__note { font-size: var(--text-xs); color: var(--ink-muted); margin: 0; }
+</style>
+
+<script>
+  // Sans backend : on compose un lien mailto pré-rempli (zéro dépendance, zéro cookie).
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '');
+    const email = String(data.get('email') ?? '');
+    const message = String(data.get('message') ?? '');
+    const prefix = form.dataset.subject ?? 'Message';
+    const subject = encodeURIComponent(`${prefix} — ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:cc.christinecal@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>

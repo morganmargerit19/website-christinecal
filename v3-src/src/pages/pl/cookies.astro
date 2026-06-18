@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'pl';
+---
+<Base
+  locale={locale}
+  routeKey="cookies"
+  title="Polityka plików cookie — Christine CAL"
+  description="Ten serwis nie wykorzystuje żadnych plików cookie śledzących. Szczegóły dotyczące plików cookie i filmów YouTube."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Prywatność</span>
+      <h1>Polityka plików cookie</h1>
+      <p class="lede">Ten serwis Państwa nie śledzi.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Brak plików cookie śledzących</h2>
+        <p>
+          Ten serwis jest celowo oszczędny&nbsp;: nie umieszcza <strong>żadnych</strong>
+          plików cookie reklamowych, śledzących ani służących do pomiaru ruchu. Korzystanie z niego nie wymaga zatem żadnej zgody,
+          a Państwo nie są śledzeni przy przechodzeniu między stronami.
+        </p>
+
+        <h2>Filmy YouTube</h2>
+        <p>
+          Filmy wczytują się <strong>dopiero w chwili kliknięcia</strong> przycisku
+          odtwarzania. Dopóki nie uruchomią Państwo filmu, nie jest umieszczany żaden plik cookie YouTube. Po
+          kliknięciu film jest serwowany w trybie zwiększonej ochrony prywatności
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google może wówczas umieścić własne
+          pliki cookie, podlegające
+          <a href="https://policies.google.com/privacy" rel="noopener">polityce Google</a>.
+        </p>
+
+        <h2>Techniczne pliki cookie</h2>
+        <p>
+          Do działania serwisu nie jest wymagany żaden plik cookie. Państwa przeglądarka może
+          przechowywać lokalnie preferencje wyświetlania&nbsp;; informacje te pozostają na
+          Państwa urządzeniu i nigdy nie są nam przekazywane.
+        </p>
+
+        <h2>Dowiedz się więcej</h2>
+        <p>
+          Przetwarzanie Państwa danych zostało opisane w
+          <a href={pathFor('confidentialite', locale)}>polityce prywatności</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

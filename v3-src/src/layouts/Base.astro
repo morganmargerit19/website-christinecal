@@ -11,9 +11,10 @@ interface Props {
   routeKey: RouteKey;
   title: string;
   description: string;
+  portal?: boolean;
 }
 
-const { locale, routeKey, title, description } = Astro.props;
+const { locale, routeKey, title, description, portal = false } = Astro.props;
 const t = ui[locale];
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
 const canonical = site + pathFor(routeKey, locale);
@@ -47,13 +48,13 @@ const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class={portal ? 'is-portal' : undefined}>
     <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
     <Starfield />
-    <Header locale={locale} routeKey={routeKey} />
+    {portal ? null : <Header locale={locale} routeKey={routeKey} />}
     <main id="main">
       <slot />
     </main>
-    <Footer locale={locale} />
+    {portal ? null : <Footer locale={locale} />}
   </body>
 </html>

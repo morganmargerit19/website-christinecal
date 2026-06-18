@@ -1,4 +1,4 @@
-export const locales = ['fr', 'en', 'pl'] as const;
+export const locales = ['fr', 'en', 'pl', 'es', 'it'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'fr';
 
@@ -6,6 +6,8 @@ export const localeNames: Record<Locale, string> = {
   fr: 'Français',
   en: 'English',
   pl: 'Polski',
+  es: 'Español',
+  it: 'Italiano',
 };
 
 /**
@@ -21,6 +23,7 @@ export const localeNames: Record<Locale, string> = {
 export type RouteKey =
   | 'home'
   | 'about'
+  | 'mission'
   | 'eveilASoi'
   | 'eveilAuSoi'
   | 'consultation'
@@ -30,25 +33,32 @@ export type RouteKey =
   | 'cookies';
 
 export const routes: Record<RouteKey, Record<Locale, string>> = {
-  home: { fr: '/', en: '/en/', pl: '/pl/' },
-  about: { fr: '/qui-suis-je/', en: '/en/about/', pl: '/pl/o-mnie/' },
-  // FR-only pour l'instant (en/pl = FR) — à traduire plus tard.
-  eveilASoi: { fr: '/eveil-a-soi/', en: '/eveil-a-soi/', pl: '/eveil-a-soi/' },
-  eveilAuSoi: { fr: '/eveil-au-soi/', en: '/eveil-au-soi/', pl: '/eveil-au-soi/' },
+  home: { fr: '/', en: '/en/', pl: '/pl/', es: '/es/', it: '/it/' },
+  about: { fr: '/qui-suis-je/', en: '/en/about/', pl: '/pl/o-mnie/', es: '/es/about/', it: '/it/about/' },
+  mission: { fr: '/mission/', en: '/en/mission/', pl: '/pl/mission/', es: '/es/mission/', it: '/it/mission/' },
+  eveilASoi: { fr: '/eveil-a-soi/', en: '/en/eveil-a-soi/', pl: '/pl/eveil-a-soi/', es: '/es/eveil-a-soi/', it: '/it/eveil-a-soi/' },
+  eveilAuSoi: { fr: '/eveil-au-soi/', en: '/en/eveil-au-soi/', pl: '/pl/eveil-au-soi/', es: '/es/eveil-au-soi/', it: '/it/eveil-au-soi/' },
   consultation: {
     fr: '/eveil-a-soi/consultation-mediumnique/',
-    en: '/eveil-a-soi/consultation-mediumnique/',
-    pl: '/eveil-a-soi/consultation-mediumnique/',
+    en: '/en/eveil-a-soi/consultation-mediumnique/',
+    pl: '/pl/eveil-a-soi/consultation-mediumnique/',
+    es: '/es/eveil-a-soi/consultation-mediumnique/',
+    it: '/it/eveil-a-soi/consultation-mediumnique/',
   },
-  contact: { fr: '/contact/', en: '/contact/', pl: '/contact/' },
-  mentions: { fr: '/mentions-legales/', en: '/mentions-legales/', pl: '/mentions-legales/' },
+  contact: { fr: '/contact/', en: '/en/contact/', pl: '/pl/contact/', es: '/es/contact/', it: '/it/contact/' },
+  mentions: { fr: '/mentions-legales/', en: '/en/mentions-legales/', pl: '/pl/mentions-legales/', es: '/es/mentions-legales/', it: '/it/mentions-legales/' },
   confidentialite: {
     fr: '/politique-de-confidentialite/',
-    en: '/politique-de-confidentialite/',
-    pl: '/politique-de-confidentialite/',
+    en: '/en/politique-de-confidentialite/',
+    pl: '/pl/politique-de-confidentialite/',
+    es: '/es/politique-de-confidentialite/',
+    it: '/it/politique-de-confidentialite/',
   },
-  cookies: { fr: '/cookies/', en: '/cookies/', pl: '/cookies/' },
+  cookies: { fr: '/cookies/', en: '/en/cookies/', pl: '/pl/cookies/', es: '/es/cookies/', it: '/it/cookies/' },
 };
+
+/** Préfixe d'URL par langue (le FR est à la racine). */
+export const localePrefix: Record<Locale, string> = { fr: '', en: '/en', pl: '/pl', es: '/es', it: '/it' };
 
 /** Préfixe `base` d'Astro (ex. « /v3 » pendant la phase aperçu), sans slash final. */
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -63,7 +73,11 @@ export const hubs: Record<'eveil-a-soi' | 'eveil-au-soi', { key: RouteKey; label
   'eveil-au-soi': { key: 'eveilAuSoi', label: 'Éveil au Soi' },
 };
 
-/** URL d'une fiche (préfixée par `base` et son hub). */
-export function fichePath(hub: 'eveil-a-soi' | 'eveil-au-soi', slug: string): string {
-  return `${base}/${hub}/${slug}/`;
+/** URL d'une fiche (préfixée par `base`, la langue et son hub). */
+export function fichePath(
+  hub: 'eveil-a-soi' | 'eveil-au-soi',
+  slug: string,
+  locale: Locale = 'fr',
+): string {
+  return `${base}${localePrefix[locale]}/${hub}/${slug}/`;
 }

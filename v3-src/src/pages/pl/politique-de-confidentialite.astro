@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pathFor } from '../../i18n/utils';
+
+const locale = 'pl';
+---
+<Base
+  locale={locale}
+  routeKey="confidentialite"
+  title="Polityka prywatności — Christine CAL"
+  description="W jaki sposób Państwa dane osobowe są przetwarzane w serwisie Christine CAL, zgodnie z RODO."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">RODO</span>
+      <h1>Polityka prywatności</h1>
+      <p class="lede">Państwa dane należą do Państwa. Oto jak są przetwarzane.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose">
+        <h2>Administrator danych</h2>
+        <p>
+          Dane gromadzone w tym serwisie są przetwarzane przez <strong>EURL Christine CAL</strong>,
+          254 Chemin de la Terre Pointue, Castelgirou, 24 580 PLAZAC —
+          <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a>.
+        </p>
+
+        <h2>Gromadzone dane i cel</h2>
+        <p>
+          Serwis ma charakter wizytówki: nie tworzy konta i nie gromadzi żadnych danych bez Państwa wiedzy.
+          Przetwarzane są wyłącznie informacje, które przekazują Państwo dobrowolnie za pośrednictwem formularza kontaktowego
+          lub pocztą elektroniczną (imię i nazwisko, adres e-mail, treść wiadomości), w
+          jedynym celu <strong>udzielenia odpowiedzi na Państwa zapytanie</strong>.
+        </p>
+        <p>
+          Podstawa prawna: Państwa <strong>zgoda</strong> oraz uzasadniony interes polegający na udzieleniu odpowiedzi na
+          Państwa zapytanie (art. 6 RODO — Rozporządzenie UE 2016/679).
+        </p>
+
+        <h2>Odbiorcy i okres przechowywania</h2>
+        <p>
+          Państwa dane nie są <strong>sprzedawane, odstępowane ani przekazywane</strong> osobom trzecim w
+          celach handlowych. Są przechowywane przez czas niezbędny do rozpatrzenia Państwa
+          zapytania, a następnie usuwane (najpóźniej 3 lata po ostatnim kontakcie).
+        </p>
+
+        <h2>Państwa prawa</h2>
+        <p>Zgodnie z RODO oraz francuską ustawą „Informatique et Libertés" (ustawa 78-17 z dnia 6 stycznia 1978 r.) przysługują Państwu następujące prawa:</p>
+        <ul>
+          <li>prawo dostępu i informacji;</li>
+          <li>prawo do sprostowania;</li>
+          <li>prawo do usunięcia danych („prawo do bycia zapomnianym");</li>
+          <li>prawo do ograniczenia przetwarzania;</li>
+          <li>prawo do sprzeciwu;</li>
+          <li>prawo do przenoszenia danych;</li>
+          <li>prawo do ustanowienia dyspozycji na wypadek śmierci.</li>
+        </ul>
+        <p>
+          Aby skorzystać z tych praw, prosimy o kontakt na adres
+          <a href="mailto:cc.christinecal@gmail.com">cc.christinecal@gmail.com</a>. W razie
+          trudności mogą Państwo wnieść skargę do
+          <strong>CNIL</strong> (3 place de Fontenoy, 75007 Paris —
+          <a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).
+        </p>
+
+        <h2>Pliki cookie</h2>
+        <p>
+          Korzystanie z plików cookie zostało szczegółowo opisane w
+          <a href={pathFor('cookies', locale)}>polityce plików cookie</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

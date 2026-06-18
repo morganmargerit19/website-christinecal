@@ -37,7 +37,9 @@
           "enum": [
             "fr",
             "en",
-            "pl"
+            "pl",
+            "es",
+            "it"
           ],
           "default": "fr"
         },
@@ -58,6 +60,12 @@
           "type": "string"
         },
         "format": {
+          "type": "string"
+        },
+        "banner": {
+          "type": "string"
+        },
+        "bannerAlt": {
           "type": "string"
         },
         "image": {
