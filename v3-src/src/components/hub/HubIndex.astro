@@ -191,11 +191,11 @@ const rest = fiches.filter((f) => !f.data.featured);
   .hub-hero .container { position: relative; z-index: 1; }
   .hub-symbol {
     position: absolute; z-index: 0; pointer-events: none;
-    right: clamp(-70px, -3vw, -10px); top: 50%; transform: translateY(-50%);
-    width: clamp(200px, 30vw, 380px); height: auto;
-    opacity: 0.2;
-    -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
-    mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+    right: clamp(-50px, -1.5vw, 8px); top: 50%; transform: translateY(-50%);
+    width: clamp(230px, 33vw, 430px); height: auto;
+    opacity: 0.5;
+    -webkit-mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
   }
-  @media (max-width: 720px) { .hub-symbol { opacity: 0.12; right: -90px; } }
+  @media (max-width: 720px) { .hub-symbol { opacity: 0.28; right: -70px; } }
 </style>
