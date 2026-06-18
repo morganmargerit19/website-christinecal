@@ -14,7 +14,8 @@ const t = about[locale];
 const u = ui[locale];
 ---
 <Base locale={locale} routeKey="about" title={t.meta.title} description={t.meta.description}>
-  <section class="page-hero">
+  <section class="page-hero about-hero">
+    <img class="about-hero__symbol" src={base + '/images/geometrie/fleur-de-vie.svg'} alt="" aria-hidden="true" loading="lazy" />
     <div class="container">
       <span class="eyebrow" data-reveal>{t.hero.eyebrow}</span>
       <h1 data-reveal>{t.hero.title}</h1>
@@ -35,9 +36,7 @@ const u = ui[locale];
           </figure>
           <div class="prose about-intro__text">
             <h2>{t.galactic.heading}</h2>
-            <ul>
-              {t.galactic.items.map((item) => <li>{item}</li>)}
-            </ul>
+            {t.galactic.items.map((item) => <p>{item}</p>)}
           </div>
         </div>
       </div>
@@ -46,8 +45,40 @@ const u = ui[locale];
 
   <section class="paper-section paper-section--soft">
     <div class="container container--narrow">
-      <div class="paper-section__inner prose" data-reveal>
-        <h2>{t.videos.heading}</h2>
+      <div class="paper-section__inner" data-reveal>
+        <h2 class="about-h2">{t.journey.heading}</h2>
+        <ol class="about-timeline">
+          {t.journey.items.map((item) => (
+            <li>
+              <span class="about-timeline__lead">{item.lead}</span>
+              <span class="about-timeline__text">{item.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container">
+      <div class="paper-section__inner" data-reveal>
+        <h2 class="about-h2">{t.activities.heading}</h2>
+        <div class="about-cards">
+          {t.activities.items.map((item) => (
+            <article class="about-card">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper-section paper-section--soft">
+    <div class="container container--narrow">
+      <div class="paper-section__inner" data-reveal>
+        <h2 class="about-h2">{t.videos.heading}</h2>
         <div class="video-grid">
           {t.videos.list.map((v) => (
             <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={u.video.play} />
@@ -57,58 +88,29 @@ const u = ui[locale];
     </div>
   </section>
 
-  <section class="paper-section paper-section--soft">
-    <div class="container container--narrow">
-      <div class="paper-section__inner prose" data-reveal>
-        <h2>{t.journey.heading}</h2>
-        <ul>
-          {t.journey.items.map((item) => (
-            <li>
-              <strong>{item.lead}</strong> — {item.text}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </section>
-
   <section class="paper-section">
     <div class="container container--narrow">
-      <div class="paper-section__inner prose" data-reveal>
-        <h2>{t.activities.heading}</h2>
-        {t.activities.items.map((item) => (
-          <>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="paper-section paper-section--soft">
-    <div class="container container--narrow">
-      <div class="paper-section__inner prose" data-reveal>
-        <h2>{t.news.heading}</h2>
-        <ul>
+      <div class="paper-section__inner" data-reveal>
+        <h2 class="about-h2">{t.news.heading}</h2>
+        <ul class="about-news">
           {t.news.items.map((item) => <li>{item}</li>)}
         </ul>
 
-        <div class="highlight">
+        <div class="about-clients">
           <h3>{t.clients.heading}</h3>
           <p>{t.clients.text}</p>
         </div>
 
-        <p>
+        <p class="about-press">
           <a href={t.press.href} target="_blank" rel="noopener">{t.press.text}</a>
         </p>
 
-        <h3>{t.dvd.heading}</h3>
+        <h3 class="about-h3">{t.dvd.heading}</h3>
         <div class="about-dvd">
           <figure class="about-dvd__poster">
             <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
           </figure>
-          <div class="about-dvd__media">
+          <div class="about-dvd__media prose">
             <p>{t.dvd.body}</p>
             <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
           </div>
@@ -119,6 +121,24 @@ const u = ui[locale];
 </Base>
 
 <style>
+  /* Titres de section sur papier */
+  .about-h2 {
+    font-family: var(--font-serif); color: var(--ink); margin: 0 0 var(--space-3);
+    font-size: var(--text-xl);
+  }
+  .about-h3 { font-family: var(--font-serif); color: var(--ink); margin: var(--space-4) 0 var(--space-2); }
+
+  /* Fleur de vie en filigrane derrière le titre (univers de Christine) */
+  .about-hero { position: relative; overflow: hidden; }
+  .about-hero .container { position: relative; z-index: 1; }
+  .about-hero__symbol {
+    position: absolute; z-index: 0; pointer-events: none;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: min(72vw, 540px); height: auto; opacity: 0.12;
+    -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 52%, transparent 100%);
+  }
+
   /* Portrait à côté du premier bloc de texte (moins de scroll) */
   .about-intro { display: grid; gap: var(--space-4); align-items: center; }
   @media (min-width: 760px) {
@@ -131,6 +151,50 @@ const u = ui[locale];
   }
   .about-intro__portrait img { width: 100%; display: block; }
   .about-intro__text :first-child { margin-top: 0; }
+
+  /* Parcours = timeline dorée */
+  .about-timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .about-timeline::before {
+    content: ""; position: absolute; left: 7px; top: 8px; bottom: 12px; width: 2px;
+    background: linear-gradient(180deg, var(--gold), rgba(201,169,97,0.15));
+  }
+  .about-timeline li { position: relative; padding: 0 0 var(--space-4) calc(var(--space-4) + 0.4rem); }
+  .about-timeline li:last-child { padding-bottom: 0; }
+  .about-timeline li::before {
+    content: ""; position: absolute; left: 0; top: 6px; width: 16px; height: 16px;
+    border-radius: 50%; border: 2px solid var(--gold); background: var(--paper);
+    box-shadow: 0 0 0 4px rgba(201,169,97,0.12);
+  }
+  .about-timeline__lead {
+    display: block; font-family: var(--font-serif); font-size: var(--text-lg);
+    color: var(--ink); line-height: 1.2; margin-bottom: 0.2em;
+  }
+  .about-timeline__text { color: var(--ink-soft); }
+
+  /* Activités = cartes */
+  .about-cards { display: grid; gap: var(--space-3); }
+  @media (min-width: 620px) { .about-cards { grid-template-columns: 1fr 1fr; } }
+  .about-card {
+    padding: var(--space-3); border-radius: var(--radius);
+    background: var(--paper-soft); border: 1px solid rgba(22,20,51,0.07);
+    border-left: 3px solid var(--gold);
+  }
+  .about-card h3 { margin: 0 0 0.3em; font-family: var(--font-serif); color: var(--ink); font-size: var(--text-lg); }
+  .about-card p { margin: 0; color: var(--ink-soft); font-size: var(--text-sm); }
+
+  /* Actualités = liste ✦ */
+  .about-news { list-style: none; margin: 0 0 var(--space-4); padding: 0; }
+  .about-news li { position: relative; padding-left: 1.6em; margin-bottom: 0.7em; color: var(--ink-soft); }
+  .about-news li::before { content: "✦"; position: absolute; left: 0; top: 0.05em; color: var(--gold); }
+
+  /* Clientèle = encart sobre */
+  .about-clients {
+    border-left: 3px solid var(--indigo-300); padding: var(--space-1) 0 var(--space-1) var(--space-3);
+    margin: var(--space-4) 0;
+  }
+  .about-clients h3 { margin: 0 0 0.3em; font-family: var(--font-serif); color: var(--ink); }
+  .about-clients p { margin: 0; color: var(--ink-soft); font-style: italic; }
+  .about-press a { color: var(--indigo-700); }
 
   .about-dvd { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
   @media (min-width: 640px) { .about-dvd { grid-template-columns: 170px 1fr; } }
