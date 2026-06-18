@@ -88,20 +88,22 @@ const year = new Date().getFullYear();
 
   /* Boutons-portails ovales (esprit /welcome) */
   .hero__doors {
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-    gap: clamp(2rem, 9vw, 7rem);
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch;
+    gap: clamp(1.6rem, 7vw, 5.5rem);
     margin-top: clamp(2.4rem, 7vh, 5rem);
   }
   .door {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.3rem; text-align: center; text-decoration: none;
-    width: clamp(188px, 22vw, 238px); height: clamp(150px, 17vw, 186px);
+    gap: 0.4rem; text-align: center; text-decoration: none;
+    min-width: clamp(190px, 23vw, 250px); max-width: 320px;
+    padding: clamp(1.5rem, 3.4vh, 2.3rem) clamp(1.9rem, 3vw, 2.7rem);
     border: 1px solid rgba(230, 212, 154, 0.5);
-    border-radius: 50%;
+    border-radius: 999px;
     background: radial-gradient(ellipse at center, rgba(16, 13, 46, 0.32) 0%, rgba(7, 6, 26, 0.10) 72%);
     color: #fff;
     transition: transform 0.45s ease, border-color 0.45s, box-shadow 0.45s, background 0.45s;
   }
+  .door__title { text-wrap: balance; }
   .door:hover, .door:focus-visible {
     transform: translateY(-5px) scale(1.03);
     border-color: var(--gold);
