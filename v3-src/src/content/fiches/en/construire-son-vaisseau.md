@@ -9,6 +9,15 @@ image: /images/wp/eveil-quantique.jpg
 imageAlt: "Building your multidimensional vessel of the Soul"
 lede: Creating the 5D Soul's light vessel from your own geometry.
 format: In person or Zoom
+videos:
+  - id: 9QKss6wHSB4
+    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
+    meta: "Août 2023"
+    credit: debowska
+  - id: tVTU9y7RqaM
+    title: "Réintégration de nos vies passées — Conférence (même sujet)"
+    meta: "17 août 2025"
+    credit: debowska
 ---
 
 Each Soul is unique and possesses its own geometry, forming a specific vortex

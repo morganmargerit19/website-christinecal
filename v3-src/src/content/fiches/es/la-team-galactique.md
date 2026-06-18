@@ -7,6 +7,15 @@ order: 12
 lang: es
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "El equipo galáctico de la Nueva Tierra"
+videos:
+  - id: usgLaR-vK-U
+    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
+    meta: "Juillet 2022"
+    credit: debowska
+  - id: PcQKmMNv9CY
+    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 16 août 2025"
+    credit: debowska
 lede: Reencuentro de Almas galácticas para estabilizar la nueva línea temporal.
 dates:
   - "6–9 de mayo de 2027"
@@ -30,3 +39,8 @@ temporales. Espíritu rector: el reencuentro de Almas.
 
 > Invitación a los cuestionamientos: informarse antes de juzgar, y mantener el
 > respeto por el libre pensamiento de cada uno.
+
+## Conexión — Campo Unificado
+
+Para ir más allá, dos conferencias en vídeo sobre el Campo Unificado y la nueva
+Conciencia planetaria.

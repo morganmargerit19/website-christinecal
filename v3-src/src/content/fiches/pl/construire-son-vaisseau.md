@@ -9,6 +9,15 @@ image: /images/wp/eveil-quantique.jpg
 imageAlt: "Budowa wielowymiarowego pojazdu Duszy"
 lede: Stworzenie świetlistego pojazdu Duszy 5D z jej własnej geometrii.
 format: Stacjonarnie lub przez Zoom
+videos:
+  - id: 9QKss6wHSB4
+    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
+    meta: "Août 2023"
+    credit: debowska
+  - id: tVTU9y7RqaM
+    title: "Réintégration de nos vies passées — Conférence (même sujet)"
+    meta: "17 août 2025"
+    credit: debowska
 ---
 
 Każda Dusza jest wyjątkowa i posiada własną geometrię, tworząc wir

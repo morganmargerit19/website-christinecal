@@ -93,6 +93,12 @@
               },
               "meta": {
                 "type": "string"
+              },
+              "credit": {
+                "type": "string",
+                "enum": [
+                  "debowska"
+                ]
               }
             },
             "required": [

@@ -45,6 +45,9 @@ const fiches = defineCollection({
           id: z.string(),
           title: z.string().optional(),
           meta: z.string().optional(),
+          // Mention de droits à afficher sous la vidéo. `debowska` = phrase
+          // d'attribution validée par Konstanty Debowska (avec lien vers son site).
+          credit: z.enum(['debowska']).optional(),
         }),
       )
       .default([]),

@@ -11,6 +11,15 @@ lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne tempor
 dates:
   - "6–9 mai 2027"
 format: Vallée de l'Homme, Dordogne (24)
+videos:
+  - id: usgLaR-vK-U
+    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
+    meta: "Juillet 2022"
+    credit: debowska
+  - id: PcQKmMNv9CY
+    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 16 août 2025"
+    credit: debowska
 ---
 
 La nouvelle Terre se révèle progressivement, offrant l'opportunité de devenir un
@@ -30,3 +39,8 @@ temporelles. Esprit directeur : les retrouvailles d'Âmes.
 
 > Invitation aux questionnements : se renseigner avant de juger, et maintenir le
 > respect de la libre pensée de chacun.
+
+## Reliance — Champ Unifié
+
+Pour aller plus loin, deux conférences en vidéo autour du Champ unifié et de la
+nouvelle Conscience planétaire.

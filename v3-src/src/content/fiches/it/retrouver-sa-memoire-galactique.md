@@ -7,6 +7,19 @@ order: 10
 lang: it
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Ritrovare la propria memoria galattica"
+videos:
+  - id: 0eDwfiYJY3w
+    title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
+    meta: "Août 2022"
+    credit: debowska
+  - id: J7CRbYCPSKI
+    title: "Extra-terrestres — Conférence (même sujet)"
+    meta: "16 août 2025"
+    credit: debowska
+  - id: raXSnQhrWiA
+    title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 15-16 août 2025"
+    credit: debowska
 lede: Ritrovare il filo conduttore della propria storia e l'origine galattica della propria Anima.
 ---
 

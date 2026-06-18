@@ -12,6 +12,11 @@ dates:
   - "October 24–25, 2026"
   - "January 23–24, 2027"
 format: Via Zoom
+videos:
+  - id: 5djFYRe7C1Q
+    title: "Être créateur de notre existence — La nouvelle ligne spatio-temporelle"
+    meta: "Octobre 2022"
+    credit: debowska
 ---
 
 > "Dare! You will no longer recognize yourself, and neither will those around you."

@@ -7,6 +7,15 @@ order: 12
 lang: pl
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "Galaktyczny zespół Nowej Ziemi"
+videos:
+  - id: usgLaR-vK-U
+    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
+    meta: "Juillet 2022"
+    credit: debowska
+  - id: PcQKmMNv9CY
+    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 16 août 2025"
+    credit: debowska
 lede: Ponowne spotkanie Dusz galaktycznych, by ustabilizować nową linię czasową.
 dates:
   - "6–9 maja 2027"
@@ -30,3 +39,8 @@ czasowych. Duch przewodni: ponowne spotkania Dusz.
 
 > Zaproszenie do stawiania pytań: zasięgnąć informacji przed osądzeniem i zachować
 > szacunek dla wolnej myśli każdego.
+
+## Połączenie — Pole Zjednoczone
+
+Aby pójść dalej, dwie konferencje wideo poświęcone Polu Zjednoczonemu i nowej
+Świadomości planetarnej.

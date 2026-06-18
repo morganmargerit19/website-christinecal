@@ -12,6 +12,11 @@ dates:
   - "24–25 października 2026"
   - "23–24 stycznia 2027"
 format: Przez Zoom
+videos:
+  - id: 5djFYRe7C1Q
+    title: "Être créateur de notre existence — La nouvelle ligne spatio-temporelle"
+    meta: "Octobre 2022"
+    credit: debowska
 ---
 
 > „Odważ się! Nie poznasz już samego siebie, a twoje otoczenie również nie."

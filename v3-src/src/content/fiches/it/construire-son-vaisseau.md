@@ -9,6 +9,15 @@ image: /images/wp/eveil-quantique.jpg
 imageAlt: "Costruire il veicolo multidimensionale dell'Anima"
 lede: Creare il veicolo di luce dell'Anima 5D a partire dalla propria geometria.
 format: In presenza o Zoom
+videos:
+  - id: 9QKss6wHSB4
+    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
+    meta: "Août 2023"
+    credit: debowska
+  - id: tVTU9y7RqaM
+    title: "Réintégration de nos vies passées — Conférence (même sujet)"
+    meta: "17 août 2025"
+    credit: debowska
 ---
 
 Ogni Anima è unica e possiede la propria geometria, che forma un vortice

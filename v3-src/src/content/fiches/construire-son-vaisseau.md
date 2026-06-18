@@ -9,6 +9,15 @@ image: /images/wp/eveil-quantique.jpg
 imageAlt: "Construire son vaisseau multidimensionnel de l'Âme"
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
 format: Présentiel ou Zoom
+videos:
+  - id: 9QKss6wHSB4
+    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
+    meta: "Août 2023"
+    credit: debowska
+  - id: tVTU9y7RqaM
+    title: "Réintégration de nos vies passées — Conférence (même sujet)"
+    meta: "17 août 2025"
+    credit: debowska
 ---
 
 Chaque Âme est unique et possède sa propre géométrie, formant un vortex

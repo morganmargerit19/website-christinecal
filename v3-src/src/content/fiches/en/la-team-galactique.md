@@ -7,6 +7,15 @@ order: 12
 lang: en
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "The galactic team of the New Earth"
+videos:
+  - id: usgLaR-vK-U
+    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
+    meta: "Juillet 2022"
+    credit: debowska
+  - id: PcQKmMNv9CY
+    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 16 août 2025"
+    credit: debowska
 lede: Reunion of galactic Souls to stabilize the new timeline.
 dates:
   - "6–9 May 2027"
@@ -30,3 +39,8 @@ Guiding spirit: the reunion of Souls.
 
 > An invitation to questioning: inform yourself before judging, and maintain
 > respect for each person's freedom of thought.
+
+## Connection — Unified Field
+
+To go further, two video conferences on the Unified Field and the new planetary
+Consciousness.

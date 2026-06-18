@@ -7,6 +7,15 @@ order: 12
 lang: it
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "La team galattica della Nuova Terra"
+videos:
+  - id: usgLaR-vK-U
+    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
+    meta: "Juillet 2022"
+    credit: debowska
+  - id: PcQKmMNv9CY
+    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 16 août 2025"
+    credit: debowska
 lede: Ricongiungimento di Anime galattiche per stabilizzare la nuova linea temporale.
 dates:
   - "6–9 maggio 2027"
@@ -30,3 +39,8 @@ temporali. Spirito conduttore: il ricongiungimento delle Anime.
 
 > Invito all'interrogarsi: informarsi prima di giudicare, e mantenere il
 > rispetto del libero pensiero di ciascuno.
+
+## Connessione — Campo Unificato
+
+Per andare oltre, due conferenze in video sul Campo Unificato e la nuova
+Coscienza planetaria.

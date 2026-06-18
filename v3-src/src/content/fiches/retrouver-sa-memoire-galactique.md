@@ -8,6 +8,19 @@ lang: fr
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Retrouver sa mémoire galactique"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
+videos:
+  - id: 0eDwfiYJY3w
+    title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
+    meta: "Août 2022"
+    credit: debowska
+  - id: J7CRbYCPSKI
+    title: "Extra-terrestres — Conférence (même sujet)"
+    meta: "16 août 2025"
+    credit: debowska
+  - id: raXSnQhrWiA
+    title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
+    meta: "Rennes-les-Bains · 15-16 août 2025"
+    credit: debowska
 ---
 
 > Ne cherchez pas via la volonté de votre personnalité. C'est l'Âme qui, en éveil

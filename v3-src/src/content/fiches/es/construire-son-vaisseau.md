@@ -9,6 +9,15 @@ image: /images/wp/eveil-quantique.jpg
 imageAlt: "Construir su nave multidimensional del Alma"
 lede: Crear la nave de luz del Alma 5D a partir de su propia geometría.
 format: Presencial o Zoom
+videos:
+  - id: 9QKss6wHSB4
+    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
+    meta: "Août 2023"
+    credit: debowska
+  - id: tVTU9y7RqaM
+    title: "Réintégration de nos vies passées — Conférence (même sujet)"
+    meta: "17 août 2025"
+    credit: debowska
 ---
 
 Cada Alma es única y posee su propia geometría, formando un vórtice

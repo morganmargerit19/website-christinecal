@@ -7,6 +7,15 @@ order: 11
 lang: es
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine en el Mont Shasta — los intra de Telos"
+videos:
+  - id: ouTq-jp9NgM
+    title: "Mont Shasta Telos — Voyages multidimensionnels"
+    meta: "Avril 2019"
+    credit: debowska
+  - id: jHuw3hnoCxo
+    title: "Mont Shasta — Le nouveau TELOS après la guerre galactique — Forum avec Anne Givaudan"
+    meta: "15 août 2025"
+    credit: debowska
 lede: En conexión con la ciudad intraterrestre de Telos desde 2003.
 ---
 

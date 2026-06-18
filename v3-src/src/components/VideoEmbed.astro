@@ -10,10 +10,12 @@ interface Props {
   id: string;
   title?: string;
   meta?: string;
+  /** Mention de droits sous la vidéo (ex. `debowska`). */
+  credit?: 'debowska';
   /** Libellé d'action traduit (aria-label + titre de l'iframe). */
   playLabel?: string;
 }
-const { id, title, meta, playLabel = 'Lancer la vidéo' } = Astro.props;
+const { id, title, meta, credit, playLabel = 'Lancer la vidéo' } = Astro.props;
 const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
 <figure class="video-card">
@@ -28,10 +30,17 @@ const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
       <span class="video-facade__play" aria-hidden="true">▸</span>
     </button>
   </div>
-  {(title || meta) && (
+  {(title || meta || credit) && (
     <figcaption>
       {title && <strong>{title}</strong>}
       {meta && <span>{meta}</span>}
+      {credit === 'debowska' && (
+        <span class="video-credit">
+          DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty
+          UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska —{' '}
+          <a href="https://www.debowska.fr/" target="_blank" rel="noopener">Visiter son site</a>
+        </span>
+      )}
     </figcaption>
   )}
 </figure>

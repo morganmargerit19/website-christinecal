@@ -447,7 +447,9 @@ h1, h2, h3, h4 {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
     margin-top: var(--space-4);
 }
-.video-card { margin: 0; }
+/* Plafond de largeur : une vidéo isolée ne s'étire pas en plein cadre
+   (souhait de Christine pour les jaquettes DVD : « pas trop grand »). */
+.video-card { margin: 0; max-width: 540px; }
 .video-card .frame {
     position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius);
     overflow: hidden; box-shadow: var(--shadow-md);
@@ -456,6 +458,9 @@ h1, h2, h3, h4 {
 /* Légendes vidéo : claires par défaut (vidéos posées sur l'indigo : fiches, Mission) */
 .video-card figcaption { margin-top: 0.7em; font-size: var(--text-sm); color: var(--indigo-250); }
 .video-card figcaption strong { display: block; color: #fff; }
+/* Mention de droits (DVD Debowska) : plus discrète, sous le titre/date. */
+.video-card .video-credit { display: block; margin-top: 0.5em; font-size: 0.82em; font-style: italic; line-height: 1.45; opacity: 0.9; }
+.video-card .video-credit a { color: var(--gold); text-decoration: underline; }
 /* … mais sombres quand la grille vidéo est dans une carte papier (Qui suis-je) */
 .paper-section__inner .video-card figcaption { color: var(--ink-soft); }
 .paper-section__inner .video-card figcaption strong { color: var(--ink); }

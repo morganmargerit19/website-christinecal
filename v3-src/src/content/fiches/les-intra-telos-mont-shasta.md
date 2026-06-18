@@ -8,6 +8,15 @@ lang: fr
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine au Mont Shasta — les intra de Telos"
 lede: En connexion avec la cité intra-terrestre de Telos depuis 2003.
+videos:
+  - id: ouTq-jp9NgM
+    title: "Mont Shasta Telos — Voyages multidimensionnels"
+    meta: "Avril 2019"
+    credit: debowska
+  - id: jHuw3hnoCxo
+    title: "Mont Shasta — Le nouveau TELOS après la guerre galactique — Forum avec Anne Givaudan"
+    meta: "15 août 2025"
+    credit: debowska
 ---
 
 Le Mont Shasta, montagne de 4700 mètres en Californie, est l'un des vortex les
