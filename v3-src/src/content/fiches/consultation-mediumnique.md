@@ -11,6 +11,8 @@ featured: true
 lede: Une lecture d'Âme qui révèle vos ressources et votre mission de vie.
 banner: /images/wp/bandeau-mediumnique.jpg
 bannerAlt: "Un regard tourné vers l'invisible"
+audio: /audio/interpreter-sa-mediumnite-adofm.mp3
+audioTitle: "Interpréter sa médiumnité — émission de radio (Ado FM)"
 format: Séance via Zoom
 duration: 1h30
 price: 70 €

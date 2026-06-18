@@ -101,6 +101,15 @@ const facts = [
       </section>
     )}
 
+    {f.audio && (
+      <section class="container">
+        <figure class="fiche-audio">
+          {f.audioTitle && <figcaption>{f.audioTitle}</figcaption>}
+          <audio controls preload="none" src={base + f.audio}></audio>
+        </figure>
+      </section>
+    )}
+
     <section class="contact-band">
       <div class="container">
         <h2>{f.category === 'consultation' ? t.fiche.ctaConsult : t.fiche.ctaDefault}</h2>
@@ -123,6 +132,14 @@ const facts = [
     width: 100%; height: 100%; object-fit: cover; display: block;
     max-height: 44vh;
   }
+  .fiche-audio {
+    margin: 0; max-width: var(--container-narrow); margin-inline: auto;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .fiche-audio figcaption {
+    font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--indigo-100);
+  }
+  .fiche-audio audio { width: 100%; }
 </style>
 
 <script>

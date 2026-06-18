@@ -11,6 +11,8 @@ featured: true
 lede: Una lettura dell'Anima che rivela le tue risorse e la tua missione di vita.
 banner: /images/wp/bandeau-mediumnique.jpg
 bannerAlt: "Uno sguardo rivolto verso l'invisibile"
+audio: /audio/interpreter-sa-mediumnite-adofm.mp3
+audioTitle: "Interpretare la propria medianità — programma radiofonico (Ado FM)"
 format: Seduta tramite Zoom
 duration: 1h30
 price: 70 €

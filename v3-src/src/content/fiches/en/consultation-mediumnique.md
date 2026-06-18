@@ -11,6 +11,8 @@ featured: true
 lede: A Soul reading that reveals your resources and your life mission.
 banner: /images/wp/bandeau-mediumnique.jpg
 bannerAlt: "A gaze turned towards the invisible"
+audio: /audio/interpreter-sa-mediumnite-adofm.mp3
+audioTitle: "Interpreting your mediumship — radio show (Ado FM)"
 format: Session via Zoom
 duration: 1h30
 price: 70 €

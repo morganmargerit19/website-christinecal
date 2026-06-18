@@ -74,6 +74,12 @@
         "imageAlt": {
           "type": "string"
         },
+        "audio": {
+          "type": "string"
+        },
+        "audioTitle": {
+          "type": "string"
+        },
         "videos": {
           "type": "array",
           "items": {
