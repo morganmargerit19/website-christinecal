@@ -20,6 +20,7 @@ const u = ui[locale];
       <span class="eyebrow" data-reveal>{t.hero.eyebrow}</span>
       <h1 data-reveal>{t.hero.title}</h1>
       <p class="lede" data-reveal>{t.hero.lede}</p>
+      <p class="about-epigraph" data-reveal>{t.epigraph}</p>
     </div>
   </section>
 
@@ -127,6 +128,19 @@ const u = ui[locale];
     font-size: var(--text-xl);
   }
   .about-h3 { font-family: var(--font-serif); color: var(--ink); margin: var(--space-4) 0 var(--space-2); }
+
+  /* Épigraphe : portrait poétique en ouverture, mis à part du reste */
+  .about-epigraph {
+    margin: var(--space-4) auto 0; max-width: 46ch;
+    font-family: var(--font-serif); font-style: italic;
+    font-size: var(--text-lg); line-height: 1.6;
+    color: var(--indigo-100); position: relative;
+    padding-top: var(--space-3);
+  }
+  .about-epigraph::before {
+    content: "✦"; display: block; margin: 0 auto var(--space-2);
+    color: var(--gold); font-style: normal; font-size: 0.9em;
+  }
 
   /* Fleur de vie en filigrane derrière le titre (univers de Christine) */
   .about-hero { position: relative; overflow: hidden; }

@@ -8,6 +8,8 @@ import type { Locale } from '../utils';
 export interface AboutDict {
   meta: { title: string; description: string };
   hero: { eyebrow: string; title: string; lede: string };
+  /** Épigraphe poétique en ouverture (portrait à la 3e personne). */
+  epigraph: string;
   galactic: { heading: string; items: string[] };
   videos: {
     heading: string;
@@ -33,6 +35,8 @@ export const about: Record<Locale, AboutDict> = {
       title: 'Un électron libre atypique en contact avec ses versions du futur',
       lede: "L'Espace-Temps se contracte de plus en plus, donc soyons brefs mais précis.",
     },
+    epigraph:
+      "Elle vit dans plusieurs mondes à la fois, et a ce don rare de les relier : le ciel et le quotidien, l'invisible et le concret. Les pieds sur Terre, le regard dans les étoiles — une chaleur qui accueille, une exigence de vérité qui éveille. Une galactique venue du futur, profondément humaine, qui vous prend par la main pour vous montrer la lumière que vous portez déjà.",
     galactic: {
       heading: "Une galactique venue d'un futur",
       items: [
@@ -120,6 +124,8 @@ export const about: Record<Locale, AboutDict> = {
       title: 'An atypical free spirit in contact with her future selves',
       lede: 'Space-Time is contracting more and more, so let us be brief but precise.',
     },
+    epigraph:
+      'She lives in several worlds at once, with the rare gift of weaving them together: the sky and the everyday, the invisible and the tangible. Feet on the Earth, eyes among the stars — a warmth that welcomes, a longing for truth that awakens. A galactic soul from the future, deeply human, who takes you by the hand to show you the light you already carry.',
     galactic: {
       heading: 'A galactic soul from a future',
       items: [
@@ -207,6 +213,8 @@ export const about: Record<Locale, AboutDict> = {
       title: 'Nietypowy wolny duch w kontakcie ze swoimi wersjami z przyszłości',
       lede: 'Czasoprzestrzeń kurczy się coraz bardziej, bądźmy więc zwięźli, ale precyzyjni.',
     },
+    epigraph:
+      'Żyje w kilku światach naraz i ma rzadki dar ich łączenia: niebo i codzienność, to, co niewidzialne, i to, co namacalne. Stopami na Ziemi, wzrokiem wśród gwiazd — ciepło, które przyjmuje, i pragnienie prawdy, które przebudza. Galaktyczna dusza z przyszłości, głęboko ludzka, która bierze cię za rękę, by pokazać ci światło, które już w sobie nosisz.',
     galactic: {
       heading: 'Galaktyczna dusza z przyszłości',
       items: [
@@ -294,6 +302,8 @@ export const about: Record<Locale, AboutDict> = {
       title: 'Un espíritu libre atípico en contacto con sus versiones del futuro',
       lede: 'El Espacio-Tiempo se contrae cada vez más, así que seamos breves pero precisos.',
     },
+    epigraph:
+      'Vive en varios mundos a la vez, con el raro don de entrelazarlos: el cielo y lo cotidiano, lo invisible y lo tangible. Los pies en la Tierra, la mirada entre las estrellas — una calidez que acoge, una exigencia de verdad que despierta. Una galáctica venida del futuro, profundamente humana, que te toma de la mano para mostrarte la luz que ya llevas dentro.',
     galactic: {
       heading: 'Un alma galáctica venida de un futuro',
       items: [
@@ -381,6 +391,8 @@ export const about: Record<Locale, AboutDict> = {
       title: 'Uno spirito libero atipico in contatto con le sue versioni del futuro',
       lede: 'Lo Spazio-Tempo si contrae sempre di più, quindi siamo brevi ma precisi.',
     },
+    epigraph:
+      'Vive in più mondi alla volta, con il raro dono di intrecciarli: il cielo e il quotidiano, l’invisibile e il concreto. I piedi sulla Terra, lo sguardo tra le stelle — un calore che accoglie, un’esigenza di verità che risveglia. Un’anima galattica venuta dal futuro, profondamente umana, che ti prende per mano per mostrarti la luce che già porti dentro.',
     galactic: {
       heading: "Un'anima galattica venuta da un futuro",
       items: [
