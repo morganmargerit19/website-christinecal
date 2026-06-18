@@ -12,3 +12,6 @@ sources/wp-v2/wp-content/
 .DS_Store
 Thumbs.db
 *.log
+
+# Fichiers de travail temporaires (candidates images en attente de choix Christine)
+sources/img-candidates/
