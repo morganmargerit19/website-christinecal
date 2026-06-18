@@ -25,7 +25,7 @@ const u = ui[locale];
   <section class="container">
     <figure class="about-portrait" data-reveal>
       <img
-        src={base + '/images/wp/ccal-portrait-2.jpg'}
+        src={base + '/images/christine-portrait.jpg'}
         alt="Portrait de Christine CAL"
         loading="lazy"
       />
@@ -43,21 +43,7 @@ const u = ui[locale];
         <h2>{t.videos.heading}</h2>
         <div class="video-grid">
           {t.videos.list.map((v) => (
-            <figure class="video-card">
-              <div class="frame">
-                <iframe
-                  src={`https://www.youtube-nocookie.com/embed/${v.id}`}
-                  title={v.title}
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                />
-              </div>
-              <figcaption>
-                <strong>{v.title}</strong>
-                <span>{v.meta}</span>
-              </figcaption>
-            </figure>
+            <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={u.video.play} />
           ))}
         </div>
       </div>
