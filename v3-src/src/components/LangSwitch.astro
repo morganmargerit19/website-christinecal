@@ -6,10 +6,12 @@ interface Props {
   locale: Locale;
   routeKey: RouteKey;
   align?: 'left' | 'right';
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, routeKey, align = 'right' } = Astro.props;
+const { locale, routeKey, align = 'right', alternates } = Astro.props;
 const t = ui[locale];
+const hrefFor = (l: Locale) => alternates?.[l] ?? pathFor(routeKey, l);
 ---
 <details class="lang" data-lang data-align={align}>
   <summary class="lang__btn" aria-label={t.nav.langLabel}>
@@ -26,7 +28,7 @@ const t = ui[locale];
   <ul class="lang__menu" role="list">
     {locales.map((l) => (
       <li>
-        <a href={pathFor(routeKey, l)} hreflang={l} lang={l} aria-current={l === locale ? 'true' : undefined}>
+        <a href={hrefFor(l)} hreflang={l} lang={l} aria-current={l === locale ? 'true' : undefined}>
           <span class="lang__code">{l.toUpperCase()}</span>
           <span class="lang__name">{localeNames[l]}</span>
         </a>

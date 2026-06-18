@@ -1,6 +1,6 @@
 ---
 title: Settimana iniziatica con l'energia dei Telosiani
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 20

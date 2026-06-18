@@ -12,13 +12,16 @@ interface Props {
   title: string;
   description: string;
   portal?: boolean;
+  /** URLs par langue (base-préfixées) quand l'URL ne dérive pas du routeKey (ex. fiches). */
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, routeKey, title, description, portal = false } = Astro.props;
+const { locale, routeKey, title, description, portal = false, alternates } = Astro.props;
 const t = ui[locale];
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
-const canonical = site + pathFor(routeKey, locale);
-const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL' };
+const hrefFor = (l: Locale) => site + (alternates?.[l] ?? pathFor(routeKey, l));
+const canonical = hrefFor(locale);
+const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL', es: 'es_ES', it: 'it_IT' };
 ---
 <!doctype html>
 <html lang={locale}>
@@ -30,9 +33,9 @@ const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL
     <meta name="theme-color" content="#100d2e" />
     <link rel="canonical" href={canonical} />
     {locales.map((l) => (
-      <link rel="alternate" hreflang={l} href={site + pathFor(routeKey, l)} />
+      <link rel="alternate" hreflang={l} href={hrefFor(l)} />
     ))}
-    <link rel="alternate" hreflang="x-default" href={site + pathFor(routeKey, 'fr')} />
+    <link rel="alternate" hreflang="x-default" href={hrefFor('fr')} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -40,6 +43,9 @@ const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL
     <meta property="og:locale" content={ogLocales[locale]} />
     <meta property="og:image" content={site + base + '/images/wp/fond-portail-2021-bleu1200-V2.jpg'} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={site + base + '/images/wp/fond-portail-2021-bleu1200-V2.jpg'} />
     <link rel="icon" href={base + "/favicon.svg"} type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,7 +57,7 @@ const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL
   <body class={portal ? 'is-portal' : undefined}>
     <a class="skip-link" href="#main">{t.nav.skipToContent}</a>
     <Starfield />
-    {portal ? null : <Header locale={locale} routeKey={routeKey} />}
+    {portal ? null : <Header locale={locale} routeKey={routeKey} alternates={alternates} />}
     <main id="main">
       <slot />
     </main>

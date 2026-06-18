@@ -112,7 +112,7 @@ const fiches = (
   await getCollection('fiches', (e) => e.data.hub === hub && e.data.lang === locale && !e.data.draft)
 ).sort((a, b) => a.data.order - b.data.order);
 
-const slugOf = (id: string) => id.replace(/^(en|pl)\//, '');
+const slugOf = (id: string) => id.replace(/^(en|pl|es|it)\//, '');
 const featured = fiches.filter((f) => f.data.featured);
 const rest = fiches.filter((f) => !f.data.featured);
 ---
@@ -134,7 +134,7 @@ const rest = fiches.filter((f) => !f.data.featured);
 
   <section class="container">
     <figure class="hub-banner">
-      <img src={base + `/images/wp/bandeau-${hub}.jpg`} alt={c.eyebrow} loading="lazy" />
+      <img src={base + `/images/wp/bandeau-${hub}.jpg`} alt="" aria-hidden="true" loading="lazy" />
     </figure>
 
     {featured.length > 0 && (

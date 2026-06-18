@@ -1,12 +1,12 @@
 ---
-title: Stage n°2 — Costruzione della Merkaba cristallina
-kicker: Stage · Umano quantico
+title: Seminario n°2 — Costruzione della Merkaba cristallina
+kicker: Seminario · Umano quantico
 hub: eveil-a-soi
 category: stage
 order: 22
 lang: it
 image: /images/wp/stage-construction-merkaba-cristalline.jpg
-imageAlt: "Stage Costruzione della Merkaba cristallina"
+imageAlt: "Seminario Costruzione della Merkaba cristallina"
 lede: Costruire la geometria dell'Anima sulla base della Merkaba cristallina.
 format: In presenza o Zoom
 videos:
@@ -34,5 +34,5 @@ Mont Shasta, 2017: faccio cadere per sbaglio un blocco di coltelli. «Funziona,
 la Merkaba!» esclamano i miei amici partecipanti: i coltelli sono posati a terra ad
 arco di cerchio davanti al mio piede, nessun dito è stato toccato.
 
-Questo stage è il **secondo delle tre fasce** del percorso «Costruire il proprio
+Questo seminario è il **secondo delle tre fasce** del percorso «Costruire il proprio
 Veicolo Multidimensionale».

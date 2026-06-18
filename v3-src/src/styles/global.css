@@ -12,6 +12,8 @@
     --indigo-700: #2e2a78;
     --indigo-500: #3f3d9c;
     --indigo-300: #7b79c6;
+    --indigo-250: #9492d6; /* texte secondaire petit sur indigo (AA confortable) */
+    --indigo-200: #b9b7e0; /* accroches / ledes lumineuses sur indigo */
     --indigo-100: #dcdbf0;
 
     --gold: #c9a961;
@@ -21,7 +23,7 @@
     --paper-soft: #efece3;
     --ink: #161433;
     --ink-soft: #4b4870;
-    --ink-muted: #7a7898;
+    --ink-muted: #615f85; /* assombri pour AA sur papier (note formulaire) */
 
     --star: rgba(255, 255, 255, 0.92);
 
@@ -92,10 +94,25 @@ body {
     overflow-x: hidden;
 }
 
-img { max-width: 100%; height: auto; display: block; }
+img {
+    max-width: 100%; height: auto; display: block;
+    /* Dissuasion d'enregistrement (demande de Christine) — n'empêche pas les captures d'écran */
+    -webkit-user-drag: none; user-select: none; -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
 
 a { color: var(--gold-soft); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: #fff; }
+
+/* Focus clavier visible partout (accessibilité WCAG 2.4.7) */
+:where(a, button, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+.paper-section__inner :where(a, button):focus-visible {
+    outline-color: var(--indigo-700);
+}
 
 h1, h2, h3, h4 {
     font-family: var(--font-serif);
@@ -196,6 +213,8 @@ h1, h2, h3, h4 {
     .site-nav.is-open { opacity: 1; pointer-events: auto; }
     .site-nav a { font-size: 1.1rem; }
     .nav-toggle { position: relative; z-index: 70; }
+    /* Le sélecteur de langue reste accessible au-dessus de l'overlay du menu */
+    .site-header .lang { position: relative; z-index: 71; }
 }
 
 /* --- Hero ---------------------------------------------------------------- */
@@ -259,7 +278,7 @@ h1, h2, h3, h4 {
 .section-head h2 { font-size: var(--text-2xl); }
 .section-head .lede {
     font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
-    color: var(--indigo-300); max-width: 50ch; margin: 0 auto;
+    color: var(--indigo-200); max-width: 50ch; margin: 0 auto;
 }
 
 .portal-grid {
@@ -300,7 +319,7 @@ h1, h2, h3, h4 {
     display: flex; flex-direction: column; gap: 0.5em;
 }
 .portal-card li {
-    padding-left: 1.4em; position: relative; font-size: var(--text-sm); color: var(--indigo-300);
+    padding-left: 1.4em; position: relative; font-size: var(--text-sm); color: var(--indigo-250);
 }
 .portal-card li::before {
     content: "✦"; position: absolute; left: 0; color: var(--gold); font-size: 0.8em; top: 0.25em;
@@ -397,7 +416,7 @@ h1, h2, h3, h4 {
 /* --- Contact (bandeau) -------------------------------------------------------- */
 .contact-band { padding-block: var(--space-7); text-align: center; }
 .contact-band h2 { font-size: var(--text-2xl); }
-.contact-band p { color: var(--indigo-300); max-width: 50ch; margin: 0 auto var(--space-4); }
+.contact-band p { color: var(--indigo-200); max-width: 50ch; margin: 0 auto var(--space-4); }
 .contact-band__actions {
     display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center;
 }
@@ -414,7 +433,7 @@ h1, h2, h3, h4 {
 .page-hero h1 { font-size: var(--text-2xl); max-width: 24ch; margin-inline: auto; }
 .page-hero .lede {
     font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
-    color: var(--indigo-300); max-width: 55ch; margin: var(--space-2) auto 0;
+    color: var(--indigo-200); max-width: 55ch; margin: var(--space-2) auto 0;
 }
 
 .prose h2 { font-size: var(--text-xl); margin-top: var(--space-4); }
@@ -434,8 +453,12 @@ h1, h2, h3, h4 {
     overflow: hidden; box-shadow: var(--shadow-md);
 }
 .video-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-card figcaption { margin-top: 0.7em; font-size: var(--text-sm); color: var(--ink-soft); }
-.video-card figcaption strong { display: block; color: var(--ink); }
+/* Légendes vidéo : claires par défaut (vidéos posées sur l'indigo : fiches, Mission) */
+.video-card figcaption { margin-top: 0.7em; font-size: var(--text-sm); color: var(--indigo-250); }
+.video-card figcaption strong { display: block; color: #fff; }
+/* … mais sombres quand la grille vidéo est dans une carte papier (Qui suis-je) */
+.paper-section__inner .video-card figcaption { color: var(--ink-soft); }
+.paper-section__inner .video-card figcaption strong { color: var(--ink); }
 
 .highlight {
     border-left: 3px solid var(--gold);
@@ -450,9 +473,9 @@ h1, h2, h3, h4 {
     margin-bottom: var(--space-3);
     font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase;
 }
-.breadcrumb a { color: var(--indigo-300); text-decoration: none; }
+.breadcrumb a { color: var(--indigo-250); text-decoration: none; }
 .breadcrumb a:hover { color: var(--gold-soft); }
-.breadcrumb span { color: var(--indigo-700); }
+.breadcrumb span { color: var(--indigo-300); opacity: 0.6; }
 
 /* --- Fiche : infos pratiques ------------------------------------------------------- */
 .fiche-meta {
@@ -546,7 +569,7 @@ h1, h2, h3, h4 {
 .site-footer li { margin-bottom: 0.5em; }
 .site-footer a { color: var(--indigo-100); text-decoration: none; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
-.site-footer p { color: var(--indigo-300); margin-top: 0; white-space: pre-line; }
+.site-footer p { color: var(--indigo-250); margin-top: 0; white-space: pre-line; }
 .footer-bottom {
     display: flex; flex-wrap: wrap; gap: var(--space-2);
     justify-content: space-between; color: var(--indigo-300);

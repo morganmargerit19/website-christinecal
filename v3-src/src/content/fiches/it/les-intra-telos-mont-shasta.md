@@ -1,6 +1,6 @@
 ---
 title: Gli Intra del nuovo Telos al Mont Shasta
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 11

@@ -1,6 +1,6 @@
 ---
 title: Ritrovare la propria memoria galattica
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 10
@@ -34,7 +34,7 @@ Rivelazione della sua multidimensionalità sul Mont Shasta, tra il 2017 e il 201
 con l'aiuto degli Intra-Terrestri di TELOS — il ritorno di una versione di se stessa
 per collaborare alla nuova linea spazio-temporale.
 
-## Stage iniziatici
+## Seminari iniziatici
 
 - Dal corpo fisico al tempio iniziatico
 - Dall'uomo terrestre all'umano cosmico

@@ -1,6 +1,6 @@
 ---
 title: La Team galattica della Nuova Terra
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 12
@@ -23,7 +23,7 @@ Portare la vibrazione durante la Transizione. Che gioia per l'Anima che, in
 incarnazione, partecipa con i suoi fratelli e sorelle galattici a una missione
 collettiva per la Pace, dopo lunghe battaglie.
 
-## Stage — Incontri di galattici sulla Terra
+## Seminari — Incontri di galattici sulla Terra
 
 Ricongiungimento attorno a strumenti di riconnessione e di pacificazione nelle linee
 temporali. Spirito conduttore: il ricongiungimento delle Anime.

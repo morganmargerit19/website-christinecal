@@ -1,6 +1,6 @@
 ---
 title: I 7 raggi — 7 giorni iniziatici
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 21
@@ -12,9 +12,9 @@ dates:
   - "A partire dal 2027"
 ---
 
-Numerosi stage sui Raggi dei Maestri Ascesi sono stati condotti tra
+Numerosi seminari sui Raggi dei Maestri Ascesi sono stati condotti tra
 il 2014 e il 2020, con un approccio scientifico e pragmatico e un'applicazione
-concreta nella vita. Ripresa degli stage a partire dal 2027.
+concreta nella vita. Ripresa dei seminari a partire dal 2027.
 
 ## Testimonianze
 

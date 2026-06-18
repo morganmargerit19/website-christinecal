@@ -18,10 +18,10 @@ cellulare, attraverso l'inconscio, mediante meditazioni guidate, mantra ed
 esercizi concreti.
 
 Un insegnamento nato da un lungo apprendimento personale: 20 anni di conduzione
-di stage, formazione presso scienziati risvegliati degli USA e della Russia,
+di seminari, formazione presso scienziati risvegliati degli USA e della Russia,
 documenti di TELOS e trasmissioni di Coscienze Superiori.
 
-**Più di 950 persone hanno seguito questi stage dal 2013.**
+**Più di 950 persone hanno seguito questi seminari dal 2013.**
 
 > Revisione mensile gratuita tramite Zoom, ogni primo martedì del mese alle 20.30.
 

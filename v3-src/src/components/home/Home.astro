@@ -99,7 +99,7 @@ const year = new Date().getFullYear();
     padding: clamp(1.5rem, 3.4vh, 2.3rem) clamp(1.9rem, 3vw, 2.7rem);
     border: 1px solid rgba(230, 212, 154, 0.5);
     border-radius: 999px;
-    background: radial-gradient(ellipse at center, rgba(16, 13, 46, 0.32) 0%, rgba(7, 6, 26, 0.10) 72%);
+    background: radial-gradient(ellipse at center, rgba(10, 8, 34, 0.55) 0%, rgba(7, 6, 26, 0.28) 75%);
     color: #fff;
     transition: transform 0.45s ease, border-color 0.45s, box-shadow 0.45s, background 0.45s;
   }
@@ -113,10 +113,12 @@ const year = new Date().getFullYear();
   .door__title {
     font-family: var(--font-serif); font-size: clamp(1.4rem, 2.6vw, 1.9rem);
     letter-spacing: 0.04em; line-height: 1.05;
+    text-shadow: 0 2px 18px rgba(7, 6, 26, 0.9);
   }
   .door__sub {
     font-size: var(--text-xs); letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--gold-soft); margin-top: 0.5rem;
+    text-shadow: 0 1px 12px rgba(7, 6, 26, 0.95);
   }
 
   /* Sélecteur de langue flottant (pas de barre) */
@@ -146,7 +148,7 @@ const year = new Date().getFullYear();
   }
   .portal-legal a { color: var(--indigo-100); text-decoration: none; }
   .portal-legal a:hover { color: var(--gold-soft); }
-  @media (max-width: 560px) {
+  @media (max-width: 560px), (max-height: 720px) {
     :global(body.is-portal) { overflow: auto; }
   }
 </style>

@@ -6,9 +6,10 @@ import { pathFor, type Locale, type RouteKey } from '../i18n/utils';
 interface Props {
   locale: Locale;
   routeKey: RouteKey;
+  alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, routeKey } = Astro.props;
+const { locale, routeKey, alternates } = Astro.props;
 const t = ui[locale];
 ---
 <header class="site-header" data-header>
@@ -16,20 +17,20 @@ const t = ui[locale];
     <a class="brand" href={pathFor('home', locale)}>Christine <em>CAL</em></a>
 
     <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-controls="site-nav">
-      <span class="sr-only">Menu</span>
+      <span class="sr-only">{t.nav.menu}</span>
       ☰
     </button>
 
-    <nav class="site-nav" id="site-nav" data-nav aria-label="Navigation principale">
+    <nav class="site-nav" id="site-nav" data-nav aria-label={t.nav.mainNav}>
       <a href={pathFor('home', locale)} aria-current={routeKey === 'home' ? 'page' : undefined}>{t.nav.home}</a>
       <a href={pathFor('eveilASoi', locale)} aria-current={routeKey === 'eveilASoi' ? 'page' : undefined}>{t.nav.eveilASoi}</a>
       <a href={pathFor('eveilAuSoi', locale)} aria-current={routeKey === 'eveilAuSoi' ? 'page' : undefined}>{t.nav.eveilAuSoi}</a>
-      <a href={pathFor('mission', locale)} aria-current={routeKey === 'mission' ? 'page' : undefined}>Mission</a>
+      <a href={pathFor('mission', locale)} aria-current={routeKey === 'mission' ? 'page' : undefined}>{t.nav.mission}</a>
       <a href={pathFor('about', locale)} aria-current={routeKey === 'about' ? 'page' : undefined}>{t.nav.about}</a>
       <a href={pathFor('contact', locale)} aria-current={routeKey === 'contact' ? 'page' : undefined}>{t.nav.contact}</a>
     </nav>
 
-    <LangSwitch locale={locale} routeKey={routeKey} align="right" />
+    <LangSwitch locale={locale} routeKey={routeKey} alternates={alternates} align="right" />
   </div>
 </header>
 

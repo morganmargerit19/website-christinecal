@@ -15,9 +15,16 @@ export interface UIDict {
     about: string;
     eveilASoi: string;
     eveilAuSoi: string;
+    mission: string;
     contact: string;
     skipToContent: string;
     langLabel: string;
+    menu: string;
+    mainNav: string;
+    breadcrumb: string;
+  };
+  video: {
+    play: string;
   };
   hero: {
     eyebrow: string;
@@ -66,6 +73,7 @@ export interface UIDict {
     navTitle: string;
     contactTitle: string;
     followTitle: string;
+    consultation: string;
     legal: string;
     privacy: string;
     rights: string;
@@ -93,9 +101,16 @@ export const ui: Record<Locale, UIDict> = {
       about: 'Qui suis-je',
       eveilASoi: 'Éveil à Soi',
       eveilAuSoi: 'Éveil au Soi',
+      mission: 'Mission',
       contact: 'Contact',
       skipToContent: 'Aller au contenu',
       langLabel: 'Langue',
+      menu: 'Menu',
+      mainNav: 'Navigation principale',
+      breadcrumb: "Fil d'Ariane",
+    },
+    video: {
+      play: 'Lancer la vidéo',
     },
     hero: {
       eyebrow: "Coach d'Éveil à la Multidimensionnalité de l'Être",
@@ -148,6 +163,7 @@ export const ui: Record<Locale, UIDict> = {
       navTitle: 'Navigation',
       contactTitle: 'Contact',
       followTitle: 'Suivre',
+      consultation: 'Consultation médiumnique',
       legal: 'Mentions légales',
       privacy: 'Politique de confidentialité',
       rights: 'Tous droits réservés',
@@ -174,9 +190,16 @@ export const ui: Record<Locale, UIDict> = {
       about: 'About me',
       eveilASoi: 'Self-Awakening',
       eveilAuSoi: 'Awakening to the Self',
+      mission: 'Mission',
       contact: 'Contact',
       skipToContent: 'Skip to content',
       langLabel: 'Language',
+      menu: 'Menu',
+      mainNav: 'Main navigation',
+      breadcrumb: 'Breadcrumb',
+    },
+    video: {
+      play: 'Play video',
     },
     hero: {
       eyebrow: 'Coach in Awakening to the Multidimensionality of Being',
@@ -229,6 +252,7 @@ export const ui: Record<Locale, UIDict> = {
       navTitle: 'Navigation',
       contactTitle: 'Contact',
       followTitle: 'Follow',
+      consultation: 'Mediumship consultation',
       legal: 'Legal notice',
       privacy: 'Privacy policy',
       rights: 'All rights reserved',
@@ -255,9 +279,16 @@ export const ui: Record<Locale, UIDict> = {
       about: 'O mnie',
       eveilASoi: 'Przebudzenie Siebie',
       eveilAuSoi: 'Przebudzenie do Jaźni',
+      mission: 'Misja',
       contact: 'Kontakt',
       skipToContent: 'Przejdź do treści',
       langLabel: 'Język',
+      menu: 'Menu',
+      mainNav: 'Nawigacja główna',
+      breadcrumb: 'Ścieżka nawigacji',
+    },
+    video: {
+      play: 'Odtwórz wideo',
     },
     hero: {
       eyebrow: 'Coach przebudzenia do wielowymiarowości istnienia',
@@ -310,6 +341,7 @@ export const ui: Record<Locale, UIDict> = {
       navTitle: 'Nawigacja',
       contactTitle: 'Kontakt',
       followTitle: 'Obserwuj',
+      consultation: 'Konsultacja mediumiczna',
       legal: 'Nota prawna',
       privacy: 'Polityka prywatności',
       rights: 'Wszelkie prawa zastrzeżone',
@@ -336,9 +368,16 @@ export const ui: Record<Locale, UIDict> = {
       about: 'Quién soy',
       eveilASoi: 'Despertar a Sí',
       eveilAuSoi: 'Despertar al Sí',
+      mission: 'Misión',
       contact: 'Contacto',
       skipToContent: 'Ir al contenido',
       langLabel: 'Idioma',
+      menu: 'Menú',
+      mainNav: 'Navegación principal',
+      breadcrumb: 'Ruta de navegación',
+    },
+    video: {
+      play: 'Reproducir vídeo',
     },
     hero: {
       eyebrow: 'Coach de despertar a la multidimensionalidad del Ser',
@@ -354,7 +393,7 @@ export const ui: Record<Locale, UIDict> = {
         kicker: 'Encontrarse',
         sub: 'Escuela 5D',
         desc: 'Liberarse de las heridas del pasado, desplegar tus capacidades y construir la autoestima — mediante el coaching, las consultas de médium y los talleres de despertar.',
-        items: ['Coaching y consultas', 'Talleres de despertar', 'Talleres y conferencias'],
+        items: ['Coaching y consultas', 'Cursos de despertar', 'Talleres y conferencias'],
       },
       auSoi: {
         title: 'Despertar al Sí',
@@ -391,6 +430,7 @@ export const ui: Record<Locale, UIDict> = {
       navTitle: 'Navegación',
       contactTitle: 'Contacto',
       followTitle: 'Seguir',
+      consultation: 'Consulta de médium',
       legal: 'Aviso legal',
       privacy: 'Política de privacidad',
       rights: 'Todos los derechos reservados',
@@ -417,9 +457,16 @@ export const ui: Record<Locale, UIDict> = {
       about: 'Chi sono',
       eveilASoi: 'Risveglio a Sé',
       eveilAuSoi: 'Risveglio al Sé',
+      mission: 'Missione',
       contact: 'Contatto',
       skipToContent: 'Vai al contenuto',
       langLabel: 'Lingua',
+      menu: 'Menu',
+      mainNav: 'Navigazione principale',
+      breadcrumb: 'Percorso di navigazione',
+    },
+    video: {
+      play: 'Riproduci video',
     },
     hero: {
       eyebrow: "Coach del risveglio alla multidimensionalità dell'Essere",
@@ -472,6 +519,7 @@ export const ui: Record<Locale, UIDict> = {
       navTitle: 'Navigazione',
       contactTitle: 'Contatto',
       followTitle: 'Seguimi',
+      consultation: 'Consulto medianico',
       legal: 'Note legali',
       privacy: 'Informativa sulla privacy',
       rights: 'Tutti i diritti riservati',

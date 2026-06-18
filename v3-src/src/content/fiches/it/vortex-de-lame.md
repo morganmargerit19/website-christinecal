@@ -1,12 +1,12 @@
 ---
-title: Stage n°3 — Vortice ascensionale dell'Anima
-kicker: Stage · Umano multidimensionale
+title: Seminario n°3 — Vortice ascensionale dell'Anima
+kicker: Seminario · Umano multidimensionale
 hub: eveil-a-soi
 category: stage
 order: 23
 lang: it
 image: /images/wp/stage-construction-vortex-ascentionnel.jpg
-imageAlt: "Stage Vortice ascensionale dell'Anima"
+imageAlt: "Seminario Vortice ascensionale dell'Anima"
 draft: false
 lede: Creare il veicolo intergalattico dell'Anima e il suo vortice ascensionale.
 ---

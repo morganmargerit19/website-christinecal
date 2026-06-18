@@ -1,6 +1,6 @@
 ---
 title: Dal corpo fisico al tempio iniziatico
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 24

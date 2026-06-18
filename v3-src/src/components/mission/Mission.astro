@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import VideoEmbed from '../VideoEmbed.astro';
+import { ui } from '../../i18n/ui';
 import { base, pathFor, type Locale } from '../../i18n/utils';
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const t = ui[locale];
 
 type Crew = { title: string; en: string; desc: string };
 type MissionContent = {
@@ -336,7 +338,7 @@ const c = tr[locale];
 
   <section class="container">
     <div class="video-grid">
-      {c.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} />)}
+      {c.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />)}
     </div>
   </section>
 
@@ -363,8 +365,8 @@ const c = tr[locale];
 
   .mission-pioneer { position: relative; }
   .mission-pioneer__img {
-    float: right; width: clamp(150px, 26%, 220px); margin: 0 0 1rem 1.6rem;
-    border-radius: 12px; overflow: hidden; border: 1px solid var(--border-light);
+    width: clamp(160px, 32%, 230px); margin: 0 auto var(--space-3);
+    border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-light);
   }
   .mission-pioneer__img img { width: 100%; display: block; }
 
@@ -390,7 +392,7 @@ const c = tr[locale];
   }
   @media (max-width: 600px) {
     .mission-crews { grid-template-columns: 1fr; }
-    .mission-pioneer__img { float: none; width: 60%; margin: 0 auto 1.2rem; }
+    .mission-pioneer__img { width: 55%; }
   }
 </style>
 

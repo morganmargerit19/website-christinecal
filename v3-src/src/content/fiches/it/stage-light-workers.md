@@ -1,6 +1,6 @@
 ---
 title: Missione dei Light Workers
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 25

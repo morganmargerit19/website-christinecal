@@ -1,6 +1,6 @@
 ---
 title: Iniziazione di fine ciclo e multidimensionalità dell'Essere
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 22

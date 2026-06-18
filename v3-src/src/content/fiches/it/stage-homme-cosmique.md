@@ -1,6 +1,6 @@
 ---
 title: Dall'uomo terrestre all'umano cosmico
-kicker: Stage
+kicker: Seminario
 hub: eveil-au-soi
 category: stage
 order: 23

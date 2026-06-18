@@ -2,7 +2,7 @@
 import Base from './Base.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
 import { ui } from '../i18n/ui';
-import { base, hubs, pathFor, type Locale } from '../i18n/utils';
+import { base, fichePath, hubs, locales, pathFor, type Locale } from '../i18n/utils';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -16,6 +16,13 @@ const f = entry.data;
 const hub = hubs[f.hub];
 const hubLabel = f.hub === 'eveil-a-soi' ? t.nav.eveilASoi : t.nav.eveilAuSoi;
 
+// URL de cette fiche dans chaque langue (slugs identiques entre langues) :
+// pour le canonical, les hreflang et le sélecteur de langue.
+const slug = entry.id.replace(/^(en|pl|es|it)\//, '');
+const alternates = Object.fromEntries(
+  locales.map((l) => [l, fichePath(f.hub, slug, l)]),
+) as Record<Locale, string>;
+
 // Lignes d'infos pratiques (uniquement celles renseignées).
 const facts = [
   f.format && { label: t.fiche.format, value: f.format },
@@ -23,7 +30,7 @@ const facts = [
   f.price && { label: t.fiche.price, value: f.price },
 ].filter(Boolean) as { label: string; value: string }[];
 ---
-<Base locale={locale} routeKey={hub.key} title={`${f.title} — Christine CAL`} description={f.lede}>
+<Base locale={locale} routeKey={hub.key} alternates={alternates} title={`${f.title} — Christine CAL`} description={f.lede}>
   <article class="fiche">
     {f.banner && (
       <figure class="fiche-banner">
@@ -32,7 +39,7 @@ const facts = [
     )}
     <section class="page-hero fiche-hero">
       <div class="container">
-        <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <nav class="breadcrumb" aria-label={t.nav.breadcrumb}>
           <a href={pathFor('home', locale)}>{t.nav.home}</a>
           <span aria-hidden="true">/</span>
           <a href={pathFor(hub.key, locale)}>{hubLabel}</a>
@@ -89,7 +96,7 @@ const facts = [
     {f.videos.length > 0 && (
       <section class="container">
         <div class="video-grid">
-          {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} />)}
+          {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />)}
         </div>
       </section>
     )}

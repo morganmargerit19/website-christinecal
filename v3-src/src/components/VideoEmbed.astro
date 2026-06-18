@@ -10,8 +10,10 @@ interface Props {
   id: string;
   title?: string;
   meta?: string;
+  /** Libellé d'action traduit (aria-label + titre de l'iframe). */
+  playLabel?: string;
 }
-const { id, title, meta } = Astro.props;
+const { id, title, meta, playLabel = 'Lancer la vidéo' } = Astro.props;
 const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
 <figure class="video-card">
@@ -20,7 +22,7 @@ const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
       class="video-facade"
       data-video-id={id}
       type="button"
-      aria-label={`Lancer la vidéo${title ? ' : ' + title : ''}`}
+      aria-label={`${playLabel}${title ? ' : ' + title : ''}`}
     >
       <img src={thumb} alt="" loading="lazy" width="480" height="360" />
       <span class="video-facade__play" aria-hidden="true">▸</span>

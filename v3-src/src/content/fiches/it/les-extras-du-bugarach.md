@@ -27,7 +27,7 @@ sempre alimentato leggende e interrogativi: tesori, ufo, il «delirio» del
 
 ## Riconnessione per la Nuova Terra
 
-In missione per il momento — aggiornamento nell'autunno 2026. Uno stage «Il Nuovo
+In missione per il momento — aggiornamento nell'autunno 2026. Un seminario «Il Nuovo
 Bugarach» è da prevedere per il 2027, e un libro con lo stesso titolo è in corso
 di scrittura.
 
