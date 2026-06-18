@@ -24,6 +24,17 @@
     let w = 0;
     let h = 0;
 
+    // Parallaxe douce au mouvement de la souris (souris fine uniquement).
+    const finePointer = window.matchMedia('(pointer: fine)').matches;
+    const parallax = !reduceMotion && finePointer;
+    let px = 0, py = 0, tpx = 0, tpy = 0; // position lissée / cible (-1..1)
+    if (parallax) {
+      window.addEventListener('pointermove', (e) => {
+        tpx = (e.clientX / w - 0.5) * 2;
+        tpy = (e.clientY / h - 0.5) * 2;
+      }, { passive: true });
+    }
+
     function seed() {
       w = window.innerWidth;
       h = window.innerHeight;
@@ -44,14 +55,19 @@
 
     function draw(t: number) {
       ctx.clearRect(0, 0, w, h);
+      // Lissage du décalage souris (les grosses étoiles, plus « proches », bougent plus).
+      px += (tpx - px) * 0.05;
+      py += (tpy - py) * 0.05;
       const drift = (window.scrollY || 0) * 0.04;
       for (const s of stars) {
         const tw = reduceMotion ? 1 : 0.6 + 0.4 * Math.sin(t / 1000 * s.speed + s.phase);
-        const y = (s.y - drift + h) % h;
+        const depth = 3 + s.r * 6;
+        const x = s.x + px * depth;
+        const y = (s.y - drift + py * depth + h) % h;
         ctx.globalAlpha = s.base * tw;
         ctx.fillStyle = s.gold ? '#e6d49a' : '#ffffff';
         ctx.beginPath();
-        ctx.arc(s.x, y, s.r, 0, Math.PI * 2);
+        ctx.arc(x, y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;

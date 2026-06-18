@@ -178,11 +178,39 @@ const year = new Date().getFullYear();
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  // Parallaxe douce au mouvement de la souris : la Terre glisse à l'inverse du
+  // curseur, l'emblème et les textes la suivent → effet de profondeur cosmique.
+  function enablePointerParallax() {
+    if (!finePointer) return;
+    // On pré-agrandit un peu la Terre pour qu'aucun bord ne se découvre au décalage.
+    gsap.set('[data-hero="bg"]', { scale: 1.06 });
+    const layers: { sel: string; fx: number; fy: number }[] = [
+      { sel: '[data-hero="bg"]', fx: -16, fy: -10 },
+      { sel: '[data-hero="emblem"]', fx: 18, fy: 13 },
+      { sel: '[data-hero="eyebrow"]', fx: 11, fy: 8 },
+      { sel: '[data-hero="brand"]', fx: 13, fy: 9 },
+      { sel: '[data-hero="baseline"]', fx: 13, fy: 9 },
+      { sel: '[data-hero="doors"]', fx: 8, fy: 6 },
+    ];
+    const tweeners = layers.map((l) => ({
+      x: gsap.quickTo(l.sel, 'x', { duration: 0.9, ease: 'power3.out' }),
+      y: gsap.quickTo(l.sel, 'y', { duration: 0.9, ease: 'power3.out' }),
+      fx: l.fx, fy: l.fy,
+    }));
+    window.addEventListener('pointermove', (e) => {
+      const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+      for (const t of tweeners) { t.x(nx * t.fx); t.y(ny * t.fy); }
+    }, { passive: true });
+  }
+
   if (!reduceMotion) {
     gsap.registerPlugin(ScrollTrigger);
 
     gsap
-      .timeline({ defaults: { ease: 'power3.out' } })
+      .timeline({ defaults: { ease: 'power3.out' }, onComplete: enablePointerParallax })
       .from('[data-hero="bg"]', { scale: 1.12, opacity: 0, duration: 1.6 })
       .from('[data-hero="emblem"]', { scale: 0.6, opacity: 0, duration: 0.9 }, '-=0.9')
       .from('[data-hero="eyebrow"]', { y: 16, opacity: 0, duration: 0.7 }, '-=0.5')
