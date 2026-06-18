@@ -117,7 +117,14 @@ const featured = fiches.filter((f) => f.data.featured);
 const rest = fiches.filter((f) => !f.data.featured);
 ---
 <Base locale={locale} routeKey={routeKey} title={c.title} description={c.desc}>
-  <section class="page-hero">
+  <section class="page-hero hub-hero">
+    <img
+      class="hub-symbol"
+      src={base + `/images/geometrie/${hub === 'eveil-a-soi' ? 'spirale-fibonacci' : 'fleur-de-vie'}.svg`}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+    />
     <div class="container">
       <span class="eyebrow">{c.eyebrow}</span>
       <h1>{c.h1}</h1>
@@ -178,3 +185,17 @@ const rest = fiches.filter((f) => !f.data.featured);
     </div>
   </section>
 </Base>
+
+<style>
+  .hub-hero { position: relative; overflow: hidden; }
+  .hub-hero .container { position: relative; z-index: 1; }
+  .hub-symbol {
+    position: absolute; z-index: 0; pointer-events: none;
+    right: clamp(-70px, -3vw, -10px); top: 50%; transform: translateY(-50%);
+    width: clamp(200px, 30vw, 380px); height: auto;
+    opacity: 0.2;
+    -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 60%, transparent 100%);
+  }
+  @media (max-width: 720px) { .hub-symbol { opacity: 0.12; right: -90px; } }
+</style>
