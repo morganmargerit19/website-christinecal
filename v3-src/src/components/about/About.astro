@@ -22,24 +22,31 @@ const u = ui[locale];
     </div>
   </section>
 
-  <section class="container">
-    <figure class="about-portrait" data-reveal>
-      <img
-        src={base + '/images/christine-portrait.jpg'}
-        alt="Portrait de Christine CAL"
-        loading="lazy"
-      />
-    </figure>
+  <section class="paper-section">
+    <div class="container">
+      <div class="paper-section__inner" data-reveal>
+        <div class="about-intro">
+          <figure class="about-intro__portrait">
+            <img
+              src={base + '/images/christine-portrait.jpg'}
+              alt="Portrait de Christine CAL"
+              loading="lazy"
+            />
+          </figure>
+          <div class="prose about-intro__text">
+            <h2>{t.galactic.heading}</h2>
+            <ul>
+              {t.galactic.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section class="paper-section">
+  <section class="paper-section paper-section--soft">
     <div class="container container--narrow">
       <div class="paper-section__inner prose" data-reveal>
-        <h2>{t.galactic.heading}</h2>
-        <ul>
-          {t.galactic.items.map((item) => <li>{item}</li>)}
-        </ul>
-
         <h2>{t.videos.heading}</h2>
         <div class="video-grid">
           {t.videos.list.map((v) => (
@@ -112,6 +119,19 @@ const u = ui[locale];
 </Base>
 
 <style>
+  /* Portrait à côté du premier bloc de texte (moins de scroll) */
+  .about-intro { display: grid; gap: var(--space-4); align-items: center; }
+  @media (min-width: 760px) {
+    .about-intro { grid-template-columns: minmax(220px, 300px) 1fr; gap: var(--space-5); }
+  }
+  .about-intro__portrait {
+    margin: 0; border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
+    max-width: 320px; justify-self: center;
+  }
+  .about-intro__portrait img { width: 100%; display: block; }
+  .about-intro__text :first-child { margin-top: 0; }
+
   .about-dvd { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
   @media (min-width: 640px) { .about-dvd { grid-template-columns: 170px 1fr; } }
   .about-dvd__poster {

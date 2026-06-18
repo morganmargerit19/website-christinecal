@@ -505,8 +505,8 @@ h1, h2, h3, h4 {
 
 .fiche-image {
     /* Le cadre s'ajuste à l'image et ne l'agrandit JAMAIS au-delà de sa taille
-       native (cap 560px) → fini la pixelisation des petites images. */
-    width: fit-content; max-width: min(100%, 560px);
+       native (cap par image, via style inline) → fini la pixelisation. */
+    width: fit-content; max-width: 100%;
     margin: var(--space-4) auto 0; border-radius: var(--radius-lg); overflow: hidden;
     border: 1px solid var(--border-light); box-shadow: var(--shadow-lg);
 }

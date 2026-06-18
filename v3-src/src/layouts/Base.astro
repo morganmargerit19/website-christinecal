@@ -62,5 +62,18 @@ const ogLocales: Record<Locale, string> = { fr: 'fr_FR', en: 'en_US', pl: 'pl_PL
       <slot />
     </main>
     {portal ? null : <Footer locale={locale} />}
+
+    <script is:inline>
+      // Dissuasion d'enregistrement des images (demande de Christine) :
+      // bloque le menu contextuel et le glisser-déposer sur les images/figures.
+      // N'empêche PAS les captures d'écran (impossible) ; la vraie protection est juridique.
+      document.addEventListener('contextmenu', (e) => {
+        const t = e.target;
+        if (t && (t.tagName === 'IMG' || (t.closest && t.closest('figure, picture')))) e.preventDefault();
+      });
+      document.addEventListener('dragstart', (e) => {
+        if (e.target && e.target.tagName === 'IMG') e.preventDefault();
+      });
+    </script>
   </body>
 </html>
