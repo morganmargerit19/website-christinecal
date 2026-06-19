@@ -167,8 +167,21 @@ const year = new Date().getFullYear();
   }
   .portal-legal a { color: var(--indigo-100); text-decoration: none; }
   .portal-legal a:hover { color: var(--gold-soft); }
+  /* Petits écrans (mobiles courts, tablettes en paysage) : le portail ne tient
+     plus en un seul écran. On rend le corps scrollable ET on remet le liseré
+     légal dans le flux (au lieu de `position:absolute; bottom:0`) pour qu'il ne
+     chevauche plus les boutons-portails. Sur les écrans où tout tient encore,
+     le `justify-content:center` garde le portail centré verticalement. */
   @media (max-width: 560px), (max-height: 720px) {
     :global(body.is-portal) { overflow: auto; }
+    .hero--portal {
+      display: flex; flex-direction: column; justify-content: center;
+      padding-block: clamp(4.5rem, 13vh, 6.5rem) 0;
+    }
+    .portal-legal {
+      position: static; inset: auto;
+      margin-top: clamp(2.4rem, 7vh, 3.6rem);
+    }
   }
 </style>
 

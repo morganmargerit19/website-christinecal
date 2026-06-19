@@ -216,6 +216,12 @@ h1, h2, h3, h4 {
     /* Le sélecteur de langue reste accessible au-dessus de l'overlay du menu */
     .site-header .lang { position: relative; z-index: 71; }
 }
+/* Très petits écrans (iPhone SE 1re génération ~320px) : on réduit le logo et
+   resserre l'espacement pour que le pill langue ne déborde plus à droite. */
+@media (max-width: 359px) {
+    .brand { font-size: 1.2rem; }
+    .site-header__inner { gap: var(--space-2); }
+}
 
 /* --- Hero ---------------------------------------------------------------- */
 .hero {
@@ -443,13 +449,16 @@ h1, h2, h3, h4 {
 .prose li::marker { color: var(--gold); content: "✦  "; }
 
 .video-grid {
-    display: grid; gap: var(--space-3);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--space-3);
     margin-top: var(--space-4);
 }
 /* Plafond de largeur : une vidéo isolée ne s'étire pas en plein cadre
-   (souhait de Christine pour les jaquettes DVD : « pas trop grand »). */
-.video-card { margin: 0; max-width: 540px; }
+   (souhait de Christine pour les jaquettes DVD : « pas trop grand »).
+   Flex + justify-content:center : une vidéo seule — ou la dernière, orpheline,
+   d'une grille à nombre impair — reste CENTRÉE au lieu de se coller à gauche
+   (visible sur iPad/desktop ; invisible sur mobile en 1 colonne). */
+.video-card { margin: 0; flex: 1 1 320px; max-width: 540px; }
 .video-card .frame {
     position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius);
     overflow: hidden; box-shadow: var(--shadow-md);
