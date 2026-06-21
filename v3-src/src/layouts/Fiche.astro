@@ -3,7 +3,7 @@ import Base from './Base.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
 import { ui } from '../i18n/ui';
 import { base, fichePath, hubs, locales, pathFor, type Locale } from '../i18n/utils';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
   entry: CollectionEntry<'fiches'>;
@@ -52,6 +52,16 @@ const IMG_W: Record<string, number> = {
   '/images/wp/stage-construction-vortex-ascentionnel.jpg': 864,
 };
 const imgMax = f.image ? Math.min(IMG_W[f.image] ?? 560, 880) : 560;
+
+// Si cette fiche est une rubrique (elle regroupe des stages), on rend ses stages
+// DANS la page (et non « en dessous » sur l'index du hub). Ordre = celui de `stages`.
+const childSlug = (id: string) => id.replace(/^(en|pl|es|it)\//, '');
+const stageEntries = f.stages.length
+  ? (await getCollection('fiches', (e) => e.data.lang === locale && f.stages.includes(childSlug(e.id))))
+      .sort((a, b) => f.stages.indexOf(childSlug(a.id)) - f.stages.indexOf(childSlug(b.id)))
+  : [];
+const stagesHeading: Record<Locale, string> = { fr: 'Au programme', en: 'Programme', pl: 'Program', es: 'Programa', it: 'Programma' };
+const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn more', pl: 'Dowiedz się więcej', es: 'Saber más', it: 'Scopri di più' };
 ---
 <Base locale={locale} routeKey={hub.key} alternates={alternates} title={`${f.title} — Christine CAL`} description={f.lede}>
   <article class="fiche">
@@ -116,6 +126,25 @@ const imgMax = f.image ? Math.min(IMG_W[f.image] ?? 560, 880) : 560;
       </div>
     </section>
 
+    {stageEntries.length > 0 && (
+      <section class="container">
+        <h2 class="fiche-stages-title">{stagesHeading[locale]}</h2>
+        <div class="hub-grid">
+          {stageEntries.map((st) => (
+            <a class="portal-card" href={fichePath(f.hub, childSlug(st.id), locale)}>
+              <span class="portal-card__kicker">{st.data.kicker}</span>
+              <h3>{st.data.title}</h3>
+              <p>{st.data.lede}</p>
+              {st.data.dates.length > 0 && (
+                <div class="portal-card__meta"><span>{st.data.dates[0]}</span></div>
+              )}
+              <span class="portal-card__cta">{learnMore[locale]}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     {f.videos.length > 0 && (
       <section class="container">
         <div class="video-grid">
@@ -163,6 +192,11 @@ const imgMax = f.image ? Math.min(IMG_W[f.image] ?? 560, 880) : 560;
     font-size: var(--text-sm); letter-spacing: 0.04em; color: var(--indigo-100);
   }
   .fiche-audio audio { width: 100%; }
+
+  .fiche-stages-title {
+    text-align: center; margin: var(--space-5) 0 var(--space-4);
+    font-size: var(--text-2xl);
+  }
 </style>
 
 <script>

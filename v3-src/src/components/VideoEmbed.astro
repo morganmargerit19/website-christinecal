@@ -91,24 +91,29 @@ const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   }
   .video-facade:hover .video-facade__play { transform: scale(1.08); }
 
-  /* Vidéo + jaquette côte à côte */
-  .video-card--with-cover { max-width: 760px; flex-basis: 480px; }
-  .video-card__row { display: flex; gap: var(--space-3); align-items: flex-start; }
-  .video-card__row .frame { flex: 1 1 auto; min-width: 0; }
-  .video-cover { flex: 0 0 clamp(118px, 26%, 168px); margin: 0; }
+  /* Vidéo + jaquette côte à côte. Carte PLEINE LARGEUR (une par ligne) pour
+     laisser la jaquette assez grande et la mention lisible. */
+  .video-card--with-cover { flex-basis: 100%; max-width: 860px; }
+  .video-card__row { display: flex; gap: var(--space-4); align-items: flex-start; }
+  .video-card__row .frame { flex: 1 1 56%; min-width: 0; }
+  .video-cover {
+    flex: 0 0 clamp(200px, 36%, 280px); margin: 0;
+    display: flex; flex-direction: column;
+  }
   .video-cover img {
     width: 100%; height: auto; display: block;
     border-radius: var(--radius); box-shadow: var(--shadow-md);
     border: 1px solid var(--border-light);
   }
   .video-cover .video-credit {
-    display: block; margin-top: 0.55em; font-size: 0.74em;
-    font-style: italic; line-height: 1.4; opacity: 0.9;
+    display: block; margin-top: 0.75em; font-size: 0.82em;
+    font-style: italic; line-height: 1.5; opacity: 0.92;
   }
   .video-cover .video-credit a { color: var(--gold); text-decoration: underline; }
-  @media (max-width: 540px) {
+  @media (max-width: 680px) {
     .video-card__row { flex-direction: column; align-items: center; }
-    .video-cover { flex-basis: auto; max-width: 200px; }
+    .video-cover { flex-basis: auto; width: 100%; max-width: 320px; }
+    .video-cover .video-credit { text-align: center; }
   }
 </style>
 

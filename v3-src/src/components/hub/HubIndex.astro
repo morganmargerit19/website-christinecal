@@ -113,23 +113,14 @@ const fiches = (
 ).sort((a, b) => a.data.order - b.data.order);
 
 const slugOf = (id: string) => id.replace(/^(en|pl|es|it)\//, '');
-const bySlug = new Map(fiches.map((f) => [slugOf(f.id), f]));
 const featured = fiches.filter((f) => f.data.featured);
 const rest = fiches.filter((f) => !f.data.featured);
 
-// Rubriques : une fiche « parcours » regroupe plusieurs stages (les « carrés
-// bleus » du WordPress). Ses stages sont imbriqués sous elle, pas affichés en vrac.
-const rubriques = rest.filter((f) => f.data.stages.length > 0);
-const childSlugs = new Set(rubriques.flatMap((r) => r.data.stages));
-const rubriqueGroups = rubriques.map((r) => ({
-  rubrique: r,
-  stages: r.data.stages.flatMap((s) => {
-    const f = bySlug.get(s);
-    return f ? [f] : [];
-  }),
-}));
-// Cartes simples : ni rubrique, ni stage rattaché à une rubrique.
-const standalone = rest.filter((f) => f.data.stages.length === 0 && !childSlugs.has(slugOf(f.id)));
+// Les stages d'une rubrique vivent DANS la page de la rubrique (rendus par
+// Fiche.astro), pas sur l'index. On les retire donc des cartes de l'index ;
+// la rubrique reste une carte normale qui mène à sa page.
+const childSlugs = new Set(rest.flatMap((f) => f.data.stages));
+const cards = rest.filter((f) => !childSlugs.has(slugOf(f.id)));
 ---
 <Base locale={locale} routeKey={routeKey} title={c.title} description={c.desc}>
   <section class="page-hero hub-hero">
@@ -170,42 +161,21 @@ const standalone = rest.filter((f) => f.data.stages.length === 0 && !childSlugs.
       </div>
     )}
 
-    {standalone.length > 0 && (
+    {cards.length > 0 && (
       <div class="hub-grid">
-        {standalone.map((f) => (
+        {cards.map((f) => (
           <a class="portal-card" href={fichePath(hub, slugOf(f.id), locale)}>
             <span class="portal-card__kicker">{f.data.kicker}</span>
             <h3>{f.data.title}</h3>
             <p>{f.data.lede}</p>
-            {f.data.dates.length > 0 && (
+            {f.data.stages.length === 0 && f.data.dates.length > 0 && (
               <div class="portal-card__meta"><span>{f.data.dates[0]}</span></div>
             )}
-            <span class="portal-card__cta">{learnMore[locale]}</span>
+            <span class="portal-card__cta">{f.data.stages.length > 0 ? discover[locale] : learnMore[locale]}</span>
           </a>
         ))}
       </div>
     )}
-
-    {rubriqueGroups.map(({ rubrique, stages }) => (
-      <section class="hub-rubrique">
-        <a class="hub-rubrique__head" href={fichePath(hub, slugOf(rubrique.id), locale)}>
-          <span class="portal-card__kicker">{rubrique.data.kicker}</span>
-          <h2>{rubrique.data.title}</h2>
-          <p>{rubrique.data.lede}</p>
-          <span class="hub-rubrique__cta">{discover[locale]}</span>
-        </a>
-        <div class="hub-grid hub-grid--nested">
-          {stages.map((st) => (
-            <a class="portal-card" href={fichePath(hub, slugOf(st.id), locale)}>
-              <span class="portal-card__kicker">{st.data.kicker}</span>
-              <h3>{st.data.title}</h3>
-              <p>{st.data.lede}</p>
-              <span class="portal-card__cta">{learnMore[locale]}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    ))}
   </section>
 
   <section class="contact-band">
@@ -232,32 +202,4 @@ const standalone = rest.filter((f) => f.data.stages.length === 0 && !childSlugs.
     mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
   }
   @media (max-width: 720px) { .hub-symbol { opacity: 0.28; right: -70px; } }
-
-  /* --- Rubrique : un parcours qui regroupe ses stages --------------------- */
-  .hub-rubrique { margin-top: var(--space-6); }
-  .hub-rubrique__head {
-    display: block; text-align: center; max-width: 64ch;
-    margin: 0 auto var(--space-4); padding: clamp(1.4rem, 3vw, 2.4rem);
-    border: 1px solid rgba(201, 169, 97, 0.32); border-radius: var(--radius-lg);
-    background: linear-gradient(120deg, rgba(46, 42, 120, 0.45), var(--glass));
-    transition: border-color var(--transition), transform var(--transition);
-  }
-  .hub-rubrique__head:hover { border-color: rgba(201, 169, 97, 0.55); transform: translateY(-3px); }
-  .hub-rubrique__head h2 { font-size: var(--text-2xl); margin: 0.35em 0 0.25em; }
-  .hub-rubrique__head p { color: var(--indigo-100); margin: 0 auto; max-width: 52ch; }
-  .hub-rubrique__cta {
-    display: inline-block; margin-top: var(--space-3);
-    font-size: var(--text-sm); letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--gold-soft);
-  }
-  .hub-rubrique__cta::after { content: " →"; }
-  /* Stages imbriqués : légèrement en retrait pour marquer l'appartenance */
-  .hub-grid--nested {
-    border-left: 2px solid rgba(201, 169, 97, 0.25);
-    padding-left: clamp(0.8rem, 2vw, 1.6rem);
-    margin-left: clamp(0.4rem, 1.5vw, 1rem);
-  }
-  @media (max-width: 600px) {
-    .hub-grid--nested { border-left: none; padding-left: 0; margin-left: 0; }
-  }
 </style>
