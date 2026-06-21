@@ -1,0 +1,63 @@
+# Sveltia CMS — édition du contenu par Christine, depuis le navigateur (page /admin).
+# Compatible Decap CMS. Chaque enregistrement = un commit GitHub → rebuild + déploiement OVH.
+#
+# ⚠️ La config liste TOUS les champs des fiches : un CMS git-based réécrit l'intégralité
+# du frontmatter à la sauvegarde ; un champ absent ici serait effacé du fichier.
+#
+# Pour l'instant : collection française (l'essentiel de ce que Christine édite).
+# Les langues EN/ES/PL/IT s'ajoutent à l'identique (folder: .../fiches/en, default lang: en, etc.).
+
+backend:
+  name: github
+  repo: morganmargerit19/website-christinecal
+  branch: main
+  # Connexion GitHub via un relais OAuth à déployer une fois (gratuit, Cloudflare Worker).
+  # Voir CMS-CHRISTINE.md, puis renseigner l'URL du relais :
+  # base_url: https://VOTRE-RELAIS-OAUTH
+
+# Dépôt des images choisies par Christine.
+media_folder: "v3-src/public/images/wp"
+public_folder: "/images/wp"
+
+collections:
+  - name: fiches_fr
+    label: "Fiches — Français"
+    label_singular: "Fiche"
+    description: "Stages, ateliers, consultations, conférences et parcours (version française)."
+    folder: "v3-src/src/content/fiches"
+    filter: { field: lang, value: fr }
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    fields:
+      - { name: lang, label: "Langue", widget: hidden, default: fr }
+      - { name: title, label: "Titre", widget: string }
+      - { name: kicker, label: "Sur-titre (ex. Stage, Atelier, Consultation)", widget: string }
+      - { name: hub, label: "Univers", widget: select, options: ["eveil-a-soi", "eveil-au-soi"] }
+      - { name: category, label: "Catégorie", widget: select, options: ["consultation", "stage", "atelier", "conference", "voyage", "parcours"] }
+      - { name: order, label: "Ordre d'affichage (petit = en premier)", widget: number, value_type: int, default: 50 }
+      - { name: lede, label: "Résumé court (carte + chapeau)", widget: text }
+      - { name: stages, label: "Rubrique : slugs des stages regroupés", widget: list, required: false }
+      - { name: dates, label: "Dates", widget: list, required: false }
+      - { name: duration, label: "Durée", widget: string, required: false }
+      - { name: price, label: "Tarif", widget: string, required: false }
+      - { name: format, label: "Format", widget: string, required: false }
+      - { name: banner, label: "Bandeau (haut de page)", widget: image, required: false }
+      - { name: bannerAlt, label: "Texte alternatif du bandeau", widget: string, required: false }
+      - { name: image, label: "Image principale", widget: image, required: false }
+      - { name: imageAlt, label: "Texte alternatif de l'image", widget: string, required: false }
+      - { name: audio, label: "Audio (mp3)", widget: file, required: false }
+      - { name: audioTitle, label: "Titre de l'audio", widget: string, required: false }
+      - name: videos
+        label: "Vidéos YouTube"
+        widget: list
+        required: false
+        fields:
+          - { name: id, label: "ID YouTube", widget: string }
+          - { name: title, label: "Titre", widget: string, required: false }
+          - { name: meta, label: "Légende (date…)", widget: string, required: false }
+          - { name: credit, label: "Crédit", widget: select, options: ["debowska"], required: false }
+      - { name: featured, label: "Mise en avant", widget: boolean, default: false, required: false }
+      - { name: draft, label: "Brouillon (caché du site)", widget: boolean, default: false, required: false }
+      - { name: body, label: "Contenu", widget: markdown }
