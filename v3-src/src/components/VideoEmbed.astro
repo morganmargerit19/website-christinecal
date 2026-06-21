@@ -5,36 +5,60 @@
  *  - Respecte la vie privée (aucun cookie YouTube avant action de l'internaute).
  *  - Plus rapide (pas de player chargé tant qu'on ne lance pas).
  *  - Répond au souhait de Christine : « déclencher la vidéo via le site ».
+ *
+ * Si `cover` est fourni (jaquette du DVD), elle s'affiche À CÔTÉ de la vidéo,
+ * avec la mention de droits posée SOUS la jaquette (souhait de Christine).
  */
+import { base } from '../i18n/utils';
+
 interface Props {
   id: string;
   title?: string;
   meta?: string;
-  /** Mention de droits sous la vidéo (ex. `debowska`). */
+  /** Mention de droits (ex. `debowska`). */
   credit?: 'debowska';
+  /** Jaquette du DVD (chemin sous /images/…), affichée à côté de la vidéo. */
+  cover?: string;
+  coverAlt?: string;
   /** Libellé d'action traduit (aria-label + titre de l'iframe). */
   playLabel?: string;
 }
-const { id, title, meta, credit, playLabel = 'Lancer la vidéo' } = Astro.props;
+const { id, title, meta, credit, cover, coverAlt, playLabel = 'Lancer la vidéo' } = Astro.props;
 const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
-<figure class="video-card">
-  <div class="frame">
-    <button
-      class="video-facade"
-      data-video-id={id}
-      type="button"
-      aria-label={`${playLabel}${title ? ' : ' + title : ''}`}
-    >
-      <img src={thumb} alt="" loading="lazy" width="480" height="360" />
-      <span class="video-facade__play" aria-hidden="true">▸</span>
-    </button>
+<figure class:list={["video-card", cover && "video-card--with-cover"]}>
+  <div class:list={[cover && "video-card__row"]}>
+    <div class="frame">
+      <button
+        class="video-facade"
+        data-video-id={id}
+        type="button"
+        aria-label={`${playLabel}${title ? ' : ' + title : ''}`}
+      >
+        <img src={thumb} alt="" loading="lazy" width="480" height="360" />
+        <span class="video-facade__play" aria-hidden="true">▸</span>
+      </button>
+    </div>
+
+    {cover && (
+      <figure class="video-cover">
+        <img src={base + cover} alt={coverAlt ?? (title ? `Jaquette — ${title}` : '')} loading="lazy" />
+        {credit === 'debowska' && (
+          <figcaption class="video-credit">
+            DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty
+            UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska —{' '}
+            <a href="https://www.debowska.fr/" target="_blank" rel="noopener">Visiter son site</a>
+          </figcaption>
+        )}
+      </figure>
+    )}
   </div>
-  {(title || meta || credit) && (
+
+  {(title || meta || (credit === 'debowska' && !cover)) && (
     <figcaption>
       {title && <strong>{title}</strong>}
       {meta && <span>{meta}</span>}
-      {credit === 'debowska' && (
+      {credit === 'debowska' && !cover && (
         <span class="video-credit">
           DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty
           UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska —{' '}
@@ -66,6 +90,26 @@ const thumb = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     transition: transform var(--transition);
   }
   .video-facade:hover .video-facade__play { transform: scale(1.08); }
+
+  /* Vidéo + jaquette côte à côte */
+  .video-card--with-cover { max-width: 760px; flex-basis: 480px; }
+  .video-card__row { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .video-card__row .frame { flex: 1 1 auto; min-width: 0; }
+  .video-cover { flex: 0 0 clamp(118px, 26%, 168px); margin: 0; }
+  .video-cover img {
+    width: 100%; height: auto; display: block;
+    border-radius: var(--radius); box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-light);
+  }
+  .video-cover .video-credit {
+    display: block; margin-top: 0.55em; font-size: 0.74em;
+    font-style: italic; line-height: 1.4; opacity: 0.9;
+  }
+  .video-cover .video-credit a { color: var(--gold); text-decoration: underline; }
+  @media (max-width: 540px) {
+    .video-card__row { flex-direction: column; align-items: center; }
+    .video-cover { flex-basis: auto; max-width: 200px; }
+  }
 </style>
 
 <script>

@@ -12,10 +12,12 @@ lede: Creating the 5D Soul's light vessel from your own geometry.
 format: In person or Zoom
 videos:
   - id: 9QKss6wHSB4
+    cover: /images/wp/dvd-reintegration-vies-passees.jpg
     title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
     meta: "Août 2023"
     credit: debowska
   - id: tVTU9y7RqaM
+    cover: /images/wp/dvd-reintegration-vies-passees-2.jpg
     title: "Réintégration de nos vies passées — Conférence (même sujet)"
     meta: "17 août 2025"
     credit: debowska

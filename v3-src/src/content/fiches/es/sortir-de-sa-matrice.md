@@ -14,6 +14,7 @@ dates:
 format: Por Zoom
 videos:
   - id: 5djFYRe7C1Q
+    cover: /images/wp/dvd-la-nouvelle-ligne-spatio-temporelle.jpg
     title: "Être créateur de notre existence — La nouvelle ligne spatio-temporelle"
     meta: "Octobre 2022"
     credit: debowska

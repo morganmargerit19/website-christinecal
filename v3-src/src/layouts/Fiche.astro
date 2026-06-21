@@ -119,7 +119,7 @@ const imgMax = f.image ? Math.min(IMG_W[f.image] ?? 560, 880) : 560;
     {f.videos.length > 0 && (
       <section class="container">
         <div class="video-grid">
-          {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} credit={v.credit} playLabel={t.video.play} />)}
+          {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} credit={v.credit} cover={v.cover} coverAlt={v.coverAlt} playLabel={t.video.play} />)}
         </div>
       </section>
     )}

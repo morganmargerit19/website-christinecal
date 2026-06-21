@@ -52,6 +52,9 @@ const fiches = defineCollection({
           // Mention de droits à afficher sous la vidéo. `debowska` = phrase
           // d'attribution validée par Konstanty Debowska (avec lien vers son site).
           credit: z.enum(['debowska']).optional(),
+          // Jaquette du DVD (chemin sous /images/…) : affichée à côté de la vidéo.
+          cover: z.string().optional(),
+          coverAlt: z.string().optional(),
         }),
       )
       .default([]),

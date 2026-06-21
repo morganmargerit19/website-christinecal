@@ -10,10 +10,12 @@ image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "Galaktyczny zespół Nowej Ziemi"
 videos:
   - id: usgLaR-vK-U
+    cover: /images/wp/dvd-champs-unifie.jpg
     title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
     meta: "Juillet 2022"
     credit: debowska
   - id: PcQKmMNv9CY
+    cover: /images/wp/dvd-experiences-autres-mondes.jpg
     title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
     meta: "Rennes-les-Bains · 16 août 2025"
     credit: debowska

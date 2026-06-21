@@ -10,10 +10,12 @@ image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine en el Mont Shasta — los intra de Telos"
 videos:
   - id: ouTq-jp9NgM
+    cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
     title: "Mont Shasta Telos — Voyages multidimensionnels"
     meta: "Avril 2019"
     credit: debowska
   - id: jHuw3hnoCxo
+    cover: /images/wp/dvd-mont-shasta-nouveau-tellos.jpg
     title: "Mont Shasta — Le nouveau TELOS après la guerre galactique — Forum avec Anne Givaudan"
     meta: "15 août 2025"
     credit: debowska

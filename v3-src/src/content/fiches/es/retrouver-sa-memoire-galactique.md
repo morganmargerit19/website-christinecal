@@ -10,14 +10,17 @@ image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Recuperar la memoria galáctica"
 videos:
   - id: 0eDwfiYJY3w
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
     title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
     meta: "Août 2022"
     credit: debowska
   - id: J7CRbYCPSKI
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
     title: "Extra-terrestres — Conférence (même sujet)"
     meta: "16 août 2025"
     credit: debowska
   - id: raXSnQhrWiA
+    cover: /images/wp/dvd-pret-pour-devenir-un-humain-galactique.jpg
     title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
     meta: "Rennes-les-Bains · 15-16 août 2025"
     credit: debowska

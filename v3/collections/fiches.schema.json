@@ -106,6 +106,12 @@
                 "enum": [
                   "debowska"
                 ]
+              },
+              "cover": {
+                "type": "string"
+              },
+              "coverAlt": {
+                "type": "string"
               }
             },
             "required": [
