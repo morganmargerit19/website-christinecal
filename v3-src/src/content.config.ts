@@ -21,6 +21,10 @@ const fiches = defineCollection({
     category: z.enum(['consultation', 'stage', 'atelier', 'conference', 'voyage', 'parcours']),
     // Ordre d'affichage dans la grille du hub (petit = en premier)
     order: z.number().default(50),
+    // Rubrique : une fiche `parcours` regroupe plusieurs stages. Liste des slugs
+    // des stages qui en font partie (ils sont alors imbriqués sous la rubrique
+    // dans la grille du hub, et non affichés en vrac).
+    stages: z.array(z.string()).default([]),
     lang: z.enum(['fr', 'en', 'pl', 'es', 'it']).default('fr'),
     // Résumé court (carte + chapeau de page). Christine : « pas de blabla ».
     lede: z.string(),

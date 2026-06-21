@@ -3,6 +3,7 @@ title: Odzyskanie swojej pamięci galaktycznej
 kicker: Warsztat
 hub: eveil-au-soi
 category: stage
+stages: [stage-corps-temple, stage-homme-cosmique, stage-light-workers]
 order: 10
 lang: pl
 image: /images/wp/multidimensionnalite.jpg

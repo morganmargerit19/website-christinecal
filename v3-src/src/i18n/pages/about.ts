@@ -19,7 +19,6 @@ export interface AboutDict {
   activities: { heading: string; items: { title: string; text: string }[] };
   news: { heading: string; items: string[] };
   clients: { heading: string; text: string };
-  press: { text: string; href: string };
   dvd: { heading: string; body: string; posterAlt: string; trailerTitle: string };
 }
 
@@ -41,6 +40,8 @@ export const about: Record<Locale, AboutDict> = {
       heading: "Une galactique venue d'un futur",
       items: [
         'Ayant quitté sa lointaine famille pour participer à la libération de cette humanité sur cette magnifique planète Terre, dans cette galaxie très convoitée et depuis peu libérée.',
+        'Ayant reconnecté son identité en réintégrant consciemment ses fractales Terrestres.',
+        'Œuvrant avec ses fractales Célestes à travers les différentes Time-Lines.',
       ],
     },
     videos: {
@@ -101,10 +102,6 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'Une clientèle variée',
       text: "Psychologues, médecins divers, pédopsychiatre, infirmières, ostéopathes, naturopathes, kinésiologues, pharmacien, directrice d'EHPAD, nombreux thérapeutes énergétiques, artistes divers, inspecteur et contrôleurs des Impôts, architecte, huissier de justice… et tant d'autres.",
     },
-    press: {
-      text: 'Lire l’article dans Sud Ouest du 2 juin 2017 — « Cette comptable qui est devenue coach de vie… »',
-      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
-    },
     dvd: {
       heading: 'Presse & DVD',
       body: 'Christine figure dans le film documentaire « Les Acteurs de la Vie » de Peter Müller et Angélique Piro (2017), qui donne la parole à celles et ceux qui voient le monde autrement.',
@@ -130,6 +127,8 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'A galactic soul from a future',
       items: [
         'Having left her distant family to take part in the liberation of this humanity on this magnificent planet Earth, in this highly coveted and recently liberated galaxy.',
+        'Having reconnected her identity by consciously reintegrating her Terrestrial fractals.',
+        'Working with her Celestial fractals across the different Time-Lines.',
       ],
     },
     videos: {
@@ -190,10 +189,6 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'A varied clientele',
       text: 'Psychologists, doctors, a child psychiatrist, nurses, osteopaths, naturopaths, kinesiologists, a pharmacist, a care-home director, many energy therapists, artists, tax inspectors, an architect, a bailiff… and so many others.',
     },
-    press: {
-      text: 'Read the article in Sud Ouest, 2 June 2017 — “The accountant who became a life coach…” (in French)',
-      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
-    },
     dvd: {
       heading: 'Press & DVD',
       body: 'Christine appears in the documentary film “Les Acteurs de la Vie” by Peter Müller and Angélique Piro (2017), which gives a voice to those who see the world differently.',
@@ -219,6 +214,8 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'Galaktyczna dusza z przyszłości',
       items: [
         'Opuściła swoją odległą rodzinę, aby wziąć udział w wyzwoleniu tej ludzkości na tej wspaniałej planecie Ziemi, w tej bardzo pożądanej i niedawno wyzwolonej galaktyce.',
+        'Ponownie połączyła swoją tożsamość, świadomie reintegrując swoje fraktale Ziemskie.',
+        'Działając ze swoimi fraktalami Niebiańskimi poprzez różne Linie Czasowe.',
       ],
     },
     videos: {
@@ -279,10 +276,6 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'Różnorodna klientela',
       text: 'Psychologowie, lekarze, psychiatra dziecięcy, pielęgniarki, osteopaci, naturopaci, kinezjolodzy, farmaceuta, dyrektorka domu opieki, liczni terapeuci energetyczni, artyści, inspektorzy podatkowi, architekt, komornik… i wielu innych.',
     },
-    press: {
-      text: 'Przeczytaj artykuł w Sud Ouest z 2 czerwca 2017 — „Księgowa, która została life coachem…” (po francusku)',
-      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
-    },
     dvd: {
       heading: 'Prasa i DVD',
       body: 'Christine występuje w filmie dokumentalnym „Les Acteurs de la Vie” Petera Müllera i Angélique Piro (2017), który oddaje głos tym, którzy widzą świat inaczej.',
@@ -308,6 +301,8 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'Un alma galáctica venida de un futuro',
       items: [
         'Habiendo dejado a su lejana familia para participar en la liberación de esta humanidad en este magnífico planeta Tierra, en esta galaxia tan codiciada y recientemente liberada.',
+        'Habiendo reconectado su identidad reintegrando conscientemente sus fractales Terrestres.',
+        'Obrando con sus fractales Celestes a través de las diferentes Líneas Temporales.',
       ],
     },
     videos: {
@@ -368,10 +363,6 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'Una clientela variada',
       text: 'Psicólogos, médicos diversos, una psiquiatra infantil, enfermeras, osteópatas, naturópatas, kinesiólogos, un farmacéutico, una directora de residencia de ancianos, numerosos terapeutas energéticos, artistas diversos, inspectores y controladores de Hacienda, un arquitecto, un agente judicial… y tantos otros.',
     },
-    press: {
-      text: 'Lee el artículo en Sud Ouest del 2 de junio de 2017 — «Esta contable que se convirtió en coach de vida…» (en francés)',
-      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
-    },
     dvd: {
       heading: 'Prensa y DVD',
       body: 'Christine aparece en el documental «Les Acteurs de la Vie» de Peter Müller y Angélique Piro (2017), que da voz a quienes ven el mundo de otra manera.',
@@ -397,6 +388,8 @@ export const about: Record<Locale, AboutDict> = {
       heading: "Un'anima galattica venuta da un futuro",
       items: [
         'Avendo lasciato la sua lontana famiglia per partecipare alla liberazione di questa umanità su questo magnifico pianeta Terra, in questa galassia tanto ambita e da poco liberata.',
+        'Avendo riconnesso la sua identità reintegrando consapevolmente le sue frattali Terrestri.',
+        'Operando con le sue frattali Celesti attraverso le diverse Linee Temporali.',
       ],
     },
     videos: {
@@ -456,10 +449,6 @@ export const about: Record<Locale, AboutDict> = {
     clients: {
       heading: 'Una clientela variegata',
       text: 'Psicologi, medici vari, una neuropsichiatra infantile, infermiere, osteopati, naturopati, kinesiologi, un farmacista, una direttrice di casa di riposo, numerosi terapeuti energetici, artisti vari, ispettori e controllori delle Imposte, un architetto, un ufficiale giudiziario… e tanti altri.',
-    },
-    press: {
-      text: "Leggi l'articolo su Sud Ouest del 2 giugno 2017 — «Questa contabile diventata coach di vita…» (in francese)",
-      href: 'https://www.sudouest.fr/2017/06/02/cela-vous-dit-d-enfin-realiser-vos-reves-3497649-1988.php',
     },
     dvd: {
       heading: 'Stampa e DVD',

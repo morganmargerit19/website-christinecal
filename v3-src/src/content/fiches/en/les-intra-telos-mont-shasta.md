@@ -3,7 +3,8 @@ title: The Intra of the new Telos at Mount Shasta
 kicker: Workshop
 hub: eveil-au-soi
 category: stage
-order: 11
+stages: [les-7-rayons, semaine-telosiens, initiation-fin-de-cycle, voyages-expansion-conscience]
+order: 12
 lang: en
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine at Mount Shasta — the intra of Telos"

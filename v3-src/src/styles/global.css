@@ -592,3 +592,18 @@ h1, h2, h3, h4 {
     justify-content: space-between; color: var(--indigo-300);
     border-top: 1px solid var(--border-light); padding-top: var(--space-3);
 }
+
+/* --- Dissuasion d'impression --------------------------------------------- *
+ * À l'impression (Ctrl+P / PDF), on masque tout le contenu et on n'affiche
+ * qu'une mention de copyright. NB : ce n'est qu'un garde-fou — capture d'écran
+ * et lecture du code source restent techniquement possibles. */
+@media print {
+    body * { display: none !important; }
+    body::after {
+        display: block !important;
+        content: "© Christine CAL — Tous droits réservés. Reproduction et impression non autorisées.";
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 13pt; line-height: 1.6; text-align: center;
+        color: #000; padding: 4cm 1.5cm;
+    }
+}

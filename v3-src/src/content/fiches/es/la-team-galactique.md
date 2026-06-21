@@ -3,7 +3,8 @@ title: El Equipo galáctico de la Nueva Tierra
 kicker: Taller
 hub: eveil-au-soi
 category: stage
-order: 12
+stages: [rencontres-galactiques-au-sol]
+order: 11
 lang: es
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "El equipo galáctico de la Nueva Tierra"

@@ -1,0 +1,50 @@
+name: Déploiement OVH (christinecal.com)
+
+# Construit le site V3 (cible racine) et l'envoie en FTP sur l'hébergement
+# mutualisé OVH. Reste DORMANT tant que la variable de dépôt OVH_DEPLOY != 'true'
+# (Settings → Secrets and variables → Actions → Variables).
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - 'v3-src/**'
+      - '.github/workflows/deploy-ovh.yml'
+
+concurrency:
+  group: deploy-ovh
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: vars.OVH_DEPLOY == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: v3-src/package-lock.json
+
+      - name: Installer les dépendances
+        working-directory: v3-src
+        run: npm ci
+
+      - name: Build (cible OVH, racine)
+        working-directory: v3-src
+        env:
+          DEPLOY_TARGET: ovh
+        run: npm run build
+
+      - name: Déploiement FTP vers OVH
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.OVH_FTP_HOST }}
+          username: ${{ secrets.OVH_FTP_USER }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./v3-src/dist/
+          server-dir: ${{ vars.OVH_FTP_DIR }}

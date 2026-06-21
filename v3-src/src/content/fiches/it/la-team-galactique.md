@@ -3,7 +3,8 @@ title: La Team galattica della Nuova Terra
 kicker: Seminario
 hub: eveil-au-soi
 category: stage
-order: 12
+stages: [rencontres-galactiques-au-sol]
+order: 11
 lang: it
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "La team galattica della Nuova Terra"

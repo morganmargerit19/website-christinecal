@@ -4,6 +4,7 @@ kicker: Parcours · École 5D
 hub: eveil-a-soi
 category: parcours
 order: 20
+stages: [corps-de-lumiere, merkaba, vortex-de-lame]
 lang: fr
 image: /images/wp/eveil-quantique.jpg
 imageAlt: "Construire son vaisseau multidimensionnel de l'Âme"

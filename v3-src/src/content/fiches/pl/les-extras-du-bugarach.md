@@ -3,6 +3,7 @@ title: Pozaziemcy z Bugarach i jego nowe energie
 kicker: Konferencja
 hub: eveil-au-soi
 category: conference
+stages: [nouveau-bugarach]
 order: 13
 lang: pl
 image: /images/wp/bugarach.jpg

@@ -3,7 +3,8 @@ title: Wewnątrzziemcy nowego Telos na Mount Shasta
 kicker: Warsztat
 hub: eveil-au-soi
 category: stage
-order: 11
+stages: [les-7-rayons, semaine-telosiens, initiation-fin-de-cycle, voyages-expansion-conscience]
+order: 12
 lang: pl
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine na Mount Shasta — wewnątrzziemcy z Telos"

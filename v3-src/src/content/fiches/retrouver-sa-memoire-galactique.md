@@ -3,6 +3,7 @@ title: Retrouver sa mémoire galactique
 kicker: Stage
 hub: eveil-au-soi
 category: stage
+stages: [stage-corps-temple, stage-homme-cosmique, stage-light-workers]
 order: 10
 lang: fr
 image: /images/wp/multidimensionnalite.jpg

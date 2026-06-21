@@ -3,7 +3,8 @@ title: The Galactic Team of the New Earth
 kicker: Workshop
 hub: eveil-au-soi
 category: stage
-order: 12
+stages: [rencontres-galactiques-au-sol]
+order: 11
 lang: en
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "The galactic team of the New Earth"

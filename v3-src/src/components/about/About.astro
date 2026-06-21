@@ -102,18 +102,16 @@ const u = ui[locale];
           <p>{t.clients.text}</p>
         </div>
 
-        <p class="about-press">
-          <a href={t.press.href} target="_blank" rel="noopener">{t.press.text}</a>
-        </p>
-
         <h3 class="about-h3">{t.dvd.heading}</h3>
         <div class="about-dvd">
-          <figure class="about-dvd__poster">
-            <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
-          </figure>
-          <div class="about-dvd__media prose">
-            <p>{t.dvd.body}</p>
-            <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
+          <p class="about-dvd__intro">{t.dvd.body}</p>
+          <div class="about-dvd__grid">
+            <figure class="about-dvd__poster">
+              <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
+            </figure>
+            <div class="about-dvd__trailer">
+              <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
+            </div>
           </div>
         </div>
       </div>
@@ -208,16 +206,18 @@ const u = ui[locale];
   }
   .about-clients h3 { margin: 0 0 0.3em; font-family: var(--font-serif); color: var(--ink); }
   .about-clients p { margin: 0; color: var(--ink-soft); font-style: italic; }
-  .about-press a { color: var(--indigo-700); }
-
-  .about-dvd { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
-  @media (min-width: 640px) { .about-dvd { grid-template-columns: 170px 1fr; } }
+  .about-dvd { margin-top: var(--space-3); }
+  .about-dvd__intro { margin: 0 0 var(--space-4); }
+  .about-dvd__grid {
+    display: grid; gap: var(--space-4); align-items: center;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .about-dvd__grid { grid-template-columns: 280px 1fr; } }
   .about-dvd__poster {
     margin: 0; border-radius: var(--radius); overflow: hidden;
     border: 1px solid var(--border-light); box-shadow: var(--shadow-md);
   }
   .about-dvd__poster img { width: 100%; display: block; }
-  .about-dvd__media p { margin-top: 0; }
 </style>
 
 <script>

@@ -3,7 +3,8 @@ title: Los Intra del nuevo Telos en el Mont Shasta
 kicker: Taller
 hub: eveil-au-soi
 category: stage
-order: 11
+stages: [les-7-rayons, semaine-telosiens, initiation-fin-de-cycle, voyages-expansion-conscience]
+order: 12
 lang: es
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Christine en el Mont Shasta — los intra de Telos"

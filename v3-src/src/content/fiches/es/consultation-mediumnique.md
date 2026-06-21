@@ -9,8 +9,6 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Lectura del Alma — consulta mediúmnica"
 featured: true
 lede: Una lectura del Alma que revela tus recursos y tu misión de vida.
-banner: /images/wp/bandeau-mediumnique.jpg
-bannerAlt: "Una mirada vuelta hacia lo invisible"
 audio: /audio/interpreter-sa-mediumnite-adofm.mp3
 audioTitle: "Interpretar tu mediumnidad — programa de radio (Ado FM)"
 format: Sesión por Zoom

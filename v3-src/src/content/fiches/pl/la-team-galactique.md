@@ -3,7 +3,8 @@ title: Galaktyczny Zespół Nowej Ziemi
 kicker: Warsztat
 hub: eveil-au-soi
 category: stage
-order: 12
+stages: [rencontres-galactiques-au-sol]
+order: 11
 lang: pl
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "Galaktyczny zespół Nowej Ziemi"

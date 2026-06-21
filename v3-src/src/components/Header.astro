@@ -23,10 +23,10 @@ const t = ui[locale];
 
     <nav class="site-nav" id="site-nav" data-nav aria-label={t.nav.mainNav}>
       <a href={pathFor('home', locale)} aria-current={routeKey === 'home' ? 'page' : undefined}>{t.nav.home}</a>
+      <a href={pathFor('about', locale)} aria-current={routeKey === 'about' ? 'page' : undefined}>{t.nav.about}</a>
+      <a href={pathFor('mission', locale)} aria-current={routeKey === 'mission' ? 'page' : undefined}>{t.nav.mission}</a>
       <a href={pathFor('eveilASoi', locale)} aria-current={routeKey === 'eveilASoi' ? 'page' : undefined}>{t.nav.eveilASoi}</a>
       <a href={pathFor('eveilAuSoi', locale)} aria-current={routeKey === 'eveilAuSoi' ? 'page' : undefined}>{t.nav.eveilAuSoi}</a>
-      <a href={pathFor('mission', locale)} aria-current={routeKey === 'mission' ? 'page' : undefined}>{t.nav.mission}</a>
-      <a href={pathFor('about', locale)} aria-current={routeKey === 'about' ? 'page' : undefined}>{t.nav.about}</a>
       <a href={pathFor('contact', locale)} aria-current={routeKey === 'contact' ? 'page' : undefined}>{t.nav.contact}</a>
     </nav>
 

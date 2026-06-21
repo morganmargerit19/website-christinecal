@@ -3,6 +3,7 @@ title: Les Extras du Bugarach et ses nouvelles énergies
 kicker: Conférence
 hub: eveil-au-soi
 category: conference
+stages: [nouveau-bugarach]
 order: 13
 lang: fr
 image: /images/wp/bugarach.jpg

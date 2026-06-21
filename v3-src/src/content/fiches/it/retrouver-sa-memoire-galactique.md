@@ -3,6 +3,7 @@ title: Ritrovare la propria memoria galattica
 kicker: Seminario
 hub: eveil-au-soi
 category: stage
+stages: [stage-corps-temple, stage-homme-cosmique, stage-light-workers]
 order: 10
 lang: it
 image: /images/wp/multidimensionnalite.jpg

@@ -4,6 +4,7 @@ kicker: Ścieżka · Szkoła 5D
 hub: eveil-a-soi
 category: parcours
 order: 20
+stages: [corps-de-lumiere, merkaba, vortex-de-lame]
 lang: pl
 image: /images/wp/eveil-quantique.jpg
 imageAlt: "Budowa wielowymiarowego pojazdu Duszy"

@@ -3,6 +3,7 @@ title: Gli Extraterrestri del Bugarach e le sue nuove energie
 kicker: Conferenza
 hub: eveil-au-soi
 category: conference
+stages: [nouveau-bugarach]
 order: 13
 lang: it
 image: /images/wp/bugarach.jpg

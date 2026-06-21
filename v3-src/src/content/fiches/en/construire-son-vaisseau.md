@@ -4,6 +4,7 @@ kicker: Journey · 5D School
 hub: eveil-a-soi
 category: parcours
 order: 20
+stages: [corps-de-lumiere, merkaba, vortex-de-lame]
 lang: en
 image: /images/wp/eveil-quantique.jpg
 imageAlt: "Building your multidimensional vessel of the Soul"

@@ -3,7 +3,8 @@ title: La Team galactique de la Nouvelle Terre
 kicker: Stage
 hub: eveil-au-soi
 category: stage
-order: 12
+stages: [rencontres-galactiques-au-sol]
+order: 11
 lang: fr
 image: /images/wp/les-freres-des-etoiles.jpg
 imageAlt: "La team galactique de la Nouvelle Terre"
