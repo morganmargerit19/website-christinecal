@@ -102,18 +102,22 @@ const u = ui[locale];
           <p>{t.clients.text}</p>
         </div>
 
-        <h3 class="about-h3">{t.dvd.heading}</h3>
-        <div class="about-dvd">
-          <p class="about-dvd__intro">{t.dvd.body}</p>
-          <div class="about-dvd__grid">
-            <figure class="about-dvd__poster">
-              <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
-            </figure>
-            <div class="about-dvd__trailer">
-              <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
+        {t.dvd && (
+          <>
+            <h3 class="about-h3">{t.dvd.heading}</h3>
+            <div class="about-dvd">
+              <p class="about-dvd__intro">{t.dvd.body}</p>
+              <div class="about-dvd__grid">
+                <figure class="about-dvd__poster">
+                  <img src={base + '/images/wp/acteurs-de-la-vie.jpg'} alt={t.dvd.posterAlt} loading="lazy" width="300" height="424" />
+                </figure>
+                <div class="about-dvd__trailer">
+                  <VideoEmbed id="Ncg54JqREp4" title={t.dvd.trailerTitle} playLabel={u.video.play} />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   </section>

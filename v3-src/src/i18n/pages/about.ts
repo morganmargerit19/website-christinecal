@@ -7,7 +7,8 @@ import type { Locale } from '../utils';
  */
 export interface AboutDict {
   meta: { title: string; description: string };
-  hero: { eyebrow: string; title: string; lede: string };
+  /** `lede` optionnel : retiré sur la page FR à la demande de Christine. */
+  hero: { eyebrow: string; title: string; lede?: string };
   /** Épigraphe poétique en ouverture (portrait à la 3e personne). */
   epigraph: string;
   galactic: { heading: string; items: string[] };
@@ -16,10 +17,23 @@ export interface AboutDict {
     list: { id: string; title: string; meta: string }[];
   };
   journey: { heading: string; items: { lead: string; text: string }[] };
-  activities: { heading: string; items: { title: string; text: string }[] };
+  /** Une carte peut porter un accordéon (ex. liste des conférences). */
+  activities: {
+    heading: string;
+    items: {
+      title: string;
+      text: string;
+      accordion?: { summary: string; items: string[] };
+    }[];
+  };
+  /** Section « Spécificités » (FR). Optionnel le temps de traduire les autres langues. */
+  specifics?: { heading: string; items: string[] };
   news: { heading: string; items: string[] };
+  /** Section « À venir » (FR). Optionnel le temps de traduire les autres langues. */
+  upcoming?: { heading: string; items: string[] };
   clients: { heading: string; text: string };
-  dvd: { heading: string; body: string; posterAlt: string; trailerTitle: string };
+  /** Bloc « Presse & DVD » — retiré de la page FR (déplacé vers la rubrique Mission). */
+  dvd?: { heading: string; body: string; posterAlt: string; trailerTitle: string };
 }
 
 export const about: Record<Locale, AboutDict> = {
