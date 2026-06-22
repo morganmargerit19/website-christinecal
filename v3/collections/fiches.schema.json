@@ -90,6 +90,28 @@
           },
           "default": []
         },
+        "videosHeading": {
+          "type": "string"
+        },
+        "testimonials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "quote": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "quote"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
         "dates": {
           "type": "array",
           "items": {

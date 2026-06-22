@@ -45,6 +45,13 @@ const fiches = defineCollection({
     pendingVideos: z
       .array(z.object({ title: z.string().optional(), meta: z.string().optional() }))
       .default([]),
+    // Titre affiché au-dessus de la grille vidéo (ex. « Témoignage de ma propre
+    // expérience grâce à ces outils » avant les vidéos Debowska).
+    videosHeading: z.string().optional(),
+    // Témoignages affichés en bas de fiche (après les vidéos).
+    testimonials: z
+      .array(z.object({ quote: z.string(), author: z.string().optional() }))
+      .default([]),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),

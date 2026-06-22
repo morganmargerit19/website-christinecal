@@ -186,6 +186,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
 
     {(f.videos.length > 0 || f.pendingVideos.length > 0) && (
       <section class="container">
+        {f.videosHeading && <h2 class="fiche-videos-title">{f.videosHeading}</h2>}
         <div class="video-grid">
           {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} credit={v.credit} cover={v.cover} coverAlt={v.coverAlt} playLabel={t.video.play} />)}
           {f.pendingVideos.map((v) => (
@@ -196,6 +197,19 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
                 {v.meta && <span>{v.meta}</span>}
               </figcaption>
             </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {f.testimonials.length > 0 && (
+      <section class="container container--narrow">
+        <div class="fiche-testimonials" data-reveal>
+          {f.testimonials.map((tm) => (
+            <blockquote class="fiche-testimonial">
+              <p>{tm.quote}</p>
+              {tm.author && <cite>— {tm.author}</cite>}
+            </blockquote>
           ))}
         </div>
       </section>
@@ -267,6 +281,20 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     text-align: center; margin: var(--space-5) 0 var(--space-4);
     font-size: var(--text-2xl);
   }
+  .fiche-videos-title {
+    text-align: center; margin: 0 0 var(--space-4);
+    font-size: var(--text-xl); font-family: var(--font-serif);
+  }
+
+  /* Témoignages (bas de fiche) */
+  .fiche-testimonials { display: grid; gap: var(--space-3); }
+  .fiche-testimonial {
+    margin: 0; padding: var(--space-3) var(--space-4);
+    border-left: 3px solid var(--gold); border-radius: var(--radius);
+    background: rgba(85, 85, 85, 0.06);
+  }
+  .fiche-testimonial p { margin: 0 0 0.5em; font-style: italic; color: var(--ink-soft); }
+  .fiche-testimonial cite { font-style: normal; font-size: var(--text-sm); color: var(--ink-muted); }
 
   /* Placeholders (images / vidéos à fournir) */
   .img-placeholder, .video-placeholder__box {

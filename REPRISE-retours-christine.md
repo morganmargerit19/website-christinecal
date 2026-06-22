@@ -41,11 +41,36 @@ cd v3-src && npm install && npm run build   # build (sortie dans ../v3)
 
 ---
 
-# Vague 2 — mails 7→10 (analysés, PAS encore implémentés)
+# Vague 2 — mails 7→10 (IMPLÉMENTÉE depuis l'extract WP)
 
-⚠️ **Blocage majeur : le WordPress de Christine renvoie 403 (curl ET WebFetch).**
-Impossible de « reprendre le contenu du WordPress » automatiquement → demander à
-Christine/Morgan de **copier-coller** les textes manquants.
+✅ **Le contenu WP est dans le repo** : `sources/wp-v2/pages/*.md` (extract de
+Christophe). Le WordPress en ligne renvoie 403, mais l'extract suffit — c'est la
+source utilisée. NE PAS scraper le WP en ligne.
+
+## ✅ Fait (vague 2)
+- **Éveil au Soi** (`HubIndex.astro`) : nouveau lede (« …explorer des lieux de
+  5ème Dimension »), bloc intro 6 § sous bannière, bannière → `bandeau-eveil-au-soi-2.jpg`.
+  Les 4 cartes : non touchées (souhait de Christine).
+- **Construire son vaisseau** (`construire-son-vaisseau.md`) : titre « École 5D — … »,
+  corps repris du WP (Comment / Particularité+ADN / Effets / Source), liste
+  « Les trois bandeaux » retirée, titre `videosHeading` « Témoignage de ma propre
+  expérience… » avant les vidéos Debowska, 6 témoignages (frontmatter `testimonials`).
+- **Retrouver sa mémoire galactique** (`retrouver-sa-memoire-galactique.md`) :
+  jaquettes des 2 vidéos ET inversées (corrigées), liste « Stages initiatiques »
+  retirée (cartes dessous), ajout infos astrologue **Claude Jarry des Loges**.
+- Infra : schéma + `Fiche.astro` étendus (`videosHeading`, `testimonials`).
+
+## ⏸️ Reste à faire (vague 2)
+- **`merkaba.mp4`** (image/vidéo « qui s'active » en tête de Construire) : fichier
+  absent du repo → à fournir, puis l'intégrer en tête de la fiche.
+- **Image ADN `restructurer-adn.jpg` en 2 colonnes** (gauche image / droite texte)
+  dans « Particularité » : le texte est en place ; l'image reste à poser via le
+  layout (contrainte `base` empêche l'`<img>` en markdown brut).
+- **Photo astrologue `claude-jarry-des-loges.jpg`** : présente dans le repo, à
+  afficher à côté du texte si souhaité (même contrainte `base`).
+
+⚠️ Rappel historique : ne PAS scraper le WP en ligne (403). Tout est dans
+`sources/wp-v2/pages/`.
 
 Ordre chrono (le plus récent fait foi) :
 - Mail 20:25 « PAGE CONSTRUIRE… » → **ANNULÉ** par le mail 20:40.

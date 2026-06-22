@@ -65,7 +65,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Explorer plus grand que soi : mémoire galactique, Mont Shasta & nouveau TELOS, énergies du Bugarach et la team galactique de la Nouvelle Terre.',
       eyebrow: 'Éveil au Soi',
       h1: 'Explorer plus grand que soi',
-      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer le Mont Shasta, le nouveau TELOS et les nouvelles énergies du Bugarach.',
+      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer des lieux de 5ème Dimension.',
       section: '',
     },
     en: {
@@ -152,8 +152,24 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
 
   <section class="container">
     <figure class="hub-banner">
-      <img src={base + `/images/wp/bandeau-${hub}.jpg`} alt="" aria-hidden="true" loading="lazy" />
+      <img
+        src={base + (hub === 'eveil-au-soi' ? '/images/wp/bandeau-eveil-au-soi-2.jpg' : `/images/wp/bandeau-${hub}.jpg`)}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
     </figure>
+
+    {hub === 'eveil-au-soi' && locale === 'fr' && (
+      <div class="auso-intro prose" data-reveal>
+        <p>La personnalité consciente et partenaire de l'Âme poursuit l'aventure. Elle se prépare à la <strong>fusion avec le SOI Supérieur ou Présence I AM / JE SUIS</strong>, partie non incarnée à intégrer via le processus ascensionnel multidimensionnel.</p>
+        <p>L'Âme procède alors à la <strong>synthèse de ce cycle et réintègre ses fractales terrestres</strong>.</p>
+        <p>Par la radiance de sa fréquence, elle <strong>appelle sa famille Monadique</strong>.</p>
+        <p>Se souvenir, se reconnecter, se retrouver devient un besoin, voire une nécessité pour terminer sa mission individuelle et collective.</p>
+        <p>Le SOI ou Présence JE SUIS profite des énergies 5D pour descendre progressivement dans l'Âme structurée par sa géométrie et transformée en <strong>véritable vaisseau de lumière</strong>.</p>
+        <p>Des <strong>connexions avec des fractales dites futures ou des parties galactiques</strong> permettent à l'Être conscient, aidé de Grands Frères Intra ou Extra terrestres, de retrouver sa véritable <strong>famille et histoire galactique</strong>.</p>
+      </div>
+    )}
 
     {hub === 'eveil-a-soi' ? (
       <>
@@ -278,6 +294,14 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
   .eveil-intro__strong { font-weight: 600; color: var(--indigo-100); }
 
   .eveil-videos { margin-bottom: var(--space-5); }
+
+  /* Page « Éveil au Soi » — texte d'introduction sous la bannière */
+  .auso-intro {
+    max-width: 68ch; margin: var(--space-5) auto var(--space-4);
+    color: var(--indigo-100);
+  }
+  .auso-intro p { margin: 0 0 1em; line-height: 1.7; }
+  .auso-intro strong { color: var(--gold-soft); font-weight: 600; }
 
   /* Placeholders vidéo (en attendant les IDs YouTube de Christine) */
   .video-placeholder { margin: 0; }

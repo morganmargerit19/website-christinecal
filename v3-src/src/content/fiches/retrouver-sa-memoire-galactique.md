@@ -11,13 +11,13 @@ imageAlt: "Retrouver sa mémoire galactique"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
 videos:
   - id: 0eDwfiYJY3w
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
     title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
     meta: "Août 2022"
     credit: debowska
   - id: J7CRbYCPSKI
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
-    title: "Extra-terrestres — Conférence (même sujet)"
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    title: "Extra-terrestres — Conférence (même sujet, avec compléments)"
     meta: "16 août 2025"
     credit: debowska
   - id: raXSnQhrWiA
@@ -47,15 +47,16 @@ révélant ses origines dans cette galaxie.
 
 ## Témoignage de vie
 
-Révélation de sa multidimensionnalité sur le Mont Shasta, entre 2017 et 2019,
-avec l'aide des Intra-Terrestres de TELOS — le retour d'une version de soi-même
-pour collaborer à la nouvelle ligne spatio-temporelle.
+Retrouver le **fil conducteur de son histoire et le choix du SOI via l'Âme**, à
+partir d'un long parcours initiatique.
 
-## Stages initiatiques
+Révélation de sa multidimensionnalité sur le Mont Shasta, suite à des expériences
+vécues entre 2017 et 2019 avec l'aide des Intra-Terrestres de TELOS (synthèse sur
+place en 2026) — le retour d'une version de soi-même pour collaborer à la nouvelle
+ligne spatio-temporelle.
 
-- Du corps physique au temple initiatique
-- De l'homme terrestre à l'humain cosmique
-- Mission des Light Workers
+Analyse spécifique de mon thème par une amie qui pratique une astrologie
+spécifique : **Claude Jarry des Loges**.
 
 > Invitation aux questionnements : se renseigner avant de juger, et maintenir le
 > respect de la libre pensée de chacun.
