@@ -38,3 +38,44 @@ cd v3-src && npm install && npm run build   # build (sortie dans ../v3)
 - Intégrer les assets ci-dessus.
 - Répercuter le FR sur EN/PL/ES/IT.
 - Passer la PR #2 de draft à « ready » quand validé.
+
+---
+
+# Vague 2 — mails 7→10 (analysés, PAS encore implémentés)
+
+⚠️ **Blocage majeur : le WordPress de Christine renvoie 403 (curl ET WebFetch).**
+Impossible de « reprendre le contenu du WordPress » automatiquement → demander à
+Christine/Morgan de **copier-coller** les textes manquants.
+
+Ordre chrono (le plus récent fait foi) :
+- Mail 20:25 « PAGE CONSTRUIRE… » → **ANNULÉ** par le mail 20:40.
+- Mail 20:31 « PAGE EVEIL AU SOI ».
+- Mail 20:40 « ANNULE ET REMPLACE … CONSTRUIRE » → **fait foi**.
+- Mail 21:02 « pages suivantes » (consigne générale + Retrouver mémoire galactique).
+
+## ✅ Faisable tout de suite (texte dans les mails / repo)
+1. **Éveil au Soi** (`HubIndex.astro`, hub `eveil-au-soi`) :
+   - Lede → « Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer des lieux de 5ème Dimension ».
+   - Ajouter bloc intro 6 paragraphes (texte fourni dans le mail 20:31) sous la bannière — même mécanisme que la page `eveil-a-soi`.
+   - Cartes (4 cadres) : NE PAS toucher.
+   - Bannière : remplacer l'image Mont Shasta par `bandeau-eveil-au-soi-2.jpg` → ⏸️ asset.
+2. **Construire son vaisseau** (`construire-son-vaisseau.md`, `Fiche.astro`) :
+   - Titre → « ÉCOLE 5D — CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL DE L'ÂME ».
+   - Bloc image ADN (`/images/wp/restructurer-adn.jpg`) à gauche + texte à droite
+     (texte « …s'intègre au niveau cellulaire via l'inconscient… » — fourni mail 20:25).
+   - Retirer la section texte « Les trois bandeaux » (les cartes de stages suffisent).
+   - Ajouter H2 « Témoignage de ma propre expérience grâce à ces outils » AVANT les vidéos Debowska.
+   - Image « qui s'active » → ⏸️ asset.
+3. **Retrouver sa mémoire galactique** (`retrouver-sa-memoire-galactique.md`) :
+   - Retirer la section texte « Stages initiatiques » (cartes suffisent).
+   - Inverser les 2 jaquettes vidéo ET (08/2022 vs 16/08/2025) : permuter les `cover`
+     entre la vidéo `0eDwfiYJY3w` et `J7CRbYCPSKI` (« robe jaune / veste blanche »).
+
+## ⛔ Bloqué (WP 403 — réclamer le texte à Christine)
+- Les **4 témoignages manquants** de Construire son vaisseau (il en faut 5, on en a 1).
+- **Contenu manquant + infos sur l'astrologue** de Retrouver sa mémoire galactique.
+- Reprise fidèle « tous les textes / même présentation » des pages WP.
+
+## Compliments (aucune action)
+- Stages : « contenu super, rien à changer » ; elle aime les kickers
+  (ex. « Faire de son corps physique un temple initiatique, le temps d'un week-end »).
