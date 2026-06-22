@@ -83,7 +83,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </div>
     </section>
 
-    {(facts.length > 0 || f.dates.length > 0) && (
+    {(facts.length > 0 || f.dates.length > 0) && !f.hideHeaderMeta && (
       <section class="container">
         <div class="fiche-meta">
           {f.dates.length > 0 && (
@@ -108,7 +108,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    {f.image && (
+    {f.image && !f.hideHeaderImage && (
       <section class="container">
         <figure class="fiche-image" style={`max-width: min(100%, ${imgMax}px)`}>
           <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
@@ -116,15 +116,54 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    <section class="paper-section">
-      <div class="container container--narrow">
-        <div class="paper-section__inner">
-          <div class="prose">
-            <slot />
+    {f.richLayout === 'sortir-matrice' ? (
+      <section class="paper-section">
+        <div class="container container--narrow">
+          <div class="paper-section__inner sortir-rich" data-reveal>
+            {/* Image sous le titre (placeholder : old-life-new-life.jpg à fournir) */}
+            <figure class="sortir-hero-img">
+              <div class="img-placeholder" aria-hidden="true"><span>Image<br /><small>old-life-new-life</small></span></div>
+            </figure>
+
+            <h3 class="sortir-baseline"><em>Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</em></h3>
+
+            <div class="sortir-duo">
+              <p class="sortir-duo__text">
+                Transmuter la peur<br />en énergie positive<br />et passer d'une vie réactive<br />à une vie créative.
+              </p>
+              <figure class="sortir-duo__img">
+                <div class="img-placeholder img-placeholder--square" aria-hidden="true"><span>Image<br /><small>chat-miroir</small></span></div>
+              </figure>
+            </div>
+
+            <h3 class="sortir-stage-title">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h3>
+            <p class="sortir-stage-sub">— Avec une approche différente de cet outil connu —</p>
+
+            <div class="sortir-wheel">
+              <figure class="sortir-wheel__img">
+                <img src={base + (f.image ?? '/images/wp/eneagramme.jpg')} alt={f.imageAlt ?? "L'énnéagramme"} loading="lazy" />
+              </figure>
+              <ul class="sortir-wheel__list">
+                <li>Découvrir cette source de souffrances permanentes.</li>
+                <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>
+                <li>Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.</li>
+                <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    ) : (
+      <section class="paper-section">
+        <div class="container container--narrow">
+          <div class="paper-section__inner">
+            <div class="prose">
+              <slot />
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
 
     {stageEntries.length > 0 && (
       <section class="container">
@@ -145,10 +184,41 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    {f.videos.length > 0 && (
+    {(f.videos.length > 0 || f.pendingVideos.length > 0) && (
       <section class="container">
         <div class="video-grid">
           {f.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} credit={v.credit} cover={v.cover} coverAlt={v.coverAlt} playLabel={t.video.play} />)}
+          {f.pendingVideos.map((v) => (
+            <figure class="video-card video-placeholder">
+              <div class="video-placeholder__box" aria-hidden="true"><span>Vidéo<br /><small>à intégrer</small></span></div>
+              <figcaption>
+                {v.title && <strong>{v.title}</strong>}
+                {v.meta && <span>{v.meta}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {f.practicalFooter && (facts.length > 0 || f.image) && (
+      <section class="container">
+        <div class="fiche-practical" data-reveal>
+          {f.image && (
+            <figure class="fiche-practical__img">
+              <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
+            </figure>
+          )}
+          {facts.length > 0 && (
+            <dl class="fiche-practical__facts">
+              {facts.map((fact) => (
+                <div>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
         </div>
       </section>
     )}
@@ -197,6 +267,54 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     text-align: center; margin: var(--space-5) 0 var(--space-4);
     font-size: var(--text-2xl);
   }
+
+  /* Placeholders (images / vidéos à fournir) */
+  .img-placeholder, .video-placeholder__box {
+    border-radius: var(--radius); border: 1px dashed rgba(201, 169, 97, 0.5);
+    background: rgba(85, 85, 85, 0.08);
+    display: grid; place-items: center; text-align: center;
+    color: var(--ink-muted); font-family: var(--font-serif); padding: var(--space-3);
+  }
+  .img-placeholder { aspect-ratio: 16 / 10; }
+  .img-placeholder--square { aspect-ratio: 1 / 1; }
+  .img-placeholder small, .video-placeholder__box small { opacity: 0.7; font-size: 0.8em; }
+  .video-placeholder { margin: 0; }
+  .video-placeholder__box { aspect-ratio: 16 / 9; }
+  .video-placeholder figcaption { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.15rem; }
+
+  /* Encart « infos pratiques » en bas (page Consultation) : petite image + texte */
+  .fiche-practical {
+    max-width: var(--container-narrow); margin-inline: auto;
+    display: flex; gap: var(--space-4); align-items: center;
+    flex-wrap: wrap;
+  }
+  .fiche-practical__img {
+    margin: 0; flex: 0 0 clamp(120px, 22%, 180px);
+    border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border-light);
+  }
+  .fiche-practical__img img { width: 100%; display: block; }
+  .fiche-practical__facts { display: grid; gap: 0.6rem; margin: 0; }
+  .fiche-practical__facts dt { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+  .fiche-practical__facts dd { margin: 0; font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink); }
+
+  /* Gabarit « Sortir de sa matrice » */
+  .sortir-hero-img { margin: 0 auto var(--space-4); max-width: 420px; }
+  .sortir-baseline { text-align: center; color: var(--ink); font-size: var(--text-xl); margin: 0 0 var(--space-4); }
+  .sortir-duo, .sortir-wheel {
+    display: grid; gap: var(--space-4); align-items: center; margin: var(--space-4) 0;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .sortir-duo { grid-template-columns: 1fr clamp(140px, 30%, 200px); }
+    .sortir-wheel { grid-template-columns: clamp(150px, 32%, 220px) 1fr; }
+  }
+  .sortir-duo__text { text-align: center; font-size: var(--text-lg); color: var(--ink); }
+  .sortir-duo__img, .sortir-wheel__img { margin: 0; }
+  .sortir-wheel__img img { width: 100%; display: block; border-radius: var(--radius); }
+  .sortir-stage-title { text-align: center; font-size: var(--text-xl); margin: var(--space-5) 0 0.2em; }
+  .sortir-stage-sub { text-align: center; color: var(--ink-soft); font-style: italic; margin: 0 0 var(--space-3); }
+  .sortir-wheel__list { margin: 0; padding-left: 1.2em; }
+  .sortir-wheel__list li { margin-bottom: 0.6em; color: var(--ink-soft); }
 </style>
 
 <script>

@@ -9,6 +9,7 @@ lang: fr
 image: /images/wp/eveil-quantique.jpg
 imageAlt: "Construire son vaisseau multidimensionnel de l'Âme"
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
+cardLede: "Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme."
 format: Présentiel ou Zoom
 videos:
   - id: 9QKss6wHSB4

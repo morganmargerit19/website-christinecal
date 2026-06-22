@@ -53,6 +53,43 @@
         "lede": {
           "type": "string"
         },
+        "cardLede": {
+          "type": "string"
+        },
+        "hideHeaderImage": {
+          "type": "boolean",
+          "default": false
+        },
+        "hideHeaderMeta": {
+          "type": "boolean",
+          "default": false
+        },
+        "practicalFooter": {
+          "type": "boolean",
+          "default": false
+        },
+        "richLayout": {
+          "type": "string",
+          "enum": [
+            "sortir-matrice"
+          ]
+        },
+        "pendingVideos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "meta": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        },
         "dates": {
           "type": "array",
           "items": {
