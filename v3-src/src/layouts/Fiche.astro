@@ -160,7 +160,13 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     ) : (
       <section class="paper-section">
         <div class="container container--narrow">
-          <div class="paper-section__inner">
+          <div class:list={['paper-section__inner', { 'has-bodyimage': f.bodyImage }]}>
+            {f.bodyImage && (
+              <figure class="fiche-bodyimage fiche-bodyimage--aside" data-reveal>
+                <img src={base + f.bodyImage.src} alt={f.bodyImage.alt ?? ''} loading="lazy" />
+                {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
+              </figure>
+            )}
             <div class="prose">
               <slot />
             </div>
@@ -169,7 +175,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    {f.bodyImage && (
+    {f.bodyImage && f.richLayout && (
       <section class="container container--narrow">
         <figure class="fiche-bodyimage" data-reveal>
           <img src={base + f.bodyImage.src} alt={f.bodyImage.alt ?? ''} loading="lazy" />
@@ -301,6 +307,17 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-bodyimage { margin: 0 auto; max-width: 520px; }
   .fiche-bodyimage img { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border-light); }
   .fiche-bodyimage figcaption { margin-top: 0.5rem; text-align: center; font-size: var(--text-sm); color: var(--ink-muted); font-style: italic; }
+
+  /* bodyImage en aside flottant : le texte s'enroule autour → moins de scroll */
+  .paper-section__inner.has-bodyimage::after { content: ''; display: block; clear: both; }
+  .fiche-bodyimage--aside { max-width: 100%; margin: 0.25rem 0 var(--space-3); }
+  @media (min-width: 720px) {
+    .fiche-bodyimage--aside {
+      float: right;
+      width: clamp(220px, 36%, 320px);
+      margin: 0.25rem 0 var(--space-3) var(--space-4);
+    }
+  }
 
   /* Témoignages (bas de fiche) */
   .fiche-testimonials { display: grid; gap: var(--space-3); }
