@@ -133,6 +133,101 @@ const eveilVideoTitles: { id: string; title: Record<Locale, string>; meta: strin
   },
 ];
 
+// Bloc éditorial « Éveil à Soi » (sous la bannière). Chaque paragraphe est une
+// chaîne HTML (balises <em>/<strong> conservées). Le 1er paragraphe porte la
+// classe de mise en avant, le 3e et le dernier la classe « strong » (cf. <style>).
+const eveilIntro: Record<Locale, string[]> = {
+  fr: [
+    '<em>Les révélations vont se multiplier et conduire l’humanité au réveil</em>',
+    'Les énergies 4D font sauter les verrous de l’inconscient jusqu’alors protecteur.',
+    'Le retour à l’intérieur s’impose car l’extérieur explose.',
+    'Lever ses blocages et ses peurs, apaiser son mental et stabiliser son émotionnel permettent <strong>l’accès à la conscience de l’Âme</strong> : on parle de <em>la deuxième naissance</em>.',
+    'Pour l’humain réveillé, <strong>subir sa vie est terminé</strong>.',
+    'Devenu un humain éveillé, il va s’agir de <strong>la créer</strong>.',
+    'Vibrant en Âme incarnée, l’humain conscient accède à sa multidimensionnalité.',
+  ],
+  en: [
+    '<em>Revelations will multiply and lead humanity to awakening</em>',
+    'The 4D energies unlock the doors of the unconscious that until now protected us.',
+    'The return within becomes inevitable, for the outer world is bursting apart.',
+    'Lifting our blocks and our fears, calming the mind and stabilising the emotions grant <strong>access to the consciousness of the Soul</strong>: this is what we call <em>the second birth</em>.',
+    'For the awakened human, <strong>enduring one’s life is over</strong>.',
+    'Now an awakened being, the task becomes to <strong>create it</strong>.',
+    'Vibrating as an incarnated Soul, the conscious human accesses their multidimensionality.',
+  ],
+  pl: [
+    '<em>Objawienia będą się mnożyć i poprowadzą ludzkość ku przebudzeniu</em>',
+    'Energie 4D otwierają zamki nieświadomości, dotąd pełniącej rolę ochronną.',
+    'Powrót do wnętrza staje się koniecznością, ponieważ świat zewnętrzny eksploduje.',
+    'Uwolnienie blokad i lęków, uspokojenie umysłu i ustabilizowanie emocji otwierają <strong>dostęp do świadomości Duszy</strong>: mówimy o <em>drugich narodzinach</em>.',
+    'Dla przebudzonego człowieka <strong>znoszenie swojego życia dobiegło końca</strong>.',
+    'Stawszy się człowiekiem przebudzonym, ma teraz <strong>je tworzyć</strong>.',
+    'Wibrując jako wcielona Dusza, świadomy człowiek uzyskuje dostęp do swojej wielowymiarowości.',
+  ],
+  es: [
+    '<em>Las revelaciones se multiplicarán y conducirán a la humanidad al despertar</em>',
+    'Las energías 4D hacen saltar los cerrojos del inconsciente hasta entonces protector.',
+    'El retorno al interior se impone porque el exterior estalla.',
+    'Liberar los bloqueos y los miedos, apaciguar la mente y estabilizar lo emocional permiten <strong>el acceso a la conciencia del Alma</strong>: se habla del <em>segundo nacimiento</em>.',
+    'Para el humano despierto, <strong>padecer su vida ha terminado</strong>.',
+    'Convertido en un humano despierto, se tratará de <strong>crearla</strong>.',
+    'Vibrando como Alma encarnada, el humano consciente accede a su multidimensionalidad.',
+  ],
+  it: [
+    '<em>Le rivelazioni si moltiplicheranno e condurranno l’umanità al risveglio</em>',
+    'Le energie 4D fanno saltare i lucchetti dell’inconscio fino ad allora protettivo.',
+    'Il ritorno all’interno si impone perché l’esterno esplode.',
+    'Sciogliere i blocchi e le paure, placare la mente e stabilizzare l’emotività permettono <strong>l’accesso alla coscienza dell’Anima</strong>: si parla della <em>seconda nascita</em>.',
+    'Per l’essere umano risvegliato, <strong>subire la propria vita è finito</strong>.',
+    'Divenuto un essere umano risvegliato, si tratterà di <strong>crearla</strong>.',
+    'Vibrando come Anima incarnata, l’essere umano consapevole accede alla propria multidimensionalità.',
+  ],
+};
+
+// Bloc éditorial « Éveil au Soi » (sous la bannière). Paragraphes HTML.
+const ausoIntro: Record<Locale, string[]> = {
+  fr: [
+    'La personnalité consciente et partenaire de l\'Âme poursuit l\'aventure. Elle se prépare à la <strong>fusion avec le SOI Supérieur ou Présence I AM / JE SUIS</strong>, partie non incarnée à intégrer via le processus ascensionnel multidimensionnel.',
+    'L\'Âme procède alors à la <strong>synthèse de ce cycle et réintègre ses fractales terrestres</strong>.',
+    'Par la radiance de sa fréquence, elle <strong>appelle sa famille Monadique</strong>.',
+    'Se souvenir, se reconnecter, se retrouver devient un besoin, voire une nécessité pour terminer sa mission individuelle et collective.',
+    'Le SOI ou Présence JE SUIS profite des énergies 5D pour descendre progressivement dans l\'Âme structurée par sa géométrie et transformée en <strong>véritable vaisseau de lumière</strong>.',
+    'Des <strong>connexions avec des fractales dites futures ou des parties galactiques</strong> permettent à l\'Être conscient, aidé de Grands Frères Intra ou Extra terrestres, de retrouver sa véritable <strong>famille et histoire galactique</strong>.',
+  ],
+  en: [
+    'The conscious personality, now partner of the Soul, continues the journey. It prepares for the <strong>fusion with the Higher SELF or I AM Presence</strong>, the non-incarnated part to be integrated through the multidimensional ascension process.',
+    'The Soul then carries out the <strong>synthesis of this cycle and reintegrates its earthly fractals</strong>.',
+    'Through the radiance of its frequency, it <strong>calls upon its Monadic family</strong>.',
+    'To remember, to reconnect, to find oneself again becomes a need, even a necessity, in order to complete one’s individual and collective mission.',
+    'The SELF or I AM Presence draws upon the 5D energies to descend gradually into the Soul, structured by its geometry and transformed into a <strong>true vessel of light</strong>.',
+    '<strong>Connections with so-called future fractals or galactic parts</strong> allow the conscious Being, aided by Intra- or Extra-terrestrial Elder Brothers, to find again its true <strong>galactic family and history</strong>.',
+  ],
+  pl: [
+    'Świadoma osobowość, partnerka Duszy, kontynuuje przygodę. Przygotowuje się do <strong>fuzji z Wyższym JA lub Obecnością I AM / JESTEM</strong>, niewcieloną częścią, którą należy zintegrować poprzez wielowymiarowy proces wniebowstąpienia.',
+    'Dusza dokonuje wówczas <strong>syntezy tego cyklu i ponownie integruje swoje ziemskie fraktale</strong>.',
+    'Poprzez promieniowanie swojej częstotliwości <strong>przywołuje swoją Monadyczną rodzinę</strong>.',
+    'Pamiętać, połączyć się na nowo, odnaleźć siebie staje się potrzebą, a nawet koniecznością, by dokończyć swoją indywidualną i zbiorową misję.',
+    'JA lub Obecność JESTEM korzysta z energii 5D, aby stopniowo zstąpić do Duszy, ustrukturyzowanej przez swoją geometrię i przemienionej w <strong>prawdziwy statek światła</strong>.',
+    '<strong>Połączenia z tak zwanymi przyszłymi fraktalami lub częściami galaktycznymi</strong> pozwalają świadomej Istocie, wspieranej przez Wielkich Braci Wewnątrz- lub Pozaziemskich, odnaleźć swoją prawdziwą <strong>galaktyczną rodzinę i historię</strong>.',
+  ],
+  es: [
+    'La personalidad consciente y compañera del Alma prosigue la aventura. Se prepara para la <strong>fusión con el SER Superior o Presencia I AM / YO SOY</strong>, parte no encarnada que debe integrarse mediante el proceso ascensional multidimensional.',
+    'El Alma realiza entonces la <strong>síntesis de este ciclo y reintegra sus fractales terrestres</strong>.',
+    'Por la radiancia de su frecuencia, <strong>llama a su familia Monádica</strong>.',
+    'Recordar, reconectarse, reencontrarse se vuelve una necesidad, incluso una urgencia para concluir su misión individual y colectiva.',
+    'El SER o Presencia YO SOY aprovecha las energías 5D para descender progresivamente en el Alma, estructurada por su geometría y transformada en un <strong>verdadero vehículo de luz</strong>.',
+    'Unas <strong>conexiones con fractales llamados futuros o partes galácticas</strong> permiten al Ser consciente, ayudado por Grandes Hermanos Intra o Extraterrestres, reencontrar su verdadera <strong>familia e historia galáctica</strong>.',
+  ],
+  it: [
+    'La personalità consapevole e partner dell\'Anima prosegue l\'avventura. Si prepara alla <strong>fusione con il SÉ Superiore o Presenza I AM / IO SONO</strong>, parte non incarnata da integrare attraverso il processo ascensionale multidimensionale.',
+    'L\'Anima procede allora alla <strong>sintesi di questo ciclo e reintegra i suoi frattali terrestri</strong>.',
+    'Attraverso la radianza della sua frequenza, <strong>chiama la sua famiglia Monadica</strong>.',
+    'Ricordare, riconnettersi, ritrovarsi diventa un bisogno, persino una necessità per portare a termine la propria missione individuale e collettiva.',
+    'Il SÉ o Presenza IO SONO approfitta delle energie 5D per scendere progressivamente nell\'Anima, strutturata dalla sua geometria e trasformata in un <strong>vero vascello di luce</strong>.',
+    'Delle <strong>connessioni con frattali detti futuri o parti galattiche</strong> permettono all\'Essere consapevole, aiutato da Grandi Fratelli Intra o Extra terrestri, di ritrovare la sua vera <strong>famiglia e storia galattica</strong>.',
+  ],
+};
+
 const c = intro[hub][locale];
 
 const fiches = (
@@ -187,30 +282,24 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
       />
     </figure>
 
-    {hub === 'eveil-au-soi' && locale === 'fr' && (
+    {hub === 'eveil-au-soi' && (
       <div class="auso-intro prose" data-reveal>
-        <p>La personnalité consciente et partenaire de l'Âme poursuit l'aventure. Elle se prépare à la <strong>fusion avec le SOI Supérieur ou Présence I AM / JE SUIS</strong>, partie non incarnée à intégrer via le processus ascensionnel multidimensionnel.</p>
-        <p>L'Âme procède alors à la <strong>synthèse de ce cycle et réintègre ses fractales terrestres</strong>.</p>
-        <p>Par la radiance de sa fréquence, elle <strong>appelle sa famille Monadique</strong>.</p>
-        <p>Se souvenir, se reconnecter, se retrouver devient un besoin, voire une nécessité pour terminer sa mission individuelle et collective.</p>
-        <p>Le SOI ou Présence JE SUIS profite des énergies 5D pour descendre progressivement dans l'Âme structurée par sa géométrie et transformée en <strong>véritable vaisseau de lumière</strong>.</p>
-        <p>Des <strong>connexions avec des fractales dites futures ou des parties galactiques</strong> permettent à l'Être conscient, aidé de Grands Frères Intra ou Extra terrestres, de retrouver sa véritable <strong>famille et histoire galactique</strong>.</p>
+        {ausoIntro[locale].map((para) => (
+          <p set:html={para} />
+        ))}
       </div>
     )}
 
     {hub === 'eveil-a-soi' ? (
       <>
-        {locale === 'fr' && (
-          <div class="eveil-intro" data-reveal>
-            <p class="eveil-intro__hl"><em>Les révélations vont se multiplier et conduire l’humanité au réveil</em></p>
-            <p>Les énergies 4D font sauter les verrous de l’inconscient jusqu’alors protecteur.</p>
-            <p class="eveil-intro__strong">Le retour à l’intérieur s’impose car l’extérieur explose.</p>
-            <p>Lever ses blocages et ses peurs, apaiser son mental et stabiliser son émotionnel permettent <strong>l’accès à la conscience de l’Âme</strong> : on parle de <em>la deuxième naissance</em>.</p>
-            <p>Pour l’humain réveillé, <strong>subir sa vie est terminé</strong>.</p>
-            <p>Devenu un humain éveillé, il va s’agir de <strong>la créer</strong>.</p>
-            <p class="eveil-intro__strong">Vibrant en Âme incarnée, l’humain conscient accède à sa multidimensionnalité.</p>
-          </div>
-        )}
+        <div class="eveil-intro" data-reveal>
+          {eveilIntro[locale].map((para, i) => (
+            <p
+              class={i === 0 ? 'eveil-intro__hl' : (i === 2 || i === eveilIntro[locale].length - 1) ? 'eveil-intro__strong' : undefined}
+              set:html={para}
+            />
+          ))}
+        </div>
 
         <div class="video-grid eveil-videos" data-reveal>
           {eveilVideoTitles.map((v) => (
