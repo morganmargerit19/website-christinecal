@@ -270,11 +270,7 @@ const c = tr[locale];
       <div class="paper-section__inner" data-reveal>
         <div class="mission-spacetime">
           <figure class="mission-spacetime__media">
-            {/* TODO — Vidéo « spirale dorée du temps » (Shutterstock #1062052936),
-                à intégrer une fois achetée par Christine. Placeholder en attendant. */}
-            <div class="mission-spacetime__placeholder" aria-hidden="true">
-              <span>Vidéo — spirale dorée du temps<br /><small>à intégrer (Shutterstock #1062052936)</small></span>
-            </div>
+            <img src={base + '/images/geometrie/spirale-temps.svg'} alt="Spirale dorée du temps — l'Espace-Temps se contracte" loading="lazy" />
           </figure>
           <div class="mission-spacetime__text prose">
             <h2>{c.s1Heading}</h2>
@@ -386,16 +382,12 @@ const c = tr[locale];
     align-items: center;
   }
   .mission-spacetime__media { margin: 0; align-self: start; }
-  .mission-spacetime__placeholder {
-    aspect-ratio: 1 / 1;
+  .mission-spacetime__media img {
+    width: 100%; display: block; aspect-ratio: 1 / 1;
     border-radius: var(--radius);
-    border: 1px dashed rgba(201, 169, 97, 0.55);
-    background: var(--glass, rgba(16, 13, 46, 0.35));
-    display: grid; place-items: center; text-align: center;
-    padding: var(--space-3);
-    color: var(--gold-soft); font-family: var(--font-serif);
+    box-shadow: 0 10px 40px rgba(7, 6, 26, 0.45);
+    border: 1px solid rgba(201, 169, 97, 0.22);
   }
-  .mission-spacetime__placeholder small { opacity: 0.7; font-size: 0.8em; }
   .mission-spacetime__text > :first-child { margin-top: 0; }
   @media (max-width: 600px) {
     .mission-spacetime { grid-template-columns: 1fr; gap: var(--space-3); }
