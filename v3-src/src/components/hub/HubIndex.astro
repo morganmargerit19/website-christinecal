@@ -74,7 +74,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Exploring beyond yourself: galactic memory, Mount Shasta & the new TELOS, the energies of Bugarach and the galactic team of the New Earth.',
       eyebrow: 'Awakening to the Self',
       h1: 'Exploring beyond yourself',
-      lede: 'Reconnect with your galactic memory, take part in the creation of the New Earth, and explore Mount Shasta, the new TELOS and the new energies of Bugarach.',
+      lede: 'Reconnect with your galactic memory, take part in the creation of the New Earth, and explore places of the 5th Dimension.',
       section: '',
     },
     pl: {
@@ -82,7 +82,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Odkrywać to, co większe: pamięć galaktyczna, Mount Shasta i nowe TELOS, energie Bugarach oraz galaktyczny zespół Nowej Ziemi.',
       eyebrow: 'Przebudzenie do Jaźni',
       h1: 'Odkrywać to, co większe',
-      lede: 'Odzyskać pamięć galaktyczną, uczestniczyć w tworzeniu Nowej Ziemi oraz odkrywać Mount Shasta, nowe TELOS i nowe energie Bugarach.',
+      lede: 'Odzyskać pamięć galaktyczną, uczestniczyć w tworzeniu Nowej Ziemi i odkrywać miejsca 5. Wymiaru.',
       section: '',
     },
     es: {
@@ -90,7 +90,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Explorar más allá de uno mismo: memoria galáctica, Monte Shasta y el nuevo TELOS, energías del Bugarach y el equipo galáctico de la Nueva Tierra.',
       eyebrow: 'Despertar al Sí',
       h1: 'Explorar más allá de uno mismo',
-      lede: 'Reencontrar tu memoria galáctica, participar en la creación de la Nueva Tierra y explorar el Monte Shasta, el nuevo TELOS y las nuevas energías del Bugarach.',
+      lede: 'Reencontrar tu memoria galáctica, participar en la creación de la Nueva Tierra y explorar lugares de la 5ª Dimensión.',
       section: '',
     },
     it: {
@@ -98,7 +98,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Esplorare oltre se stessi: memoria galattica, Monte Shasta e il nuovo TELOS, energie del Bugarach e il team galattico della Nuova Terra.',
       eyebrow: 'Risveglio al Sé',
       h1: 'Esplorare oltre se stessi',
-      lede: 'Ritrovare la propria memoria galattica, partecipare alla creazione della Nuova Terra ed esplorare il Monte Shasta, il nuovo TELOS e le nuove energie del Bugarach.',
+      lede: 'Ritrovare la propria memoria galattica, partecipare alla creazione della Nuova Terra ed esplorare luoghi di 5ª Dimensione.',
       section: '',
     },
   },
@@ -106,6 +106,32 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
 
 const discover: Record<Locale, string> = { fr: 'Découvrir', en: 'Discover', pl: 'Odkryj', es: 'Descubrir', it: 'Scopri' };
 const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn more', pl: 'Dowiedz się więcej', es: 'Saber más', it: 'Scopri di più' };
+
+// Titres des vidéos « Éveil à Soi » (IDs YouTube fixes, libellés traduits).
+const eveilVideoTitles: { id: string; title: Record<Locale, string>; meta: string }[] = [
+  {
+    id: 'AvtWBNRF8vE',
+    title: {
+      fr: "La transition planétaire terrestre à l'ère du Verseau",
+      en: 'The planetary transition of Earth in the Age of Aquarius',
+      pl: 'Ziemska transformacja planetarna w erze Wodnika',
+      es: 'La transición planetaria terrestre en la era de Acuario',
+      it: "La transizione planetaria terrestre nell'era dell'Acquario",
+    },
+    meta: 'Juin 2017',
+  },
+  {
+    id: 'rALVl8lKlBs',
+    title: {
+      fr: "Le défi de l'humanité actuelle",
+      en: 'The challenge of humanity today',
+      pl: 'Wyzwanie współczesnej ludzkości',
+      es: 'El desafío de la humanidad actual',
+      it: "La sfida dell'umanità attuale",
+    },
+    meta: 'Juin 2017',
+  },
+];
 
 const c = intro[hub][locale];
 
@@ -187,11 +213,8 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
         )}
 
         <div class="video-grid eveil-videos" data-reveal>
-          {[
-            { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017' },
-            { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017' },
-          ].map((v) => (
-            <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />
+          {eveilVideoTitles.map((v) => (
+            <VideoEmbed id={v.id} title={v.title[locale]} meta={v.meta} playLabel={t.video.play} />
           ))}
         </div>
 
