@@ -6,8 +6,11 @@ category: atelier
 order: 5
 lang: it
 image: /images/wp/eneagramme.jpg
-imageAlt: "Uscire dalla propria matrice personale"
+imageAlt: "L'enneagramma — uscire dalla propria matrice personale"
 lede: Trasmutare la propria paura di base per passare da una vita reattiva a una vita creativa.
+cardLede: "Trasforma la tua paura principale in una fonte di energia."
+richLayout: sortir-matrice
+hideHeaderImage: true
 dates:
   - "24–25 ottobre 2026"
   - "23–24 gennaio 2027"

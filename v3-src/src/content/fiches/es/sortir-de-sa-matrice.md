@@ -6,8 +6,11 @@ category: atelier
 order: 5
 lang: es
 image: /images/wp/eneagramme.jpg
-imageAlt: "Salir de la propia matriz personal"
+imageAlt: "El eneagrama — salir de la propia matriz personal"
 lede: Transmutar el miedo de base para pasar de una vida reactiva a una vida creativa.
+cardLede: "Transmuta tu miedo principal en una fuente de energía."
+richLayout: sortir-matrice
+hideHeaderImage: true
 dates:
   - "24–25 de octubre de 2026"
   - "23–24 de enero de 2027"

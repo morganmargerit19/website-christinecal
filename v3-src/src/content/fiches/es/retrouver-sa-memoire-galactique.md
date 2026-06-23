@@ -8,15 +8,20 @@ order: 10
 lang: es
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Recuperar la memoria galáctica"
+lede: Recuperar el hilo conductor de su historia y el origen galáctico de su Alma.
+bodyImage:
+  src: /images/wp/claude-jarry-des-loges.jpg
+  alt: "Análisis de carta astral — Claude Jarry des Loges"
+  caption: "Análisis específico de mi carta — Claude Jarry des Loges"
 videos:
   - id: 0eDwfiYJY3w
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
     title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
     meta: "Août 2022"
     credit: debowska
   - id: J7CRbYCPSKI
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
-    title: "Extra-terrestres — Conférence (même sujet)"
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    title: "Extra-terrestres — Conférence (même sujet, avec compléments)"
     meta: "16 août 2025"
     credit: debowska
   - id: raXSnQhrWiA
@@ -24,7 +29,6 @@ videos:
     title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
     meta: "Rennes-les-Bains · 15-16 août 2025"
     credit: debowska
-lede: Recuperar el hilo conductor de su historia y el origen galáctico de su Alma.
 ---
 
 > No busques mediante la voluntad de tu personalidad. Es el Alma la que, despierta
@@ -47,15 +51,16 @@ que reveló sus orígenes en esta galaxia.
 
 ## Testimonio de vida
 
-Revelación de su multidimensionalidad en el Mont Shasta, entre 2017 y 2019,
-con la ayuda de los Intraterrestres de TELOS — el regreso de una versión de sí misma
-para colaborar en la nueva línea espacio-temporal.
+Recuperar el **hilo conductor de su historia y la elección del SÍ MISMO a través
+del Alma**, a partir de un largo recorrido iniciático.
 
-## Talleres iniciáticos
+Revelación de su multidimensionalidad en el Mont Shasta, tras experiencias
+vividas entre 2017 y 2019 con la ayuda de los Intraterrestres de TELOS
+(síntesis realizada sobre el terreno en 2026) — el regreso de una versión de sí
+misma para colaborar en la nueva línea espacio-temporal.
 
-- Del cuerpo físico al templo iniciático
-- Del hombre terrestre al humano cósmico
-- Misión de los Light Workers
+Análisis específico de mi carta por una amiga que practica una astrología
+particular: **Claude Jarry des Loges**.
 
 > Invitación a los cuestionamientos: informarse antes de juzgar, y mantener el
 > respeto por el libre pensamiento de cada uno.

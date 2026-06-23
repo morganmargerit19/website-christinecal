@@ -8,15 +8,20 @@ order: 10
 lang: en
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Recovering your galactic memory"
+lede: Recover the guiding thread of your story and the galactic origin of your Soul.
+bodyImage:
+  src: /images/wp/claude-jarry-des-loges.jpg
+  alt: "Astral chart reading — Claude Jarry des Loges"
+  caption: "A specific reading of my chart — Claude Jarry des Loges"
 videos:
   - id: 0eDwfiYJY3w
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
     title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
     meta: "Août 2022"
     credit: debowska
   - id: J7CRbYCPSKI
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
-    title: "Extra-terrestres — Conférence (même sujet)"
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    title: "Extra-terrestres — Conférence (même sujet, avec compléments)"
     meta: "16 août 2025"
     credit: debowska
   - id: raXSnQhrWiA
@@ -24,7 +29,6 @@ videos:
     title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
     meta: "Rennes-les-Bains · 15-16 août 2025"
     credit: debowska
-lede: Recover the guiding thread of your story and the galactic origin of your Soul.
 ---
 
 > Do not search through the will of your personality. It is the Soul that, when
@@ -47,15 +51,16 @@ revealing her origins in this galaxy.
 
 ## A life testimony
 
-Revelation of her multidimensionality at Mount Shasta, between 2017 and 2019,
-with the help of the Inner-Earth beings of TELOS — the return of a version of
-herself to collaborate on the new space-time line.
+Recovering the **guiding thread of one's story and the choice of the SELF
+through the Soul**, drawn from a long initiatory journey.
 
-## Initiatory workshops
+Revelation of her multidimensionality at Mount Shasta, following experiences
+lived between 2017 and 2019 with the help of the Inner-Earth beings of TELOS
+(a synthesis made on site in 2026) — the return of a version of herself to
+collaborate on the new space-time line.
 
-- From the physical body to the initiatory temple
-- From the earthly man to the cosmic human
-- The mission of the Light Workers
+A specific reading of my chart by a friend who practises a particular kind of
+astrology: **Claude Jarry des Loges**.
 
 > An invitation to questioning: inform yourself before judging, and uphold
 > respect for everyone's freedom of thought.

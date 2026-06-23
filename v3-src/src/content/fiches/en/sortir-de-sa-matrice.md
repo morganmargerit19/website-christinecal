@@ -6,8 +6,11 @@ category: atelier
 order: 5
 lang: en
 image: /images/wp/eneagramme.jpg
-imageAlt: "Stepping out of your personal matrix"
+imageAlt: "The Enneagram — stepping out of your personal matrix"
 lede: Transmute your core fear to move from a reactive life to a creative life.
+cardLede: "Transmute your major fear into a source of energy."
+richLayout: sortir-matrice
+hideHeaderImage: true
 dates:
   - "October 24–25, 2026"
   - "January 23–24, 2027"

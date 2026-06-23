@@ -9,27 +9,29 @@ image: /images/wp/mediumnite.jpg
 imageAlt: "Odczyt Duszy — konsultacja mediumiczna"
 featured: true
 lede: Odczyt Duszy, który ujawnia twoje zasoby i twoją misję życiową.
+cardLede: "Odkryj swoje dary i swoją misję życiową, i stań się twórcą własnego życia."
+hideHeaderImage: true
+hideHeaderMeta: true
+practicalFooter: true
 audio: /audio/interpreter-sa-mediumnite-adofm.mp3
-audioTitle: "Interpretacja swojego medium — audycja radiowa (Ado FM)"
+audioTitle: "Być Medium — wywiad z 28.08.2013 przeprowadzony przez Boba Bellancę (Ado FM)"
 format: Sesja przez Zoom
 duration: 1h30
 price: 70 €
 videos:
   - id: T3R7jxtKto8
     title: Przebieg sesji
-    meta: Konsultacja mediumiczna · Christine CAL
+    meta: Sesja coachingu mediumicznego
 ---
 
 Odważ się na spotkanie z mądrą częścią samego siebie, we współpracy z twoimi
-przewodnikami. **20 lat doświadczenia** — rozeznanie i twoja osobista wolność
-zawsze pozostają zasadą.
+zewnętrznymi przewodnikami. **20 lat doświadczenia** — a mimo to rozeznanie
+i twoja osobista wolność zawsze pozostają zasadą.
 
-## Co daje ci konsultacja
-
-- Odkrycie twoich darów i atutów do rozwinięcia, by urzeczywistnić twoją misję
-- Rozwiązanie sytuacji relacyjnych lub zawodowych i zniesienie nieświadomych blokad
-- Wykrycie form-myśli leżących u źródła przyszłego „nie-do-powiedzenia"
-- Otwarcie twojego pola widzenia i percepcji
+- Odkryj swoje dary i atuty, które warto rozwinąć, by urzeczywistnić swoją misję i ewentualnie przygotować swoją transformację
+- Rozwikłaj swoje trudne sytuacje relacyjne lub zawodowe i znieś nieświadome blokady, by rozwinąć twórczą moc swojego życia
+- Wykryj formy-myśli mogące leżeć u źródła przyszłego „nie-do-powiedzenia"
+- Otwórz swoje pole widzenia i percepcji, by zmienić swój świat wewnętrzny, a tym samym zewnętrzny…
 
 ## Świadectwa
 

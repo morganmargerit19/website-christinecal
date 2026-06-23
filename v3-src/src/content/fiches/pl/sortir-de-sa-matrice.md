@@ -6,8 +6,11 @@ category: atelier
 order: 5
 lang: pl
 image: /images/wp/eneagramme.jpg
-imageAlt: "Wyjście z własnej matrycy osobistej"
+imageAlt: "Enneagram — wyjście z własnej matrycy osobistej"
 lede: Transmutacja swojego podstawowego lęku, by przejść od życia reaktywnego do życia twórczego.
+cardLede: "Przekształć swój główny lęk w źródło energii."
+richLayout: sortir-matrice
+hideHeaderImage: true
 dates:
   - "24–25 października 2026"
   - "23–24 stycznia 2027"

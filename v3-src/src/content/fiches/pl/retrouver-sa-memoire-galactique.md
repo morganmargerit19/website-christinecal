@@ -8,15 +8,20 @@ order: 10
 lang: pl
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Odzyskanie swojej pamięci galaktycznej"
+lede: Odzyskanie nici przewodniej swojej historii i galaktycznego pochodzenia swojej Duszy.
+bodyImage:
+  src: /images/wp/claude-jarry-des-loges.jpg
+  alt: "Analiza kosmogramu — Claude Jarry des Loges"
+  caption: "Szczególna analiza mojego kosmogramu — Claude Jarry des Loges"
 videos:
   - id: 0eDwfiYJY3w
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
     title: "Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique"
     meta: "Août 2022"
     credit: debowska
   - id: J7CRbYCPSKI
-    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
-    title: "Extra-terrestres — Conférence (même sujet)"
+    cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
+    title: "Extra-terrestres — Conférence (même sujet, avec compléments)"
     meta: "16 août 2025"
     credit: debowska
   - id: raXSnQhrWiA
@@ -24,7 +29,6 @@ videos:
     title: "Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan"
     meta: "Rennes-les-Bains · 15-16 août 2025"
     credit: debowska
-lede: Odzyskanie nici przewodniej swojej historii i galaktycznego pochodzenia swojej Duszy.
 ---
 
 > Nie szukaj poprzez wolę swojej osobowości. To Dusza, przebudzona
@@ -47,15 +51,16 @@ ujawniający jej pochodzenie w tej galaktyce.
 
 ## Świadectwo życia
 
-Objawienie jej wielowymiarowości na Mount Shasta, między 2017 a 2019 rokiem,
-z pomocą Istot Wewnątrzziemskich z TELOS — powrót wersji samej siebie
+Odzyskanie **nici przewodniej swojej historii i wyboru JAŹNI poprzez Duszę**,
+wywiedzionych z długiej drogi inicjacyjnej.
+
+Objawienie jej wielowymiarowości na Mount Shasta, w następstwie doświadczeń
+przeżytych między 2017 a 2019 rokiem z pomocą Istot Wewnątrzziemskich z TELOS
+(synteza dokonana na miejscu w 2026 roku) — powrót wersji samej siebie
 do współpracy nad nową linią czasoprzestrzenną.
 
-## Warsztaty inicjacyjne
-
-- Od ciała fizycznego do świątyni inicjacyjnej
-- Od człowieka ziemskiego do człowieka kosmicznego
-- Misja Pracowników Światła
+Szczególna analiza mojego kosmogramu przez przyjaciółkę, która praktykuje
+szczególny rodzaj astrologii: **Claude Jarry des Loges**.
 
 > Zaproszenie do stawiania pytań: zasięgnąć informacji przed osądzeniem i zachować
 > szacunek dla wolnej myśli każdego.
