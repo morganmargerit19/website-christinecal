@@ -1,4 +1,4 @@
-// Merkaba v12 — d'après le retour de Christine (mail « POUR FINIR ») :
+// Merkaba v13 — TORE toroïdal validé (deux lobes, être au centre) + fleur de vie + merkaba + chakras
 // fleur de vie (gardée) + MERKABA 3D (statique) + CHAMP orbital + VORTEX / champ de torsion
 // autour de l'être = « du mouvement autour », deux nappes de spirales en contre-rotation,
 // or + violet doux, volontairement discret (réf. 3 « le mouvement parfait mais trop voyant »).
@@ -50,15 +50,29 @@ function fieldElectrons(){
   return e(0,26,0)+e(60,32,-4)+e(120,38,-8);
 }
 
-// ---------- VORTEX / champ de torsion (« du mouvement autour ») ----------
-// Deux nappes de bras spiralés en contre-rotation : sensation de torsion/vortex (réf.3)
-// et de rayonnement (réf.2), mais douce — or + violet, faible opacité, léger flou (pas voyant).
-function vortexField(){
-  const C=FC;
-  const arm=(turns,r0,r1,steps)=>{let d='';for(let i=0;i<=steps;i++){const t=i/steps;const a=t*turns*2*Math.PI;const r=r0+(r1-r0)*t;d+=(i?' L':'M')+f(C[0]+r*Math.cos(a))+','+f(C[1]+r*Math.sin(a));}return d;};
-  const layer=(cls,n,color,op,w,turns,r1)=>{let g=`<g class='${cls}'>`;for(let k=0;k<n;k++){g+=`<path d='${arm(turns,70,r1,64)}' fill='none' stroke='${color}' stroke-width='${w}' stroke-opacity='${op}' stroke-linecap='round' transform='rotate(${f(k*360/n)} ${C[0]} ${C[1]})'/>`;}return g+'</g>';};
-  // nappe or (sens horaire) + nappe violet (sens anti-horaire) = contre-rotation
-  return layer('vxA',5,'#e6d49a',.14,1.0,.6,262)+layer('vxB',5,'#9a8fd0',.10,0.9,.6,262);
+// ---------- TORE / champ toroïdal (forme validée) ----------
+// Vrai tore vu de profil : DEUX LOBES bombés à gauche/droite, centre évidé -> l'être
+// apparaît dans le pincement central. Fines particules (or/violet/bleu) qui circulent
+// autour (flux animé en CSS). D'après l'inspiration de Christine (champ toroïdal).
+function torusField(){
+  const cxT=cx, cyT=300, Rmaj=170, rtub=64, Ys=2.3, tau=13*Math.PI/180;
+  const st=Math.sin(tau), ct=Math.cos(tau), CULL=78;
+  const cols=['#f6ead0','#f0e0a8','#d8c6f2','#b9a6e8','#a9d2f2']; // or dominant + violet + bleu doux
+  const P=(u,v)=>{const rho=Rmaj+rtub*Math.cos(v), X=rho*Math.cos(u), Yt=rtub*Math.sin(v)*Ys, Zd=rho*Math.sin(u);
+    const Yr=Yt*ct+Zd*st, dep=-Yt*st+Zd*ct; return [cxT+X, cyT-Yr, dep];};
+  // évide les points qui sont DEVANT l'être au centre -> on garde les lobes + les arcs arrière
+  const culled=(pts,col,op,w)=>{let d='',pen=false;for(const [x,y,dep] of pts){
+      if(Math.abs(x-cxT)<CULL && dep>0){pen=false;continue;}
+      d+=(pen?' L':'M')+f(x)+','+f(y); pen=true;}
+    return d?`<path class='vxd' d='${d}' fill='none' stroke='${col}' stroke-width='${w}' stroke-opacity='${op}' stroke-linecap='round' stroke-dasharray='0.8 3.2'/>`:'';};
+  let g='';
+  const NV=14; // longitudes (tour du donut)
+  for(let j=0;j<NV;j++){const v0=j*2*Math.PI/NV,col=cols[j%cols.length],pts=[];
+    for(let i=0;i<=180;i++) pts.push(P(2*Math.PI*i/180, v0)); g+=culled(pts,col,.55,1.7);}
+  const NU=26; // sections du tube -> dessine les lobes gauche/droite
+  for(let k=0;k<NU;k++){const u0=k*2*Math.PI/NU,col=cols[k%cols.length],pts=[];
+    for(let i=0;i<=70;i++) pts.push(P(u0, 2*Math.PI*i/70)); g+=culled(pts,col,.42,1.5);}
+  return g;
 }
 
 // ---------- fleur de vie (gardée — Christine adore) ----------
@@ -94,8 +108,7 @@ const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' role='i
   <filter id='mkHaze' x='-60%' y='-60%' width='220%' height='220%'><feGaussianBlur stdDeviation='1.6'/></filter>
   <style>
     .orb{transform-origin:${FC[0]}px ${FC[1]}px;animation:spin linear infinite}
-    .vxA{transform-origin:${FC[0]}px ${FC[1]}px;animation:spin 60s linear infinite}
-    .vxB{transform-origin:${FC[0]}px ${FC[1]}px;animation:spinR 82s linear infinite}
+    .vxd{animation:vxdash 2s linear infinite}
     .mk{transform-origin:${FC[0]}px ${FC[1]}px;animation:mkbreathe 6s ease-in-out infinite}
     .core{transform-origin:300px ${FC[1]}px;animation:breathe 6s ease-in-out infinite}
     .fol{transform-origin:300px 300px;animation:breathe 9s ease-in-out infinite}
@@ -104,28 +117,26 @@ const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' role='i
     .crown{transform-origin:300px 150px;animation:breathe 4.5s ease-in-out infinite}
     .star{animation:twk 3.4s ease-in-out infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes spinR{to{transform:rotate(-360deg)}}
+    @keyframes vxdash{to{stroke-dashoffset:-32}}
     @keyframes mkbreathe{0%,100%{opacity:.78;transform:scale(.99)}50%{opacity:1;transform:scale(1.012)}}
     @keyframes breathe{0%,100%{transform:scale(.95);opacity:.45}50%{transform:scale(1.05);opacity:.85}}
     @keyframes heartbeat{0%,100%{transform:scale(.92);opacity:.8}50%{transform:scale(1.08);opacity:1}}
     @keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
     @keyframes twk{0%,100%{opacity:.25}50%{opacity:.95}}
-    @media (prefers-reduced-motion: reduce){.orb,.vxA,.vxB,.mk,.core,.fol,.chk,.heart,.crown,.star{animation:none}.core,.fol,.crown{opacity:.7}.mk{opacity:.92}.chk,.heart,.star{opacity:.95}}
+    @media (prefers-reduced-motion: reduce){.orb,.vxd,.mk,.core,.fol,.chk,.heart,.crown,.star{animation:none}.core,.fol,.crown{opacity:.7}.mk{opacity:.92}.chk,.heart,.star{opacity:.95}}
   </style>
 </defs>
 <rect width='600' height='600' fill='url(#mkBg)'/>
 <g class='star'>${starEls()}</g>
 <g class='fol' fill='none' stroke='#c9a961' stroke-width='.8' stroke-opacity='.16'>${flowerOfLife(64)}</g>
-<g filter='url(#mkHaze)'>${vortexField()}</g>
-<g class='burst' mask='url(#mkRayMask)' stroke='#ffe9a8' stroke-opacity='.4' stroke-width='.6'>${(function(){let s='';for(let k=0;k<72;k++){const a=k/72*2*Math.PI;s+=`<line x1='${f(cx+30*Math.cos(a))}' y1='${f(FC[1]+30*Math.sin(a))}' x2='${f(cx+300*Math.cos(a))}' y2='${f(FC[1]+300*Math.sin(a))}'/>`;}return s;})()}</g>
+<g class='burst' mask='url(#mkRayMask)' stroke='#ffe9a8' stroke-opacity='.28' stroke-width='.6'>${(function(){let s='';for(let k=0;k<72;k++){const a=k/72*2*Math.PI;s+=`<line x1='${f(cx+30*Math.cos(a))}' y1='${f(FC[1]+30*Math.sin(a))}' x2='${f(cx+300*Math.cos(a))}' y2='${f(FC[1]+300*Math.sin(a))}'/>`;}return s;})()}</g>
 <ellipse class='core' cx='300' cy='${FC[1]}' rx='150' ry='150' fill='url(#mkCore)' filter='url(#mkSoft)'/>
+<g filter='url(#mkGlow)'>${torusField()}</g>
 <g class='mk' filter='url(#mkGlow)'>${merkaba()}</g>
-<g filter='url(#mkGlow)'>${fieldRings()}</g>
 ${bodyParts()}
 <circle class='heart' cx='300' cy='262' r='36' fill='url(#mkHeart)'/>
 <circle class='crown' cx='300' cy='150' r='24' fill='url(#mkCrownG)'/>
 <g filter='url(#mkGlow)'>${chakraEls()}</g>
-<g filter='url(#mkGlow)'>${fieldElectrons()}</g>
 </svg>`;
 fs.writeFileSync(OUT, svg);
 console.log('écrit ' + OUT + ' (' + svg.length + ' octets)');
