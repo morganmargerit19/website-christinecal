@@ -68,6 +68,8 @@ const fiches = defineCollection({
     // Visuel principal (chemin sous /images/… ; vraies images intégrées demain)
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    // Diaporama en tête de fiche (remplace l'image unique) — liste de chemins.
+    slideshow: z.array(z.string()).default([]),
     // Piste audio (ex. émission radio) — lecteur affiché sur la fiche
     audio: z.string().optional(),
     audioTitle: z.string().optional(),

@@ -85,6 +85,30 @@ source utilisée. NE PAS scraper le WP en ligne.
 ⚠️ Rappel : ne PAS scraper le WP en ligne (403). Tout est dans
 `sources/wp-v2/pages/` (textes) et `v3-src/public/images/wp/` (images).
 
+---
+
+# Mail 11 — « PAGE TELOS et BUGARACH » (21:15) — IMPLÉMENTÉ
+
+(Total réel = **11 mails** ; le mail 7 est annulé par le 9.)
+
+## ✅ Fait
+- **Les Intra du nouveau Telos / Mont Shasta** (`les-intra-telos-mont-shasta.md`) :
+  - **Diaporama** des 7 photos `diapo-shasta1..7.jpg` en tête (remplace la
+    photo-montage de Christine) → nouveau composant `components/Slideshow.astro`
+    + champ `slideshow` au schéma, rendu par `Fiche.astro`.
+  - Contenu **repris/enrichi** depuis l'extract WP (rencontres, Fondation Telos
+    Mondial, neurosciences, DVD…).
+  - Section **« ✦ Le nouveau Telos » mise en évidence**.
+  - Liste textuelle des stages retirée (cartes dessous).
+- **Les Extras du Bugarach** (`les-extras-du-bugarach.md`) :
+  - **Photo en double corrigée** : `image` → `bugarach-2.jpg` (photo distincte
+    « contact Gardiens »), bannière `bugarach-1280x400-1.jpg` conservée.
+  - Texte **complété** depuis l'extract WP (2003, 2010, 2022, fin 2025, 2026…).
+
+## ⏸️ Reste (mail 11)
+- **Telos — « vidéos interview radio »** : IDs absents de l'extract → à fournir
+  par Christine.
+
 Ordre chrono (le plus récent fait foi) :
 - Mail 20:25 « PAGE CONSTRUIRE… » → **ANNULÉ** par le mail 20:40.
 - Mail 20:31 « PAGE EVEIL AU SOI ».

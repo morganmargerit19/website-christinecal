@@ -158,6 +158,13 @@
         "imageAlt": {
           "type": "string"
         },
+        "slideshow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
         "audio": {
           "type": "string"
         },

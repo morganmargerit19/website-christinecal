@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import VideoEmbed from '../components/VideoEmbed.astro';
+import Slideshow from '../components/Slideshow.astro';
 import { ui } from '../i18n/ui';
 import { base, fichePath, hubs, locales, pathFor, type Locale } from '../i18n/utils';
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -108,7 +109,11 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    {f.image && !f.hideHeaderImage && (
+    {f.slideshow.length > 0 ? (
+      <section class="container">
+        <Slideshow images={f.slideshow} alt={f.imageAlt ?? f.title} />
+      </section>
+    ) : f.image && !f.hideHeaderImage && (
       <section class="container">
         <figure class="fiche-image" style={`max-width: min(100%, ${imgMax}px)`}>
           <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
