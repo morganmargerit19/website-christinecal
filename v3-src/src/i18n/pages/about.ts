@@ -58,10 +58,11 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     videos: {
-      heading: 'Deux vidéos de présentation',
+      heading: 'Vidéos de présentation',
       list: [
         { id: '0QL8ive6NuU', title: 'Qui est Christine CAL', meta: 'Juillet 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Témoignage de vie de C.C.', meta: 'Juillet 2016 · 4 min 39' },
+        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions et Médiumnité — Radio Fréquence Évasion', meta: 'Interview · 11 avril 2017' },
       ],
     },
     journey: {
@@ -180,10 +181,11 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     videos: {
-      heading: 'Two introduction videos',
+      heading: 'Introduction videos',
       list: [
         { id: '0QL8ive6NuU', title: 'Who is Christine CAL (in French)', meta: 'July 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'A life testimony by C.C. (in French)', meta: 'July 2016 · 4 min 39' },
+        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions and Mediumship (in French) — Radio Fréquence Évasion', meta: 'Interview · April 11, 2017' },
       ],
     },
     journey: {
@@ -302,10 +304,11 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     videos: {
-      heading: 'Dwa filmy wprowadzające',
+      heading: 'Filmy wprowadzające',
       list: [
         { id: '0QL8ive6NuU', title: 'Kim jest Christine CAL (po francusku)', meta: 'Lipiec 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Świadectwo życia C.C. (po francusku)', meta: 'Lipiec 2016 · 4 min 39' },
+        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions et Médiumnité (po francusku) — Radio Fréquence Évasion', meta: 'Wywiad · 11 kwietnia 2017' },
       ],
     },
     journey: {
@@ -424,10 +427,11 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     videos: {
-      heading: 'Dos vídeos de presentación',
+      heading: 'Vídeos de presentación',
       list: [
         { id: '0QL8ive6NuU', title: 'Quién es Christine CAL (en francés)', meta: 'Julio de 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Testimonio de vida de C.C. (en francés)', meta: 'Julio de 2016 · 4 min 39' },
+        { id: 'ZKYMHeWzyM8', title: 'Multidimensiones y Mediumnidad (en francés) — Radio Fréquence Évasion', meta: 'Entrevista · 11 de abril de 2017' },
       ],
     },
     journey: {
@@ -546,10 +550,11 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     videos: {
-      heading: 'Due video di presentazione',
+      heading: 'Video di presentazione',
       list: [
         { id: '0QL8ive6NuU', title: 'Chi è Christine CAL (in francese)', meta: 'Luglio 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Testimonianza di vita di C.C. (in francese)', meta: 'Luglio 2016 · 4 min 39' },
+        { id: 'ZKYMHeWzyM8', title: 'Multidimensioni e Medianità (in francese) — Radio Fréquence Évasion', meta: 'Intervista · 11 aprile 2017' },
       ],
     },
     journey: {

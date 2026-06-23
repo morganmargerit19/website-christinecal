@@ -18,6 +18,9 @@ slideshow:
   - /images/wp/diapo-shasta7.jpg
 lede: W połączeniu z wewnątrzziemskim miastem Telos od 2003 roku.
 videos:
+  - id: 9c9DHFKWst0
+    title: "La Terre Creuse et le Mont Shasta — Interview Radio Fréquence Évasion"
+    meta: "23 avril 2017"
   - id: ouTq-jp9NgM
     cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
     title: "Mont Shasta Telos — Voyages multidimensionnels"
