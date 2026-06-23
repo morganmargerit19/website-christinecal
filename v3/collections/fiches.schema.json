@@ -53,6 +53,83 @@
         "lede": {
           "type": "string"
         },
+        "cardLede": {
+          "type": "string"
+        },
+        "hideHeaderImage": {
+          "type": "boolean",
+          "default": false
+        },
+        "hideHeaderMeta": {
+          "type": "boolean",
+          "default": false
+        },
+        "practicalFooter": {
+          "type": "boolean",
+          "default": false
+        },
+        "richLayout": {
+          "type": "string",
+          "enum": [
+            "sortir-matrice"
+          ]
+        },
+        "pendingVideos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "meta": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "videosHeading": {
+          "type": "string"
+        },
+        "testimonials": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "quote": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "quote"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "bodyImage": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            },
+            "caption": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "src"
+          ],
+          "additionalProperties": false
+        },
         "dates": {
           "type": "array",
           "items": {
@@ -80,6 +157,13 @@
         },
         "imageAlt": {
           "type": "string"
+        },
+        "slideshow": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
         },
         "audio": {
           "type": "string"

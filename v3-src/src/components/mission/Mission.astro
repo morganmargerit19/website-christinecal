@@ -31,7 +31,7 @@ const tr: Record<Locale, MissionContent> = {
     metaDesc: "Éveil à la multidimensionnalité de l'Être : la mission d'une galactique au sol, accompagner le passage de la conscience de la 3D à la 5D.",
     eyebrow: 'Ma mission',
     h1: "Éveil à la multidimensionnalité de l'Être",
-    lede: "« Il est temps de fusionner l'Essence-ciel dans l'Existence-Ciel. » L'expérience de vie d'une galactique au sol.",
+    lede: "« Il est temps de fusionner l'Essence-ciel dans l'Existence-Ciel. » Expérience de vie d'une galactique au sol.",
     bannerAlt: 'Passage de la conscience vers la cinquième dimension',
     s1Heading: "L'Espace-Temps se contracte",
     s1p1: "Notre galaxie traverse une ceinture de photons et de multiples portails. Notre monde oscille entre des trajectoires spatio-temporelles différentes qui s'interpénètrent, autorisant des voyages dans l'espace-temps.",
@@ -266,11 +266,22 @@ const c = tr[locale];
   </section>
 
   <section class="paper-section">
-    <div class="container container--narrow">
-      <div class="paper-section__inner prose" data-reveal>
-        <h2>{c.s1Heading}</h2>
-        <p>{c.s1p1}</p>
-        <p>{c.s1p2}</p>
+    <div class="container">
+      <div class="paper-section__inner" data-reveal>
+        <div class="mission-spacetime">
+          <figure class="mission-spacetime__media">
+            {/* TODO — Vidéo « spirale dorée du temps » (Shutterstock #1062052936),
+                à intégrer une fois achetée par Christine. Placeholder en attendant. */}
+            <div class="mission-spacetime__placeholder" aria-hidden="true">
+              <span>Vidéo — spirale dorée du temps<br /><small>à intégrer (Shutterstock #1062052936)</small></span>
+            </div>
+          </figure>
+          <div class="mission-spacetime__text prose">
+            <h2>{c.s1Heading}</h2>
+            <p>{c.s1p1}</p>
+            <p>{c.s1p2}</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -366,6 +377,30 @@ const c = tr[locale];
   .mission-banner img { width: 100%; height: clamp(220px, 40vh, 420px); object-fit: cover; object-position: center 22%; display: block; }
 
   .mission-points li { margin-bottom: 0.6em; }
+
+  /* « L'Espace-Temps se contracte » : vidéo à gauche, texte à droite */
+  .mission-spacetime {
+    display: grid;
+    grid-template-columns: clamp(220px, 38%, 360px) 1fr;
+    gap: clamp(1.6rem, 4vw, 3rem);
+    align-items: center;
+  }
+  .mission-spacetime__media { margin: 0; align-self: start; }
+  .mission-spacetime__placeholder {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    border: 1px dashed rgba(201, 169, 97, 0.55);
+    background: var(--glass, rgba(16, 13, 46, 0.35));
+    display: grid; place-items: center; text-align: center;
+    padding: var(--space-3);
+    color: var(--gold-soft); font-family: var(--font-serif);
+  }
+  .mission-spacetime__placeholder small { opacity: 0.7; font-size: 0.8em; }
+  .mission-spacetime__text > :first-child { margin-top: 0; }
+  @media (max-width: 600px) {
+    .mission-spacetime { grid-template-columns: 1fr; gap: var(--space-3); }
+    .mission-spacetime__media { width: 70%; margin: 0 auto; }
+  }
 
   .mission-pioneer {
     display: grid;

@@ -28,6 +28,35 @@ const fiches = defineCollection({
     lang: z.enum(['fr', 'en', 'pl', 'es', 'it']).default('fr'),
     // Résumé court (carte + chapeau de page). Christine : « pas de blabla ».
     lede: z.string(),
+    // Texte spécifique affiché sur la CARTE du hub (si différent du `lede` de la
+    // page). Permet d'avoir un sous-titre de carte distinct du chapeau de page.
+    cardLede: z.string().optional(),
+    // Mise en page « riche » de la fiche : on masque l'image / les infos
+    // pratiques générées en tête, car le corps gère lui-même la mise en page.
+    hideHeaderImage: z.boolean().default(false),
+    hideHeaderMeta: z.boolean().default(false),
+    // Affiche un encart « infos pratiques » (petite image + format/durée/tarif)
+    // EN BAS de la fiche, après les vidéos (souhait de Christine, page Consultation).
+    practicalFooter: z.boolean().default(false),
+    // Mise en page sur-mesure rendue par le layout (images positionnées avec le
+    // bon `base`). Identifiant de gabarit ; pour l'instant : 'sortir-matrice'.
+    richLayout: z.enum(['sortir-matrice']).optional(),
+    // Emplacements vidéo « à intégrer » (placeholders) en attente d'un ID YouTube.
+    pendingVideos: z
+      .array(z.object({ title: z.string().optional(), meta: z.string().optional() }))
+      .default([]),
+    // Titre affiché au-dessus de la grille vidéo (ex. « Témoignage de ma propre
+    // expérience grâce à ces outils » avant les vidéos Debowska).
+    videosHeading: z.string().optional(),
+    // Témoignages affichés en bas de fiche (après les vidéos).
+    testimonials: z
+      .array(z.object({ quote: z.string(), author: z.string().optional() }))
+      .default([]),
+    // Image illustrative insérée après le corps (chemin sous /images/…), rendue
+    // par le layout pour bénéficier du bon `base` (impossible en markdown brut).
+    bodyImage: z
+      .object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() })
+      .optional(),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),
@@ -39,6 +68,8 @@ const fiches = defineCollection({
     // Visuel principal (chemin sous /images/… ; vraies images intégrées demain)
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    // Diaporama en tête de fiche (remplace l'image unique) — liste de chemins.
+    slideshow: z.array(z.string()).default([]),
     // Piste audio (ex. émission radio) — lecteur affiché sur la fiche
     audio: z.string().optional(),
     audioTitle: z.string().optional(),

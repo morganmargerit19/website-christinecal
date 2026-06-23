@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import VideoEmbed from '../VideoEmbed.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../../i18n/ui';
 import { base, fichePath, pathFor, type Locale } from '../../i18n/utils';
@@ -65,7 +66,7 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
       desc: 'Explorer plus grand que soi : mémoire galactique, Mont Shasta & nouveau TELOS, énergies du Bugarach et la team galactique de la Nouvelle Terre.',
       eyebrow: 'Éveil au Soi',
       h1: 'Explorer plus grand que soi',
-      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer le Mont Shasta, le nouveau TELOS et les nouvelles énergies du Bugarach.',
+      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer des lieux de 5ème Dimension.',
       section: '',
     },
     en: {
@@ -121,6 +122,18 @@ const rest = fiches.filter((f) => !f.data.featured);
 // la rubrique reste une carte normale qui mène à sa page.
 const childSlugs = new Set(rest.flatMap((f) => f.data.stages));
 const cards = rest.filter((f) => !childSlugs.has(slugOf(f.id)));
+
+// Texte affiché sur la carte (sous-titre de carte distinct du chapeau de page).
+const cardText = (f: (typeof fiches)[number]) => f.data.cardLede ?? f.data.lede;
+
+// Page « Éveil à Soi » : disposition voulue par Christine — Consultation et
+// Sortir de sa matrice côte à côte, puis Construire le vaisseau plus grand
+// dessous. On récupère les fiches par slug pour garder l'ordre demandé.
+const bySlug = (s: string) => fiches.find((f) => slugOf(f.id) === s);
+const eveilDuo = ['consultation-mediumnique', 'sortir-de-sa-matrice']
+  .map(bySlug)
+  .filter(Boolean) as typeof fiches;
+const eveilVaisseau = bySlug('construire-son-vaisseau');
 ---
 <Base locale={locale} routeKey={routeKey} title={c.title} description={c.desc}>
   <section class="page-hero hub-hero">
@@ -140,41 +153,104 @@ const cards = rest.filter((f) => !childSlugs.has(slugOf(f.id)));
 
   <section class="container">
     <figure class="hub-banner">
-      <img src={base + `/images/wp/bandeau-${hub}.jpg`} alt="" aria-hidden="true" loading="lazy" />
+      <img
+        src={base + (hub === 'eveil-au-soi' ? '/images/wp/bandeau-eveil-au-soi-2.jpg' : `/images/wp/bandeau-${hub}.jpg`)}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+      />
     </figure>
 
-    {featured.length > 0 && (
-      <div class="hub-grid">
-        {featured.map((f) => (
-          <a class="portal-card portal-card--featured" href={fichePath(hub, slugOf(f.id), locale)}>
-            <span class="portal-card__kicker">{f.data.kicker}</span>
-            <h3>{f.data.title}</h3>
-            <p>{f.data.lede}</p>
-            <div class="portal-card__meta">
-              {f.data.format && <span>{f.data.format}</span>}
-              {f.data.duration && <span>{f.data.duration}</span>}
-              {f.data.price && <span>{f.data.price}</span>}
-            </div>
-            <span class="portal-card__cta">{discover[locale]}</span>
-          </a>
-        ))}
+    {hub === 'eveil-au-soi' && locale === 'fr' && (
+      <div class="auso-intro prose" data-reveal>
+        <p>La personnalité consciente et partenaire de l'Âme poursuit l'aventure. Elle se prépare à la <strong>fusion avec le SOI Supérieur ou Présence I AM / JE SUIS</strong>, partie non incarnée à intégrer via le processus ascensionnel multidimensionnel.</p>
+        <p>L'Âme procède alors à la <strong>synthèse de ce cycle et réintègre ses fractales terrestres</strong>.</p>
+        <p>Par la radiance de sa fréquence, elle <strong>appelle sa famille Monadique</strong>.</p>
+        <p>Se souvenir, se reconnecter, se retrouver devient un besoin, voire une nécessité pour terminer sa mission individuelle et collective.</p>
+        <p>Le SOI ou Présence JE SUIS profite des énergies 5D pour descendre progressivement dans l'Âme structurée par sa géométrie et transformée en <strong>véritable vaisseau de lumière</strong>.</p>
+        <p>Des <strong>connexions avec des fractales dites futures ou des parties galactiques</strong> permettent à l'Être conscient, aidé de Grands Frères Intra ou Extra terrestres, de retrouver sa véritable <strong>famille et histoire galactique</strong>.</p>
       </div>
     )}
 
-    {cards.length > 0 && (
-      <div class="hub-grid">
-        {cards.map((f) => (
-          <a class="portal-card" href={fichePath(hub, slugOf(f.id), locale)}>
-            <span class="portal-card__kicker">{f.data.kicker}</span>
-            <h3>{f.data.title}</h3>
-            <p>{f.data.lede}</p>
-            {f.data.stages.length === 0 && f.data.dates.length > 0 && (
-              <div class="portal-card__meta"><span>{f.data.dates[0]}</span></div>
-            )}
-            <span class="portal-card__cta">{f.data.stages.length > 0 ? discover[locale] : learnMore[locale]}</span>
+    {hub === 'eveil-a-soi' ? (
+      <>
+        {locale === 'fr' && (
+          <div class="eveil-intro" data-reveal>
+            <p class="eveil-intro__hl"><em>Les révélations vont se multiplier et conduire l’humanité au réveil</em></p>
+            <p>Les énergies 4D font sauter les verrous de l’inconscient jusqu’alors protecteur.</p>
+            <p class="eveil-intro__strong">Le retour à l’intérieur s’impose car l’extérieur explose.</p>
+            <p>Lever ses blocages et ses peurs, apaiser son mental et stabiliser son émotionnel permettent <strong>l’accès à la conscience de l’Âme</strong> : on parle de <em>la deuxième naissance</em>.</p>
+            <p>Pour l’humain réveillé, <strong>subir sa vie est terminé</strong>.</p>
+            <p>Devenu un humain éveillé, il va s’agir de <strong>la créer</strong>.</p>
+            <p class="eveil-intro__strong">Vibrant en Âme incarnée, l’humain conscient accède à sa multidimensionnalité.</p>
+          </div>
+        )}
+
+        <div class="video-grid eveil-videos" data-reveal>
+          {[
+            { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017' },
+            { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017' },
+          ].map((v) => (
+            <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />
+          ))}
+        </div>
+
+        <div class="hub-grid hub-grid--duo" data-reveal>
+          {eveilDuo.map((f) => (
+            <a class="portal-card" href={fichePath(hub, slugOf(f.id), locale)}>
+              <span class="portal-card__kicker">{f.data.kicker}</span>
+              <h3>{f.data.title}</h3>
+              <p>{cardText(f)}</p>
+              <span class="portal-card__cta">{learnMore[locale]}</span>
+            </a>
+          ))}
+        </div>
+
+        {eveilVaisseau && (
+          <a class="portal-card portal-card--featured eveil-vaisseau" data-reveal href={fichePath(hub, slugOf(eveilVaisseau.id), locale)}>
+            <span class="portal-card__kicker">{eveilVaisseau.data.kicker}</span>
+            <h3>{eveilVaisseau.data.title}</h3>
+            <p>{cardText(eveilVaisseau)}</p>
+            <span class="portal-card__cta">{discover[locale]}</span>
           </a>
-        ))}
-      </div>
+        )}
+      </>
+    ) : (
+      <>
+        {featured.length > 0 && (
+          <div class="hub-grid">
+            {featured.map((f) => (
+              <a class="portal-card portal-card--featured" href={fichePath(hub, slugOf(f.id), locale)}>
+                <span class="portal-card__kicker">{f.data.kicker}</span>
+                <h3>{f.data.title}</h3>
+                <p>{cardText(f)}</p>
+                <div class="portal-card__meta">
+                  {f.data.format && <span>{f.data.format}</span>}
+                  {f.data.duration && <span>{f.data.duration}</span>}
+                  {f.data.price && <span>{f.data.price}</span>}
+                </div>
+                <span class="portal-card__cta">{discover[locale]}</span>
+              </a>
+            ))}
+          </div>
+        )}
+
+        {cards.length > 0 && (
+          <div class="hub-grid">
+            {cards.map((f) => (
+              <a class="portal-card" href={fichePath(hub, slugOf(f.id), locale)}>
+                <span class="portal-card__kicker">{f.data.kicker}</span>
+                <h3>{f.data.title}</h3>
+                <p>{cardText(f)}</p>
+                {f.data.stages.length === 0 && f.data.dates.length > 0 && (
+                  <div class="portal-card__meta"><span>{f.data.dates[0]}</span></div>
+                )}
+                <span class="portal-card__cta">{f.data.stages.length > 0 ? discover[locale] : learnMore[locale]}</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </>
     )}
   </section>
 
@@ -202,4 +278,47 @@ const cards = rest.filter((f) => !childSlugs.has(slugOf(f.id)));
     mask-image: radial-gradient(closest-side, #000 78%, transparent 100%);
   }
   @media (max-width: 720px) { .hub-symbol { opacity: 0.28; right: -70px; } }
+
+  /* Page « Éveil à Soi » — bloc éditorial sous la bannière */
+  .eveil-intro {
+    max-width: 60ch; margin: var(--space-5) auto var(--space-4);
+    text-align: center; color: var(--indigo-100);
+  }
+  .eveil-intro p { margin: 0 0 0.9em; line-height: 1.6; }
+  .eveil-intro__hl {
+    font-family: var(--font-serif); font-size: var(--text-xl);
+    color: var(--gold-soft); font-style: italic;
+  }
+  .eveil-intro__strong { font-weight: 600; color: var(--indigo-100); }
+
+  .eveil-videos { margin-bottom: var(--space-5); }
+
+  /* Page « Éveil au Soi » — texte d'introduction sous la bannière */
+  .auso-intro {
+    max-width: 68ch; margin: var(--space-5) auto var(--space-4);
+    color: var(--indigo-100);
+  }
+  .auso-intro p { margin: 0 0 1em; line-height: 1.7; }
+  .auso-intro strong { color: var(--gold-soft); font-weight: 600; }
+
+  /* Placeholders vidéo (en attendant les IDs YouTube de Christine) */
+  .video-placeholder { margin: 0; }
+  .video-placeholder__box {
+    aspect-ratio: 16 / 9; border-radius: var(--radius);
+    border: 1px dashed rgba(201, 169, 97, 0.5);
+    background: var(--glass, rgba(16, 13, 46, 0.35));
+    display: grid; place-items: center; text-align: center;
+    color: var(--gold-soft); font-family: var(--font-serif);
+  }
+  .video-placeholder__box small { opacity: 0.7; font-size: 0.8em; }
+  .video-placeholder figcaption { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.15rem; }
+
+  /* Deux cartes côte à côte, puis la grande carte « vaisseau » dessous */
+  .hub-grid--duo { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) { .hub-grid--duo { grid-template-columns: 1fr; } }
+  .eveil-vaisseau {
+    display: block; margin-top: var(--space-4);
+    text-align: center; padding: var(--space-5);
+  }
+  .eveil-vaisseau h3 { font-size: var(--text-2xl); }
 </style>
