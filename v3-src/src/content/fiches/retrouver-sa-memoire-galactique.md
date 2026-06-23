@@ -9,6 +9,10 @@ lang: fr
 image: /images/wp/multidimensionnalite.jpg
 imageAlt: "Retrouver sa mémoire galactique"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
+bodyImage:
+  src: /images/wp/claude-jarry-des-loges.jpg
+  alt: "Analyse de thème astral — Claude Jarry des Loges"
+  caption: "Analyse spécifique de mon thème — Claude Jarry des Loges"
 videos:
   - id: 0eDwfiYJY3w
     cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg

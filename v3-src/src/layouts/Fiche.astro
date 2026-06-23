@@ -120,9 +120,8 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       <section class="paper-section">
         <div class="container container--narrow">
           <div class="paper-section__inner sortir-rich" data-reveal>
-            {/* Image sous le titre (placeholder : old-life-new-life.jpg à fournir) */}
             <figure class="sortir-hero-img">
-              <div class="img-placeholder" aria-hidden="true"><span>Image<br /><small>old-life-new-life</small></span></div>
+              <img src={base + '/images/wp/old-life-new-life.jpg'} alt="D'une ancienne vie à une nouvelle vie" loading="lazy" />
             </figure>
 
             <h3 class="sortir-baseline"><em>Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</em></h3>
@@ -132,7 +131,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
                 Transmuter la peur<br />en énergie positive<br />et passer d'une vie réactive<br />à une vie créative.
               </p>
               <figure class="sortir-duo__img">
-                <div class="img-placeholder img-placeholder--square" aria-hidden="true"><span>Image<br /><small>chat-miroir</small></span></div>
+                <img src={base + '/images/wp/chat-mirroir.jpg'} alt="Le chat qui se voit lion dans le miroir" loading="lazy" />
               </figure>
             </div>
 
@@ -162,6 +161,15 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
             </div>
           </div>
         </div>
+      </section>
+    )}
+
+    {f.bodyImage && (
+      <section class="container container--narrow">
+        <figure class="fiche-bodyimage" data-reveal>
+          <img src={base + f.bodyImage.src} alt={f.bodyImage.alt ?? ''} loading="lazy" />
+          {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
+        </figure>
       </section>
     )}
 
@@ -285,6 +293,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     text-align: center; margin: 0 0 var(--space-4);
     font-size: var(--text-xl); font-family: var(--font-serif);
   }
+  .fiche-bodyimage { margin: 0 auto; max-width: 520px; }
+  .fiche-bodyimage img { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border-light); }
+  .fiche-bodyimage figcaption { margin-top: 0.5rem; text-align: center; font-size: var(--text-sm); color: var(--ink-muted); font-style: italic; }
 
   /* Témoignages (bas de fiche) */
   .fiche-testimonials { display: grid; gap: var(--space-3); }
@@ -338,7 +349,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   }
   .sortir-duo__text { text-align: center; font-size: var(--text-lg); color: var(--ink); }
   .sortir-duo__img, .sortir-wheel__img { margin: 0; }
-  .sortir-wheel__img img { width: 100%; display: block; border-radius: var(--radius); }
+  .sortir-hero-img img, .sortir-duo__img img, .sortir-wheel__img img {
+    width: 100%; display: block; border-radius: var(--radius);
+  }
   .sortir-stage-title { text-align: center; font-size: var(--text-xl); margin: var(--space-5) 0 0.2em; }
   .sortir-stage-sub { text-align: center; color: var(--ink-soft); font-style: italic; margin: 0 0 var(--space-3); }
   .sortir-wheel__list { margin: 0; padding-left: 1.2em; }

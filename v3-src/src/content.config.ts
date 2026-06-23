@@ -52,6 +52,11 @@ const fiches = defineCollection({
     testimonials: z
       .array(z.object({ quote: z.string(), author: z.string().optional() }))
       .default([]),
+    // Image illustrative insérée après le corps (chemin sous /images/…), rendue
+    // par le layout pour bénéficier du bon `base` (impossible en markdown brut).
+    bodyImage: z
+      .object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() })
+      .optional(),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),

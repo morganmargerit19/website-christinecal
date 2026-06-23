@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import VideoEmbed from '../VideoEmbed.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../../i18n/ui';
 import { base, fichePath, pathFor, type Locale } from '../../i18n/utils';
@@ -187,13 +188,10 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
 
         <div class="video-grid eveil-videos" data-reveal>
           {[
-            { title: 'La transition planétaire', meta: 'Juin 2017' },
-            { title: "Le défi de l'Humanité", meta: 'Juin 2017' },
+            { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017' },
+            { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017' },
           ].map((v) => (
-            <figure class="video-card video-placeholder">
-              <div class="video-placeholder__box" aria-hidden="true"><span>Vidéo<br /><small>à intégrer</small></span></div>
-              <figcaption><strong>{v.title}</strong><span>{v.meta}</span></figcaption>
-            </figure>
+            <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />
           ))}
         </div>
 

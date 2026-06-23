@@ -112,6 +112,24 @@
           },
           "default": []
         },
+        "bodyImage": {
+          "type": "object",
+          "properties": {
+            "src": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            },
+            "caption": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "src"
+          ],
+          "additionalProperties": false
+        },
         "dates": {
           "type": "array",
           "items": {

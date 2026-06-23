@@ -60,17 +60,30 @@ source utilisée. NE PAS scraper le WP en ligne.
   retirée (cartes dessous), ajout infos astrologue **Claude Jarry des Loges**.
 - Infra : schéma + `Fiche.astro` étendus (`videosHeading`, `testimonials`).
 
-## ⏸️ Reste à faire (vague 2)
-- **`merkaba.mp4`** (image/vidéo « qui s'active » en tête de Construire) : fichier
-  absent du repo → à fournir, puis l'intégrer en tête de la fiche.
-- **Image ADN `restructurer-adn.jpg` en 2 colonnes** (gauche image / droite texte)
-  dans « Particularité » : le texte est en place ; l'image reste à poser via le
-  layout (contrainte `base` empêche l'`<img>` en markdown brut).
-- **Photo astrologue `claude-jarry-des-loges.jpg`** : présente dans le repo, à
-  afficher à côté du texte si souhaité (même contrainte `base`).
+## ✅ Finitions faites (depuis l'extract WP + images du repo)
+- **Éveil à Soi** : vraies vidéos intégrées (IDs trouvés dans l'extract) —
+  « La transition planétaire… » `AvtWBNRF8vE`, « Le défi de l'humanité… » `rALVl8lKlBs`.
+- **Sortir de la matrice** : vraies images posées (`old-life-new-life.jpg`,
+  `chat-mirroir.jpg` — présentes dans `public/images/wp/`).
+- **Construire** : image ADN `restructurer-adn.jpg` rendue (champ `bodyImage`).
+- **Retrouver mémoire galactique** : photo astrologue `claude-jarry-des-loges.jpg`
+  rendue (champ `bodyImage`).
+- **Consultation** : le « BOB Bellanca » est en réalité l'**interview AUDIO**
+  (confirmé par l'extract WP : MP3, pas une vidéo) → placeholder vidéo retiré,
+  titre de l'audio corrigé. ⚠️ à faire confirmer par Christine.
 
-⚠️ Rappel historique : ne PAS scraper le WP en ligne (403). Tout est dans
-`sources/wp-v2/pages/`.
+## ⏸️ Vrais manques (assets externes, hors repo)
+1. **`merkaba.mp4`** — vidéo « qui s'active » en tête de Construire (absente du repo).
+2. **Nouvelle photo « Qui suis-je »** (Christine la voulait « plus actuelle »).
+3. **Vidéo Shutterstock #1062052936** (spirale dorée, Mission) — qu'elle achètera.
+
+## 🎨 Raffinements optionnels
+- ADN (Construire) et astrologue (Retrouver) sont affichés en **figure centrée**
+  (`bodyImage`), pas en strict 2 colonnes image-gauche/texte-droite.
+- Teinte de bleu du titre galactique (Qui suis-je) à valider.
+
+⚠️ Rappel : ne PAS scraper le WP en ligne (403). Tout est dans
+`sources/wp-v2/pages/` (textes) et `v3-src/public/images/wp/` (images).
 
 Ordre chrono (le plus récent fait foi) :
 - Mail 20:25 « PAGE CONSTRUIRE… » → **ANNULÉ** par le mail 20:40.

@@ -14,7 +14,7 @@ hideHeaderImage: true
 hideHeaderMeta: true
 practicalFooter: true
 audio: /audio/interpreter-sa-mediumnite-adofm.mp3
-audioTitle: "Interpréter sa médiumnité — émission de radio (Ado FM)"
+audioTitle: "Être Médium — interview du 28.08.2013 par Bob Bellanca (Ado FM)"
 format: Séance via Zoom
 duration: 1h30
 price: 70 €
@@ -22,9 +22,6 @@ videos:
   - id: T3R7jxtKto8
     title: Déroulement d'une séance
     meta: Séance de coaching médiumnique
-pendingVideos:
-  - title: Être Médium — BOB Bellanca
-    meta: Interview du 28.08.2013 par BOB
 ---
 
 Osez une rencontre avec la partie sage de vous-même, en collaboration avec vos
