@@ -1,5 +1,7 @@
-// Merkaba v10 — d'après le retour de Christine :
-// fleur de vie (gardée) + MERKABA 3D ajoutée (statique) + CHAMP orbital agrandi autour de l'homme
+// Merkaba v12 — d'après le retour de Christine (mail « POUR FINIR ») :
+// fleur de vie (gardée) + MERKABA 3D (statique) + CHAMP orbital + VORTEX / champ de torsion
+// autour de l'être = « du mouvement autour », deux nappes de spirales en contre-rotation,
+// or + violet doux, volontairement discret (réf. 3 « le mouvement parfait mais trop voyant »).
 const fs = require('fs');
 const OUT = process.argv[2] || 'c:/Users/Morgan/MyApps/website-christinecal/v3-src/public/images/geometrie/merkaba-activation.svg';
 const cx = 300, cyC = 300;
@@ -48,6 +50,17 @@ function fieldElectrons(){
   return e(0,26,0)+e(60,32,-4)+e(120,38,-8);
 }
 
+// ---------- VORTEX / champ de torsion (« du mouvement autour ») ----------
+// Deux nappes de bras spiralés en contre-rotation : sensation de torsion/vortex (réf.3)
+// et de rayonnement (réf.2), mais douce — or + violet, faible opacité, léger flou (pas voyant).
+function vortexField(){
+  const C=FC;
+  const arm=(turns,r0,r1,steps)=>{let d='';for(let i=0;i<=steps;i++){const t=i/steps;const a=t*turns*2*Math.PI;const r=r0+(r1-r0)*t;d+=(i?' L':'M')+f(C[0]+r*Math.cos(a))+','+f(C[1]+r*Math.sin(a));}return d;};
+  const layer=(cls,n,color,op,w,turns,r1)=>{let g=`<g class='${cls}'>`;for(let k=0;k<n;k++){g+=`<path d='${arm(turns,70,r1,64)}' fill='none' stroke='${color}' stroke-width='${w}' stroke-opacity='${op}' stroke-linecap='round' transform='rotate(${f(k*360/n)} ${C[0]} ${C[1]})'/>`;}return g+'</g>';};
+  // nappe or (sens horaire) + nappe violet (sens anti-horaire) = contre-rotation
+  return layer('vxA',5,'#e6d49a',.14,1.0,.6,262)+layer('vxB',5,'#9a8fd0',.10,0.9,.6,262);
+}
+
 // ---------- fleur de vie (gardée — Christine adore) ----------
 function flowerOfLife(r){
   const pts=[[0,0]];
@@ -78,8 +91,11 @@ const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' role='i
   ${chakraDefs()}
   <filter id='mkGlow' x='-50%' y='-50%' width='200%' height='200%'><feGaussianBlur stdDeviation='2' result='b'/><feMerge><feMergeNode in='b'/><feMergeNode in='SourceGraphic'/></feMerge></filter>
   <filter id='mkSoft' x='-90%' y='-90%' width='280%' height='280%'><feGaussianBlur stdDeviation='9'/></filter>
+  <filter id='mkHaze' x='-60%' y='-60%' width='220%' height='220%'><feGaussianBlur stdDeviation='1.6'/></filter>
   <style>
     .orb{transform-origin:${FC[0]}px ${FC[1]}px;animation:spin linear infinite}
+    .vxA{transform-origin:${FC[0]}px ${FC[1]}px;animation:spin 60s linear infinite}
+    .vxB{transform-origin:${FC[0]}px ${FC[1]}px;animation:spinR 82s linear infinite}
     .mk{transform-origin:${FC[0]}px ${FC[1]}px;animation:mkbreathe 6s ease-in-out infinite}
     .core{transform-origin:300px ${FC[1]}px;animation:breathe 6s ease-in-out infinite}
     .fol{transform-origin:300px 300px;animation:breathe 9s ease-in-out infinite}
@@ -88,17 +104,19 @@ const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600' role='i
     .crown{transform-origin:300px 150px;animation:breathe 4.5s ease-in-out infinite}
     .star{animation:twk 3.4s ease-in-out infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes spinR{to{transform:rotate(-360deg)}}
     @keyframes mkbreathe{0%,100%{opacity:.78;transform:scale(.99)}50%{opacity:1;transform:scale(1.012)}}
     @keyframes breathe{0%,100%{transform:scale(.95);opacity:.45}50%{transform:scale(1.05);opacity:.85}}
     @keyframes heartbeat{0%,100%{transform:scale(.92);opacity:.8}50%{transform:scale(1.08);opacity:1}}
     @keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
     @keyframes twk{0%,100%{opacity:.25}50%{opacity:.95}}
-    @media (prefers-reduced-motion: reduce){.orb,.mk,.core,.fol,.chk,.heart,.crown,.star{animation:none}.core,.fol,.crown{opacity:.7}.mk{opacity:.92}.chk,.heart,.star{opacity:.95}}
+    @media (prefers-reduced-motion: reduce){.orb,.vxA,.vxB,.mk,.core,.fol,.chk,.heart,.crown,.star{animation:none}.core,.fol,.crown{opacity:.7}.mk{opacity:.92}.chk,.heart,.star{opacity:.95}}
   </style>
 </defs>
 <rect width='600' height='600' fill='url(#mkBg)'/>
 <g class='star'>${starEls()}</g>
 <g class='fol' fill='none' stroke='#c9a961' stroke-width='.8' stroke-opacity='.16'>${flowerOfLife(64)}</g>
+<g filter='url(#mkHaze)'>${vortexField()}</g>
 <g class='burst' mask='url(#mkRayMask)' stroke='#ffe9a8' stroke-opacity='.4' stroke-width='.6'>${(function(){let s='';for(let k=0;k<72;k++){const a=k/72*2*Math.PI;s+=`<line x1='${f(cx+30*Math.cos(a))}' y1='${f(FC[1]+30*Math.sin(a))}' x2='${f(cx+300*Math.cos(a))}' y2='${f(FC[1]+300*Math.sin(a))}'/>`;}return s;})()}</g>
 <ellipse class='core' cx='300' cy='${FC[1]}' rx='150' ry='150' fill='url(#mkCore)' filter='url(#mkSoft)'/>
 <g class='mk' filter='url(#mkGlow)'>${merkaba()}</g>
