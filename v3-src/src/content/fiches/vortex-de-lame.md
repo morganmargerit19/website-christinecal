@@ -10,20 +10,20 @@ imageAlt: "Stage Vortex ascensionnel de l'Âme"
 draft: false
 lede: Créer le vaisseau intergalactique de l'Âme et son vortex ascensionnel.
 format: Présentiel ou Zoom
+hideHeaderMeta: true
+practicalFooter: true
 ---
 
-> Création du vaisseau multidimensionnel de l'Âme reliée au SOI, pour permettre à
-> la conscience — voire au corps spirituel — de naviguer dans l'espace-temps,
-> retrouver sa famille galactique et révéler son histoire.
-
-Troisième et dernier bandeau du parcours « Construire son Vaisseau
-Multidimensionnel » : l'Âme tisse sa propre géométrie et bâtit son vaisseau
-intergalactique, son vortex ascensionnel.
+Au fur et à mesure du parcours initiatique, l'Âme tisse sa propre géométrie et
+bâtit son vaisseau intergalactique, son vortex ascensionnel relié au Soi.
+Celui-ci va permettre à la conscience, voire au corps spirituel, de naviguer dans
+l'espace-temps. L'Âme en connexion avec le Soi retrouve progressivement sa famille
+et son histoire galactiques.
 
 ## Effets
 
-- Réinitialisation de l'Âme et intégration de ses sceaux — synthèse de ce cycle terrestre
-- Activation de diverses géométries pour sortir de la Matrice
+- Réinitialisation de l'Âme avec intégration de ses sceaux, permettant la synthèse de ce cycle terrestre
+- Activation de diverses géométries facilitant la sortie de la Matrice
 - Mutation de l'ADN éthérique
 - Tissage par l'Âme de sa propre géométrie et construction du vaisseau multidimensionnel
 - Déploiement progressif des aptitudes 5D : télépathie, télékinésie, attraction
@@ -31,8 +31,10 @@ intergalactique, son vortex ascensionnel.
 ## Un exemple concret
 
 Hiver 2021 : expansions de conscience et contacts avec une partie
-multidimensionnelle de moi-même. Hiver 2025, en jeu : une expérience amusante de
-télékinésie avec de petites cuillères à café.
+multidimensionnelle de moi-même.
+
+Hiver 2025 — Tests et jeu : une expérience amusante de télékinésie avec de petites
+cuillères à café.
 
 Ce stage est le **troisième et dernier des trois bandeaux** du parcours
 « Construire son Vaisseau Multidimensionnel ».

@@ -9,6 +9,8 @@ image: /images/wp/stage-construction-corps-de-lumiere.jpg
 imageAlt: "Stage Construction du Corps de Lumière"
 lede: Activer et restructurer les corps subtils pour créer un champ propice aux expansions de conscience.
 format: Présentiel ou Zoom
+hideHeaderMeta: true
+practicalFooter: true
 videos:
   - id: QExlOVMPHPc
     title: Le Corps de Lumière
@@ -17,6 +19,12 @@ videos:
 
 > « L'activation et la restructuration des corps subtils créent un champ
 > électromagnétique permettant des expansions de conscience. »
+
+L'activation et la restructuration des corps subtils crée un champ
+électromagnétique permettant des expansions de conscience, des révélations
+d'aptitudes, une nouvelle appréhension de soi. L'orientation de sa vie et les
+prises de décision majeures se font désormais en conformité avec l'Âme et son
+Plan d'incarnation.
 
 ## Effets
 
@@ -29,9 +37,13 @@ videos:
 
 ## Un exemple concret
 
-De nombreux stagiaires ont changé de vie — dont Nicolas Lebettre (2015), auteur de
-*« Surmonter ses peurs, changer de vie — itinéraire d'un notaire devenu
-hypnothérapeute »*.
+De nombreux stagiaires ont changé de vie, dont Nicolas Lebettre en 2015, auteur du
+livre *« Surmonter ses peurs, Changer de vie — Itinéraire d'un notaire devenu
+Hypnothérapeute »* (interview d'avril 2025, voir le passage à 23 min 58 :
+https://www.youtube.com/watch?v=PUr_YpN8rTY).
+
+Loi d'Attraction = expérience personnelle avec de nombreux exemples : appartement
+ou voiture atypiques, rencontres personnelles ou professionnelles…
 
 Ce stage est le **premier des trois bandeaux** du parcours
 « Construire son Vaisseau Multidimensionnel ».

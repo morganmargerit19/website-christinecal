@@ -237,7 +237,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     {f.practicalFooter && (facts.length > 0 || f.image) && (
       <section class="container">
         <div class="fiche-practical" data-reveal>
-          {f.image && (
+          {f.image && f.hideHeaderImage && (
             <figure class="fiche-practical__img">
               <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
             </figure>

@@ -52,7 +52,7 @@ const u = ui[locale];
           {t.journey.items.map((item) => (
             <li>
               <span class="about-timeline__lead">{item.lead}</span>
-              <span class="about-timeline__text">{item.text}</span>
+              <span class="about-timeline__text" set:html={item.text} />
             </li>
           ))}
         </ol>
@@ -90,7 +90,7 @@ const u = ui[locale];
         <div class="paper-section__inner" data-reveal>
           <h2 class="about-h2">{t.specifics.heading}</h2>
           <ul class="about-news">
-            {t.specifics.items.map((item) => <li>{item}</li>)}
+            {t.specifics.items.map((item) => <li set:html={item} />)}
           </ul>
         </div>
       </div>
@@ -204,11 +204,18 @@ const u = ui[locale];
     border-radius: 50%; border: 2px solid var(--gold); background: var(--paper);
     box-shadow: 0 0 0 4px rgba(201,169,97,0.12);
   }
+  /* Titres de la timeline : police lisible (corps) plutôt que la serif
+     décorative Cormorant, jugée trop difficile à lire (retour Christine). */
   .about-timeline__lead {
-    display: block; font-family: var(--font-serif); font-size: var(--text-lg);
-    color: var(--ink); line-height: 1.2; margin-bottom: 0.2em;
+    display: block; font-family: var(--font-sans); font-weight: 600;
+    font-size: var(--text-md, 1.05rem); letter-spacing: 0.005em;
+    color: var(--ink); line-height: 1.3; margin-bottom: 0.2em;
   }
   .about-timeline__text { color: var(--ink-soft); }
+
+  /* Mise en évidence des termes clés (or/accent) — souhait de Christine.
+     `:global` car ces <strong> sont injectés via set:html (non scopés). */
+  :global(.about-accent) { color: var(--gold); font-weight: 700; }
 
   /* Activités = cartes */
   .about-cards { display: grid; gap: var(--space-3); }
@@ -220,15 +227,16 @@ const u = ui[locale];
   }
   .about-card h3 { margin: 0 0 0.3em; font-family: var(--font-serif); color: var(--ink); font-size: var(--text-lg); }
   .about-card p { margin: 0; color: var(--ink-soft); font-size: var(--text-sm); }
-  /* La carte « Conférencière » (avec accordéon) occupe toute la largeur. */
-  .about-card--wide { grid-column: 1 / -1; }
+  /* La carte « Conférencière » (avec accordéon) reste sur une seule colonne
+     afin que la carte « Organisatrice » se place juste à côté (retour Christine). */
+  .about-card--wide { grid-column: auto; }
 
   /* « Une galactique venue d'un futur » : en italique et en bleu (souhait de Christine) */
   .about-galactic-heading { font-style: italic; color: var(--indigo-500); }
 
   /* Parcours en bref : version compacte (« prendre moins de place ») */
   .about-timeline--compact li { padding-bottom: var(--space-3); }
-  .about-timeline--compact .about-timeline__lead { font-size: var(--text-md, 1.05rem); margin-bottom: 0.1em; }
+  .about-timeline--compact .about-timeline__lead { font-size: var(--text-base, 1rem); margin-bottom: 0.1em; }
 
   /* Accordéon des conférences (replié par défaut, comme l'ancien WordPress) */
   .about-accordion { margin-top: var(--space-2); }
@@ -242,7 +250,7 @@ const u = ui[locale];
   .about-accordion[open] summary::before { content: "▾ "; }
   .about-accordion ul {
     list-style: none; margin: 0.4em 0 0; padding: 0;
-    columns: 2; column-gap: var(--space-4);
+    columns: 1; column-gap: var(--space-4);
   }
   .about-accordion li {
     break-inside: avoid; margin-bottom: 0.45em;

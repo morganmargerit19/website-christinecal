@@ -8,6 +8,7 @@ order: 12
 lang: fr
 image: /images/wp/chris-shasta.jpg
 imageAlt: "Mont Shasta — les Intra de Telos"
+hideHeaderImage: true
 slideshow:
   - /images/wp/diapo-shasta1.jpg
   - /images/wp/diapo-shasta2.jpg

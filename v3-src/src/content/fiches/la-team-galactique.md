@@ -6,12 +6,9 @@ category: stage
 stages: [rencontres-galactiques-au-sol]
 order: 11
 lang: fr
-image: /images/wp/les-freres-des-etoiles.jpg
+hideHeaderMeta: true
 imageAlt: "La team galactique de la Nouvelle Terre"
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
-dates:
-  - "6–9 mai 2027"
-format: Vallée de l'Homme, Dordogne (24)
 videos:
   - id: usgLaR-vK-U
     cover: /images/wp/dvd-champs-unifie.jpg
@@ -25,23 +22,29 @@ videos:
     credit: debowska
 ---
 
-La nouvelle Terre se révèle progressivement, offrant l'opportunité de devenir un
-Humain 5D créateur. Les disclosures dévoilent des réalités longtemps cachées —
-et une technologie qu'il va falloir apprivoiser.
+## Contexte actuel
 
-## Notre mission : créer le pont
+**APOCALYPSE NOW** — La véritable Révélation : les humains sortent de la Matrice
+d'illusion et découvrent l'imbrication des dimensions via la Conscience Unifiée.
+
+**« La Présence du Futur »** — Les flux intenses de rayons X et la collaboration
+des E.T évolutifs, frères et amis de l'humanité ou parties de nous-mêmes dans une
+version de notre futur, contribuent activement à la révélation de notre
+Multidimensionnalité pour les Âmes prêtes.
+
+La nouvelle Terre se révèle progressivement, offrant l'opportunité de devenir un
+Humain 5D, Divin Créateur. Un monde est à créer. Les disclosures dévoilent
+progressivement des réalités longtemps cachées et une technologie qu'il va falloir
+apprivoiser, car dans cette galaxie celle-ci occupe une place importante sous
+différentes formes : ce vaste programme est déjà en cours !
+
+## Notre mission : créer le pont et stabiliser la nouvelle time line
 
 Porter la vibration pendant la Transition. Que de bonheur pour l'Âme qui, en
 incarnation, participe avec ses frères et sœurs galactiques à une mission
 collective pour la Paix, après de longs combats.
 
-## Stage — Rencontres de galactiques au sol
-
-Retrouvailles autour d'outils de reconnexion et de pacification dans les lignes
-temporelles. Esprit directeur : les retrouvailles d'Âmes.
-
-> Invitation aux questionnements : se renseigner avant de juger, et maintenir le
-> respect de la libre pensée de chacun.
+*À compléter : créer le pont et stabiliser la nouvelle time line.*
 
 ## Reliance — Champ Unifié
 

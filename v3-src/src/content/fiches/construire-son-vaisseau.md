@@ -6,8 +6,9 @@ category: parcours
 order: 20
 stages: [corps-de-lumiere, merkaba, vortex-de-lame]
 lang: fr
-image: /images/wp/eveil-quantique.jpg
-imageAlt: "Construire son vaisseau multidimensionnel de l'Âme"
+hideHeaderMeta: true
+image: /images/geometrie/merkaba-activation.svg
+imageAlt: "Merkaba — champ vibratoire (animation en cours)"
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
 cardLede: "Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme."
 format: Présentiel ou Zoom
@@ -50,7 +51,7 @@ cadre du processus ascensionnel.
 ## Comment ?
 
 - Déploiement du 5ᵉ élément, support du champ unifié de l'Être.
-- Activation à partir de méditations guidées et de connexions immédiates par mantras et exercices concrets.
+- Activation à partir de méditations guidées et de connexions immédiates à partir de mantras et d'exercices concrets.
 - Ouverture de conscience progressive, rythmée par l'Âme, dans le respect physique, psychologique et psychique de la personnalité.
 
 ## Particularité
@@ -73,7 +74,7 @@ puissance de cet outil.
 
 **Plus de 950 personnes ont suivi ces stages depuis 2013.**
 
-> Révision mensuelle gratuite via Zoom, tous les premiers mardis du mois à 20h30.
+Révision mensuelle gratuite via Zoom, tous les premiers mardis du mois à 20h30.
 
 ## Effets
 
@@ -89,6 +90,6 @@ puissance de cet outil.
 - 20 ans d'animation de stages d'Éveil du cœur et de la conscience.
 - 2002 — Stage sur la géométrie du corps vibratoire avec un scientifique de la NASA.
 - 2011 — Stages / École « Lumin Essence » du Canada, et proposition de devenir enseignante (diplômée en 2012).
-- Depuis 2013 — création d'une synthèse personnelle à partir de pratiques enseignées par des scientifiques éveillés des USA et de Russie (diplôme sur 3 niveaux, 2019-2020), de documents de TELOS et d'informations reçues télépathiquement de Consciences Supérieures et de Maîtres Ascensionnés.
+- Depuis 2013 — Création d'une synthèse personnelle à partir de pratiques enseignées par des scientifiques éveillés des USA et de Russie (Systèmes de pilotage pour le développement des capacités de l'être humain en 2019 et 2020 avec Diplôme sur 3 Niveaux), de documents de TELOS et d'informations reçues télépathiquement de Consciences Supérieures Intra ou Extras et de Maîtres Ascensionnés apparus en Merkaba physique pour m'enseigner.
 </content>
 </invoke>

@@ -6,8 +6,8 @@ category: stage
 stages: [stage-corps-temple, stage-homme-cosmique, stage-light-workers]
 order: 10
 lang: fr
-image: /images/wp/multidimensionnalite.jpg
-imageAlt: "Retrouver sa mémoire galactique"
+image: /images/wp/eveil-quantique.jpg
+imageAlt: "Retrouver sa mémoire galactique — éveil quantique"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
 bodyImage:
   src: /images/wp/claude-jarry-des-loges.jpg

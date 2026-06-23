@@ -14,7 +14,9 @@ format: Vallée de l'Homme, Dordogne (24)
 ---
 
 Retrouvailles autour d'outils de reconnexion et de pacification dans les lignes
-temporelles. Esprit directeur : les retrouvailles d'Âmes.
+temporelles.
+
+**Esprit Directeur : Les retrouvailles d'Âmes.**
 
 > Invitation aux questionnements : se renseigner avant de juger, et maintenir le
 > respect de la libre pensée de chacun.
