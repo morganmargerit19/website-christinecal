@@ -371,6 +371,19 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
   .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink); }
 
+  /* Deux blocs côte à côte dans le corps d'une fiche (ex. Time line 1 / 2) */
+  :global(.prose .duo-cols) { display: grid; gap: var(--space-4); margin: var(--space-3) 0 var(--space-4); }
+  @media (min-width: 640px) { :global(.prose .duo-cols) { grid-template-columns: 1fr 1fr; } }
+  :global(.prose .duo-col) {
+    border: 1px solid var(--border-light); border-radius: var(--radius);
+    padding: var(--space-3) var(--space-4); background: rgba(85, 85, 85, 0.05);
+  }
+  :global(.prose .duo-col h3) { margin-top: 0; }
+  :global(.prose .duo-sub) {
+    margin: 0 0 0.6em; font-family: var(--font-serif); letter-spacing: 0.08em;
+    text-transform: uppercase; font-size: var(--text-sm); color: var(--gold);
+  }
+
   /* Gabarit « Sortir de sa matrice » */
   .sortir-hero-img { margin: 0 auto var(--space-4); max-width: 420px; }
   .sortir-baseline { text-align: center; color: var(--ink); font-size: var(--text-xl); margin: 0 0 var(--space-4); }
