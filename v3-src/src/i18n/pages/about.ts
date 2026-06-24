@@ -83,10 +83,6 @@ export const about: Record<Locale, AboutDict> = {
           lead: 'Un cerveau droit déployé',
           text: '<strong class="about-accent">Médium clairvoyante et clairaudiente</strong> en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie.',
         },
-        {
-          lead: '2021',
-          text: "Contacts avec une autre fractale d'un courant parallèle suite à des ressentis physiques.",
-        },
       ],
     },
     activities: {
@@ -139,7 +135,7 @@ export const about: Record<Locale, AboutDict> = {
         "Création d'un enseignement initiatique : <strong class=\"about-accent\">CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL</strong> — Formation de plus de 950 personnes depuis 2013.",
         'Spécialiste du voyage astral et des contacts avec divers peuples intra et extraterrestres par télépathie depuis 2003.',
         '2019 — Contact avec une fractale de mon Futur sur le <strong class="about-accent">MONT SHASTA</strong>.',
-        "2021 — Contacts avec une autre fractale d'un courant parallèle, avec des ressentis physiques et des flashs troublants au réveil durant des mois. Ce qui va me conduire à me documenter et à rencontrer des Êtres qui côtoient ces mondes.",
+        "2021 — Contacts avec une autre fractale d'un courant parallèle suite à des ressentis physiques.",
       ],
     },
     news: {

@@ -91,5 +91,3 @@ Révision mensuelle gratuite via Zoom, tous les premiers mardis du mois à 20h30
 - 2002 — Stage sur la géométrie du corps vibratoire avec un scientifique de la NASA.
 - 2011 — Stages / École « Lumin Essence » du Canada, et proposition de devenir enseignante (diplômée en 2012).
 - Depuis 2013 — Création d'une synthèse personnelle à partir de pratiques enseignées par des scientifiques éveillés des USA et de Russie (Systèmes de pilotage pour le développement des capacités de l'être humain en 2019 et 2020 avec Diplôme sur 3 Niveaux), de documents de TELOS et d'informations reçues télépathiquement de Consciences Supérieures Intra ou Extras et de Maîtres Ascensionnés apparus en Merkaba physique pour m'enseigner.
-</content>
-</invoke>

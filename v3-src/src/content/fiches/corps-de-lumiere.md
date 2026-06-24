@@ -5,8 +5,8 @@ hub: eveil-a-soi
 category: stage
 order: 21
 lang: fr
-image: /images/wp/stage-construction-corps-de-lumiere.jpg
-imageAlt: "Stage Construction du Corps de Lumière"
+image: /images/wp/stage-construction-vortex-ascentionnel.jpg
+imageAlt: "Humain en Éveil — Éveil du champ des possibles · Corps vibratoire ou Corps de Lumière"
 lede: Activer et restructurer les corps subtils pour créer un champ propice aux expansions de conscience.
 format: Présentiel ou Zoom
 hideHeaderMeta: true

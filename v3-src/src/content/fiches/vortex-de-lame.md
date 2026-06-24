@@ -5,8 +5,8 @@ hub: eveil-a-soi
 category: stage
 order: 23
 lang: fr
-image: /images/wp/stage-construction-vortex-ascentionnel.jpg
-imageAlt: "Stage Vortex ascensionnel de l'Âme"
+image: /images/wp/stage-construction-corps-de-lumiere.jpg
+imageAlt: "Humain Multidimensionnel — Éveil du champ multidimensionnel · Conscience expansée"
 draft: false
 lede: Créer le vaisseau intergalactique de l'Âme et son vortex ascensionnel.
 format: Présentiel ou Zoom

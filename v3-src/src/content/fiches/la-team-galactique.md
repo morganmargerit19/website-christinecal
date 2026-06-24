@@ -40,9 +40,11 @@ différentes formes : ce vaste programme est déjà en cours !
 
 ## Notre mission : créer le pont et stabiliser la nouvelle time line
 
-Porter la vibration pendant la Transition. Que de bonheur pour l'Âme qui, en
-incarnation, participe avec ses frères et sœurs galactiques à une mission
-collective pour la Paix, après de longs combats.
+Porter la vibration pendant la Transition. Que de bonheur pour l'Âme qui vibre en
+incarnation et participe avec ses frères et sœurs galactiques à une mission
+collective sur Terre pour œuvrer pour la Paix, après de longs et douloureux
+combats, parfois même entre nous durant des éons ! Je partage mon expérience de
+collaboration.
 
 *À compléter : créer le pont et stabiliser la nouvelle time line.*
 

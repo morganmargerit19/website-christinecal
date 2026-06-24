@@ -140,19 +140,21 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
               </figure>
             </div>
 
-            <h3 class="sortir-stage-title">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h3>
-            <p class="sortir-stage-sub">— Avec une approche différente de cet outil connu —</p>
+            <div class="sortir-stage">
+              <h3 class="sortir-stage-title">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h3>
+              <p class="sortir-stage-sub">— Avec une approche différente de cet outil connu —</p>
 
-            <div class="sortir-wheel">
-              <figure class="sortir-wheel__img">
-                <img src={base + (f.image ?? '/images/wp/eneagramme.jpg')} alt={f.imageAlt ?? "L'énnéagramme"} loading="lazy" />
-              </figure>
-              <ul class="sortir-wheel__list">
-                <li>Découvrir cette source de souffrances permanentes.</li>
-                <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>
-                <li>Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.</li>
-                <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
-              </ul>
+              <div class="sortir-wheel">
+                <figure class="sortir-wheel__img">
+                  <img src={base + (f.image ?? '/images/wp/eneagramme.jpg')} alt={f.imageAlt ?? "L'énnéagramme"} loading="lazy" />
+                </figure>
+                <ul class="sortir-wheel__list">
+                  <li>Découvrir cette source de souffrances permanentes.</li>
+                  <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>
+                  <li>Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.</li>
+                  <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -234,13 +236,21 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
-    {f.practicalFooter && (facts.length > 0 || f.image) && (
+    {f.practicalFooter && (facts.length > 0 || f.image || f.dates.length > 0) && (
       <section class="container">
         <div class="fiche-practical" data-reveal>
           {f.image && f.hideHeaderImage && (
             <figure class="fiche-practical__img">
               <img src={base + f.image} alt={f.imageAlt ?? f.title} loading="lazy" />
             </figure>
+          )}
+          {f.dates.length > 0 && (
+            <div class="fiche-practical__dates">
+              <span class="fiche-meta__label">{t.fiche.dates}</span>
+              <ul>
+                {f.dates.map((d) => <li>{d}</li>)}
+              </ul>
+            </div>
           )}
           {facts.length > 0 && (
             <dl class="fiche-practical__facts">
@@ -357,6 +367,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__facts { display: grid; gap: 0.6rem; margin: 0; }
   .fiche-practical__facts dt { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
   .fiche-practical__facts dd { margin: 0; font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink); }
+  .fiche-practical__dates .fiche-meta__label { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+  .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
+  .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink); }
 
   /* Gabarit « Sortir de sa matrice » */
   .sortir-hero-img { margin: 0 auto var(--space-4); max-width: 420px; }
@@ -374,7 +387,16 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .sortir-hero-img img, .sortir-duo__img img, .sortir-wheel__img img {
     width: 100%; display: block; border-radius: var(--radius);
   }
-  .sortir-stage-title { text-align: center; font-size: var(--text-xl); margin: var(--space-5) 0 0.2em; }
+  /* Le stage est présenté dans un bloc à part (souhait de Christine) */
+  .sortir-stage {
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-4) var(--space-3);
+    border: 1px solid var(--border-light);
+    border-top: 3px solid var(--gold);
+    border-radius: var(--radius);
+    background: rgba(85, 85, 85, 0.04);
+  }
+  .sortir-stage-title { text-align: center; font-size: var(--text-xl); margin: 0 0 0.2em; }
   .sortir-stage-sub { text-align: center; color: var(--ink-soft); font-style: italic; margin: 0 0 var(--space-3); }
   .sortir-wheel__list { margin: 0; padding-left: 1.2em; }
   .sortir-wheel__list li { margin-bottom: 0.6em; color: var(--ink-soft); }

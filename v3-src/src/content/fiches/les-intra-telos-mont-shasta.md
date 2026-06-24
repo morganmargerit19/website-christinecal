@@ -63,7 +63,8 @@ véhicule de son Âme.
 Channeling avec les Telosiens — dont un Grand Sage de Telos, le Maître Adama — et
 des Maîtres Ascensionnés. Entre 2015 et 2018, organisation de Rencontres
 Internationales avec Telos Canada, Telos Israël, Telos Australie et les membres de
-la Fondation Telos Mondial (totalement indépendante de l'association Telos France).
+la [Fondation Telos Mondial](https://www.telosinfo.org/site/) (totalement
+indépendante de l'association Telos France).
 
 ## Expérimentation de la multidimensionnalité
 
@@ -73,8 +74,8 @@ Lémurie, l'interaction avec les Telosiens et la charge énergétique la propuls
 
 > « Il y a une part de nous en vous. » « Nous sommes votre futur. » — *les Telosiens*
 
-> « Cesse de rêver la 5D et décide de la vivre, car elle est ta nature
-> véritable. » — *un Sage de Telos*
+> « Songe à cela : Révélation, le Rêve en élévation. » « Cesse de rêver la 5D
+> et décide de la vivre, car elle est ta nature véritable. » — *un Sage de Telos*
 
 Sciences et mysticisme se rejoignent : en 2017, des neuroscientifiques suisses et
 belges ont découvert des structures multidimensionnelles dans le cerveau humain,
@@ -88,7 +89,9 @@ des milliards de neurones organisés à travers 7 voire 11 dimensions.
 - **2022** — reprise des contacts et découverte de la nouvelle cité de Telos.
 - **2026** — voyage au Mont Shasta et connexions plus précises pour vérification sur place ; rencontre avec le groupe Telos International.
 
-Livre en cours d'écriture : *Mont Shasta et le Nouveau Telos*.
+Livres : *Enseignement de TELOS Mont Shasta — Rencontre avec notre futur*
+(contacts et expériences multidimensionnelles d'une experte-comptable devenue
+médium) et *Mont Shasta et le Nouveau Telos* (en cours d'écriture).
 
 ## Rencontres initiatiques en Dordogne
 
