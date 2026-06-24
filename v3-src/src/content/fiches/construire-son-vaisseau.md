@@ -38,8 +38,6 @@ testimonials:
     author: Claudine — Périgueux
   - quote: "Ma phobie de l'enfermement n'est plus qu'un vieux souvenir. À mon grand étonnement, dès les premiers stages, ma peur panique des tunnels, des périphériques et du RER a disparu. Une véritable victoire après 10 ans de parcours pour m'en sortir."
     author: Ludmilla — Paris
-  - quote: "C'était durant la 3e session du stage « Corps de Lumière ». Dans la matinée, je relate une expérience où j'ai davantage donné foi à un interlocuteur qu'à mon propre ressenti. À la pause déjeuner, mon index droit devient violet à la base, le sang ne circule plus : sensation effrayante. Christine relie l'index au jugement. J'ai alors l'image de la fresque de Michel-Ange — Dieu qui tend l'index vers celui de l'homme — et je m'aperçois que mon doigt est redevenu normal. J'ai compris : je me coupe de Dieu, ou de mon âme, quand je me juge. Expérience incroyable et puissante ! Merci Christine, tes stages sont sacrément puissants !"
-    author: Patricia — Juin 2026
 ---
 
 **Créer le vaisseau de lumière de votre Âme à partir de sa propre géométrie — « L'Âme agit ! »**

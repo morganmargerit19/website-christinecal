@@ -22,9 +22,6 @@ videos:
   - id: T3R7jxtKto8
     title: Déroulement d'une séance
     meta: Séance de coaching médiumnique
-pendingVideos:
-  - title: "BOB — enregistrement"
-    meta: "Vidéo / image à intégrer"
 testimonials:
   - quote: "La consultation était vraiment extraordinaire ! Les réponses et visions énoncées étaient stupéfiantes."
     author: "Élisabeth, Bretagne"

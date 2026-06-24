@@ -66,7 +66,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     journey: {
-      heading: 'Un parcours en bref',
+      heading: 'UN PARCOURS EN BREF',
       items: [
         { lead: 'Une petite fille', text: 'choquée par un monde inversé.' },
         {
@@ -86,7 +86,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     activities: {
-      heading: 'Activités actuelles',
+      heading: 'ACTIVITÉS ACTUELLES',
       items: [
         {
           title: 'Coach Consultant',
@@ -130,7 +130,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     specifics: {
-      heading: 'Spécificités',
+      heading: 'SPÉCIFICITÉS',
       items: [
         "Création d'un enseignement initiatique : <strong class=\"about-accent\">CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL</strong> — Formation de plus de 950 personnes depuis 2013.",
         'Spécialiste du voyage astral et des contacts avec divers peuples intra et extraterrestres par télépathie depuis 2003.',
@@ -139,7 +139,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     news: {
-      heading: 'Actualités',
+      heading: 'ACTUALITÉS',
       items: [
         "Depuis 2024 — Stages sur la multidimensionnalité de l'Être.",
         "2025 / 2026 — Mont Shasta et le nouveau TELOS, après l'invasion par des êtres involutifs en 2021, confirmée suite à ma rencontre avec Elena Danaan en août 2024 et 2025. Voyage au Mont Shasta en 07.2026.",
@@ -147,7 +147,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     upcoming: {
-      heading: 'À venir',
+      heading: 'À VENIR',
       items: [
         'YouTube : « Découvrir sa multidimensionnalité : mon aventure ! Et vous, la vôtre ? » — audios ou vidéos à partir du 2ᵉ semestre 2026.',
         "Divers livres en cours d'écriture.",
