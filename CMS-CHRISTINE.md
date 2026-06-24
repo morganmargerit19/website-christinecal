@@ -1,11 +1,19 @@
 # CMS — Christine édite le site elle-même
 
 Le site utilise **Sveltia CMS** (interface d'édition dans le navigateur, compatible
-Decap CMS). Christine se connecte sur **`https://www.christinecal.com/admin/`**, modifie
-les fiches (stages, ateliers, consultations…), et **enregistre** : ça crée un commit
-GitHub, qui relance automatiquement le build et le déploiement OVH. Aucune ligne de code.
+Decap CMS). Christine modifie les fiches (stages, ateliers, consultations…) et
+**enregistre** : ça crée un commit GitHub qui relance le build et le déploiement.
+Aucune ligne de code.
 
 Fichiers : `v3-src/public/admin/index.html` + `v3-src/public/admin/config.yml`.
+
+**Deux phases :**
+- **Maintenant (preview Vercel)** — le site n'est pas figé, on reste sur Vercel.
+  Le CMS est sur `https://website-christinecal.vercel.app/v3/admin/` et le relais OAuth
+  est servi par Vercel (`/api`). C'est la **config active** (ci-dessous).
+- **Plus tard (production OVH `christinecal.com`)** — une fois le site figé : on bascule
+  sur OVH. Le relais OAuth PHP est **déjà prêt** (`/oauth`), il suffira d'1 changement de
+  config (voir « Phase 2 » en bas).
 
 ---
 
@@ -37,10 +45,8 @@ Il ne reste que 3 choses, qui exigent TON compte (impossible à faire à ta plac
    L'inviter comme collaboratrice du dépôt GitHub (*Settings → Collaborators*, accès écriture).
    Elle se connecte sur `/admin/` avec son propre compte GitHub.
 
-> Note OVH : l'hébergement statique OVH ne peut pas exécuter `/api`. Le relais OAuth reste
-> donc servi par Vercel (garde le projet Vercel actif) ; `base_url` pointe vers Vercel même
-> quand le site public est sur OVH. Alternative : héberger le même `/api` sur la plateforme
-> finale si elle gère des fonctions serverless.
+> Note : `/api` (Node) ne tourne que sur Vercel. C'est parfait pour la phase preview.
+> Pour OVH (PHP, pas de Node serverless), le relais équivalent en PHP est déjà prêt — voir Phase 2.
 
 ---
 
@@ -59,3 +65,31 @@ Il ne reste que 3 choses, qui exigent TON compte (impossible à faire à ta plac
   `folder: .../fiches/<langue>`), et la migration des textes de pages (accueil, mission,
   « Qui suis-je ») actuellement en fichiers TypeScript vers des fichiers de données
   éditables (petite étape technique).
+
+---
+
+## Phase 2 — bascule sur OVH (christinecal.com), quand le site est figé
+
+Tout est **déjà prêt**, il n'y a presque rien à coder :
+
+- **Auto-déploiement** : le workflow `.github/workflows/deploy-ovh.yml` build en cible OVH
+  (`DEPLOY_TARGET=ovh`) et envoie le site en FTPS. Il est **dormant** tant que la variable
+  de dépôt `OVH_DEPLOY` ≠ `true`.
+- **Relais OAuth PHP** : `v3-src/public/oauth/{auth.php,callback.php}` (OVH exécute PHP).
+  Sa clé `oauth/config.php` est **générée au build** depuis les secrets GitHub (jamais committée).
+
+### Étapes de bascule
+1. **OAuth App GitHub** : passer (ou créer) le **callback** sur
+   `https://www.christinecal.com/oauth/callback.php` et la Homepage sur `https://www.christinecal.com`.
+2. **Secrets GitHub du dépôt** (*Settings → Secrets and variables → Actions*) :
+   - Secrets : `CMS_GITHUB_CLIENT_ID`, `CMS_GITHUB_CLIENT_SECRET`,
+     `OVH_FTP_HOST`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD`
+   - Variables : `OVH_DEPLOY = true`, `OVH_FTP_DIR = ./www/` (selon ton hébergement OVH)
+3. **Config du CMS** (`v3-src/public/admin/config.yml`) — un seul bloc à changer :
+   ```yaml
+   base_url: https://www.christinecal.com
+   auth_endpoint: /oauth/auth.php
+   ```
+   (à la place de l'URL Vercel + `/api/auth`).
+4. Pousser sur `main` → le workflow build + déploie OVH automatiquement. Le CMS `/admin/`
+   de `christinecal.com` est opérationnel ; chaque enregistrement de Christine redéploie le site.

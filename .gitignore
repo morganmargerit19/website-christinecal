@@ -13,5 +13,8 @@ sources/wp-v2/wp-content/
 Thumbs.db
 *.log
 
+# Secret du relais OAuth (généré au build CI, jamais committé)
+v3-src/public/oauth/config.php
+
 # Fichiers de travail temporaires (candidates images en attente de choix Christine)
 sources/img-candidates/

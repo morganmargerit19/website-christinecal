@@ -33,6 +33,18 @@ jobs:
         working-directory: v3-src
         run: npm ci
 
+      - name: Générer le secret du relais OAuth (oauth/config.php)
+        env:
+          CID: ${{ secrets.CMS_GITHUB_CLIENT_ID }}
+          CSECRET: ${{ secrets.CMS_GITHUB_CLIENT_SECRET }}
+        run: |
+          mkdir -p v3-src/public/oauth
+          esc() { printf '%s' "$1" | sed "s/\\\\/\\\\\\\\/g; s/'/\\\\'/g"; }
+          {
+            printf '<?php\n'
+            printf "return ['client_id' => '%s', 'client_secret' => '%s'];\n" "$(esc "$CID")" "$(esc "$CSECRET")"
+          } > v3-src/public/oauth/config.php
+
       - name: Build (cible OVH, racine)
         working-directory: v3-src
         env:

@@ -1,6 +1,8 @@
 # État de la session — reprise ultérieure
 
-_Dernière mise à jour : 2026-06-24. Branche de travail : `claude/merkaba-modification-ideas-e42d03`. PR **#3** (ouverte, prête à merger)._
+_Dernière mise à jour : 2026-06-24. **PR #3 mergée dans `main`** (site + CMS en place)._
+
+**Phase d'hébergement :** preview sur **Vercel** tant que le site n'est pas figé (config CMS active = relais OAuth Vercel `/api`). Bascule **OVH `christinecal.com`** prévue ensuite — tout est préparé (relais PHP `/oauth` + workflow `deploy-ovh.yml`), 1 seul changement de config le moment venu. Détail : `CMS-CHRISTINE.md` § « Phase 2 ».
 
 ## Comment ça marche (rappel technique)
 - **Source** : `v3-src/` (Astro). **Build** : `cd v3-src && npm run build` → génère le site dans **`../v3/`** (committé).
