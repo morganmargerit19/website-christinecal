@@ -33,9 +33,9 @@ const tr: Record<Locale, MissionContent> = {
     h1: "Éveil à la multidimensionnalité de l'Être",
     lede: "« Il est temps de fusionner l'Essence-ciel dans l'Existence-Ciel. » Expérience de vie d'une galactique au sol.",
     bannerAlt: 'Passage de la conscience vers la cinquième dimension',
-    s1Heading: "L'Espace-Temps se contracte",
+    s1Heading: "Expérience de vie d'une galactique au sol. L'Espace-Temps se contracte",
     s1p1: "Notre galaxie traverse une ceinture de photons et de multiples portails. Notre monde oscille entre des trajectoires spatio-temporelles différentes qui s'interpénètrent, autorisant des voyages dans l'espace-temps.",
-    s1p2: "Sur ce joyau exceptionnel appelé Terre, dans un même décor 3D, des Âmes de nature et de conscience différentes — et des êtres technologiques — évoluent sous un même costume humain.",
+    s1p2: "Sur ce joyau exceptionnel appelé Terre, dans un même décor 3D, des Âmes de nature et de conscience différentes et des êtres technologiques évoluent sous un même costume humain.",
     s2Heading: 'La mission',
     s2Quote: "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être, de la 3D à la 5D, dans un contexte des plus difficiles.",
     points: [
@@ -270,7 +270,7 @@ const c = tr[locale];
       <div class="paper-section__inner" data-reveal>
         <div class="mission-spacetime">
           <figure class="mission-spacetime__media">
-            <img src={base + '/images/geometrie/spirale-temps.svg'} alt="Spirale dorée du temps — l'Espace-Temps se contracte" loading="lazy" />
+            <img src={base + '/images/geometrie/spirale-temps.svg'} alt="Cadran de montre doré — l'Espace-Temps se contracte" loading="lazy" />
           </figure>
           <div class="mission-spacetime__text prose">
             <h2>{c.s1Heading}</h2>
@@ -308,7 +308,6 @@ const c = tr[locale];
               {c.pioneerQuotes.map((q) => <li>{q}</li>)}
             </ul>
             <p>{c.pioneerP2}</p>
-            <p>{c.pioneerP3}</p>
           </div>
         </div>
       </div>
@@ -331,6 +330,7 @@ const c = tr[locale];
           width="360"
           height="180"
         />
+        <p class="mission-infinity__note">{c.pioneerP3}</p>
         <div class="mission-crews">
           <article class="crew">
             <h3>{c.crewOld.title}</h3>
@@ -412,6 +412,10 @@ const c = tr[locale];
 
   .mission-infinity { display: flex; flex-direction: column; align-items: center; }
   .mission-infinity__svg { width: clamp(240px, 40vw, 380px); height: auto; margin-bottom: var(--space-2); }
+  .mission-infinity__note {
+    text-align: center; max-width: 60ch;
+    margin: 0 auto var(--space-5); color: var(--indigo-200, inherit);
+  }
   .mission-crews {
     display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem);
     max-width: 860px; margin: 0 auto;

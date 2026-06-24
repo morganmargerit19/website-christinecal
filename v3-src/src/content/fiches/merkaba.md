@@ -9,21 +9,25 @@ image: /images/wp/stage-construction-merkaba-cristalline.jpg
 imageAlt: "Stage Construction de la Merkaba cristalline"
 lede: Construire la géométrie de l'Âme sur la base de la Merkaba cristalline.
 format: Présentiel ou Zoom
+hideHeaderMeta: true
+practicalFooter: true
 videos:
   - id: UQzWaRZutoM
     title: Les ateliers de Christine CAL
 ---
 
+Notre galaxie traverse une ceinture de photons et notre planète change de
+dimension. Adapter le microcosme au macrocosme est essentiel.
+
 > Mes guides en 2012 : « Vous connaîtrez la Compression de l'Âme. »
 
-Notre galaxie traverse une ceinture de photons et notre planète change de
-dimension. Adapter le microcosme au macrocosme devient essentiel : construire la
-géométrie de l'Âme sur la base de la Merkaba cristalline constitue une étape
-importante du parcours.
+Construire la géométrie de l'Âme sur la base de la Merkaba cristalline constitue
+une étape importante.
 
 ## Effets
 
-- Ancrage et déploiement du cerveau droit — intuition et créativité
+- Ancrage
+- Déploiement du cerveau droit : intuition et créativité
 - Libération des mémoires karmiques et réintégration des fractales des vies passées
 - Attraction de la famille d'Âme
 - Protection face aux pollutions énergétiques, électromagnétiques et physiques

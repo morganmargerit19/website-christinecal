@@ -9,36 +9,38 @@ Fichiers : `v3-src/public/admin/index.html` + `v3-src/public/admin/config.yml`.
 
 ---
 
-## Mise en place (une seule fois)
+## Mise en place (une seule fois, ~3 min)
 
-Sveltia/Decap a besoin d'un **relais OAuth** pour la connexion GitHub (l'hébergement OVH
-ne fournit pas d'authentification). Le plus simple, gratuit : un **Cloudflare Worker**.
+Le **relais OAuth est déjà fourni** : dossier `/api` du dépôt (`auth.js` + `callback.js`),
+déployé automatiquement par **Vercel** en fonctions serverless. **Pas besoin de Cloudflare.**
+Il ne reste que 3 choses, qui exigent TON compte (impossible à faire à ta place) :
 
-1. **Créer une OAuth App GitHub**
+1. **Créer une OAuth App GitHub** (2 min)
    GitHub → *Settings* → *Developer settings* → *OAuth Apps* → *New OAuth App*.
-   - Homepage URL : `https://www.christinecal.com`
-   - Authorization callback URL : l'URL du Worker (étape 2) + `/callback`
-   - Noter le **Client ID** et le **Client Secret**.
+   - Application name : `CMS Christine CAL`
+   - Homepage URL : `https://website-christinecal.vercel.app`
+   - **Authorization callback URL** : `https://website-christinecal.vercel.app/api/callback`
+     (remplace par ton vrai domaine Vercel de prod si différent)
+   - Crée l'app, puis **Generate a new client secret**. Note le **Client ID** et le **Client Secret**.
 
-2. **Déployer le relais OAuth** (Cloudflare Worker)
-   Utiliser le projet **`sveltia-cms-auth`** (open source) :
-   https://github.com/sveltia/sveltia-cms-auth — « Deploy to Cloudflare ».
-   Renseigner `GITHUB_CLIENT_ID` et `GITHUB_CLIENT_SECRET` dans les variables du Worker.
-   Récupérer l'URL publique du Worker.
+2. **Ajouter 2 variables d'environnement dans Vercel** (1 min)
+   Vercel → projet `website-christinecal` → *Settings* → *Environment Variables* :
+   - `CMS_GITHUB_CLIENT_ID` = le Client ID
+   - `CMS_GITHUB_CLIENT_SECRET` = le Client Secret
+   Puis *Redeploy* (pour que les fonctions `/api` prennent les variables).
 
-3. **Brancher le relais dans la config**
-   Dans `v3-src/public/admin/config.yml`, sous `backend:`, décommenter et renseigner :
-   ```yaml
-   base_url: https://VOTRE-WORKER.workers.dev
-   ```
-   Committer → le `/admin` est opérationnel.
+3. **Vérifier `base_url`** dans `v3-src/public/admin/config.yml`
+   Il pointe sur `https://website-christinecal.vercel.app`. Si ton domaine de prod diffère,
+   ajuste-le (il doit servir `/api/auth` et `/api/callback`).
 
 4. **Donner l'accès à Christine**
-   L'inviter comme collaboratrice du dépôt GitHub (*Settings → Collaborators*), avec
-   un accès en écriture. Elle se connecte avec son propre compte GitHub.
+   L'inviter comme collaboratrice du dépôt GitHub (*Settings → Collaborators*, accès écriture).
+   Elle se connecte sur `/admin/` avec son propre compte GitHub.
 
-> Astuce : à la bascule d'indépendance (dépôt transféré sur le GitHub de Christine),
-> il suffit de mettre à jour `repo:` dans `config.yml` et de recréer l'OAuth App.
+> Note OVH : l'hébergement statique OVH ne peut pas exécuter `/api`. Le relais OAuth reste
+> donc servi par Vercel (garde le projet Vercel actif) ; `base_url` pointe vers Vercel même
+> quand le site public est sur OVH. Alternative : héberger le même `/api` sur la plateforme
+> finale si elle gère des fonctions serverless.
 
 ---
 

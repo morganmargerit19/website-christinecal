@@ -70,6 +70,11 @@ const fiches = defineCollection({
     imageAlt: z.string().optional(),
     // Diaporama en tête de fiche (remplace l'image unique) — liste de chemins.
     slideshow: z.array(z.string()).default([]),
+    // Galerie d'images légendées rendue dans le corps de la fiche (après le texte),
+    // avec le bon `base`. Pour les pages riches en photos (ex. Mont Shasta).
+    gallery: z
+      .array(z.object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() }))
+      .default([]),
     // Piste audio (ex. émission radio) — lecteur affiché sur la fiche
     audio: z.string().optional(),
     audioTitle: z.string().optional(),

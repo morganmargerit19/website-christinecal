@@ -19,16 +19,18 @@ Cette montagne de 1230 mètres, située dans le sud de la France près du lieu
 mythique de Rennes-le-Château, en pays cathare, a toujours nourri littérature et
 questionnements : trésors, SS, ovnis, ou le « délire » du 21 décembre 2012. Elle
 a même fait l'objet d'une série TV de fiction fantastique en 2024, soutenue par la
-région Occitanie, où l'intrication des mondes est clairement révélée — une
-présentation qui interpelle dans le contexte actuel de révélations officielles sur
-les UFO et les E.T.
+région Occitanie, dans laquelle l'intrication des mondes est clairement révélée.
+Une présentation qui interpelle, tout particulièrement dans le contexte actuel de
+révélations officielles et mondiales concernant les UFO et les E.T.
 
-> La fiction d'hier correspond à la réalité d'aujourd'hui ! Tout a été montré dans
-> les films ; ils montrent souvent la réalité, mais nous continuons à vivre dans
-> l'illusion.
+Vous allez découvrir que *la fiction d'hier correspond à la réalité
+d'aujourd'hui !*
 
-*Une montagne « à l'envers »* — en géologie (des couches supérieures plus
-anciennes que les couches intérieures), mais aussi en énergie, selon mes
+> Tout a été montré dans les films. Ils montrent souvent la réalité, mais nous
+> continuons à vivre dans l'illusion. À suivre…
+
+*Une montagne « à l'envers »* — en géologie, avec des couches supérieures de roche
+plus ancienne que les couches intérieures ; mais aussi en énergie, selon mes
 expériences.
 
 ## 2003 — Une rencontre troublante
@@ -37,8 +39,9 @@ Au pied du Bugarach, un couple d'Américains. « Je t'attendais ! » me dit-elle
 femme, habillée en Amérindienne, me remet quelque chose concernant **TELOS** (le
 livre venait juste de sortir), dont je retrouverai la trace dans le plan physique à
 Shasta en 2017. « Où l'as-tu mis ? » me dit-il — l'homme fait référence, sans le
-savoir, à l'un de mes songes de 2001 concernant ma vie cathare ; un songe qui me
-mènera sur le périple des châteaux en 2003.
+savoir, à l'un de mes songes de 2001 concernant ma vie cathare. Un songe qui va me
+mener sur le périple des châteaux en 2003 et se terminer sur le lieu des Parfaits
+Cathares en tant qu'expert comptable en 2006.
 
 ## 2010 — Visite en voyage astral
 
@@ -48,9 +51,9 @@ laboratoires, une énergie très métallique. Une dualité intérieure qui refl�
 réalité extérieure de l'humanité. Une information m'est donnée : la nécessité
 d'attendre un changement orchestré par d'autres intelligences.
 
-Certains rapprochent le Mont Bugarach du Mont Shasta. Après plus d'une douzaine de
-voyages au Mont Shasta, je peux dire que ces deux montagnes sont totalement
-différentes.
+Certains trouvent une correspondance entre le Mont Bugarach et le Mont Shasta. Bien
+que chacun soit libre de ses pensées, après avoir été plus d'une douzaine de fois
+au Mont Shasta, je peux dire que ces deux montagnes sont totalement différentes.
 
 ## 2022 — Des DVD filmés au Bugarach
 
@@ -63,13 +66,16 @@ Je m'approche, mais je reste dubitative.
 
 ## 2026 — Contact avec des Gardiens
 
-Expérience du 20 mars 2026 : *« Nous t'attendions… »* En mission pour le moment —
-mise à jour en fin d'été.
+Expérience du 20 mars 2026 : *« Nous t'attendions… »*
+
+En mission pour le moment. Mise à jour en fin d'été.
 
 ## Reliance pour la Nouvelle Terre
 
-Mise à jour en septembre 2026… Un stage **« Le Nouveau Bugarach »** est à prévoir
-pour 2027, et un livre du même titre est en cours d'écriture.
+Mise à jour en septembre 2026… *(sera complété en septembre).*
+
+Un stage **« Le Nouveau Bugarach »** est à prévoir pour 2027, et un livre du même
+titre est en cours d'écriture.
 
 > Invitation aux questionnements : se renseigner avant de juger, et maintenir le
 > respect de la libre pensée de chacun.

@@ -165,6 +165,28 @@
           },
           "default": []
         },
+        "gallery": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "src": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "src"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
         "audio": {
           "type": "string"
         },

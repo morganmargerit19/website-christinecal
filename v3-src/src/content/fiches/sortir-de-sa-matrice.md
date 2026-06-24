@@ -8,9 +8,11 @@ lang: fr
 image: /images/wp/eneagramme.jpg
 imageAlt: "L'énnéagramme — sortir de sa matrice personnelle"
 lede: Transmuter sa peur de base pour passer d'une vie réactive à une vie créative.
-cardLede: "Transmuter sa peur majeure en source d'énergie."
+cardLede: "Transmuter sa peur majeure en source d'énergie et devenir créateur de sa vie."
 richLayout: sortir-matrice
 hideHeaderImage: true
+hideHeaderMeta: true
+practicalFooter: true
 dates:
   - "24–25 octobre 2026"
   - "23–24 janvier 2027"

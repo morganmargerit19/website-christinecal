@@ -66,7 +66,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     journey: {
-      heading: 'Un parcours en bref',
+      heading: 'UN PARCOURS EN BREF',
       items: [
         { lead: 'Une petite fille', text: 'choquée par un monde inversé.' },
         {
@@ -78,15 +78,15 @@ export const about: Record<Locale, AboutDict> = {
           text: 'passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI. Sortir du Jeu par le JE.',
         },
         { lead: 'Une maman', text: "en contact avec l'Âme de sa fille durant sa grossesse." },
-        { lead: 'Un cerveau gauche musclé', text: 'Expert-comptable en libéral de 1993 à 2013.' },
+        { lead: 'Un cerveau gauche musclé', text: '<strong class="about-accent">Expert comptable</strong> en libéral de 1993 à 2013.' },
         {
           lead: 'Un cerveau droit déployé',
-          text: 'Médium clairvoyante et clairaudiente en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie.',
+          text: '<strong class="about-accent">Médium clairvoyante et clairaudiente</strong> en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie.',
         },
       ],
     },
     activities: {
-      heading: 'Activités actuelles',
+      heading: 'ACTIVITÉS ACTUELLES',
       items: [
         {
           title: 'Coach Consultant',
@@ -108,8 +108,7 @@ export const about: Record<Locale, AboutDict> = {
               'Du couple psycho karmique au couple cosmique',
               'Alignements planétaires et galactiques du 21/12/2012',
               'Conférence et Ateliers sur le féminin / Symposium International de Biarritz 2014',
-              'Les mondes parallèles',
-              'Perceptions extra-sensorielles et voyage astral',
+              'Mondes parallèles, Perceptions extra-sensorielles et voyage astral',
               'Passage en 5D : compte à rebours',
               'Apocalypse Now : révélations vers la 5D',
               'La Sagesse Lémurienne au service de la 5D',
@@ -118,7 +117,7 @@ export const about: Record<Locale, AboutDict> = {
               "La multidimensionnalité de l'Être — 2025",
               'Le Champ Unifié de la Conscience — 2022',
               "L'état de Terra : actualités intra et extra en 2024, idem en 2025",
-              "Organisatrice de Forums : 2025 « Expériences d'autres mondes » à Rennes-les-Bains et interventions",
+              "Organisatrice de Forums : 2025 « Expériences d'autres mondes » avec Anne Givaudan à Rennes-les-Bains et interventions",
               "La mutation des corps et de l'ADN — juin 2026",
               "Et bien d'autres sujets… dont de nombreux DVD chez DEBOWSKA Productions à découvrir dans le site.",
             ],
@@ -131,16 +130,16 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     specifics: {
-      heading: 'Spécificités',
+      heading: 'SPÉCIFICITÉS',
       items: [
-        "Création d'un enseignement initiatique : CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL — formation de plus de 950 personnes depuis 2013.",
+        "Création d'un enseignement initiatique : <strong class=\"about-accent\">CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL</strong> — Formation de plus de 950 personnes depuis 2013.",
         'Spécialiste du voyage astral et des contacts avec divers peuples intra et extraterrestres par télépathie depuis 2003.',
-        '2019 — Contact avec une fractale de mon Futur sur le Mont Shasta.',
-        "2021 — Contacts avec une autre fractale d'un courant parallèle, avec des ressentis physiques et des flashs troublants au réveil durant des mois. Ce qui va me conduire à me documenter et à rencontrer des Êtres qui côtoient ces mondes.",
+        '2019 — Contact avec une fractale de mon Futur sur le <strong class="about-accent">MONT SHASTA</strong>.',
+        "2021 — Contacts avec une autre fractale d'un courant parallèle suite à des ressentis physiques.",
       ],
     },
     news: {
-      heading: 'Actualités',
+      heading: 'ACTUALITÉS',
       items: [
         "Depuis 2024 — Stages sur la multidimensionnalité de l'Être.",
         "2025 / 2026 — Mont Shasta et le nouveau TELOS, après l'invasion par des êtres involutifs en 2021, confirmée suite à ma rencontre avec Elena Danaan en août 2024 et 2025. Voyage au Mont Shasta en 07.2026.",
@@ -148,7 +147,7 @@ export const about: Record<Locale, AboutDict> = {
       ],
     },
     upcoming: {
-      heading: 'À venir',
+      heading: 'À VENIR',
       items: [
         'YouTube : « Découvrir sa multidimensionnalité : mon aventure ! Et vous, la vôtre ? » — audios ou vidéos à partir du 2ᵉ semestre 2026.',
         "Divers livres en cours d'écriture.",
@@ -201,7 +200,7 @@ export const about: Record<Locale, AboutDict> = {
           text: 'passionate about bridging science and the mystical, having experienced a reversal of consciousness, a revelation of the SELF. Stepping out of the Game through the I.',
         },
         { lead: 'A mother', text: "in contact with her daughter's Soul during pregnancy." },
-        { lead: 'A well-trained left brain', text: 'Chartered accountant in private practice from 1993 to 2013.' },
+        { lead: 'A well-trained left brain', text: 'Chartered accountant (C.P.A) in private practice from 1993 to 2013.' },
         {
           lead: 'A fully unfolded right brain',
           text: 'Clairvoyant and clairaudient medium in contact with many parallel worlds through astral travel and telepathy.',

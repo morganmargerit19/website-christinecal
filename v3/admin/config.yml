@@ -1,23 +1,28 @@
 # Sveltia CMS — édition du contenu par Christine, depuis le navigateur (page /admin).
-# Compatible Decap CMS. Chaque enregistrement = un commit GitHub → rebuild + déploiement OVH.
+# Compatible Decap CMS. Chaque enregistrement = un commit GitHub → rebuild + déploiement.
 #
-# ⚠️ La config liste TOUS les champs des fiches : un CMS git-based réécrit l'intégralité
-# du frontmatter à la sauvegarde ; un champ absent ici serait effacé du fichier.
+# ⚠️ IMPORTANT : un CMS git-based réécrit TOUT le frontmatter à la sauvegarde.
+# Tout champ du schéma (src/content.config.ts) absent ici serait EFFACÉ du fichier.
+# => cette config liste donc l'intégralité des champs des fiches.
 #
-# Pour l'instant : collection française (l'essentiel de ce que Christine édite).
-# Les langues EN/ES/PL/IT s'ajoutent à l'identique (folder: .../fiches/en, default lang: en, etc.).
+# Collection française uniquement (ce que Christine édite). Les langues EN/ES/PL/IT
+# s'ajouteront à l'identique plus tard (folder .../fiches/en, default lang: en, etc.).
 
 backend:
   name: github
   repo: morganmargerit19/website-christinecal
   branch: main
-  # Connexion GitHub via un relais OAuth à déployer une fois (gratuit, Cloudflare Worker).
-  # Voir CMS-CHRISTINE.md, puis renseigner l'URL du relais :
-  # base_url: https://VOTRE-RELAIS-OAUTH
+  # Connexion GitHub via le relais OAuth hébergé sur VOTRE Vercel (dossier /api du dépôt).
+  # base_url = le domaine Vercel qui sert /api (à ajuster si ton domaine de prod diffère).
+  base_url: https://website-christinecal.vercel.app
+  auth_endpoint: /api/auth
 
 # Dépôt des images choisies par Christine.
 media_folder: "v3-src/public/images/wp"
 public_folder: "/images/wp"
+
+# Confort d'édition : commit direct (pas de workflow éditorial à valider).
+publish_mode: simple
 
 collections:
   - name: fiches_fr
@@ -30,6 +35,8 @@ collections:
     extension: md
     format: frontmatter
     slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
     fields:
       - { name: lang, label: "Langue", widget: hidden, default: fr }
       - { name: title, label: "Titre", widget: string }
@@ -37,27 +44,93 @@ collections:
       - { name: hub, label: "Univers", widget: select, options: ["eveil-a-soi", "eveil-au-soi"] }
       - { name: category, label: "Catégorie", widget: select, options: ["consultation", "stage", "atelier", "conference", "voyage", "parcours"] }
       - { name: order, label: "Ordre d'affichage (petit = en premier)", widget: number, value_type: int, default: 50 }
-      - { name: lede, label: "Résumé court (carte + chapeau)", widget: text }
-      - { name: stages, label: "Rubrique : slugs des stages regroupés", widget: list, required: false }
-      - { name: dates, label: "Dates", widget: list, required: false }
-      - { name: duration, label: "Durée", widget: string, required: false }
-      - { name: price, label: "Tarif", widget: string, required: false }
-      - { name: format, label: "Format", widget: string, required: false }
-      - { name: banner, label: "Bandeau (haut de page)", widget: image, required: false }
-      - { name: bannerAlt, label: "Texte alternatif du bandeau", widget: string, required: false }
+      - { name: lede, label: "Résumé court (chapeau de page)", widget: text }
+      - { name: cardLede, label: "Texte de la carte (si différent du résumé)", widget: text, required: false }
+
+      # --- Visuels ---
       - { name: image, label: "Image principale", widget: image, required: false }
       - { name: imageAlt, label: "Texte alternatif de l'image", widget: string, required: false }
+      - { name: banner, label: "Bandeau large (haut de page)", widget: image, required: false }
+      - { name: bannerAlt, label: "Texte alternatif du bandeau", widget: string, required: false }
+      - name: slideshow
+        label: "Diaporama (remplace l'image principale en tête)"
+        widget: list
+        required: false
+        summary: "{{fields.image}}"
+        field: { name: image, label: "Image", widget: image }
+      - name: gallery
+        label: "Galerie d'images (dans le corps de la fiche)"
+        widget: list
+        required: false
+        summary: "{{fields.caption}}"
+        fields:
+          - { name: src, label: "Image", widget: image }
+          - { name: caption, label: "Légende", widget: string, required: false }
+          - { name: alt, label: "Texte alternatif", widget: string, required: false }
+      - name: bodyImage
+        label: "Image illustrative dans le texte"
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: src, label: "Image", widget: image }
+          - { name: alt, label: "Texte alternatif", widget: string, required: false }
+          - { name: caption, label: "Légende", widget: string, required: false }
+
+      # --- Infos pratiques ---
+      - { name: dates, label: "Dates", widget: list, required: false, field: { name: date, label: "Date", widget: string } }
+      - { name: duration, label: "Durée", widget: string, required: false }
+      - { name: price, label: "Tarif", widget: string, required: false }
+      - { name: format, label: "Format (Présentiel ou Zoom…)", widget: string, required: false }
+
+      # --- Audio / Vidéos ---
       - { name: audio, label: "Audio (mp3)", widget: file, required: false }
       - { name: audioTitle, label: "Titre de l'audio", widget: string, required: false }
+      - { name: videosHeading, label: "Titre au-dessus des vidéos", widget: string, required: false }
       - name: videos
         label: "Vidéos YouTube"
         widget: list
         required: false
+        summary: "{{fields.title}}"
         fields:
           - { name: id, label: "ID YouTube", widget: string }
           - { name: title, label: "Titre", widget: string, required: false }
           - { name: meta, label: "Légende (date…)", widget: string, required: false }
           - { name: credit, label: "Crédit", widget: select, options: ["debowska"], required: false }
+          - { name: cover, label: "Jaquette (DVD…)", widget: image, required: false }
+          - { name: coverAlt, label: "Texte alternatif de la jaquette", widget: string, required: false }
+      - name: pendingVideos
+        label: "Emplacements vidéo à intégrer (placeholders)"
+        widget: list
+        required: false
+        fields:
+          - { name: title, label: "Titre", widget: string, required: false }
+          - { name: meta, label: "Légende", widget: string, required: false }
+
+      # --- Témoignages ---
+      - name: testimonials
+        label: "Témoignages"
+        widget: list
+        required: false
+        summary: "{{fields.author}}"
+        fields:
+          - { name: quote, label: "Témoignage", widget: text }
+          - { name: author, label: "Auteur", widget: string, required: false }
+
+      # --- Rubrique (regroupe des stages) ---
+      - name: stages
+        label: "Rubrique : slugs des stages regroupés"
+        widget: list
+        required: false
+        field: { name: slug, label: "Slug du stage", widget: string }
+
+      # --- Réglages de mise en page (avancé) ---
+      - { name: hideHeaderImage, label: "Masquer l'image en tête", widget: boolean, default: false, required: false }
+      - { name: hideHeaderMeta, label: "Masquer le cadre dates/format en haut", widget: boolean, default: false, required: false }
+      - { name: practicalFooter, label: "Afficher les infos pratiques en bas", widget: boolean, default: false, required: false }
+      - { name: richLayout, label: "Gabarit spécial", widget: select, options: ["sortir-matrice"], required: false }
       - { name: featured, label: "Mise en avant", widget: boolean, default: false, required: false }
       - { name: draft, label: "Brouillon (caché du site)", widget: boolean, default: false, required: false }
+
+      # --- Contenu rédactionnel ---
       - { name: body, label: "Contenu", widget: markdown }
