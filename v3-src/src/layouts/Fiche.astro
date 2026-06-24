@@ -186,6 +186,19 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
+    {f.gallery.length > 0 && (
+      <section class="container container--narrow">
+        <div class="fiche-gallery" data-reveal>
+          {f.gallery.map((g) => (
+            <figure>
+              <img src={base + g.src} alt={g.alt ?? ''} loading="lazy" />
+              {g.caption && <figcaption>{g.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+
     {stageEntries.length > 0 && (
       <section class="container">
         <h2 class="fiche-stages-title">{stagesHeading[locale]}</h2>
@@ -370,6 +383,22 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__dates .fiche-meta__label { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
   .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
   .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink); }
+
+  /* Galerie d'images légendées (ex. Mont Shasta : livres, lieux, photos) */
+  .fiche-gallery {
+    display: grid; gap: var(--space-3); margin: var(--space-3) auto var(--space-4);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .fiche-gallery figure { margin: 0; }
+  .fiche-gallery img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: var(--radius); border: 1px solid var(--border-light);
+    aspect-ratio: 4 / 3;
+  }
+  .fiche-gallery figcaption {
+    margin-top: 0.4rem; font-size: var(--text-sm); color: var(--ink-muted);
+    font-style: italic; text-align: center;
+  }
 
   /* Deux blocs côte à côte dans le corps d'une fiche (ex. Time line 1 / 2) */
   :global(.prose .duo-cols) { display: grid; gap: var(--space-4); margin: var(--space-3) 0 var(--space-4); }

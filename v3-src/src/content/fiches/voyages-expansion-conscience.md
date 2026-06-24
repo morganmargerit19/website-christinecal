@@ -13,5 +13,5 @@ dates:
 format: Soirées via Zoom
 ---
 
-Des soirées de connexion via Zoom, proposées pendant l'hiver, pour s'initier au
-voyage astral et à l'expansion de conscience.
+Des soirées de connexion via Zoom, proposées pendant l'hiver, pour s'initier à
+l'expansion de conscience.
