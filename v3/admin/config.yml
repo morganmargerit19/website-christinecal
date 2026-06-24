@@ -12,9 +12,10 @@ backend:
   name: github
   repo: morganmargerit19/website-christinecal
   branch: main
-  # Connexion GitHub via un relais OAuth à déployer UNE fois (gratuit, Cloudflare Worker).
-  # Voir CMS-CHRISTINE.md, puis décommenter et renseigner l'URL du relais :
-  # base_url: https://VOTRE-RELAIS-OAUTH
+  # Connexion GitHub via le relais OAuth hébergé sur VOTRE Vercel (dossier /api du dépôt).
+  # base_url = le domaine Vercel qui sert /api (à ajuster si ton domaine de prod diffère).
+  base_url: https://website-christinecal.vercel.app
+  auth_endpoint: /api/auth
 
 # Dépôt des images choisies par Christine.
 media_folder: "v3-src/public/images/wp"
