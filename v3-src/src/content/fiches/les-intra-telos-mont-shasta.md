@@ -129,14 +129,14 @@ expert-comptable devenue médium.
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
 propulsée **dans mon futur face à une version de moi-même qui vit avec eux**.
 
-> _« Il y a une part de nous en vous. » « Nous sommes votre futur. »_ — les Telosiens
+> _« Il y a une part de nous en vous. » « Nous sommes votre futur. »_ me disent les Telosiens
 
 > \*« Songe à cela : Révélation = le Rêve en élévation. Cesse de rêver la 5D et
-> décide de la vivre, car elle est ta nature véritable. »\* — me disait en 2019 un
+> décide de la vivre, car elle est ta nature véritable. »\*  me disait en 2019 un
 > Sage de Telos, que je capte par télépathie dans un autre lieu de Shasta.
 
 _Sciences et mysticisme se rejoignent._ En 2017, des neuroscientifiques suisses et
-belges ont découvert des structures multidimensionnelles dans le cerveau humain :
+belges ont découvert des structures multidimensionnelles dans le cerveau humain avec
 des milliards de neurones organisés à travers 7, voire 11 dimensions. Des
 chercheurs chinois travaillent depuis des années sur la téléportation ; en
 réalité, certains Êtres se téléportent déjà.
