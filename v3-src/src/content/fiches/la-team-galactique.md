@@ -7,6 +7,8 @@ stages: [rencontres-galactiques-au-sol]
 order: 11
 lang: fr
 hideHeaderMeta: true
+banner: /images/wp/les-freres-des-etoiles.jpg
+bannerAlt: "Les Frères des étoiles — la Team galactique de la Nouvelle Terre"
 imageAlt: "La team galactique de la Nouvelle Terre"
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
 videos:
