@@ -297,7 +297,7 @@ h1, h2, h3, h4 {
     border-radius: var(--radius-lg);
     background: var(--glass);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    padding: clamp(2rem, 4vw, 3.2rem);
+    padding: clamp(1.4rem, 2.4vw, 2rem);
     text-decoration: none; color: var(--indigo-100);
     display: flex; flex-direction: column; gap: var(--space-2);
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
@@ -318,8 +318,11 @@ h1, h2, h3, h4 {
     font-size: var(--text-xs); letter-spacing: 0.25em; text-transform: uppercase;
     color: var(--gold-soft);
 }
-.portal-card h3 { font-size: var(--text-xl); margin-bottom: 0.2em; }
-.portal-card p { margin: 0; color: var(--indigo-100); }
+.portal-card h3 {
+    font-size: var(--text-lg); margin-bottom: 0.2em;
+    overflow-wrap: break-word; hyphens: auto;
+}
+.portal-card p { margin: 0; color: var(--indigo-100); overflow-wrap: break-word; }
 .portal-card ul {
     list-style: none; margin: var(--space-2) 0 0; padding: 0;
     display: flex; flex-direction: column; gap: 0.5em;
