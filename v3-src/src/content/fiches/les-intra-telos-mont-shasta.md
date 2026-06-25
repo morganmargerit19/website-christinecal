@@ -60,11 +60,6 @@ inlineMedia:
       id: ouTq-jp9NgM
     section: Enseignement de TELOS Mont Shasta
 sideImages:
-  - section: montagne de 4700
-    src: /images/wp/nuage-lenticulaire.jpg
-    alt: Nuage lenticulaire au-dessus du Mont Shasta
-    align: right
-    size: small
   - section: Des rencontres successives
     src: /images/wp/telos-revelations-de-la-nouvelle-lemurie.jpg
     alt: « Révélations de la Nouvelle Lémurie » — Aurelia Louise Jones
@@ -81,6 +76,11 @@ sideImages:
     align: right
     size: small
 ---
+
+<figure class="shasta-lead-img">
+  <img src="/images/wp/nuage-lenticulaire.jpg" alt="Nuage lenticulaire au-dessus du Mont Shasta" loading="lazy" />
+  <figcaption>Nuage lenticulaire au-dessus du Mont Shasta</figcaption>
+</figure>
 
 Le **MONT SHASTA**, montagne de 4700 mètres située en Californie et considérée
 comme sacrée par les Amérindiens, porte l'énergie de « Celui qui vit selon la Loi
