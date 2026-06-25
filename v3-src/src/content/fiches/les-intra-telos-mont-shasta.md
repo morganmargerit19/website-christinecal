@@ -121,9 +121,9 @@ des Maîtres Ascensionnés.
 Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
 [TELOS Mondial](https://www.telosinfo.org/site/) ( mais totalement indépendante de l'association TELOS France).
 
-**Livre en cours d'écriture** : Enseignement de TELOS Mont Shasta — Rencontre
-avec notre futur. Contacts et expériences multidimensionnelles d'une
-expert-comptable devenue médium.
+##### **Livre en cours d'écriture** : 
+
+##### _Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium._
 
 **Expérimentation consciente de la multidimensionnalité.** Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
