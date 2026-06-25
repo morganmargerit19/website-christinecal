@@ -16,11 +16,12 @@ type MissionContent = {
   metaTitle: string; metaDesc: string;
   eyebrow: string; h1: string; lede: string; bannerAlt: string;
   s1Heading: string; s1p1: string; s1p2: string;
-  s2Heading: string; s2Quote: string; points: string[];
+  s2Heading: string; s2Quote: string; points: string[]; s2Matrix?: string;
   pioneerAlt: string; pioneerHeading: string; pioneerIntro: string;
-  pioneerQuotes: string[]; pioneerP2: string; pioneerP3: string;
+  pioneerQuotes: string[]; pioneerP2: string; pioneerAdn?: string; pioneerP3: string;
   callEyebrow: string; callHeading: string; callHeadingEm: string; callLede: string;
   infinityAlt: string; crewOld: Crew; crewYoung: Crew;
+  pressHeading?: string;
   videos: { id: string; title: string; meta: string }[];
   recognizeHeading: string; recognizeBody: string; contactCta: string; back: string;
 };
@@ -33,11 +34,12 @@ const tr: Record<Locale, MissionContent> = {
     h1: "Éveil à la multidimensionnalité de l'Être",
     lede: "« Il est temps de fusionner l'Essence-ciel dans l'Existence-Ciel. » Expérience de vie d'une galactique au sol.",
     bannerAlt: 'Passage de la conscience vers la cinquième dimension',
-    s1Heading: "Expérience de vie d'une galactique au sol. L'Espace-Temps se contracte",
+    s1Heading: "Expérience de vie d'une galactique au sol.<br />L'Espace-Temps se contracte",
     s1p1: "Notre galaxie traverse une ceinture de photons et de multiples portails. Notre monde oscille entre des trajectoires spatio-temporelles différentes qui s'interpénètrent, autorisant des voyages dans l'espace-temps.",
     s1p2: "Sur ce joyau exceptionnel appelé Terre, dans un même décor 3D, des Âmes de nature et de conscience différentes et des êtres technologiques évoluent sous un même costume humain.",
     s2Heading: 'La mission',
-    s2Quote: "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être, de la 3D à la 5D, dans un contexte des plus difficiles.",
+    s2Quote: "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : <strong><em>la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être, de la 3D à la 5D, dans un contexte des plus difficiles.</em></strong>",
+    s2Matrix: 'Confère le film Matrix qui nous montre la réalité !',
     points: [
       "Dans une Matrice d'enfermement et de manipulation de la conscience, mise en place sur Terre depuis des milliers d'années par des êtres involutifs non humains.",
       "Dans un programme d'infiltration et de substitution d'une humanité par une race en recherche de corps, déterminée à s'emparer du bien le plus précieux donné par le Créateur à sa Création : l'Âme.",
@@ -51,7 +53,8 @@ const tr: Record<Locale, MissionContent> = {
       'Vous deviendrez les enseignants de mes jeunes de cette planète.',
       'Vous êtes précieux. Vous êtes les ancêtres du futur.',
     ],
-    pioneerP2: "… me disent les Intra- et Extraterrestres avec qui je communique par télépathie depuis plus d'une décennie. « Ce nouvel ADN servira de base-source pour la création de futures races galactiques et intergalactiques. »",
+    pioneerP2: "… me disent les Intra et Extraterrestres avec qui je communique par télépathie depuis plus d'une décennie.",
+    pioneerAdn: "« Ce nouvel ADN servira de base-source pour la création de futures races galactiques et intergalactiques. »",
     pioneerP3: "Ce processus résulte d'un long cheminement initiatique : il nécessite un mental structuré et un émotionnel stabilisé, car c'est l'Âme qui ascensionne, et non la personnalité humaine.",
     callEyebrow: "Vous sentez l'appel ?",
     callHeading: 'Alors embarquez dans votre vaisseau',
@@ -60,6 +63,7 @@ const tr: Record<Locale, MissionContent> = {
     infinityAlt: 'Lemniscate — les deux équipages galactiques',
     crewOld: { title: '« Vieilles Âmes »', en: 'The Ground Galactic Crew', desc: "L'équipe galactique au sol depuis des milliers d'années, en cours de reconnexion avec la Présence I AM pour la fin de mission." },
     crewYoung: { title: '« Jeunes Âmes galactiques »', en: 'The Young Galactic Crew', desc: "Arrivées depuis quelques décennies, en cours d'ancrage et de re-mémorisation du programme pour la concrétisation de la mission." },
+    pressHeading: 'Informations / Presse',
     videos: [
       { id: 'Ncg54JqREp4', title: "Bande-annonce officielle « Les Acteurs de la vie »", meta: 'Juin 2017' },
       { id: 'ANs3YN5mMb0', title: "« Les Acteurs de la Vie » — Peter Müller & Angélique Piro", meta: 'Juin 2017' },
@@ -273,11 +277,11 @@ const c = tr[locale];
             <img src={base + '/images/geometrie/spirale-temps.svg'} alt="Cadran de montre doré — l'Espace-Temps se contracte" loading="lazy" />
           </figure>
           <div class="mission-spacetime__text prose">
-            <h2>{c.s1Heading}</h2>
+            <h2 set:html={c.s1Heading} />
             <p>{c.s1p1}</p>
-            <p>{c.s1p2}</p>
           </div>
         </div>
+        <p class="mission-after prose">{c.s1p2}</p>
       </div>
     </div>
   </section>
@@ -286,10 +290,11 @@ const c = tr[locale];
     <div class="container container--narrow">
       <div class="paper-section__inner prose" data-reveal>
         <h2>{c.s2Heading}</h2>
-        <blockquote>{c.s2Quote}</blockquote>
+        <blockquote set:html={c.s2Quote} />
         <ul class="mission-points">
           {c.points.map((p) => <li>{p}</li>)}
         </ul>
+        {c.s2Matrix && <p class="mission-highlight">{c.s2Matrix}</p>}
       </div>
     </div>
   </section>
@@ -307,9 +312,10 @@ const c = tr[locale];
             <ul>
               {c.pioneerQuotes.map((q) => <li>{q}</li>)}
             </ul>
-            <p>{c.pioneerP2}</p>
           </div>
         </div>
+        <p class="mission-after prose">{c.pioneerP2}</p>
+        {c.pioneerAdn && <p class="mission-highlight">{c.pioneerAdn}</p>}
       </div>
     </div>
   </section>
@@ -348,6 +354,7 @@ const c = tr[locale];
   </section>
 
   <section class="container">
+    {c.pressHeading && <h2 class="mission-videos-heading" data-reveal>{c.pressHeading}</h2>}
     <div class="video-grid">
       {c.videos.map((v) => <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={t.video.play} />)}
     </div>
@@ -373,6 +380,22 @@ const c = tr[locale];
   .mission-banner img { width: 100%; height: clamp(220px, 40vh, 420px); object-fit: cover; object-position: center 22%; display: block; }
 
   .mission-points li { margin-bottom: 0.6em; }
+
+  /* Dernière phrase « démarre sous le dessin » : pleine largeur sous le bloc image+texte */
+  .mission-after { margin-top: var(--space-3); }
+  .mission-after > :first-child { margin-top: 0; }
+  /* Phrases mises en évidence dans le cadre (Matrix, ADN…) : centrées, italiques */
+  .mission-highlight {
+    margin: var(--space-3) auto 0; max-width: 54ch; text-align: center;
+    font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
+    color: var(--indigo-700);
+  }
+  /* En-tête « Informations / Presse » avant les vidéos (sur fond étoilé) */
+  .mission-videos-heading {
+    text-align: center; margin: 0 0 var(--space-4);
+    font-size: var(--text-xs); letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold-soft);
+  }
 
   /* « L'Espace-Temps se contracte » : vidéo à gauche, texte à droite */
   .mission-spacetime {

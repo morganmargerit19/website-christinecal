@@ -24,21 +24,19 @@ const u = ui[locale];
     </div>
   </section>
 
-  <section class="paper-section">
+  <section class="about-cosmic">
     <div class="container">
-      <div class="paper-section__inner" data-reveal>
-        <div class="about-intro">
-          <figure class="about-intro__portrait">
-            <img
-              src={base + '/images/wp/ccal-portrait-2.jpg'}
-              alt="Portrait de Christine CAL"
-              loading="lazy"
-            />
-          </figure>
-          <div class="prose about-intro__text">
-            <h2 class="about-galactic-heading">{t.galactic.heading}</h2>
-            {t.galactic.items.map((item) => <p>{item}</p>)}
-          </div>
+      <div class="about-intro about-intro--cosmic" data-reveal>
+        <figure class="about-intro__portrait about-intro__portrait--cosmic">
+          <img
+            src={base + '/images/wp/ccal-portrait-2.jpg'}
+            alt="Portrait de Christine CAL"
+            loading="lazy"
+          />
+        </figure>
+        <div class="about-intro__text about-intro__text--cosmic">
+          <h2 class="about-galactic-heading">{t.galactic.heading}</h2>
+          {t.galactic.items.map((item) => <p>{item}</p>)}
         </div>
       </div>
     </div>
@@ -231,8 +229,36 @@ const u = ui[locale];
      afin que la carte « Organisatrice » se place juste à côté (retour Christine). */
   .about-card--wide { grid-column: auto; }
 
-  /* « Une galactique venue d'un futur » : en italique et en bleu (souhait de Christine) */
-  .about-galactic-heading { font-style: italic; color: var(--indigo-500); }
+  /* « Une galactique venue d'un futur » : en italique et en bleu (souhait de Christine).
+     Bleu clair (indigo-200) car le bloc est désormais sur le fond étoilé sombre. */
+  .about-galactic-heading { font-style: italic; color: var(--indigo-200); }
+
+  /* Bloc photo + « galactique » SANS carte blanche : sur le fond cosmique (étoiles),
+     comme la section « Vous sentez l'appel » de Mission, que Christine adore. */
+  .about-cosmic { padding-block: var(--space-5); }
+  .about-intro--cosmic { display: grid; gap: var(--space-4); align-items: center; }
+  @media (min-width: 760px) {
+    .about-intro--cosmic { grid-template-columns: minmax(220px, 300px) 1fr; gap: var(--space-5); }
+  }
+  .about-intro__text--cosmic { color: var(--indigo-100); }
+  .about-intro__text--cosmic p { color: var(--indigo-100); margin: 0 0 0.8em; }
+  /* Portrait posé dans le cosmos : halo doré/indigo derrière, fin liseré or, lueur */
+  .about-intro__portrait--cosmic {
+    position: relative; margin: 0; justify-self: center;
+    max-width: 320px; border-radius: var(--radius-lg); overflow: visible;
+    border: none; box-shadow: none;
+  }
+  .about-intro__portrait--cosmic img {
+    width: 100%; display: block; border-radius: var(--radius-lg);
+    border: 1px solid rgba(230, 212, 154, 0.45);
+    box-shadow: 0 0 50px rgba(201, 169, 97, 0.25), 0 18px 50px rgba(7, 6, 26, 0.55);
+    position: relative; z-index: 1;
+  }
+  .about-intro__portrait--cosmic::before {
+    content: ""; position: absolute; inset: -22%; z-index: 0; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123, 121, 198, 0.38), rgba(201, 169, 97, 0.12) 46%, transparent 72%);
+    filter: blur(8px); pointer-events: none;
+  }
 
   /* Parcours en bref : version compacte (« prendre moins de place ») */
   .about-timeline--compact li { padding-bottom: var(--space-3); }
@@ -242,7 +268,7 @@ const u = ui[locale];
   .about-accordion { margin-top: var(--space-2); }
   .about-accordion summary {
     cursor: pointer; list-style: none; font-family: var(--font-serif);
-    color: var(--gold); font-size: var(--text-sm); letter-spacing: 0.02em;
+    color: var(--indigo-700); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em;
     padding: 0.35em 0; user-select: none;
   }
   .about-accordion summary::-webkit-details-marker { display: none; }

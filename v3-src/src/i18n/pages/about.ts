@@ -48,7 +48,7 @@ export const about: Record<Locale, AboutDict> = {
       title: 'Un électron libre atypique en contact avec ses versions du futur',
     },
     epigraph:
-      "Elle vit dans plusieurs mondes à la fois, et a ce don rare de les relier : le ciel et le quotidien, l'invisible et le concret. Les pieds sur Terre, le regard dans les étoiles — une chaleur qui accueille, une exigence de vérité qui éveille. Une galactique venue du futur, profondément humaine, qui vous prend par la main pour vous montrer la lumière que vous portez déjà.",
+      "Elle vit dans plusieurs mondes à la fois, et a ce don rare de les relier : le ciel et le quotidien, l'invisible et le concret. Les pieds sur Terre, le regard dans les étoiles, une chaleur qui accueille, une exigence de vérité qui éveille. Une galactique venue du futur, profondément humaine, qui vous prend par la main pour vous montrer la lumière que vous portez déjà.",
     galactic: {
       heading: "Une galactique venue d'un futur",
       items: [
@@ -62,7 +62,6 @@ export const about: Record<Locale, AboutDict> = {
       list: [
         { id: '0QL8ive6NuU', title: 'Qui est Christine CAL', meta: 'Juillet 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Témoignage de vie de C.C.', meta: 'Juillet 2016 · 4 min 39' },
-        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions et Médiumnité — Radio Fréquence Évasion', meta: 'Interview · 11 avril 2017' },
       ],
     },
     journey: {
@@ -75,7 +74,7 @@ export const about: Record<Locale, AboutDict> = {
         },
         {
           lead: 'Une chercheuse pragmatique indépendante',
-          text: 'passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI. Sortir du Jeu par le JE.',
+          text: 'passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI.<br /><em>Sortir du Jeu par le JE.</em>',
         },
         { lead: 'Une maman', text: "en contact avec l'Âme de sa fille durant sa grossesse." },
         { lead: 'Un cerveau gauche musclé', text: '<strong class="about-accent">Expert comptable</strong> en libéral de 1993 à 2013.' },
@@ -142,14 +141,14 @@ export const about: Record<Locale, AboutDict> = {
       heading: 'ACTUALITÉS',
       items: [
         "Depuis 2024 — Stages sur la multidimensionnalité de l'Être.",
-        "2025 / 2026 — Mont Shasta et le nouveau TELOS, après l'invasion par des êtres involutifs en 2021, confirmée suite à ma rencontre avec Elena Danaan en août 2024 et 2025. Voyage au Mont Shasta en 07.2026.",
+        "2025 / 2026 — Mont Shasta et le nouveau TELOS après l'invasion par des êtres involutifs en 2021 confirmée suite à ma rencontre avec Elena Danaan en août 2024 et 2025. Voyage au Mont Shasta en 07.2026.",
         '2026 — Mont Bugarach : contacts avec des ET Gardiens. Mission en cours.',
       ],
     },
     upcoming: {
       heading: 'À VENIR',
       items: [
-        'YouTube : « Découvrir sa multidimensionnalité : mon aventure ! Et vous, la vôtre ? » — audios ou vidéos à partir du 2ᵉ semestre 2026.',
+        'YouTube : « Découvrir sa multidimensionnalité : mon aventure ! Et vous, la vôtre ? » Audios ou vidéos à partir du 2ᵉ semestre 2026.',
         "Divers livres en cours d'écriture.",
       ],
     },
@@ -184,7 +183,6 @@ export const about: Record<Locale, AboutDict> = {
       list: [
         { id: '0QL8ive6NuU', title: 'Who is Christine CAL (in French)', meta: 'July 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'A life testimony by C.C. (in French)', meta: 'July 2016 · 4 min 39' },
-        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions and Mediumship (in French) — Radio Fréquence Évasion', meta: 'Interview · April 11, 2017' },
       ],
     },
     journey: {
@@ -307,7 +305,6 @@ export const about: Record<Locale, AboutDict> = {
       list: [
         { id: '0QL8ive6NuU', title: 'Kim jest Christine CAL (po francusku)', meta: 'Lipiec 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Świadectwo życia C.C. (po francusku)', meta: 'Lipiec 2016 · 4 min 39' },
-        { id: 'ZKYMHeWzyM8', title: 'Multi-dimensions et Médiumnité (po francusku) — Radio Fréquence Évasion', meta: 'Wywiad · 11 kwietnia 2017' },
       ],
     },
     journey: {
@@ -430,7 +427,6 @@ export const about: Record<Locale, AboutDict> = {
       list: [
         { id: '0QL8ive6NuU', title: 'Quién es Christine CAL (en francés)', meta: 'Julio de 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Testimonio de vida de C.C. (en francés)', meta: 'Julio de 2016 · 4 min 39' },
-        { id: 'ZKYMHeWzyM8', title: 'Multidimensiones y Mediumnidad (en francés) — Radio Fréquence Évasion', meta: 'Entrevista · 11 de abril de 2017' },
       ],
     },
     journey: {
@@ -553,7 +549,6 @@ export const about: Record<Locale, AboutDict> = {
       list: [
         { id: '0QL8ive6NuU', title: 'Chi è Christine CAL (in francese)', meta: 'Luglio 2016 · 10 min 42' },
         { id: '2oEYgOGBH7o', title: 'Testimonianza di vita di C.C. (in francese)', meta: 'Luglio 2016 · 4 min 39' },
-        { id: 'ZKYMHeWzyM8', title: 'Multidimensioni e Medianità (in francese) — Radio Fréquence Évasion', meta: 'Intervista · 11 aprile 2017' },
       ],
     },
     journey: {
