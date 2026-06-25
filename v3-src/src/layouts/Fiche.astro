@@ -155,6 +155,12 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
                   <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
                 </ul>
               </div>
+              {(facts.length > 0 || f.dates.length > 0) && (
+                <ul class="sortir-facts">
+                  {facts.map((fact) => <li><span class="sortir-facts__label">{fact.label}</span> {fact.value}</li>)}
+                  {f.dates.length > 0 && <li><span class="sortir-facts__label">{t.fiche.dates}</span> {f.dates.join(' · ')}</li>}
+                </ul>
+              )}
             </div>
           </div>
         </div>
@@ -308,6 +314,28 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
         </div>
       </div>
     </section>
+
+    {f.sideImages.length > 0 && (
+      <script is:inline define:vars={{ items: f.sideImages.map((s) => ({ ...s, src: base + s.src })) }}>
+        requestAnimationFrame(() => {
+          for (const it of items) {
+            const target = document.getElementById(it.section);
+            if (!target || !target.parentNode) continue;
+            const fig = document.createElement('figure');
+            fig.className = 'prose-side-img prose-side-img--' + it.align + (it.size === 'small' ? ' prose-side-img--small' : '');
+            const img = document.createElement('img');
+            img.src = it.src; img.alt = it.alt || ''; img.loading = 'lazy';
+            fig.appendChild(img);
+            if (it.caption) {
+              const fc = document.createElement('figcaption');
+              fc.textContent = it.caption;
+              fig.appendChild(fc);
+            }
+            target.parentNode.insertBefore(fig, target);
+          }
+        });
+      </script>
+    )}
   </article>
 </Base>
 
@@ -486,6 +514,19 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .sortir-stage-sub { text-align: center; color: var(--ink-soft); font-style: italic; margin: 0 0 var(--space-3); }
   .sortir-wheel__list { margin: 0; padding-left: 1.2em; }
   .sortir-wheel__list li { margin-bottom: 0.6em; color: var(--ink-soft); }
+  /* Infos pratiques compactes, sous la roue (souhait de Christine : pas de bloc
+     séparé, gain de place). Sur fond papier → encre sombre. */
+  .sortir-facts {
+    list-style: none; margin: var(--space-3) 0 0; padding: var(--space-3) 0 0;
+    border-top: 1px solid rgba(22, 20, 51, 0.12);
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.8rem;
+    font-family: var(--font-serif); font-size: var(--text-lg); color: var(--ink);
+  }
+  .sortir-facts li { margin: 0; }
+  .sortir-facts__label {
+    display: block; font-family: var(--font-sans); text-transform: uppercase;
+    letter-spacing: 0.1em; font-size: var(--text-xs); color: var(--ink-muted);
+  }
 </style>
 
 <script>

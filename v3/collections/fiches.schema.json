@@ -138,6 +138,48 @@
           "type": "boolean",
           "default": false
         },
+        "sideImages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "section": {
+                "type": "string"
+              },
+              "src": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "align": {
+                "type": "string",
+                "enum": [
+                  "left",
+                  "right"
+                ],
+                "default": "right"
+              },
+              "size": {
+                "type": "string",
+                "enum": [
+                  "small",
+                  "normal"
+                ],
+                "default": "normal"
+              }
+            },
+            "required": [
+              "section",
+              "src"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
         "dates": {
           "type": "array",
           "items": {

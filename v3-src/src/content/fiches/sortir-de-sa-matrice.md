@@ -12,12 +12,11 @@ cardLede: "Transmuter sa peur majeure en source d'énergie et devenir créateur 
 richLayout: sortir-matrice
 hideHeaderImage: true
 hideHeaderMeta: true
-practicalFooter: true
 dates:
   - "Me contacter"
 duration: 2 jours
 price: 200 €
-format: Via Zoom
+format: Via Zoom ou Présentiel
 videos:
   - id: 5djFYRe7C1Q
     cover: /images/wp/dvd-la-nouvelle-ligne-spatio-temporelle.jpg

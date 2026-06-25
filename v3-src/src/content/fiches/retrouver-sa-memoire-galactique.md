@@ -9,11 +9,12 @@ lang: fr
 image: /images/wp/eveil-quantique.jpg
 imageAlt: "Deux mondes dans un même décor — la Terre, le brin d'ADN et l'Humain"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
-bodyImage:
-  src: /images/wp/claude-jarry-des-loges.jpg
-  alt: "Analyse de thème astral — Claude Jarry des Loges"
-  caption: "À droite : l'analyse spécifique de mon thème par Claude Jarry des Loges, astrologue."
-bodyImageBelow: true
+sideImages:
+  - section: "témoignage-de-vie"
+    src: /images/wp/claude-jarry-des-loges.jpg
+    alt: "Analyse spécifique de mon thème — Claude Jarry des Loges, astrologue"
+    align: right
+    size: small
 wideBody: true
 videos:
   - id: 0eDwfiYJY3w

@@ -9,9 +9,11 @@ lang: fr
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
 banner: /images/wp/bugarach-1280x400-1.jpg
 bannerAlt: "Le Pic de Bugarach au crépuscule"
-bodyImage:
-  src: /images/wp/bugarach-2.jpg
-  alt: "Le Bugarach — contact avec les Gardiens (2026)"
+sideImages:
+  - section: "2026--contact-avec-des-gardiens"
+    src: /images/wp/bugarach-2.jpg
+    alt: "Le Bugarach — contact avec les Gardiens (2026)"
+    align: right
 ---
 
 ## Un lieu atypique et légendaire

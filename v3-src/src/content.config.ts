@@ -63,6 +63,20 @@ const fiches = defineCollection({
     // Si vrai, la carte « papier » du corps prend toute la largeur (au lieu de
     // la colonne étroite) : utile pour des blocs côte à côte bien carrés.
     wideBody: z.boolean().default(false),
+    // Images insérées À CÔTÉ d'une section précise du corps (flottantes), ancrées
+    // par l'id du titre (slug). Permet « mettre cette photo à côté de tel texte ».
+    sideImages: z
+      .array(
+        z.object({
+          section: z.string(), // id du titre (ex. "2026--contact-avec-des-gardiens")
+          src: z.string(),
+          alt: z.string().optional(),
+          caption: z.string().optional(),
+          align: z.enum(['left', 'right']).default('right'),
+          size: z.enum(['small', 'normal']).default('normal'),
+        }),
+      )
+      .default([]),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),

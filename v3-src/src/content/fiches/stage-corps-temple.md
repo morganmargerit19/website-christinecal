@@ -12,4 +12,4 @@ dates:
   - "1er–2 mai 2027"
 ---
 
-Week-end initiatique pour transformer le corps physique en temple.
+Week-end initiatique pour transformer le corps physique en temple initiatique ascensionnel.

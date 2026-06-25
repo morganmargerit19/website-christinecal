@@ -18,7 +18,6 @@ audioTitle: "Être Médium — interview du 28.08.2013 par Bob Bellanca (Ado FM)
 audioCover: /images/wp/bob-vous-dit-toute-la-verite.jpg
 format: Séance via Zoom
 duration: 1h30 – 2h
-price: 70 € (depuis 2013)
 videos:
   - id: T3R7jxtKto8
     title: Déroulement d'une séance

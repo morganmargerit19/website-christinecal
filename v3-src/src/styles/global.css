@@ -448,6 +448,23 @@ h1, h2, h3, h4 {
 .prose li { margin-bottom: 0.6em; }
 .prose li::marker { color: var(--gold); content: "✦  "; }
 
+/* Image flottante insérée à côté d'une section (mécanisme `sideImages`).
+   Rendue dans .prose (carte papier) → encre sombre des légendes OK. */
+.prose-side-img { margin: 0.25rem 0 1rem; }
+.prose-side-img img {
+    width: 100%; display: block; border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+}
+.prose-side-img figcaption {
+    margin-top: 0.4rem; font-size: var(--text-sm); color: var(--ink-muted);
+    font-style: italic; text-align: center;
+}
+@media (min-width: 640px) {
+    .prose-side-img--right { float: right; clear: right; width: clamp(190px, 34%, 300px); margin-left: var(--space-4); }
+    .prose-side-img--left { float: left; clear: left; width: clamp(190px, 34%, 300px); margin-right: var(--space-4); }
+    .prose-side-img--small { width: clamp(150px, 26%, 230px); }
+}
+
 .video-grid {
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: var(--space-3);
