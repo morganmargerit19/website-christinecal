@@ -421,7 +421,7 @@ h1, h2, h3, h4 {
 
 /* --- Contact (bandeau) -------------------------------------------------------- */
 .contact-band { padding-block: var(--space-7); text-align: center; }
-.contact-band h2 { font-size: var(--text-2xl); }
+.contact-band h2 { font-size: var(--text-2xl); overflow-wrap: break-word; }
 .contact-band p { color: var(--indigo-200); max-width: 50ch; margin: 0 auto var(--space-4); }
 .contact-band__actions {
     display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: center;
@@ -436,7 +436,7 @@ h1, h2, h3, h4 {
     font-size: var(--text-xs); letter-spacing: 0.3em; text-transform: uppercase;
     color: var(--gold-soft); display: block; margin-bottom: var(--space-2);
 }
-.page-hero h1 { font-size: var(--text-2xl); max-width: 24ch; margin-inline: auto; }
+.page-hero h1 { font-size: var(--text-2xl); max-width: 24ch; margin-inline: auto; overflow-wrap: break-word; }
 .page-hero .lede {
     font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
     color: var(--indigo-200); max-width: 55ch; margin: var(--space-2) auto 0;
@@ -546,7 +546,9 @@ h1, h2, h3, h4 {
 /* --- Grille des hubs (cartes de fiches) ------------------------------------------- */
 .hub-grid {
     display: grid; gap: var(--space-3);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    /* auto-fit (et non auto-fill) : 4 cartes remplissent une rangée au lieu de
+       laisser une 4e carte orpheline ; 3 cartes s'étirent sur la rangée. */
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
 }
 .portal-card--featured {
     grid-column: 1 / -1;

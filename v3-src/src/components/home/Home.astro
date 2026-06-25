@@ -149,6 +149,12 @@ const year = new Date().getFullYear();
   @media (max-width: 560px) {
     .hero__doors { gap: 2.4rem; }
   }
+  /* Très petits écrans : on empile les deux portails (sinon ils sont serrés
+     côte à côte contre les bords). */
+  @media (max-width: 430px) {
+    .hero__doors { flex-direction: column; align-items: center; gap: 1.5rem; }
+    .door { width: min(100%, 290px); min-width: 0; }
+  }
 
   /* ----- Portail pur : un seul écran, liseré légal en bas ----- */
   :global(body.is-portal) { overflow: hidden; }

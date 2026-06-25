@@ -340,6 +340,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-bodyimage { margin: 0 auto; max-width: 520px; }
   .fiche-bodyimage img { width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border-light); }
   .fiche-bodyimage figcaption { margin-top: 0.5rem; text-align: center; font-size: var(--text-sm); color: var(--ink-muted); font-style: italic; }
+  /* L'aside flotte dans la carte papier (encre sombre OK) ; la version « en bas »
+     est rendue sur le fond indigo → légende en couleur claire pour rester lisible. */
+  .fiche-bodyimage:not(.fiche-bodyimage--aside) figcaption { color: var(--indigo-250); }
 
   /* bodyImage en aside flottant : le texte s'enroule autour → moins de scroll */
   .paper-section__inner.has-bodyimage::after { content: ''; display: block; clear: both; }
@@ -379,7 +382,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     border-radius: var(--radius); border: 1px dashed rgba(201, 169, 97, 0.5);
     background: rgba(85, 85, 85, 0.08);
     display: grid; place-items: center; text-align: center;
-    color: var(--ink-muted); font-family: var(--font-serif); padding: var(--space-3);
+    color: var(--indigo-250); font-family: var(--font-serif); padding: var(--space-3);
   }
   .img-placeholder { aspect-ratio: 16 / 10; }
   .img-placeholder--square { aspect-ratio: 1 / 1; }
@@ -390,9 +393,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
 
   /* Encart « infos pratiques » en bas (page Consultation) : petite image + texte */
   .fiche-practical {
-    max-width: var(--container-narrow); margin-inline: auto;
-    display: flex; gap: var(--space-4); align-items: center;
-    flex-wrap: wrap;
+    width: fit-content; max-width: 100%; margin-inline: auto;
+    display: flex; gap: var(--space-3) var(--space-5); align-items: flex-start;
+    flex-wrap: wrap; justify-content: center;
     padding: var(--space-3) var(--space-4);
     border: 1px solid var(--border-light);
     border-top: 3px solid var(--gold);
@@ -423,7 +426,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     aspect-ratio: 4 / 3;
   }
   .fiche-gallery figcaption {
-    margin-top: 0.4rem; font-size: var(--text-sm); color: var(--ink-muted);
+    margin-top: 0.4rem; font-size: var(--text-sm); color: var(--indigo-250);
     font-style: italic; text-align: center;
   }
 
