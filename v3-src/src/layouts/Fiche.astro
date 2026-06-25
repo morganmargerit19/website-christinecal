@@ -488,6 +488,16 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
   .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--indigo-100); }
 
+  /* Titre long « Organisatrice de séminaires initiatiques (2014-2018) » : tenu sur
+     UNE seule ligne sur écran large (taille un peu réduite pour rentrer dans la
+     colonne sans déborder ; il peut revenir à la ligne sous 820px). */
+  @media (min-width: 820px) {
+    :global(.prose h2[id="organisatrice-de-séminaires-initiatiques-2014-2018"]) {
+      white-space: nowrap;
+      font-size: clamp(1.4rem, 2.2vw, 1.65rem);
+    }
+  }
+
   /* Bloc média inséré après une section (vidéo + rangée de photos), rendu dans
      le corps papier → encre sombre pour les légendes. */
   .inline-media { margin: var(--space-4) 0; }
