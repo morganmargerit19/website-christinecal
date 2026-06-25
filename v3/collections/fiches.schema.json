@@ -180,6 +180,74 @@
           },
           "default": []
         },
+        "inlineMedia": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "section": {
+                "type": "string"
+              },
+              "video": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "meta": {
+                    "type": "string"
+                  },
+                  "credit": {
+                    "type": "string",
+                    "enum": [
+                      "debowska"
+                    ]
+                  },
+                  "cover": {
+                    "type": "string"
+                  },
+                  "coverAlt": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "additionalProperties": false
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "src": {
+                      "type": "string"
+                    },
+                    "alt": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "src"
+                  ],
+                  "additionalProperties": false
+                },
+                "default": []
+              }
+            },
+            "required": [
+              "section"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
         "dates": {
           "type": "array",
           "items": {

@@ -77,6 +77,29 @@ const fiches = defineCollection({
         }),
       )
       .default([]),
+    // Médias insérés EN PLEINE LARGEUR juste après une section (ancrée par id de
+    // titre ou extrait de texte) : une vidéo (façade RGPD + crédit) et/ou une
+    // rangée de photos. Pour reproduire « vidéo + photos sous tel paragraphe ».
+    inlineMedia: z
+      .array(
+        z.object({
+          section: z.string(),
+          video: z
+            .object({
+              id: z.string(),
+              title: z.string().optional(),
+              meta: z.string().optional(),
+              credit: z.enum(['debowska']).optional(),
+              cover: z.string().optional(),
+              coverAlt: z.string().optional(),
+            })
+            .optional(),
+          images: z
+            .array(z.object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() }))
+            .default([]),
+        }),
+      )
+      .default([]),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),

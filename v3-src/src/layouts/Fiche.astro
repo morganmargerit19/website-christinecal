@@ -223,6 +223,24 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       </section>
     )}
 
+    {f.inlineMedia.map((m) => (
+      <div class="inline-media" data-inline-after={m.section} hidden>
+        {m.video && (
+          <VideoEmbed id={m.video.id} title={m.video.title} meta={m.video.meta} credit={m.video.credit} cover={m.video.cover} coverAlt={m.video.coverAlt} playLabel={t.video.play} />
+        )}
+        {m.images.length > 0 && (
+          <div class="inline-media__photos">
+            {m.images.map((g) => (
+              <figure>
+                <img src={base + g.src} alt={g.alt ?? ''} loading="lazy" />
+                {g.caption && <figcaption>{g.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+
     {f.gallery.length > 0 && (
       <section class="container container--narrow">
         <div class="fiche-gallery" data-reveal>
@@ -344,6 +362,26 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
         });
       </script>
     )}
+
+    {f.inlineMedia.length > 0 && (
+      <script is:inline>
+        requestAnimationFrame(() => {
+          for (const block of document.querySelectorAll('[data-inline-after]')) {
+            const sec = block.getAttribute('data-inline-after');
+            let target = document.getElementById(sec);
+            if (!target) {
+              const needle = sec.toLowerCase();
+              target = [...document.querySelectorAll('.prose p, .prose h2, .prose h3, .prose li, .prose blockquote')]
+                .find((el) => el.textContent.toLowerCase().includes(needle));
+            }
+            if (target && target.parentNode) {
+              target.after(block);
+              block.hidden = false;
+            }
+          }
+        });
+      </script>
+    )}
   </article>
 </Base>
 
@@ -449,6 +487,24 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__dates .fiche-meta__label { font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--indigo-300); }
   .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
   .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--indigo-100); }
+
+  /* Bloc média inséré après une section (vidéo + rangée de photos), rendu dans
+     le corps papier → encre sombre pour les légendes. */
+  .inline-media { margin: var(--space-4) 0; }
+  .inline-media__photos {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  @media (max-width: 560px) { .inline-media__photos { grid-template-columns: 1fr; } }
+  .inline-media__photos figure { margin: 0; }
+  .inline-media__photos img {
+    width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+    border-radius: var(--radius); border: 1px solid rgba(22, 20, 51, 0.12);
+  }
+  .inline-media__photos figcaption {
+    margin-top: 0.4rem; font-size: var(--text-sm); color: var(--ink-muted);
+    font-style: italic; text-align: center;
+  }
 
   /* Galerie d'images légendées (ex. Mont Shasta : livres, lieux, photos) */
   .fiche-gallery {

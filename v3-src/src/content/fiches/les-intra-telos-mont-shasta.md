@@ -47,27 +47,26 @@ videos:
   - id: 9c9DHFKWst0
     title: "« La Terre Creuse et le Mont Shasta » — Fréquence Évasion"
     meta: "Interview du 23 avril 2017 par Bob Bellanca"
-  - id: ouTq-jp9NgM
-    cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
-    title: "Mont Shasta Telos — Voyages multidimensionnels"
-    meta: "Avril 2019"
-    credit: debowska
   - id: jHuw3hnoCxo
     cover: /images/wp/dvd-mont-shasta-nouveau-tellos.jpg
     title: "Mont Shasta — Le nouveau TELOS après la guerre galactique — Forum avec Anne Givaudan"
     meta: "15 août 2025"
     credit: debowska
-gallery:
-  - src: /images/wp/shasta1.jpg
-    caption: "Le Mont Shasta et son faisceau de lumière"
-  - src: /images/wp/black-bute-2014.jpg
-    caption: "Black Butte (2014)"
-  - src: /images/wp/peace-garden-shasta-2018-2.jpg
-    caption: "Peace Garden, Mont Shasta (2018)"
-  - src: /images/wp/shasta-2017-2.jpg
-    caption: "Mont Shasta (2017)"
-  - src: /images/wp/mains.jpg
-    caption: "Stage — Semaine initiatique avec l'énergie des Telosiens"
+inlineMedia:
+  - section: "Enseignement de TELOS Mont Shasta"
+    video:
+      id: ouTq-jp9NgM
+      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
+      title: "Mont Shasta Telos — Voyages multidimensionnels"
+      meta: "Avril 2019"
+      credit: debowska
+    images:
+      - src: /images/wp/black-bute-2014.jpg
+        caption: "Black Butte (2014)"
+      - src: /images/wp/shasta-2017-2.jpg
+        caption: "Mont Shasta (2017)"
+      - src: /images/wp/peace-garden-shasta-2018-2.jpg
+        caption: "Peace Garden, Mont Shasta (2018)"
 ---
 
 Le **MONT SHASTA**, montagne de 4700 mètres située en Californie et considérée
