@@ -125,7 +125,9 @@ Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
 
 ##### _Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium._
 
-**Expérimentation consciente de la multidimensionnalité.** Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
+## **Expérimentation consciente de la multidimensionnalité**
+
+Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
 propulsée **dans mon futur face à une version de moi-même qui vit avec eux**.
 
