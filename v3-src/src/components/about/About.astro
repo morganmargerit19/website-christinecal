@@ -235,7 +235,15 @@ const u = ui[locale];
 
   /* Bloc photo + « galactique » SANS carte blanche : sur le fond cosmique (étoiles),
      comme la section « Vous sentez l'appel » de Mission, que Christine adore. */
-  .about-cosmic { padding-block: var(--space-5); }
+  /* Bandeau cosmique : la photo de Christine posée sur l'image galaxie (Terre/Lune),
+     voile indigo pour la lisibilité du texte clair, fondu haut/bas dans la page. */
+  .about-cosmic {
+    position: relative; padding-block: var(--space-6);
+    background-image:
+      linear-gradient(180deg, var(--indigo-950) 0%, rgba(7, 6, 26, 0.5) 24%, rgba(7, 6, 26, 0.55) 76%, var(--indigo-950) 100%),
+      url('/images/wp/galaxie-terre.jpg');
+    background-size: cover; background-position: center;
+  }
   .about-intro--cosmic { display: grid; gap: var(--space-4); align-items: center; }
   @media (min-width: 760px) {
     .about-intro--cosmic { grid-template-columns: minmax(220px, 300px) 1fr; gap: var(--space-5); }
