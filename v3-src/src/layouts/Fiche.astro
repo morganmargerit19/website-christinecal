@@ -320,7 +320,14 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
       <script is:inline define:vars={{ items: f.sideImages.map((s) => ({ ...s, src: base + s.src })) }}>
         requestAnimationFrame(() => {
           for (const it of items) {
-            const target = document.getElementById(it.section);
+            // Ancre par id de titre, OU (repli) par un extrait de texte d'un
+            // paragraphe/titre/liste du corps (« mets l'image à côté de ce texte »).
+            let target = document.getElementById(it.section);
+            if (!target) {
+              const needle = it.section.toLowerCase();
+              target = [...document.querySelectorAll('.prose p, .prose h2, .prose h3, .prose li, .prose blockquote')]
+                .find((el) => el.textContent.toLowerCase().includes(needle));
+            }
             if (!target || !target.parentNode) continue;
             const fig = document.createElement('figure');
             fig.className = 'prose-side-img prose-side-img--' + it.align + (it.size === 'small' ? ' prose-side-img--small' : '');

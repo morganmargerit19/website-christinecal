@@ -19,12 +19,17 @@ slideshow:
   - /images/wp/diapo-shasta7.jpg
 lede: En connexion avec la cité intra-terrestre de Telos depuis 2003.
 sideImages:
-  - section: "en-connexion-avec-telos-depuis-2003"
+  - section: "montagne de 4700"
+    src: /images/wp/nuage-lenticulaire.jpg
+    alt: "Nuage lenticulaire au-dessus du Mont Shasta"
+    align: right
+    size: small
+  - section: "Des rencontres successives"
     src: /images/wp/telos-revelations-de-la-nouvelle-lemurie.jpg
     alt: "« Révélations de la Nouvelle Lémurie » — Aurelia Louise Jones"
     align: right
     size: small
-  - section: "organisatrice-de-séminaires-initiatiques-2014-2018"
+  - section: "Dianne Robbins"
     src: /images/wp/messages-from-hollow-earth.jpg
     alt: "« Messages from the Hollow Earth » — Dianne Robbins"
     align: left
@@ -55,8 +60,6 @@ videos:
 gallery:
   - src: /images/wp/shasta1.jpg
     caption: "Le Mont Shasta et son faisceau de lumière"
-  - src: /images/wp/nuage-lenticulaire.jpg
-    caption: "Nuage lenticulaire au-dessus du Mont Shasta"
   - src: /images/wp/black-bute-2014.jpg
     caption: "Black Butte (2014)"
   - src: /images/wp/peace-garden-shasta-2018-2.jpg
