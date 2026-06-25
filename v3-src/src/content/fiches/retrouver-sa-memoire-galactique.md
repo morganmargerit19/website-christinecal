@@ -6,13 +6,15 @@ category: stage
 stages: [stage-corps-temple, stage-homme-cosmique, stage-light-workers]
 order: 10
 lang: fr
-image: /images/wp/adn.jpg
-imageAlt: "Deux mondes dans un même décor — la Terre et le brin d'ADN"
+image: /images/wp/eveil-quantique.jpg
+imageAlt: "Deux mondes dans un même décor — la Terre, le brin d'ADN et l'Humain"
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
 bodyImage:
   src: /images/wp/claude-jarry-des-loges.jpg
   alt: "Analyse de thème astral — Claude Jarry des Loges"
-  caption: "Analyse spécifique de mon thème — Claude Jarry des Loges"
+  caption: "À droite : l'analyse spécifique de mon thème par Claude Jarry des Loges, astrologue."
+bodyImageBelow: true
+wideBody: true
 videos:
   - id: 0eDwfiYJY3w
     cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils-2.jpg
@@ -42,20 +44,20 @@ vibratoire.
     <h3>Fin de la time line 1</h3>
     <p class="duo-sub">Dissolution de la Matrice</p>
     <p>Nous ne vivons ni une crise ou une révolution sociétale, ni une fin de cycle civilisationnel.</p>
-    <p>Nous sommes en train de sortir de la Matrice mise en place depuis des millénaires par une Race involutive invasive, dont le but était de s'emparer de la planète via la substitution de la race humaine par la manipulation et l'hybridation — comme elle l'a déjà fait dans d'autres galaxies.</p>
+    <p>Nous sommes en train de sortir de la Matrice mise en place depuis des millénaires par une Race involutive invasive, dont le but était de s'emparer de la planète via la substitution de la race humaine par la manipulation et l'hybridation ; comme ils l'ont déjà fait dans d'autres galaxies.</p>
   </div>
   <div class="duo-col">
     <h3>New time line 2</h3>
     <p class="duo-sub">Awakening Reset</p>
     <p>De nouveaux scientifiques commencent à parler de ces lignes spatio-temporelles, tel Philippe Guillemant, ingénieur et docteur en physique au CNRS, rencontré lors d'un dîner chez une amie, qui relie la physique et la conscience.</p>
-    <p>Des pilotes d'avion, des militaires en retraite témoignent de la présence d'OVNIS, de rencontres d'Intra ou d'Extras dans des vaisseaux — tel JP, retraité de l'armée américaine, autorisé à parler et rencontré en août 2025. Les humains se réveillent. Le monde change et le futur est déjà là.</p>
+    <p>Des pilotes d'avion, des militaires en retraite témoignent de la présence d'OVNIS, de rencontres d'Intra ou d'Extras dans des vaisseaux tel JP, retraité de l'armée américaine autorisé à parler et rencontré en août 2025. Les humains se réveillent. Le monde change et le futur est déjà là.</p>
   </div>
 </div>
 
 ## Retour du futur pour stabiliser la time line
 
 Des consciences supérieures, dites Extra et Intra-Terrestres, en collaboration avec
-des Humains militaires, ont permis en 2021 le « sauvetage » de cette humanité trop
+des Humains militaires ont permis en 2021 le « sauvetage » de cette humanité trop
 jeune pour comprendre et trop distraite pour réagir.
 
 « Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et
@@ -69,21 +71,21 @@ partir d'un long parcours initiatique.
 > *Ne cherchez pas via la volonté de votre personnalité ! C'est l'Âme qui, en éveil
 > dans l'incarnation, émet la fréquence de sa Monade ou famille Galactique.*
 
-- **Révélation de ma multidimensionnalité sur le Mont Shasta**, suite à des expériences vécues entre 2017 et 2019 avec l'aide des Intra-Terrestres de TELOS (synthèse sur place en 2026) — *le retour d'une version de moi-même pour collaborer à la nouvelle ligne spatio-temporelle.*
+- **Révélation de ma multidimensionnalité sur le Mont Shasta**, suite à des expériences vécues entre 2017 et 2019 avec l'aide des Intra-Terrestres de TELOS (synthèse sur place en 2026) : ***le retour d'une version de moi-même pour collaborer à la nouvelle ligne spatio-temporelle.***
 - **Analyse spécifique de mon thème** par une amie qui pratique une astrologie spécifique et hyper détaillée : **Claude Jarry des Loges**.
 
 ## Mes expériences avec une partie multidimensionnelle
 
 - **2021** — Sensations physiques au réveil, avec un point de côté : « Un guerrier blessé… »
 - **2024** — « Je me souviendrai toujours du regard du Grey en rédemption. »
-- **Jour de mon anniversaire 2025** — Contact télépathique avec des Êtres Intergalactiques que je côtoyais depuis 2001, qui me révèlent mes origines et confirment mon histoire dans cette galaxie.
+- **Jour de mon anniversaire 2025** : Contact télépathique avec des Êtres Intergalactiques que je côtoyais depuis 2001 qui me révèlent mes origines, confirmant mon histoire dans cette galaxie.
 
 ## 20 ans d'expérience via les voyages astraux et contacts télépathiques
 
 - Nombreux contacts et expériences avec des ET dans le plan astral depuis 2001 : Gris, une race d'Êtres plasmatiques depuis 2003, Pléiadiens et d'autres races.
 - **2001** — 3 jours avec 3 Petits Gris. **2006**, à Paris : « N'as-tu pas eu l'impression d'être face à tes descendants ? » me dit un scientifique en conférence…
 - **2007** — Expérience de détection d'implants posés par des Petits Gris sur une personne.
-- **2015**, au Mont Shasta — Expérience inédite avec une empreinte ET, à la demande d'une stagiaire.
+- **2015** au Mont Shasta : Expérience inédite avec une empreinte ET à la demande d'une stagiaire.
 - **2018** — Fin de ma phobie des reptiles grâce à la rédemption d'un Draco.
 - **Depuis 2021** — Nombreux voyages astraux dans les couloirs du haut et du bas via une partie multidimensionnelle de moi-même.
 - Recoupements d'informations et nombreux échanges depuis 15 ans avec des amis conscients de leur origine ET.

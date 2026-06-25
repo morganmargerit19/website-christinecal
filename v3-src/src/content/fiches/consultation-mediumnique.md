@@ -15,6 +15,7 @@ hideHeaderMeta: true
 practicalFooter: true
 audio: /audio/interpreter-sa-mediumnite-adofm.mp3
 audioTitle: "Être Médium — interview du 28.08.2013 par Bob Bellanca (Ado FM)"
+audioCover: /images/wp/bob-vous-dit-toute-la-verite.jpg
 format: Séance via Zoom
 duration: 1h30 – 2h
 price: 70 € (depuis 2013)

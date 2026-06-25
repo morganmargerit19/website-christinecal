@@ -46,8 +46,6 @@ collective sur Terre pour œuvrer pour la Paix, après de longs et douloureux
 combats, parfois même entre nous durant des éons ! Je partage mon expérience de
 collaboration.
 
-*À compléter : créer le pont et stabiliser la nouvelle time line.*
-
 ## Reliance — Champ Unifié
 
 Pour aller plus loin, deux conférences en vidéo autour du Champ unifié et de la

@@ -130,6 +130,14 @@
           ],
           "additionalProperties": false
         },
+        "bodyImageBelow": {
+          "type": "boolean",
+          "default": false
+        },
+        "wideBody": {
+          "type": "boolean",
+          "default": false
+        },
         "dates": {
           "type": "array",
           "items": {
@@ -191,6 +199,9 @@
           "type": "string"
         },
         "audioTitle": {
+          "type": "string"
+        },
+        "audioCover": {
           "type": "string"
         },
         "videos": {

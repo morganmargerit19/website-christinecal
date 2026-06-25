@@ -9,6 +9,10 @@ image: /images/wp/stage-construction-merkaba-cristalline.jpg
 imageAlt: "Stage Construction de la Merkaba cristalline"
 lede: Construire la géométrie de l'Âme sur la base de la Merkaba cristalline.
 format: Présentiel ou Zoom
+duration: 3 jours
+price: 300 €
+dates:
+  - "Me contacter"
 hideHeaderMeta: true
 practicalFooter: true
 videos:

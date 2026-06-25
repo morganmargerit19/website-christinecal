@@ -1,16 +1,17 @@
 ---
 title: Les Extras du Bugarach et ses nouvelles énergies
-kicker: Conférence
+kicker: ""
 hub: eveil-au-soi
 category: conference
 stages: [nouveau-bugarach]
 order: 13
 lang: fr
-image: /images/wp/bugarach-2.jpg
-imageAlt: "Le Bugarach — contact avec les Gardiens (2026)"
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
 banner: /images/wp/bugarach-1280x400-1.jpg
 bannerAlt: "Le Pic de Bugarach au crépuscule"
+bodyImage:
+  src: /images/wp/bugarach-2.jpg
+  alt: "Le Bugarach — contact avec les Gardiens (2026)"
 ---
 
 ## Un lieu atypique et légendaire
@@ -20,8 +21,7 @@ mythique de Rennes-le-Château, en pays cathare, a toujours nourri littérature 
 questionnements : trésors, SS, ovnis, ou le « délire » du 21 décembre 2012. Elle
 a même fait l'objet d'une série TV de fiction fantastique en 2024, soutenue par la
 région Occitanie, dans laquelle l'intrication des mondes est clairement révélée.
-Une présentation qui interpelle, tout particulièrement dans le contexte actuel de
-révélations officielles et mondiales concernant les UFO et les E.T.
+Une présentation qui interpelle.
 
 Vous allez découvrir que *la fiction d'hier correspond à la réalité
 d'aujourd'hui !*

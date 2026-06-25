@@ -57,7 +57,7 @@ cadre du processus ascensionnel.
 **Cette démarche en soi et pour le Soi est un parcours initiatique !**
 
 C'est-à-dire qu'elle s'intègre au niveau cellulaire via l'inconscient. Car nous
-sommes gérés par notre inconscient et non par notre conscient — sans quoi tout le
+sommes gérés par notre inconscient et non par notre conscient ; sans quoi tout le
 monde serait heureux et ce monde merveilleux.
 
 La profondeur et l'aspect cellulaire du travail se manifestent via les rêves, les

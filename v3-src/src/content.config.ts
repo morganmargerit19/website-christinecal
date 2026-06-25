@@ -57,6 +57,12 @@ const fiches = defineCollection({
     bodyImage: z
       .object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() })
       .optional(),
+    // Si vrai, l'image `bodyImage` est rendue APRÈS le corps (figure centrée
+    // légendée) au lieu de flotter en aside en haut du texte.
+    bodyImageBelow: z.boolean().default(false),
+    // Si vrai, la carte « papier » du corps prend toute la largeur (au lieu de
+    // la colonne étroite) : utile pour des blocs côte à côte bien carrés.
+    wideBody: z.boolean().default(false),
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),
@@ -78,6 +84,9 @@ const fiches = defineCollection({
     // Piste audio (ex. émission radio) — lecteur affiché sur la fiche
     audio: z.string().optional(),
     audioTitle: z.string().optional(),
+    // Visuel (jaquette) de l'enregistrement audio : si renseigné, l'audio est
+    // présenté comme une carte (image + « Enregistrement ») à côté des vidéos.
+    audioCover: z.string().optional(),
     // Vidéos YouTube (IDs récupérés du WordPress)
     videos: z
       .array(

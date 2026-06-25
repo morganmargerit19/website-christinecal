@@ -14,8 +14,9 @@ hideHeaderImage: true
 hideHeaderMeta: true
 practicalFooter: true
 dates:
-  - "24–25 octobre 2026"
-  - "23–24 janvier 2027"
+  - "Me contacter"
+duration: 2 jours
+price: 200 €
 format: Via Zoom
 videos:
   - id: 5djFYRe7C1Q

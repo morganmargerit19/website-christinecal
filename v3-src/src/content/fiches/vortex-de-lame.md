@@ -10,6 +10,10 @@ imageAlt: "Humain Multidimensionnel — Éveil du champ multidimensionnel · Con
 draft: false
 lede: Créer le vaisseau intergalactique de l'Âme et son vortex ascensionnel.
 format: Présentiel ou Zoom
+duration: 2 jours
+price: 200 €
+dates:
+  - "Me contacter"
 hideHeaderMeta: true
 practicalFooter: true
 ---
@@ -22,7 +26,7 @@ et son histoire galactiques.
 
 ## Effets
 
-- Réinitialisation de l'Âme avec intégration de ses sceaux, permettant la synthèse de ce cycle terrestre
+- Réinitialisation de l'Âme avec intégration de ses sceaux permettant la synthèse de ce cycle terrestre
 - Activation de diverses géométries facilitant la sortie de la Matrice
 - Mutation de l'ADN éthérique
 - Tissage par l'Âme de sa propre géométrie et construction du vaisseau multidimensionnel
@@ -33,7 +37,7 @@ et son histoire galactiques.
 Hiver 2021 : expansions de conscience et contacts avec une partie
 multidimensionnelle de moi-même.
 
-Hiver 2025 — Tests et jeu : une expérience amusante de télékinésie avec de petites
+Hiver 2025 : Tests et jeu : une expérience amusante de télékinésie avec de petites
 cuillères à café.
 
 Ce stage est le **troisième et dernier des trois bandeaux** du parcours
