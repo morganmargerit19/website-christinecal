@@ -1,48 +1,57 @@
 ---
+lang: fr
 title: École 5D — Construire son Vaisseau Multidimensionnel de l'Âme
 kicker: Parcours · École 5D
 hub: eveil-a-soi
 category: parcours
 order: 20
-stages: [corps-de-lumiere, merkaba, vortex-de-lame]
-lang: fr
-hideHeaderMeta: true
-image: /images/geometrie/merkaba-activation.svg
-imageAlt: "Merkaba — champ vibratoire (animation en cours)"
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
-cardLede: "Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme."
-format: Présentiel ou Zoom
+cardLede: Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme.
+image: /images/geometrie/merkaba-activation.svg
+imageAlt: Merkaba — champ vibratoire (animation en cours)
+bannerAlt: ''
 bodyImage:
   src: /images/wp/restructurer-adn.jpg
-  alt: "Restructuration de l'ADN éthérique à partir des organes spirituels"
+  alt: Restructuration de l'ADN éthérique à partir des organes spirituels
+duration: ''
+price: ''
+format: Présentiel ou Zoom
+audioTitle: ''
 videosHeading: Témoignage de ma propre expérience grâce à ces outils
 videos:
   - id: 9QKss6wHSB4
+    title: Réintégration de nos vies passées — Perceptions de nos fractales du futur
+    meta: Août 2023
+    credit: debowska
     cover: /images/wp/dvd-reintegration-vies-passees.jpg
-    title: "Réintégration de nos vies passées — Perceptions de nos fractales du futur"
-    meta: "Août 2023"
-    credit: debowska
+    coverAlt: ''
   - id: tVTU9y7RqaM
-    cover: /images/wp/dvd-reintegration-vies-passees-2.jpg
-    title: "Réintégration de nos vies passées — Conférence (même sujet)"
-    meta: "17 août 2025"
+    title: Réintégration de nos vies passées — Conférence (même sujet)
+    meta: 17 août 2025
     credit: debowska
+    cover: /images/wp/dvd-reintegration-vies-passees-2.jpg
+    coverAlt: ''
 testimonials:
-  - quote: "J'ai participé à une session de chez moi via Skype ; il y avait de la géométrie sacrée dans ce stage. Je suis émerveillée des ressentis que j'ai eus et des effets sur ma famille. Mes enfants ont reçu l'énergie, ils étaient apaisés puis ont choisi de faire des dessins pendant et après le stage. Incroyable ! Ils ont dessiné les formes de géométrie que je vivais dans la pièce d'à côté, sans bien sûr être au courant. Ce stage a décuplé mes ressentis."
+  - quote: J'ai participé à une session de chez moi via Skype ; il y avait de la géométrie sacrée dans ce stage. Je suis émerveillée des ressentis que j'ai eus et des effets sur ma famille. Mes enfants ont reçu l'énergie, ils étaient apaisés puis ont choisi de faire des dessins pendant et après le stage. Incroyable ! Ils ont dessiné les formes de géométrie que je vivais dans la pièce d'à côté, sans bien sûr être au courant. Ce stage a décuplé mes ressentis.
     author: Claire
-  - quote: "Depuis tes enseignements, nous vivons dans un monde plus grand et plus lumineux. Cela a changé notre vie."
+  - quote: Depuis tes enseignements, nous vivons dans un monde plus grand et plus lumineux. Cela a changé notre vie.
     author: P. et R. — Bretagne
-  - quote: "Depuis le suivi des stages, ma compréhension de la grandeur de l'Être au-delà du physique s'est intégrée cellulairement pour devenir vivante. La confiance et la responsabilité de ma vie me permettent d'accueillir les expériences à transcender, plutôt que de les laisser m'enliser émotionnellement comme je le faisais auparavant."
+  - quote: Depuis le suivi des stages, ma compréhension de la grandeur de l'Être au-delà du physique s'est intégrée cellulairement pour devenir vivante. La confiance et la responsabilité de ma vie me permettent d'accueillir les expériences à transcender, plutôt que de les laisser m'enliser émotionnellement comme je le faisais auparavant.
     author: Murielle — Paris
   - quote: "Le Corps de Lumière est un véritable catalyseur des expériences de vie. Mon Âme s'est éveillée ; je me suis délivrée de blessures et mon mental est plus fluide. J'écris alors que je viens d'expérimenter ce qui me paraissait insurmontable : je l'ai mis en pratique et, tel le phœnix, je renais. J'ai une nouvelle vie, heureuse et épanouie."
     author: Claudine — Périgueux
-  - quote: "Ma phobie de l'enfermement n'est plus qu'un vieux souvenir. À mon grand étonnement, dès les premiers stages, ma peur panique des tunnels, des périphériques et du RER a disparu. Une véritable victoire après 10 ans de parcours pour m'en sortir."
+  - quote: Ma phobie de l'enfermement n'est plus qu'un vieux souvenir. À mon grand étonnement, dès les premiers stages, ma peur panique des tunnels, des périphériques et du RER a disparu. Une véritable victoire après 10 ans de parcours pour m'en sortir.
     author: Ludmilla — Paris
+stages:
+  - corps-de-lumiere
+  - merkaba
+  - vortex-de-lame
+hideHeaderMeta: true
 ---
 
 **Créer le vaisseau de lumière de votre Âme à partir de sa propre géométrie — « L'Âme agit ! »**
 
-*Tout est son dans l'Univers, et donc tout est géométrie.* Chaque Âme est unique
+_Tout est son dans l'Univers, et donc tout est géométrie._ Chaque Âme est unique
 et possède sa propre géométrie, formant un vortex spécifique à activer dans le
 cadre du processus ascensionnel.
 
@@ -50,7 +59,7 @@ cadre du processus ascensionnel.
 
 - Déploiement du 5ᵉ élément, support du champ unifié de l'Être.
 - Activation à partir de méditations guidées et de connexions immédiates à partir de mantras et d'exercices concrets.
-- Ouverture de conscience progressive, rythmée par l'Âme, dans le respect physique, psychologique et psychique de la personnalité.
+- Ouverture de conscience progressive rythmée par l'Âme dans le respect physique, psychologique et psychique de la personnalité.
 
 ## Particularité
 
