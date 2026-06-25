@@ -103,17 +103,17 @@ plaisir à chaque voyage à Shasta.
 Channeling avec les Telosiens, dont un Grand Sage de Telos, le Maître Adama, et
 des Maîtres Ascensionnés.
 
-J'organise des Rencontres Internationales avec TELOS Canada, TELOS Israël, TELOS
-Australie et les membres de la Fondation [TELOS Mondial](https://www.telosinfo.org/site/),
-totalement indépendante de l'association TELOS France.
+## Rencontres Internationales avec la Fondation Telos Mondial et divers groupes entre 2016 et 2018
+
+Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
+[TELOS Mondial](https://www.telosinfo.org/site/), totalement indépendante de
+l'association TELOS France.
 
 **Livre en cours d'écriture** : *Enseignement de TELOS Mont Shasta — Rencontre
 avec notre futur. Contacts et expériences multidimensionnelles d'une
 experte-comptable devenue médium.*
 
-## Expérimentation consciente de la multidimensionnalité
-
-Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
+**Expérimentation consciente de la multidimensionnalité.** Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
 propulsée **dans mon futur face à une version de moi-même qui vit avec eux**.
 
