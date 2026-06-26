@@ -3,6 +3,9 @@ import Base from '../../layouts/Base.astro';
 import VideoEmbed from '../VideoEmbed.astro';
 import { ui } from '../../i18n/ui';
 import { base, pathFor, type Locale } from '../../i18n/utils';
+// FR éditable par Christine via le CMS (/admin → « Page : Mission »).
+// Le formulaire écrit ce fichier de données ; ne pas dupliquer le FR ci-dessous.
+import missionFrData from '../../data/mission.fr.json';
 
 interface Props {
   locale: Locale;
@@ -27,53 +30,7 @@ type MissionContent = {
 };
 
 const tr: Record<Locale, MissionContent> = {
-  fr: {
-    metaTitle: 'Ma mission — Christine CAL',
-    metaDesc: "Éveil à la multidimensionnalité de l'Être : la mission d'une galactique au sol, accompagner le passage de la conscience de la 3D à la 5D.",
-    eyebrow: 'Ma mission',
-    h1: "Éveil à la multidimensionnalité de l'Être",
-    lede: "« Il est temps de fusionner l'Essence-ciel dans l'Existence-Ciel. » Expérience de vie d'une galactique au sol.",
-    bannerAlt: 'Passage de la conscience vers la cinquième dimension',
-    s1Heading: "Expérience de vie d'une galactique au sol.<br />L'Espace-Temps se contracte",
-    s1p1: "Notre galaxie traverse une ceinture de photons et de multiples portails. Notre monde oscille entre des trajectoires spatio-temporelles différentes qui s'interpénètrent, autorisant des voyages dans l'espace-temps.",
-    s1p2: "Sur ce joyau exceptionnel appelé Terre, dans un même décor 3D, des Âmes de nature et de conscience différentes et des êtres technologiques évoluent sous un même costume humain.",
-    s2Heading: 'La mission',
-    s2Quote: "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : <strong><em>la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être, de la 3D à la 5D, dans un contexte des plus difficiles.</em></strong>",
-    s2Matrix: 'Confère le film Matrix qui nous montre la réalité !',
-    points: [
-      "Dans une Matrice d'enfermement et de manipulation de la conscience, mise en place sur Terre depuis des milliers d'années par des êtres involutifs non humains.",
-      "Dans un programme d'infiltration et de substitution d'une humanité par une race en recherche de corps, déterminée à s'emparer du bien le plus précieux donné par le Créateur à sa Création : l'Âme.",
-      "Avec le voile de l'oubli de QUI JE SUIS et la déconnexion de l'Âme par la coupure des dix brins d'ADN.",
-    ],
-    pioneerAlt: "L'ascension de l'Âme",
-    pioneerHeading: 'Véritable pionnier',
-    pioneerIntro: "« Expérimenter un ADN en cours de mutation, pour une reconnexion maximale avec l'Être spirituel que nous sommes. »",
-    pioneerQuotes: [
-      'Votre expérience est unique dans la galaxie et servira de modèle pour d’autres.',
-      'Vous deviendrez les enseignants de mes jeunes de cette planète.',
-      'Vous êtes précieux. Vous êtes les ancêtres du futur.',
-    ],
-    pioneerP2: "… me disent les Intra et Extraterrestres avec qui je communique par télépathie depuis plus d'une décennie.",
-    pioneerAdn: "« Ce nouvel ADN servira de base-source pour la création de futures races galactiques et intergalactiques. »",
-    pioneerP3: "Ce processus résulte d'un long cheminement initiatique : il nécessite un mental structuré et un émotionnel stabilisé, car c'est l'Âme qui ascensionne, et non la personnalité humaine.",
-    callEyebrow: "Vous sentez l'appel ?",
-    callHeading: 'Alors embarquez dans votre vaisseau',
-    callHeadingEm: "Let's go !",
-    callLede: 'Cet enseignement s’adresse essentiellement à deux équipages',
-    infinityAlt: 'Lemniscate — les deux équipages galactiques',
-    crewOld: { title: '« Vieilles Âmes »', en: 'The Ground Galactic Crew', desc: "L'équipe galactique au sol depuis des milliers d'années, en cours de reconnexion avec la Présence I AM pour la fin de mission." },
-    crewYoung: { title: '« Jeunes Âmes galactiques »', en: 'The Young Galactic Crew', desc: "Arrivées depuis quelques décennies, en cours d'ancrage et de re-mémorisation du programme pour la concrétisation de la mission." },
-    pressHeading: 'Informations / Presse',
-    videos: [
-      { id: 'Ncg54JqREp4', title: "Bande-annonce officielle « Les Acteurs de la vie »", meta: 'Juin 2017' },
-      { id: 'ANs3YN5mMb0', title: "« Les Acteurs de la Vie » — Peter Müller & Angélique Piro", meta: 'Juin 2017' },
-      { id: 'zKNYVg283kU', title: 'APOCALYPSE NOW !? Révélations vers la 5ᵉ Dimension', meta: 'Conférence — 29 novembre 2021' },
-    ],
-    recognizeHeading: 'Vous vous reconnaissez ?',
-    recognizeBody: 'Écrivez-moi : nous verrons ensemble par où commencer votre voyage.',
-    contactCta: 'Me contacter',
-    back: 'Éveil au Soi',
-  },
+  fr: missionFrData as MissionContent,
   en: {
     metaTitle: 'My mission — Christine CAL',
     metaDesc: 'Awakening to the multidimensionality of Being: the mission of a galactic soul on the ground, guiding the shift of consciousness from 3D to 5D.',

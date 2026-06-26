@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "title": "Qui suis-je — Christine CAL",
+    "description": "Le parcours de Christine CAL : expert-comptable devenue médium clairvoyante et clairaudiente, coach d'éveil, conférencière, créatrice d'un enseignement initiatique."
+  },
+  "hero": {
+    "eyebrow": "Qui suis-je",
+    "title": "Un électron libre atypique en contact avec ses versions du futur"
+  },
+  "epigraph": "Elle vit dans plusieurs mondes à la fois, et a ce don rare de les relier : le ciel et le quotidien, l'invisible et le concret. Les pieds sur Terre, le regard dans les étoiles, une chaleur qui accueille, une exigence de vérité qui éveille. Une galactique venue du futur, profondément humaine, qui vous prend par la main pour vous montrer la lumière que vous portez déjà.",
+  "galactic": {
+    "heading": "Une galactique venue d'un futur",
+    "items": [
+      "Ayant quitté sa lointaine contrée pour participer à la libération de cette magnifique planète Terre, dans cette galaxie depuis peu libérée.",
+      "Ayant reconnecté son identité multidimensionnelle en réintégrant consciemment ses fractales Terrestres en cette fin de cycle Apocalyptique.",
+      "Œuvrant avec ses fractales Célestes à travers les différentes lignes de temps."
+    ]
+  },
+  "videos": {
+    "heading": "Vidéos de présentation",
+    "list": [
+      { "id": "0QL8ive6NuU", "title": "Qui est Christine CAL", "meta": "Juillet 2016 · 10 min 42" },
+      { "id": "2oEYgOGBH7o", "title": "Témoignage de vie de C.C.", "meta": "Juillet 2016 · 4 min 39" }
+    ]
+  },
+  "journey": {
+    "heading": "UN PARCOURS EN BREF",
+    "items": [
+      { "lead": "Une petite fille", "text": "choquée par un monde inversé." },
+      { "lead": "Une adolescente", "text": "consciente du Jeu Matriciel, lectrice insatiable de sciences et psychologie humaines, de religions et idéologies contemporaines." },
+      { "lead": "Une chercheuse pragmatique indépendante", "text": "passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI.<br /><em>Sortir du Jeu par le JE.</em>" },
+      { "lead": "Une maman", "text": "en contact avec l'Âme de sa fille durant sa grossesse." },
+      { "lead": "Un cerveau gauche musclé", "text": "<strong class=\"about-accent\">Expert comptable</strong> en libéral de 1993 à 2013." },
+      { "lead": "Un cerveau droit déployé", "text": "<strong class=\"about-accent\">Médium clairvoyante et clairaudiente</strong> en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie." }
+    ]
+  },
+  "activities": {
+    "heading": "ACTIVITÉS ACTUELLES",
+    "items": [
+      { "title": "Coach Consultant", "text": "Création et animation de stages d'Éveil depuis plus de 20 ans. PNL — diplômée de l'INLPTA (International NLP Trainers Association), 1997." },
+      { "title": "Consultations médiumniques", "text": "Coaching individuel, de couple ou professionnel." },
+      {
+        "title": "Conférencière depuis 2013",
+        "text": "Sujets présentés en France et via Zoom ou des Associations.",
+        "accordion": {
+          "summary": "Quelques exemples de conférence (cliquez)",
+          "items": [
+            "Processus d'incarnation et de désincarnation avec anecdotes personnelles",
+            "Le voyage de l'Âme et le monde de l'Astral",
+            "Du couple intérieur au couple extérieur",
+            "Du couple psycho karmique au couple cosmique",
+            "Alignements planétaires et galactiques du 21/12/2012",
+            "Conférence et Ateliers sur le féminin / Symposium International de Biarritz 2014",
+            "Mondes parallèles, Perceptions extra-sensorielles et voyage astral",
+            "Passage en 5D : compte à rebours",
+            "Apocalypse Now : révélations vers la 5D",
+            "La Sagesse Lémurienne au service de la 5D",
+            "La Terre Creuse et le Mont Shasta",
+            "Devenir un Humain Quantique — 2025",
+            "La multidimensionnalité de l'Être — 2025",
+            "Le Champ Unifié de la Conscience — 2022",
+            "L'état de Terra : actualités intra et extra en 2024, idem en 2025",
+            "Organisatrice de Forums : 2025 « Expériences d'autres mondes » avec Anne Givaudan à Rennes-les-Bains et interventions",
+            "La mutation des corps et de l'ADN — juin 2026",
+            "Et bien d'autres sujets… dont de nombreux DVD chez DEBOWSKA Productions à découvrir dans le site."
+          ]
+        }
+      },
+      { "title": "Organisatrice", "text": "Séminaires Initiatiques au Mont Shasta de 2014 à 2019 et Rencontres Internationales avec la Fondation et le Réseau TELOS Mondial." }
+    ]
+  },
+  "specifics": {
+    "heading": "SPÉCIFICITÉS",
+    "items": [
+      "Création d'un enseignement initiatique : <strong class=\"about-accent\">CONSTRUIRE SON VAISSEAU MULTIDIMENSIONNEL</strong> — Formation de plus de 950 personnes depuis 2013.",
+      "Spécialiste du voyage astral et des contacts avec divers peuples intra et extraterrestres par télépathie depuis 2003.",
+      "2019 — Contact avec une fractale de mon Futur sur le <strong class=\"about-accent\">MONT SHASTA</strong>.",
+      "2021 — Contacts avec une autre fractale d'un courant parallèle suite à des ressentis physiques."
+    ]
+  },
+  "news": {
+    "heading": "ACTUALITÉS",
+    "items": [
+      "Depuis 2024 — Stages sur la multidimensionnalité de l'Être.",
+      "2025 / 2026 — Mont Shasta et le nouveau TELOS après l'invasion par des êtres involutifs en 2021 confirmée suite à ma rencontre avec Elena Danaan en août 2024 et 2025. Voyage au Mont Shasta en 07.2026.",
+      "2026 — Mont Bugarach : contacts avec des ET Gardiens. Mission en cours."
+    ]
+  },
+  "upcoming": {
+    "heading": "À VENIR",
+    "items": [
+      "YouTube : « Découvrir sa multidimensionnalité : mon aventure ! Et vous, la vôtre ? » Audios ou vidéos à partir du 2ᵉ semestre 2026.",
+      "Divers livres en cours d'écriture."
+    ]
+  },
+  "clients": {
+    "heading": "Une clientèle variée",
+    "text": "Psychologues, médecins divers, pédopsychiatre, infirmières, ostéopathes, naturopathes, kinésiologues, pharmacien, directrice d'EHPAD, nombreux thérapeutes énergétiques, artistes divers, inspecteur et contrôleurs des Impôts, architecte, huissier de justice… et tant d'autres."
+  }
+}

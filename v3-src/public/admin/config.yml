@@ -134,3 +134,193 @@ collections:
 
       # --- Contenu rédactionnel ---
       - { name: body, label: "Contenu", widget: markdown }
+
+  # =========================================================================
+  # PAGES « hors fiches » (Qui suis-je, Mission) — éditables comme un formulaire.
+  # Chaque page = un fichier de données FR lu par le site (src/data/*.fr.json).
+  # ⚠️ Mêmes règles que les fiches : tout champ doit figurer ici, sinon il serait
+  # effacé à la sauvegarde. Seul le FR est édité au CMS (les autres langues sont
+  # resynchronisées ensuite par Morgan).
+  # =========================================================================
+  - name: pages_fr
+    label: "Pages — Français"
+    description: "Les pages Qui suis-je et Mission (version française)."
+    files:
+      # ------------------------------ QUI SUIS-JE ------------------------------
+      - name: about
+        label: "Page : Qui suis-je"
+        file: "v3-src/src/data/about.fr.json"
+        description: "La page de présentation de Christine."
+        fields:
+          - name: meta
+            label: "Référencement Google (titre & description)"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: "Titre de l'onglet", widget: string }
+              - { name: description, label: "Description (résultat Google)", widget: text }
+          - name: hero
+            label: "En-tête de page"
+            widget: object
+            fields:
+              - { name: eyebrow, label: "Sur-titre", widget: string }
+              - { name: title, label: "Grand titre", widget: text }
+              - { name: lede, label: "Accroche (facultatif)", widget: text, required: false }
+          - { name: epigraph, label: "Épigraphe (texte d'ouverture en italique)", widget: text }
+          - name: galactic
+            label: "Bloc « Une galactique venue d'un futur » (sur la photo)"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - name: items
+                label: "Paragraphes"
+                widget: list
+                field: { name: item, label: "Paragraphe", widget: text }
+          - name: videos
+            label: "Vidéos de présentation"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: list
+                label: "Vidéos"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: id, label: "ID YouTube (les caractères après v=)", widget: string }
+                  - { name: title, label: "Titre", widget: string }
+                  - { name: meta, label: "Légende (date, durée…)", widget: string, required: false }
+          - name: journey
+            label: "Un parcours en bref"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: items
+                label: "Étapes du parcours"
+                widget: list
+                summary: "{{fields.lead}}"
+                fields:
+                  - { name: lead, label: "Intitulé (en gras)", widget: string }
+                  - { name: text, label: "Texte", widget: text, hint: "Les balises <strong>…</strong>, <em>…</em> et <br /> servent à la mise en forme : à conserver." }
+          - name: activities
+            label: "Activités actuelles"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: items
+                label: "Activités"
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: "Titre de l'activité", widget: string }
+                  - { name: text, label: "Texte", widget: text }
+                  - name: accordion
+                    label: "Liste dépliante (facultatif — ex. exemples de conférences)"
+                    widget: object
+                    required: false
+                    collapsed: true
+                    fields:
+                      - { name: summary, label: "Intitulé cliquable", widget: string }
+                      - name: items
+                        label: "Éléments de la liste"
+                        widget: list
+                        field: { name: item, label: "Élément", widget: string }
+          - name: specifics
+            label: "Spécificités"
+            widget: object
+            required: false
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: items
+                label: "Éléments"
+                widget: list
+                field: { name: item, label: "Élément", widget: text, hint: "La balise <strong>…</strong> met un terme en doré : à conserver." }
+          - name: news
+            label: "Actualités"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: items
+                label: "Éléments"
+                widget: list
+                field: { name: item, label: "Élément", widget: text }
+          - name: upcoming
+            label: "À venir"
+            widget: object
+            required: false
+            fields:
+              - { name: heading, label: "Titre de section", widget: string }
+              - name: items
+                label: "Éléments"
+                widget: list
+                field: { name: item, label: "Élément", widget: text }
+          - name: clients
+            label: "Une clientèle variée"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - { name: text, label: "Texte", widget: text }
+
+      # ------------------------------- MISSION --------------------------------
+      - name: mission
+        label: "Page : Mission"
+        file: "v3-src/src/data/mission.fr.json"
+        description: "La page « Ma mission »."
+        fields:
+          - { name: metaTitle, label: "Titre de l'onglet (Google)", widget: string }
+          - { name: metaDesc, label: "Description Google", widget: text }
+          - { name: eyebrow, label: "Sur-titre", widget: string }
+          - { name: h1, label: "Grand titre", widget: string }
+          - { name: lede, label: "Accroche", widget: text }
+          - { name: bannerAlt, label: "Description de la bannière (accessibilité)", widget: string }
+          - { name: s1Heading, label: "Titre — section « Espace-Temps »", widget: text, hint: "La balise <br /> insère un saut de ligne : à conserver." }
+          - { name: s1p1, label: "Paragraphe 1 — Espace-Temps", widget: text }
+          - { name: s1p2, label: "Paragraphe 2 (sous le dessin)", widget: text }
+          - { name: s2Heading, label: "Titre — « La mission »", widget: string }
+          - { name: s2Quote, label: "Citation principale de la mission", widget: text, hint: "Les balises <strong><em>…</em></strong> mettent le passage en évidence : à conserver." }
+          - { name: s2Matrix, label: "Phrase « Matrix » (facultatif)", widget: string, required: false }
+          - name: points
+            label: "Les points de la mission"
+            widget: list
+            field: { name: point, label: "Point", widget: text }
+          - { name: pioneerAlt, label: "Description de l'image « ascension » (accessibilité)", widget: string }
+          - { name: pioneerHeading, label: "Titre — « Véritable pionnier »", widget: string }
+          - { name: pioneerIntro, label: "Introduction — pionnier", widget: text }
+          - name: pioneerQuotes
+            label: "Citations — pionnier"
+            widget: list
+            field: { name: quote, label: "Citation", widget: text }
+          - { name: pioneerP2, label: "Phrase après les citations", widget: text }
+          - { name: pioneerAdn, label: "Phrase « nouvel ADN » (facultatif)", widget: text, required: false }
+          - { name: pioneerP3, label: "Paragraphe de conclusion (sous la lemniscate)", widget: text }
+          - { name: callEyebrow, label: "Sur-titre — « Vous sentez l'appel ? »", widget: string }
+          - { name: callHeading, label: "Titre — Appel", widget: string }
+          - { name: callHeadingEm, label: "Fin du titre (en doré, ex. Let's go !)", widget: string }
+          - { name: callLede, label: "Accroche — Appel", widget: string }
+          - { name: infinityAlt, label: "Description de la lemniscate (accessibilité)", widget: string }
+          - name: crewOld
+            label: "Équipage — « Vieilles Âmes »"
+            widget: object
+            fields:
+              - { name: title, label: "Titre", widget: string }
+              - { name: en, label: "Sous-titre (anglais)", widget: string }
+              - { name: desc, label: "Description", widget: text }
+          - name: crewYoung
+            label: "Équipage — « Jeunes Âmes »"
+            widget: object
+            fields:
+              - { name: title, label: "Titre", widget: string }
+              - { name: en, label: "Sous-titre (anglais)", widget: string }
+              - { name: desc, label: "Description", widget: text }
+          - { name: pressHeading, label: "Titre au-dessus des vidéos (facultatif)", widget: string, required: false }
+          - name: videos
+            label: "Vidéos"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: id, label: "ID YouTube (les caractères après v=)", widget: string }
+              - { name: title, label: "Titre", widget: string }
+              - { name: meta, label: "Légende (date…)", widget: string, required: false }
+          - { name: recognizeHeading, label: "Titre — bandeau de contact", widget: string }
+          - { name: recognizeBody, label: "Texte — bandeau de contact", widget: text }
+          - { name: contactCta, label: "Texte du bouton contact", widget: string }
+          - { name: back, label: "Texte du lien retour", widget: string }
