@@ -102,7 +102,7 @@ Nouvelle Lémurie (T.1)" d'Aurelia Louise Jones me bouleverse profondément et m
 
 En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia Louise Jones, décédée en 2009. Je contacte Dianne et nous organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand plaisir à chaque voyage à Shasta.
 
-**12 voyages au Mont Shasta.**
+**12 voyages au MONT SHASTA**
 
 ## Organisatrice de séminaires initiatiques (2014-2018)                  
 
