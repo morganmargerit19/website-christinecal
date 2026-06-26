@@ -1,11 +1,11 @@
 ---
 lang: fr
-title: Mutation du prototype humain
-kicker: Stage
+title: Activer l'échelle Ascensionnelle qui est déjà en nous.
+kicker: stage
 hub: eveil-au-soi
 category: stage
 order: 24
-lede: Accompagner la transformation cellulaire avec des exercices concrets basés sur la géométrie sacrée.
+lede: Transformer le corps physique en Temple Initiatique et apprendre à monter en soi vers le SOI.
 cardLede: ''
 image: /images/wp/istockphoto-1054507174-612x612.jpg
 imageAlt: Du corps physique au temple initiatique
