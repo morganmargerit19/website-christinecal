@@ -49,8 +49,8 @@ wideBody: true
 
 ## 2 mondes dans un même décor
 
-**Nous vivons une expérience inédite** : \*nous évoluons entre 2 mondes dans un
-même décor 3D.\* La différence = la conscience. La porte d'accès = la fréquence
+**Nous vivons une expérience inédite** : Nous évoluons entre 2 mondes dans un
+même décor 3D. La différence = la conscience. La porte d'accès = la fréquence
 vibratoire.
 
 <div class="duo-cols">
