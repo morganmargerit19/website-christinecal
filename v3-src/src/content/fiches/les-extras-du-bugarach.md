@@ -1,18 +1,21 @@
 ---
-title: Les Extras du Bugarach et ses nouvelles énergies
-kicker: ""
-hub: eveil-au-soi
-category: conference
-stages: [nouveau-bugarach]
-order: 13
 lang: fr
+title: Les Extras du Bugarach et ses nouvelles énergies
+kicker: Atelier
+hub: eveil-au-soi
+category: atelier
+order: 13
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
+cardLede: ''
+imageAlt: ''
 banner: /images/wp/bugarach-1280x400-1.jpg
-bannerAlt: "Le Pic de Bugarach au crépuscule"
+bannerAlt: Le Pic de Bugarach au crépuscule
+stages:
+  - nouveau-bugarach
 sideImages:
-  - section: "2026--contact-avec-des-gardiens"
+  - section: 2026--contact-avec-des-gardiens
     src: /images/wp/bugarach-2.jpg
-    alt: "Le Bugarach — contact avec les Gardiens (2026)"
+    alt: Le Bugarach — contact avec les Gardiens (2026)
     align: right
 ---
 
