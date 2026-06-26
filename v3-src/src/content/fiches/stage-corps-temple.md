@@ -5,7 +5,7 @@ kicker: Stage
 hub: eveil-au-soi
 category: stage
 order: 24
-lede: Faire de son corps physique un temple initiatique, le temps d'un week-end.
+lede: Faire de son corps physique un temple initiatique
 cardLede: ''
 image: /images/wp/restructurer-adn.jpg
 imageAlt: Du corps physique au temple initiatique
