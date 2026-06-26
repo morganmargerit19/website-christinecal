@@ -123,7 +123,7 @@ Au fil de mes voyages dans un lieu spécifique, croyant accéder à mon passé e
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
 propulsée **dans mon futur face à une version de moi-même qui vit avec eux**.
 
-> _« Il y a une part de nous en vous. » « Nous sommes votre futur. »_ me disent les Telosiens
+> _« Il y a une part de nous en vous. » « Nous sommes votre futur. »_ me disent les Telosiens.
 
 > « Songe à cela : Révélation = le Rêve en élévation. Cesse de rêver la 5D et
 > décide de la vivre, car elle est ta nature véritable. »  me dit un vieux
