@@ -1,7 +1,7 @@
 ---
 lang: fr
 title: Retrouver sa mémoire galactique
-kicker: Stage
+kicker: stage
 hub: eveil-au-soi
 category: stage
 order: 10
