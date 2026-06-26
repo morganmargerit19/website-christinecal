@@ -5,9 +5,7 @@ kicker: Atelier
 hub: eveil-au-soi
 category: atelier
 order: 12
-lede: |-
-  Une Présence subtile qui assiste l'humanité dans son ascension en 5D
-  Le nouveau TELOS
+lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
 cardLede: ''
 image: /images/wp/chris-shasta.jpg
 imageAlt: Mont Shasta — les Intra de Telos
@@ -47,20 +45,20 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - section: Enseignement de TELOS Mont Shasta
+  - images:
+      - caption: Black Butte (2014)
+        src: /images/wp/black-bute-2014.jpg
+      - caption: Mont Shasta (2017)
+        src: /images/wp/shasta-2017-2.jpg
+      - caption: Peace Garden, Mont Shasta (2018)
+        src: /images/wp/peace-garden-shasta-2018-2.jpg
     video:
-      id: ouTq-jp9NgM
-      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
-      title: Mont Shasta Telos — Voyages multidimensionnels
-      meta: Avril 2019
       credit: debowska
-    images:
-      - src: /images/wp/black-bute-2014.jpg
-        caption: Black Butte (2014)
-      - src: /images/wp/shasta-2017-2.jpg
-        caption: Mont Shasta (2017)
-      - src: /images/wp/peace-garden-shasta-2018-2.jpg
-        caption: Peace Garden, Mont Shasta (2018)
+      meta: Avril 2019
+      title: Mont Shasta Telos — Voyages multidimensionnels
+      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
+      id: ouTq-jp9NgM
+    section: Enseignement de TELOS Mont Shasta
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
