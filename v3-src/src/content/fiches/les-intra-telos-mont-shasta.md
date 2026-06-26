@@ -45,20 +45,20 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - images:
-      - caption: Black Butte (2014)
-        src: /images/wp/black-bute-2014.jpg
-      - caption: Mont Shasta (2017)
-        src: /images/wp/shasta-2017-2.jpg
-      - caption: Peace Garden, Mont Shasta (2018)
-        src: /images/wp/peace-garden-shasta-2018-2.jpg
+  - section: Enseignement de TELOS Mont Shasta
     video:
-      credit: debowska
-      meta: Avril 2019
-      title: Mont Shasta Telos — Voyages multidimensionnels
-      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
       id: ouTq-jp9NgM
-    section: Enseignement de TELOS Mont Shasta
+      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
+      title: Mont Shasta Telos — Voyages multidimensionnels
+      meta: Avril 2019
+      credit: debowska
+    images:
+      - src: /images/wp/black-bute-2014.jpg
+        caption: Black Butte (2014)
+      - src: /images/wp/shasta-2017-2.jpg
+        caption: Mont Shasta (2017)
+      - src: /images/wp/peace-garden-shasta-2018-2.jpg
+        caption: Peace Garden, Mont Shasta (2018)
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
@@ -104,7 +104,7 @@ En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia L
 
 **12 voyages au Mont Shasta.**
 
-## Organisatrice de séminaires initiatiques (2014-2018)
+## Organisatrice de séminaires initiatiques (2014-2018)                  
 
 Channeling avec les Telosiens, dont un Grand Sage de Telos, le Maître Adama, et
 des Maîtres Ascensionnés.
@@ -114,9 +114,9 @@ des Maîtres Ascensionnés.
 Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
 [TELOS Mondial](https://www.telosinfo.org/site/) ( mais totalement indépendante de l'association TELOS France).
 
-#### **Livre en cours d'écriture** : 
+##### **Livre en cours d'écriture :  _"Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium"._**
 
-##### _Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium._
+##### 
 
 ## **Expérimentation consciente de la multidimensionnalité**
 
@@ -150,7 +150,7 @@ l'ADN.
 - **2022** — Reprise des contacts et découverte de la nouvelle cité de Telos.
 - **2026** — Voyage au Mont Shasta et connexions plus précises pour vérification sur place ; rencontre avec le groupe Telos International.
 
-Livre en cours d'écriture : _Mont Shasta et le Nouveau Telos_.
+##### **Livre en cours d'écriture : "_Mont Shasta et le Nouveau Telos"_.**
 
 ## Rencontres initiatiques en Dordogne
 
