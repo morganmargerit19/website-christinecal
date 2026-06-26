@@ -1,9 +1,9 @@
 ---
 lang: fr
 title: Retrouver sa mémoire galactique
-kicker: stage
+kicker: Atelier
 hub: eveil-au-soi
-category: stage
+category: atelier
 order: 10
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
 cardLede: ''
