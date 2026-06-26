@@ -144,9 +144,9 @@ Le retour de l'Être multidimensionnel que nous sommes est à portée pour les i
 
 **Invasion de Telos en 2021 et fin de la guerre galactique.**
 
-- **2021** — Lors de mes voyages astraux, je suis stupéfaite de trouver la cité vide et en partie détruite. Une vidéo d'Elena Danaan (archéologue, émissaire de la Fédération Galactique des Mondes), que je rencontre en juillet 2024 et août 2025, corrobore mes observations lors de nos échanges.
+- **2021** — Lors de mes voyages astraux, je suis stupéfaite de trouver la cité vide et en partie détruite. Une vidéo d'Elena Danaan (archéologue et émissaire de la Fédération Galactique des Mondes) corrobore mes observations lors de nos échanges en juillet 2024 et à nouveau en août 2025.
 - **2022** — Reprise des contacts et découverte de la nouvelle cité de Telos.
-- **2026** — Voyage au Mont Shasta et connexions plus précises pour vérification sur place ; rencontre avec le groupe Telos International.
+- **2026** — Voyage au Mont Shasta avec connexions plus précises sur place et rencontre avec le groupe Telos International.
 
 ##### **Livre en cours d'écriture : "_Mont Shasta et le Nouveau Telos"_.**
 
