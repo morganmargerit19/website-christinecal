@@ -79,7 +79,7 @@ conseils à la personnalité.
 De plus en plus de psychologues stagiaires avouent être impressionnés par la
 puissance de cet outil.
 
-#####             **Plus de 950 personnes ont suivi ces stages depuis 2013**
+####                  **_Plus de 950 personnes ont suivi ces stages depuis 2013_**
 
 **_Révision mensuelle gratuite via Zoom, tous les premiers mardis du mois à 20h30._**
 
