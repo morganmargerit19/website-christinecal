@@ -5,7 +5,9 @@ kicker: Stage
 hub: eveil-au-soi
 category: conference
 order: 12
-lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
+lede: |-
+  Une Présence subtile qui assiste l'humanité dans son ascension en 5D
+  Le nouveau TELOS
 cardLede: ''
 image: /images/wp/chris-shasta.jpg
 imageAlt: Mont Shasta — les Intra de Telos
