@@ -5,7 +5,7 @@ kicker: Stage
 hub: eveil-au-soi
 category: stage
 order: 24
-lede: Accompagner la transformation cellulaire avec des exercices concrets basés sur la géométrie sacrée
+lede: Accompagner la transformation cellulaire avec des exercices concrets basés sur la géométrie sacrée.
 cardLede: ''
 image: /images/wp/istockphoto-1054507174-612x612.jpg
 imageAlt: Du corps physique au temple initiatique
