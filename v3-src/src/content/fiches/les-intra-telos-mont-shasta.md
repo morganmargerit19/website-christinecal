@@ -1,9 +1,9 @@
 ---
 lang: fr
 title: Les Intra du nouveau Telos au Mont Shasta
-kicker: stage
+kicker: Atelier
 hub: eveil-au-soi
-category: conference
+category: atelier
 order: 12
 lede: |-
   Une Présence subtile qui assiste l'humanité dans son ascension en 5D
