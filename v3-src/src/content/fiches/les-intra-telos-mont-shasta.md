@@ -111,8 +111,7 @@ des Maîtres Ascensionnés.
 
 ## Rencontres Internationales avec la Fondation Telos Mondial et divers groupes entre 2015 et 2018
 
-Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
-[TELOS Mondial](https://www.telosinfo.org/site/) ( mais totalement indépendante de l'association TELOS France).
+Organisatrice de rencontres avec TELOS CANADA, TELOS ISRAEL, TELOS AUSTRALIE et les membres de la Fondation [TELOS Mondial](https://www.telosinfo.org/site/) ( mais totalement indépendante de l'association TELOS France).
 
 ##### **Livre en cours d'écriture :  _"Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium"._**
 
