@@ -1,27 +1,35 @@
 ---
+lang: fr
 title: La Team galactique de la Nouvelle Terre
 kicker: Stage
 hub: eveil-au-soi
 category: stage
-stages: [rencontres-galactiques-au-sol]
 order: 11
-lang: fr
-hideHeaderMeta: true
-banner: /images/wp/les-freres-des-etoiles.jpg
-bannerAlt: "Les Frères des étoiles — la Team galactique de la Nouvelle Terre"
-imageAlt: "La team galactique de la Nouvelle Terre"
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
+cardLede: ''
+imageAlt: La team galactique de la Nouvelle Terre
+banner: /images/wp/les-freres-des-etoiles.jpg
+bannerAlt: Les Frères des étoiles — la Team galactique de la Nouvelle Terre
+duration: ''
+price: ''
+format: ''
+audioTitle: ''
+videosHeading: ''
 videos:
   - id: usgLaR-vK-U
+    title: Le Champ Unifié — La nouvelle Conscience Planétaire
+    meta: Juillet 2022
+    credit: debowska
     cover: /images/wp/dvd-champs-unifie.jpg
-    title: "Le Champ Unifié — La nouvelle Conscience Planétaire"
-    meta: "Juillet 2022"
-    credit: debowska
+    coverAlt: ''
   - id: PcQKmMNv9CY
-    cover: /images/wp/dvd-experiences-autres-mondes.jpg
-    title: "Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan"
-    meta: "Rennes-les-Bains · 16 août 2025"
+    title: Forum « Expériences d'Autres Mondes » — Table ronde avec Anne Givaudan
+    meta: Rennes-les-Bains · 16 août 2025
     credit: debowska
+    cover: /images/wp/dvd-experiences-autres-mondes.jpg
+stages:
+  - rencontres-galactiques-au-sol
+hideHeaderMeta: true
 ---
 
 ## Contexte actuel
@@ -34,10 +42,10 @@ des E.T évolutifs, frères et amis de l'humanité ou parties de nous-mêmes dan
 version de notre futur, contribuent activement à la révélation de notre
 Multidimensionnalité pour les Âmes prêtes.
 
-La nouvelle Terre se révèle progressivement, offrant l'opportunité de devenir un
-Humain 5D, Divin Créateur. Un monde est à créer. Les disclosures dévoilent
+La nouvelle Terre se révèle progressivement offrant l'opportunité de devenir un
+Humain 5D Divin Créateur. Un monde est à créer. Les disclosures dévoilent
 progressivement des réalités longtemps cachées et une technologie qu'il va falloir
-apprivoiser, car dans cette galaxie celle-ci occupe une place importante sous
+apprivoiser ; car dans cette galaxie celle-ci occupe une place importante sous
 différentes formes : ce vaste programme est déjà en cours !
 
 ## Notre mission : créer le pont et stabiliser la nouvelle time line
