@@ -3,7 +3,7 @@ lang: fr
 title: Les Intra du nouveau Telos au Mont Shasta
 kicker: Stage
 hub: eveil-au-soi
-category: stage
+category: conference
 order: 12
 lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
 cardLede: ''
