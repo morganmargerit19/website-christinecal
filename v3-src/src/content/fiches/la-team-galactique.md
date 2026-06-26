@@ -1,9 +1,9 @@
 ---
 lang: fr
 title: La Team galactique de la Nouvelle Terre
-kicker: Stage
+kicker: Atelier
 hub: eveil-au-soi
-category: stage
+category: atelier
 order: 11
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
 cardLede: ''
