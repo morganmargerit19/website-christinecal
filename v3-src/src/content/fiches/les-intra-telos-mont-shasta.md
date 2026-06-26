@@ -1,7 +1,7 @@
 ---
 lang: fr
 title: Les Intra du nouveau Telos au Mont Shasta
-kicker: Stage
+kicker: stage
 hub: eveil-au-soi
 category: conference
 order: 12
@@ -122,27 +122,25 @@ Avec TELOS Canada, TELOS Israël, TELOS Australie et les membres de la Fondation
 
 ## **Expérimentation consciente de la multidimensionnalité**
 
-Au fil de mes voyages, dans un lieu spécifique, croyant accéder à mon passé en
+Au fil de mes voyages dans un lieu spécifique, croyant accéder à mon passé en
 Lémurie, l'interaction avec les Telosiens et la charge énergétique reçue m'ont
 propulsée **dans mon futur face à une version de moi-même qui vit avec eux**.
 
 > _« Il y a une part de nous en vous. » « Nous sommes votre futur. »_ me disent les Telosiens
 
-> \*« Songe à cela : Révélation = le Rêve en élévation. Cesse de rêver la 5D et
-> décide de la vivre, car elle est ta nature véritable. »\*  me disait en 2019 un
-> Sage de Telos, que je capte par télépathie dans un autre lieu de Shasta.
+> « Songe à cela : Révélation = le Rêve en élévation. Cesse de rêver la 5D et
+> décide de la vivre, car elle est ta nature véritable. »  me dit un vieux
+> Sage de Telos en 2019 que je capte télépathiquement.
 
-_Sciences et mysticisme se rejoignent._ En 2017, des neuroscientifiques suisses et
-belges ont découvert des structures multidimensionnelles dans le cerveau humain avec
-des milliards de neurones organisés à travers 7, voire 11 dimensions. Des
-chercheurs chinois travaillent depuis des années sur la téléportation ; en
-réalité, certains Êtres se téléportent déjà.
+_Sciences et mysticisme se rejoignent._ En 2017 des neuroscientifiques suisses et
+belges découvrent dans le cerveau humain des structures multidimensionnelles comprenant
+des milliards de neurones organisés à travers 7 voire 11 dimensions. Des chercheurs chinois travaillent depuis des années sur la téléportation. En réalité certains Êtres se téléportent déjà.
 
-L'heure du retour vers l'Être multidimensionnel que nous sommes est déjà là.
+Le retour de l'Être multidimensionnel que nous sommes est à portée pour les initiés au sujet.
 
-Ces expériences et ces contacts m'ont aidée à concevoir mon **vaisseau**
-**multidimensionnel de l'Âme** et me motivent à le perfectionner pour transformer
-l'ADN.
+**_Ces expériences et ces contacts m'ont aidée à concevoir mon vaisseau_**
+**_multidimensionnel de l'Âme et me motivent à le perfectionner pour transformer_**
+**_l'ADN._**
 
 ## Le nouveau TELOS
 
