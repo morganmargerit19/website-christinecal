@@ -7,7 +7,7 @@ category: stage
 order: 24
 lede: Faire de son corps physique un temple initiatique
 cardLede: ''
-image: /images/wp/restructurer-adn.jpg
+image: /images/wp/istockphoto-1054507174-612x612.jpg
 imageAlt: Du corps physique au temple initiatique
 bannerAlt: ''
 dates:
