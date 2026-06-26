@@ -27,6 +27,7 @@ videos:
     meta: Rennes-les-Bains · 16 août 2025
     credit: debowska
     cover: /images/wp/dvd-experiences-autres-mondes.jpg
+    coverAlt: ''
 stages:
   - rencontres-galactiques-au-sol
 hideHeaderMeta: true
@@ -52,9 +53,8 @@ différentes formes : ce vaste programme est déjà en cours !
 
 Porter la vibration pendant la Transition. Que de bonheur pour l'Âme qui vibre en
 incarnation et participe avec ses frères et sœurs galactiques à une mission
-collective sur Terre pour œuvrer pour la Paix, après de longs et douloureux
-combats, parfois même entre nous durant des éons ! Je partage mon expérience de
-collaboration.
+collective sur Terre, œuvrant pour la Paix après de longs et douloureux
+combats depuis des éons ! Je partage mon expérience de collaboration.
 
 ## Reliance — Champ Unifié
 
