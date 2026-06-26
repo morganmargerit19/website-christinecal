@@ -45,20 +45,20 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - section: Enseignement de TELOS Mont Shasta
+  - images:
+      - caption: Black Butte (2014)
+        src: /images/wp/black-bute-2014.jpg
+      - caption: Mont Shasta (2017)
+        src: /images/wp/shasta-2017-2.jpg
+      - caption: Peace Garden, Mont Shasta (2018)
+        src: /images/wp/peace-garden-shasta-2018-2.jpg
     video:
-      id: ouTq-jp9NgM
-      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
-      title: Mont Shasta Telos — Voyages multidimensionnels
-      meta: Avril 2019
       credit: debowska
-    images:
-      - src: /images/wp/black-bute-2014.jpg
-        caption: Black Butte (2014)
-      - src: /images/wp/shasta-2017-2.jpg
-        caption: Mont Shasta (2017)
-      - src: /images/wp/peace-garden-shasta-2018-2.jpg
-        caption: Peace Garden, Mont Shasta (2018)
+      meta: Avril 2019
+      title: Mont Shasta Telos — Voyages multidimensionnels
+      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
+      id: ouTq-jp9NgM
+    section: Enseignement de TELOS Mont Shasta
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
@@ -93,21 +93,14 @@ attire de nombreux UFO cachés sous ses célèbres lenticulaires.
 
 ## En connexion avec TELOS depuis 2003
 
-**Déclencheur** : la lecture, en une nuit de février 2003, des \*Révélations de la
-Nouvelle Lémurie (T.1)\* d'Aurelia Louise Jones me bouleverse profondément et me
-connecte à un Telosien qui me fait visiter la cité en voyage astral. Ces visites
-et ces contacts dureront des années. Ce Telosien m'initie au voyage astral à
-grande distance, via mon vaisseau multidimensionnel.
+**Déclencheur** : la lecture en une nuit de février 2003 des "Révélations de la
+Nouvelle Lémurie (T.1)" d'Aurelia Louise Jones me bouleverse profondément et me connecte à un Telosien qui me fait visiter la cité en voyage astral. Ces visites et ces contacts dureront des années. 
 
-**Des rencontres successives** : en 2003, Jean-Claude Genel et Aurelia Louise
-Jones, à Genève, Paris et Toulouse. Jean-Claude, devenu un ami, avait pour mission
-d'amener Aurelia Louise Jones en Europe, principalement en France, et de conduire
-des Français au Mont Shasta : mon premier voyage a lieu en juillet 2004.
+**_Ce Telosien va m'initier progressivement au voyage astral à grande distance via mon vaisseau multidimensionnel._**
 
-En août 2017, je rencontre Dianne Robbins, à la suite d'un songe avec Aurelia
-Louise Jones, décédée en 2009. Je contacte Dianne, qui me répond aussitôt, et nous
-organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand
-plaisir à chaque voyage à Shasta.
+**Des rencontres successives** : En mars 2003 je rencontre Jean-Claude Genel qui a pour mission d'amener Aurelia Louise Jones en Europe et principalement en France. Jean Claude, devenu un ami, me présente Aurelia à Genève, à Paris puis à Toulouse. Durant l'été 2004 il donne de magnifiques stages initiatiques au Mont Shasta ; ce sera mon premier voyage.
+
+En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia Louise Jones, décédée en 2009. Je contacte Dianne et nous organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand plaisir à chaque voyage à Shasta.
 
 **12 voyages au Mont Shasta.**
 
