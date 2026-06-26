@@ -1,15 +1,17 @@
 ---
+lang: fr
 title: Le Nouveau Bugarach
 kicker: Stage
 hub: eveil-au-soi
 category: stage
 order: 2
-lang: fr
+lede: Un stage sur site avec les nouvelles énergies et Présences du Bugarach à prévoir pour Aout 2027.
+cardLede: ''
 image: /images/wp/bugarach.jpg
-imageAlt: "Le Pic de Bugarach"
-lede: Un nouveau stage autour des énergies du Bugarach — à prévoir pour 2027.
+imageAlt: Le Pic de Bugarach
+bannerAlt: ''
 dates:
-  - "2027"
+  - '2027'
 ---
 
 En mission pour le moment — mise à jour à l'automne 2026. Un stage « Le Nouveau
