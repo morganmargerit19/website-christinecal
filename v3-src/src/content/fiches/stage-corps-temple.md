@@ -1,11 +1,11 @@
 ---
 lang: fr
-title: Du corps physique au temple initiatique
+title: Mutation du prototype humain
 kicker: Stage
 hub: eveil-au-soi
 category: stage
 order: 24
-lede: Faire de son corps physique un temple initiatique
+lede: Accompagner la transformation cellulaire avec des exercices concrets basés sur la géométrie sacrée
 cardLede: ''
 image: /images/wp/istockphoto-1054507174-612x612.jpg
 imageAlt: Du corps physique au temple initiatique
