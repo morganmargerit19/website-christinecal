@@ -466,6 +466,7 @@ h1, h2, h3, h4 {
     .prose-side-img--right { float: right; clear: right; width: clamp(190px, 34%, 300px); margin-left: var(--space-4); }
     .prose-side-img--left { float: left; clear: left; width: clamp(190px, 34%, 300px); margin-right: var(--space-4); }
     .prose-side-img--small { width: clamp(150px, 26%, 230px); }
+    .prose-side-img--xsmall { width: clamp(110px, 18%, 165px); }
 }
 
 /* Photo d'ouverture (lenticulaire Mont Shasta) : grande, centrée, au-dessus du texte */

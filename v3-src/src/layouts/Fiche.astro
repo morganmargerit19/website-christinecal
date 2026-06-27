@@ -224,14 +224,14 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     )}
 
     {f.inlineMedia.map((m) => (
-      <div class="inline-media" data-inline-after={m.section} hidden>
+      <div class:list={['inline-media', { 'inline-media--aside': m.layout === 'aside' }]} data-inline-after={m.section} hidden>
         {m.video && (
           <VideoEmbed id={m.video.id} title={m.video.title} meta={m.video.meta} credit={m.video.credit} cover={m.video.cover} coverAlt={m.video.coverAlt} playLabel={t.video.play} />
         )}
         {m.images.length > 0 && (
           <div class="inline-media__photos">
             {m.images.map((g) => (
-              <figure>
+              <figure class:list={[{ 'is-small': g.size === 'small' }]}>
                 <img src={base + g.src} alt={g.alt ?? ''} loading="lazy" />
                 {g.caption && <figcaption>{g.caption}</figcaption>}
               </figure>
@@ -348,7 +348,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
             }
             if (!target || !target.parentNode) continue;
             const fig = document.createElement('figure');
-            fig.className = 'prose-side-img prose-side-img--' + it.align + (it.size === 'small' ? ' prose-side-img--small' : '');
+            fig.className = 'prose-side-img prose-side-img--' + it.align + (it.size && it.size !== 'normal' ? ' prose-side-img--' + it.size : '');
             const img = document.createElement('img');
             img.src = it.src; img.alt = it.alt || ''; img.loading = 'lazy';
             fig.appendChild(img);
@@ -488,16 +488,6 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .fiche-practical__dates ul { margin: 0.3rem 0 0; padding-left: 1.1em; }
   .fiche-practical__dates li { font-family: var(--font-serif); font-size: var(--text-lg); color: var(--indigo-100); }
 
-  /* Titre long « Organisatrice de séminaires initiatiques (2014-2018) » : tenu sur
-     UNE seule ligne sur écran large (taille un peu réduite pour rentrer dans la
-     colonne sans déborder ; il peut revenir à la ligne sous 820px). */
-  @media (min-width: 820px) {
-    :global(.prose h2[id="organisatrice-de-séminaires-initiatiques-2014-2018"]) {
-      white-space: nowrap;
-      font-size: clamp(1.4rem, 2.2vw, 1.65rem);
-    }
-  }
-
   /* Bloc média inséré après une section (vidéo + rangée de photos), rendu dans
      le corps papier → encre sombre pour les légendes. */
   .inline-media { margin: var(--space-4) 0; }
@@ -514,6 +504,27 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   .inline-media__photos figcaption {
     margin-top: 0.4rem; font-size: var(--text-sm); color: var(--ink-muted);
     font-style: italic; text-align: center;
+  }
+
+  /* Variante « aside » : la vidéo et une colonne de photos CÔTE À CÔTE (souhait
+     de Christine : « à côté de la vidéo, la photo faisceau et moi en petit »).
+     Les photos passent sous la vidéo en mobile. */
+  @media (min-width: 760px) {
+    .inline-media--aside {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) clamp(160px, 27%, 230px);
+      gap: var(--space-4); align-items: start;
+    }
+    .inline-media--aside :global(.video-card) { max-width: none; margin: 0; }
+    .inline-media--aside .inline-media__photos {
+      grid-template-columns: 1fr; margin-top: 0; gap: var(--space-3);
+    }
+    /* En colonne étroite, on n'impose pas le recadrage 4/3 : les photos
+       portrait (faisceau, portrait de Christine) gardent leurs proportions. */
+    .inline-media--aside .inline-media__photos img { aspect-ratio: auto; }
+    .inline-media--aside .inline-media__photos figure.is-small {
+      width: 68%; margin-inline: auto;
+    }
   }
 
   /* Galerie d'images légendées (ex. Mont Shasta : livres, lieux, photos) */

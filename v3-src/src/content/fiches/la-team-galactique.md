@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 11
 lede: Retrouvailles d'Âmes galactiques pour stabiliser la nouvelle ligne temporelle.
-cardLede: ''
+cardLede: Retrouvailles, Reconnexion, Mission
 imageAlt: La team galactique de la Nouvelle Terre
 banner: /images/wp/les-freres-des-etoiles.jpg
 bannerAlt: Les Frères des étoiles — la Team galactique de la Nouvelle Terre

@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 10
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
-cardLede: ''
+cardLede: "Témoignage de vie. Et vous ?"
 image: /images/wp/eveil-quantique.jpg
 imageAlt: Deux mondes dans un même décor — la Terre, le brin d'ADN et l'Humain
 bannerAlt: ''

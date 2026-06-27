@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 12
 lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
-cardLede: ''
+cardLede: Initiations de fin de cycle et Multidimensionnalité
 image: /images/wp/chris-shasta.jpg
 imageAlt: Mont Shasta — les Intra de Telos
 bannerAlt: ''
@@ -32,11 +32,21 @@ videos:
     title: « La Terre Creuse et le Mont Shasta » — Fréquence Évasion
     meta: Interview du 23 avril 2017 par Bob Bellanca
     coverAlt: ''
+  - id: GzqcsFWp0ec
+    title: "« Les Intra-terrestres de 5ᵉ dimension : leur rôle pour la Terre et l'humanité »"
+    meta: Conférence en ligne pour l'Association Communauté de l'Abondance (janvier 2022)
+    coverAlt: ''
   - id: jHuw3hnoCxo
     title: Mont Shasta — Le nouveau TELOS après la guerre galactique — Forum avec Anne Givaudan
     meta: 15 août 2025
     credit: debowska
     cover: /images/wp/dvd-mont-shasta-nouveau-tellos.jpg
+    coverAlt: ''
+  - id: ouTq-jp9NgM
+    title: Mont Shasta Telos Terre Creuse et Voyages multidimensionnels
+    meta: Avril 2019
+    credit: debowska
+    cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
     coverAlt: ''
 stages:
   - les-7-rayons
@@ -45,36 +55,40 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - images:
-      - caption: Black Butte (2014)
-        src: /images/wp/black-bute-2014.jpg
-      - caption: Mont Shasta (2017)
-        src: /images/wp/shasta-2017-2.jpg
-      - caption: Peace Garden, Mont Shasta (2018)
-        src: /images/wp/peace-garden-shasta-2018-2.jpg
+  - section: Organisatrice de séminaires initiatiques
+    layout: aside
     video:
-      credit: debowska
-      meta: Avril 2019
-      title: Mont Shasta Telos — Voyages multidimensionnels
-      cover: /images/wp/dvd-mont-shasta-terre-creuse.jpg
-      id: ouTq-jp9NgM
-    section: Enseignement de TELOS Mont Shasta
+      id: u2ngUaunI9w
+      title: Voyage au Mont Shasta
+    images:
+      - src: /images/wp/shasta1.jpg
+        alt: Le Mont Shasta traversé par un faisceau de lumière
+      - src: /images/wp/chris-shasta.jpg
+        alt: Christine devant le Mont Shasta
+        size: small
+  - section: Enseignement de TELOS Mont Shasta
+    images:
+      - src: /images/wp/black-bute-2014.jpg
+        caption: Black Butte (2014)
+      - src: /images/wp/shasta-2017-2.jpg
+        caption: Mont Shasta (2017)
+      - src: /images/wp/peace-garden-shasta-2018-2.jpg
+        caption: Peace Garden, Mont Shasta (2018)
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
     alt: Nuage lenticulaire au-dessus du Mont Shasta
     align: right
-    size: small
   - section: Des rencontres successives
     src: /images/wp/telos-revelations-de-la-nouvelle-lemurie.jpg
     alt: « Révélations de la Nouvelle Lémurie » — Aurelia Louise Jones
     align: right
-    size: small
+    size: xsmall
   - section: Dianne Robbins
     src: /images/wp/messages-from-hollow-earth.jpg
     alt: « Messages from the Hollow Earth » — Dianne Robbins
     align: left
-    size: small
+    size: xsmall
   - section: rencontres-initiatiques-en-dordogne
     src: /images/wp/shasta-plazac.jpg
     alt: Rencontres initiatiques à Plazac, en Dordogne
@@ -102,7 +116,7 @@ Nouvelle Lémurie (T.1)" d'Aurelia Louise Jones me bouleverse profondément et m
 
 En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia Louise Jones, décédée en 2009. Je contacte Dianne et nous organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand plaisir à chaque voyage à Shasta.
 
-**12 voyages au MONT SHASTA**
+<p style="clear: both"><strong>12 voyages au MONT SHASTA</strong></p>
 
 ## Organisatrice de séminaires initiatiques (2014-2018)                  
 
@@ -114,8 +128,6 @@ des Maîtres Ascensionnés.
 Organisatrice de rencontres avec TELOS CANADA, TELOS ISRAEL, TELOS AUSTRALIE et les membres de la Fondation [TELOS Mondial](https://www.telosinfo.org/site/) ( mais totalement indépendante de l'association TELOS France).
 
 ##### **Livre en cours d'écriture :  _"Enseignement de TELOS Mont Shasta — Rencontre avec notre futur. Contacts et expériences multidimensionnelles d'une expert-comptable devenue médium"._**
-
-##### 
 
 ## **Expérimentation consciente de la multidimensionnalité**
 

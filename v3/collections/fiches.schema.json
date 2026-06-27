@@ -166,6 +166,7 @@
               "size": {
                 "type": "string",
                 "enum": [
+                  "xsmall",
                   "small",
                   "normal"
                 ],
@@ -187,6 +188,12 @@
             "properties": {
               "section": {
                 "type": "string"
+              },
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "aside"
+                ]
               },
               "video": {
                 "type": "object",
@@ -231,6 +238,13 @@
                     },
                     "caption": {
                       "type": "string"
+                    },
+                    "size": {
+                      "type": "string",
+                      "enum": [
+                        "small",
+                        "normal"
+                      ]
                     }
                   },
                   "required": [

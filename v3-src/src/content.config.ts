@@ -73,7 +73,7 @@ const fiches = defineCollection({
           alt: z.string().optional(),
           caption: z.string().optional(),
           align: z.enum(['left', 'right']).default('right'),
-          size: z.enum(['small', 'normal']).default('normal'),
+          size: z.enum(['xsmall', 'small', 'normal']).default('normal'),
         }),
       )
       .default([]),
@@ -84,6 +84,9 @@ const fiches = defineCollection({
       .array(
         z.object({
           section: z.string(),
+          // 'aside' : la (les) photo(s) sont placées À CÔTÉ de la vidéo (colonne
+          // étroite à droite) au lieu d'une rangée sous la vidéo.
+          layout: z.enum(['aside']).optional(),
           video: z
             .object({
               id: z.string(),
@@ -95,7 +98,14 @@ const fiches = defineCollection({
             })
             .optional(),
           images: z
-            .array(z.object({ src: z.string(), alt: z.string().optional(), caption: z.string().optional() }))
+            .array(
+              z.object({
+                src: z.string(),
+                alt: z.string().optional(),
+                caption: z.string().optional(),
+                size: z.enum(['small', 'normal']).optional(),
+              }),
+            )
             .default([]),
         }),
       )
