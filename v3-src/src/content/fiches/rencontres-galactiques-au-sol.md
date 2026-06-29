@@ -11,10 +11,12 @@ bannerAlt: ''
 inlineMedia:
   - section: Rencontre autour
     images:
-      - src: /images/wp/cote-de-jor.jpg
-        alt: Christine sur la Côte de Jor, surplombant la Vallée de l'Homme (Dordogne)
+      - src: /images/wp/lumiere-etoiles-600x462-1.jpg
+        alt: Mains tendues vers la lumière des étoiles
       - src: /images/wp/multidimensionnalite.jpg
         alt: La multidimensionnalité de l'Être
+      - src: /images/wp/cote-de-jor.jpg
+        alt: Christine sur la Côte de Jor, surplombant la Vallée de l'Homme (Dordogne)
 dates:
   - 6–9 mai 2027
 duration: ''
