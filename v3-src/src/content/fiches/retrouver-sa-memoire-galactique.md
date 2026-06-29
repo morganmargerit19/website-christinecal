@@ -81,7 +81,8 @@ des Humains militaires ont permis en 2021 le « sauvetage » de cette humanité 
 jeune pour comprendre et trop distraite pour réagir.
 
 _<center>« Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et_
-_vérifiez ! » vous dirait l'ex-comptable que je fus. Ou bien attendez…</center>_
+_vérifiez ! » vous dirait l'ex-comptable que je fus._ 
+_Ou bien attendez…</center>_
 
 ## Témoignage de vie
 
