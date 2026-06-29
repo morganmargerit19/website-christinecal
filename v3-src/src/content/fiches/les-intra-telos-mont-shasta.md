@@ -110,13 +110,13 @@ Nouvelle Lémurie (T.1)" d'Aurelia Louise Jones me bouleverse profondément et m
 
 **Des rencontres successives** : En mars 2003 je rencontre Jean-Claude Genel qui a pour mission d'amener Aurelia Louise Jones en Europe et principalement en France. Jean Claude, devenu un ami, me présente Aurelia à Genève, à Paris puis à Toulouse. Durant l'été 2004 il donne de magnifiques stages initiatiques au Mont Shasta ; ce sera mon premier voyage.
 
-En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia Louise Jones, décédée en 2009. Je contacte Dianne et nous organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand plaisir à chaque voyage à Shasta.
+En août 2017, je rencontre Dianne Robbins à la suite d'un songe avec Aurelia Louise Jones décédée en 2009. Je contacte Dianne et nous organisons une réunion avec la Fondation TELOS Mondial. Je la revois avec grand plaisir à chaque voyage à Shasta.
 
 <p style="clear: both"><strong>12 voyages au MONT SHASTA</strong></p>
 
 ## Organisatrice de séminaires initiatiques (2014-2018)                  
 
-Channeling avec les Telosiens, dont un Grand Sage de Telos, le Maître Adama, et
+Channeling avec les Telosiens dont un Grand Sage de Telos, le Maître Adama et
 des Maîtres Ascensionnés.
 
 ## Rencontres Internationales avec la Fondation Telos Mondial et divers groupes entre 2015 et 2018
