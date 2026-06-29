@@ -9,7 +9,7 @@
   "s1p1": "Notre galaxie traverse une ceinture de photons et de multiples portails. Notre monde oscille entre des trajectoires spatio-temporelles différentes qui s'interpénètrent, autorisant des voyages dans l'espace-temps.",
   "s1p2": "Sur ce joyau exceptionnel appelé Terre, dans un même décor 3D, des Âmes de nature et de conscience différentes et des êtres technologiques évoluent sous un même costume humain.",
   "s2Heading": "La mission",
-  "s2Quote": "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : <strong><em>la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être, de la 3D à la 5D, dans un contexte des plus difficiles.</em></strong>",
+  "s2Quote": "Une période inédite offre une opportunité d'incroyable évolution, raison de notre décision d'incarnation : <strong><em>la conscientisation et l'intégration expérientielle du passage de la conscience de l'Être de la 3D à la 5D dans un contexte des plus difficiles.</em></strong>",
   "s2Matrix": "Confère le film Matrix qui nous montre la réalité !",
   "points": [
     "Dans une Matrice d'enfermement et de manipulation de la conscience, mise en place sur Terre depuis des milliers d'années par des êtres involutifs non humains.",
@@ -44,9 +44,21 @@
   },
   "pressHeading": "Informations / Presse",
   "videos": [
-    { "id": "Ncg54JqREp4", "title": "Bande-annonce officielle « Les Acteurs de la vie »", "meta": "Juin 2017" },
-    { "id": "ANs3YN5mMb0", "title": "« Les Acteurs de la Vie » — Peter Müller & Angélique Piro", "meta": "Juin 2017" },
-    { "id": "zKNYVg283kU", "title": "APOCALYPSE NOW !? Révélations vers la 5ᵉ Dimension", "meta": "Conférence — 29 novembre 2021" }
+    {
+      "id": "Ncg54JqREp4",
+      "title": "Bande-annonce officielle « Les Acteurs de la vie »",
+      "meta": "Juin 2017"
+    },
+    {
+      "id": "ANs3YN5mMb0",
+      "title": "« Les Acteurs de la Vie » — Peter Müller & Angélique Piro",
+      "meta": "Juin 2017"
+    },
+    {
+      "id": "zKNYVg283kU",
+      "title": "APOCALYPSE NOW !? Révélations vers la 5ᵉ Dimension",
+      "meta": "Conférence — 29 novembre 2021"
+    }
   ],
   "recognizeHeading": "Vous vous reconnaissez ?",
   "recognizeBody": "Écrivez-moi : nous verrons ensemble par où commencer votre voyage.",
