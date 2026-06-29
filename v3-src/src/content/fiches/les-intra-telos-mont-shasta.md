@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 12
 lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
-cardLede: ''
+cardLede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
 image: /images/wp/chris-shasta.jpg
 imageAlt: Mont Shasta — les Intra de Telos
 bannerAlt: ''
