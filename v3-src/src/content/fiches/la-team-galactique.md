@@ -58,4 +58,4 @@ _Porter la vibration pendant la Transition._ Que de bonheur pour l'Âme en incar
 Pour aller plus loin, deux conférences en vidéo autour du Champ unifié et de la
 nouvelle Conscience planétaire.
 
-            Invitation au discernement et aux questionnements - Respect de la libre pensée
+<center>Invitation au discernement et aux questionnements - Respect de la libre pensée</center>
