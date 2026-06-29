@@ -547,7 +547,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
   /* Deux blocs côte à côte dans le corps d'une fiche (ex. Time line 1 / 2).
      Sur grand écran, le bloc « déborde » de la colonne de texte étroite pour
      offrir deux colonnes confortables (sinon elles sont trop fines). */
-  :global(.prose .duo-cols) { display: grid; gap: var(--space-4); margin: var(--space-4) 0; }
+  :global(.prose .duo-cols) { display: grid; gap: var(--space-4); margin: var(--space-4) 0; clear: both; }
   @media (min-width: 720px) { :global(.prose .duo-cols) { grid-template-columns: 1fr 1fr; } }
 
   /* Corps « large » (ex. Retrouver sa mémoire) : la carte papier prend toute la
