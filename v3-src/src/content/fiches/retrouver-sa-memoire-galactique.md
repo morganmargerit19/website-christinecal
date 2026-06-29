@@ -104,5 +104,5 @@ partir d'un long parcours initiatique.
 - **Depuis 2021** — Nombreux voyages astraux dans les couloirs du haut et du bas via une partie multidimensionnelle de moi-même.
 - Recoupements d'informations et nombreux échanges depuis 15 ans avec des amis conscients de leur origine ET.
 
-> Invitation au discernement et aux questionnements
+> Invitation au discernement et aux questionnements - 
 > Respect de la libre pensée de chacun
