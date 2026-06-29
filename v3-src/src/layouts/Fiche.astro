@@ -34,6 +34,7 @@ const facts = [
 // Largeur native des images (pour les afficher au plus près de leur taille sans
 // jamais les agrandir : les petites restent nettes, les bandeaux larges s'élargissent).
 const IMG_W: Record<string, number> = {
+  '/images/wp/bugarach-1280x400-1.jpg': 1280,
   '/images/wp/bugarach.jpg': 1024,
   '/images/wp/chris-shasta.jpg': 400,
   '/images/wp/cote-de-jor.jpg': 600,
@@ -67,7 +68,7 @@ const stagesHeading: Record<Locale, string> = { fr: 'Au programme', en: 'Program
 const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn more', pl: 'Dowiedz się więcej', es: 'Saber más', it: 'Scopri di più' };
 ---
 <Base locale={locale} routeKey={hub.key} alternates={alternates} title={`${f.title} — Christine CAL`} description={f.lede}>
-  <article class="fiche">
+  <article class:list={['fiche', 'fiche--' + slug]}>
     {f.banner && (
       <figure class="fiche-banner">
         <img src={base + f.banner} alt={f.bannerAlt ?? f.imageAlt ?? f.title} fetchpriority="high" />
@@ -567,6 +568,14 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     :global(.paper-section__inner.is-wide .prose > h3),
     :global(.paper-section__inner.is-wide .prose > blockquote) { max-width: 74ch; }
     :global(.paper-section__inner.is-wide .prose > .duo-cols) { max-width: none; }
+    /* Telos : on veut au contraire que le texte ET les titres s'étalent sur toute
+       la largeur du bloc (les images flottent au bord droit) ; seule la vidéo est bornée. */
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > p),
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > ul),
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > h2),
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > h3),
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > blockquote) { max-width: none; }
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > .inline-media) { max-width: min(100%, 720px); }
   }
   :global(.prose .duo-col) {
     border: 1px solid var(--border-light); border-radius: var(--radius);

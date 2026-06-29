@@ -54,6 +54,7 @@ stages:
   - initiation-fin-de-cycle
   - voyages-expansion-conscience
 hideHeaderImage: true
+wideBody: true
 inlineMedia:
   - section: Organisatrice de séminaires initiatiques
     layout: aside
@@ -63,9 +64,6 @@ inlineMedia:
     images:
       - src: /images/wp/shasta1.jpg
         alt: Le Mont Shasta traversé par un faisceau de lumière
-      - src: /images/wp/chris-shasta.jpg
-        alt: Christine devant le Mont Shasta
-        size: small
   - section: Channeling avec les Telosiens
     images:
       - src: /images/wp/black-bute-2014.jpg
@@ -75,6 +73,11 @@ inlineMedia:
         caption: Mont Shasta 2017 après la cérémonie d’Ascension
         alt: Mont Shasta, 2017
 sideImages:
+  - section: Channeling avec les Telosiens
+    src: /images/wp/chris-shasta.jpg
+    alt: Christine devant le Mont Shasta
+    align: right
+    size: small
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
     alt: Nuage lenticulaire au-dessus du Mont Shasta
