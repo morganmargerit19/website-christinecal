@@ -16,6 +16,12 @@ format: ''
 audioTitle: ''
 videosHeading: ''
 videos:
+  - id: raXSnQhrWiA
+    title: Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan
+    meta: Rennes-les-Bains · 15-16 août 2025
+    credit: debowska
+    cover: /images/wp/dvd-pret-pour-devenir-un-humain-galactique.jpg
+    coverAlt: ''
   - id: 0eDwfiYJY3w
     title: Extra-terrestres — Envahisseurs subtils de la Matrice 3D ou Révélateurs de la Famille Galactique
     meta: Août 2022
@@ -27,12 +33,6 @@ videos:
     meta: 16 août 2025
     credit: debowska
     cover: /images/wp/dvd-extraterrestres-envahisseurs-subtils.jpg
-    coverAlt: ''
-  - id: raXSnQhrWiA
-    title: Prêt pour devenir un Humain Galactique ? — Forum avec Anne Givaudan
-    meta: Rennes-les-Bains · 15-16 août 2025
-    credit: debowska
-    cover: /images/wp/dvd-pret-pour-devenir-un-humain-galactique.jpg
     coverAlt: ''
 stages:
   - stage-corps-temple

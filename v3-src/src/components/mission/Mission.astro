@@ -228,7 +228,7 @@ const c = tr[locale];
 
   <section class="paper-section">
     <div class="container">
-      <div class="paper-section__inner" data-reveal>
+      <div class="mission-glass" data-reveal>
         <div class="mission-spacetime">
           <figure class="mission-spacetime__media">
             <img src={base + '/images/geometrie/spirale-temps.svg'} alt="Cadran de montre doré — l'Espace-Temps se contracte" loading="lazy" />
@@ -236,9 +236,9 @@ const c = tr[locale];
           <div class="mission-spacetime__text prose">
             <h2 set:html={c.s1Heading} />
             <p>{c.s1p1}</p>
+            <p>{c.s1p2}</p>
           </div>
         </div>
-        <p class="mission-after prose">{c.s1p2}</p>
       </div>
     </div>
   </section>
@@ -258,7 +258,7 @@ const c = tr[locale];
 
   <section class="paper-section">
     <div class="container">
-      <div class="paper-section__inner" data-reveal>
+      <div class="mission-glass" data-reveal>
         <div class="mission-pioneer">
           <figure class="mission-pioneer__img">
             <img src={base + '/images/wp/ascencion-396x600-1.jpg'} alt={c.pioneerAlt} loading="lazy" />
@@ -270,9 +270,9 @@ const c = tr[locale];
               {c.pioneerQuotes.map((q) => <li>{q}</li>)}
             </ul>
             <p>{c.pioneerP2}</p>
+            {c.pioneerAdn && <p class="mission-adn-inline">{c.pioneerAdn}</p>}
           </div>
         </div>
-        {c.pioneerAdn && <p class="mission-highlight mission-highlight--adn">{c.pioneerAdn}</p>}
       </div>
     </div>
   </section>
@@ -338,24 +338,33 @@ const c = tr[locale];
 
   .mission-points li { margin-bottom: 0.6em; }
 
-  /* Dernière phrase « démarre sous le dessin » : pleine largeur sous le bloc image+texte */
-  .mission-after { margin-top: var(--space-3); }
-  .mission-after > :first-child { margin-top: 0; }
-  /* Phrases mises en évidence dans le cadre (Matrix, ADN…) : centrées, italiques */
+  /* Phrases mises en évidence dans le cadre (Matrix…) : centrées, italiques */
   .mission-highlight {
     margin: var(--space-3) auto 0; max-width: 54ch; text-align: center;
     font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
     color: var(--indigo-700);
   }
-  /* « Ce nouvel ADN… » : sur une seule ligne (la police se réduit pour tenir ;
-     retour à la ligne autorisé uniquement sur petits écrans) */
-  .mission-highlight--adn {
-    max-width: none;
-    white-space: nowrap;
-    font-size: clamp(0.85rem, 1.7vw, var(--text-lg));
+  /* Blocs « Espace-Temps » et « pionnier » : plus de cadre blanc → panneau de
+     verre dépoli (flou d'arrière-plan) sur le fond étoilé, texte clair. */
+  .mission-glass {
+    background: var(--glass-strong, rgba(16, 13, 46, 0.72));
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border: 1px solid rgba(201, 169, 97, 0.20);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3.5vw, 2.6rem);
+    color: var(--indigo-100);
   }
-  @media (max-width: 760px) {
-    .mission-highlight--adn { white-space: normal; font-size: var(--text-lg); }
+  .mission-glass :is(p, li) { color: var(--indigo-100); }
+  .mission-glass h2 { color: var(--gold-soft); }
+  /* « Ce nouvel ADN… » remontée à côté de l'image, sur une seule ligne (police
+     réduite pour tenir dans la colonne ; repasse à la ligne sous 960px). */
+  .mission-adn-inline {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-serif); font-style: italic; color: var(--gold-soft);
+    white-space: nowrap; font-size: clamp(0.72rem, 1vw, 0.9rem);
+  }
+  @media (max-width: 960px) {
+    .mission-adn-inline { white-space: normal; font-size: var(--text-lg); }
   }
   /* En-tête « Informations / Presse » avant les vidéos (sur fond étoilé) */
   .mission-videos-heading {
@@ -386,8 +395,8 @@ const c = tr[locale];
 
   .mission-pioneer {
     display: grid;
-    grid-template-columns: clamp(190px, 30%, 280px) 1fr;
-    gap: clamp(1.6rem, 4vw, 3rem);
+    grid-template-columns: clamp(170px, 24%, 240px) 1fr;
+    gap: clamp(1.4rem, 3vw, 2.4rem);
     align-items: center;
   }
   .mission-pioneer__img {
