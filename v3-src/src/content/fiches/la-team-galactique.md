@@ -41,7 +41,7 @@ d'illusion et découvrent l'imbrication des dimensions via la Conscience Unifié
 **« La Présence du Futur »** — Les flux intenses de rayons X et la collaboration
 des E.T évolutifs, frères et amis de l'humanité ou parties de nous-mêmes dans une
 version de notre futur, contribuent activement à la révélation de notre
-multidimensionnalité pour les Âmes prêtes.
+multidimensionalité pour les Âmes prêtes.
 
 La nouvelle Terre se révèle progressivement offrant l'opportunité de devenir un
 Humain 5D Divin Créateur. Un monde est à créer. Les disclosures dévoilent
@@ -57,3 +57,5 @@ _Porter la vibration pendant la Transition._ Que de bonheur pour l'Âme en incar
 
 Pour aller plus loin, deux conférences en vidéo autour du Champ unifié et de la
 nouvelle Conscience planétaire.
+
+Invitation au discernement et aux questionnements - Respect de la libre pensée
