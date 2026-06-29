@@ -7,7 +7,7 @@ category: stage
 order: 24
 lede: Transformer le corps physique en Temple Initiatique et apprendre à monter en soi vers le SOI.
 cardLede: ''
-image: /images/wp/istockphoto-1054507174-612x612.jpg
+image: /images/wp/stage-corps-temple.webp
 imageAlt: Du corps physique au temple initiatique
 bannerAlt: ''
 dates:
