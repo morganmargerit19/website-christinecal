@@ -55,25 +55,25 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - section: Organisatrice de séminaires initiatiques
-    layout: aside
-    video:
-      id: u2ngUaunI9w
-      title: Voyage au Mont Shasta
-    images:
-      - src: /images/wp/shasta1.jpg
-        alt: Le Mont Shasta traversé par un faisceau de lumière
-      - src: /images/wp/chris-shasta.jpg
+  - images:
+      - alt: Le Mont Shasta traversé par un faisceau de lumière
+        src: /images/wp/shasta1.jpg
+      - size: small
         alt: Christine devant le Mont Shasta
-        size: small
-  - section: Enseignement de TELOS Mont Shasta
-    images:
-      - src: /images/wp/black-bute-2014.jpg
-        caption: Black Butte (2014)
-      - src: /images/wp/shasta-2017-2.jpg
-        caption: Mont Shasta (2017)
-      - src: /images/wp/peace-garden-shasta-2018-2.jpg
-        caption: Peace Garden, Mont Shasta (2018)
+        src: /images/wp/chris-shasta.jpg
+    video:
+      title: Voyage au Mont Shasta
+      id: u2ngUaunI9w
+    layout: aside
+    section: Organisatrice de séminaires initiatiques
+  - images:
+      - caption: Black Butte (2014)
+        src: /images/wp/black-bute-2014.jpg
+      - caption: Mont Shasta (2017)
+        src: /images/wp/shasta-2017-2.jpg
+      - caption: Peace Garden, Mont Shasta (2018)
+        src: /images/wp/peace-garden-shasta-2018-2.jpg
+    section: Enseignement de TELOS Mont Shasta
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
@@ -165,5 +165,5 @@ Le retour de l'Être multidimensionnel que nous sommes est à portée pour les i
 
 Dans un lieu entièrement dédié aux Telosiens.
 
-> Invitation aux questionnements : se renseigner avant de juger, et maintenir le
-> respect de la libre pensée de chacun.
+> Invitation au discernement et aux questionnements - 
+> Respect de la libre pensée
