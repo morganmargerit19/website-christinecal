@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 10
 lede: Retrouver le fil conducteur de son histoire et l'origine galactique de son Âme.
-cardLede: "Témoignage de vie. Et vous ?"
+cardLede: Témoignage de vie. Et vous ?
 image: /images/wp/eveil-quantique.jpg
 imageAlt: Deux mondes dans un même décor — la Terre, le brin d'ADN et l'Humain
 bannerAlt: ''
@@ -104,5 +104,5 @@ partir d'un long parcours initiatique.
 - **Depuis 2021** — Nombreux voyages astraux dans les couloirs du haut et du bas via une partie multidimensionnelle de moi-même.
 - Recoupements d'informations et nombreux échanges depuis 15 ans avec des amis conscients de leur origine ET.
 
-> Invitation aux questionnements : se renseigner avant de juger, et maintenir le
-> respect de la libre pensée de chacun.
+> Invitation au discernement et aux questionnements
+> Respect de la libre pensée de chacun
