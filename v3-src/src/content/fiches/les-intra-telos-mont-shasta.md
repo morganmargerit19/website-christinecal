@@ -161,4 +161,4 @@ Le retour de l'Être multidimensionnel que nous sommes est à portée pour les i
 
 Dans un lieu entièrement dédié aux Telosiens.
 
-             Invitation au discernement et aux questionnements - Respect de la libre pensée
+Invitation au discernement et aux questionnements - Respect de la libre pensée
