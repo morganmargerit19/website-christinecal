@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 13
 lede: Un lieu atypique et légendaire, où la fiction d'hier rejoint la réalité d'aujourd'hui.
-cardLede: Des lieux en reliance - Portes et bases du futur.
+cardLede: Des lieux en reliance - Portes et bases du futur
 imageAlt: ''
 banner: /images/wp/bugarach-1280x400-1.jpg
 bannerAlt: Le Pic de Bugarach au crépuscule
