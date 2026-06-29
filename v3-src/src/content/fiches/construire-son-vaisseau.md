@@ -46,7 +46,8 @@ stages:
 hideHeaderMeta: true
 ---
 
-**Créer le vaisseau de lumière de votre Âme à partir de sa propre géométrie — « L'Âme agit ! »**
+**Créer le vaisseau de lumière de votre Âme à partir de sa propre géométrie**  
+**« L'Âme agit ! »**
 
 _Tout est son dans l'Univers, et donc tout est géométrie._ Chaque Âme est unique
 et possède sa propre géométrie, formant un vortex spécifique à activer dans le
