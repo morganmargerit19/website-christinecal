@@ -10,6 +10,11 @@ cardLede: Changement énergétique, Stage en 2027
 imageAlt: ''
 banner: /images/wp/bugarach-1280x400-1.jpg
 bannerAlt: Le Pic de Bugarach au crépuscule
+duration: ''
+price: ''
+format: ''
+audioTitle: ''
+videosHeading: ''
 stages:
   - nouveau-bugarach
 sideImages:
@@ -28,13 +33,13 @@ a même fait l'objet d'une série TV de fiction fantastique en 2024, soutenue pa
 région Occitanie, dans laquelle l'intrication des mondes est clairement révélée.
 Une présentation qui interpelle.
 
-Vous allez découvrir que *la fiction d'hier correspond à la réalité
-d'aujourd'hui !*
+Vous allez découvrir que \*la fiction d'hier correspond à la réalité
+d'aujourd'hui !\*
 
 > Tout a été montré dans les films. Ils montrent souvent la réalité, mais nous
 > continuons à vivre dans l'illusion. À suivre…
 
-*Une montagne « à l'envers »* — en géologie, avec des couches supérieures de roche
+_Une montagne « à l'envers »_ — en géologie, avec des couches supérieures de roche
 plus ancienne que les couches intérieures ; mais aussi en énergie, selon mes
 expériences.
 
@@ -71,16 +76,15 @@ Je m'approche, mais je reste dubitative.
 
 ## 2026 — Contact avec des Gardiens
 
-Expérience du 20 mars 2026 : *« Nous t'attendions… »*
+Expérience du 20 mars 2026 : _« Nous t'attendions… »_
 
 En mission pour le moment. Mise à jour en fin d'été.
 
 ## Reliance pour la Nouvelle Terre
 
-Mise à jour en septembre 2026… *(sera complété en septembre).*
+Mise à jour en septembre 2026… _(sera complété en septembre)._
 
 Un stage **« Le Nouveau Bugarach »** est à prévoir pour 2027, et un livre du même
 titre est en cours d'écriture.
 
-> Invitation aux questionnements : se renseigner avant de juger, et maintenir le
-> respect de la libre pensée de chacun.
+> Invitation au discernement et aux aux questionnements - Respect de la libre pensée
