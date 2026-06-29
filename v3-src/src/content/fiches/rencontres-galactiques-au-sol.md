@@ -21,6 +21,3 @@ videosHeading: ''
 
 Rencontre autour d'outils de reconnexion et de pacification dans les lignes
 temporelles, dans le département du 24 dont l'Esprit Directeur = Les retrouvailles d'Âmes.
-
-> Invitation aux questionnements : se renseigner avant de juger, et maintenir le
-> respect de la libre pensée de chacun.
