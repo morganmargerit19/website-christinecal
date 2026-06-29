@@ -39,12 +39,12 @@ stages:
   - stage-homme-cosmique
   - stage-light-workers
 sideImages:
-  - section: Nous vivons une expérience inédite
+  - section: 2 mondes dans un même décor
     src: /images/wp/vesica-piscis.webp
     alt: Vesica Piscis — géométrie sacrée
     align: right
     size: small
-  - section: témoignage-de-vie
+  - section: Analyse spécifique de mon thème
     src: /images/wp/claude-jarry-des-loges.jpg
     alt: Analyse spécifique de mon thème — Claude Jarry des Loges, astrologue
     align: right
