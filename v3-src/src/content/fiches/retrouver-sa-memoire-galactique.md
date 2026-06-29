@@ -50,7 +50,8 @@ wideBody: true
 ## 2 mondes dans un même décor
 
 **Nous vivons une expérience inédite** : Nous évoluons entre 2 mondes dans un
-même décor 3D.  La différence = la conscience. La porte d'accès = la fréquence
+même décor 3D.  
+La différence = la conscience. La porte d'accès = la fréquence
 vibratoire.
 
 <div class="duo-cols">
@@ -74,8 +75,8 @@ Des consciences supérieures, dites Extra et Intra-Terrestres, en collaboration 
 des Humains militaires ont permis en 2021 le « sauvetage » de cette humanité trop
 jeune pour comprendre et trop distraite pour réagir.
 
-« Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et
-vérifiez ! » vous dirait l'ex-comptable que je fus. Ou bien attendez…
+_<center>« Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et_
+_vérifiez ! » vous dirait l'ex-comptable que je fus. Ou bien attendez…</center>_
 
 ## Témoignage de vie
 
@@ -104,4 +105,4 @@ partir d'un long parcours initiatique.
 - **Depuis 2021** — Nombreux voyages astraux dans les couloirs du haut et du bas via une partie multidimensionnelle de moi-même.
 - Recoupements d'informations et nombreux échanges depuis 15 ans avec des amis conscients de leur origine ET.
 
-            Invitation au discernement et aux questionnements - Respect de la libre pensée
+<center>Invitation au discernement et aux questionnements - Respect de la libre pensée</center>
