@@ -7,7 +7,7 @@ category: parcours
 order: 20
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
 cardLede: Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme.
-image: /images/wp/vaisseaulumiere.png
+image: /images/wp/vaisseaulumiere.webp
 imageAlt: Le vaisseau de lumière de l'Âme
 bannerAlt: ''
 duration: ''
