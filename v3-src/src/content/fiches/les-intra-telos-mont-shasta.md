@@ -55,25 +55,25 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - images:
-      - alt: Le Mont Shasta traversé par un faisceau de lumière
-        src: /images/wp/shasta1.jpg
-      - size: small
-        alt: Christine devant le Mont Shasta
-        src: /images/wp/chris-shasta.jpg
-    video:
-      title: Voyage au Mont Shasta
-      id: u2ngUaunI9w
+  - section: Organisatrice de séminaires initiatiques
     layout: aside
-    section: Organisatrice de séminaires initiatiques
-  - images:
-      - alt: Black Butte, 2014
+    video:
+      id: u2ngUaunI9w
+      title: Voyage au Mont Shasta
+    images:
+      - src: /images/wp/shasta1.jpg
+        alt: Le Mont Shasta traversé par un faisceau de lumière
+      - src: /images/wp/chris-shasta.jpg
+        alt: Christine devant le Mont Shasta
+        size: small
+  - section: Channeling avec les Telosiens
+    images:
+      - src: /images/wp/black-bute-2014.jpg
         caption: Black Bute 2014 - Expérience suite à une connexion avec le maître Saint Germain
-        src: /images/wp/black-bute-2014.jpg
-      - alt: Mont Shasta, 2017
+        alt: Black Butte, 2014
+      - src: /images/wp/shasta-2017-2.jpg
         caption: Mont Shasta 2017 après la cérémonie d’Ascension
-        src: /images/wp/shasta-2017-2.jpg
-    section: Channeling avec les Telosiens
+        alt: Mont Shasta, 2017
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
@@ -161,4 +161,4 @@ Le retour de l'Être multidimensionnel que nous sommes est à portée pour les i
 
 Dans un lieu entièrement dédié aux Telosiens.
 
-Invitation au discernement et aux questionnements - Respect de la libre pensée
+<center>Invitation au discernement et aux questionnements - Respect de la libre pensée</center>
