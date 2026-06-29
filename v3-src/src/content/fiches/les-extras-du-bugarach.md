@@ -87,4 +87,4 @@ Mise à jour en septembre 2026… _(sera complété en septembre)._
 Un stage **« Le Nouveau Bugarach »** est à prévoir pour 2027, et un livre du même
 titre est en cours d'écriture.
 
-> Invitation au discernement et aux aux questionnements - Respect de la libre pensée
+          Invitation au discernement et aux aux questionnements - Respect de la libre pensée
