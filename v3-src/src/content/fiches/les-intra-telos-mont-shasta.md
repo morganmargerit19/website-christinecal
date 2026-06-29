@@ -6,7 +6,7 @@ hub: eveil-au-soi
 category: atelier
 order: 12
 lede: Une Présence subtile qui assiste l'humanité dans son ascension en 5D
-cardLede: Initiations de fin de cycle et Multidimensionnalité
+cardLede: ''
 image: /images/wp/chris-shasta.jpg
 imageAlt: Mont Shasta — les Intra de Telos
 bannerAlt: ''
@@ -55,25 +55,25 @@ stages:
   - voyages-expansion-conscience
 hideHeaderImage: true
 inlineMedia:
-  - section: Organisatrice de séminaires initiatiques
-    layout: aside
-    video:
-      id: u2ngUaunI9w
-      title: Voyage au Mont Shasta
-    images:
-      - src: /images/wp/shasta1.jpg
-        alt: Le Mont Shasta traversé par un faisceau de lumière
-      - src: /images/wp/chris-shasta.jpg
+  - images:
+      - alt: Le Mont Shasta traversé par un faisceau de lumière
+        src: /images/wp/shasta1.jpg
+      - size: small
         alt: Christine devant le Mont Shasta
-        size: small
-  - section: Channeling avec les Telosiens
-    images:
-      - src: /images/wp/black-bute-2014.jpg
+        src: /images/wp/chris-shasta.jpg
+    video:
+      title: Voyage au Mont Shasta
+      id: u2ngUaunI9w
+    layout: aside
+    section: Organisatrice de séminaires initiatiques
+  - images:
+      - alt: Black Butte, 2014
         caption: Black Bute 2014 - Expérience suite à une connexion avec le maître Saint Germain
-        alt: Black Butte, 2014
-      - src: /images/wp/shasta-2017-2.jpg
+        src: /images/wp/black-bute-2014.jpg
+      - alt: Mont Shasta, 2017
         caption: Mont Shasta 2017 après la cérémonie d’Ascension
-        alt: Mont Shasta, 2017
+        src: /images/wp/shasta-2017-2.jpg
+    section: Channeling avec les Telosiens
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
