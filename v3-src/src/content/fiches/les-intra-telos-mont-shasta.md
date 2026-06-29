@@ -66,14 +66,14 @@ inlineMedia:
       - src: /images/wp/chris-shasta.jpg
         alt: Christine devant le Mont Shasta
         size: small
-  - section: Enseignement de TELOS Mont Shasta
+  - section: Channeling avec les Telosiens
     images:
       - src: /images/wp/black-bute-2014.jpg
-        caption: Black Butte (2014)
+        caption: Black Bute 2014 - Expérience suite à une connexion avec le maître Saint Germain
+        alt: Black Butte, 2014
       - src: /images/wp/shasta-2017-2.jpg
-        caption: Mont Shasta (2017)
-      - src: /images/wp/peace-garden-shasta-2018-2.jpg
-        caption: Peace Garden, Mont Shasta (2018)
+        caption: Mont Shasta 2017 après la cérémonie d’Ascension
+        alt: Mont Shasta, 2017
 sideImages:
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg

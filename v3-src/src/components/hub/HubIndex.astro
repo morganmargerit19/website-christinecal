@@ -4,6 +4,10 @@ import VideoEmbed from '../VideoEmbed.astro';
 import { getCollection } from 'astro:content';
 import { ui } from '../../i18n/ui';
 import { base, fichePath, pathFor, type Locale } from '../../i18n/utils';
+// FR éditable par Christine via le CMS (/admin → « Page : Éveil à Soi / au Soi »).
+// Le formulaire écrit ces fichiers de données ; ne pas dupliquer le FR ci-dessous.
+import eveilASoiFr from '../../data/eveil-a-soi.fr.json';
+import eveilAuSoiFr from '../../data/eveil-au-soi.fr.json';
 
 type Hub = 'eveil-a-soi' | 'eveil-au-soi';
 
@@ -20,12 +24,12 @@ const routeKey = hub === 'eveil-a-soi' ? 'eveilASoi' : 'eveilAuSoi';
 const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: string; h1: string; lede: string; section: string }>> = {
   'eveil-a-soi': {
     fr: {
-      title: 'Éveil à Soi — Christine CAL',
-      desc: "Se rencontrer, se libérer du passé et devenir créateur de sa vie : consultations médiumniques, sortie de sa matrice et stages d'éveil quantique (École 5D).",
-      eyebrow: 'Éveil à Soi',
-      h1: 'Devenez créateur de votre vie',
-      lede: "Se rencontrer, se libérer des blessures du passé et transmuter la peur en énergie au service de votre mission, par la consultation médiumnique, les outils de sortie de sa matrice personnelle et l'enseignement de l'École 5D.",
-      section: "Stages & ateliers d'éveil quantique",
+      title: eveilASoiFr.metaTitle,
+      desc: eveilASoiFr.metaDesc,
+      eyebrow: eveilASoiFr.eyebrow,
+      h1: eveilASoiFr.h1,
+      lede: eveilASoiFr.lede,
+      section: '',
     },
     en: {
       title: 'Self-Awakening — Christine CAL',
@@ -62,11 +66,11 @@ const intro: Record<Hub, Record<Locale, { title: string; desc: string; eyebrow: 
   },
   'eveil-au-soi': {
     fr: {
-      title: 'Éveil au Soi — Christine CAL',
-      desc: 'Explorer plus grand que soi : mémoire galactique, Mont Shasta & nouveau TELOS, énergies du Bugarach et la team galactique de la Nouvelle Terre.',
-      eyebrow: 'Éveil au Soi',
-      h1: 'Explorer plus grand que soi',
-      lede: 'Retrouver sa mémoire galactique, participer à la création de la Nouvelle Terre et explorer des lieux de 5ème Dimension.',
+      title: eveilAuSoiFr.metaTitle,
+      desc: eveilAuSoiFr.metaDesc,
+      eyebrow: eveilAuSoiFr.eyebrow,
+      h1: eveilAuSoiFr.h1,
+      lede: eveilAuSoiFr.lede,
       section: '',
     },
     en: {
@@ -137,15 +141,7 @@ const eveilVideoTitles: { id: string; title: Record<Locale, string>; meta: strin
 // chaîne HTML (balises <em>/<strong> conservées). Le 1er paragraphe porte la
 // classe de mise en avant, le 3e et le dernier la classe « strong » (cf. <style>).
 const eveilIntro: Record<Locale, string[]> = {
-  fr: [
-    '<em>Les révélations vont se multiplier et conduire l’humanité au réveil</em>',
-    'Les énergies 4D font sauter les verrous de l’inconscient jusqu’alors protecteur.',
-    'Le retour à l’intérieur s’impose car l’extérieur explose.',
-    'Lever ses blocages et ses peurs, apaiser son mental et stabiliser son émotionnel permettent <strong>l’accès à la conscience de l’Âme</strong> : on parle de <em>la deuxième naissance</em>.',
-    'Pour l’humain réveillé, <strong>subir sa vie est terminé</strong>.',
-    'Devenu un humain éveillé, il va s’agir de <strong>la créer</strong>.',
-    'Vibrant en Âme incarnée, l’humain conscient accède à sa multidimensionnalité.',
-  ],
+  fr: eveilASoiFr.intro,
   en: [
     '<em>Revelations will multiply and lead humanity to awakening</em>',
     'The 4D energies unlock the doors of the unconscious that until now protected us.',
@@ -186,14 +182,7 @@ const eveilIntro: Record<Locale, string[]> = {
 
 // Bloc éditorial « Éveil au Soi » (sous la bannière). Paragraphes HTML.
 const ausoIntro: Record<Locale, string[]> = {
-  fr: [
-    'La personnalité consciente et partenaire de l\'Âme poursuit l\'aventure. Elle se prépare à la <strong>fusion avec le SOI Supérieur ou Présence I AM / JE SUIS</strong>, partie non incarnée à intégrer via le processus ascensionnel multidimensionnel.',
-    'L\'Âme procède alors à la <strong>synthèse de ce cycle et réintègre ses fractales terrestres</strong>.',
-    'Par la radiance de sa fréquence, elle <strong>appelle sa famille Monadique</strong>.',
-    'Se souvenir, se reconnecter, se retrouver devient un besoin, voire une nécessité pour terminer sa mission individuelle et collective.',
-    'Le SOI ou Présence JE SUIS profite des énergies 5D pour descendre progressivement dans l\'Âme structurée par sa géométrie et transformée en <strong>véritable vaisseau de lumière</strong>.',
-    'Des <strong>connexions avec des fractales dites futures ou des parties galactiques</strong> permettent à l\'Être conscient, aidé de Grands Frères Intra ou Extra terrestres, de retrouver sa véritable <strong>famille et histoire galactique</strong>.',
-  ],
+  fr: eveilAuSoiFr.intro,
   en: [
     'The conscious personality, now partner of the Soul, continues the journey. It prepares for the <strong>fusion with the Higher SELF or I AM Presence</strong>, the non-incarnated part to be integrated through the multidimensional ascension process.',
     'The Soul then carries out the <strong>synthesis of this cycle and reintegrates its earthly fractals</strong>.',
@@ -226,6 +215,16 @@ const ausoIntro: Record<Locale, string[]> = {
     'Il SÉ o Presenza IO SONO approfitta delle energie 5D per scendere progressivamente nell\'Anima, strutturata dalla sua geometria e trasformata in un <strong>vero vascello di luce</strong>.',
     'Delle <strong>connessioni con frattali detti futuri o parti galattiche</strong> permettono all\'Essere consapevole, aiutato da Grandi Fratelli Intra o Extra terrestri, di ritrovare la sua vera <strong>famiglia e storia galattica</strong>.',
   ],
+};
+
+// Bloc de clôture « Éveil au Soi » (sous les cartes). FR éditable au CMS ;
+// les autres langues seront resynchronisées par Morgan après validation.
+const ausoOutro: Record<Locale, string[]> = {
+  fr: eveilAuSoiFr.outro,
+  en: [],
+  pl: [],
+  es: [],
+  it: [],
 };
 
 const c = intro[hub][locale];
@@ -298,7 +297,7 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
               class:list={[
                 i === 0 && 'eveil-intro__hl',
                 (i === 2 || i === eveilIntro[locale].length - 1) && 'eveil-intro__strong',
-                (i === 3 || i === eveilIntro[locale].length - 1) && 'eveil-intro__left',
+                i === 3 && 'eveil-intro__left',
               ]}
               set:html={para}
             />
@@ -366,6 +365,17 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
             ))}
           </div>
         )}
+
+        {ausoOutro[locale].length > 0 && (
+          <div class="hub-outro" data-reveal>
+            {ausoOutro[locale].map((para, i) => (
+              <p
+                class:list={[i === ausoOutro[locale].length - 1 && 'hub-outro__tagline']}
+                set:html={para}
+              />
+            ))}
+          </div>
+        )}
       </>
     )}
   </section>
@@ -418,6 +428,17 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
   }
   .auso-intro p { margin: 0 0 1em; line-height: 1.7; }
   .auso-intro strong { color: var(--gold-soft); font-weight: 600; }
+
+  /* Page « Éveil au Soi » — phrases de clôture centrées (sous les cartes) */
+  .hub-outro {
+    max-width: 62ch; margin: var(--space-5) auto 0;
+    text-align: center; color: var(--indigo-100);
+  }
+  .hub-outro p { margin: 0 0 0.7em; line-height: 1.6; }
+  .hub-outro__tagline {
+    font-family: var(--font-serif); font-style: italic;
+    color: var(--gold-soft);
+  }
 
   /* Placeholders vidéo (en attendant les IDs YouTube de Christine) */
   .video-placeholder { margin: 0; }

@@ -25,19 +25,23 @@ public_folder: "/images/wp"
 publish_mode: simple
 
 collections:
-  - name: fiches_fr
-    label: "Fiches — Français"
-    label_singular: "Fiche"
-    description: "Stages, ateliers, consultations, conférences et parcours (version française)."
+  # Les « cartes cliquables » des deux pages = les fiches. On expose UNE collection
+  # par page, filtrée sur le champ « hub ». Le dossier ne contient que le FR à la
+  # racine ; les champs sont définis une seule fois (ancre &fiche_fields) puis
+  # réutilisés par la 2e collection (*fiche_fields).
+  - name: fiches_eveil_a_soi
+    label: "Cartes — Éveil à Soi"
+    label_singular: "Carte"
+    description: "Les cartes de la page « Éveil à Soi » (consultation, sortir de sa matrice, vaisseau…) et tout leur contenu."
     folder: "v3-src/src/content/fiches"
-    filter: { field: lang, value: fr }
+    filter: { field: hub, value: eveil-a-soi }
     create: true
     extension: md
     format: frontmatter
     slug: "{{slug}}"
     summary: "{{title}}"
     sortable_fields: [order, title]
-    fields:
+    fields: &fiche_fields
       - { name: lang, label: "Langue", widget: hidden, default: fr }
       - { name: title, label: "Titre", widget: string }
       - { name: kicker, label: "Sur-titre (ex. Stage, Atelier, Consultation)", widget: string }
@@ -135,8 +139,22 @@ collections:
       # --- Contenu rédactionnel ---
       - { name: body, label: "Contenu", widget: markdown }
 
+  - name: fiches_eveil_au_soi
+    label: "Cartes — Éveil au Soi"
+    label_singular: "Carte"
+    description: "Les cartes de la page « Éveil au Soi » (mémoire galactique, Mont Shasta, Bugarach, team galactique…) et tout leur contenu."
+    folder: "v3-src/src/content/fiches"
+    filter: { field: hub, value: eveil-au-soi }
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [order, title]
+    fields: *fiche_fields
+
   # =========================================================================
-  # PAGES « hors fiches » (Qui suis-je, Mission) — éditables comme un formulaire.
+  # PAGES « hors fiches » (Qui suis-je, Mission, Éveil à/au Soi) — formulaire.
   # Chaque page = un fichier de données FR lu par le site (src/data/*.fr.json).
   # ⚠️ Mêmes règles que les fiches : tout champ doit figurer ici, sinon il serait
   # effacé à la sauvegarde. Seul le FR est édité au CMS (les autres langues sont
@@ -324,3 +342,42 @@ collections:
           - { name: recognizeBody, label: "Texte — bandeau de contact", widget: text }
           - { name: contactCta, label: "Texte du bouton contact", widget: string }
           - { name: back, label: "Texte du lien retour", widget: string }
+
+      # ---------------------------- ÉVEIL À SOI -------------------------------
+      - name: eveilASoi
+        label: "Page : Éveil à Soi"
+        file: "v3-src/src/data/eveil-a-soi.fr.json"
+        description: "La page d'accueil « Éveil à Soi » (le texte, hors cartes)."
+        fields:
+          - { name: metaTitle, label: "Titre de l'onglet (Google)", widget: string }
+          - { name: metaDesc, label: "Description Google", widget: text }
+          - { name: eyebrow, label: "Sur-titre", widget: string }
+          - { name: h1, label: "Grand titre", widget: string }
+          - { name: lede, label: "Accroche", widget: text }
+          - name: intro
+            label: "Paragraphes d'introduction (sous la bannière)"
+            widget: list
+            hint: "L'ordre compte : le 1er paragraphe est mis en avant (doré), le dernier est centré en gras. Les balises <em>…</em> (italique) et <strong>…</strong> (doré) sont à conserver."
+            field: { name: paragraphe, label: "Paragraphe", widget: text }
+
+      # ---------------------------- ÉVEIL AU SOI ------------------------------
+      - name: eveilAuSoi
+        label: "Page : Éveil au Soi"
+        file: "v3-src/src/data/eveil-au-soi.fr.json"
+        description: "La page d'accueil « Éveil au Soi » (le texte, hors cartes)."
+        fields:
+          - { name: metaTitle, label: "Titre de l'onglet (Google)", widget: string }
+          - { name: metaDesc, label: "Description Google", widget: text }
+          - { name: eyebrow, label: "Sur-titre", widget: string }
+          - { name: h1, label: "Grand titre", widget: string }
+          - { name: lede, label: "Accroche", widget: text }
+          - name: intro
+            label: "Paragraphes d'introduction (sous la bannière)"
+            widget: list
+            hint: "Les balises <strong>…</strong> mettent un passage en doré : à conserver."
+            field: { name: paragraphe, label: "Paragraphe", widget: text }
+          - name: outro
+            label: "Phrases de clôture (centrées, sous les cartes)"
+            widget: list
+            hint: "La dernière phrase s'affiche en doré italique."
+            field: { name: phrase, label: "Phrase", widget: text }

@@ -269,10 +269,10 @@ const c = tr[locale];
             <ul>
               {c.pioneerQuotes.map((q) => <li>{q}</li>)}
             </ul>
+            <p>{c.pioneerP2}</p>
           </div>
         </div>
-        <p class="mission-after prose">{c.pioneerP2}</p>
-        {c.pioneerAdn && <p class="mission-highlight">{c.pioneerAdn}</p>}
+        {c.pioneerAdn && <p class="mission-highlight mission-highlight--adn">{c.pioneerAdn}</p>}
       </div>
     </div>
   </section>
@@ -346,6 +346,16 @@ const c = tr[locale];
     margin: var(--space-3) auto 0; max-width: 54ch; text-align: center;
     font-family: var(--font-serif); font-style: italic; font-size: var(--text-lg);
     color: var(--indigo-700);
+  }
+  /* « Ce nouvel ADN… » : sur une seule ligne (la police se réduit pour tenir ;
+     retour à la ligne autorisé uniquement sur petits écrans) */
+  .mission-highlight--adn {
+    max-width: none;
+    white-space: nowrap;
+    font-size: clamp(0.85rem, 1.7vw, var(--text-lg));
+  }
+  @media (max-width: 760px) {
+    .mission-highlight--adn { white-space: normal; font-size: var(--text-lg); }
   }
   /* En-tête « Informations / Presse » avant les vidéos (sur fond étoilé) */
   .mission-videos-heading {
