@@ -7,12 +7,9 @@ category: parcours
 order: 20
 lede: Créer le vaisseau de lumière de l'Âme 5D à partir de sa propre géométrie.
 cardLede: Tisser son corps de lumière cristallin à partir de géométries et activer le vortex de son Âme.
-image: /images/geometrie/merkaba-activation.svg
-imageAlt: Merkaba — champ vibratoire (animation en cours)
+image: /images/wp/vaisseaulumiere.png
+imageAlt: Le vaisseau de lumière de l'Âme
 bannerAlt: ''
-bodyImage:
-  src: /images/wp/restructurer-adn.jpg
-  alt: Restructuration de l'ADN éthérique à partir des organes spirituels
 duration: ''
 price: ''
 format: Présentiel ou Zoom
@@ -55,11 +52,25 @@ _Tout est son dans l'Univers, et donc tout est géométrie._ Chaque Âme est uni
 et possède sa propre géométrie, formant un vortex spécifique à activer dans le
 cadre du processus ascensionnel.
 
-## Comment ?
-
-- Déploiement du 5ᵉ élément, support du champ unifié de l'Être.
-- Activation à partir de méditations guidées et de connexions immédiates à partir de mantras et d'exercices concrets.
-- Ouverture de conscience progressive rythmée par l'Âme dans le respect physique, psychologique et psychique de la personnalité.
+<div class="duo-cols">
+  <div>
+    <h2 style="margin-top:0">Comment ?</h2>
+    <ul>
+      <li>Déploiement du 5ᵉ élément, support du champ unifié de l'Être.</li>
+      <li>Activation à partir de méditations guidées et de connexions immédiates à partir de mantras et d'exercices concrets.</li>
+      <li>Ouverture de conscience progressive rythmée par l'Âme dans le respect physique, psychologique et psychique de la personnalité.</li>
+    </ul>
+  </div>
+  <div>
+    <h2 style="margin-top:0">Effets</h2>
+    <ul>
+      <li>Voyager à l'intérieur pour voyager à l'extérieur.</li>
+      <li>Restructurer l'ADN éthérique à partir des organes spirituels.</li>
+      <li>Réintégrer ses fractales terrestres et célestes et retrouver la multidimensionnalité de l'Être.</li>
+      <li>Expérimenter le nouveau prototype humanoïde, base de la prochaine civilisation terrestre.</li>
+    </ul>
+  </div>
+</div>
 
 ## Particularité
 
@@ -82,13 +93,6 @@ puissance de cet outil.
 <center>Plus de 950 personnes ont suivi ces stages depuis 2013</center>
 
 **_Révision mensuelle gratuite via Zoom, tous les premiers mardis du mois à 20h30._**
-
-## Effets
-
-- Voyager à l'intérieur pour voyager à l'extérieur.
-- Restructurer l'ADN éthérique à partir des organes spirituels.
-- Réintégrer ses fractales terrestres et célestes et retrouver la multidimensionnalité de l'Être.
-- Expérimenter le nouveau prototype humanoïde, base de la prochaine civilisation terrestre.
 
 ## Source
 
