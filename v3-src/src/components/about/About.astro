@@ -105,18 +105,28 @@ const u = ui[locale];
     </div>
   </section>
 
-  {t.upcoming && (
-    <section class="paper-section paper-section--soft">
-      <div class="container container--narrow">
-        <div class="paper-section__inner" data-reveal>
-          <h2 class="about-h2">{t.upcoming.heading}</h2>
-          <ul class="about-news">
-            {t.upcoming.items.map((item) => <li>{item}</li>)}
-          </ul>
+  <section class="paper-section paper-section--soft">
+    <div class="container">
+      <div class="paper-section__inner" data-reveal>
+        <div class="about-duo">
+          {t.upcoming && (
+            <div class="about-duo__col">
+              <h2 class="about-h2">{t.upcoming.heading}</h2>
+              <ul class="about-news">
+                {t.upcoming.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          )}
+          <div class="about-duo__col">
+            <div class="about-clients">
+              <h3>{t.clients.heading}</h3>
+              <p>{t.clients.text}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-  )}
+    </div>
+  </section>
 
   <section class="paper-section">
     <div class="container container--narrow">
@@ -126,17 +136,6 @@ const u = ui[locale];
           {t.videos.list.map((v) => (
             <VideoEmbed id={v.id} title={v.title} meta={v.meta} playLabel={u.video.play} />
           ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="paper-section paper-section--soft">
-    <div class="container container--narrow">
-      <div class="paper-section__inner" data-reveal>
-        <div class="about-clients">
-          <h3>{t.clients.heading}</h3>
-          <p>{t.clients.text}</p>
         </div>
       </div>
     </div>
@@ -300,6 +299,7 @@ const u = ui[locale];
   }
   .about-duo .about-h2 { margin-top: 0; }
   .about-duo .about-news { margin-bottom: 0; }
+  .about-duo .about-clients { margin: 0; }
 
   /* Actualités = liste ✦ */
   .about-news { list-style: none; margin: 0 0 var(--space-4); padding: 0; }

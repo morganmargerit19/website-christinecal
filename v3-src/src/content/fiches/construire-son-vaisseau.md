@@ -10,9 +10,6 @@ cardLede: Tisser son corps de lumière cristallin à partir de géométries et a
 image: /images/geometrie/merkaba-activation.svg
 imageAlt: Merkaba — champ vibratoire (animation en cours)
 bannerAlt: ''
-bodyImage:
-  src: /images/wp/restructurer-adn.jpg
-  alt: Restructuration de l'ADN éthérique à partir des organes spirituels
 duration: ''
 price: ''
 format: Présentiel ou Zoom
@@ -48,6 +45,10 @@ stages:
   - vortex-de-lame
 hideHeaderMeta: true
 ---
+
+<figure style="margin: 0 auto var(--space-4); max-width: min(100%, 560px);">
+  <img src="/images/wp/vaisseaulumiere.png" alt="Le vaisseau de lumière de l'Âme" loading="lazy" style="width: 100%; display: block; border-radius: var(--radius); border: 1px solid var(--border-light);" />
+</figure>
 
 **Créer le vaisseau de lumière de votre Âme à partir de sa propre géométrie — « L'Âme agit ! »**
 
