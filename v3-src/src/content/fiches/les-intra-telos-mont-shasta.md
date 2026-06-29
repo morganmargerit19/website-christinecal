@@ -98,12 +98,8 @@ sideImages:
 
 Le **MONT SHASTA**, montagne de 4700 mètres située en Californie et considérée
 comme sacrée par les Amérindiens, porte l'énergie de « Celui qui vit selon la Loi
-Divine ». L'un des vortex les plus puissants de la Terre, il permet aux survivants
-de la Lémurie d'ascensionner : ils vivent sous la montagne, en 5D, dans la cité de
-TELOS (« Communication avec l'Esprit »), capitale des cités intra-terrestres de
-l'**AGARTHA**. Source de légendes  avec les Big Foot et les témoignages, au
-XIXᵉ siècle, de « Grands Êtres blonds vêtus de blanc », le **MONT SHASTA**
-attire de nombreux UFO cachés sous ses célèbres lenticulaires.
+Divine ».  Ce vortex permet aux survivants de la Lémurie d'ascensionner : ils vivent sous la montagne en 5D  dans la cité de TELOS (« Communication avec l'Esprit »), capitale des cités intra-terrestres de
+l'**AGARTHA**. Source de légendes  avec les Big Foot et les témoignages, au XIXᵉ siècle, de « Grands Êtres blonds vêtus de blanc », le **MONT SHASTA** attire de nombreux UFO cachés sous ses célèbres lenticulaires.
 
 ## En connexion avec TELOS depuis 2003
 
