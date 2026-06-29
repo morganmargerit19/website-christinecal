@@ -105,4 +105,4 @@ partir d'un long parcours initiatique.
 - Recoupements d'informations et nombreux échanges depuis 15 ans avec des amis conscients de leur origine ET.
 
 > Invitation au discernement et aux questionnements - 
-> Respect de la libre pensée de chacun
+> Respect de la libre pensée
