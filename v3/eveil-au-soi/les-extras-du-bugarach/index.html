@@ -71,7 +71,14 @@ titre est en cours d’écriture.</p>
               fc.textContent = it.caption;
               fig.appendChild(fc);
             }
-            target.parentNode.insertBefore(fig, target);
+            // Insérer l'image comme enfant DIRECT de .prose : si la cible est
+            // imbriquée (ex. un <li> dans une liste bridée à 74ch en gabarit
+            // large), le flottant resterait au bord de la liste au lieu du bord
+            // droit de la page. On remonte donc jusqu'à l'enfant direct de .prose.
+            let anchor = target;
+            const prose = target.closest && target.closest('.prose');
+            if (prose) { while (anchor.parentNode && anchor.parentNode !== prose) anchor = anchor.parentNode; }
+            (anchor.parentNode || target.parentNode).insertBefore(fig, anchor);
           }
         });
       })();</script>  </article>  </main> <footer class="site-footer"> <div class="container"> <div class="footer-grid"> <div> <h4>Christine CAL</h4> <p>Coach médiumnique · Conférencière
