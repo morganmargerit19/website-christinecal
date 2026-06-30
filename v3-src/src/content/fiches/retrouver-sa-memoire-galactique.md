@@ -69,7 +69,7 @@ vibratoire.
   <div class="duo-col">
     <h3>New time line 2</h3>
     <p class="duo-sub">Awakening Reset</p>
-    <p>De nouveaux scientifiques commencent à parler de ces lignes spatio-temporelles, tel Philippe Guillemant, ingénieur et docteur en physique au CNRS, rencontré lors d'un dîner chez une amie, qui relie la physique et la conscience.</p>
+    <p>De nouveaux scientifiques commencent à parler de ces lignes spatio-temporelles. Philippe Guillemant, ingénieur et docteur en physique au CNRS rencontré chez une amie, possède cette aisance à relier la physique et la conscience.</p>
     <p>Des pilotes d'avion, des militaires en retraite témoignent de la présence d'OVNIS, de rencontres d'Intra ou d'Extras dans des vaisseaux tel JP, retraité de l'armée américaine autorisé à parler et rencontré en août 2025. Les humains se réveillent. Le monde change et le futur est déjà là.</p>
   </div>
 </div>
