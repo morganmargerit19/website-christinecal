@@ -80,12 +80,12 @@ Des consciences supérieures, dites Extra et Intra-Terrestres, en collaboration 
 
 _<center>« Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et_
 _vérifiez ! » vous dirait l'ex-comptable que je fus._ 
-_Ou bien attendez…</center>_
+
+_ou bien patientez…</center>_
 
 ## Témoignage de vie
 
-Retrouver le **fil conducteur de son histoire et le choix du SOI via l'Âme**, à
-partir d'un long parcours initiatique.
+Retrouver le **fil conducteur de son histoire et le choix du SOI via l'Âme**, à partir d'un long parcours initiatique.
 
 > \*Ne cherchez pas via la volonté de votre personnalité ! C'est l'Âme qui, en éveil
 > dans l'incarnation, émet la fréquence de sa Monade ou famille Galactique.\*
