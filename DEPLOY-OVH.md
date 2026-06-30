@@ -67,5 +67,6 @@ Pour que Christine ne dépende pas du GitHub de Morgan :
 2. Re-créer les *secrets/variables* OVH sous ce nouveau dépôt (étape 2 ci-dessus).
 3. Le workflow et la config fonctionnent à l'identique : seule l'appartenance change.
 
-L'édition de contenu par Christine (CMS) est traitée séparément — voir la feuille
-de route fournie (Decap/Sveltia CMS branché sur les fiches Markdown existantes).
+L'édition de contenu (CMS) est traitée séparément — voir **`DEPLOY-CMS-TINA.md`**
+(TinaCMS sur `/admin`, commits GitHub via Tina Cloud). Le build du site est
+**indépendant** du CMS : il réussit même sans les identifiants Tina.
