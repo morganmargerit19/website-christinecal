@@ -37,6 +37,11 @@ jobs:
         working-directory: v3-src
         env:
           DEPLOY_TARGET: ovh
+          # Identifiants Tina Cloud (cf. DEPLOY-CMS-TINA.md). Absents = le site
+          # se build quand même, sans la page /admin (build découplé).
+          PUBLIC_TINA_CLIENT_ID: ${{ secrets.PUBLIC_TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          GITHUB_BRANCH: main
         run: npm run build
 
       - name: Déploiement FTP vers OVH

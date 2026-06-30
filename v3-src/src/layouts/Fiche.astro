@@ -536,6 +536,39 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     }
   }
 
+  /* Duo d'images côte à côte dans le corps (ex. Telos : les 2 livres), le texte
+     s'enroule à côté (retour Christine : « les 2 livres côte à côte, texte à côté »). */
+  :global(.media-duo) {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2);
+    margin: 0.25rem 0 var(--space-3);
+  }
+  :global(.media-duo figure) { margin: 0; }
+  :global(.media-duo img) {
+    width: 100%; height: auto; display: block;
+    border-radius: var(--radius); border: 1px solid rgba(22, 20, 51, 0.12);
+  }
+  :global(.media-duo figcaption) {
+    margin-top: 0.3rem; font-size: var(--text-xs); color: var(--ink-muted);
+    font-style: italic; text-align: center;
+  }
+  @media (min-width: 720px) {
+    :global(.media-duo--books) {
+      float: right; width: clamp(220px, 34%, 320px);
+      margin: 0.25rem 0 var(--space-3) var(--space-4);
+    }
+  }
+
+  /* Telos — la rangée de 3 photos (faisceau / Black Bute / Mont Shasta 2017) :
+     alignées par le bas, la 3e (portrait) ressort plus haute, et SURTOUT aucun
+     recadrage 4/3 qui masquerait le phénomène lumineux (retour Christine :
+     « sur le site elle est coupée, on ne voit pas le phénomène »). */
+  :global(.fiche--les-intra-telos-mont-shasta .inline-media:not(.inline-media--aside) .inline-media__photos) {
+    align-items: end;
+  }
+  :global(.fiche--les-intra-telos-mont-shasta .inline-media:not(.inline-media--aside) .inline-media__photos img) {
+    aspect-ratio: auto;
+  }
+
   /* Galerie d'images légendées (ex. Mont Shasta : livres, lieux, photos) */
   .fiche-gallery {
     display: grid; gap: var(--space-3); margin: var(--space-3) auto var(--space-4);

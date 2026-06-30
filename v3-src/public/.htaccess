@@ -2,10 +2,17 @@
 # Ce fichier n'a d'effet que sur OVH ; il est ignoré par Vercel (preview /v3/).
 
 # --- 1) HTTPS + domaine canonique (www) ---------------------------------
+# OVH termine le TLS en amont : on teste X-Forwarded-Proto et NON %{HTTPS}
+# (qui vaut « off » côté Apache même en HTTPS → boucle de redirection infinie).
 RewriteEngine On
-RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^ https://www.christinecal.com%{REQUEST_URI} [L,R=301]
+
+# Redirections SEO « ancien WordPress → V3 » : à compléter avant la bascule.
+# Les slugs V3 diffèrent de l'ancien WordPress : mapper chaque URL indexée
+# (Search Console) vers la page V3 la plus proche, sinon laisser répondre 404.
+# Ex. : RewriteRule ^le-mont-shasta/?$ /eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
 
 # --- 2) Page 404 personnalisée ------------------------------------------
 ErrorDocument 404 /404.html

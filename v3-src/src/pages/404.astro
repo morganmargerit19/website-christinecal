@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import { pathFor } from '../i18n/utils';
+
+const locale = 'fr';
+---
+<Base
+  locale={locale}
+  routeKey="home"
+  title="Page introuvable — Christine CAL"
+  description="Cette page n'existe pas ou a été déplacée."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Erreur 404</span>
+      <h1>Cette page s'est égarée dans une autre dimension</h1>
+      <p class="lede">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+    </div>
+  </section>
+
+  <section class="paper-section">
+    <div class="container container--narrow">
+      <div class="paper-section__inner prose" style="text-align: center;">
+        <p>Reprenez le fil par l'une de ces entrées :</p>
+        <p>
+          <a class="btn btn--gold" href={pathFor('home', locale)}>Accueil</a>
+        </p>
+        <p>
+          <a href={pathFor('eveilASoi', locale)}>Éveil à Soi</a> ·
+          <a href={pathFor('eveilAuSoi', locale)}>Éveil au Soi</a> ·
+          <a href={pathFor('contact', locale)}>Contact</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

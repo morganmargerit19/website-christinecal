@@ -18,7 +18,7 @@ videosHeading: ''
 stages:
   - nouveau-bugarach
 sideImages:
-  - section: 2026--contact-avec-des-gardiens
+  - section: Expérience du 20 mars 2026
     src: /images/wp/bugarach-2.jpg
     alt: Le Bugarach — contact avec les Gardiens (2026)
     align: right
@@ -86,4 +86,4 @@ Mise à jour en septembre 2026… _(sera complété en septembre)._
 Un stage **« Le Nouveau Bugarach »** est à prévoir pour 2027, et un livre du même
 titre est en cours d'écriture.
 
-<center>Invitation au discernement et aux aux questionnements - Respect de la libre pensée</center>
+<center>Invitation au discernement et aux questionnements - Respect de la libre pensée</center>

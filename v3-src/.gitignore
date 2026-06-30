@@ -1,3 +1,8 @@
 node_modules/
 dist/
 .astro/
+
+# TinaCMS — régénérés à chaque build / identifiants locaux (à NE PAS committer)
+.env
+public/admin/
+tina/__generated__/

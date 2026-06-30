@@ -56,42 +56,31 @@ stages:
 hideHeaderImage: true
 inlineMedia:
   - images:
-      - alt: Le Mont Shasta traversé par un faisceau de lumière
-        src: /images/wp/shasta1.jpg
+      - alt: Christine devant le Mont Shasta
+        src: /images/wp/chris-shasta.jpg
+        size: small
     video:
       title: Voyage au Mont Shasta
       id: u2ngUaunI9w
     layout: aside
     section: Organisatrice de séminaires initiatiques
   - images:
+      - alt: Le Mont Shasta traversé par un faisceau de lumière
+        caption: Le faisceau de lumière sur le Mont Shasta
+        src: /images/wp/shasta1.jpg
       - alt: Black Butte, 2014
-        caption: Black Bute 2014 - Expérience suite à une connexion avec le maître Saint Germain
+        caption: Black Bute 2014 — connexion avec le maître Saint Germain
         src: /images/wp/black-bute-2014.jpg
-      - alt: Mont Shasta, 2017
-        caption: Mont Shasta 2017 après la cérémonie d’Ascension
+      - alt: Mont Shasta 2017 — le phénomène lumineux apparu après la cérémonie d’Ascension
+        caption: Mont Shasta 2017 — après la cérémonie d’Ascension
         src: /images/wp/shasta-2017-2.jpg
     section: Channeling avec les Telosiens
 wideBody: true
 sideImages:
-  - section: Channeling avec les Telosiens
-    src: /images/wp/chris-shasta.jpg
-    alt: Christine devant le Mont Shasta
-    align: right
-    size: small
   - section: montagne de 4700
     src: /images/wp/nuage-lenticulaire.jpg
     alt: Nuage lenticulaire au-dessus du Mont Shasta
     align: right
-  - section: Des rencontres successives
-    src: /images/wp/telos-revelations-de-la-nouvelle-lemurie.jpg
-    alt: « Révélations de la Nouvelle Lémurie » — Aurelia Louise Jones
-    align: right
-    size: xsmall
-  - section: Dianne Robbins
-    src: /images/wp/messages-from-hollow-earth.jpg
-    alt: « Messages from the Hollow Earth » — Dianne Robbins
-    align: left
-    size: xsmall
   - section: rencontres-initiatiques-en-dordogne
     src: /images/wp/shasta-plazac.jpg
     alt: Rencontres initiatiques à Plazac, en Dordogne
@@ -105,6 +94,11 @@ Divine ».  Ce vortex permet aux survivants de la Lémurie d'ascensionner : ils 
 l'**AGARTHA**. Source de légendes  avec les Big Foot et les témoignages, au XIXᵉ siècle, de « Grands Êtres blonds vêtus de blanc », le **MONT SHASTA** attire de nombreux UFO cachés sous ses célèbres lenticulaires.
 
 ## En connexion avec TELOS depuis 2003
+
+<div class="media-duo media-duo--books">
+  <figure><img src="/images/wp/telos-revelations-de-la-nouvelle-lemurie.jpg" alt="« Révélations de la Nouvelle Lémurie » — Aurelia Louise Jones (Tome 1)" loading="lazy" /><figcaption>TELOS — Révélations de la Nouvelle Lémurie</figcaption></figure>
+  <figure><img src="/images/wp/messages-from-hollow-earth.jpg" alt="« Messages from the Hollow Earth » — Dianne Robbins" loading="lazy" /><figcaption>Messages from the Hollow Earth</figcaption></figure>
+</div>
 
 **Déclencheur** : la lecture en une nuit de février 2003 des "Révélations de la
 Nouvelle Lémurie (T.1)" d'Aurelia Louise Jones me bouleverse profondément et me connecte à un Telosien qui me fait visiter la cité en voyage astral. Ces visites et ces contacts dureront des années. 
