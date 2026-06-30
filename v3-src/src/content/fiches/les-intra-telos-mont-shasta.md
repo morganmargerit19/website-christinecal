@@ -54,24 +54,24 @@ stages:
   - initiation-fin-de-cycle
   - voyages-expansion-conscience
 hideHeaderImage: true
-wideBody: true
 inlineMedia:
-  - section: Organisatrice de séminaires initiatiques
-    layout: aside
+  - images:
+      - alt: Le Mont Shasta traversé par un faisceau de lumière
+        src: /images/wp/shasta1.jpg
     video:
-      id: u2ngUaunI9w
       title: Voyage au Mont Shasta
-    images:
-      - src: /images/wp/shasta1.jpg
-        alt: Le Mont Shasta traversé par un faisceau de lumière
-  - section: Channeling avec les Telosiens
-    images:
-      - src: /images/wp/black-bute-2014.jpg
+      id: u2ngUaunI9w
+    layout: aside
+    section: Organisatrice de séminaires initiatiques
+  - images:
+      - alt: Black Butte, 2014
         caption: Black Bute 2014 - Expérience suite à une connexion avec le maître Saint Germain
-        alt: Black Butte, 2014
-      - src: /images/wp/shasta-2017-2.jpg
+        src: /images/wp/black-bute-2014.jpg
+      - alt: Mont Shasta, 2017
         caption: Mont Shasta 2017 après la cérémonie d’Ascension
-        alt: Mont Shasta, 2017
+        src: /images/wp/shasta-2017-2.jpg
+    section: Channeling avec les Telosiens
+wideBody: true
 sideImages:
   - section: Channeling avec les Telosiens
     src: /images/wp/chris-shasta.jpg
@@ -154,7 +154,7 @@ Le retour de l'Être multidimensionnel que nous sommes est à portée pour les i
 
 **Invasion de Telos en 2021 et fin de la guerre galactique.**
 
-- **2021** — Lors de mes voyages astraux, je suis stupéfaite de trouver la cité vide et en partie détruite. Une vidéo d'Elena Danaan (archéologue et émissaire de la Fédération Galactique des Mondes) corrobore mes observations lors de nos échanges en juillet 2024 et à nouveau en août 2025.
+- **2021** — Lors de mes voyages astraux, je suis stupéfaite de trouver la cité vide et en partie détruite. Une vidéo d'Elena Danaan (archéologue et émissaire de la Fédération Galactique des Mondes) corrobore mes observations lors de nos échanges en juillet 2024 puis en août 2025.
 - **2022** — Reprise des contacts et découverte de la nouvelle cité de Telos.
 - **2026** — Voyage au Mont Shasta avec connexions plus précises sur place et rencontre avec le groupe Telos International.
 
