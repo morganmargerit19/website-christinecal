@@ -62,8 +62,7 @@ réalité extérieure de l'humanité. Une information m'est donnée : la nécess
 d'attendre un changement orchestré par d'autres intelligences.
 
 Certains trouvent une correspondance entre le Mont Bugarach et le Mont Shasta. Bien
-que chacun soit libre de ses pensées, après avoir été plus d'une douzaine de fois
-au Mont Shasta, je peux dire que ces deux montagnes sont totalement différentes.
+que chacun soit libre de ses pensées et sensations, je peux dire après une douzaine de voyages au Mont Shasta, que ces deux montagnes sont différentes.
 
 ## 2022 — Des DVD filmés au Bugarach
 
