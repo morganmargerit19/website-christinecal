@@ -412,7 +412,7 @@ export default defineConfig({
   branch,
   // Renseignés par Tina Cloud (cf. DEPLOY-CMS-TINA.md). Vides tant que non
   // configurés : l'éditeur /admin ne se connecte pas, mais le SITE se build quand même.
-  clientId: process.env.PUBLIC_TINA_CLIENT_ID ?? '',
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID ?? '',
   token: process.env.TINA_TOKEN ?? '',
   build: {
     outputFolder: 'admin', // → public/admin/ (servi à /admin sur OVH comme sur Vercel)
