@@ -120,7 +120,10 @@ h1, h2, h3, h4 {
     line-height: 1.15;
     margin: 0 0 var(--space-3);
     color: #fff;
-    text-wrap: balance;
+    /* `pretty` remplit la ligne naturellement avant de passer à la suivante :
+       on évite l'empilement de lignes courtes (« espaces blancs ») que
+       produisait `balance` sur les titres longs (retour de Christine). */
+    text-wrap: pretty;
 }
 
 .sr-only {
