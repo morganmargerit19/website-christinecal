@@ -46,7 +46,7 @@ expériences.
 ## 2003 — Une rencontre troublante
 
 Au pied du Bugarach, un couple d'Américains. « Je t'attendais ! » me dit-elle. La
-femme, habillée en Amérindienne, me remet quelque chose concernant **TELOS** (le
+femme, habillée en Amérindienne me remet quelque chose concernant **TELOS** (le
 livre venait juste de sortir), dont je retrouverai la trace dans le plan physique à
 Shasta en 2017. « Où l'as-tu mis ? » me dit-il — l'homme fait référence, sans le
 savoir, à l'un de mes songes de 2001 concernant ma vie cathare. Un songe qui va me
