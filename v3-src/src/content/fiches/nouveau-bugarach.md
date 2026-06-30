@@ -12,11 +12,18 @@ imageAlt: Le Pic de Bugarach
 bannerAlt: ''
 dates:
   - '2027'
+duration: ''
+price: ''
+format: ''
+audioTitle: ''
+videosHeading: ''
 ---
 
-En mission pour le moment — mise à jour à l'automne 2026. Un stage « Le Nouveau
-Bugarach » est à prévoir pour 2027, et un livre du même titre est en cours
-d'écriture.
+En mission pour le moment, prévoir une mise à jour à l'automne 2026. 
+
+Un stage « Le Nouveau Bugarach » est à prévoir pour 2027. 
+
+Un livre du même titre est en cours d'écriture.
 
 > Invitation aux questionnements : se renseigner avant de juger, et maintenir le
 > respect de la libre pensée de chacun.
