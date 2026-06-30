@@ -1,0 +1,26 @@
+# Redirections 301 — ANCIEN site « Éveil au Soi »
+#   www.christinecal-coach-quantique.com  →  www.christinecal.com/eveil-au-soi/
+#
+# À déposer comme .htaccess à la RACINE du domaine christinecal-coach-quantique.com
+# sur son hébergement (remplace l'ancien WordPress). Préserve le référencement
+# Google en envoyant chaque ancienne URL vers son équivalent V3 le plus proche,
+# le reste vers la section Éveil au Soi.
+#
+# ⚠️ Ne fonctionne qu'une fois christinecal.com (V3) en ligne.
+
+RewriteEngine On
+
+# --- Pages à cible précise (avant le catch-all) ------------------------
+RewriteRule ^le-mont-shasta/?$                               https://www.christinecal.com/eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+RewriteRule ^reseau-telos-mondial/?$                         https://www.christinecal.com/eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+RewriteRule ^l-ere-des-revelations/?$                        https://www.christinecal.com/eveil-au-soi/la-team-galactique/ [L,R=301]
+RewriteRule ^qui-est-christine-cal-medium-5d-telos/?$        https://www.christinecal.com/qui-suis-je/ [L,R=301]
+RewriteRule ^contact/?$                                      https://www.christinecal.com/contact/ [L,R=301]
+RewriteRule ^(voyage-initiatique-au-mont-shasta-2017|voyage-en-conscience-vers-telos|voyage-conscient-vers-telos-2)/?$ https://www.christinecal.com/eveil-au-soi/voyages-expansion-conscience/ [L,R=301]
+RewriteRule ^portfolio/voyage-en-conscience-vers-telos/?$    https://www.christinecal.com/eveil-au-soi/voyages-expansion-conscience/ [L,R=301]
+RewriteRule ^portfolio/stage-telos-et-la-5d/?$              https://www.christinecal.com/eveil-au-soi/semaine-telosiens/ [L,R=301]
+RewriteRule ^portfolio/atelier-shasta-a-plazac/?$          https://www.christinecal.com/eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+RewriteRule ^portfolio/conf-on-line-intra-terrestres        https://www.christinecal.com/eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+
+# --- Tout le reste de l'ancien site → la section Éveil au Soi ----------
+RewriteRule ^ https://www.christinecal.com/eveil-au-soi/ [L,R=301]
