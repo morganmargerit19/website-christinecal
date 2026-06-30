@@ -26,8 +26,8 @@ sideImages:
 
 ## Un lieu atypique et légendaire
 
-Cette montagne de 1230 mètres, située dans le sud de la France près du lieu
-mythique de Rennes-le-Château, en pays cathare, a toujours nourri littérature et
+Cette montagne de 1230 mètres située dans le sud de la France près du lieu
+mythique de Rennes-le-Château  en pays cathare a toujours nourri littérature et
 questionnements : trésors, SS, ovnis, ou le « délire » du 21 décembre 2012. Elle
 a même fait l'objet d'une série TV de fiction fantastique en 2024, soutenue par la
 région Occitanie, dans laquelle l'intrication des mondes est clairement révélée.
@@ -36,7 +36,7 @@ Une présentation qui interpelle.
 Vous allez découvrir que \*la fiction d'hier correspond à la réalité
 d'aujourd'hui !\*
 
-> Tout a été montré dans les films. Ils montrent souvent la réalité, mais nous
+> Tout a été montré dans les films. Ils révèlent souvent la réalité mais nous
 > continuons à vivre dans l'illusion. À suivre…
 
 _Une montagne « à l'envers »_ — en géologie, avec des couches supérieures de roche
