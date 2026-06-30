@@ -76,7 +76,7 @@ vibratoire.
 
 ## Retour du futur pour stabiliser la time line
 
-Des consciences supérieures, dites Extra et Inrra Terrestres, en collaboration avec des humains militaires ont permis en 2021 une étape de libération de cette humanité trop jeune pour comprendre e trop distraite pour réagir.
+Des consciences supérieures, dites Extra et Intra Terrestres, en collaboration avec des humains militaires ont permis en 2021 une étape de libération de cette humanité trop jeune pour comprendre et trop distraite pour réagir.
 
 _<center>« Elle se croit dans Star Trek ou Stargate », direz-vous ! « Soyez curieux et_
 _vérifiez ! » vous dirait l'ex-comptable que je fus._ 
