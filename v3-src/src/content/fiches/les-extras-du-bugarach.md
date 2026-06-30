@@ -33,8 +33,8 @@ a même fait l'objet d'une série TV de fiction fantastique en 2024, soutenue pa
 région Occitanie, dans laquelle l'intrication des mondes est clairement révélée.
 Une présentation qui interpelle.
 
-Vous allez découvrir que \*la fiction d'hier correspond à la réalité
-d'aujourd'hui !\*
+Vous allez découvrir que "la fiction d'hier correspond à la réalité
+d'aujourd'hui !"
 
 > Tout a été montré dans les films. Ils révèlent souvent la réalité mais nous
 > continuons à vivre dans l'illusion. À suivre…
