@@ -5,7 +5,7 @@ kicker: Stage
 hub: eveil-au-soi
 category: stage
 order: 20
-lede: Renaître à votre Être originel au fil d'une semaine d'exercices et de rituels.
+lede: Renaître à notre Être originel au fil d'une semaine d'exercices et de rituels.
 cardLede: ''
 image: /images/wp/mains.jpg
 imageAlt: Semaine initiatique avec l'énergie des Télosiens
