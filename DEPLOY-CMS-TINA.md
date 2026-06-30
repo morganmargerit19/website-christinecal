@@ -38,9 +38,9 @@ site se reconstruit et se redéploie. Plus aucune ligne de code à toucher.
    onglet *Tokens* → créer un **Content token (lecture seule)**.
 5. **Renseigner ces 2 valeurs à 3 endroits** (mêmes valeurs partout) :
    - **Vercel** → projet `website-christinecal` → *Settings → Environment Variables* :
-     `PUBLIC_TINA_CLIENT_ID` et `TINA_TOKEN`.
+     `NEXT_PUBLIC_TINA_CLIENT_ID` et `TINA_TOKEN`.
    - **GitHub Actions** (déploiement OVH) → dépôt → *Settings → Secrets and
-     variables → Actions → Secrets* : `PUBLIC_TINA_CLIENT_ID` et `TINA_TOKEN`.
+     variables → Actions → Secrets* : `NEXT_PUBLIC_TINA_CLIENT_ID` et `TINA_TOKEN`.
    - **En local** (facultatif) : copier `v3-src/.env.example` en `v3-src/.env`.
 6. **CORS / origines autorisées** : dans le projet Tina Cloud (*Site URLs* /
    allowed origins), ajouter l'URL Vercel de prod, le glob des previews Vercel

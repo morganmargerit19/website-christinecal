@@ -27,7 +27,7 @@ Détails de fond : `DEPLOY-CMS-TINA.md` (CMS) et `DEPLOY-OVH.md` (hébergement).
       - (plus tard) `https://www.christinecal.com` et `https://christinecal.com`.
 - [ ] **1.6** **Vercel** → projet `website-christinecal` → *Settings → Environment Variables* →
       ajoute (Production **et** Preview) :
-      - `PUBLIC_TINA_CLIENT_ID` = le Client ID
+      - `NEXT_PUBLIC_TINA_CLIENT_ID` = le Client ID
       - `TINA_TOKEN` = le token
       Puis *Deployments → … → Redeploy* le dernier déploiement.
 - [ ] **1.7** **Test** : ouvre `https://<ton-url-vercel>/admin/` → connecte-toi →
@@ -63,7 +63,7 @@ Détails de fond : `DEPLOY-CMS-TINA.md` (CMS) et `DEPLOY-OVH.md` (hébergement).
 
 ### 3b. Côté GitHub (Settings → Secrets and variables → Actions)
 - [ ] **3.4** **Secrets** : `OVH_FTP_HOST`, `OVH_FTP_USER`, `OVH_FTP_PASSWORD`,
-      et (pour que `/admin` soit aussi sur OVH) `PUBLIC_TINA_CLIENT_ID`, `TINA_TOKEN`.
+      et (pour que `/admin` soit aussi sur OVH) `NEXT_PUBLIC_TINA_CLIENT_ID`, `TINA_TOKEN`.
 - [ ] **3.5** **Variables** : `OVH_FTP_DIR` = `./www/` (ton chemin), et — **en dernier** —
       `OVH_DEPLOY` = `true`.
 
