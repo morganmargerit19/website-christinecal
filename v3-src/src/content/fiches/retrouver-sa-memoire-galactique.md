@@ -87,8 +87,7 @@ _ou bien patientez…</center>_
 
 Retrouver le **fil conducteur de son histoire et le choix du SOI via l'Âme**, à partir d'un long parcours initiatique.
 
-> \*Ne cherchez pas via la volonté de votre personnalité ! C'est l'Âme qui, en éveil
-> dans l'incarnation, émet la fréquence de sa Monade ou famille Galactique.\*
+> \*Ne cherchez pas via la volonté de votre personnalité ! C'est l'Âme qui, en éveil dans l'incarnation, émet la fréquence de sa Monade ou famille Galactique.\*
 
 - **Révélation de ma multidimensionnalité sur le Mont Shasta**, suite à des expériences vécues entre 2017 et 2019 avec l'aide des Intra-Terrestres de TELOS (synthèse sur place en 2026) : **_le retour d'une version de moi-même pour collaborer à la nouvelle ligne spatio-temporelle._**
 - **Analyse spécifique de mon thème** par une amie qui pratique une astrologie spécifique et hyper détaillée : **Claude Jarry des Loges**.
