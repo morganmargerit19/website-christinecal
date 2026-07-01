@@ -1,10 +1,11 @@
 
 export default new Map([
 ["src/content/fiches/construire-son-vaisseau.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fconstruire-son-vaisseau.mdx&astroContentModuleFlag=true")],
-["src/content/fiches/la-team-galactique.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fla-team-galactique.mdx&astroContentModuleFlag=true")],
 ["src/content/fiches/les-7-rayons.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fles-7-rayons.mdx&astroContentModuleFlag=true")],
-["src/content/fiches/les-intra-telos-mont-shasta.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fles-intra-telos-mont-shasta.mdx&astroContentModuleFlag=true")],
 ["src/content/fiches/les-extras-du-bugarach.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fles-extras-du-bugarach.mdx&astroContentModuleFlag=true")],
+["src/content/fiches/les-intra-telos-mont-shasta.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fles-intra-telos-mont-shasta.mdx&astroContentModuleFlag=true")],
+["src/content/fiches/la-team-galactique.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fla-team-galactique.mdx&astroContentModuleFlag=true")],
+["src/content/fiches/nouveau-bugarach.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fnouveau-bugarach.mdx&astroContentModuleFlag=true")],
 ["src/content/fiches/retrouver-sa-memoire-galactique.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fretrouver-sa-memoire-galactique.mdx&astroContentModuleFlag=true")],
 ["src/content/fiches/sortir-de-sa-matrice.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fsortir-de-sa-matrice.mdx&astroContentModuleFlag=true")],
 ["src/content/fiches/en/sortir-de-sa-matrice.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Ffiches%2Fen%2Fsortir-de-sa-matrice.mdx&astroContentModuleFlag=true")],
