@@ -619,13 +619,20 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
     :global(.paper-section__inner.is-wide .prose > h3),
     :global(.paper-section__inner.is-wide .prose > blockquote) { max-width: 74ch; }
     :global(.paper-section__inner.is-wide .prose > .duo-cols) { max-width: none; }
-    /* Telos : on veut au contraire que le texte ET les titres s'étalent sur toute
-       la largeur du bloc (les images flottent au bord droit) ; seule la vidéo est bornée. */
+    /* Telos + « Retrouver sa mémoire galactique » : on veut au contraire que le
+       texte ET les titres s'étalent sur toute la largeur du bloc (demande de
+       Christine 01/07 — le texte plafonné à 74ch se coupait en lignes courtes).
+       Pour Telos, les images flottent au bord droit ; seule la vidéo est bornée. */
     :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > p),
     :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > ul),
     :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > h2),
     :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > h3),
-    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > blockquote) { max-width: none; }
+    :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > blockquote),
+    :global(.fiche--retrouver-sa-memoire-galactique .paper-section__inner.is-wide .prose > p),
+    :global(.fiche--retrouver-sa-memoire-galactique .paper-section__inner.is-wide .prose > ul),
+    :global(.fiche--retrouver-sa-memoire-galactique .paper-section__inner.is-wide .prose > h2),
+    :global(.fiche--retrouver-sa-memoire-galactique .paper-section__inner.is-wide .prose > h3),
+    :global(.fiche--retrouver-sa-memoire-galactique .paper-section__inner.is-wide .prose > blockquote) { max-width: none; }
     :global(.fiche--les-intra-telos-mont-shasta .paper-section__inner.is-wide .prose > .inline-media) { max-width: min(100%, 720px); }
   }
   :global(.prose .duo-col) {
