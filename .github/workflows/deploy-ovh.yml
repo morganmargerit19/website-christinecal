@@ -59,3 +59,20 @@ jobs:
           lftp -c "set sftp:auto-confirm yes; \
             open -u \"$SFTP_USER\",\"$SFTP_PASS\" sftp://$SFTP_HOST:22; \
             mirror -R --verbose --delete --parallel=4 ./v3-src/dist/ \"$SFTP_DIR\""
+
+      # Redirections SEO des 2 anciens domaines (coach-medium / coach-quantique) :
+      # on dépose leur .htaccess dans des dossiers dédiés sur OVH. Il restera à
+      # repointer ces 2 domaines dessus dans Multisite (l'ancien WP est conservé).
+      - name: Déploiement SFTP des redirections (anciens domaines)
+        env:
+          SFTP_HOST: ${{ secrets.OVH_FTP_HOST }}
+          SFTP_USER: ${{ secrets.OVH_FTP_USER }}
+          SFTP_PASS: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          mkdir -p _redir/coach-redir _redir/coach-quantique-redir
+          cp redirects/coach-medium.com.htaccess    _redir/coach-redir/.htaccess
+          cp redirects/coach-quantique.com.htaccess _redir/coach-quantique-redir/.htaccess
+          lftp -c "set sftp:auto-confirm yes; \
+            open -u \"$SFTP_USER\",\"$SFTP_PASS\" sftp://$SFTP_HOST:22; \
+            mirror -R --verbose _redir/coach-redir coach-redir; \
+            mirror -R --verbose _redir/coach-quantique-redir coach-quantique-redir"
