@@ -1,0 +1,17 @@
+---
+/**
+ * Bloc « Petit texte » (préréglage de taille) — pour une note, une précision,
+ * une mention discrète, plus petite que le texte courant.
+ */
+---
+<div class="block-note"><slot /></div>
+
+<style>
+  .block-note {
+    font-size: var(--text-sm, 0.9rem);
+    color: var(--ink-muted, #6b6b6b); line-height: 1.6;
+    margin: var(--space-3, 1.5rem) 0;
+  }
+  .block-note :global(p) { margin: 0.3em 0; }
+  .block-note :global(> :last-child) { margin-bottom: 0; }
+</style>

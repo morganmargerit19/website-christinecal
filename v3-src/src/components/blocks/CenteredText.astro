@@ -1,0 +1,21 @@
+---
+/**
+ * Bloc « Texte centré » — remplace les anciens <center>…</center> écrits à la main.
+ * Le contenu (formaté : gras, italique, lien…) est placé entre les balises.
+ * italic : met tout le bloc en italique (ex. phrases de clôture de Christine).
+ */
+interface Props {
+  italic?: boolean;
+}
+const { italic = false } = Astro.props;
+---
+<div class:list={['block-center', { 'block-center--italic': italic }]}>
+  <slot />
+</div>
+
+<style>
+  .block-center { text-align: center; margin: var(--space-3, 1.5rem) 0; clear: both; }
+  .block-center--italic { font-style: italic; }
+  .block-center :global(p) { margin: 0.3em 0; }
+  .block-center :global(p:last-child) { margin-bottom: 0; }
+</style>

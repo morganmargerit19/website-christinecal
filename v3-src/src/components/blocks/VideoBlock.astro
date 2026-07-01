@@ -1,0 +1,31 @@
+---
+/**
+ * Bloc « Vidéo » inséré dans le corps — réutilise VideoEmbed (façade YouTube RGPD).
+ * cover = jaquette DVD optionnelle ; credit:'debowska' = mention de droits.
+ * Les chemins de jaquette sont bruts (/images/…) : VideoEmbed ajoute `base` lui-même.
+ */
+import VideoEmbed from '../VideoEmbed.astro';
+import { ui } from '../../i18n/ui';
+import { type Locale } from '../../i18n/utils';
+
+interface Props {
+  id: string;
+  title?: string;
+  meta?: string;
+  credit?: 'debowska';
+  cover?: string;
+  coverAlt?: string;
+}
+const { id, title, meta, credit, cover, coverAlt } = Astro.props;
+
+const raw = Astro.currentLocale ?? 'fr';
+const locale = (['fr', 'en', 'pl', 'es', 'it'].includes(raw) ? raw : 'fr') as Locale;
+const playLabel = ui[locale].video.play;
+---
+<div class="block-video">
+  <VideoEmbed id={id} title={title} meta={meta} credit={credit} cover={cover} coverAlt={coverAlt} playLabel={playLabel} />
+</div>
+
+<style>
+  .block-video { margin: var(--space-4, 2rem) 0; clear: both; }
+</style>

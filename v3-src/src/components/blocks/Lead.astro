@@ -1,0 +1,16 @@
+---
+/**
+ * Bloc « Grand texte » (préréglage de taille) — pour mettre une phrase en avant,
+ * plus grosse que le texte courant. Cohérent avec le design (pas de pixels libres).
+ */
+---
+<div class="block-lead"><slot /></div>
+
+<style>
+  .block-lead {
+    font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+    line-height: 1.5; margin: var(--space-3, 1.5rem) 0;
+  }
+  .block-lead :global(p) { margin: 0.4em 0; }
+  .block-lead :global(> :last-child) { margin-bottom: 0; }
+</style>

@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
 
 // Cible de build (le site vit à la RACINE dans tous les cas — plus de /v3) :
 //  - défaut (aperçu Vercel) : sortie dans ../v3/, servie À LA RACINE par Vercel
@@ -12,7 +13,7 @@ export default defineConfig({
   site: 'https://www.christinecal.com',
   base: '/',
   outDir: isOvh ? './dist' : '../v3',
-  integrations: [sitemap()],
+  integrations: [mdx(), sitemap()],
   i18n: {
     defaultLocale: 'fr',
     locales: ['fr', 'en', 'pl'],

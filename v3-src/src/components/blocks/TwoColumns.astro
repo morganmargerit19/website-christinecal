@@ -1,0 +1,17 @@
+---
+/**
+ * Bloc « Deux colonnes » — remplace le HTML brut `<div class="duo-cols">`.
+ * Contient deux blocs <Column> côte à côte (empilés en mobile).
+ */
+---
+<div class="block-cols"><slot /></div>
+
+<style>
+  .block-cols {
+    display: grid; gap: var(--space-4, 2rem);
+    margin: var(--space-4, 2rem) 0; clear: both;
+  }
+  @media (min-width: 720px) {
+    .block-cols { grid-template-columns: 1fr 1fr; }
+  }
+</style>

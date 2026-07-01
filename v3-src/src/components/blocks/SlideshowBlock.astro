@@ -1,0 +1,20 @@
+---
+/**
+ * Bloc « Diaporama » — réutilise le composant Slideshow (fondu + auto-défilement).
+ * Les chemins d'images sont bruts (/images/…) : Slideshow ajoute `base` lui-même.
+ */
+import Slideshow from '../Slideshow.astro';
+
+interface Props {
+  images?: string[];
+  alt?: string;
+}
+const { images = [], alt = '' } = Astro.props;
+---
+<div class="block-slideshow">
+  <Slideshow images={images} alt={alt} />
+</div>
+
+<style>
+  .block-slideshow { margin: var(--space-4, 2rem) 0; clear: both; }
+</style>

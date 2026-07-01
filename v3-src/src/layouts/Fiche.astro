@@ -4,7 +4,24 @@ import VideoEmbed from '../components/VideoEmbed.astro';
 import Slideshow from '../components/Slideshow.astro';
 import { ui } from '../i18n/ui';
 import { base, fichePath, hubs, locales, pathFor, type Locale } from '../i18n/utils';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import FloatImage from '../components/blocks/FloatImage.astro';
+import CenteredText from '../components/blocks/CenteredText.astro';
+import TwoColumns from '../components/blocks/TwoColumns.astro';
+import Column from '../components/blocks/Column.astro';
+import MediaDuo from '../components/blocks/MediaDuo.astro';
+import VideoBlock from '../components/blocks/VideoBlock.astro';
+import SlideshowBlock from '../components/blocks/SlideshowBlock.astro';
+import GalleryBlock from '../components/blocks/GalleryBlock.astro';
+import Lead from '../components/blocks/Lead.astro';
+import Note from '../components/blocks/Note.astro';
+
+// Blocs de l'éditeur (rich-text Tina). Les fiches .mdx référencent ces composants
+// par leur nom ; les fiches .md (non migrées) n'en utilisent aucun → sans effet.
+const blockComponents = {
+  FloatImage, CenteredText, TwoColumns, Column, MediaDuo,
+  VideoBlock, SlideshowBlock, GalleryBlock, Lead, Note,
+};
 
 interface Props {
   entry: CollectionEntry<'fiches'>;
@@ -12,6 +29,7 @@ interface Props {
 }
 
 const { entry, locale } = Astro.props;
+const { Content } = await render(entry);
 const t = ui[locale];
 const f = entry.data;
 const hub = hubs[f.hub];
@@ -179,7 +197,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
               </figure>
             )}
             <div class="prose">
-              <slot />
+              <Content components={blockComponents} />
             </div>
           </div>
         </div>

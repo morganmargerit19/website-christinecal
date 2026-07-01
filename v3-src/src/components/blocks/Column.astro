@@ -1,0 +1,32 @@
+---
+/**
+ * Une colonne d'un bloc « Deux colonnes ». Titre + sous-titre doré optionnels,
+ * puis le contenu formaté (listes, paragraphes…) placé entre les balises.
+ */
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+const { title, subtitle } = Astro.props;
+---
+<div class="block-col">
+  {title && <h3 class="block-col__title">{title}</h3>}
+  {subtitle && <p class="block-col__sub">{subtitle}</p>}
+  <slot />
+</div>
+
+<style>
+  .block-col {
+    border: 1px solid var(--border-light, rgba(22, 20, 51, 0.12));
+    border-radius: var(--radius, 14px);
+    padding: var(--space-3, 1.5rem) var(--space-4, 2rem);
+    background: rgba(85, 85, 85, 0.05);
+  }
+  .block-col__title { margin-top: 0; }
+  .block-col__sub {
+    margin: 0 0 0.6em; font-family: var(--font-serif, serif);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-size: var(--text-sm, 0.9rem); color: var(--gold, #c9a961);
+  }
+  .block-col :global(> :last-child) { margin-bottom: 0; }
+</style>

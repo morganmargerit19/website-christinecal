@@ -11,7 +11,7 @@ import { glob } from 'astro/loaders';
  * des sous-dossiers (en/, pl/) avec le même `slug` pour relier les langues.
  */
 const fiches = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/fiches' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/fiches' }),
   schema: z.object({
     title: z.string(),
     // Eyebrow affiché au-dessus du titre : « Consultation », « Stage », etc.

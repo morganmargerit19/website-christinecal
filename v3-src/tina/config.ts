@@ -29,11 +29,132 @@ const HUBS = ['eveil-a-soi', 'eveil-au-soi'];
 const CATEGORIES = ['consultation', 'stage', 'atelier', 'conference', 'voyage', 'parcours'];
 const LANGS = ['fr', 'en', 'pl', 'es', 'it'];
 
+// ─── Blocs insérables dans le corps (éditeur rich-text) ──────────────────────
+// ⚠️ Le `name` de chaque template DOIT correspondre EXACTEMENT au composant Astro
+// (src/components/blocks/<Name>.astro) ET à la clé du mapping `blockComponents`
+// dans src/layouts/Fiche.astro — c'est ce nom qui devient la balise MDX écrite
+// dans le fichier .mdx. Un champ nommé `children` (rich-text) = le contenu placé
+// ENTRE les balises du bloc (texte formaté). Les fiches sont désormais en `.mdx`.
+type ImgItem = { caption?: string; alt?: string };
+const imageItemFields = [
+  { type: 'image' as const, name: 'src', label: 'Image' },
+  { type: 'string' as const, name: 'alt', label: 'Texte alternatif' },
+  { type: 'string' as const, name: 'caption', label: 'Légende' },
+];
+
+const columnTemplate = {
+  name: 'Column',
+  label: 'Colonne',
+  fields: [
+    { type: 'string' as const, name: 'title', label: 'Titre' },
+    { type: 'string' as const, name: 'subtitle', label: 'Sous-titre (en doré, facultatif)' },
+    { type: 'rich-text' as const, name: 'children', label: 'Contenu' },
+  ],
+};
+
+const bodyTemplates = [
+  {
+    name: 'FloatImage',
+    label: 'Image (dans le texte)',
+    fields: [
+      { type: 'image' as const, name: 'src', label: 'Image' },
+      { type: 'string' as const, name: 'alt', label: 'Texte alternatif' },
+      { type: 'string' as const, name: 'caption', label: 'Légende (facultatif)' },
+      {
+        type: 'string' as const, name: 'placement', label: 'Placement',
+        options: [
+          { value: 'right', label: 'Flottante à droite (le texte s’enroule)' },
+          { value: 'left', label: 'Flottante à gauche' },
+          { value: 'center', label: 'Centrée' },
+          { value: 'full', label: 'Pleine largeur' },
+        ],
+      },
+      {
+        type: 'string' as const, name: 'size', label: 'Taille',
+        options: [
+          { value: 'small', label: 'Petite' },
+          { value: 'medium', label: 'Moyenne' },
+          { value: 'large', label: 'Grande' },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'CenteredText',
+    label: 'Texte centré',
+    fields: [
+      { type: 'boolean' as const, name: 'italic', label: 'En italique' },
+      { type: 'rich-text' as const, name: 'children', label: 'Texte' },
+    ],
+  },
+  {
+    name: 'Lead',
+    label: 'Grand texte (mise en avant)',
+    fields: [{ type: 'rich-text' as const, name: 'children', label: 'Texte' }],
+  },
+  {
+    name: 'Note',
+    label: 'Petit texte / note',
+    fields: [{ type: 'rich-text' as const, name: 'children', label: 'Texte' }],
+  },
+  {
+    name: 'MediaDuo',
+    label: 'Deux images côte à côte',
+    fields: [
+      { type: 'boolean' as const, name: 'float', label: 'Flotte à droite (le texte s’enroule à gauche)' },
+      {
+        type: 'object' as const, name: 'images', label: 'Images', list: true,
+        ui: { itemProps: (i: ImgItem) => ({ label: i?.caption || i?.alt || 'Image' }) },
+        fields: imageItemFields,
+      },
+    ],
+  },
+  {
+    name: 'VideoBlock',
+    label: 'Vidéo',
+    fields: [
+      { type: 'string' as const, name: 'id', label: 'ID YouTube (les caractères après v=)' },
+      { type: 'string' as const, name: 'title', label: 'Titre (facultatif)' },
+      { type: 'string' as const, name: 'meta', label: 'Légende / date (facultatif)' },
+      { type: 'string' as const, name: 'credit', label: 'Crédit', options: [{ value: 'debowska', label: 'DVD Debowska' }] },
+      { type: 'image' as const, name: 'cover', label: 'Jaquette DVD (facultatif)' },
+      { type: 'string' as const, name: 'coverAlt', label: 'Texte alternatif de la jaquette' },
+    ],
+  },
+  {
+    name: 'SlideshowBlock',
+    label: 'Diaporama',
+    fields: [
+      { type: 'image' as const, name: 'images', label: 'Images', list: true },
+      { type: 'string' as const, name: 'alt', label: 'Texte alternatif (1re image)' },
+    ],
+  },
+  {
+    name: 'GalleryBlock',
+    label: 'Galerie de photos',
+    fields: [
+      {
+        type: 'object' as const, name: 'images', label: 'Images', list: true,
+        ui: { itemProps: (i: ImgItem) => ({ label: i?.caption || i?.alt || 'Image' }) },
+        fields: imageItemFields,
+      },
+    ],
+  },
+  columnTemplate,
+  {
+    name: 'TwoColumns',
+    label: 'Deux colonnes',
+    fields: [
+      { type: 'rich-text' as const, name: 'children', label: 'Colonnes (ajouter des blocs « Colonne »)', templates: [columnTemplate] },
+    ],
+  },
+];
+
 const fiches = {
   name: 'fiches',
   label: 'Cartes (stages, ateliers, consultations, voyages…)',
   path: 'src/content/fiches',
-  format: 'md' as const,
+  format: 'mdx' as const,
   // FR à la racine, traductions dans en/ es/ it/ pl/ — toutes partagent ce schéma.
   ui: {
     filename: {
@@ -181,8 +302,9 @@ const fiches = {
     { type: 'boolean', name: 'featured', label: 'Mise en avant' },
     { type: 'boolean', name: 'draft', label: 'Brouillon (caché du site)' },
 
-    // --- Contenu rédactionnel (HTML brut autorisé → textarea, jamais rich-text) ---
-    { type: 'string', name: 'body', label: 'Contenu', isBody: true, ui: { component: 'textarea' } },
+    // --- Contenu rédactionnel : éditeur riche (gras/italique/titres/listes/citation/lien)
+    // + blocs insérables (images, colonnes, vidéo, diaporama…). Voir `bodyTemplates`. ---
+    { type: 'rich-text', name: 'body', label: 'Contenu', isBody: true, templates: bodyTemplates },
   ],
 };
 

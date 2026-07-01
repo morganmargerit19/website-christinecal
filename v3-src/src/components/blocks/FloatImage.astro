@@ -1,0 +1,55 @@
+---
+/**
+ * Bloc « Image » inséré dans le corps d'une fiche (éditeur en blocs).
+ * Remplace les anciens champs frontmatter `sideImages` / `bodyImage` : l'image
+ * est posée DIRECTEMENT dans le flux du texte (plus d'ancrage fragile par titre).
+ * placement : flottante droite/gauche, centrée, ou pleine largeur. size : petite/moyenne/grande.
+ */
+import { base } from '../../i18n/utils';
+
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+  placement?: 'right' | 'left' | 'center' | 'full';
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { src, alt = '', caption, placement = 'right', size = 'medium' } = Astro.props;
+---
+<figure class:list={['block-img', `block-img--${placement}`, `block-img--${size}`]}>
+  <img src={base + src} alt={alt} loading="lazy" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .block-img { margin: 0.25rem 0 1rem; }
+  .block-img img {
+    width: 100%; display: block;
+    border-radius: var(--radius, 14px);
+    border: 1px solid rgba(22, 20, 51, 0.12);
+  }
+  .block-img figcaption {
+    margin-top: 0.4rem; font-size: var(--text-sm, 0.9rem);
+    font-style: italic; text-align: center; color: var(--ink-muted, #6b6b6b);
+  }
+
+  /* Centrée / pleine largeur */
+  .block-img--center { margin-inline: auto; }
+  .block-img--full { width: 100%; }
+  .block-img--center.block-img--small { max-width: 240px; }
+  .block-img--center.block-img--medium { max-width: 440px; }
+  .block-img--center.block-img--large { max-width: 640px; }
+
+  /* Flottantes : le texte s'enroule à côté (≥ 640px) */
+  @media (min-width: 640px) {
+    .block-img--right { float: right; clear: right; margin: 0.25rem 0 1rem 2rem; }
+    .block-img--left  { float: left;  clear: left;  margin: 0.25rem 2rem 1rem 0; }
+    .block-img--right.block-img--small,
+    .block-img--left.block-img--small  { width: clamp(150px, 26%, 230px); }
+    .block-img--right.block-img--medium,
+    .block-img--left.block-img--medium { width: clamp(190px, 34%, 300px); }
+    .block-img--right.block-img--large,
+    .block-img--left.block-img--large  { width: clamp(240px, 44%, 380px); }
+  }
+</style>
