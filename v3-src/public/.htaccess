@@ -9,10 +9,27 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !https [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^ https://www.christinecal.com%{REQUEST_URI} [L,R=301]
 
-# Redirections SEO « ancien WordPress → V3 » : à compléter avant la bascule.
-# Les slugs V3 diffèrent de l'ancien WordPress : mapper chaque URL indexée
-# (Search Console) vers la page V3 la plus proche, sinon laisser répondre 404.
-# Ex. : RewriteRule ^le-mont-shasta/?$ /eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+# Redirections SEO « ancien WordPress → V3 » (301). URLs relevées dans l'export
+# WP du site (sources/wp-v2). En V3 les fiches sont passées de la racine à leur
+# hub (eveil-a-soi / eveil-au-soi). Les pages inchangées (/, /contact/, /mission/,
+# /qui-suis-je/, /eveil-a-soi/, /eveil-au-soi/) n'ont pas besoin de règle.
+RewriteRule ^construire-son-vaisseau-multidimensionnel-de-lame/?$      /eveil-a-soi/construire-son-vaisseau/ [L,R=301]
+RewriteRule ^consultation-mediumnique/?$                              /eveil-a-soi/consultation-mediumnique/ [L,R=301]
+RewriteRule ^sortir-de-sa-matrice-personnelle/?$                      /eveil-a-soi/sortir-de-sa-matrice/ [L,R=301]
+RewriteRule ^stage-construction-de-la-merkaba-chritalline/?$          /eveil-a-soi/merkaba/ [L,R=301]
+RewriteRule ^stage-construction-du-corps-de-lumiere/?$                /eveil-a-soi/corps-de-lumiere/ [L,R=301]
+RewriteRule ^initiation-de-fin-de-cycle-et-multi-dimensionnalite-de-letre/?$ /eveil-au-soi/initiation-fin-de-cycle/ [L,R=301]
+RewriteRule ^la-team-galactique-de-la-nouvelle-terre/?$              /eveil-au-soi/la-team-galactique/ [L,R=301]
+RewriteRule ^les-7-rayons-7-jours-initiatiques/?$                    /eveil-au-soi/les-7-rayons/ [L,R=301]
+RewriteRule ^les-extras-du-bugarach-et-ses-nouvelles-energies/?$      /eveil-au-soi/les-extras-du-bugarach/ [L,R=301]
+RewriteRule ^les-intra-du-nouveau-telos-au-mont-shasta/?$            /eveil-au-soi/les-intra-telos-mont-shasta/ [L,R=301]
+RewriteRule ^retrouver-sa-memoire-galactique/?$                      /eveil-au-soi/retrouver-sa-memoire-galactique/ [L,R=301]
+RewriteRule ^semaine-initiatique-avec-lenergie-des-telosiens/?$      /eveil-au-soi/semaine-telosiens/ [L,R=301]
+RewriteRule ^stage-de-lhomme-terrestre-a-lhumain-cosmique/?$          /eveil-au-soi/stage-homme-cosmique/ [L,R=301]
+RewriteRule ^stage-du-corps-physique-au-temple-initiatique/?$        /eveil-au-soi/stage-corps-temple/ [L,R=301]
+RewriteRule ^stage-mission-des-light-workers/?$                      /eveil-au-soi/stage-light-workers/ [L,R=301]
+RewriteRule ^voyages-en-expansion-de-conscience-ou-voyage-astral/?$  /eveil-au-soi/voyages-expansion-conscience/ [L,R=301]
+RewriteRule ^welcome(-new)?/?$                                        / [L,R=301]
 
 # --- 2) Page 404 personnalisée ------------------------------------------
 ErrorDocument 404 /404.html
