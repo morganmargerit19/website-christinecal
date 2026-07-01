@@ -44,12 +44,18 @@ jobs:
           GITHUB_BRANCH: main
         run: npm run build
 
-      - name: Déploiement FTP vers OVH
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OVH_FTP_HOST }}
-          username: ${{ secrets.OVH_FTP_USER }}
-          password: ${{ secrets.OVH_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./v3-src/dist/
-          server-dir: ${{ vars.OVH_FTP_DIR }}
+      # OVH mutualisé refuse le FTPS explicite (« 500 This security scheme is not
+      # implemented »). On déploie donc en SFTP (port 22, méthode OVH recommandée)
+      # via lftp : `mirror -R` crée le dossier cible et `--delete` le garde propre.
+      - name: Déploiement SFTP vers OVH
+        env:
+          SFTP_HOST: ${{ secrets.OVH_FTP_HOST }}
+          SFTP_USER: ${{ secrets.OVH_FTP_USER }}
+          SFTP_PASS: ${{ secrets.OVH_FTP_PASSWORD }}
+          SFTP_DIR: ${{ vars.OVH_FTP_DIR }}
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lftp
+          lftp -c "set sftp:auto-confirm yes; \
+            open -u \"$SFTP_USER\",\"$SFTP_PASS\" sftp://$SFTP_HOST:22; \
+            mirror -R --verbose --delete --parallel=4 ./v3-src/dist/ \"$SFTP_DIR\""
