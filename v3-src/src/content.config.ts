@@ -25,6 +25,10 @@ const fiches = defineCollection({
     // des stages qui en font partie (ils sont alors imbriqués sous la rubrique
     // dans la grille du hub, et non affichés en vrac).
     stages: z.array(z.string()).default([]),
+    // Rubrique de rattachement, choisie par Christine au CMS (slug de la fiche
+    // parente, ex. `construire-son-vaisseau`) : le stage apparaît alors dans la
+    // page de cette rubrique, sans avoir à modifier la rubrique elle-même.
+    rubrique: z.string().optional(),
     lang: z.enum(['fr', 'en', 'pl', 'es', 'it']).default('fr'),
     // Résumé court (carte + chapeau de page). Christine : « pas de blabla ».
     lede: z.string(),
@@ -113,6 +117,8 @@ const fiches = defineCollection({
     // Infos pratiques (toutes optionnelles)
     dates: z.array(z.string()).default([]),
     duration: z.string().optional(),
+    // Lieu du stage (ville, gîte, « En ligne »…)
+    place: z.string().optional(),
     price: z.string().optional(),
     format: z.string().optional(),
     // Bandeau large en tête de page (full-bleed, ratio ~3.2:1), optionnel

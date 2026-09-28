@@ -65,10 +65,13 @@ site se reconstruit et se redéploie. Plus aucune ligne de code à toucher.
 
 ## Ce que les éditeurs peuvent gérer
 
-- **Cartes** (`fiches`) : stages, ateliers, consultations, voyages — tous les
-  champs (textes, images, diaporama, vidéos, photos latérales/insérées, etc.).
-  Le **corps** est un éditeur texte (markdown + HTML autorisé) : le HTML de mise
-  en page est conservé tel quel.
+- **Mes stages et pages (français)** (`fiches`) : les fiches FR en affichage
+  **simplifié** pour Christine (titre, rubrique, dates, lieu, tarif, photos, texte,
+  vidéos, témoignages). Les réglages de mise en page sont masqués mais conservés à
+  l'enregistrement. Ni suppression (« Masquer du site »), ni renommage d'URL.
+  Mode d'emploi : `GUIDE-CHRISTINE-STAGES.md`.
+- **⚙️ Traductions** (`traductions`) : fiches EN/ES/IT/PL, tous les champs visibles
+  (réservé à Morgan).
 - **Pages** : Qui suis-je, Ma mission, Éveil à Soi, Éveil au Soi.
 
 ## RGPD

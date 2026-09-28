@@ -71,6 +71,30 @@ Bascule OVH réalisée et vérifiée de bout en bout :
 
 ---
 
+## 🆕 SEPT. 2026 — GESTION DES STAGES PAR CHRISTINE (branche `claude/eloquent-cannon-tzsjp5`)
+
+Demande de Christine (mail 25/09) : gérer elle-même ses stages (ajouter, dates, photos,
+infos) **sans rien casser**. Fait :
+- **`/admin` simplifié** : collection « Mes stages et pages (français) » = fiches FR
+  uniquement, réglages de mise en page **masqués mais conservés** (`ui.component: 'hidden'`),
+  pas de suppression (interrupteur « Masquer du site »), pas de renommage d'URL, pas de
+  dossiers. Traductions dans une collection à part « ⚙️ Traductions » (réservée à Morgan).
+- **Champ `rubrique`** sur le stage (remplace la liste `stages` de la rubrique, migrée
+  dans les 5 langues) : Christine choisit la rubrique, le stage s'y range tout seul (et
+  suit l'univers de sa rubrique → pas de lien cassé). Nouveau champ **`place`** (Lieu).
+- **Repli FR** (`src/lib/fiches.ts`) : une fiche non traduite s'affiche en français sur
+  les versions EN/ES/IT/PL (mention « pas encore traduite »).
+- Corrigé : `<MediaDuo float>` / `<CenteredText italic>` illisibles par Tina (« Unable to
+  parse rich-text ») → Mont Shasta et Mémoire galactique **ne pouvaient pas être
+  enregistrées** au CMS ; écrits `={true}`.
+- Vérifié : build 141 pages **identique** au site en ligne (0 différence HTML) ; création
+  + enregistrement testés dans l'interface Tina en local (champs masqués conservés).
+- Mode d'emploi : **`GUIDE-CHRISTINE-STAGES.md`**.
+
+**Après merge sur `main`** : inviter Christine dans app.tina.io → *Collaborators*
+(2ᵉ siège gratuit), vérifier que christinecal.com est dans les *Site URLs*, lui envoyer
+le guide, faire un essai ensemble (week-end du 3–4 octobre).
+
 ## ⏭️ RESTE À FAIRE
 1. **Accès CMS de Christine** : `/admin` marche sur OVH ; confirmer qu'ELLE peut se
    connecter (login GitHub `christinecal24` → si bloquée, l'inviter dans

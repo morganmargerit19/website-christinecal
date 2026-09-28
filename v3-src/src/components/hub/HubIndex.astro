@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import VideoEmbed from '../VideoEmbed.astro';
-import { getCollection } from 'astro:content';
+import { childSlugs, getFiches, slugOf, stagesOf } from '../../lib/fiches';
 import { ui } from '../../i18n/ui';
 import { base, fichePath, pathFor, type Locale } from '../../i18n/utils';
 // FR éditable par Christine via le CMS (/admin → « Page : Éveil à Soi / au Soi »).
@@ -229,19 +229,24 @@ const ausoOutro: Record<Locale, string[]> = {
 
 const c = intro[hub][locale];
 
-const fiches = (
-  await getCollection('fiches', (e) => e.data.hub === hub && e.data.lang === locale && !e.data.draft)
-).sort((a, b) => a.data.order - b.data.order);
+// Avec repli sur le français pour les fiches pas encore traduites (cf. lib/fiches).
+const localeFiches = await getFiches(locale);
+const fiches = localeFiches
+  .filter((e) => e.data.hub === hub)
+  .sort((a, b) => a.data.order - b.data.order);
 
-const slugOf = (id: string) => id.replace(/^(en|pl|es|it)\//, '');
 const featured = fiches.filter((f) => f.data.featured);
 const rest = fiches.filter((f) => !f.data.featured);
 
 // Les stages d'une rubrique vivent DANS la page de la rubrique (rendus par
 // Fiche.astro), pas sur l'index. On les retire donc des cartes de l'index ;
 // la rubrique reste une carte normale qui mène à sa page.
-const childSlugs = new Set(rest.flatMap((f) => f.data.stages));
-const cards = rest.filter((f) => !childSlugs.has(slugOf(f.id)));
+// Un stage rattaché à une rubrique (via `stages` de la rubrique ou via son
+// propre champ `rubrique`) n'est donc pas affiché en carte ici.
+const nested = childSlugs(localeFiches);
+const cards = rest.filter((f) => !nested.has(slugOf(f.id)));
+// Rubrique = carte qui regroupe des stages (« Découvrir », sans date).
+const isRubrique = (f: (typeof fiches)[number]) => stagesOf(f, localeFiches).length > 0;
 
 // Texte affiché sur la carte (sous-titre de carte distinct du chapeau de page).
 const cardText = (f: (typeof fiches)[number]) => f.data.cardLede ?? f.data.lede;
@@ -357,10 +362,10 @@ const eveilVaisseau = bySlug('construire-son-vaisseau');
                 <span class="portal-card__kicker">{f.data.kicker}</span>
                 <h3>{f.data.title}</h3>
                 <p>{cardText(f)}</p>
-                {f.data.stages.length === 0 && f.data.dates.length > 0 && (
+                {!isRubrique(f) && f.data.dates.length > 0 && (
                   <div class="portal-card__meta"><span>{f.data.dates[0]}</span></div>
                 )}
-                <span class="portal-card__cta">{f.data.stages.length > 0 ? discover[locale] : learnMore[locale]}</span>
+                <span class="portal-card__cta">{isRubrique(f) ? discover[locale] : learnMore[locale]}</span>
               </a>
             ))}
           </div>
