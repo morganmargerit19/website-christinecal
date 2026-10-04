@@ -1,0 +1,7 @@
+---
+/** Bloc « Vidéo ». */
+import VideoCard from '../VideoCard.astro';
+interface Props { id: string; title?: string; meta?: string; credit?: 'debowska'; cover?: string; coverAlt?: string }
+const p = Astro.props;
+---
+{p.id && <div class="b-video"><VideoCard {...p} /></div>}

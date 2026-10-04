@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Hublot from '../components/Hublot.astro';
+import Icon from '../components/Icon.astro';
+import { CONTACT } from '../lib/site';
+---
+<Base title="Contact · Christine CAL" description="Contacter Christine CAL pour une consultation médiumnique, un stage ou une question, par e-mail ou téléphone." path="/contact/">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <div class="wrap split">
+      <div class="txt">
+        <p class="eyebrow">Contact</p>
+        <h1 id="titre">Entrer en contact</h1>
+        <p class="lede-serif">Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi.</p>
+        <div class="items" style="margin-top: 44px">
+          <div><p class="label">E-mail</p><p class="n" style="margin-top: 6px"><a href={`mailto:${CONTACT.email}`} style="color: var(--light)">{CONTACT.email}</a></p></div>
+          <div><p class="label">Téléphone</p><p class="n" style="margin-top: 6px"><a href={`tel:${CONTACT.tel}`} style="color: var(--light)">{CONTACT.phone}</a></p></div>
+          <div><p class="label">Adresse</p><p class="t">EURL Christine CAL · Coach Consultant<br />254 Chemin de la Terre Pointue, Castelgirou, 24 580 Plazac</p></div>
+        </div>
+      </div>
+      <Hublot src="/images/wp/mains.jpg" alt="Deux mains de nuage qui se rejoignent dans le ciel" />
+    </div>
+  </section>
+
+  <section class="section deep">
+    <div class="wrap wrap--narrow">
+      <h2 class="h3">M'écrire un message</h2>
+      <form class="form" id="contact-form" style="margin-top: 32px">
+        <label>Votre nom<input type="text" name="name" required autocomplete="name" /></label>
+        <label>Votre e-mail<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Votre message<textarea name="message" rows="6" required></textarea></label>
+        <button type="submit" class="btn btn-gold">Envoyer<Icon name="arrow" /></button>
+        <p class="muted" style="font-size: 14px">Votre messagerie s'ouvre avec le message pré-rempli, prêt à m'être envoyé. Aucune donnée n'est enregistrée par le site.</p>
+      </form>
+    </div>
+  </section>
+  <Footer />
+</Base>
+
+<style>
+  .form { display: grid; gap: 22px; }
+  .form label { display: grid; gap: 10px; font-size: 11.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+  .form input, .form textarea {
+    font: 400 17px/1.5 var(--sans); letter-spacing: 0; text-transform: none; color: var(--light);
+    background: rgba(255,255,255,.03); border: 1px solid var(--line-strong); border-radius: 6px; padding: 14px 16px;
+  }
+  .form input:focus, .form textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; border-color: var(--gold); }
+  .form button { justify-self: start; }
+</style>
+
+<script>
+  // Sans serveur : on compose un e-mail pré-rempli (aucune donnée stockée, aucun cookie).
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const name = String(d.get('name') ?? '');
+    const subject = encodeURIComponent(`Message du site — ${name}`);
+    const body = encodeURIComponent(`${d.get('message') ?? ''}\n\n— ${name} (${d.get('email') ?? ''})`);
+    window.location.href = `mailto:cc.christinecal@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>

@@ -1,0 +1,14 @@
+---
+/** Bloc « Deux images côte à côte ». */
+import { u } from '../../lib/site';
+interface Props { images?: { src: string; alt?: string; caption?: string }[]; float?: boolean }
+const { images = [], float = false } = Astro.props;
+---
+<div class:list={['b-duo', { 'b-duo--float': float }]}>
+  {images.filter((im) => im?.src).map((im) => (
+    <figure>
+      <img src={u(im.src)} alt={im.alt ?? ''} loading="lazy" />
+      {im.caption && <figcaption set:html={im.caption} />}
+    </figure>
+  ))}
+</div>

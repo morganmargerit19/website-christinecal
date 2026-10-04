@@ -8,6 +8,7 @@
     "build": "(tinacms build --skip-cloud-checks || echo 'Tina admin non construit (identifiants Tina Cloud absents) — le site est build sans /admin') && astro build",
     "build:site-only": "astro build",
     "build:strict": "tinacms build --skip-cloud-checks && astro build",
+    "build:nouveau-site": "astro build --config astro.nouveau-site.config.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

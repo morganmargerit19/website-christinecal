@@ -1,0 +1,12 @@
+---
+/** Bloc « Image (dans le texte) » de l'éditeur. */
+import { u } from '../../lib/site';
+interface Props { src: string; alt?: string; caption?: string; placement?: 'right' | 'left' | 'center' | 'full'; size?: 'small' | 'medium' | 'large' }
+const { src, alt = '', caption, placement = 'right', size = 'medium' } = Astro.props;
+---
+{src && (
+  <figure class:list={['b-img', `b-img--${placement}`, `b-img--${size}`]}>
+    <img src={u(src)} alt={alt} loading="lazy" />
+    {caption && <figcaption>{caption}</figcaption>}
+  </figure>
+)}

@@ -1,0 +1,111 @@
+---
+import Header from '../components/Header.astro';
+import Sprites from '../components/Sprites.astro';
+import { SHOW_PROPOSITION, u } from '../lib/site';
+import '../styles/relier.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Chemin de la page (pour le menu actif et l'URL canonique). */
+  path: string;
+  image?: string;
+}
+const { title, description, path, image = '/images/wp/portail-terre.png' } = Astro.props;
+const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Proposition de refonte : jamais indexée tant qu'elle n'est pas validée -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#070618" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={site + u(image)} />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <Sprites />
+    <Header current={path} />
+    <main id="main">
+      <slot />
+    </main>
+    {SHOW_PROPOSITION && path !== '/proposition/' && (
+      <a class="avis-badge" href={u('/proposition/')}><span class="dot" aria-hidden="true"></span>Maquette · donner mon avis</a>
+    )}
+
+    <script>
+      // Menu mobile
+      for (const b of document.querySelectorAll<HTMLButtonElement>('[data-burger]')) {
+        const panel = document.getElementById(b.getAttribute('aria-controls') ?? '');
+        if (!panel) continue;
+        b.addEventListener('click', () => {
+          const open = panel.hidden;
+          panel.hidden = !open;
+          b.setAttribute('aria-expanded', String(open));
+          b.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+        });
+      }
+
+      // Vidéos : l'iframe n'est chargée qu'au clic
+      for (const a of document.querySelectorAll<HTMLAnchorElement>('a[data-yt]')) {
+        a.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          const f = document.createElement('iframe');
+          f.src = `https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&rel=0`;
+          f.title = a.getAttribute('aria-label') ?? 'Vidéo';
+          f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+          f.allowFullscreen = true;
+          a.replaceChildren(f);
+          a.removeAttribute('href');
+        }, { once: true });
+      }
+
+      // Diaporamas
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      for (const el of document.querySelectorAll<HTMLElement>('[data-slides]')) {
+        const slides = [...el.querySelectorAll('figure')];
+        const dots = [...el.querySelectorAll('.dots button')];
+        let i = 0;
+        const show = (n: number) => {
+          i = (n + slides.length) % slides.length;
+          slides.forEach((s, k) => s.setAttribute('data-active', String(k === i)));
+          dots.forEach((d, k) => d.setAttribute('data-active', String(k === i)));
+        };
+        dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+        if (!still && slides.length > 1) setInterval(() => show(i + 1), 5000);
+      }
+
+      // Agenda : masque les dates passées depuis la dernière mise à jour du site
+      const today = new Date().toISOString().slice(0, 10);
+      for (const list of document.querySelectorAll<HTMLElement>('[data-agenda]')) {
+        const limit = Number(list.dataset.limit) || Infinity;
+        let shown = 0;
+        for (const li of list.querySelectorAll<HTMLElement>('li')) {
+          const past = li.dataset.end && li.dataset.end < today;
+          li.hidden = Boolean(past) || shown >= limit;
+          if (!li.hidden) shown++;
+        }
+        const empty = list.parentElement?.querySelector<HTMLElement>('[data-agenda-empty]');
+        if (empty) empty.hidden = shown > 0;
+      }
+
+      // Dissuasion d'enregistrement des photos (souhait de Christine)
+      document.addEventListener('contextmenu', (e) => {
+        const t = e.target as HTMLElement | null;
+        if (t?.tagName === 'IMG') e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

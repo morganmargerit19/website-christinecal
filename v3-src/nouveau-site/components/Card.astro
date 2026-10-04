@@ -1,0 +1,31 @@
+---
+/** Carte d'un stage / d'une rubrique : photo (ou fleur de vie), date, titre, résumé. */
+import type { CollectionEntry } from 'astro:content';
+import { slugOf } from '../../src/lib/fiches';
+import { fichePath, type Hub, u } from '../lib/site';
+import { visualOf } from '../lib/images';
+import { nextDate } from '../lib/agenda';
+import Geo from './Geo.astro';
+import GeoFleur from './GeoFleur.astro';
+import GeoMerkaba from './GeoMerkaba.astro';
+import GeoFibonacci from './GeoFibonacci.astro';
+import { ECOLE_GEO } from '../lib/ecole';
+interface Props { entry: CollectionEntry<'fiches'>; count?: number; feature?: boolean }
+const { entry, count, feature = false } = Astro.props;
+const f = entry.data;
+const geo = ECOLE_GEO[slugOf(entry.id)];
+const img = geo ? undefined : visualOf(f);
+const date = nextDate(f);
+const label = count ? `${count} stage${count > 1 ? 's' : ''}` : (date ?? f.kicker);
+const meta = !count ? [f.place, f.format, f.duration, f.price].filter(Boolean).join(' · ') : '';
+---
+<a class:list={['card', { 'card--feature': feature }]} href={fichePath(f.hub as Hub, slugOf(entry.id))}>
+  <span class:list={['img', { 'img--geo': geo }]}>{img ? <img src={u(img)} alt={f.imageAlt || ''} loading="lazy" />
+    : geo === 'merkaba' ? <GeoMerkaba /> : geo === 'spirale' ? <GeoFibonacci /> : geo === 'fleur' ? <GeoFleur /> : <Geo />}</span>
+  <span>
+    <span class="label">{label}</span>
+    <span class="t">{f.title}</span>
+    <span class="d">{f.cardLede || f.lede}</span>
+    {meta && <span class="m">{meta}</span>}
+  </span>
+</a>

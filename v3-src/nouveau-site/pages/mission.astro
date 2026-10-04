@@ -1,0 +1,97 @@
+---
+/** Ma mission : formulaire « Page : Ma mission » du CMS (src/data/mission.fr.json). */
+import Base from '../layouts/Base.astro';
+import ContactBand from '../components/ContactBand.astro';
+import Lemniscate from '../components/Lemniscate.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Fleur from '../components/Fleur.astro';
+import { u } from '../lib/site';
+import m from '../../src/data/mission.fr.json';
+---
+<Base title={m.metaTitle.replace(' — ', ' · ')} description={m.metaDesc} path="/mission/" image="/images/wp/5emedimension.jpg">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap center" style="padding-bottom: 50px">
+      <nav class="crumbs" aria-label="Fil d'Ariane" style="justify-content: center"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><a href={u('/qui-suis-je/')}>Qui suis-je</a><span aria-hidden="true">/</span><span aria-current="page">Ma mission</span></nav>
+      <p class="eyebrow" style="margin-top: 36px">{m.eyebrow.trim()}</p>
+      <h1 id="titre" style="max-width: 900px; margin-inline: auto">{m.h1}</h1>
+      <p class="lede-serif" style="margin-inline: auto" set:html={m.lede} />
+    </div>
+  </section>
+
+  <section class="sky" style="padding-bottom: 20px">
+    <div class="wrap">
+      <figure class="framed"><img src={u('/images/wp/5emedimension.jpg')} alt={m.bannerAlt} fetchpriority="high" /></figure>
+    </div>
+  </section>
+
+  <section class="section sky">
+    <div class="wrap split">
+      <div class="txt stack gap-m">
+        <h2 class="h3" set:html={m.s1Heading} />
+        <p style="font-size: 19px; color: var(--soft)" set:html={m.s1p1} />
+        <p class="serif italic" style="font-size: 25px; line-height: 1.45; color: var(--gold-pale)" set:html={m.s1p2} />
+      </div>
+      <figure class="framed" style="width: min(360px, 100%); flex-shrink: 0">
+        <img src={u('/images/geometrie/spirale-temps.svg')} alt="Cadran de montre doré : l'Espace-Temps se contracte" loading="lazy" style="box-shadow: none" />
+      </figure>
+    </div>
+  </section>
+
+  <section class="section deep">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">{m.s2Heading}</p>
+      <p class="serif" style="margin-top: 22px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.45" set:html={m.s2Quote} />
+      {m.s2Matrix && <p class="muted italic" style="margin-top: 18px">{m.s2Matrix}</p>}
+      <ol class="points" style="margin-top: 44px">{m.points.map((p) => <li set:html={p} />)}</ol>
+    </div>
+  </section>
+
+  <section class="section sky epi-section">
+    <Fleur class="fleur" />
+    <div class="wrap">
+      <div class="split">
+        <div class="txt stack gap-m">
+          <p class="eyebrow">{m.pioneerHeading}</p>
+          <p class="serif" style="font-size: clamp(28px, 3vw, 38px); line-height: 1.3" set:html={m.pioneerIntro} />
+        </div>
+        <figure class="framed" style="width: min(300px, 100%); flex-shrink: 0">
+          <img src={u('/images/wp/ascencion-396x600-1.jpg')} alt={m.pioneerAlt} loading="lazy" />
+        </figure>
+      </div>
+      <div class="voices">{m.pioneerQuotes.map((q) => <p>« {q.replace(/^["«\s]+|["»\s]+$/g, '')} »</p>)}</div>
+      <p class="muted center" style="margin-top: 36px; font-size: 18px" set:html={m.pioneerP2} />
+      {m.pioneerAdn && <p class="serif italic center" style="margin-top: 36px; font-size: 26px; color: var(--gold-warm)" set:html={m.pioneerAdn} />}
+      <div class="hemis" style="grid-template-columns: 1fr; justify-items: center; text-align: center">
+        <div class="mid"><Lemniscate /></div>
+        <p style="max-width: 760px; font-size: 19px; color: var(--soft)" set:html={m.pioneerP3} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section mission">
+    <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
+    <div class="veil"></div>
+    <div class="wrap">
+      <h2 style="margin-top: 0">{m.callEyebrow}<span class="caret" aria-hidden="true"></span></h2>
+      <p class="embark">{m.callHeading} <em style="color: var(--gold)">{m.callHeadingEm}</em></p>
+      <div class="crews">
+        <div class="c1"><p class="t">{m.crewOld.title}</p><p class="label" style="margin-top: 8px">{m.crewOld.en}</p><p class="d">{m.crewOld.desc}</p></div>
+        <Lemniscate dash="40 484" />
+        <div><p class="t">{m.crewYoung.title}</p><p class="label" style="margin-top: 8px">{m.crewYoung.en}</p><p class="d">{m.crewYoung.desc}</p></div>
+      </div>
+      <p class="muted" style="margin-top: 44px">{m.callLede}</p>
+    </div>
+  </section>
+
+  {m.videos.length > 0 && (
+    <section class="section deep">
+      <div class="wrap">
+        <p class="eyebrow">{m.pressHeading || 'Vidéos'}</p>
+        <div class="video-grid">{m.videos.map((v) => <VideoCard {...v} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <ContactBand heading={m.recognizeHeading} text={m.recognizeBody.replace(/\.$/, '')} cta={m.contactCta} />
+</Base>

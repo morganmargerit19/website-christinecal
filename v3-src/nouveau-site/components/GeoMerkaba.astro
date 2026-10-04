@@ -1,0 +1,90 @@
+---
+/**
+ * Merkaba : deux tétraèdres imbriqués (masculin / féminin) qui tournent en sens
+ * contraire. Calculée en 3D ; sans JavaScript ou si le visiteur réduit les
+ * animations, l'étoile reste dessinée, immobile.
+ */
+interface Props { class?: string; label?: string }
+const { class: cls, label } = Astro.props;
+
+// Même calcul que le script client (rotation qui met l'axe (1,1,1) à la verticale).
+const A = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+const B = A.map((v) => v.map((c) => -c));
+const EDGES = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+function project(v: number[], spin: number) {
+  // aligne (1,1,1) sur l'axe vertical
+  const [x, y, z] = v;
+  const s3 = Math.sqrt(3), s6 = Math.sqrt(6), s2 = Math.sqrt(2);
+  let X = (x - z) / s2, Y = (x + y + z) / s3, Z = (x - 2 * y + z) / s6;
+  const c = Math.cos(spin), s = Math.sin(spin);
+  [X, Z] = [X * c - Z * s, X * s + Z * c];
+  const tilt = 0.32, ct = Math.cos(tilt), st = Math.sin(tilt);
+  [Y, Z] = [Y * ct - Z * st, Y * st + Z * ct];
+  const k = 95 / (1 + Z * 0.12);
+  return [X * k, -Y * k];
+}
+const lines = (verts: number[][], spin: number) =>
+  EDGES.map(([i, j]) => [...project(verts[i], spin), ...project(verts[j], spin)].map((n) => n.toFixed(1)));
+const la = lines(A, 0.5);
+const lb = lines(B, -0.5);
+---
+<svg class:list={['geo-anim geo-merkaba', cls]} viewBox="-200 -200 400 400" data-merkaba role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+  <circle class="gf-core" r="150" fill="url(#gm-core)" />
+  <circle r="182" fill="none" stroke="rgba(233,204,138,.35)" stroke-dasharray="2 8" class="gfi-rings" />
+  <g data-tetra="a" stroke="#FFF1C9" stroke-width="1.8" stroke-linecap="round">
+    {la.map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} />)}
+  </g>
+  <g data-tetra="b" stroke="#E98AB8" stroke-width="1.8" stroke-linecap="round">
+    {lb.map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} />)}
+  </g>
+  <circle r="5" fill="#FFF3D6" />
+</svg>
+
+<script>
+  const A = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
+  const B = A.map((v) => v.map((c) => -c));
+  const EDGES = [[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]];
+  const s3 = Math.sqrt(3), s6 = Math.sqrt(6), s2 = Math.sqrt(2);
+  const project = (v: number[], spin: number) => {
+    const [x, y, z] = v;
+    let X = (x - z) / s2, Y = (x + y + z) / s3, Z = (x - 2 * y + z) / s6;
+    const c = Math.cos(spin), s = Math.sin(spin);
+    [X, Z] = [X * c - Z * s, X * s + Z * c];
+    const ct = Math.cos(0.32), st = Math.sin(0.32);
+    [Y, Z] = [Y * ct - Z * st, Y * st + Z * ct];
+    const k = 95 / (1 + Z * 0.12);
+    return [X * k, -Y * k];
+  };
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stars = [...document.querySelectorAll<SVGSVGElement>('[data-merkaba]')].map((svg) => ({
+    svg,
+    a: [...svg.querySelectorAll<SVGLineElement>('[data-tetra="a"] line')],
+    b: [...svg.querySelectorAll<SVGLineElement>('[data-tetra="b"] line')],
+    visible: true,
+  }));
+  if (!still && stars.length) {
+    const io = new IntersectionObserver((list) => {
+      for (const e of list) { const s = stars.find((x) => x.svg === e.target); if (s) s.visible = e.isIntersecting; }
+    });
+    stars.forEach((s) => io.observe(s.svg));
+    const draw = (lines: SVGLineElement[], verts: number[][], spin: number) => {
+      EDGES.forEach(([i, j], n) => {
+        const [x1, y1] = project(verts[i], spin), [x2, y2] = project(verts[j], spin);
+        const l = lines[n];
+        l.setAttribute('x1', x1.toFixed(1)); l.setAttribute('y1', y1.toFixed(1));
+        l.setAttribute('x2', x2.toFixed(1)); l.setAttribute('y2', y2.toFixed(1));
+      });
+    };
+    const t0 = performance.now();
+    const tick = (now: number) => {
+      const t = (now - t0) / 1000;
+      for (const s of stars) {
+        if (!s.visible) continue;
+        draw(s.a, A, 0.5 + t * 0.35);   // sens horaire
+        draw(s.b, B, -0.5 - t * 0.35);  // sens inverse
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+</script>

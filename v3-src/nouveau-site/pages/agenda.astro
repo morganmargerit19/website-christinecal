@@ -1,0 +1,50 @@
+---
+/**
+ * Agenda : toutes les dates de toutes les fiches, dans l'ordre, sans les dates
+ * passées. Christine n'a rien à faire ici : elle remplit les dates de ses stages.
+ */
+import Base from '../layouts/Base.astro';
+import ContactBand from '../components/ContactBand.astro';
+import AgendaList from '../components/AgendaList.astro';
+import Fleur from '../components/Fleur.astro';
+import Icon from '../components/Icon.astro';
+import { getFiches, slugOf } from '../../src/lib/fiches';
+import { buildAgenda } from '../lib/agenda';
+import { fichePath, u } from '../lib/site';
+
+const fiches = await getFiches('fr');
+const { entries, onDemand } = buildAgenda(fiches);
+const consult = fiches.find((f) => f.data.category === 'consultation');
+---
+<Base title="Agenda des stages · Christine CAL" description="Les prochains stages, ateliers et rendez-vous de Christine CAL, en présentiel ou via Zoom." path="/agenda/">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Agenda</span></nav>
+      <p class="eyebrow" style="margin-top: 44px">Agenda</p>
+      <h1 id="titre">Prochains stages et rendez-vous</h1>
+      <p class="lede-serif">En présentiel ou via Zoom. Pour vous inscrire, cliquez sur « S'inscrire » : votre messagerie s'ouvre avec le nom du stage et la date.</p>
+    </div>
+  </section>
+
+  <section class="sky" style="padding-bottom: clamp(72px, 10vw, 128px)">
+    <div class="wrap">
+      <div><AgendaList entries={entries} /></div>
+      {onDemand.length > 0 && (
+        <div class="on-demand" style="margin-top: 56px">
+          <p><span class="label">Sur demande, en présentiel ou via Zoom : </span>
+            {onDemand.map((o, i) => <>{i > 0 && ' · '}<a href={o.href}>{o.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</a></>)}
+          </p>
+          <a class="arrow" href={u('/contact/')}>Me contacter<Icon name="arrow" /></a>
+        </div>
+      )}
+      {consult && (
+        <div class="on-demand" style="margin-top: 24px">
+          <p><span class="label">Toute l'année : </span><a href={fichePath(consult.data.hub as 'eveil-a-soi', slugOf(consult.id))}>{consult.data.title}</a>{consult.data.format && ` · ${consult.data.format}`}{consult.data.duration && ` · ${consult.data.duration}`}{consult.data.price && ` · ${consult.data.price}`}</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <ContactBand heading="Une question sur un stage ?" text="Écrivez-moi ou appelez-moi : je vous réponds personnellement" motto={false} />
+</Base>

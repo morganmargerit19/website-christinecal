@@ -1,0 +1,10 @@
+---
+/** Bloc « Colonne ». */
+interface Props { title?: string; subtitle?: string }
+const { title, subtitle } = Astro.props;
+---
+<div class="b-col">
+  {title && <h3 class="b-col__title">{title}</h3>}
+  {subtitle && <p class="b-col__sub">{subtitle}</p>}
+  <slot />
+</div>
