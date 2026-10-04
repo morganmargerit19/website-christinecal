@@ -12,6 +12,9 @@ import AgendaList from '../components/AgendaList.astro';
 import VideoCard from '../components/VideoCard.astro';
 import Icon from '../components/Icon.astro';
 import Arcs from '../components/Arcs.astro';
+import GeoFleur from '../components/GeoFleur.astro';
+import GeoFibonacci from '../components/GeoFibonacci.astro';
+import GeoMerkaba from '../components/GeoMerkaba.astro';
 import { getFiches, slugOf } from '../../src/lib/fiches';
 import { ui } from '../../src/i18n/ui';
 import { buildAgenda } from '../lib/agenda';
@@ -105,14 +108,12 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
             </div>
             <p class="eyebrow" style="margin-top: 26px">{p.data.eyebrow}</p>
             <h3 class="h3" style="margin-top: 12px">{p.data.h1}</h3>
-            <p class="lede">{p.data.lede}</p>
             <p class="quote">« {p.quote} »</p>
             <div class="rows">
-              {topLevel(fiches, p.hub).slice(0, 4).map((f) => (
+              {topLevel(fiches, p.hub).slice(0, 3).map((f) => (
                 <a href={fichePath(p.hub, slugOf(f.id))}>
                   <span>
                     <span class="n">{f.data.title}</span>
-                    <span class="d">{f.data.cardLede || f.data.lede}</span>
                     {metaLine(f, fiches) && <span class="m">{metaLine(f, fiches)}</span>}
                   </span>
                   <Icon name="arrow" />
@@ -126,6 +127,18 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
     </div>
   </section>
 
+  <section id="geometrie" class="section deep">
+    <div class="wrap">
+      <div class="stack gap-m center"><p class="eyebrow">Géométrie sacrée</p><h2 class="h2">Les formes qui relient</h2></div>
+      <div class="geometries">
+        <a href={u('/eveil-au-soi/')}><span class="g"><GeoFleur /></span><span class="t">Fleur de vie</span><span class="label">Éveil au Soi</span></a>
+        <a href={u('/eveil-a-soi/')}><span class="g"><GeoFibonacci /></span><span class="t">Spirale d'or</span><span class="label">Éveil à Soi</span></a>
+        <a href={fichePath('eveil-a-soi', 'construire-son-vaisseau')}><span class="g"><GeoMerkaba /></span><span class="t">Merkaba</span><span class="label">Construire son vaisseau</span></a>
+        <a href={u('/mission/')}><span class="g" style="display:grid; place-items:center"><Lemniscate /></span><span class="t">Lemniscate</span><span class="label">Ma mission</span></a>
+      </div>
+    </div>
+  </section>
+
   <section id="mission" class="section mission">
     <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
     <div class="veil"></div>
@@ -134,12 +147,6 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
       <p class="quote">« {missionQuote} »</p>
       <h2>{mission.callEyebrow}<span class="caret" aria-hidden="true"></span></h2>
       <p class="embark">{mission.callHeading} <em style="color: var(--gold)">{mission.callHeadingEm}</em></p>
-      <div class="crews">
-        <div class="c1"><p class="t">{mission.crewOld.title}</p><p class="label" style="margin-top: 8px">{mission.crewOld.en}</p><p class="d">{mission.crewOld.desc}</p></div>
-        <Lemniscate dash="40 484" />
-        <div><p class="t">{mission.crewYoung.title}</p><p class="label" style="margin-top: 8px">{mission.crewYoung.en}</p><p class="d">{mission.crewYoung.desc}</p></div>
-      </div>
-      <p class="muted" style="margin-top: 44px">{mission.callLede}</p>
       <a class="btn" href={u('/mission/')} style="margin-top: 26px">Lire ma mission<Icon name="arrow" /></a>
     </div>
   </section>
@@ -150,15 +157,7 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
         <div><p class="eyebrow">Agenda</p><h2 class="h2" style="margin-top: 14px">Prochains stages</h2></div>
         <a class="btn" href={u('/agenda/')}>Tout l'agenda<Icon name="arrow" /></a>
       </div>
-      <div><AgendaList entries={entries} limit={6} /></div>
-      {onDemand.length > 0 && (
-        <div class="on-demand">
-          <p><span class="label">Sur demande, en présentiel ou via Zoom : </span>
-            {onDemand.map((o, i) => <>{i > 0 && ' · '}<a href={o.href}>{o.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</a></>)}
-          </p>
-          <a class="arrow" href={u('/contact/')}>Me contacter<Icon name="arrow" /></a>
-        </div>
-      )}
+      <div><AgendaList entries={entries} limit={4} spare={1} /></div>
     </div>
   </section>
 
@@ -172,7 +171,7 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
         <div class="medias">
           <VideoCard id={film.id} title={film.title} meta={film.meta} />
           <ul class="dvds">
-            {moreFilms.slice(0, 3).map((d) => (
+            {moreFilms.slice(0, 2).map((d) => (
               <li><a href={d.href}><span class="cover"><img src={u(d.cover)} alt={d.coverAlt || `Jaquette du DVD « ${d.title} »`} loading="lazy" /></span><span><span class="t">{d.title}</span>{d.meta && <span class="label" style="display:block; margin-top: 8px">DVD · {d.meta}</span>}</span></a></li>
             ))}
           </ul>
@@ -197,12 +196,9 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
           {quotes.map((q) => <figure><span class="mark" aria-hidden="true">«</span><blockquote>{q.quote}</blockquote>{q.author && <figcaption>{q.author}</figcaption>}</figure>)}
         </div>
       )}
-      <div class="clients">
-        <p class="label">{about.clients.heading}</p>
-        <p class="big">{about.clients.text}</p>
-      </div>
+
     </div>
   </section>
 
-  <ContactBand />
+  <ContactBand motto />
 </Base>

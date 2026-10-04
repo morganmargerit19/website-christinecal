@@ -12,6 +12,10 @@ const petals = [[100,100],[120,100],[110,117.3],[90,117.3],[80,100],[90,82.7],[1
       <stop offset="0" stop-color="#F3D99A" /><stop offset=".5" stop-color="#D2468E" /><stop offset="1" stop-color="#F3D99A" />
     </linearGradient>
     <path id="lem" d={lem} />
+    <radialGradient id="gf-core"><stop offset="0" stop-color="#FFF6DC" stop-opacity=".85" /><stop offset=".45" stop-color="#E9CC8A" stop-opacity=".25" /><stop offset="1" stop-color="#E9CC8A" stop-opacity="0" /></radialGradient>
+    <linearGradient id="gfi-gold" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFF1C9" /><stop offset=".55" stop-color="#E9CC8A" /><stop offset="1" stop-color="#D2468E" /></linearGradient>
+    <radialGradient id="gfi-core"><stop offset="0" stop-color="#FFF6DC" stop-opacity=".7" /><stop offset="1" stop-color="#E9CC8A" stop-opacity="0" /></radialGradient>
+    <radialGradient id="gm-core"><stop offset="0" stop-color="#FFF6DC" stop-opacity=".75" /><stop offset=".5" stop-color="#D2468E" stop-opacity=".12" /><stop offset="1" stop-color="#D2468E" stop-opacity="0" /></radialGradient>
     <g id="fleur">
       {petals.map(([cx, cy]) => <circle cx={cx} cy={cy} r="20" />)}
       <circle cx="100" cy="100" r="60" />

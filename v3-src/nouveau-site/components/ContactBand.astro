@@ -7,7 +7,7 @@ interface Props { heading?: string; text?: string; subject?: string; cta?: strin
 const {
   heading = 'Vous vous reconnaissez ?',
   text = 'Écrivez-moi : nous verrons ensemble par où commencer votre voyage',
-  subject, cta = "M'écrire", motto = true,
+  subject, cta = "M'écrire", motto = false,
 } = Astro.props;
 ---
 <section id="contact" class="contact sky">

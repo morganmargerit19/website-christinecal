@@ -46,7 +46,11 @@ const siblings = parent
   : [];
 
 // Gabarit « Sortir de sa matrice » : l'ennéagramme est déjà dans le corps, le hublot prend le chat-lion.
-const visual = f.richLayout === 'sortir-matrice' ? '/images/wp/chat-mirroir.jpg' : visualOf(f);
+const visual =
+  f.richLayout === 'sortir-matrice' ? '/images/wp/chat-mirroir.jpg'
+  : slug === 'construire-son-vaisseau' ? '/images/geometrie/merkaba-activation.svg' // visuel animé validé avec Christine
+  : slug === 'merkaba' ? undefined
+  : visualOf(f);
 const strip = [f.image, f.banner].find((s) => s && s !== visual && exists(s) && isStrip(s));
 const dates = f.dates.filter((d) => d.trim());
 const hasCalendar = dates.some((d) => parseDate(d));
@@ -86,7 +90,7 @@ const anchored = [
             : children.length > 0 && <a class="btn" href="#programme">Voir le programme</a>}
         </div>
       </div>
-      <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} eager />
+      <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} geo={slug === 'merkaba' ? 'merkaba' : 'fleur'} eager />
     </div>
   </section>
 

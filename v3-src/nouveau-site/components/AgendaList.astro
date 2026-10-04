@@ -7,10 +7,10 @@
 import type { AgendaEntry } from '../lib/agenda';
 import { mailto } from '../lib/site';
 import Icon from './Icon.astro';
-interface Props { entries: AgendaEntry[]; limit?: number }
-const { entries, limit } = Astro.props;
+interface Props { entries: AgendaEntry[]; limit?: number; spare?: number }
+const { entries, limit, spare = 4 } = Astro.props;
 // On rend quelques entrées de plus que la limite : si une date passe, la suivante prend sa place.
-const shown = limit ? entries.slice(0, limit + 4) : entries;
+const shown = limit ? entries.slice(0, limit + spare) : entries;
 ---
 <ol class="agenda" data-agenda data-limit={limit}>
   {shown.map((e, i) => (

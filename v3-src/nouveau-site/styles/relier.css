@@ -500,6 +500,8 @@ main { overflow-x: clip; }
 .more summary::-webkit-details-marker { display: none; }
 .more summary::after { content: "+"; font-size: 18px; line-height: 1; }
 .more[open] summary::after { content: "–"; }
+.intro-more { margin-top: 4px; text-align: center; }
+.intro-more[open] summary { margin-bottom: 18px; }
 .big-num { font-family: var(--serif); font-weight: 300; font-size: clamp(130px, 16vw, 200px); line-height: .95; color: var(--gold-warm); font-variant-numeric: tabular-nums; }
 .dated { list-style: none; margin: 0; padding: 0; }
 .dated li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-top: 1px solid var(--line); color: var(--soft); }
@@ -530,3 +532,24 @@ main { overflow-x: clip; }
 
 /* ---------- Pages légales ---------- */
 .legal .prose h2 { font-size: 30px; }
+
+/* ---------- Géométries sacrées animées (toujours visibles au repos) ---------- */
+@keyframes gf-sweep { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes gf-breathe { 0%,100% { opacity: .55; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.04); } }
+.geo-anim { display: block; width: 100%; height: auto; overflow: visible; }
+.geo-anim .gf-core { transform-box: fill-box; transform-origin: center; animation: gf-breathe 7s ease-in-out infinite; }
+.geo-anim .gf-turn, .geo-anim .gfi-rings { transform-box: view-box; transform-origin: center; animation: spin 140s linear infinite; }
+.geo-fibo .gfi-turn { transform-box: view-box; transform-origin: center; animation: spin 90s linear infinite reverse; }
+.gf-light { stroke-dasharray: .14 .86; stroke-dashoffset: 1; animation: gf-sweep 6s linear infinite; opacity: .9; }
+.gf-light--ring { stroke-dasharray: .06 .94; animation-duration: 14s; }
+.gfi-light { stroke-dasharray: .07 .93; stroke-dashoffset: 1; animation: gf-sweep 7s cubic-bezier(.45,.05,.55,.95) infinite reverse; }
+@media (prefers-reduced-motion: reduce) { .gf-light, .gfi-light { stroke-dasharray: none; opacity: .35; } }
+
+.geometries { margin-top: 64px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(24px, 4vw, 48px); }
+.geometries a { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; color: var(--light); }
+.geometries a:hover .t { color: var(--gold-pale); }
+.geometries .g { width: min(220px, 100%); aspect-ratio: 1; }
+.geometries .t { font-family: var(--serif); font-size: 26px; line-height: 1.2; transition: color .3s; }
+@media (max-width: 860px) { .geometries { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.geo-intro { width: min(260px, 70%); margin: 0 auto 36px; }
+.hublot .pic .geo-anim { width: 86%; margin: 7%; }
