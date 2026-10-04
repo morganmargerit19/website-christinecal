@@ -26,7 +26,10 @@ const t = ui.fr;
 const fiches = await getFiches('fr');
 const { entries, onDemand } = buildAgenda(fiches);
 const films = dvds(fiches);
-const [film, ...moreFilms] = films;
+const film = films.find((d) => !/même sujet/i.test(d.title)) ?? films[0];
+// Dans la liste aussi, les DVD « même sujet » passent après les autres.
+const moreFilms = films.filter((d) => d !== film)
+  .sort((a, b) => Number(/même sujet/i.test(a.title)) - Number(/même sujet/i.test(b.title)));
 const quotes = someTestimonials(fiches);
 const left = about.journey.items[4];
 const right = about.journey.items[5];

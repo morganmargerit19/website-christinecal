@@ -227,7 +227,7 @@ main { overflow-x: clip; }
 @media (max-width: 900px) { .crews { grid-template-columns: 1fr; text-align: center; } .crews .c1 { text-align: center; } .crews svg { width: 280px; margin-inline: auto; } }
 
 /* ---------- Agenda ---------- */
-.agenda { position: relative; margin-top: 52px; }
+.agenda { position: relative; margin: 52px 0 0; padding: 0; list-style: none; }
 .agenda::before { content: ""; position: absolute; left: 5px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, rgba(233,204,138,.6), rgba(233,204,138,.06)); }
 .agenda li { position: relative; display: grid; grid-template-columns: 250px minmax(0, 1fr) 230px auto; align-items: center; gap: 24px; padding: 22px 0 22px 44px; border-bottom: 1px solid rgba(233,204,138,.14); }
 .agenda li::before { content: ""; position: absolute; left: 0; top: 50%; width: 11px; height: 11px; margin-top: -5px; border-radius: 50%; background: var(--gold-pale); box-shadow: 0 0 12px rgba(233,204,138,.9); }
@@ -361,7 +361,7 @@ main { overflow-x: clip; }
 .prose strong { color: var(--light); font-weight: 500; }
 .prose em { color: inherit; }
 .prose a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
-.prose ul, .prose ol { padding-left: 1.4em; }
+.prose ul, .prose ol { padding-left: 1.4em; display: flow-root; }
 .prose ul { list-style: none; padding-left: 1.6em; }
 .prose ul > li { position: relative; }
 .prose ul > li::before { content: ""; position: absolute; left: -1.25em; top: .72em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px rgba(233,204,138,.7); }

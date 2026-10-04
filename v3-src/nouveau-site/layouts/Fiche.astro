@@ -45,7 +45,8 @@ const siblings = parent
   ? stagesOf(parent, all).filter((e) => slugOf(e.id) !== slug).slice(0, 3)
   : [];
 
-const visual = visualOf(f);
+// Gabarit « Sortir de sa matrice » : l'ennéagramme est déjà dans le corps, le hublot prend le chat-lion.
+const visual = f.richLayout === 'sortir-matrice' ? '/images/wp/chat-mirroir.jpg' : visualOf(f);
 const strip = [f.image, f.banner].find((s) => s && s !== visual && exists(s) && isStrip(s));
 const dates = f.dates.filter((d) => d.trim());
 const hasCalendar = dates.some((d) => parseDate(d));
@@ -85,7 +86,7 @@ const anchored = [
             : children.length > 0 && <a class="btn" href="#programme">Voir le programme</a>}
         </div>
       </div>
-      <Hublot src={visual} alt={f.imageAlt || ''} eager />
+      <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} eager />
     </div>
   </section>
 
@@ -117,7 +118,6 @@ const anchored = [
         <div class="prose">
           <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/old-life-new-life.jpg')} alt="D'une ancienne vie à une nouvelle vie" loading="lazy" /></figure>
           <p class="b-center b-center--italic">Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</p>
-          <figure class="b-img b-img--right b-img--small"><img src={u('/images/wp/chat-mirroir.jpg')} alt="Le chat qui se voit lion dans le miroir" loading="lazy" /></figure>
           <p class="b-lead">Transmuter la peur<br />en énergie positive<br />et passer d'une vie réactive<br />à une vie créative.</p>
           <h2 style="clear: both; letter-spacing: .04em">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h2>
           <p><em>— Avec une approche différente de cet outil connu —</em></p>
