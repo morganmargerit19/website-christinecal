@@ -1,0 +1,11 @@
+---
+/** Le signe de l'infini parcouru par une lumière : relier les deux mondes. */
+interface Props { class?: string; dash?: string }
+const { class: cls, dash = '36 488' } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 240 120" aria-hidden="true">
+  <use href="#lem" fill="none" stroke="rgba(233,204,138,.75)" stroke-width="1.2" />
+  <use href="#lem" class="flow" fill="none" stroke="#FFF1C9" stroke-width="2.2" stroke-linecap="round" stroke-dasharray={dash} />
+  <circle cx="120" cy="60" r="11" fill="rgba(233,204,138,.25)" />
+  <circle cx="120" cy="60" r="4" fill="#FFF3D6" />
+</svg>

@@ -1,0 +1,6 @@
+---
+/** Bloc « Texte centré ». */
+interface Props { italic?: boolean }
+const { italic = false } = Astro.props;
+---
+<div class:list={['b-center', { 'b-center--italic': italic }]}><slot /></div>

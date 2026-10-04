@@ -1,0 +1,15 @@
+---
+/**
+ * Visuel de remplacement quand une fiche n'a pas (encore) de photo : un ciel et
+ * une fleur de vie, pour qu'aucune carte n'ait l'air « cassée ».
+ */
+interface Props { class?: string }
+const { class: cls = 'geo' } = Astro.props;
+---
+<svg class={cls} viewBox="0 0 240 140" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="240" height="140" fill="#0B0A24" />
+  <circle cx="120" cy="70" r="70" fill="rgba(210,70,142,.10)" />
+  <circle cx="120" cy="70" r="36" fill="rgba(233,204,138,.10)" />
+  <use href="#fleur" fill="none" stroke="rgba(255,241,201,.5)" stroke-width=".7" transform="translate(120 70) scale(.94) translate(-100 -100)" />
+  <circle cx="120" cy="70" r="3" fill="#FFF3D6" />
+</svg>

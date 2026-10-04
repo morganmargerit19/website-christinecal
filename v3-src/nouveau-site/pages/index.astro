@@ -1,0 +1,205 @@
+---
+/**
+ * Accueil. Tous les textes viennent du CMS (pages Qui suis-je, Mission, Éveil
+ * à/au Soi) ; les stages, l'agenda, les DVD et les témoignages sont tirés des
+ * fiches. Quand Christine ajoute un stage, il apparaît ici tout seul.
+ */
+import Base from '../layouts/Base.astro';
+import ContactBand from '../components/ContactBand.astro';
+import Hublot from '../components/Hublot.astro';
+import Lemniscate from '../components/Lemniscate.astro';
+import AgendaList from '../components/AgendaList.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Icon from '../components/Icon.astro';
+import Arcs from '../components/Arcs.astro';
+import { getFiches, slugOf } from '../../src/lib/fiches';
+import { ui } from '../../src/i18n/ui';
+import { buildAgenda } from '../lib/agenda';
+import { clauses, dvds, metaLine, someTestimonials, topLevel } from '../lib/content';
+import { HUBS, fichePath, plain, u, type Hub } from '../lib/site';
+import about from '../../src/data/about.fr.json';
+import mission from '../../src/data/mission.fr.json';
+import aSoi from '../../src/data/eveil-a-soi.fr.json';
+import auSoi from '../../src/data/eveil-au-soi.fr.json';
+
+const t = ui.fr;
+const fiches = await getFiches('fr');
+const { entries, onDemand } = buildAgenda(fiches);
+const films = dvds(fiches);
+const [film, ...moreFilms] = films;
+const quotes = someTestimonials(fiches);
+const left = about.journey.items[4];
+const right = about.journey.items[5];
+const missionQuote = mission.lede.match(/«\s*([^»]+?)\s*»/)?.[1] ?? plain(mission.lede);
+const upcoming = about.upcoming.items[0] ?? '';
+const telos = fiches.find((f) => slugOf(f.id) === 'les-intra-telos-mont-shasta');
+
+const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: string; geo: 'spiral' | 'fleur' }[] = [
+  { hub: 'eveil-a-soi', data: aSoi, img: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%', quote: "Pour l'humain réveillé, subir sa vie est terminé", geo: 'spiral' },
+  { hub: 'eveil-au-soi', data: auSoi as typeof aSoi, img: '/images/wp/shasta2.jpg', pos: '50% 28%', quote: 'Se souvenir, se reconnecter, se retrouver', geo: 'fleur' },
+];
+---
+<Base title="Christine CAL · Éveil à sa multidimensionnalité" description={t.meta.homeDescription} path="/">
+  <section class="portal" aria-label="Portail">
+    <img class="bg" src={u('/images/wp/portail-terre.png')} alt="La Terre vue de l'espace, un point de lumière se lève sur l'horizon" fetchpriority="high" />
+    <div class="veil"></div>
+    <div class="glow-point" aria-hidden="true"></div>
+    <div class="portal-top">
+      <div class="emblem">
+        <img src={u('/images/wp/mains.jpg')} alt="Deux mains qui se rejoignent dans le ciel, l'emblème de Christine" />
+        <Arcs />
+      </div>
+      <p class="eyebrow">{t.hero.portalEyebrow}</p>
+      <h1>Christine CAL</h1>
+      <p class="baseline">{t.hero.portalBaseline}</p>
+    </div>
+    <div class="doors">
+      {portes.map((p) => (
+        <a class="door" href={u(HUBS[p.hub].path)} aria-label={`Entrer dans l'${HUBS[p.hub].label}`}>
+          <svg viewBox="0 0 34 128" preserveAspectRatio="none" aria-hidden="true"><path d="M30 4A80 80 0 0 0 30 124" fill="none" stroke="url(#g-arc)" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg>
+          <span class="t"><b>{HUBS[p.hub].label}</b><small>{HUBS[p.hub].sub}</small></span>
+          <svg viewBox="0 0 34 128" preserveAspectRatio="none" aria-hidden="true"><path d="M4 4A80 80 0 0 1 4 124" fill="none" stroke="url(#g-arc)" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke" /></svg>
+        </a>
+      ))}
+    </div>
+    <a class="scroll-cue" href="#relier">Entrer dans le voyage</a>
+  </section>
+
+  <section id="relier" class="section sky">
+    <div class="wrap">
+      <div class="relier">
+        <Hublot src="/images/christine-portrait.jpg" alt="Portrait de Christine CAL, souriante" portrait />
+        <div class="txt stack gap-m">
+          <p class="eyebrow">{about.hero.eyebrow}</p>
+          <h2 class="h2">{about.hero.title}</h2>
+          <p class="epigraph">
+            {clauses(about.epigraph).map((c, i) => <><span class:list={['w', { hl: /relier/i.test(c) }]} style={`--d:${(0.2 + i * 0.3).toFixed(1)}s`}>{c}</span>{' '}</>)}
+          </p>
+          <a class="arrow" href={u('/qui-suis-je/')}>Découvrir mon parcours<Icon name="arrow" /></a>
+        </div>
+      </div>
+      {left && right && (
+        <div class="hemis">
+          <div class="l"><p class="label">{left.lead}</p><p class="big" set:html={left.text} /></div>
+          <div class="mid"><Lemniscate /></div>
+          <div><p class="label">{right.lead}</p><p class="big" set:html={right.text} /></div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section id="portes" class="section sky">
+    <div class="wrap">
+      <div class="stack gap-m center">
+        <p class="eyebrow">{t.paths.heading}</p>
+        <h2 class="h2" style="max-width: 920px; margin-inline: auto">{t.paths.lede.replace(/\.$/, '')}</h2>
+      </div>
+      <div class="portes">
+        {portes.map((p) => (
+          <article class="porte">
+            <div class="visual">
+              <img src={u(p.img)} alt="" loading="lazy" style={`object-position:${p.pos}`} />
+            </div>
+            <p class="eyebrow" style="margin-top: 26px">{p.data.eyebrow}</p>
+            <h3 class="h3" style="margin-top: 12px">{p.data.h1}</h3>
+            <p class="lede">{p.data.lede}</p>
+            <p class="quote">« {p.quote} »</p>
+            <div class="rows">
+              {topLevel(fiches, p.hub).slice(0, 4).map((f) => (
+                <a href={fichePath(p.hub, slugOf(f.id))}>
+                  <span>
+                    <span class="n">{f.data.title}</span>
+                    <span class="d">{f.data.cardLede || f.data.lede}</span>
+                    {metaLine(f, fiches) && <span class="m">{metaLine(f, fiches)}</span>}
+                  </span>
+                  <Icon name="arrow" />
+                </a>
+              ))}
+            </div>
+            <a class="btn" href={u(HUBS[p.hub].path)}>Entrer dans l'{HUBS[p.hub].label}<Icon name="arrow" /></a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="mission" class="section mission">
+    <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
+    <div class="veil"></div>
+    <div class="wrap">
+      <p class="eyebrow">{mission.eyebrow.trim()}</p>
+      <p class="quote">« {missionQuote} »</p>
+      <h2>{mission.callEyebrow}<span class="caret" aria-hidden="true"></span></h2>
+      <p class="embark">{mission.callHeading} <em style="color: var(--gold)">{mission.callHeadingEm}</em></p>
+      <div class="crews">
+        <div class="c1"><p class="t">{mission.crewOld.title}</p><p class="label" style="margin-top: 8px">{mission.crewOld.en}</p><p class="d">{mission.crewOld.desc}</p></div>
+        <Lemniscate dash="40 484" />
+        <div><p class="t">{mission.crewYoung.title}</p><p class="label" style="margin-top: 8px">{mission.crewYoung.en}</p><p class="d">{mission.crewYoung.desc}</p></div>
+      </div>
+      <p class="muted" style="margin-top: 44px">{mission.callLede}</p>
+      <a class="btn" href={u('/mission/')} style="margin-top: 26px">Lire ma mission<Icon name="arrow" /></a>
+    </div>
+  </section>
+
+  <section id="agenda" class="section sky">
+    <div class="wrap">
+      <div class="head-row">
+        <div><p class="eyebrow">Agenda</p><h2 class="h2" style="margin-top: 14px">Prochains stages</h2></div>
+        <a class="btn" href={u('/agenda/')}>Tout l'agenda<Icon name="arrow" /></a>
+      </div>
+      <div><AgendaList entries={entries} limit={6} /></div>
+      {onDemand.length > 0 && (
+        <div class="on-demand">
+          <p><span class="label">Sur demande, en présentiel ou via Zoom : </span>
+            {onDemand.map((o, i) => <>{i > 0 && ' · '}<a href={o.href}>{o.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</a></>)}
+          </p>
+          <a class="arrow" href={u('/contact/')}>Me contacter<Icon name="arrow" /></a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {film && (
+    <section id="medias" class="section deep">
+      <div class="wrap">
+        <div class="head-row">
+          <div><p class="eyebrow">Vidéos · DVD · Radio</p><h2 class="h2" style="margin-top: 14px">Voir et écouter</h2></div>
+          <p class="serif italic" style="max-width: 430px; font-size: 17px; line-height: 1.5; color: var(--mist-2)">DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska</p>
+        </div>
+        <div class="medias">
+          <VideoCard id={film.id} title={film.title} meta={film.meta} />
+          <ul class="dvds">
+            {moreFilms.slice(0, 3).map((d) => (
+              <li><a href={d.href}><span class="cover"><img src={u(d.cover)} alt={d.coverAlt || `Jaquette du DVD « ${d.title} »`} loading="lazy" /></span><span><span class="t">{d.title}</span>{d.meta && <span class="label" style="display:block; margin-top: 8px">DVD · {d.meta}</span>}</span></a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="band">
+          {telos && (
+            <a href={fichePath('eveil-au-soi', 'les-intra-telos-mont-shasta')}><Icon name="radio" /><div><p class="label">Radio · Fréquence Évasion</p><p class="big">Interviews par Bob Bellanca, avril 2017</p></div></a>
+          )}
+          {upcoming && (
+            <div><Icon name="youtube" /><div><p class="label">À venir</p><p class="big italic">{upcoming.replace(/^YouTube\s*:\s*/, '')}</p></div></div>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section sky">
+    <div class="wrap">
+      <div class="stack gap-m center"><p class="eyebrow">Paroles</p><h2 class="h2">Témoignages</h2></div>
+      {quotes.length > 0 && (
+        <div class="quotes">
+          {quotes.map((q) => <figure><span class="mark" aria-hidden="true">«</span><blockquote>{q.quote}</blockquote>{q.author && <figcaption>{q.author}</figcaption>}</figure>)}
+        </div>
+      )}
+      <div class="clients">
+        <p class="label">{about.clients.heading}</p>
+        <p class="big">{about.clients.text}</p>
+      </div>
+    </div>
+  </section>
+
+  <ContactBand />
+</Base>

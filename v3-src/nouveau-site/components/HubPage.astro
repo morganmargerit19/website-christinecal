@@ -1,0 +1,105 @@
+---
+/**
+ * Page d'un univers (Éveil à Soi / Éveil au Soi). Textes : formulaire
+ * « Page : Éveil à Soi / au Soi » du CMS. Cartes et dates : les fiches.
+ */
+import Base from '../layouts/Base.astro';
+import ContactBand from './ContactBand.astro';
+import Card from './Card.astro';
+import VideoCard from './VideoCard.astro';
+import AgendaList from './AgendaList.astro';
+import Icon from './Icon.astro';
+import { getFiches, stagesOf } from '../../src/lib/fiches';
+import { buildAgenda } from '../lib/agenda';
+import { topLevel } from '../lib/content';
+import { HUBS, u, type Hub } from '../lib/site';
+import aSoi from '../../src/data/eveil-a-soi.fr.json';
+import auSoi from '../../src/data/eveil-au-soi.fr.json';
+
+interface Props { hub: Hub }
+const { hub } = Astro.props;
+const data = hub === 'eveil-a-soi' ? aSoi : auSoi;
+const outro = 'outro' in data ? (data.outro as string[]) : [];
+const fiches = await getFiches('fr');
+const cards = topLevel(fiches, hub);
+const regular = cards.filter((c, i) => !(i === 0 && c.data.featured)).length;
+const { entries } = buildAgenda(fiches.filter((f) => f.data.hub === hub));
+const bg = hub === 'eveil-a-soi'
+  ? { src: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%' }
+  : { src: '/images/wp/shasta2.jpg', pos: '50% 30%' };
+
+// Vidéos de présentation de la page Éveil à Soi (identiques au site actuel)
+const videos = hub === 'eveil-a-soi'
+  ? [
+      { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017' },
+      { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017' },
+    ]
+  : [];
+---
+<Base title={data.metaTitle.replace(' — ', ' · ')} description={data.metaDesc} path={HUBS[hub].path} image={bg.src}>
+  <section class="page-hero" aria-labelledby="titre">
+    <img class="bg" src={u(bg.src)} alt="" style={`object-position:${bg.pos}`} fetchpriority="high" />
+    <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.15) 75%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>
+    <div class="wrap" style="padding-bottom: clamp(90px, 10vw, 150px)">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
+      <div style="max-width: 680px">
+        <p class="eyebrow" style="margin-top: 44px">{data.eyebrow}</p>
+        <h1 id="titre">{data.h1}</h1>
+        <p class="lede-serif">{data.lede}</p>
+      </div>
+    </div>
+  </section>
+
+  {data.intro.length > 0 && (
+    <section class="section sky">
+      <div class="wrap">
+        <div class="intro-lines">
+          {data.intro.map((p, i) => (
+            <p class:list={[{ hl: hub === 'eveil-a-soi' && i === 0, accent: hub === 'eveil-a-soi' && (i === 2 || i === data.intro.length - 1) }]} set:html={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {videos.length > 0 && (
+    <section class="section--tight sky">
+      <div class="wrap"><div class="video-grid" style="margin-top: 0">{videos.map((v) => <VideoCard {...v} />)}</div></div>
+    </section>
+  )}
+
+  <section class="section deep">
+    <div class="wrap">
+      <p class="eyebrow">{hub === 'eveil-a-soi' ? 'Consultations, ateliers et École 5D' : 'Rubriques et stages'}</p>
+      <h2 class="h2" style="margin-top: 14px">{hub === 'eveil-a-soi' ? 'Par où commencer' : 'Explorer'}</h2>
+      <div class:list={['cards', { 'cards--2': regular % 3 !== 0 && regular % 2 === 0 }]}>
+        {cards.map((c, i) => <Card entry={c} feature={i === 0 && c.data.featured} count={stagesOf(c, fiches).length || undefined} />)}
+      </div>
+    </div>
+  </section>
+
+  {entries.length > 0 && (
+    <section class="section sky">
+      <div class="wrap">
+        <div class="head-row">
+          <div><p class="eyebrow">Agenda</p><h2 class="h2" style="margin-top: 14px">Prochaines dates</h2></div>
+          <a class="btn" href={u('/agenda/')}>Tout l'agenda<Icon name="arrow" /></a>
+        </div>
+        <div><AgendaList entries={entries} limit={6} /></div>
+      </div>
+    </section>
+  )}
+
+  {outro.length > 0 && (
+    <section class="section--tight sky">
+      <div class="wrap wrap--narrow">
+        <figure class="rigueur">
+          <blockquote>« {outro[0]} »</blockquote>
+          {outro.slice(1).map((o) => <figcaption class="serif italic" style="margin-top: 22px; font-size: 21px; color: var(--mist-2)">{o}</figcaption>)}
+        </figure>
+      </div>
+    </section>
+  )}
+
+  <ContactBand />
+</Base>

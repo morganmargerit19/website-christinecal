@@ -1,0 +1,275 @@
+---
+/**
+ * Page d'un stage, d'un atelier, d'une consultation ou d'une rubrique.
+ * Tout vient de la fiche que Christine remplit dans /admin : titre, phrase de
+ * présentation, dates, lieu, durée, tarif, photos, texte, vidéos, témoignages.
+ * Une case vide n'affiche rien (jamais de « à préciser »).
+ */
+import { render, type CollectionEntry } from 'astro:content';
+import Base from './Base.astro';
+import ContactBand from '../components/ContactBand.astro';
+import Hublot from '../components/Hublot.astro';
+import Fleur from '../components/Fleur.astro';
+import Slideshow from '../components/Slideshow.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Card from '../components/Card.astro';
+import Icon from '../components/Icon.astro';
+import FloatImage from '../components/blocks/FloatImage.astro';
+import CenteredText from '../components/blocks/CenteredText.astro';
+import TwoColumns from '../components/blocks/TwoColumns.astro';
+import Column from '../components/blocks/Column.astro';
+import MediaDuo from '../components/blocks/MediaDuo.astro';
+import VideoBlock from '../components/blocks/VideoBlock.astro';
+import SlideshowBlock from '../components/blocks/SlideshowBlock.astro';
+import GalleryBlock from '../components/blocks/GalleryBlock.astro';
+import Lead from '../components/blocks/Lead.astro';
+import Note from '../components/blocks/Note.astro';
+import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
+import { HUBS, fichePath, mailto, u, type Hub } from '../lib/site';
+import { exists, isStrip, visualOf } from '../lib/images';
+import { parseDate } from '../lib/agenda';
+
+// Mêmes noms que les blocs de l'éditeur (cf. tina/config.ts → bodyTemplates).
+const blocks = { FloatImage, CenteredText, TwoColumns, Column, MediaDuo, VideoBlock, SlideshowBlock, GalleryBlock, Lead, Note };
+
+interface Props { entry: CollectionEntry<'fiches'> }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const f = entry.data;
+const slug = slugOf(entry.id);
+const hub = HUBS[f.hub as Hub];
+const all = await getFiches('fr');
+const parent = f.rubrique ? all.find((e) => slugOf(e.id) === f.rubrique) : undefined;
+const children = stagesOf(entry, all);
+const siblings = parent
+  ? stagesOf(parent, all).filter((e) => slugOf(e.id) !== slug).slice(0, 3)
+  : [];
+
+const visual = visualOf(f);
+const strip = [f.image, f.banner].find((s) => s && s !== visual && exists(s) && isStrip(s));
+const dates = f.dates.filter((d) => d.trim());
+const hasCalendar = dates.some((d) => parseDate(d));
+const isConsult = f.category === 'consultation';
+const cta = isConsult ? 'Réserver une consultation' : 'Participer ou en savoir plus';
+const subject = isConsult ? `Consultation médiumnique` : `${f.title}${dates[0] ? ` (${dates[0]})` : ''}`;
+
+const facts = [
+  dates.length && { label: dates.length === 1 && hasCalendar ? 'Date' : 'Dates', values: dates },
+  f.place && { label: 'Lieu', values: [f.place] },
+  f.format && { label: 'Format', values: [f.format] },
+  f.duration && { label: 'Durée', values: [f.duration] },
+  f.price && { label: 'Tarif', values: [f.price] },
+].filter(Boolean) as { label: string; values: string[] }[];
+
+const anchored = [
+  ...f.sideImages.filter((s) => exists(s.src)).map((s) => ({ ...s, src: u(s.src) })),
+];
+---
+<Base title={`${f.title} · Christine CAL`} description={f.lede} path={hub.path} image={visual}>
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap split">
+      <div class="txt">
+        <nav class="crumbs" aria-label="Fil d'Ariane">
+          <a href={u('/')}>Accueil</a><span aria-hidden="true">/</span>
+          <a href={u(hub.path)}>{hub.label}</a>
+          {parent && <><span aria-hidden="true">/</span><a href={fichePath(parent.data.hub as Hub, slugOf(parent.id))}>{parent.data.title}</a></>}
+        </nav>
+        <p class="eyebrow" style="margin-top: 44px">{f.kicker}</p>
+        <h1 id="titre">{f.title}</h1>
+        <p class="lede-serif">{f.lede}</p>
+        <div class="actions" style="margin-top: 40px">
+          <a class="btn btn-gold" href={mailto(subject)}>{cta}</a>
+          {hasCalendar
+            ? <a class="btn" href={u('/agenda/')}>Voir tout l'agenda</a>
+            : children.length > 0 && <a class="btn" href="#programme">Voir le programme</a>}
+        </div>
+      </div>
+      <Hublot src={visual} alt={f.imageAlt || ''} eager />
+    </div>
+  </section>
+
+  {facts.length > 0 && !f.practicalFooter && (
+    <section class="sky" aria-label="Infos pratiques" style="padding-block: 10px 40px">
+      <div class="wrap">
+        <dl class="facts" style={`--cols:${facts.length}`}>
+          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  {strip && (
+    <section class="sky" style="padding-block: 30px">
+      <div class="wrap wrap--narrow"><figure class="strip"><img src={u(strip)} alt={f.imageAlt || ''} loading="lazy" /></figure></div>
+    </section>
+  )}
+
+  {f.slideshow.filter(exists).length > 0 && (
+    <section class="sky" style="padding-block: 30px">
+      <div class="wrap"><Slideshow images={f.slideshow.filter(exists)} alt={f.imageAlt || f.title} /></div>
+    </section>
+  )}
+
+  <section class="section sky" style="padding-top: 50px">
+    <div class:list={['wrap', 'wrap--narrow']} style={f.wideBody ? 'max-width: 1040px' : undefined}>
+      {f.richLayout === 'sortir-matrice' ? (
+        <div class="prose">
+          <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/old-life-new-life.jpg')} alt="D'une ancienne vie à une nouvelle vie" loading="lazy" /></figure>
+          <p class="b-center b-center--italic">Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</p>
+          <figure class="b-img b-img--right b-img--small"><img src={u('/images/wp/chat-mirroir.jpg')} alt="Le chat qui se voit lion dans le miroir" loading="lazy" /></figure>
+          <p class="b-lead">Transmuter la peur<br />en énergie positive<br />et passer d'une vie réactive<br />à une vie créative.</p>
+          <h2 style="clear: both; letter-spacing: .04em">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h2>
+          <p><em>— Avec une approche différente de cet outil connu —</em></p>
+          <figure class="b-img b-img--left b-img--medium"><img src={u(f.image ?? '/images/wp/eneagramme.jpg')} alt={f.imageAlt || "L'ennéagramme"} loading="lazy" /></figure>
+          <ul>
+            <li>Découvrir cette source de souffrances permanentes.</li>
+            <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>
+            <li>Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.</li>
+            <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
+          </ul>
+        </div>
+      ) : (
+        <div class="prose">
+          {f.bodyImage && exists(f.bodyImage.src) && !f.bodyImageBelow && (
+            <figure class="b-img b-img--right b-img--medium">
+              <img src={u(f.bodyImage.src)} alt={f.bodyImage.alt ?? ''} loading="lazy" />
+              {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
+            </figure>
+          )}
+          <Content components={blocks} />
+          {f.bodyImage && exists(f.bodyImage.src) && f.bodyImageBelow && (
+            <figure class="b-img b-img--center b-img--large" style="clear: both">
+              <img src={u(f.bodyImage.src)} alt={f.bodyImage.alt ?? ''} loading="lazy" />
+              {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
+            </figure>
+          )}
+        </div>
+      )}
+
+      {f.inlineMedia.map((m) => (
+        <div class:list={['inline-media', { 'inline-media--aside': m.layout === 'aside' }]} data-after={m.section} hidden>
+          {m.video?.id && <VideoCard {...m.video} />}
+          {m.images.filter((g) => exists(g.src)).length > 0 && (
+            <div class="inline-media__photos">
+              {m.images.filter((g) => exists(g.src)).map((g) => (
+                <figure><img src={u(g.src)} alt={g.alt ?? ''} loading="lazy" />{g.caption && <figcaption>{g.caption}</figcaption>}</figure>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+
+      {f.gallery.filter((g) => exists(g.src)).length > 0 && (
+        <div class="gallery">
+          {f.gallery.filter((g) => exists(g.src)).map((g) => (
+            <figure><img src={u(g.src)} alt={g.alt ?? ''} loading="lazy" />{g.caption && <figcaption>{g.caption}</figcaption>}</figure>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  {children.length > 0 && (
+    <section id="programme" class="section deep">
+      <div class="wrap">
+        <p class="eyebrow">Au programme</p>
+        <h2 class="h2" style="margin-top: 14px">{children.length} rendez-vous</h2>
+        <div class="cards">{children.map((c) => <Card entry={c} />)}</div>
+      </div>
+    </section>
+  )}
+
+  {(f.videos.length > 0 || (f.audio && exists(f.audio))) && (
+    <section class="section sky">
+      <div class="wrap">
+        <p class="eyebrow">Voir et écouter</p>
+        {f.videosHeading && <h2 class="h2" style="margin-top: 14px">{f.videosHeading}</h2>}
+        <div class="video-grid">
+          {f.videos.map((v) => <VideoCard {...v} />)}
+          {f.audio && exists(f.audio) && (
+            <figure class="video">
+              {f.audioCover && exists(f.audioCover) && <img src={u(f.audioCover)} alt="" loading="lazy" style="width: 100%; max-width: 360px; border-radius: 4px" />}
+              <figcaption>
+                <span class="label">Enregistrement</span>
+                {f.audioTitle && <span class="vt">{f.audioTitle}</span>}
+                <audio controls preload="none" src={u(f.audio)} style="width: 100%"></audio>
+              </figcaption>
+            </figure>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {f.testimonials.length > 0 && (
+    <section class="section deep">
+      <div class="wrap">
+        <p class="eyebrow center">Témoignages</p>
+        <div class:list={['quotes', { 'quotes--2': f.testimonials.length % 3 !== 0 && f.testimonials.length % 2 === 0 }]}>
+          {f.testimonials.map((t) => (
+            <figure><span class="mark" aria-hidden="true">«</span><blockquote>{t.quote}</blockquote>{t.author && <figcaption>{t.author}</figcaption>}</figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {facts.length > 0 && f.practicalFooter && (
+    <section class="sky section--tight" aria-label="Infos pratiques">
+      <div class="wrap">
+        <dl class="facts" style={`--cols:${facts.length}`}>
+          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
+        </dl>
+      </div>
+    </section>
+  )}
+
+  {siblings.length > 0 && parent && (
+    <section class="section sky">
+      <div class="wrap">
+        <div class="head-row">
+          <div><p class="eyebrow">Dans la même rubrique</p><h2 class="h2" style="margin-top: 14px">{parent.data.title}</h2></div>
+          <a class="arrow" href={fichePath(parent.data.hub as Hub, slugOf(parent.id))}>Toute la rubrique<Icon name="arrow" /></a>
+        </div>
+        <div class="cards">{siblings.map((c) => <Card entry={c} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <ContactBand heading={cta} text="Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi" subject={subject} motto={false} />
+
+  {(anchored.length > 0 || f.inlineMedia.length > 0) && (
+    <script is:inline define:vars={{ anchored }}>
+      // Réglages avancés existants : une photo ou une vidéo « à côté de tel titre ».
+      const find = (key) => {
+        let t = document.getElementById(key);
+        if (!t) {
+          const needle = key.toLowerCase();
+          t = [...document.querySelectorAll('.prose p, .prose h2, .prose h3, .prose li, .prose blockquote')]
+            .find((el) => el.textContent.toLowerCase().includes(needle));
+        }
+        if (!t) return null;
+        const prose = t.closest('.prose');
+        while (prose && t.parentNode && t.parentNode !== prose) t = t.parentNode;
+        return t;
+      };
+      for (const it of anchored) {
+        const t = find(it.section);
+        if (!t) continue;
+        const fig = document.createElement('figure');
+        fig.className = 'side-img side-img--' + it.align + (it.size && it.size !== 'normal' ? ' side-img--' + it.size : '');
+        const img = document.createElement('img');
+        img.src = it.src; img.alt = it.alt || ''; img.loading = 'lazy';
+        fig.append(img);
+        if (it.caption) { const c = document.createElement('figcaption'); c.textContent = it.caption; fig.append(c); }
+        t.before(fig);
+      }
+      for (const block of document.querySelectorAll('[data-after]')) {
+        const t = find(block.getAttribute('data-after'));
+        if (t) t.after(block);
+        block.hidden = false;
+      }
+    </script>
+  )}
+</Base>

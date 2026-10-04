@@ -1,0 +1,28 @@
+---
+/**
+ * Liste chronologique des prochaines dates. Les dates déjà passées au moment
+ * du build sont exclues ; un petit script masque aussi, chez le visiteur,
+ * celles qui passent entre deux mises à jour du site.
+ */
+import type { AgendaEntry } from '../lib/agenda';
+import { mailto } from '../lib/site';
+import Icon from './Icon.astro';
+interface Props { entries: AgendaEntry[]; limit?: number }
+const { entries, limit } = Astro.props;
+// On rend quelques entrées de plus que la limite : si une date passe, la suivante prend sa place.
+const shown = limit ? entries.slice(0, limit + 4) : entries;
+---
+<ol class="agenda" data-agenda data-limit={limit}>
+  {shown.map((e, i) => (
+    <li data-end={e.end} hidden={limit !== undefined && i >= limit}>
+      <span class="date">{e.label}</span>
+      <span>
+        <a class="title" href={e.href}>{e.title}</a>
+        {e.rubrique && <span class="rub">{e.rubrique}</span>}
+      </span>
+      <span class="info">{e.info}</span>
+      <a class="book" href={mailto(e.subject)} aria-label={`S'inscrire : ${e.title}, ${e.label}`}>S'inscrire<Icon name="arrow" /></a>
+    </li>
+  ))}
+</ol>
+<p class="agenda-empty" data-agenda-empty hidden={shown.length > 0}>Les prochaines dates arrivent bientôt. Écrivez-moi pour être prévenu(e).</p>
