@@ -9,8 +9,6 @@ import Card from './Card.astro';
 import VideoCard from './VideoCard.astro';
 import AgendaList from './AgendaList.astro';
 import Icon from './Icon.astro';
-import GeoFleur from './GeoFleur.astro';
-import GeoFibonacci from './GeoFibonacci.astro';
 import { getFiches, stagesOf } from '../../src/lib/fiches';
 import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
@@ -55,7 +53,6 @@ const videos = hub === 'eveil-a-soi'
   {data.intro.length > 0 && (
     <section class="section sky">
       <div class="wrap">
-        <div class="geo-intro">{hub === 'eveil-a-soi' ? <GeoFibonacci label="Spirale d'or de Fibonacci" /> : <GeoFleur label="Fleur de vie" />}</div>
         {/* Deux paragraphes d'entrée, le reste à la demande : on arrive vite aux stages. */}
         <div class="intro-lines">
           {data.intro.slice(0, 2).map((p, i) => (

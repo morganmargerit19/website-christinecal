@@ -1,13 +1,15 @@
 ---
 /**
  * Une photo dans un cercle de lumière (orbite pointillée qui tourne lentement).
- * Sans photo : fleur de vie animée (ou Merkaba). `portrait` cadre le visage de Christine.
+ * Sans photo : fleur de vie, ou une géométrie animée (stages de l'École 5D). `portrait` cadre le visage de Christine.
  */
 import { u } from '../lib/site';
+import Geo from './Geo.astro';
 import GeoFleur from './GeoFleur.astro';
 import GeoMerkaba from './GeoMerkaba.astro';
-interface Props { src?: string; alt?: string; portrait?: boolean; halo?: boolean; class?: string; eager?: boolean; position?: string; geo?: 'fleur' | 'merkaba' }
-const { src, alt = '', portrait = false, halo = true, class: cls, eager = false, position, geo = 'fleur' } = Astro.props;
+import GeoFibonacci from './GeoFibonacci.astro';
+interface Props { src?: string; alt?: string; portrait?: boolean; halo?: boolean; class?: string; eager?: boolean; position?: string; geo?: 'fleur' | 'merkaba' | 'spirale' }
+const { src, alt = '', portrait = false, halo = true, class: cls, eager = false, position, geo } = Astro.props;
 ---
 <div class:list={['hublot', cls]}>
   {halo && <div class="halo" aria-hidden="true"></div>}
@@ -19,6 +21,9 @@ const { src, alt = '', portrait = false, halo = true, class: cls, eager = false,
   <div class="pic">
     {src
       ? <img class:list={[{ portrait }]} src={u(src)} alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} style={position ? `object-position:${position}` : undefined} />
-      : geo === 'merkaba' ? <GeoMerkaba label="Merkaba : deux tétraèdres qui tournent en sens contraire" /> : <GeoFleur />}
+      : geo === 'merkaba' ? <GeoMerkaba label="Merkaba : deux tétraèdres qui tournent en sens contraire" />
+      : geo === 'spirale' ? <GeoFibonacci label="Spirale d'or, le vortex" />
+      : geo === 'fleur' ? <GeoFleur label="Fleur de vie" />
+      : <Geo />}
   </div>
 </div>

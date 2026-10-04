@@ -4,8 +4,10 @@ import Arcs from './Arcs.astro';
 import Icon from './Icon.astro';
 interface Props { current?: string }
 const { current } = Astro.props;
-const isCurrent = (path: string) =>
-  current === path || (path !== '/' && current?.startsWith(path)) ? 'page' : undefined;
+// Une seule entrée active : la plus précise (la consultation n'allume pas aussi « Éveil à Soi »).
+const active = NAV.filter((n) => current && [n.path, ...(n.also ?? [])].some((p) => current.startsWith(p)))
+  .sort((a, b) => b.path.length - a.path.length)[0];
+const isCurrent = (path: string) => (active?.path === path ? 'page' : undefined);
 ---
 <header class="site-header">
   <div class="wrap bar">
@@ -17,6 +19,7 @@ const isCurrent = (path: string) =>
     <button class="burger" type="button" data-burger aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><Icon name="menu" /></button>
   </div>
   <nav id="menu" class="mobile-nav" aria-label="Menu" hidden>
+    <a href={u('/')} aria-current={current === '/' ? 'page' : undefined}>Accueil</a>
     {NAV.map((n) => <a href={u(n.path)} aria-current={isCurrent(n.path)}>{n.label}</a>)}
   </nav>
 </header>

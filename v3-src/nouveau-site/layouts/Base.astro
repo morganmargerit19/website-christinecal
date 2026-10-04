@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Sprites from '../components/Sprites.astro';
-import { u } from '../lib/site';
+import { SHOW_PROPOSITION, u } from '../lib/site';
 import '../styles/relier.css';
 
 interface Props {
@@ -41,6 +41,9 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
     <main id="main">
       <slot />
     </main>
+    {SHOW_PROPOSITION && path !== '/proposition/' && (
+      <a class="avis-badge" href={u('/proposition/')}><span class="dot" aria-hidden="true"></span>Maquette · donner mon avis</a>
+    )}
 
     <script>
       // Menu mobile

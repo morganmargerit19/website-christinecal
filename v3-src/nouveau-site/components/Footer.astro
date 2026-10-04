@@ -4,6 +4,12 @@ import { u } from '../lib/site';
 <footer class="site-footer">
   <div class="wrap">
     <span>© {new Date().getFullYear()} Christine CAL · Tous droits réservés</span>
+    <nav aria-label="Plan du site">
+      <a href={u('/mission/')}>Ma mission</a>
+      <a href={u('/agenda/')}>Agenda</a>
+      <a href={u('/videos/')}>Vidéos</a>
+      <a href={u('/proposition/')}>Proposition de structure</a>
+    </nav>
     <nav aria-label="Informations légales">
       <a href={u('/mentions-legales/')}>Mentions légales</a>
       <a href={u('/politique-de-confidentialite/')}>Politique de confidentialité</a>

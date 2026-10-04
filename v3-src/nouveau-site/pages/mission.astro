@@ -12,7 +12,8 @@ import m from '../../src/data/mission.fr.json';
   <section class="page-hero sky" aria-labelledby="titre">
     <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
     <div class="wrap center" style="padding-bottom: 50px">
-      <p class="eyebrow">{m.eyebrow.trim()}</p>
+      <nav class="crumbs" aria-label="Fil d'Ariane" style="justify-content: center"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><a href={u('/qui-suis-je/')}>Qui suis-je</a><span aria-hidden="true">/</span><span aria-current="page">Ma mission</span></nav>
+      <p class="eyebrow" style="margin-top: 36px">{m.eyebrow.trim()}</p>
       <h1 id="titre" style="max-width: 900px; margin-inline: auto">{m.h1}</h1>
       <p class="lede-serif" style="margin-inline: auto" set:html={m.lede} />
     </div>

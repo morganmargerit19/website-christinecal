@@ -10,6 +10,8 @@ import { clauses } from '../lib/content';
 import { splitDated, u } from '../lib/site';
 import about from '../../src/data/about.fr.json';
 import auSoi from '../../src/data/eveil-au-soi.fr.json';
+import mission from '../../src/data/mission.fr.json';
+import Icon from '../components/Icon.astro';
 
 /** « UN PARCOURS EN BREF » → « Un parcours en bref » (les titres en capitales restent lisibles en serif). */
 const sentence = (s: string) =>
@@ -82,6 +84,17 @@ const rigueur = auSoi.outro?.[0];
           <div><p class="label">{right.lead}</p><p class="big" set:html={right.text} /></div>
         </div>
       )}
+    </div>
+  </section>
+
+  <section id="mission" class="section mission">
+    <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
+    <div class="veil"></div>
+    <div class="wrap">
+      <p class="eyebrow">Ma mission</p>
+      <p class="quote">« {mission.lede.match(/«\s*([^»]+?)\s*»/)?.[1]} »</p>
+      <p class="embark">{mission.callEyebrow} {mission.callHeading} <em style="color: var(--gold)">{mission.callHeadingEm}</em></p>
+      <a class="btn" href={u('/mission/')} style="margin-top: 32px">Lire ma mission<Icon name="arrow" /></a>
     </div>
   </section>
 

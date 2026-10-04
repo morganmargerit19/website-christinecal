@@ -78,3 +78,33 @@ export function someTestimonials(fiches: Fiche[], count = 3) {
 
 /** Découpe un texte en membres de phrase, pour l'animation « écriture » de l'épigraphe. */
 export const clauses = (text: string) => text.split(/(?<=[,:;.])\s+/).filter(Boolean);
+
+export type VideoItem = {
+  id: string; title: string; meta?: string; credit?: 'debowska'; cover?: string; coverAlt?: string;
+  from?: { title: string; href: string };
+};
+
+/**
+ * Toutes les vidéos du site, une seule fois chacune, avec la page d'où elles
+ * viennent : DVD Debowska d'un côté, conférences et interviews de l'autre.
+ */
+export function allVideos(fiches: Fiche[], extra: VideoItem[] = []) {
+  const seen = new Set<string>();
+  const dvd: VideoItem[] = [];
+  const talks: VideoItem[] = [];
+  const push = (v: VideoItem) => {
+    if (!v.id || seen.has(v.id)) return;
+    seen.add(v.id);
+    (v.credit === 'debowska' ? dvd : talks).push(v);
+  };
+  const ordered = [...fiches].sort((a, b) => a.data.order - b.data.order);
+  for (const f of ordered) {
+    const from = { title: f.data.title, href: fichePath(f.data.hub as Hub, slugOf(f.id)) };
+    for (const v of f.data.videos) push({ ...v, title: v.title ?? f.data.title, from });
+    for (const m of f.data.inlineMedia) if (m.video) push({ ...m.video, title: m.video.title ?? f.data.title, from });
+  }
+  extra.forEach(push);
+  const date = (v: VideoItem) => (v.meta ? parseDate(v.meta)?.start.toISOString() : undefined) ?? '0000';
+  dvd.sort((a, b) => date(b).localeCompare(date(a)));
+  return { dvd, talks };
+}

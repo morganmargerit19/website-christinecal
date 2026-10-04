@@ -9,16 +9,12 @@ import ContactBand from '../components/ContactBand.astro';
 import Hublot from '../components/Hublot.astro';
 import Lemniscate from '../components/Lemniscate.astro';
 import AgendaList from '../components/AgendaList.astro';
-import VideoCard from '../components/VideoCard.astro';
 import Icon from '../components/Icon.astro';
 import Arcs from '../components/Arcs.astro';
-import GeoFleur from '../components/GeoFleur.astro';
-import GeoFibonacci from '../components/GeoFibonacci.astro';
-import GeoMerkaba from '../components/GeoMerkaba.astro';
 import { getFiches, slugOf } from '../../src/lib/fiches';
 import { ui } from '../../src/i18n/ui';
 import { buildAgenda } from '../lib/agenda';
-import { clauses, dvds, metaLine, someTestimonials, topLevel } from '../lib/content';
+import { clauses, metaLine, someTestimonials, topLevel } from '../lib/content';
 import { HUBS, fichePath, plain, u, type Hub } from '../lib/site';
 import about from '../../src/data/about.fr.json';
 import mission from '../../src/data/mission.fr.json';
@@ -28,17 +24,10 @@ import auSoi from '../../src/data/eveil-au-soi.fr.json';
 const t = ui.fr;
 const fiches = await getFiches('fr');
 const { entries, onDemand } = buildAgenda(fiches);
-const films = dvds(fiches);
-const film = films.find((d) => !/même sujet/i.test(d.title)) ?? films[0];
-// Dans la liste aussi, les DVD « même sujet » passent après les autres.
-const moreFilms = films.filter((d) => d !== film)
-  .sort((a, b) => Number(/même sujet/i.test(a.title)) - Number(/même sujet/i.test(b.title)));
 const quotes = someTestimonials(fiches);
 const left = about.journey.items[4];
 const right = about.journey.items[5];
 const missionQuote = mission.lede.match(/«\s*([^»]+?)\s*»/)?.[1] ?? plain(mission.lede);
-const upcoming = about.upcoming.items[0] ?? '';
-const telos = fiches.find((f) => slugOf(f.id) === 'les-intra-telos-mont-shasta');
 
 const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: string; geo: 'spiral' | 'fleur' }[] = [
   { hub: 'eveil-a-soi', data: aSoi, img: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%', quote: "Pour l'humain réveillé, subir sa vie est terminé", geo: 'spiral' },
@@ -127,30 +116,6 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
     </div>
   </section>
 
-  <section id="geometrie" class="section deep">
-    <div class="wrap">
-      <div class="stack gap-m center"><p class="eyebrow">Géométrie sacrée</p><h2 class="h2">Les formes qui relient</h2></div>
-      <div class="geometries">
-        <a href={u('/eveil-au-soi/')}><span class="g"><GeoFleur /></span><span class="t">Fleur de vie</span><span class="label">Éveil au Soi</span></a>
-        <a href={u('/eveil-a-soi/')}><span class="g"><GeoFibonacci /></span><span class="t">Spirale d'or</span><span class="label">Éveil à Soi</span></a>
-        <a href={fichePath('eveil-a-soi', 'construire-son-vaisseau')}><span class="g"><GeoMerkaba /></span><span class="t">Merkaba</span><span class="label">Construire son vaisseau</span></a>
-        <a href={u('/mission/')}><span class="g" style="display:grid; place-items:center"><Lemniscate /></span><span class="t">Lemniscate</span><span class="label">Ma mission</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section id="mission" class="section mission">
-    <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
-    <div class="veil"></div>
-    <div class="wrap">
-      <p class="eyebrow">{mission.eyebrow.trim()}</p>
-      <p class="quote">« {missionQuote} »</p>
-      <h2>{mission.callEyebrow}<span class="caret" aria-hidden="true"></span></h2>
-      <p class="embark">{mission.callHeading} <em style="color: var(--gold)">{mission.callHeadingEm}</em></p>
-      <a class="btn" href={u('/mission/')} style="margin-top: 26px">Lire ma mission<Icon name="arrow" /></a>
-    </div>
-  </section>
-
   <section id="agenda" class="section sky">
     <div class="wrap">
       <div class="head-row">
@@ -161,32 +126,12 @@ const portes: { hub: Hub; data: typeof aSoi; img: string; pos: string; quote: st
     </div>
   </section>
 
-  {film && (
-    <section id="medias" class="section deep">
-      <div class="wrap">
-        <div class="head-row">
-          <div><p class="eyebrow">Vidéos · DVD · Radio</p><h2 class="h2" style="margin-top: 14px">Voir et écouter</h2></div>
-          <p class="serif italic" style="max-width: 430px; font-size: 17px; line-height: 1.5; color: var(--mist-2)">DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska</p>
-        </div>
-        <div class="medias">
-          <VideoCard id={film.id} title={film.title} meta={film.meta} />
-          <ul class="dvds">
-            {moreFilms.slice(0, 2).map((d) => (
-              <li><a href={d.href}><span class="cover"><img src={u(d.cover)} alt={d.coverAlt || `Jaquette du DVD « ${d.title} »`} loading="lazy" /></span><span><span class="t">{d.title}</span>{d.meta && <span class="label" style="display:block; margin-top: 8px">DVD · {d.meta}</span>}</span></a></li>
-            ))}
-          </ul>
-        </div>
-        <div class="band">
-          {telos && (
-            <a href={fichePath('eveil-au-soi', 'les-intra-telos-mont-shasta')}><Icon name="radio" /><div><p class="label">Radio · Fréquence Évasion</p><p class="big">Interviews par Bob Bellanca, avril 2017</p></div></a>
-          )}
-          {upcoming && (
-            <div><Icon name="youtube" /><div><p class="label">À venir</p><p class="big italic">{upcoming.replace(/^YouTube\s*:\s*/, '')}</p></div></div>
-          )}
-        </div>
-      </div>
-    </section>
-  )}
+  <section class="section--tight deep">
+    <div class="wrap links-row">
+      <a href={u('/mission/')}><span class="label">Ma mission</span><span class="t">« {missionQuote} »</span><Icon name="arrow" /></a>
+      <a href={u('/videos/')}><span class="label">Vidéos · DVD · Radio</span><span class="t">Conférences, forums et interviews</span><Icon name="arrow" /></a>
+    </div>
+  </section>
 
   <section class="section sky">
     <div class="wrap">

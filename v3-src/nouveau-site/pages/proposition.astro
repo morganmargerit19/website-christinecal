@@ -1,0 +1,259 @@
+---
+/**
+ * Page de travail pour Christine : la structure proposée, ce qui change, et ses
+ * réponses (gardées dans son navigateur, puis copiées dans un message).
+ * À retirer à la mise en ligne (SHOW_PROPOSITION dans lib/site.ts).
+ */
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import Fleur from '../components/Fleur.astro';
+import Icon from '../components/Icon.astro';
+import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
+import { topLevel, allVideos } from '../lib/content';
+import { fichePath, u, type Hub } from '../lib/site';
+
+const fiches = await getFiches('fr');
+const rubriques = (hub: Hub) =>
+  topLevel(fiches, hub).map((f) => ({ title: f.data.title.replace(/^École 5D\s*[—–-]\s*/, 'École 5D : '), n: stagesOf(f, fiches).length }));
+const pagesAvecVideos = fiches.filter((f) => f.data.videos.length || f.data.inlineMedia.some((m) => m.video)).length;
+const { dvd, talks } = allVideos(fiches);
+
+const avant = [
+  { t: 'Accueil', d: 'Un portail : les deux portes' },
+  { t: 'Qui suis-je' },
+  { t: 'Mission' },
+  { t: 'Éveil à Soi', sub: rubriques('eveil-a-soi') },
+  { t: 'Éveil au Soi', sub: rubriques('eveil-au-soi') },
+  { t: 'Contact' },
+];
+const apres = [
+  { t: 'Accueil', d: 'Qui je suis, les deux portes, les prochains stages, des témoignages', href: '/' },
+  { t: 'Qui suis-je', d: 'Avec « Ma mission » en bref, et la page Mission complète', href: '/qui-suis-je/' },
+  { t: 'Consultation', d: 'Dans le menu, accessible en un clic', href: '/eveil-a-soi/consultation-mediumnique/' },
+  { t: 'Éveil à Soi', d: 'Sortir de sa matrice, École 5D en 3 étapes', href: '/eveil-a-soi/' },
+  { t: 'Éveil au Soi', d: 'Mémoire galactique, Telos, Bugarach, Team galactique', href: '/eveil-au-soi/' },
+  { t: 'Agenda', d: 'Nouveau : toutes les dates, rangées toutes seules', href: '/agenda/', neu: true },
+  { t: 'Vidéos', d: `Nouveau : les ${dvd.length + talks.length} vidéos au même endroit`, href: '/videos/', neu: true },
+  { t: 'Contact', href: '/contact/' },
+];
+
+const changes = [
+  { t: 'Un menu de 7 entrées, dans l’ordre d’une visite', d: 'Qui je suis, ce que je propose seul à seul, puis en groupe, quand, et où me voir. Le logo ramène à l’accueil.', href: '/' },
+  { t: 'La consultation dans le menu', d: 'C’est la demande la plus directe : elle n’est plus cachée dans Éveil à Soi.', href: '/eveil-a-soi/consultation-mediumnique/' },
+  { t: 'Un agenda unique', d: 'Toutes les dates de tous les stages, dans l’ordre. Les dates passées disparaissent seules, et « S’inscrire » prépare l’e-mail.', href: '/agenda/' },
+  { t: 'Une page Vidéos', d: `Aujourd’hui, les vidéos sont réparties dans ${pagesAvecVideos} pages. Elles sont réunies ici, et chaque page de stage n’en garde que 2.`, href: '/videos/' },
+  { t: 'Ma mission rattachée à Qui suis-je', d: 'Un résumé dans Qui suis-je, la page complète reste à un clic.', href: '/qui-suis-je/#mission' },
+  { t: 'Des pages de stage construites pareil', d: 'Titre et phrase de présentation, infos pratiques, texte, témoignages, inscription. Un sommaire en haut des pages longues.', href: '/eveil-au-soi/semaine-telosiens/' },
+  { t: 'Les géométries sacrées sur l’École 5D', d: 'Fleur de vie, Merkaba et spirale animées sur les 3 étapes du parcours, et nulle part ailleurs.', href: fichePath('eveil-a-soi', 'merkaba').replace(u(''), '') },
+  { t: 'Un accueil plus court', d: 'Environ 500 mots au lieu de 980 : la mission et les vidéos ont chacune leur page.', href: '/' },
+];
+
+const questions = [
+  { id: 'menu', q: 'Le nouveau menu (Qui suis-je, Consultation, Éveil à Soi, Éveil au Soi, Agenda, Vidéos, Contact)', a: ['Je valide', 'À ajuster', 'Je préfère l’actuel'] },
+  { id: 'consultation', q: 'La consultation dans le menu', a: ['Oui', 'Non'] },
+  { id: 'mission', q: '« Ma mission » rattachée à Qui suis-je', a: ['Oui', 'Non, je garde Mission dans le menu'] },
+  { id: 'noms', q: 'Les noms « Éveil à Soi » et « Éveil au Soi » se ressemblent beaucoup pour un nouveau visiteur', a: ['Je les garde tels quels', 'Je les garde, avec une phrase d’explication sous chacun', 'Je veux les renommer'] },
+  { id: 'rubriques', q: '« La Team galactique » et « Les Extras du Bugarach » n’ont qu’un stage chacun', a: ['Je garde deux rubriques', 'Je les regroupe en une seule rubrique'] },
+  { id: 'telos', q: 'La page Mont Shasta / Telos (environ 1 000 mots) mêle mon histoire avec Telos et 4 stages', a: ['Je garde une seule page', 'Je sépare : mon histoire dans Qui suis-je, les stages dans la rubrique'] },
+  { id: 'textes', q: 'Raccourcir mes textes les plus longs', a: ['Oui, proposez-moi une version courte à valider', 'Non, je garde mes textes'] },
+  { id: 'geometries', q: 'Les géométries animées de l’École 5D', a: ['J’aime', 'Plus discrètes', 'À retirer'] },
+];
+---
+<Base title="Proposition de structure · Christine CAL" description="La nouvelle organisation proposée pour le site, à valider par Christine." path="/proposition/">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap">
+      <p class="eyebrow">Maquette · à valider</p>
+      <h1 id="titre">Proposition de structure</h1>
+      <p class="lede-serif">Christine, voici une nouvelle organisation de votre site. Vos textes et vos stages restent les mêmes. Le but : un site plus court, plus clair et mieux ordonné.</p>
+      <div class="actions" style="margin-top: 36px">
+        <a class="btn btn-gold" href="#reponses">Donner mon avis (5 min)</a>
+        <a class="btn" href={u('/')}>Visiter la maquette</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section deep" aria-labelledby="plan">
+    <div class="wrap">
+      <p class="eyebrow">1 · Le plan du site</p>
+      <h2 id="plan" class="h2" style="margin-top: 14px">Avant, après</h2>
+      <div class="plan">
+        <div>
+          <p class="label plan-h">Le site actuel</p>
+          <ol class="tree">
+            {avant.map((p) => (
+              <li>
+                <span class="n">{p.t}</span>{p.d && <span class="d">{p.d}</span>}
+                {p.sub && <ul>{p.sub.map((s) => <li>{s.title}{s.n > 0 && <span class="d"> · {s.n} stage{s.n > 1 ? 's' : ''}</span>}</li>)}</ul>}
+              </li>
+            ))}
+          </ol>
+          <p class="muted" style="margin-top: 20px; font-size: 15px">Pas d’agenda d’ensemble. Vidéos réparties dans {pagesAvecVideos} pages.</p>
+        </div>
+        <div>
+          <p class="label plan-h">Proposé</p>
+          <ol class="tree tree--new">
+            {apres.map((p) => (
+              <li>
+                <a class="n" href={u(p.href)}>{p.t}</a>{p.neu && <span class="pill">Nouveau</span>}
+                {p.d && <span class="d">{p.d.replace(/^Nouveau : /, '')}</span>}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section sky" aria-labelledby="changes">
+    <div class="wrap">
+      <p class="eyebrow">2 · Ce qui change</p>
+      <h2 id="changes" class="h2" style="margin-top: 14px">{changes.length} changements, à voir dans la maquette</h2>
+      <ol class="changes">
+        {changes.map((c) => (
+          <li>
+            <a href={u(c.href)}>
+              <span class="t">{c.t}</span>
+              <span class="d">{c.d}</span>
+              <span class="arrow">Voir<Icon name="arrow" /></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section id="reponses" class="section deep" aria-labelledby="avis">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">3 · Votre avis</p>
+      <h2 id="avis" class="h2" style="margin-top: 14px">{questions.length} questions, une réponse par ligne</h2>
+      <p class="muted" style="margin-top: 14px">Vos réponses restent sur cet appareil tant que vous ne les envoyez pas.</p>
+      <form id="avis-form" class="qform">
+        {questions.map((q, i) => (
+          <fieldset>
+            <legend><span class="num">{i + 1}</span>{q.q}</legend>
+            <div class="choices">
+              {q.a.map((a, j) => (
+                <label><input type="radio" name={q.id} id={`${q.id}-${j}`} value={a} /><span>{a}</span></label>
+              ))}
+            </div>
+            <label class="note">Précision (facultatif)<input type="text" name={`${q.id}-note`} id={`${q.id}-note`} /></label>
+          </fieldset>
+        ))}
+        <fieldset>
+          <legend><span class="num">+</span>Autre chose à changer, ajouter ou retirer ?</legend>
+          <textarea name="libre" id="libre" rows="5"></textarea>
+        </fieldset>
+        <button type="submit" class="btn btn-gold">Préparer mon message<Icon name="arrow" /></button>
+      </form>
+
+      <div id="recap" class="recap" hidden>
+        <h3 class="h3">Votre message est prêt</h3>
+        <p class="muted" style="margin-top: 10px">Copiez-le, puis envoyez-le à Morgan par e-mail ou par message.</p>
+        <textarea id="recap-text" rows="14" readonly></textarea>
+        <div class="actions">
+          <button type="button" class="btn btn-gold" id="copy">Copier le message</button>
+          <a class="btn" id="mail" href="#">Ouvrir mon e-mail</a>
+        </div>
+        <p id="copied" class="muted" role="status" style="font-size: 14px"></p>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</Base>
+
+<style>
+  .plan { margin-top: 48px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 6vw, 80px); }
+  .plan-h { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); }
+  .tree { list-style: none; margin: 0; padding: 0; }
+  .tree > li { padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .tree .n { font-family: var(--serif); font-size: 26px; line-height: 1.2; color: var(--light); }
+  .tree a.n:hover { color: var(--gold-pale); }
+  .tree .d { display: block; margin-top: 4px; font-size: 15px; color: var(--mist-2); }
+  .tree ul { list-style: none; margin: 10px 0 0; padding: 0 0 0 18px; border-left: 1px solid var(--line); display: grid; gap: 6px; font-size: 15.5px; color: var(--soft); }
+  .tree ul .d { display: inline; margin: 0; }
+  .tree--new .n { color: var(--gold-pale); }
+  .pill { display: inline-block; margin-left: 12px; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 999px; font-size: 10.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); vertical-align: 4px; }
+  @media (max-width: 760px) { .plan { grid-template-columns: 1fr; } }
+
+  .changes { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; counter-reset: c; }
+  .changes li { counter-increment: c; border-top: 1px solid var(--line); }
+  .changes a { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; padding: 22px 0; color: var(--light); }
+  .changes a::before { content: counter(c); grid-row: 1 / 4; font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--gold); }
+  .changes .t { font-family: var(--serif); font-size: 24px; line-height: 1.25; }
+  .changes .d { margin-top: 6px; font-size: 15px; color: var(--mist); }
+  .changes .arrow { min-height: 32px; margin-top: 6px; }
+  .changes a:hover .t { color: var(--gold-pale); }
+  @media (max-width: 760px) { .changes { grid-template-columns: 1fr; } }
+
+  .qform { margin-top: 36px; display: grid; gap: 20px; }
+  .qform fieldset { margin: 0; padding: 22px 0 24px; border: 0; border-top: 1px solid var(--line); min-width: 0; }
+  .qform legend { padding: 0; display: flex; gap: 14px; font-family: var(--serif); font-size: 23px; line-height: 1.3; color: var(--light); }
+  .qform .num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--gold); display: grid; place-items: center; font-family: var(--sans); font-size: 14px; color: var(--gold); margin-top: 1px; }
+  .choices { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .choices label { cursor: pointer; }
+  .choices input { position: absolute; opacity: 0; pointer-events: none; }
+  .choices span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border: 1px solid var(--line-strong); border-radius: 999px; font-size: 15px; color: var(--soft); transition: border-color .2s, background .2s; }
+  .choices input:checked + span { border-color: var(--gold); background: rgba(233,204,138,.14); color: var(--gold-pale); }
+  .choices input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .note { margin-top: 14px; display: grid; gap: 8px; font-size: 11.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--mist-2); }
+  .qform input[type="text"], .qform textarea, .recap textarea {
+    width: 100%; font: 400 16px/1.5 var(--sans); letter-spacing: 0; text-transform: none; color: var(--light);
+    background: rgba(255,255,255,.03); border: 1px solid var(--line-strong); border-radius: 6px; padding: 12px 14px;
+  }
+  .qform textarea { margin-top: 14px; }
+  .qform input:focus, .qform textarea:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .qform button { justify-self: start; margin-top: 10px; }
+  .recap { margin-top: 44px; padding: 28px; border: 1px solid var(--gold); border-radius: 8px; display: grid; gap: 16px; }
+</style>
+
+<script>
+  const form = document.getElementById('avis-form') as HTMLFormElement;
+  const KEY = 'proposition-christine';
+  // Brouillon gardé sur l'appareil (si le navigateur le permet)
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) ?? '{}') as Record<string, string>;
+    for (const [k, v] of Object.entries(saved)) {
+      const radio = form.querySelector<HTMLInputElement>(`input[type="radio"][name="${k}"][value="${CSS.escape(v)}"]`);
+      if (radio) radio.checked = true;
+      else { const f = form.elements.namedItem(k); if (f && 'value' in f) (f as HTMLInputElement).value = v; }
+    }
+  } catch { /* stockage indisponible : on continue sans brouillon */ }
+  const save = () => {
+    try { localStorage.setItem(KEY, JSON.stringify(Object.fromEntries(new FormData(form) as unknown as Iterable<[string, string]>))); } catch {}
+  };
+  form.addEventListener('input', save);
+  form.addEventListener('change', save);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const lines = ['Mes retours sur la proposition de structure du site :', ''];
+    form.querySelectorAll('fieldset').forEach((fs, i) => {
+      const q = fs.querySelector('legend')?.textContent?.replace(/^[\d+]+/, '').trim() ?? '';
+      const radio = fs.querySelector<HTMLInputElement>('input[type="radio"]:checked');
+      const note = fs.querySelector<HTMLInputElement>('input[type="text"]')?.value.trim();
+      const libre = fs.querySelector<HTMLTextAreaElement>('textarea')?.value.trim();
+      const answer = [radio?.value, note, libre].filter(Boolean).join(' · ') || '(pas de réponse)';
+      lines.push(fs.querySelector('textarea') ? `Autre : ${answer}` : `${i + 1}. ${q}\n   → ${answer}`, '');
+    });
+    const text = lines.join('\n').trim();
+    const recap = document.getElementById('recap')!;
+    (document.getElementById('recap-text') as HTMLTextAreaElement).value = text;
+    (document.getElementById('mail') as HTMLAnchorElement).href =
+      'mailto:?subject=' + encodeURIComponent('Site : mes retours sur la nouvelle structure') + '&body=' + encodeURIComponent(text);
+    recap.hidden = false;
+    recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  document.getElementById('copy')?.addEventListener('click', async () => {
+    const area = document.getElementById('recap-text') as HTMLTextAreaElement;
+    const status = document.getElementById('copied')!;
+    try {
+      await navigator.clipboard.writeText(area.value);
+      status.textContent = 'Message copié. Collez-le dans un e-mail ou un SMS pour Morgan.';
+    } catch {
+      area.focus(); area.select();
+      status.textContent = 'Le texte est sélectionné : faites Copier (Cmd + C), puis collez-le dans votre message.';
+    }
+  });
+</script>

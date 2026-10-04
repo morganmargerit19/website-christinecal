@@ -28,13 +28,17 @@ import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
 import { HUBS, fichePath, mailto, u, type Hub } from '../lib/site';
 import { exists, isStrip, visualOf } from '../lib/images';
 import { parseDate } from '../lib/agenda';
+import { ECOLE, ECOLE_GEO } from '../lib/ecole';
+import GeoFleur from '../components/GeoFleur.astro';
+import GeoMerkaba from '../components/GeoMerkaba.astro';
+import GeoFibonacci from '../components/GeoFibonacci.astro';
 
 // Mêmes noms que les blocs de l'éditeur (cf. tina/config.ts → bodyTemplates).
 const blocks = { FloatImage, CenteredText, TwoColumns, Column, MediaDuo, VideoBlock, SlideshowBlock, GalleryBlock, Lead, Note };
 
 interface Props { entry: CollectionEntry<'fiches'> }
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const f = entry.data;
 const slug = slugOf(entry.id);
 const hub = HUBS[f.hub as Hub];
@@ -46,10 +50,16 @@ const siblings = parent
   : [];
 
 // Gabarit « Sortir de sa matrice » : l'ennéagramme est déjà dans le corps, le hublot prend le chat-lion.
+// École 5D : le parcours en 3 étapes, montré sur la page du parcours et sur chacun de ses stages.
+const ecole = slug === ECOLE || f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
+const etapes = ecole ? stagesOf(ecole, all) : [];
+// Sommaire pour les pages longues (4 titres ou plus).
+const toc = headings.filter((h) => h.depth === 2 && h.text.trim());
+const MAX_VIDEOS = 2;
 const visual =
   f.richLayout === 'sortir-matrice' ? '/images/wp/chat-mirroir.jpg'
   : slug === 'construire-son-vaisseau' ? '/images/geometrie/merkaba-activation.svg' // visuel animé validé avec Christine
-  : slug === 'merkaba' ? undefined
+  : ECOLE_GEO[slug] ? undefined // les 3 stages : leur géométrie sacrée animée
   : visualOf(f);
 const strip = [f.image, f.banner].find((s) => s && s !== visual && exists(s) && isStrip(s));
 const dates = f.dates.filter((d) => d.trim());
@@ -70,7 +80,7 @@ const anchored = [
   ...f.sideImages.filter((s) => exists(s.src)).map((s) => ({ ...s, src: u(s.src) })),
 ];
 ---
-<Base title={`${f.title} · Christine CAL`} description={f.lede} path={hub.path} image={visual}>
+<Base title={`${f.title} · Christine CAL`} description={f.lede} path={fichePath(f.hub as Hub, slug).replace(u(''), '')} image={visual}>
   <section class="page-hero sky" aria-labelledby="titre">
     <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
     <div class="wrap split">
@@ -90,7 +100,7 @@ const anchored = [
             : children.length > 0 && <a class="btn" href="#programme">Voir le programme</a>}
         </div>
       </div>
-      <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} geo={slug === 'merkaba' ? 'merkaba' : 'fleur'} eager />
+      <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} geo={ECOLE_GEO[slug]} eager />
     </div>
   </section>
 
@@ -102,6 +112,38 @@ const anchored = [
         </dl>
       </div>
     </section>
+  )}
+
+  {etapes.length > 0 && (
+    <section class="sky" aria-label="Le parcours de l'École 5D" style="padding-block: 20px 50px">
+      <div class="wrap">
+        <p class="eyebrow">École 5D · le parcours en {etapes.length} étapes</p>
+        <ol class="etapes">
+          {etapes.map((e, i) => {
+            const s = slugOf(e.id), g = ECOLE_GEO[s];
+            return (
+              <li aria-current={s === slug ? 'step' : undefined}>
+                <a href={fichePath(e.data.hub as Hub, s)}>
+                  <span class="etape-geo">{g === 'merkaba' ? <GeoMerkaba /> : g === 'spirale' ? <GeoFibonacci /> : <GeoFleur />}</span>
+                  <span class="label">Étape {i + 1}</span>
+                  <span class="t">{e.data.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</span>
+                  <span class="m">{e.data.kicker.replace(/^Stage\s*·\s*/, '')}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  {toc.length >= 4 && (
+    <nav class="sky toc-band" aria-label="Sur cette page">
+      <div class="wrap">
+        <p class="label">Sur cette page</p>
+        <ul class="toc">{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
+      </div>
+    </nav>
   )}
 
   {strip && (
@@ -190,7 +232,7 @@ const anchored = [
         <p class="eyebrow">Voir et écouter</p>
         {f.videosHeading && <h2 class="h2" style="margin-top: 14px">{f.videosHeading}</h2>}
         <div class="video-grid">
-          {f.videos.map((v) => <VideoCard {...v} />)}
+          {f.videos.slice(0, MAX_VIDEOS).map((v) => <VideoCard {...v} />)}
           {f.audio && exists(f.audio) && (
             <figure class="video">
               {f.audioCover && exists(f.audioCover) && <img src={u(f.audioCover)} alt="" loading="lazy" style="width: 100%; max-width: 360px; border-radius: 4px" />}
@@ -202,6 +244,9 @@ const anchored = [
             </figure>
           )}
         </div>
+        {f.videos.length > MAX_VIDEOS && (
+          <a class="btn" href={u('/videos/')} style="margin-top: 40px">Toutes les vidéos ({f.videos.length - MAX_VIDEOS} de plus sur ce thème)<Icon name="arrow" /></a>
+        )}
       </div>
     </section>
   )}
@@ -229,7 +274,7 @@ const anchored = [
     </section>
   )}
 
-  {siblings.length > 0 && parent && (
+  {siblings.length > 0 && parent && etapes.length === 0 && (
     <section class="section sky">
       <div class="wrap">
         <div class="head-row">

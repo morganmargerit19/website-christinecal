@@ -1,0 +1,62 @@
+---
+/**
+ * Vidéos, DVD, radio : tout au même endroit (au lieu d'être dispersé dans les
+ * pages), en préparation du projet 2027 de Christine (vidéos et audios).
+ * Généré à partir des vidéos déjà renseignées dans les fiches et les pages.
+ */
+import Base from '../layouts/Base.astro';
+import ContactBand from '../components/ContactBand.astro';
+import VideoCard from '../components/VideoCard.astro';
+import Fleur from '../components/Fleur.astro';
+import { getFiches } from '../../src/lib/fiches';
+import { allVideos } from '../lib/content';
+import { u } from '../lib/site';
+import about from '../../src/data/about.fr.json';
+import mission from '../../src/data/mission.fr.json';
+
+const fiches = await getFiches('fr');
+const presentation = about.videos.list.map((v) => ({ ...v, from: { title: 'Qui suis-je', href: u('/qui-suis-je/') } }));
+const press = [
+  ...mission.videos.map((v) => ({ ...v, from: { title: 'Ma mission', href: u('/mission/') } })),
+  { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017', from: { title: 'Éveil à Soi', href: u('/eveil-a-soi/') } },
+  { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017', from: { title: 'Éveil à Soi', href: u('/eveil-a-soi/') } },
+];
+const { dvd, talks } = allVideos(fiches, [...presentation, ...press]);
+const sections = [
+  { id: 'dvd', eyebrow: 'DVD DEBOWSKA', title: 'Forums et conférences filmés', list: dvd,
+    note: 'DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.' },
+  { id: 'conferences', eyebrow: 'Radio · conférences · présentation', title: 'Interviews et conférences', list: talks },
+];
+---
+<Base title="Vidéos et DVD · Christine CAL" description="Les vidéos de Christine CAL : DVD Debowska, conférences, interviews radio et présentation." path="/videos/">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Vidéos</span></nav>
+      <p class="eyebrow" style="margin-top: 44px">Vidéos · DVD · Radio</p>
+      <h1 id="titre">Voir et écouter</h1>
+      <p class="lede-serif">{dvd.length + talks.length} vidéos : forums, conférences, interviews. Chacune renvoie à la page qui en parle.</p>
+      <div class="toc" style="margin-top: 28px">{sections.map((s) => <a href={`#${s.id}`}>{s.title} ({s.list.length})</a>)}</div>
+    </div>
+  </section>
+
+  {sections.map((s, i) => s.list.length > 0 && (
+    <section id={s.id} class:list={['section', i % 2 ? 'sky' : 'deep']}>
+      <div class="wrap">
+        <p class="eyebrow">{s.eyebrow}</p>
+        <h2 class="h2" style="margin-top: 14px">{s.title}</h2>
+        {s.note && <p class="serif italic" style="margin-top: 16px; max-width: 720px; font-size: 17px; color: var(--mist-2)">{s.note}</p>}
+        <div class="video-grid video-grid--3">
+          {s.list.map((v) => (
+            <div class="stack gap-s">
+              <VideoCard id={v.id} title={v.title} meta={v.meta} />
+              {v.from && <a class="arrow" href={v.from.href} style="min-height: 32px">{v.from.title}</a>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <ContactBand heading="Organiser une conférence ?" text="Pour une conférence, un forum ou une intervention, en salle ou via Zoom" />
+</Base>

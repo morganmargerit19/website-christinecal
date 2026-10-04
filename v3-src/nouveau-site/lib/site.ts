@@ -9,6 +9,9 @@ export const u = (path: string) => base + path;
 /** Copie à partager (artifact) : pas d'iframe YouTube, les vidéos s'ouvrent sur YouTube. */
 export const isArtifact = import.meta.env.NOUVEAU_SITE_TARGET === 'artifact';
 
+/** Maquette : bouton « Donner mon avis » et page Proposition. À passer à false à la mise en ligne. */
+export const SHOW_PROPOSITION = true;
+
 export type Hub = 'eveil-a-soi' | 'eveil-au-soi';
 
 export const HUBS: Record<Hub, { label: string; path: string; sub: string }> = {
@@ -28,13 +31,18 @@ export const CONTACT = {
 export const mailto = (subject?: string) =>
   `mailto:${CONTACT.email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
 
+/**
+ * Menu proposé (7 entrées, dans l'ordre de la visite) : qui elle est, ce
+ * qu'elle propose seul à seul, puis en groupe, quand, et pour voir / écouter.
+ * Le logo ramène à l'accueil ; « Ma mission » est rattachée à Qui suis-je.
+ */
 export const NAV = [
-  { label: 'Accueil', path: '/' },
-  { label: 'Qui suis-je', path: '/qui-suis-je/' },
-  { label: 'Mission', path: '/mission/' },
+  { label: 'Qui suis-je', path: '/qui-suis-je/', also: ['/mission/'] },
+  { label: 'Consultation', path: '/eveil-a-soi/consultation-mediumnique/' },
   { label: 'Éveil à Soi', path: '/eveil-a-soi/' },
   { label: 'Éveil au Soi', path: '/eveil-au-soi/' },
   { label: 'Agenda', path: '/agenda/' },
+  { label: 'Vidéos', path: '/videos/' },
   { label: 'Contact', path: '/contact/' },
 ];
 
