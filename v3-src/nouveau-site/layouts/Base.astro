@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Sprites from '../components/Sprites.astro';
-import { SHOW_PROPOSITION, u } from '../lib/site';
+import { ANNONCE, SHOW_PROPOSITION, u } from '../lib/site';
 import '../styles/relier.css';
 
 interface Props {
@@ -34,7 +34,7 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" />
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
-  <body>
+  <body class={ANNONCE ? 'has-annonce' : undefined}>
     <a class="skip-link" href="#main">Aller au contenu</a>
     <Sprites />
     <Header current={path} />

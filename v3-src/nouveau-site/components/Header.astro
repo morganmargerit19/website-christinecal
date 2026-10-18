@@ -1,5 +1,5 @@
 ---
-import { NAV, u } from '../lib/site';
+import { ANNONCE, NAV, u } from '../lib/site';
 import Icon from './Icon.astro';
 interface Props { current?: string }
 const { current } = Astro.props;
@@ -9,6 +9,11 @@ const active = NAV.filter((n) => current && [n.path, ...(n.also ?? [])].some((p)
 const isCurrent = (path: string) => (active?.path === path ? 'page' : undefined);
 ---
 <header class="site-header">
+  {ANNONCE && (
+    <p class="annonce">
+      {ANNONCE.lien ? <a href={/^\//.test(ANNONCE.lien) ? u(ANNONCE.lien) : ANNONCE.lien}>{ANNONCE.texte}</a> : ANNONCE.texte}
+    </p>
+  )}
   <div class="wrap bar">
     <a class="brand" href={u('/')} aria-label="Christine CAL, accueil">Christine CAL</a>
     <nav class="main-nav" aria-label="Navigation principale">

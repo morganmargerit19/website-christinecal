@@ -48,15 +48,15 @@ import { CONTACT } from '../lib/site';
   .form button { justify-self: start; }
 </style>
 
-<script>
+<script define:vars={{ email: CONTACT.email }} is:inline>
   // Sans serveur : on compose un e-mail pré-rempli (aucune donnée stockée, aucun cookie).
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const form = document.getElementById('contact-form');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const d = new FormData(form);
     const name = String(d.get('name') ?? '');
     const subject = encodeURIComponent(`Message du site — ${name}`);
     const body = encodeURIComponent(`${d.get('message') ?? ''}\n\n— ${name} (${d.get('email') ?? ''})`);
-    window.location.href = `mailto:cc.christinecal@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
   });
 </script>

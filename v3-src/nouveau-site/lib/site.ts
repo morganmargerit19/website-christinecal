@@ -21,11 +21,14 @@ export const HUBS: Record<Hub, { label: string; path: string; sub: string }> = {
 
 export const fichePath = (hub: Hub, slug: string) => u(`/${hub}/${slug}/`);
 
+// Coordonnées et annonce : modifiables par Christine dans « Mon espace » (Petites infos).
+import infos from '../../src/data/infos.json';
 export const CONTACT = {
-  email: 'cc.christinecal@gmail.com',
-  phone: '06 80 42 85 91',
-  tel: '+33680428591',
+  email: infos.email || 'cc.christinecal@gmail.com',
+  phone: infos.telephone || '06 80 42 85 91',
+  tel: '+33' + (infos.telephone || '06 80 42 85 91').replace(/\D/g, '').replace(/^0/, ''),
 };
+export const ANNONCE = infos.annonce?.actif && infos.annonce.texte ? infos.annonce : null;
 
 /** Lien « M'écrire » avec un objet pré-rempli (ex. inscription à un stage). */
 export const mailto = (subject?: string) =>

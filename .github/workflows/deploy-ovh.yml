@@ -10,6 +10,7 @@ on:
     branches: [main]
     paths:
       - 'v3-src/**'
+      - 'mon-espace/**'
       - '.github/workflows/deploy-ovh.yml'
 
 concurrency:
@@ -43,6 +44,15 @@ jobs:
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           GITHUB_BRANCH: main
         run: npm run build
+
+      # « Mon espace » (gestion du site par Christine) : ajouté au site publié.
+      # Sa configuration (mot de passe, clé GitHub) n'est PAS dans le dépôt :
+      # elle reste sur le serveur, hors du dossier public (mon-espace/INSTALLATION.md).
+      - name: Ajout de Mon espace
+        run: |
+          mkdir -p v3-src/dist/mon-espace/vendor
+          cp mon-espace/index.html mon-espace/app.js mon-espace/app.css mon-espace/api.php mon-espace/.htaccess v3-src/dist/mon-espace/
+          cp mon-espace/vendor/*.js mon-espace/vendor/.htaccess v3-src/dist/mon-espace/vendor/
 
       # OVH mutualisé refuse le FTPS explicite (« 500 This security scheme is not
       # implemented »). On déploie donc en SFTP (port 22, méthode OVH recommandée)
