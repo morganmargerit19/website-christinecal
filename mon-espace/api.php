@@ -232,7 +232,7 @@ function commit_file(string $path, string $bytes, ?string $sha, string $message)
     ];
     if ($sha) $body['sha'] = $sha;
     [$status, $json] = gh('PUT', repo_path($path), $body);
-    if ($status === 409 || $status === 422 && str_contains((string) ($json['message'] ?? ''), 'sha')) {
+    if ($status === 409 || $status === 422 && strpos((string) ($json['message'] ?? ''), 'sha') !== false) {
         fail(409, "Cette page vient d'être modifiée ailleurs. Rechargez pour voir la dernière version.");
     }
     if ($status >= 300) fail(502, "L'enregistrement a échoué (GitHub $status). Réessayez ; rien n'a été perdu.");
@@ -292,8 +292,9 @@ switch ($action) {
         $title = trim(preg_replace('/\s+/', ' ', (string) ($input['title'] ?? '')) ?? '');
         if (!allowed_text_path($path)) fail(400, 'Ce fichier ne peut pas être modifié depuis cet espace.');
         if (strlen($text) > 300000) fail(413, 'Le texte est trop long.');
-        if (str_ends_with($path, '.json') && json_decode($text) === null) fail(400, 'Données invalides.');
-        if (!str_ends_with($path, '.json') && !preg_match('/^---\n.+?\n---\n/s', $text)) fail(400, 'Fiche invalide.');
+        $isJson = substr($path, -5) === '.json';
+        if ($isJson && json_decode($text) === null) fail(400, 'Données invalides.');
+        if (!$isJson && !preg_match('/^---\n.+?\n---\n/s', $text)) fail(400, 'Fiche invalide.');
         $msg = 'Mon espace : ' . ($sha ? 'modifie' : 'ajoute') . ' « ' . mb_substr($title ?: basename($path), 0, 80) . ' »';
         ok(commit_file($path, $text, $sha, $msg));
 
