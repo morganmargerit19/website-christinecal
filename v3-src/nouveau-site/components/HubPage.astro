@@ -9,6 +9,7 @@ import Card from './Card.astro';
 import VideoCard from './VideoCard.astro';
 import AgendaList from './AgendaList.astro';
 import Icon from './Icon.astro';
+import Fleur from './Fleur.astro';
 import { getFiches, stagesOf } from '../../src/lib/fiches';
 import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
@@ -24,6 +25,9 @@ const fiches = await getFiches('fr');
 const cards = topLevel(fiches, hub);
 const regular = cards.filter((c, i) => !(i === 0 && c.data.featured)).length;
 const { entries } = buildAgenda(fiches.filter((f) => f.data.hub === hub));
+// Éveil au Soi : disposition de la page du site actuel (retours de Christine) —
+// titre, bandeau, introduction complète, cartes, phrases de clôture.
+const classic = hub === 'eveil-au-soi';
 const bg = hub === 'eveil-a-soi'
   ? { src: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%' }
   : { src: '/images/wp/shasta2.jpg', pos: '50% 30%' };
@@ -37,10 +41,14 @@ const videos = hub === 'eveil-a-soi'
   : [];
 ---
 <Base title={data.metaTitle.replace(' — ', ' · ')} description={data.metaDesc} path={HUBS[hub].path} image={bg.src}>
-  <section class="page-hero" aria-labelledby="titre">
-    <img class="bg" src={u(bg.src)} alt="" style={`object-position:${bg.pos}`} fetchpriority="high" />
-    <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.15) 75%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>
-    <div class="wrap" style="padding-bottom: clamp(90px, 10vw, 150px)">
+  <section class:list={['page-hero', { sky: classic }]} aria-labelledby="titre">
+    {classic ? <Fleur class="fleur fleur--right" stroke="rgba(233,204,138,.16)" width={0.45} /> : (
+      <>
+        <img class="bg" src={u(bg.src)} alt="" style={`object-position:${bg.pos}`} fetchpriority="high" />
+        <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.15) 75%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>
+      </>
+    )}
+    <div class="wrap" style={classic ? undefined : 'padding-bottom: clamp(70px, 9vw, 130px)'}>
       <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
       <div style="max-width: 680px">
         <p class="eyebrow" style="margin-top: 44px">{data.eyebrow}</p>
@@ -50,7 +58,19 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
-  {data.intro.length > 0 && (
+  {classic && (
+    <section class="sky" style="padding-bottom: 10px">
+      <div class="wrap"><figure class="framed"><img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" /></figure></div>
+    </section>
+  )}
+
+  {data.intro.length > 0 && classic && (
+    <section class="section sky">
+      <div class="wrap"><div class="intro-lines">{data.intro.map((p) => <p set:html={p} />)}</div></div>
+    </section>
+  )}
+
+  {data.intro.length > 0 && !classic && (
     <section class="section sky">
       <div class="wrap">
         {/* Deux paragraphes d'entrée, le reste à la demande : on arrive vite aux stages. */}
@@ -89,7 +109,7 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
-  {entries.length > 0 && (
+  {entries.length > 0 && !classic && (
     <section class="section sky">
       <div class="wrap">
         <div class="head-row">

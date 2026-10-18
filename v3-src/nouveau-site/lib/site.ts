@@ -10,7 +10,7 @@ export const u = (path: string) => base + path;
 export const isArtifact = import.meta.env.NOUVEAU_SITE_TARGET === 'artifact';
 
 /** Maquette : bouton « Donner mon avis » et page Proposition. À passer à false à la mise en ligne. */
-export const SHOW_PROPOSITION = true;
+export const SHOW_PROPOSITION = false;
 
 export type Hub = 'eveil-a-soi' | 'eveil-au-soi';
 
@@ -32,15 +32,20 @@ export const mailto = (subject?: string) =>
   `mailto:${CONTACT.email}${subject ? '?subject=' + encodeURIComponent(subject) : ''}`;
 
 /**
- * Menu proposé (7 entrées, dans l'ordre de la visite) : qui elle est, ce
- * qu'elle propose seul à seul, puis en groupe, quand, et pour voir / écouter.
- * Le logo ramène à l'accueil ; « Ma mission » est rattachée à Qui suis-je.
+ * Menu (retours de Christine, 12/10) : Mission en accès direct (beaucoup de
+ * ses clients sont peu à l'aise avec Internet), la consultation reste dans
+ * Éveil à Soi, l'École 5D et le Mont Shasta deviennent des sections à part.
+ * `also` : les pages rattachées qui allument la même entrée.
  */
-export const NAV = [
-  { label: 'Qui suis-je', path: '/qui-suis-je/', also: ['/mission/'] },
-  { label: 'Consultation', path: '/eveil-a-soi/consultation-mediumnique/' },
+export const ECOLE_PATH = '/eveil-a-soi/construire-son-vaisseau/';
+export const SHASTA_PATH = '/eveil-au-soi/les-intra-telos-mont-shasta/';
+export const NAV: { label: string; path: string; also?: string[] }[] = [
+  { label: 'Qui suis-je', path: '/qui-suis-je/' },
+  { label: 'Mission', path: '/mission/' },
   { label: 'Éveil à Soi', path: '/eveil-a-soi/' },
+  { label: 'École 5D', path: ECOLE_PATH },
   { label: 'Éveil au Soi', path: '/eveil-au-soi/' },
+  { label: 'Mont Shasta', path: SHASTA_PATH },
   { label: 'Agenda', path: '/agenda/' },
   { label: 'Vidéos', path: '/videos/' },
   { label: 'Contact', path: '/contact/' },

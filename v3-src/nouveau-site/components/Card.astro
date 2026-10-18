@@ -8,8 +8,7 @@ import { nextDate } from '../lib/agenda';
 import Geo from './Geo.astro';
 import GeoFleur from './GeoFleur.astro';
 import GeoMerkaba from './GeoMerkaba.astro';
-import GeoFibonacci from './GeoFibonacci.astro';
-import { ECOLE_GEO } from '../lib/ecole';
+import { ACTIVATION, ECOLE_GEO } from '../lib/ecole';
 interface Props { entry: CollectionEntry<'fiches'>; count?: number; feature?: boolean }
 const { entry, count, feature = false } = Astro.props;
 const f = entry.data;
@@ -21,7 +20,7 @@ const meta = !count ? [f.place, f.format, f.duration, f.price].filter(Boolean).j
 ---
 <a class:list={['card', { 'card--feature': feature }]} href={fichePath(f.hub as Hub, slugOf(entry.id))}>
   <span class:list={['img', { 'img--geo': geo }]}>{img ? <img src={u(img)} alt={f.imageAlt || ''} loading="lazy" />
-    : geo === 'merkaba' ? <GeoMerkaba /> : geo === 'spirale' ? <GeoFibonacci /> : geo === 'fleur' ? <GeoFleur /> : <Geo />}</span>
+    : geo === 'merkaba' ? <GeoMerkaba /> : geo === 'activation' ? <img class="activation" src={u(ACTIVATION)} alt="" loading="lazy" /> : geo === 'fleur' ? <GeoFleur /> : <Geo />}</span>
   <span>
     <span class="label">{label}</span>
     <span class="t">{f.title}</span>

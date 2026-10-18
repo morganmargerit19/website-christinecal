@@ -1,7 +1,6 @@
 ---
 /** Bandeau de fin de page : l'appel, les deux boutons, puis le pied de page. */
 import { CONTACT, mailto } from '../lib/site';
-import Arcs from './Arcs.astro';
 import Footer from './Footer.astro';
 interface Props { heading?: string; text?: string; subject?: string; cta?: string; motto?: boolean }
 const {
@@ -12,10 +11,6 @@ const {
 ---
 <section id="contact" class="contact sky">
   <div class="wrap">
-    <div class="ring-point">
-      <div class="glow-point" aria-hidden="true"></div>
-      <Arcs width={3.4} />
-    </div>
     <h2>{heading}<span class="caret" aria-hidden="true"></span></h2>
     <p class="muted" style="margin-top: 22px; font-size: 19px">{text}</p>
     <div class="actions">
