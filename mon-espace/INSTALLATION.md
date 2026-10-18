@@ -53,7 +53,7 @@ Tout est annulable dans l'historique GitHub.
    Si le site n'est pas publié dans `www` (variable `OVH_FTP_DIR`), le fichier
    va dans le dossier parent du dossier du site.
 5. **Vérifier PHP** dans l'espace client OVH (Hébergement › Informations
-   générales) : PHP 8.1 ou plus récent.
+   générales) : PHP 7.4 ou plus récent.
 6. **Mettre en ligne** : fusionner la PR. Le déploiement copie `mon-espace/`.
    Ensuite, ouvre `https://www.christinecal.com/mon-espace/` et connecte-toi
    avec l'e-mail et le mot de passe de Christine.
