@@ -21,15 +21,37 @@
   let bodyDirty = false;
 
   // ------------------------------------------------------------ API
+  // Texte envoyé en base64 : le pare-feu de l'hébergeur bloque parfois un
+  // contenu qui ressemble à du code (HTML, JSON…).
+  const toBase64 = (s) => {
+    const bytes = new TextEncoder().encode(s);
+    let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return btoa(bin);
+  };
+
   async function api(action, payload = {}) {
-    const res = await fetch('api.php', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json', 'X-CSRF': csrf },
-      body: JSON.stringify({ action, ...payload }),
-    });
+    if (typeof payload.text === 'string') {
+      const { text, ...rest } = payload;
+      payload = { ...rest, text64: toBase64(text) };
+    }
+    let res;
+    try {
+      res = await fetch('api.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF': csrf },
+        body: JSON.stringify({ action, ...payload }),
+      });
+    } catch {
+      throw new Error('Pas de connexion Internet. Vérifiez le Wi-Fi puis réessayez.');
+    }
+    const raw = await res.text();
     let json;
-    try { json = await res.json(); } catch { json = { ok: false, error: 'Réponse inattendue du serveur.' }; }
+    try { json = JSON.parse(raw); } catch {
+      console.error('Mon espace : réponse du serveur', res.status, raw.slice(0, 500));
+      json = { ok: false, error: `Réponse inattendue du serveur (code ${res.status}). Appelez Morgan.` };
+    }
     if (res.status === 401 && action !== 'login') { show('login'); }
     if (!json.ok) throw new Error(json.error || 'Une erreur est survenue.');
     return json;

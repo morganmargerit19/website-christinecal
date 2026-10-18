@@ -17,6 +17,19 @@
 
 declare(strict_types=1);
 
+// Toujours une réponse JSON lisible par l'espace : pas d'avertissement PHP
+// mêlé à la réponse, et une erreur fatale devient un message d'erreur.
+ini_set('display_errors', '0');
+ob_start();
+register_shutdown_function(function (): void {
+    $e = error_get_last();
+    if (!$e || !in_array($e['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) return;
+    while (ob_get_level()) ob_end_clean();
+    if (!headers_sent()) http_response_code(500);
+    $msg = preg_replace('#(/[^\s/:]+)+/#', '', $e['message']);
+    echo json_encode(['ok' => false, 'error' => 'Erreur du serveur : ' . $msg], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+});
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 header('X-Content-Type-Options: nosniff');
@@ -72,14 +85,16 @@ function allowed_text_path(string $path): bool
 // ---------------------------------------------------------------- Réponses
 function fail(int $code, string $message): never
 {
+    if (ob_get_level()) ob_clean();
     http_response_code($code);
-    echo json_encode(['ok' => false, 'error' => $message], JSON_UNESCAPED_UNICODE);
+    echo json_encode(['ok' => false, 'error' => $message], JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
     exit;
 }
 
 function ok(array $data = []): never
 {
-    echo json_encode(['ok' => true] + $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    if (ob_get_level()) ob_clean();
+    echo json_encode(['ok' => true] + $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_INVALID_UTF8_SUBSTITUTE);
     exit;
 }
 
@@ -271,7 +286,8 @@ switch ($action) {
     case 'save':
         require_login();
         $path = (string) ($input['path'] ?? '');
-        $text = (string) ($input['text'] ?? '');
+        $text = isset($input['text64']) ? base64_decode((string) $input['text64'], true) : (string) ($input['text'] ?? '');
+        if ($text === false) fail(400, 'Texte illisible.');
         $sha = isset($input['sha']) && $input['sha'] !== '' ? (string) $input['sha'] : null;
         $title = trim(preg_replace('/\s+/', ' ', (string) ($input['title'] ?? '')) ?? '');
         if (!allowed_text_path($path)) fail(400, 'Ce fichier ne peut pas être modifié depuis cet espace.');
