@@ -70,6 +70,38 @@ jobs:
             open -u \"$SFTP_USER\",\"$SFTP_PASS\" sftp://$SFTP_HOST:22; \
             mirror -R --verbose --delete --parallel=4 ./v3-src/dist/ \"$SFTP_DIR\""
 
+      # Configuration de Mon espace, écrite à partir de 2 secrets du dépôt
+      # (MON_ESPACE_PASSWORD_HASH, MON_ESPACE_GITHUB_TOKEN) et déposée dans le
+      # dossier parent du site (à côté de « www ») : jamais dans le site publié,
+      # jamais dans le dépôt. Sans ces secrets, l'étape ne fait rien.
+      - name: Configuration de Mon espace
+        env:
+          SFTP_HOST: ${{ secrets.OVH_FTP_HOST }}
+          SFTP_USER: ${{ secrets.OVH_FTP_USER }}
+          SFTP_PASS: ${{ secrets.OVH_FTP_PASSWORD }}
+          SFTP_DIR: ${{ vars.OVH_FTP_DIR }}
+          ME_HASH: ${{ secrets.MON_ESPACE_PASSWORD_HASH }}
+          ME_TOKEN: ${{ secrets.MON_ESPACE_GITHUB_TOKEN }}
+        run: |
+          if [ -z "$ME_HASH" ] || [ -z "$ME_TOKEN" ]; then
+            echo "Secrets Mon espace absents : configuration non déposée."
+            exit 0
+          fi
+          printf '%s' "$ME_HASH" | grep -Eq '^\$2[aby]\$[0-9]{2}\$[./A-Za-z0-9]{53}$' \
+            || { echo "::error::MON_ESPACE_PASSWORD_HASH doit être l'empreinte qui commence par \$2y\$12\$"; exit 1; }
+          printf '%s' "$ME_TOKEN" | grep -Eq '^github_pat_[A-Za-z0-9_]+$' \
+            || { echo "::error::MON_ESPACE_GITHUB_TOKEN doit être la clé qui commence par github_pat_"; exit 1; }
+          umask 077
+          CONF="$RUNNER_TEMP/mon-espace-config.php"
+          printf "<?php\nreturn [\n    'email' => 'cc.christinecal@gmail.com',\n    'password_hash' => '%s',\n    'github_token' => '%s',\n];\n" \
+            "$ME_HASH" "$ME_TOKEN" > "$CONF"
+          DEST="$(dirname "${SFTP_DIR%/}")"
+          lftp -c "set sftp:auto-confirm yes; \
+            open -u \"$SFTP_USER\",\"$SFTP_PASS\" sftp://$SFTP_HOST:22; \
+            put \"$CONF\" -o \"$DEST/mon-espace-config.php\"; \
+            chmod 600 \"$DEST/mon-espace-config.php\""
+          rm -f "$CONF"
+
       # Redirections SEO des 2 anciens domaines (coach-medium / coach-quantique) :
       # on dépose leur .htaccess dans des dossiers dédiés sur OVH. Il restera à
       # repointer ces 2 domaines dessus dans Multisite (l'ancien WP est conservé).

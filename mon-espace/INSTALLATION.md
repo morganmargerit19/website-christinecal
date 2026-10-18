@@ -32,12 +32,20 @@ Tout est annulable dans l'historique GitHub.
    htpasswd -bnBC 12 "" 'LE-MOT-DE-PASSE' | tr -d ':\n'
    ```
    Copie le résultat, qui commence par `$2y$12$`.
-3. **Préparer le fichier de configuration** : copie
+3. **Ranger les 2 valeurs dans GitHub** : dépôt › Settings › Secrets and
+   variables › Actions › *New repository secret*, deux fois :
+   - `MON_ESPACE_PASSWORD_HASH` : l'empreinte (`$2y$12$…`) ;
+   - `MON_ESPACE_GITHUB_TOKEN` : la clé (`github_pat_…`).
+4. **C'est le déploiement qui crée le fichier de configuration** : il écrit
+   `mon-espace-config.php` à partir de ces 2 secrets et le dépose dans le
+   **dossier parent du site**, à côté de `www`. Pour changer le mot de passe
+   ou renouveler la clé, il suffit de modifier le secret puis de relancer le
+   workflow (Actions › Déploiement OVH › *Run workflow*).
+
+   Méthode manuelle, sans les secrets : copie
    `mon-espace/mon-espace-config.example.php` sous le nom
-   `mon-espace-config.php`, puis remplace `password_hash` et `github_token`.
-4. **Le déposer sur OVH** (FileZilla ou Cyberduck, en SFTP, mêmes identifiants
-   que le déploiement) dans le **dossier personnel**, c'est-à-dire **à côté** de
-   `www`, pas dedans :
+   `mon-espace-config.php`, remplis-le, puis dépose-le en SFTP (mêmes
+   identifiants que le déploiement) **à côté** de `www`, pas dedans :
    ```
    /home/<identifiant>/mon-espace-config.php   ← ici
    /home/<identifiant>/www/                    ← le site
