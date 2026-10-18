@@ -6,3 +6,6 @@ dist/
 .env
 public/admin/
 tina/__generated__/
+
+# Essai local du nouveau site (astro.nouveau-site.config.mjs)
+dist-nouveau-site/

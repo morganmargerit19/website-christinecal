@@ -1,0 +1,41 @@
+---
+/**
+ * Accueil : le portail, comme sur le site actuel (souhait de Christine) — la
+ * Terre, son nom, ses deux portes. Un seul écran, le menu donne accès à tout.
+ */
+import Base from '../layouts/Base.astro';
+import { ui } from '../../src/i18n/ui';
+import { HUBS, u } from '../lib/site';
+
+const t = ui.fr;
+const portes = [
+  { hub: 'eveil-a-soi' as const, sub: t.paths.aSoi.sub },
+  { hub: 'eveil-au-soi' as const, sub: t.paths.auSoi.sub },
+];
+---
+<Base title="Christine CAL · Éveil à sa multidimensionnalité" description={t.meta.homeDescription} path="/">
+  <section class="portal" aria-label="Portail">
+    <img class="bg" src={u('/images/wp/portail-terre.png')} alt="La Terre vue de l'espace, un point de lumière se lève sur l'horizon" fetchpriority="high" />
+    <div class="veil"></div>
+    <div class="glow-point" aria-hidden="true"></div>
+    <div class="portal-top">
+      <div class="emblem-cc" aria-hidden="true"><span>CC</span></div>
+      <p class="eyebrow">{t.hero.portalEyebrow}</p>
+      <h1>Christine CAL</h1>
+      <p class="baseline">{t.hero.portalBaseline}</p>
+    </div>
+    <div class="doors">
+      {portes.map((p) => (
+        <a class="door-oval" href={u(HUBS[p.hub].path)}>
+          <b>{HUBS[p.hub].label}</b><small>{p.sub}</small>
+        </a>
+      ))}
+    </div>
+    <nav class="portal-legal" aria-label="Informations légales">
+      <span>© {new Date().getFullYear()} Christine CAL</span>
+      <a href={u('/mentions-legales/')}>Mentions légales</a>
+      <a href={u('/politique-de-confidentialite/')}>Confidentialité</a>
+      <a href={u('/cookies/')}>Cookies</a>
+    </nav>
+  </section>
+</Base>

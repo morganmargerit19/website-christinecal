@@ -1,13 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content';
 import Fiche from '../../layouts/Fiche.astro';
+import { getFiches, slugOf } from '../../lib/fiches';
 
 export async function getStaticPaths() {
-  const fiches = await getCollection(
-    'fiches',
-    (e) => e.data.hub === 'eveil-a-soi' && e.data.lang === 'fr' && !e.data.draft,
-  );
-  return fiches.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+  const fiches = (await getFiches('fr')).filter((e) => e.data.hub === 'eveil-a-soi');
+  return fiches.map((entry) => ({ params: { slug: slugOf(entry.id) }, props: { entry } }));
 }
 
 const { entry } = Astro.props;

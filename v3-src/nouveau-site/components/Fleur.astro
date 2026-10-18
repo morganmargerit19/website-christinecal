@@ -1,0 +1,8 @@
+---
+/** Fleur de vie au trait doré. */
+interface Props { class?: string; stroke?: string; width?: number; spin?: boolean }
+const { class: cls, stroke = 'rgba(233,204,138,.12)', width = 0.35, spin = true } = Astro.props;
+---
+<svg class:list={[cls, { spin }]} viewBox="36 36 128 128" aria-hidden="true">
+  <use href="#fleur" fill="none" stroke={stroke} stroke-width={width} />
+</svg>

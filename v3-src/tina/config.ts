@@ -12,10 +12,10 @@ import { defineConfig } from 'tinacms';
  * reflète intégralement (c'est ce qui manquait à l'ancienne config Sveltia, qui
  * effaçait sideImages / inlineMedia / wideBody / audioCover / bodyImageBelow).
  *
- * ⚠️ Le corps des fiches contient du HTML brut (<div class>, <center>,
- * <figure>…). Le champ « body » est donc un textarea (type string), JAMAIS un
- * champ rich-text : Tina re-sérialise le rich-text via son parseur MDX et
- * corromprait/effacerait ce HTML. Un textarea l'écrit verbatim.
+ * Le corps des fiches (.mdx) est un éditeur riche + blocs (`bodyTemplates`).
+ *
+ * Christine voit la collection « Mes stages et pages » en affichage SIMPLE :
+ * les réglages de mise en page y sont masqués (mais conservés), cf. `ficheFields`.
  */
 
 // Branche ciblée par Tina Cloud (doit correspondre à la branche déployée).
@@ -150,61 +150,143 @@ const bodyTemplates = [
   },
 ];
 
-const fiches = {
-  name: 'fiches',
-  label: 'Cartes (stages, ateliers, consultations, voyages…)',
-  path: 'src/content/fiches',
-  format: 'mdx' as const,
-  // FR à la racine, traductions dans en/ es/ it/ pl/ — toutes partagent ce schéma.
-  ui: {
-    filename: {
-      readonly: false,
-      slugify: (values: { title?: string }) =>
-        (values?.title || 'carte')
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[̀-ͯ]/g, '')
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/(^-|-$)/g, ''),
-    },
-  },
-  fields: [
-    { type: 'string', name: 'lang', label: 'Langue', options: LANGS, ui: { component: 'select' } },
-    { type: 'string', name: 'title', label: 'Titre', required: true, isTitle: true },
-    { type: 'string', name: 'kicker', label: 'Sur-titre (Stage, Atelier, Consultation…)', required: true },
-    { type: 'string', name: 'hub', label: 'Univers', options: HUBS, required: true, ui: { component: 'select' } },
-    { type: 'string', name: 'category', label: 'Catégorie', options: CATEGORIES, required: true, ui: { component: 'select' } },
-    { type: 'number', name: 'order', label: "Ordre d'affichage (petit = en premier)" },
-    { type: 'string', name: 'lede', label: 'Résumé court (chapeau de page)', required: true, ui: { component: 'textarea' } },
-    { type: 'string', name: 'cardLede', label: 'Texte de la carte (si différent du résumé)', ui: { component: 'textarea' } },
+// Rubriques pouvant accueillir des stages (slug de la fiche parente). Un stage
+// qui choisit une rubrique s'affiche dans sa page « Au programme ». « aucune »
+// ne correspond à aucune fiche : le site la traite comme une absence de rubrique.
+const RUBRIQUES = [
+  { value: 'aucune', label: '— Aucune (carte directement sur la page Éveil à / au Soi)' },
+  { value: 'construire-son-vaisseau', label: 'Construire son vaisseau (Éveil à Soi)' },
+  { value: 'la-team-galactique', label: 'La Team galactique (Éveil au Soi)' },
+  { value: 'les-extras-du-bugarach', label: 'Les Extras du Bugarach (Éveil au Soi)' },
+  { value: 'les-intra-telos-mont-shasta', label: 'Mont Shasta / Telos (Éveil au Soi)' },
+  { value: 'retrouver-sa-memoire-galactique', label: 'Retrouver sa mémoire galactique (Éveil au Soi)' },
+];
 
-    // --- Visuels ---
-    { type: 'image', name: 'image', label: 'Image principale' },
-    { type: 'string', name: 'imageAlt', label: "Texte alternatif de l'image" },
-    { type: 'image', name: 'banner', label: 'Bandeau large (haut de page)' },
-    { type: 'string', name: 'bannerAlt', label: 'Texte alternatif du bandeau' },
-    { type: 'image', name: 'slideshow', label: "Diaporama (remplace l'image principale)", list: true },
+const slugify = (values: { title?: string }) =>
+  (values?.title || 'carte')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+/**
+ * Champs des fiches. Deux affichages du MÊME jeu de champs :
+ *  - `simple` (collection de Christine, fiches françaises) : seuls les champs
+ *    utiles pour gérer un stage sont visibles ; les réglages de mise en page
+ *    sont MASQUÉS (`hidden`) mais restent déclarés, donc conservés à
+ *    l'enregistrement (cf. RÈGLE D'OR) — elle ne peut ni les voir ni les casser.
+ *  - complet (traductions, réservé à Morgan) : tout est visible.
+ */
+function ficheFields(simple: boolean) {
+  // Réglage avancé : masqué dans l'affichage simple, jamais supprimé.
+  const adv = <T extends Record<string, unknown>>(field: T): T =>
+    simple ? { ...field, ui: { component: 'hidden' } } : field;
+
+  return [
+    adv({ type: 'string', name: 'lang', label: 'Langue', options: LANGS, ui: { component: 'select' } }),
+    { type: 'string', name: 'title', label: 'Titre', required: true, isTitle: true },
     {
-      type: 'object', name: 'gallery', label: 'Galerie (dans le corps)', list: true,
-      ui: { itemProps: (i: { caption?: string }) => ({ label: i?.caption || 'Image' }) },
+      type: 'string', name: 'kicker', label: 'Petit mot au-dessus du titre', required: true,
+      description: 'Ex. : Stage, Atelier, Conférence, Voyage…',
+    },
+    {
+      type: 'string', name: 'hub', label: 'Page du site', required: true,
+      description: 'Sans effet si une rubrique est choisie juste en dessous (le stage suit sa rubrique).',
+      options: [
+        { value: 'eveil-a-soi', label: 'Éveil à Soi' },
+        { value: 'eveil-au-soi', label: 'Éveil au Soi' },
+      ],
+      ui: { component: 'select' },
+    },
+    {
+      type: 'string', name: 'rubrique', label: 'Rubrique',
+      description: 'Le stage apparaît dans « Au programme » de cette page.',
+      options: RUBRIQUES, ui: { component: 'select' },
+    },
+    {
+      type: 'boolean', name: 'draft', label: 'Masquer du site',
+      description: 'Activé = la page n’apparaît plus sur le site (rien n’est supprimé ; désactiver pour la remettre).',
+    },
+    adv({ type: 'string', name: 'category', label: 'Catégorie', options: CATEGORIES, required: true, ui: { component: 'select' } }),
+    {
+      type: 'number', name: 'order', label: "Ordre d'affichage",
+      description: 'Petit nombre = affiché en premier.',
+    },
+    { type: 'string', name: 'lede', label: 'Phrase de présentation (sous le titre)', required: true, ui: { component: 'textarea' } },
+    {
+      type: 'string', name: 'cardLede', label: 'Texte de la carte (facultatif)',
+      description: 'Si vide, la carte reprend la phrase de présentation.',
+      ui: { component: 'textarea' },
+    },
+
+    // --- Infos pratiques ---
+    {
+      type: 'string', name: 'dates', label: 'Dates', list: true,
+      description: 'Une ligne par date. Ex. : 14–15 mars 2027. La première s’affiche sur la carte.',
+    },
+    { type: 'string', name: 'place', label: 'Lieu', description: 'Ex. : Bugarach (Aude), En ligne (Zoom)…' },
+    { type: 'string', name: 'duration', label: 'Durée', description: 'Ex. : 2 jours, 7 jours…' },
+    { type: 'string', name: 'price', label: 'Tarif', description: 'Ex. : 280 €' },
+    { type: 'string', name: 'format', label: 'Format', description: 'Ex. : Présentiel, Zoom…' },
+
+    // --- Photos ---
+    { type: 'image', name: 'image', label: 'Photo principale' },
+    { type: 'string', name: 'imageAlt', label: 'Description de la photo (pour Google et les malvoyants)' },
+    {
+      type: 'image', name: 'slideshow', label: 'Diaporama (facultatif)', list: true,
+      description: 'Plusieurs photos qui défilent en haut de la page, à la place de la photo principale.',
+    },
+    {
+      type: 'object', name: 'gallery', label: 'Galerie de photos (sous le texte)', list: true,
+      ui: { itemProps: (i: { caption?: string }) => ({ label: i?.caption || 'Photo' }) },
       fields: [
-        { type: 'image', name: 'src', label: 'Image' },
-        { type: 'string', name: 'alt', label: 'Texte alternatif' },
-        { type: 'string', name: 'caption', label: 'Légende' },
+        { type: 'image', name: 'src', label: 'Photo' },
+        { type: 'string', name: 'alt', label: 'Description de la photo' },
+        { type: 'string', name: 'caption', label: 'Légende (facultatif)' },
+      ],
+    },
+
+    // --- Texte de la page : éditeur riche (gras/italique/titres/listes/liens)
+    // + blocs insérables (images, colonnes, vidéo, diaporama…). Voir `bodyTemplates`. ---
+    { type: 'rich-text', name: 'body', label: 'Texte de la page', isBody: true, templates: bodyTemplates },
+
+    // --- Vidéos / témoignages ---
+    { type: 'string', name: 'videosHeading', label: 'Titre au-dessus des vidéos (facultatif)' },
+    {
+      type: 'object', name: 'videos', label: 'Vidéos YouTube', list: true,
+      ui: { itemProps: (i: { title?: string }) => ({ label: i?.title || 'Vidéo' }) },
+      fields: [
+        { type: 'string', name: 'id', label: 'Code YouTube', description: 'Les caractères après « v= » dans l’adresse de la vidéo.' },
+        { type: 'string', name: 'title', label: 'Titre' },
+        { type: 'string', name: 'meta', label: 'Légende (date…)' },
+        { type: 'string', name: 'credit', label: 'Crédit', options: ['debowska'], ui: { component: 'select' } },
+        { type: 'image', name: 'cover', label: 'Jaquette (DVD…)' },
+        { type: 'string', name: 'coverAlt', label: 'Description de la jaquette' },
       ],
     },
     {
+      type: 'object', name: 'testimonials', label: 'Témoignages', list: true,
+      ui: { itemProps: (i: { author?: string }) => ({ label: i?.author || 'Témoignage' }) },
+      fields: [
+        { type: 'string', name: 'quote', label: 'Témoignage', ui: { component: 'textarea' } },
+        { type: 'string', name: 'author', label: 'Auteur' },
+      ],
+    },
+
+    // ─── Réglages avancés (masqués pour Christine, conservés) ───
+    adv({ type: 'image', name: 'banner', label: 'Bandeau large (haut de page)' }),
+    adv({ type: 'string', name: 'bannerAlt', label: 'Texte alternatif du bandeau' }),
+    adv({
       type: 'object', name: 'bodyImage', label: 'Image illustrative dans le texte',
       fields: [
         { type: 'image', name: 'src', label: 'Image' },
         { type: 'string', name: 'alt', label: 'Texte alternatif' },
         { type: 'string', name: 'caption', label: 'Légende' },
       ],
-    },
-    { type: 'boolean', name: 'bodyImageBelow', label: "Afficher l'image illustrative SOUS le texte" },
-
-    // --- Images positionnées à côté d'une section (flottantes) ---
-    {
+    }),
+    adv({ type: 'boolean', name: 'bodyImageBelow', label: "Afficher l'image illustrative SOUS le texte" }),
+    adv({
       type: 'object', name: 'sideImages', label: "Images à côté d'une section", list: true,
       ui: { itemProps: (i: { section?: string }) => ({ label: i?.section || 'Image latérale' }) },
       fields: [
@@ -215,10 +297,8 @@ const fiches = {
         { type: 'string', name: 'align', label: 'Alignement', options: ['left', 'right'], ui: { component: 'select' } },
         { type: 'string', name: 'size', label: 'Taille', options: ['xsmall', 'small', 'normal'], ui: { component: 'select' } },
       ],
-    },
-
-    // --- Médias insérés après une section (vidéo + rangée de photos) ---
-    {
+    }),
+    adv({
       type: 'object', name: 'inlineMedia', label: 'Médias insérés après une section', list: true,
       ui: { itemProps: (i: { section?: string }) => ({ label: i?.section || 'Bloc média' }) },
       fields: [
@@ -246,66 +326,60 @@ const fiches = {
           ],
         },
       ],
-    },
-
-    // --- Infos pratiques ---
-    { type: 'string', name: 'dates', label: 'Dates', list: true },
-    { type: 'string', name: 'duration', label: 'Durée' },
-    { type: 'string', name: 'price', label: 'Tarif' },
-    { type: 'string', name: 'format', label: 'Format (Présentiel, Zoom…)' },
-
-    // --- Audio / Vidéos ---
-    { type: 'string', name: 'audio', label: 'Audio (chemin du fichier mp3, ex. /audio/xxx.mp3)' },
-    { type: 'string', name: 'audioTitle', label: "Titre de l'audio" },
-    { type: 'image', name: 'audioCover', label: "Visuel de l'audio (jaquette)" },
-    { type: 'string', name: 'videosHeading', label: 'Titre au-dessus des vidéos' },
-    {
-      type: 'object', name: 'videos', label: 'Vidéos YouTube', list: true,
-      ui: { itemProps: (i: { title?: string }) => ({ label: i?.title || 'Vidéo' }) },
-      fields: [
-        { type: 'string', name: 'id', label: 'ID YouTube' },
-        { type: 'string', name: 'title', label: 'Titre' },
-        { type: 'string', name: 'meta', label: 'Légende (date…)' },
-        { type: 'string', name: 'credit', label: 'Crédit', options: ['debowska'], ui: { component: 'select' } },
-        { type: 'image', name: 'cover', label: 'Jaquette (DVD…)' },
-        { type: 'string', name: 'coverAlt', label: 'Texte alternatif de la jaquette' },
-      ],
-    },
-    {
+    }),
+    adv({ type: 'string', name: 'audio', label: 'Audio (chemin du fichier mp3, ex. /audio/xxx.mp3)' }),
+    adv({ type: 'string', name: 'audioTitle', label: "Titre de l'audio" }),
+    adv({ type: 'image', name: 'audioCover', label: "Visuel de l'audio (jaquette)" }),
+    adv({
       type: 'object', name: 'pendingVideos', label: 'Emplacements vidéo à intégrer', list: true,
       ui: { itemProps: (i: { title?: string }) => ({ label: i?.title || 'À intégrer' }) },
       fields: [
         { type: 'string', name: 'title', label: 'Titre' },
         { type: 'string', name: 'meta', label: 'Légende' },
       ],
-    },
+    }),
+    adv({ type: 'string', name: 'stages', label: 'Rubrique : slugs des stages regroupés (préférer le champ « Rubrique » du stage)', list: true }),
+    adv({ type: 'boolean', name: 'hideHeaderImage', label: "Masquer l'image en tête" }),
+    adv({ type: 'boolean', name: 'hideHeaderMeta', label: 'Masquer le cadre dates/format en haut' }),
+    adv({ type: 'boolean', name: 'practicalFooter', label: 'Afficher les infos pratiques en bas' }),
+    adv({ type: 'boolean', name: 'wideBody', label: 'Corps en pleine largeur' }),
+    adv({ type: 'string', name: 'richLayout', label: 'Gabarit spécial', options: ['sortir-matrice'], ui: { component: 'select' } }),
+    adv({ type: 'boolean', name: 'featured', label: 'Mise en avant' }),
+  ];
+}
 
-    // --- Témoignages ---
-    {
-      type: 'object', name: 'testimonials', label: 'Témoignages', list: true,
-      ui: { itemProps: (i: { author?: string }) => ({ label: i?.author || 'Témoignage' }) },
-      fields: [
-        { type: 'string', name: 'quote', label: 'Témoignage', ui: { component: 'textarea' } },
-        { type: 'string', name: 'author', label: 'Auteur' },
-      ],
-    },
+// Collection de Christine : les pages FRANÇAISES (racine du dossier). Affichage
+// simplifié ; pas de suppression (on masque) ni de renommage d'adresse (le nom
+// de fichier = l'URL et le lien avec les traductions).
+const fiches = {
+  name: 'fiches',
+  label: 'Mes stages et pages (français)',
+  path: 'src/content/fiches',
+  format: 'mdx' as const,
+  match: { include: '*' },
+  defaultItem: () => ({
+    lang: 'fr',
+    kicker: 'Stage',
+    category: 'stage',
+    hub: 'eveil-au-soi',
+    order: 50,
+  }),
+  ui: {
+    allowedActions: { create: true, delete: false, createFolder: false, createNestedFolder: false },
+    filename: { readonly: true, slugify },
+  },
+  fields: ficheFields(true),
+};
 
-    // --- Rubrique (regroupe des stages) ---
-    { type: 'string', name: 'stages', label: 'Rubrique : slugs des stages regroupés', list: true },
-
-    // --- Réglages de mise en page (avancé) ---
-    { type: 'boolean', name: 'hideHeaderImage', label: "Masquer l'image en tête" },
-    { type: 'boolean', name: 'hideHeaderMeta', label: 'Masquer le cadre dates/format en haut' },
-    { type: 'boolean', name: 'practicalFooter', label: 'Afficher les infos pratiques en bas' },
-    { type: 'boolean', name: 'wideBody', label: 'Corps en pleine largeur' },
-    { type: 'string', name: 'richLayout', label: 'Gabarit spécial', options: ['sortir-matrice'], ui: { component: 'select' } },
-    { type: 'boolean', name: 'featured', label: 'Mise en avant' },
-    { type: 'boolean', name: 'draft', label: 'Brouillon (caché du site)' },
-
-    // --- Contenu rédactionnel : éditeur riche (gras/italique/titres/listes/citation/lien)
-    // + blocs insérables (images, colonnes, vidéo, diaporama…). Voir `bodyTemplates`. ---
-    { type: 'rich-text', name: 'body', label: 'Contenu', isBody: true, templates: bodyTemplates },
-  ],
+// Traductions (en/ es/ it/ pl/) : affichage complet, réservé à Morgan.
+const traductions = {
+  name: 'traductions',
+  label: '⚙️ Traductions (EN/ES/IT/PL) — réservé à Morgan',
+  path: 'src/content/fiches',
+  format: 'mdx' as const,
+  match: { include: '{en,es,it,pl}/*' },
+  ui: { allowedActions: { create: false, delete: false, createFolder: false, createNestedFolder: false } },
+  fields: ficheFields(false),
 };
 
 // Pages « hors fiches » (données JSON lues par le site). Chaque page = un
@@ -548,6 +622,6 @@ export default defineConfig({
     },
   },
   schema: {
-    collections: [fiches, ...pageCollections],
+    collections: [fiches, ...pageCollections, traductions],
   },
 });

@@ -1,0 +1,28 @@
+---
+/**
+ * Spirale d'or (Fibonacci) animée : la spirale est toujours tracée, une
+ * lumière la remonte depuis le centre, les cercles d'harmonie tournent.
+ */
+interface Props { class?: string; label?: string }
+const { class: cls, label } = Astro.props;
+const phi = (1 + Math.sqrt(5)) / 2;
+const b = Math.log(phi) / (Math.PI / 2);
+const pts: string[] = [];
+for (let t = -8 * Math.PI; t <= 1.92 * Math.PI; t += 0.05) {
+  const rr = 30 * Math.exp(b * t);
+  pts.push(`${(rr * Math.cos(t)).toFixed(1)} ${(-rr * Math.sin(t)).toFixed(1)}`);
+}
+const d = 'M' + pts.join('L');
+const rings = [18, 30, 48, 78, 126, 190];
+---
+<svg class:list={['geo-anim geo-fibo', cls]} viewBox="-200 -200 400 400" role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+  <g class="gfi-rings" fill="none" stroke="rgba(233,204,138,.22)" stroke-width="1">
+    {rings.map((x) => <circle r={x} stroke-dasharray={x > 100 ? '2 7' : undefined} />)}
+  </g>
+  <circle class="gf-core" r="38" fill="url(#gfi-core)" />
+  <g class="gfi-turn">
+    <path d={d} fill="none" stroke="url(#gfi-gold)" stroke-width="2.6" stroke-linecap="round" />
+    <path class="gfi-light" d={d} pathLength="1" fill="none" stroke="#FFF6DC" stroke-width="3.6" stroke-linecap="round" />
+  </g>
+  <circle r="3.5" fill="#FFF3D6" />
+</svg>

@@ -1,0 +1,22 @@
+---
+/** Diaporama en fondu (points de navigation, pause si mouvement réduit). */
+import { u } from '../lib/site';
+import { sizeOf } from '../lib/images';
+interface Props { images: string[]; alt?: string }
+const { images, alt = '' } = Astro.props;
+const first = sizeOf(images[0]);
+// Le cadre prend les proportions de la 1re photo (bornées) : rien n'est trop rogné.
+const ratio = first ? Math.min(Math.max(first.w / first.h, 1.2), 2.6) : 16 / 9;
+---
+<div class="slides" data-slides style={`--ratio:${ratio.toFixed(3)}`}>
+  {images.map((src, i) => (
+    <figure data-active={i === 0 ? 'true' : 'false'}>
+      <img src={u(src)} alt={i === 0 ? alt : ''} loading={i === 0 ? 'eager' : 'lazy'} />
+    </figure>
+  ))}
+  {images.length > 1 && (
+    <div class="dots">
+      {images.map((_, i) => <button type="button" aria-label={`Photo ${i + 1} sur ${images.length}`} data-active={i === 0 ? 'true' : 'false'}></button>)}
+    </div>
+  )}
+</div>

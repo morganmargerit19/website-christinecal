@@ -1,0 +1,8 @@
+---
+/** Bloc « Diaporama ». */
+import Slideshow from '../Slideshow.astro';
+interface Props { images?: string[]; alt?: string }
+const { images = [], alt = '' } = Astro.props;
+const list = images.filter(Boolean);
+---
+{list.length > 0 && <div class="b-slides"><Slideshow images={list} alt={alt} /></div>}

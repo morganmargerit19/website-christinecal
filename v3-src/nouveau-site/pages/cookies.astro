@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import { u } from '../lib/site';
+---
+<Base title="Cookies · Christine CAL" description="Le site de Christine CAL ne dépose aucun cookie de traçage." path="/cookies/">
+  <section class="page-hero sky">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Informations légales</p>
+      <h1>Cookies</h1>
+    </div>
+  </section>
+  <section class="section sky legal" style="padding-top: 0">
+    <div class="wrap wrap--narrow">
+      <div class="prose">
+        <h2>Aucun cookie de traçage</h2>
+        <p>
+          Ce site est volontairement sobre&nbsp;: il ne dépose <strong>aucun cookie</strong>
+          publicitaire, de traçage ou de mesure d'audience. Aucun consentement n'est donc requis
+          pour le consulter, et vous n'êtes pas suivi d'une page à l'autre.
+        </p>
+
+        <h2>Vidéos YouTube</h2>
+        <p>
+          Les vidéos ne se chargent <strong>qu'au moment où vous cliquez</strong> sur le bouton de
+          lecture. Tant que vous ne lancez pas une vidéo, aucun cookie YouTube n'est déposé. Au
+          clic, la vidéo est servie via le mode renforçant la confidentialité
+          (<em>youtube-nocookie.com</em>)&nbsp;; YouTube/Google peut alors déposer ses propres
+          cookies, soumis à
+          <a href="https://policies.google.com/privacy" rel="noopener">la politique de Google</a>.
+        </p>
+
+        <h2>Cookies techniques</h2>
+        <p>
+          Aucun cookie n'est nécessaire au fonctionnement du site. Votre navigateur peut
+          conserver localement des préférences d'affichage&nbsp;; ces informations restent sur
+          votre appareil et ne nous sont jamais transmises.
+        </p>
+
+        <h2>En savoir plus</h2>
+        <p>
+          Le traitement de vos données est décrit dans la
+          <a href={u('/politique-de-confidentialite/')}>politique de confidentialité</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</Base>

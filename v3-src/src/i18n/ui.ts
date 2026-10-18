@@ -83,7 +83,9 @@ export interface UIDict {
     dates: string;
     format: string;
     duration: string;
+    place: string;
     price: string;
+    frOnly: string;
     ctaConsult: string;
     ctaDefault: string;
     back: string;
@@ -174,6 +176,8 @@ export const ui: Record<Locale, UIDict> = {
       dates: 'Prochaines dates',
       format: 'Format',
       duration: 'Durée',
+      place: 'Lieu',
+      frOnly: "Cette page n'est pas encore traduite : elle s'affiche en français.",
       price: 'Tarif',
       ctaConsult: 'Réserver une consultation',
       ctaDefault: 'Participer ou en savoir plus',
@@ -264,6 +268,8 @@ export const ui: Record<Locale, UIDict> = {
       dates: 'Upcoming dates',
       format: 'Format',
       duration: 'Duration',
+      place: 'Venue',
+      frOnly: 'This page has not been translated yet and is shown in French.',
       price: 'Fee',
       ctaConsult: 'Book a consultation',
       ctaDefault: 'Take part or find out more',
@@ -354,6 +360,8 @@ export const ui: Record<Locale, UIDict> = {
       dates: 'Najbliższe terminy',
       format: 'Format',
       duration: 'Czas trwania',
+      place: 'Miejsce',
+      frOnly: 'Ta strona nie została jeszcze przetłumaczona i jest wyświetlana po francusku.',
       price: 'Cena',
       ctaConsult: 'Zarezerwuj konsultację',
       ctaDefault: 'Weź udział lub dowiedz się więcej',
@@ -444,6 +452,8 @@ export const ui: Record<Locale, UIDict> = {
       dates: 'Próximas fechas',
       format: 'Formato',
       duration: 'Duración',
+      place: 'Lugar',
+      frOnly: 'Esta página aún no está traducida y se muestra en francés.',
       price: 'Tarifa',
       ctaConsult: 'Reservar una consulta',
       ctaDefault: 'Participar o saber más',
@@ -534,6 +544,8 @@ export const ui: Record<Locale, UIDict> = {
       dates: 'Prossime date',
       format: 'Formato',
       duration: 'Durata',
+      place: 'Luogo',
+      frOnly: 'Questa pagina non è ancora tradotta e viene mostrata in francese.',
       price: 'Tariffa',
       ctaConsult: 'Prenotare un consulto',
       ctaDefault: 'Partecipare o saperne di più',

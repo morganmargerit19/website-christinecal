@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mon espace · Christine CAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="./">Mon espace <span>Christine CAL</span></a>
+    <nav class="tabs" id="tabs" hidden>
+      <button type="button" data-tab="stages" aria-current="page">Mes stages</button>
+      <button type="button" data-tab="infos">Petites infos</button>
+    </nav>
+    <div class="top-right" id="top-right" hidden>
+      <a class="link" href="/" target="_blank" rel="noopener">Voir mon site</a>
+      <button type="button" class="link" id="logout">Me déconnecter</button>
+    </div>
+  </div>
+</header>
+
+<div id="status" class="status" role="status" hidden></div>
+
+<main id="app">
+  <!-- Connexion -->
+  <section id="v-login" class="view narrow" hidden>
+    <h1>Bonjour Christine</h1>
+    <p class="lead">Connectez-vous pour gérer vos stages et les informations de votre site.</p>
+    <form id="login-form" class="card form">
+      <label>Votre e-mail<input type="email" id="login-email" autocomplete="username" required></label>
+      <label>Votre mot de passe<input type="password" id="login-password" autocomplete="current-password" required></label>
+      <p class="error" id="login-error" role="alert" hidden></p>
+      <button class="btn primary" type="submit">Me connecter</button>
+    </form>
+  </section>
+
+  <!-- Chargement -->
+  <section id="v-loading" class="view narrow" hidden>
+    <p class="lead">Un instant, je récupère vos stages…</p>
+  </section>
+
+  <!-- Liste des stages -->
+  <section id="v-stages" class="view" hidden>
+    <div class="head">
+      <div>
+        <h1>Mes stages</h1>
+        <p class="lead">Cliquez sur un stage pour changer ses dates, son lieu, son tarif, ses photos ou son texte.</p>
+      </div>
+      <button type="button" class="btn primary" id="add-stage">+ Ajouter un stage</button>
+    </div>
+    <div id="stage-groups"></div>
+  </section>
+
+  <!-- Fiche d'un stage -->
+  <section id="v-edit" class="view" hidden>
+    <button type="button" class="back" id="back">← Retour à mes stages</button>
+    <h1 id="edit-title">Modifier le stage</h1>
+    <div class="edit-grid">
+      <form id="edit-form" class="form" novalidate>
+        <fieldset class="card">
+          <legend>L'essentiel</legend>
+          <label>Titre du stage <span class="req">obligatoire</span><input type="text" id="f-title" required maxlength="140"></label>
+          <label>Petit mot au-dessus du titre <small>Ex. : Stage, Atelier, Conférence, Voyage</small><input type="text" id="f-kicker" maxlength="60"></label>
+          <label>Rubrique <small>La page du site où le stage apparaît</small><select id="f-rubrique"></select></label>
+          <label id="hub-wrap">Univers<select id="f-hub"><option value="eveil-a-soi">Éveil à Soi</option><option value="eveil-au-soi">Éveil au Soi</option></select></label>
+          <label>Phrase de présentation <span class="req">obligatoire</span> <small>Une ou deux phrases, reprises sur la carte du stage</small><textarea id="f-lede" rows="3" required maxlength="400"></textarea></label>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Dates et infos pratiques</legend>
+          <div class="label-like">Dates <small>Une ligne par date, écrite en clair : <em>14–15 mars 2027</em>, <em>Août 2027</em>, <em>À partir de septembre 2026</em>. Les dates passées disparaissent toutes seules du site.</small></div>
+          <div id="f-dates" class="list"></div>
+          <button type="button" class="btn small" id="add-date">+ Ajouter une date</button>
+          <div class="row3">
+            <label>Lieu<input type="text" id="f-place" placeholder="Ex. : Bugarach (Aude), Zoom"></label>
+            <label>Durée<input type="text" id="f-duration" placeholder="Ex. : 2 jours"></label>
+            <label>Tarif<input type="text" id="f-price" placeholder="Ex. : 220 €"></label>
+          </div>
+          <label>Format <small>Facultatif</small><input type="text" id="f-format" placeholder="Ex. : Présentiel ou Zoom"></label>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Photo principale</legend>
+          <div class="photo" id="photo-drop">
+            <img id="photo-img" alt="" hidden>
+            <p id="photo-empty">Aucune photo pour l'instant.</p>
+          </div>
+          <div class="row-actions">
+            <label class="btn small file">Choisir une photo<input type="file" id="f-photo" accept="image/jpeg,image/png,image/webp" hidden></label>
+            <button type="button" class="btn small ghost" id="photo-remove" hidden>Retirer la photo</button>
+          </div>
+          <p class="hint">Une photo de votre téléphone convient : elle est réduite automatiquement. Vous pouvez aussi la glisser dans le cadre.</p>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Texte de la page</legend>
+          <div id="body-locked" class="notice" hidden>Ce texte a une mise en page particulière (colonnes, images placées…). Pour le modifier, écrivez à Morgan. Tout le reste de cette fiche est modifiable ici.</div>
+          <div id="body-wrap">
+            <div class="toolbar" role="toolbar" aria-label="Mise en forme">
+              <button type="button" data-cmd="h2" title="Titre">Titre</button>
+              <button type="button" data-cmd="bold" title="Gras"><b>G</b></button>
+              <button type="button" data-cmd="italic" title="Italique"><i>I</i></button>
+              <button type="button" data-cmd="list" title="Liste à puces">• Liste</button>
+              <button type="button" data-cmd="quote" title="Citation ou témoignage">« Citation »</button>
+              <button type="button" data-cmd="link" title="Lien">Lien</button>
+              <button type="button" data-cmd="p" title="Texte normal">Texte normal</button>
+            </div>
+            <div id="f-body" class="editor" contenteditable="true" aria-label="Texte de la page"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Vidéos <small>(facultatif)</small></legend>
+          <div id="f-videos" class="list"></div>
+          <button type="button" class="btn small" id="add-video">+ Ajouter une vidéo YouTube</button>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Témoignages <small>(facultatif)</small></legend>
+          <div id="f-testimonials" class="list"></div>
+          <button type="button" class="btn small" id="add-testimonial">+ Ajouter un témoignage</button>
+        </fieldset>
+
+        <fieldset class="card">
+          <legend>Sur le site</legend>
+          <label class="switch"><input type="checkbox" id="f-visible"> <span>Afficher ce stage sur le site</span></label>
+          <p class="hint">Décochez pour le retirer du site sans le perdre : il reste ici, prêt à revenir.</p>
+        </fieldset>
+
+        <div class="save-bar">
+          <p class="error" id="edit-error" role="alert" hidden></p>
+          <button type="button" class="btn ghost" id="cancel">Annuler</button>
+          <button type="submit" class="btn primary" id="save">Enregistrer</button>
+        </div>
+      </form>
+
+      <aside class="preview" aria-label="Aperçu">
+        <p class="eyebrow">Aperçu de la carte</p>
+        <div class="pcard">
+          <div class="pimg" id="p-img"></div>
+          <p class="plabel" id="p-label"></p>
+          <p class="ptitle" id="p-title"></p>
+          <p class="plede" id="p-lede"></p>
+          <p class="pmeta" id="p-meta"></p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Petites infos -->
+  <section id="v-infos" class="view narrow" hidden>
+    <h1>Petites infos</h1>
+    <p class="lead">Vos coordonnées, une annonce en haut du site, et les phrases d'accueil de vos deux univers.</p>
+    <form id="infos-form" class="form">
+      <fieldset class="card">
+        <legend>Mes coordonnées</legend>
+        <label>Téléphone<input type="tel" id="i-phone"></label>
+        <label>E-mail<input type="email" id="i-email"></label>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Annonce en haut du site</legend>
+        <label class="switch"><input type="checkbox" id="i-annonce-on"> <span>Afficher une annonce</span></label>
+        <label>Texte de l'annonce <small>Ex. : Je serai au forum de Sarlat les 24 et 25 octobre</small><input type="text" id="i-annonce" maxlength="160"></label>
+        <label>Lien (facultatif) <small>Une page du site ou une adresse web</small><input type="text" id="i-annonce-link" placeholder="Ex. : /agenda/"></label>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Éveil à Soi</legend>
+        <label>Grand titre<input type="text" id="i-asoi-h1"></label>
+        <label>Phrase d'accroche<textarea id="i-asoi-lede" rows="3"></textarea></label>
+      </fieldset>
+      <fieldset class="card">
+        <legend>Éveil au Soi</legend>
+        <label>Grand titre<input type="text" id="i-ausoi-h1"></label>
+        <label>Phrase d'accroche<textarea id="i-ausoi-lede" rows="3"></textarea></label>
+      </fieldset>
+      <div class="save-bar">
+        <p class="error" id="infos-error" role="alert" hidden></p>
+        <button type="submit" class="btn primary">Enregistrer</button>
+      </div>
+    </form>
+  </section>
+</main>
+
+<template id="t-date"><div class="item"><input type="text" class="date" aria-label="Date"><button type="button" class="x" aria-label="Retirer cette date">Retirer</button></div></template>
+<template id="t-video"><div class="item col"><input type="text" class="v-url" placeholder="Lien YouTube (https://www.youtube.com/watch?v=…)" aria-label="Lien YouTube"><input type="text" class="v-title" placeholder="Titre de la vidéo" aria-label="Titre de la vidéo"><button type="button" class="x">Retirer</button></div></template>
+<template id="t-testimonial"><div class="item col"><textarea class="t-quote" rows="3" placeholder="Le témoignage" aria-label="Témoignage"></textarea><input type="text" class="t-author" placeholder="Prénom, ville, année" aria-label="Auteur"><button type="button" class="x">Retirer</button></div></template>
+
+<script src="vendor/js-yaml.min.js"></script>
+<script src="vendor/marked.min.js"></script>
+<script src="vendor/turndown.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

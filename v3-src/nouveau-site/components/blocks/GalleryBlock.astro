@@ -1,0 +1,14 @@
+---
+/** Bloc « Galerie de photos ». */
+import { u } from '../../lib/site';
+interface Props { images?: { src: string; alt?: string; caption?: string }[] }
+const { images = [] } = Astro.props;
+---
+<div class="b-gallery">
+  {images.filter((g) => g?.src).map((g) => (
+    <figure>
+      <img src={u(g.src)} alt={g.alt ?? ''} loading="lazy" />
+      {g.caption && <figcaption>{g.caption}</figcaption>}
+    </figure>
+  ))}
+</div>

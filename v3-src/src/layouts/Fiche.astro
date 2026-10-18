@@ -4,7 +4,8 @@ import VideoEmbed from '../components/VideoEmbed.astro';
 import Slideshow from '../components/Slideshow.astro';
 import { ui } from '../i18n/ui';
 import { base, fichePath, hubs, locales, pathFor, type Locale } from '../i18n/utils';
-import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { render, type CollectionEntry } from 'astro:content';
+import { getFiches, slugOf, stagesOf } from '../lib/fiches';
 import FloatImage from '../components/blocks/FloatImage.astro';
 import CenteredText from '../components/blocks/CenteredText.astro';
 import TwoColumns from '../components/blocks/TwoColumns.astro';
@@ -37,7 +38,9 @@ const hubLabel = f.hub === 'eveil-a-soi' ? t.nav.eveilASoi : t.nav.eveilAuSoi;
 
 // URL de cette fiche dans chaque langue (slugs identiques entre langues) :
 // pour le canonical, les hreflang et le sélecteur de langue.
-const slug = entry.id.replace(/^(en|pl|es|it)\//, '');
+const slug = slugOf(entry.id);
+// Fiche affichée en français sur une version étrangère (pas encore traduite).
+const untranslated = f.lang !== locale;
 const alternates = Object.fromEntries(
   locales.map((l) => [l, fichePath(f.hub, slug, l)]),
 ) as Record<Locale, string>;
@@ -46,6 +49,7 @@ const alternates = Object.fromEntries(
 const facts = [
   f.format && { label: t.fiche.format, value: f.format },
   f.duration && { label: t.fiche.duration, value: f.duration },
+  f.place && { label: t.fiche.place, value: f.place },
   f.price && { label: t.fiche.price, value: f.price },
 ].filter(Boolean) as { label: string; value: string }[];
 
@@ -76,12 +80,9 @@ const IMG_W: Record<string, number> = {
 const imgMax = f.image ? Math.min(IMG_W[f.image] ?? 560, 880) : 560;
 
 // Si cette fiche est une rubrique (elle regroupe des stages), on rend ses stages
-// DANS la page (et non « en dessous » sur l'index du hub). Ordre = celui de `stages`.
-const childSlug = (id: string) => id.replace(/^(en|pl|es|it)\//, '');
-const stageEntries = f.stages.length
-  ? (await getCollection('fiches', (e) => e.data.lang === locale && f.stages.includes(childSlug(e.id))))
-      .sort((a, b) => f.stages.indexOf(childSlug(a.id)) - f.stages.indexOf(childSlug(b.id)))
-  : [];
+// DANS la page (et non « en dessous » sur l'index du hub) : ceux listés dans
+// `stages` (dans cet ordre), puis ceux qui ont choisi cette rubrique au CMS.
+const stageEntries = stagesOf(entry, await getFiches(locale));
 const stagesHeading: Record<Locale, string> = { fr: 'Au programme', en: 'Programme', pl: 'Program', es: 'Programa', it: 'Programma' };
 const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn more', pl: 'Dowiedz się więcej', es: 'Saber más', it: 'Scopri di più' };
 ---
@@ -100,8 +101,9 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
           <a href={pathFor(hub.key, locale)}>{hubLabel}</a>
         </nav>
         {f.kicker && <span class="eyebrow">{f.kicker}</span>}
-        <h1>{f.title}</h1>
-        <p class="lede">{f.lede}</p>
+        <h1 lang={untranslated ? f.lang : undefined}>{f.title}</h1>
+        <p class="lede" lang={untranslated ? f.lang : undefined}>{f.lede}</p>
+        {untranslated && <p class="fiche-untranslated">{t.fiche.frOnly}</p>}
       </div>
     </section>
 
@@ -196,7 +198,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
                 {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
               </figure>
             )}
-            <div class="prose">
+            <div class="prose" lang={untranslated ? f.lang : undefined}>
               <Content components={blockComponents} />
             </div>
           </div>
@@ -279,7 +281,7 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
         <h2 class="fiche-stages-title">{stagesHeading[locale]}</h2>
         <div class="hub-grid">
           {stageEntries.map((st) => (
-            <a class="portal-card" href={fichePath(f.hub, childSlug(st.id), locale)}>
+            <a class="portal-card" href={fichePath(st.data.hub, slugOf(st.id), locale)}>
               <span class="portal-card__kicker">{st.data.kicker}</span>
               <h3>{st.data.title}</h3>
               <p>{st.data.lede}</p>
@@ -413,6 +415,10 @@ const learnMore: Record<Locale, string> = { fr: 'En savoir plus', en: 'Learn mor
 </Base>
 
 <style>
+  .fiche-untranslated {
+    margin: var(--space-3) 0 0; font-size: 0.9rem; font-style: italic;
+    color: var(--gold-soft);
+  }
   .fiche-banner {
     margin: 0; width: 100%; max-height: 44vh; overflow: hidden;
     border-bottom: 1px solid var(--border-light);

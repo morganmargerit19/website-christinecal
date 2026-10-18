@@ -1,0 +1,36 @@
+---
+/**
+ * Vidéo YouTube en « façade » : vignette + bouton, l'iframe (youtube-nocookie)
+ * n'est chargée qu'au clic (vie privée, rapidité). Sans JavaScript, ou sur la
+ * copie à partager, le lien ouvre la vidéo sur YouTube.
+ * Avec `cover` (jaquette DVD) : jaquette à côté + mention de droits Debowska.
+ */
+import { isArtifact, u } from '../lib/site';
+import Icon from './Icon.astro';
+interface Props {
+  id: string; title?: string; meta?: string; credit?: 'debowska'; cover?: string; coverAlt?: string;
+  size?: 'normal' | 'large';
+}
+const { id, title, meta, credit, cover, coverAlt } = Astro.props;
+const watch = `https://www.youtube.com/watch?v=${id}`;
+---
+<figure class:list={['video', { 'video--dvd': cover }]}>
+  <div class={cover ? 'frame-row' : undefined}>
+    <a class="frame" href={watch} data-yt={isArtifact ? undefined : id} target="_blank" rel="noopener" aria-label={`Voir la vidéo${title ? ' « ' + title + ' »' : ''}`}>
+      <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" onerror="this.remove()" />
+      <span class="play" aria-hidden="true"><Icon name="play" /></span>
+    </a>
+    {cover && (
+      <figure class="sleeve"><img src={u(cover)} alt={coverAlt || (title ? `Jaquette du DVD « ${title} »` : 'Jaquette du DVD')} loading="lazy" /></figure>
+    )}
+  </div>
+  {(title || meta || credit) && (
+    <figcaption>
+      {title && <span class="vt">{title}</span>}
+      {meta && <span class="label">{meta}</span>}
+      {credit === 'debowska' && (
+        <span class="credit">DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska. <a href="https://www.debowska.fr/" target="_blank" rel="noopener">Visiter son site</a></span>
+      )}
+    </figcaption>
+  )}
+</figure>

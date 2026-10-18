@@ -1,0 +1,13 @@
+---
+import Fiche from '../../layouts/Fiche.astro';
+import { getFiches, slugOf } from '../../../src/lib/fiches';
+
+export async function getStaticPaths() {
+  const fiches = await getFiches('fr');
+  return fiches
+    .filter((e) => e.data.hub === 'eveil-a-soi')
+    .map((entry) => ({ params: { slug: slugOf(entry.id) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<Fiche entry={entry} />

@@ -1,0 +1,35 @@
+---
+/**
+ * Fleur de vie animée : la fleur reste toujours visible, une lumière parcourt
+ * ses cercles l'un après l'autre, le cœur respire, l'ensemble tourne lentement.
+ */
+interface Props { class?: string; label?: string }
+const { class: cls, label } = Astro.props;
+const r = 60;
+const centers: [number, number][] = [[0, 0]];
+for (let k = 0; k < 6; k++) {
+  const a = (Math.PI / 3) * k;
+  centers.push([r * Math.cos(a), r * Math.sin(a)]);
+}
+for (let k = 0; k < 6; k++) {
+  const a = (Math.PI / 3) * k;
+  centers.push([2 * r * Math.cos(a), 2 * r * Math.sin(a)]);
+  const b = a + Math.PI / 6;
+  centers.push([r * Math.sqrt(3) * Math.cos(b), r * Math.sqrt(3) * Math.sin(b)]);
+}
+const f = (n: number) => n.toFixed(2);
+---
+<svg class:list={['geo-anim geo-fleur', cls]} viewBox="-200 -200 400 400" role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
+  <circle class="gf-core" r="150" fill="url(#gf-core)" />
+  <g class="gf-turn">
+    <g fill="none" stroke="rgba(233,204,138,.5)" stroke-width="1">
+      {centers.map(([x, y]) => <circle cx={f(x)} cy={f(y)} r={r} />)}
+      <circle r="180" /><circle r="186" />
+    </g>
+    <g fill="none" stroke="#FFF1C9" stroke-width="1.8" stroke-linecap="round">
+      {centers.map(([x, y], i) => <circle class="gf-light" cx={f(x)} cy={f(y)} r={r} pathLength="1" style={`animation-delay:${(i * 0.42).toFixed(2)}s`} />)}
+      <circle class="gf-light gf-light--ring" r="186" pathLength="1" />
+    </g>
+  </g>
+  <circle r="4" fill="#FFF3D6" />
+</svg>
