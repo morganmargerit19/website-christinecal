@@ -25,7 +25,7 @@ import GalleryBlock from '../components/blocks/GalleryBlock.astro';
 import Lead from '../components/blocks/Lead.astro';
 import Note from '../components/blocks/Note.astro';
 import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
-import { HUBS, ECOLE_PATH, SHASTA_PATH, fichePath, mailto, u, type Hub } from '../lib/site';
+import { HUBS, ECOLE_PATH, OLD_NEW, SHASTA_PATH, fichePath, mailto, u, type Hub } from '../lib/site';
 import { exists, isStrip, visualOf } from '../lib/images';
 import { parseDate } from '../lib/agenda';
 import { ACTIVATION, ECOLE, ECOLE_GEO } from '../lib/ecole';
@@ -48,7 +48,8 @@ const siblings = parent
   ? stagesOf(parent, all).filter((e) => slugOf(e.id) !== slug).slice(0, 3)
   : [];
 
-// Gabarit « Sortir de sa matrice » : l'ennéagramme est déjà dans le corps, le hublot prend le chat-lion.
+// Gabarit « Sortir de sa matrice » (retours du 22/10) : le médaillon prend « Old Life / New Life »,
+// le chat-lion passe dans le texte, la roue (ennéagramme) n'apparaît plus.
 // École 5D : le parcours en 3 étapes, montré sur la page du parcours et sur chacun de ses stages.
 const ecole = slug === ECOLE || f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
 const etapes = ecole ? stagesOf(ecole, all) : [];
@@ -59,7 +60,7 @@ const ownPath = `/${f.hub}/${slug}/`;
 const parentPath = parent ? `/${parent.data.hub}/${slugOf(parent.id)}/` : undefined;
 const navPath = parentPath && [ECOLE_PATH, SHASTA_PATH].includes(parentPath) ? parentPath : ownPath;
 const visual =
-  f.richLayout === 'sortir-matrice' ? '/images/wp/chat-mirroir.jpg'
+  f.richLayout === 'sortir-matrice' ? OLD_NEW
   : ECOLE_GEO[slug] === 'activation' ? ACTIVATION
   : ECOLE_GEO[slug] ? undefined // Corps de lumière, Merkaba : leur géométrie animée
   : visualOf(f);
@@ -114,7 +115,7 @@ const anchored = [
         </div>
       </div>
       {showHublot && (
-        <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? 'Le chat qui se voit lion dans le miroir' : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
+        <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
       )}
     </div>
   </section>
@@ -177,12 +178,11 @@ const anchored = [
     <div class:list={['wrap', 'wrap--narrow']} style={f.wideBody ? 'max-width: 1040px' : undefined}>
       {f.richLayout === 'sortir-matrice' ? (
         <div class="prose">
-          <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/old-life-new-life.jpg')} alt="D'une ancienne vie à une nouvelle vie" loading="lazy" /></figure>
+          <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/chat-mirroir.jpg')} alt="Le chat qui se voit lion dans le miroir" loading="lazy" /></figure>
           <p class="b-center b-center--italic">Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</p>
-          <p class="b-lead">Transmuter la peur<br />en énergie positive<br />et passer d'une vie réactive<br />à une vie créative.</p>
+          <p class="b-lead">Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.</p>
           <h2 style="clear: both; letter-spacing: .04em">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h2>
           <p><em>— Avec une approche différente de cet outil connu —</em></p>
-          <figure class="b-img b-img--left b-img--medium"><img src={u(f.image ?? '/images/wp/eneagramme.jpg')} alt={f.imageAlt || "L'ennéagramme"} loading="lazy" /></figure>
           <ul>
             <li>Découvrir cette source de souffrances permanentes.</li>
             <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>

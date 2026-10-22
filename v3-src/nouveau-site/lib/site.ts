@@ -21,6 +21,9 @@ export const HUBS: Record<Hub, { label: string; path: string; sub: string }> = {
 
 export const fichePath = (hub: Hub, slug: string) => u(`/${hub}/${slug}/`);
 
+/** « Old Life / New Life » : visuel de « Sortir de sa matrice personnelle » (carte et médaillon). */
+export const OLD_NEW = '/images/wp/old-life-new-life.jpg';
+
 // Coordonnées et annonce : modifiables par Christine dans « Mon espace » (Petites infos).
 import infos from '../../src/data/infos.json';
 export const CONTACT = {
