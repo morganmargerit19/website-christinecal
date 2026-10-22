@@ -1,0 +1,14 @@
+---
+/**
+ * Une partie seulement du texte d'une fiche : ce qui précède un titre (`before`)
+ * ou ce qui commence à ce titre (`from`). Sert à intercaler un bloc au milieu du
+ * texte ou à en renvoyer la fin en bas de page (École 5D : « Source »).
+ * Si le titre n'existe pas, `before` rend tout le texte et `from` rien.
+ */
+interface Props { at: string; part: 'before' | 'from' }
+const { at, part } = Astro.props;
+const html = await Astro.slots.render('default');
+const i = html.indexOf(`<h2 id="${at}"`);
+const out = i < 0 ? (part === 'before' ? html : '') : part === 'before' ? html.slice(0, i) : html.slice(i);
+---
+<Fragment set:html={out} />

@@ -28,6 +28,18 @@ const dated = (item: string) => {
   return m ? { date: `Depuis ${m[2]}`, text: m[1] + '.' } : d;
 };
 
+/**
+ * Conférences (retours du 22/10) : les sujets récents, en fin de liste, passent
+ * en tête ; les 8 premiers (plus anciens) se replient dans « Toutes les conférences »,
+ * suivis de « Et bien d'autres sujets… ».
+ */
+const talks = (items: string[]) => {
+  const tail = /^et bien d/i.test(items.at(-1) ?? '') ? items.slice(-1) : [];
+  const list = items.slice(0, items.length - tail.length);
+  const older = list.slice(0, 8), recent = list.slice(8);
+  return recent.length ? { shown: recent, folded: [...older, ...tail] } : { shown: older, folded: tail };
+};
+
 const [first, ...otherSpecifics] = about.specifics.items;
 const trained = first?.match(/^(.*?)\s*[—–-]\s*Formation de plus de\s*([\d\s ]+)\s*personnes\s*(.*?)\.?$/);
 const specifics = trained ? otherSpecifics : about.specifics.items;
@@ -108,11 +120,11 @@ const specifics = trained ? otherSpecifics : about.specifics.items;
             <div>
               <p class="n">{a.title}</p>
               <p class="t" set:html={a.text} />
-              <ul class="pills">{a.accordion!.items.slice(0, 8).map((c) => <li>{c}</li>)}</ul>
-              {a.accordion!.items.length > 8 && (
+              <ul class="pills">{talks(a.accordion!.items).shown.map((c) => <li>{c}</li>)}</ul>
+              {talks(a.accordion!.items).folded.length > 0 && (
                 <details class="more">
                   <summary>Toutes les conférences</summary>
-                  <ul class="pills">{a.accordion!.items.slice(8).map((c) => <li>{c}</li>)}</ul>
+                  <ul class="pills">{talks(a.accordion!.items).folded.map((c) => <li>{c}</li>)}</ul>
                 </details>
               )}
             </div>

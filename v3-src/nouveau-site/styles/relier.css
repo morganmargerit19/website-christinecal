@@ -271,6 +271,10 @@ main { overflow-x: clip; }
 @media (max-width: 640px) { .video--dvd .frame-row { grid-template-columns: 1fr; } .video--dvd .sleeve { max-width: 220px; } }
 .video-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 44px; }
 .video-grid .video--dvd { grid-column: 1 / -1; width: 100%; max-width: 940px; }
+/* Deux DVD du même sujet, côte à côte (Mémoire galactique : 2022 et 16 août 2025). */
+.video-grid .video--dvd.video--half { grid-column: auto; max-width: none; }
+.video--half.video--dvd .frame-row { grid-template-columns: minmax(0, 1fr) clamp(90px, 30%, 150px); gap: 14px; }
+.video--half .vt { font-size: 22px; }
 @media (max-width: 860px) { .video-grid { grid-template-columns: 1fr; } }
 
 .dvds { display: flex; flex-direction: column; gap: 22px; list-style: none; margin: 0; padding: 0; }
@@ -328,6 +332,9 @@ main { overflow-x: clip; }
 .split { display: flex; align-items: center; justify-content: space-between; gap: clamp(32px, 6vw, 80px); }
 .split > .txt { flex: 1; min-width: 0; max-width: 680px; }
 .split .hublot { width: min(340px, 100%); }
+/* En-tête sans médaillon : le titre et la phrase prennent la largeur (Mont Shasta : « Une Présence… » sur une ligne). */
+.split--solo > .txt { max-width: 1000px; }
+.split--solo .lede-serif { max-width: 900px; }
 @media (max-width: 900px) { .split { flex-direction: column; align-items: flex-start; } .split .hublot { width: min(360px, 100%); align-self: center; } }
 
 /* ---------- Infos pratiques (fiche) ---------- */
@@ -348,6 +355,7 @@ main { overflow-x: clip; }
 /* Bandeau graphique (titre de stage, panorama) : montré en entier */
 .strip { margin: 0; }
 .strip img { width: 100%; height: auto; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); }
+.strip--hero { margin-top: 36px; max-width: 760px; }
 
 /* ---------- Corps de texte saisi au CMS ---------- */
 .prose { font-size: 18px; line-height: 1.75; color: var(--soft); }
@@ -395,13 +403,16 @@ main { overflow-x: clip; }
 .b-center > * + * { margin-top: .5em; }
 .b-center--italic { font-family: var(--serif); font-style: italic; font-size: 1.25em; line-height: 1.5; color: var(--gold-pale); }
 .b-lead { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 30px); line-height: 1.45; color: var(--light); }
+/* Sur une seule ligne sur ordinateur (Sortir de sa matrice, retours du 22/10). */
+.b-lead--line { font-size: clamp(19px, 1.6vw, 23px); text-align: center; margin-inline: calc(50% - min(48vw, 540px)); }
 .b-lead > * + * { margin-top: .5em; }
 .b-note { font-size: 15px; line-height: 1.6; color: var(--mist-2); }
 .b-cols { display: grid; gap: 28px; clear: both; margin-block: 2em; }
 @media (min-width: 760px) { .b-cols { grid-template-columns: 1fr 1fr; } }
-.b-col { padding: 28px 30px; border: 1px solid var(--line); border-radius: 6px; background: linear-gradient(180deg, rgba(233,204,138,.05), rgba(233,204,138,0)); }
+.b-col { padding: 22px 30px 28px; border: 1px solid var(--line); border-radius: 6px; background: linear-gradient(180deg, rgba(233,204,138,.05), rgba(233,204,138,0)); }
 .b-col > * + * { margin-top: .8em; }
-.b-col__title { margin: 0; font-size: 28px; color: var(--gold-pale); }
+/* « .b-col » devant : la marge des titres du texte (.prose h3) ne doit pas creuser le haut des cadres. */
+.b-col .b-col__title { margin: 0; font-size: 28px; color: var(--gold-pale); }
 .b-col__sub { margin-top: .3em !important; font-size: 11.5px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
 .b-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: .4em 0 1.2em; }
 .b-duo figure { margin: 0; }
@@ -446,11 +457,19 @@ main { overflow-x: clip; }
 /* ---------- Cartes de stages (avec visuel) ---------- */
 .cards { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 44px; }
 .cards--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Quatre stages sur une même ligne (Mont Shasta). */
+.cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 44px 28px; }
+.cards--4 .card .t { font-size: 22px; }
+.cards--4 .card .d { font-size: 14px; }
+@media (max-width: 1100px) { .cards--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .card { display: flex; flex-direction: column; color: var(--light); min-width: 0; }
 .card:hover { color: var(--light); }
 .card .img { display: block; position: relative; aspect-ratio: 12 / 7; overflow: hidden; border-radius: 4px; background: radial-gradient(120% 100% at 30% 10%, #1A1650 0%, var(--deep) 70%); }
 .card .img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent); mask-image: linear-gradient(180deg, #000 55%, transparent); }
 .card .img svg.geo { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Bandeau-titre en guise de photo (Team galactique : Frères des étoiles) : montré en entier. */
+.card .img--band { display: flex; align-items: center; justify-content: center; padding: 0 12px; }
+.card .img--band img { height: auto; object-fit: contain; -webkit-mask-image: none; mask-image: none; }
 .card:hover .img img { transform: scale(1.04); }
 .card .label { display: block; margin-top: 18px; }
 .card .t { display: block; margin-top: 10px; font-family: var(--serif); font-size: 28px; line-height: 1.2; transition: color .3s; }
@@ -540,8 +559,9 @@ main { overflow-x: clip; }
 @keyframes gf-breathe { 0%,100% { opacity: .55; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.04); } }
 .geo-anim { display: block; width: 100%; height: auto; overflow: visible; }
 .geo-anim .gf-core { transform-box: fill-box; transform-origin: center; animation: gf-breathe 7s ease-in-out infinite; }
-.geo-anim .gf-turn, .geo-anim .gfi-rings { transform-box: view-box; transform-origin: center; animation: spin 140s linear infinite; }
-.geo-fibo .gfi-turn { transform-box: view-box; transform-origin: center; animation: spin 90s linear infinite reverse; }
+/* Rotation autour du centre du dessin (0,0) : « center » visait le coin de la viewBox et la fleur sortait de son cadre. */
+.geo-anim .gf-turn, .geo-anim .gfi-rings { transform-box: view-box; transform-origin: 0 0; animation: spin 140s linear infinite; }
+.geo-fibo .gfi-turn { transform-box: view-box; transform-origin: 0 0; animation: spin 90s linear infinite reverse; }
 .gf-light { stroke-dasharray: .14 .86; stroke-dashoffset: 1; animation: gf-sweep 6s linear infinite; opacity: .9; }
 .gf-light--ring { stroke-dasharray: .06 .94; animation-duration: 14s; }
 .gfi-light { stroke-dasharray: .07 .93; stroke-dashoffset: 1; animation: gf-sweep 7s cubic-bezier(.45,.05,.55,.95) infinite reverse; }

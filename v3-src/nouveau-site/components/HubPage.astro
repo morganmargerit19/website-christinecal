@@ -14,7 +14,7 @@ import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
 import { ECOLE } from '../lib/ecole';
 import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
-import { HUBS, u, type Hub } from '../lib/site';
+import { HUBS, SHASTA, u, type Hub } from '../lib/site';
 import aSoi from '../../src/data/eveil-a-soi.fr.json';
 import auSoi from '../../src/data/eveil-au-soi.fr.json';
 
@@ -23,9 +23,13 @@ const { hub } = Astro.props;
 const data = hub === 'eveil-a-soi' ? aSoi : auSoi;
 const outro = 'outro' in data ? (data.outro as string[]) : [];
 const fiches = await getFiches('fr');
-// L'École 5D a son propre onglet : pas de carte en double sur Éveil à Soi (retours du 22/10).
-const cards = topLevel(fiches, hub).filter((c) => slugOf(c.id) !== ECOLE);
-const regular = cards.filter((c, i) => !(i === 0 && c.data.featured)).length;
+// L'École 5D et le Mont Shasta ont leur propre onglet : pas de carte en double (retours du 22/10).
+const OWN_TAB = [ECOLE, SHASTA];
+const cards = topLevel(fiches, hub).filter((c) => !OWN_TAB.includes(slugOf(c.id)));
+// Éveil à Soi : Consultation et Sortir de sa matrice côte à côte, comme sur le site actuel.
+const duo = hub === 'eveil-a-soi' && cards.length === 2;
+const feature = (i: number) => !duo && i === 0 && cards[0].data.featured;
+const regular = cards.filter((c, i) => !feature(i)).length;
 const { entries } = buildAgenda(fiches.filter((f) => f.data.hub === hub));
 // Éveil au Soi : disposition de la page du site actuel (retours de Christine) —
 // titre, bandeau, introduction complète, cartes, phrases de clôture.
@@ -98,10 +102,10 @@ const videos = hub === 'eveil-a-soi'
 
   <section class="section deep">
     <div class="wrap">
-      <p class="eyebrow">{hub === 'eveil-a-soi' ? 'Consultations, ateliers et École 5D' : 'Rubriques et stages'}</p>
+      <p class="eyebrow">{hub === 'eveil-a-soi' ? 'Consultations et ateliers' : 'Rubriques et stages'}</p>
       <h2 class="h2" style="margin-top: 14px">{hub === 'eveil-a-soi' ? 'Par où commencer' : 'Explorer'}</h2>
       <div class:list={['cards', { 'cards--2': regular % 3 !== 0 && regular % 2 === 0 }]}>
-        {cards.map((c, i) => <Card entry={c} feature={i === 0 && c.data.featured} count={stagesOf(c, fiches).length || undefined} />)}
+        {cards.map((c, i) => <Card entry={c} feature={feature(i)} count={stagesOf(c, fiches).length || undefined} />)}
       </div>
     </div>
   </section>

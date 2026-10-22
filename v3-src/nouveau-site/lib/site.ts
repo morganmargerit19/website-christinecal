@@ -44,7 +44,8 @@ export const mailto = (subject?: string) =>
  * `also` : les pages rattachées qui allument la même entrée.
  */
 export const ECOLE_PATH = '/eveil-a-soi/construire-son-vaisseau/';
-export const SHASTA_PATH = '/eveil-au-soi/les-intra-telos-mont-shasta/';
+export const SHASTA = 'les-intra-telos-mont-shasta';
+export const SHASTA_PATH = `/eveil-au-soi/${SHASTA}/`;
 export const NAV: { label: string; path: string; also?: string[] }[] = [
   { label: 'Qui suis-je', path: '/qui-suis-je/' },
   { label: 'Mission', path: '/mission/' },

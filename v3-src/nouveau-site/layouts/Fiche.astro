@@ -26,9 +26,10 @@ import Lead from '../components/blocks/Lead.astro';
 import Note from '../components/blocks/Note.astro';
 import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
 import { HUBS, ECOLE_PATH, OLD_NEW, SHASTA_PATH, fichePath, mailto, u, type Hub } from '../lib/site';
-import { exists, isStrip, visualOf } from '../lib/images';
+import { exists, framedVisualOf, isStrip } from '../lib/images';
 import { parseDate } from '../lib/agenda';
 import { ACTIVATION, ECOLE, ECOLE_GEO } from '../lib/ecole';
+import ProsePart from '../components/ProsePart.astro';
 import GeoFleur from '../components/GeoFleur.astro';
 import GeoMerkaba from '../components/GeoMerkaba.astro';
 
@@ -50,31 +51,45 @@ const siblings = parent
 
 // Gabarit « Sortir de sa matrice » (retours du 22/10) : le médaillon prend « Old Life / New Life »,
 // le chat-lion passe dans le texte, la roue (ennéagramme) n'apparaît plus.
-// École 5D : le parcours en 3 étapes, montré sur la page du parcours et sur chacun de ses stages.
-const ecole = slug === ECOLE || f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
+// École 5D (retours du 22/10) : les 3 stages s'intercalent entre « Particularité »
+// et « Source », sous le titre « Le parcours en 3 étapes » ; « Source » passe en bas de page.
+const isEcole = slug === ECOLE;
+// Les pages des 3 stages gardent le bandeau du parcours (étapes et géométries) ; plus la page de l'École.
+const ecole = f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
 const etapes = ecole ? stagesOf(ecole, all) : [];
-// Sommaire pour les pages longues (4 titres ou plus).
-const toc = headings.filter((h) => h.depth === 2 && h.text.trim());
-const MAX_VIDEOS = 2;
+const SOURCE = 'source';
+const hasSource = isEcole && headings.some((h) => h.depth === 2 && h.slug === SOURCE);
+// « … (même sujet) » : la vidéo se place à côté de la précédente (Mémoire galactique, École 5D).
+const sameTopic = (t?: string) => /\(même sujet/i.test(t ?? '');
+const half = (i: number) => sameTopic(f.videos[i]?.title) || sameTopic(f.videos[i + 1]?.title);
 const ownPath = `/${f.hub}/${slug}/`;
 const parentPath = parent ? `/${parent.data.hub}/${slugOf(parent.id)}/` : undefined;
 const navPath = parentPath && [ECOLE_PATH, SHASTA_PATH].includes(parentPath) ? parentPath : ownPath;
 const visual =
   f.richLayout === 'sortir-matrice' ? OLD_NEW
+  : ECOLE_GEO[slug] === 'fleur' ? undefined
   : ECOLE_GEO[slug] === 'activation' ? ACTIVATION
   : ECOLE_GEO[slug] ? undefined // Corps de lumière, Merkaba : leur géométrie animée
-  : visualOf(f);
+  : framedVisualOf(f).src;
+const visualPos = framedVisualOf(f).pos;
 // En-tête avec une image de fond plutôt qu'un médaillon (retours de Christine) :
 // l'École 5D sur « l'homme en énergie ».
 const heroBg = slug === ECOLE ? { src: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%' } : undefined;
 // Pas de médaillon quand la page a déjà son visuel : diaporama (Mont Shasta),
-// bandeau seul (Team galactique), image de fond (École 5D).
-const showHublot = !heroBg && f.slideshow.filter(exists).length === 0 && (visual || ECOLE_GEO[slug] || !isStrip(f.image));
-const strip = [f.image, f.banner].find((s) => s && s !== visual && exists(s) && isStrip(s));
+// bandeau seul (Team galactique), image de fond (École 5D). Stage n°1 : pas de
+// fleur de vie animée dans le cercle, son bandeau-titre suffit (retours du 22/10).
+const showHublot = !heroBg && ECOLE_GEO[slug] !== 'fleur' && f.slideshow.filter(exists).length === 0 && (visual || ECOLE_GEO[slug] || !isStrip(f.image));
+// (Une image recadrée pour le médaillon ne revient pas en bandeau : Bugarach.)
+const strip = [f.image, f.banner].find((s) => s && s !== visual && !(visualPos && s === f.image) && exists(s) && isStrip(s));
+// Bandeau seul, sans médaillon ni parcours (Team galactique : les Frères des étoiles) :
+// il monte dans l'en-tête, à la place de la fleur de vie de fond (retours du 22/10).
+const heroStrip = strip && !showHublot && !heroBg && etapes.length === 0 ? strip : undefined;
 const dates = f.dates.filter((d) => d.trim());
 const hasCalendar = dates.some((d) => parseDate(d));
 const isConsult = f.category === 'consultation';
-const cta = isConsult ? 'Réserver une consultation' : 'Participer ou en savoir plus';
+// Seule la consultation garde son bouton en haut de page : « Participer ou en savoir
+// plus » et « Voir le programme » alourdissaient les autres (retours du 22/10).
+const cta = isConsult ? 'Réserver une consultation' : undefined;
 const subject = isConsult ? `Consultation médiumnique` : `${f.title}${dates[0] ? ` (${dates[0]})` : ''}`;
 
 const facts = [
@@ -96,8 +111,8 @@ const anchored = [
         <img class="bg" src={u(heroBg.src)} alt="" style={`object-position:${heroBg.pos}`} fetchpriority="high" />
         <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.1) 78%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>
       </>
-    ) : <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />}
-    <div class="wrap split" style={heroBg ? 'padding-bottom: clamp(48px, 6vw, 80px)' : undefined}>
+    ) : !heroStrip && <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />}
+    <div class:list={['wrap', 'split', { 'split--solo': !showHublot }]} style={heroBg ? 'padding-bottom: clamp(48px, 6vw, 80px)' : undefined}>
       <div class="txt">
         <nav class="crumbs" aria-label="Fil d'Ariane">
           <a href={u('/')}>Accueil</a><span aria-hidden="true">/</span>
@@ -107,15 +122,15 @@ const anchored = [
         <p class="eyebrow" style="margin-top: 44px">{f.kicker}</p>
         <h1 id="titre">{f.title}</h1>
         <p class="lede-serif">{f.lede}</p>
-        <div class="actions" style="margin-top: 40px">
-          <a class="btn btn-gold" href={mailto(subject)}>{cta}</a>
-          {hasCalendar
-            ? <a class="btn" href={u('/agenda/')}>Voir tout l'agenda</a>
-            : children.length > 0 && <a class="btn" href="#programme">Voir le programme</a>}
-        </div>
+        {heroStrip && <figure class="strip strip--hero"><img src={u(heroStrip)} alt={f.imageAlt || ''} fetchpriority="high" /></figure>}
+        {cta && (
+          <div class="actions" style="margin-top: 40px">
+            <a class="btn btn-gold" href={mailto(subject)}>{cta}</a>
+          </div>
+        )}
       </div>
       {showHublot && (
-        <Hublot src={visual} alt={f.richLayout === 'sortir-matrice' ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
+        <Hublot src={visual} position={visualPos} alt={f.richLayout === 'sortir-matrice' ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
       )}
     </div>
   </section>
@@ -153,16 +168,7 @@ const anchored = [
     </section>
   )}
 
-  {toc.length >= 4 && (
-    <nav class="sky toc-band" aria-label="Sur cette page">
-      <div class="wrap">
-        <p class="label">Sur cette page</p>
-        <ul class="toc">{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ul>
-      </div>
-    </nav>
-  )}
-
-  {strip && (
+  {strip && !heroStrip && (
     <section class="sky" style="padding-block: 30px">
       <div class="wrap wrap--narrow"><figure class="strip"><img src={u(strip)} alt={f.imageAlt || ''} loading="lazy" /></figure></div>
     </section>
@@ -180,7 +186,7 @@ const anchored = [
         <div class="prose">
           <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/chat-mirroir.jpg')} alt="Le chat qui se voit lion dans le miroir" loading="lazy" /></figure>
           <p class="b-center b-center--italic">Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</p>
-          <p class="b-lead">Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.</p>
+          <p class="b-lead b-lead--line">Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.</p>
           <h2 style="clear: both; letter-spacing: .04em">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h2>
           <p><em>— Avec une approche différente de cet outil connu —</em></p>
           <ul>
@@ -198,7 +204,9 @@ const anchored = [
               {f.bodyImage.caption && <figcaption>{f.bodyImage.caption}</figcaption>}
             </figure>
           )}
-          <Content components={blocks} />
+          {isEcole
+            ? <ProsePart at={SOURCE} part="before"><Content components={blocks} /></ProsePart>
+            : <Content components={blocks} />}
           {f.bodyImage && exists(f.bodyImage.src) && f.bodyImageBelow && (
             <figure class="b-img b-img--center b-img--large" style="clear: both">
               <img src={u(f.bodyImage.src)} alt={f.bodyImage.alt ?? ''} loading="lazy" />
@@ -234,9 +242,9 @@ const anchored = [
   {children.length > 0 && (
     <section id="programme" class="section deep">
       <div class="wrap">
-        <p class="eyebrow">Au programme</p>
-        <h2 class="h2" style="margin-top: 14px">{children.length} rendez-vous</h2>
-        <div class="cards">{children.map((c) => <Card entry={c} />)}</div>
+        <p class="eyebrow">{isEcole ? 'École 5D' : 'Au programme'}</p>
+        <h2 class="h2" style="margin-top: 14px">{isEcole ? `Le parcours en ${children.length} étapes` : `${children.length} rendez-vous`}</h2>
+        <div class:list={['cards', { 'cards--4': children.length === 4 }]}>{children.map((c) => <Card entry={c} />)}</div>
       </div>
     </section>
   )}
@@ -246,8 +254,9 @@ const anchored = [
       <div class="wrap">
         <p class="eyebrow">Voir et écouter</p>
         {f.videosHeading && <h2 class="h2" style="margin-top: 14px">{f.videosHeading}</h2>}
-        <div class="video-grid">
-          {f.videos.slice(0, MAX_VIDEOS).map((v) => <VideoCard {...v} />)}
+        {/* Interviews sans jaquette : 3 par ligne, comme sur le site actuel (Mont Shasta). */}
+        <div class:list={['video-grid', { 'video-grid--3': f.videos.filter((v) => !v.cover).length >= 3 }]}>
+          {f.videos.map((v, i) => <VideoCard {...v} half={half(i)} />)}
           {f.audio && exists(f.audio) && (
             <figure class="video">
               {f.audioCover && exists(f.audioCover) && <img src={u(f.audioCover)} alt="" loading="lazy" style="width: 100%; max-width: 360px; border-radius: 4px" />}
@@ -259,9 +268,6 @@ const anchored = [
             </figure>
           )}
         </div>
-        {f.videos.length > MAX_VIDEOS && (
-          <a class="btn" href={u('/videos/')} style="margin-top: 40px">Toutes les vidéos ({f.videos.length - MAX_VIDEOS} de plus sur ce thème)<Icon name="arrow" /></a>
-        )}
       </div>
     </section>
   )}
@@ -276,6 +282,12 @@ const anchored = [
           ))}
         </div>
       </div>
+    </section>
+  )}
+
+  {hasSource && (
+    <section class="section sky">
+      <div class="wrap wrap--narrow"><div class="prose"><ProsePart at={SOURCE} part="from"><Content components={blocks} /></ProsePart></div></div>
     </section>
   )}
 
