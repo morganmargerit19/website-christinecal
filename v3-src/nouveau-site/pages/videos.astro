@@ -22,11 +22,26 @@ const press = [
   { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017', from: { title: 'Éveil à Soi', href: u('/eveil-a-soi/') } },
 ];
 const { dvd, talks } = allVideos(fiches, [...presentation, ...press]);
-const sections = [
-  { id: 'dvd', eyebrow: 'DVD DEBOWSKA', title: 'Forums et conférences filmés', list: dvd,
-    note: 'DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.' },
-  { id: 'conferences', eyebrow: 'Radio · conférences · présentation', title: 'Interviews et conférences', list: talks },
+
+/**
+ * DVD Debowska classés par thème, ligne par ligne, comme Christine les a présentés
+ * (mail « VIDEOS » du 22/10). `SOON` réserve la place d'une vidéo annoncée. Un DVD
+ * ajouté plus tard dans une fiche et absent d'ici s'affiche en fin de liste (« Autres »).
+ */
+const SOON = 'soon-2026';
+const THEMES: { id: string; title: string; rows: string[][] }[] = [
+  { id: 'mont-shasta', title: 'Mont Shasta', rows: [['jHuw3hnoCxo', SOON, 'ouTq-jp9NgM']] },
+  { id: 'galactiques', title: 'Les Galactiques', rows: [['raXSnQhrWiA', SOON], ['0eDwfiYJY3w', 'J7CRbYCPSKI'], ['PcQKmMNv9CY']] },
+  { id: 'multidimensionnel', title: 'Devenir multidimensionnel', rows: [['5djFYRe7C1Q', 'usgLaR-vK-U'], ['9QKss6wHSB4', 'tVTU9y7RqaM']] },
 ];
+const byId = new Map(dvd.map((v) => [v.id, v]));
+const placed = new Set(THEMES.flatMap((t) => t.rows.flat()));
+const others = dvd.filter((v) => !placed.has(v.id));
+const themes = [
+  ...THEMES.map((t) => ({ ...t, rows: t.rows.map((row) => row.filter((id) => id === SOON || byId.has(id))).filter((row) => row.some((id) => id !== SOON)) })),
+  ...(others.length ? [{ id: 'autres', title: 'Autres forums et conférences', rows: [others.map((v) => v.id)] }] : []),
+].filter((t) => t.rows.length > 0);
+const DVD_NOTE = 'DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.';
 ---
 <Base title="Vidéos et DVD · Christine CAL" description="Les vidéos de Christine CAL : DVD Debowska, conférences, interviews radio et présentation." path="/videos/">
   <section class="page-hero sky" aria-labelledby="titre">
@@ -35,19 +50,46 @@ const sections = [
       <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Vidéos</span></nav>
       <p class="eyebrow" style="margin-top: 44px">Vidéos · DVD · Radio</p>
       <h1 id="titre">Voir et écouter</h1>
-      <p class="lede-serif">{dvd.length + talks.length} vidéos : forums, conférences, interviews. Chacune renvoie à la page qui en parle.</p>
-      <div class="toc" style="margin-top: 28px">{sections.map((s) => <a href={`#${s.id}`}>{s.title} ({s.list.length})</a>)}</div>
+      <p class="lede-serif">{dvd.length + talks.length} vidéos : forums, conférences, interviews, classées par thème. Chacune renvoie à la page qui en parle.</p>
+      <div class="toc" style="margin-top: 28px">
+        {themes.map((t) => <a href={`#${t.id}`}>{t.title}</a>)}
+        {talks.length > 0 && <a href="#conferences">Interviews et conférences</a>}
+      </div>
     </div>
   </section>
 
-  {sections.map((s, i) => s.list.length > 0 && (
-    <section id={s.id} class:list={['section', i % 2 ? 'sky' : 'deep']}>
+  {themes.map((t, i) => (
+    <section id={t.id} class:list={['section', i % 2 ? 'sky' : 'deep']}>
       <div class="wrap">
-        <p class="eyebrow">{s.eyebrow}</p>
-        <h2 class="h2" style="margin-top: 14px">{s.title}</h2>
-        {s.note && <p class="serif italic" style="margin-top: 16px; max-width: 720px; font-size: 17px; color: var(--mist-2)">{s.note}</p>}
+        <p class="eyebrow">DVD DEBOWSKA</p>
+        <h2 class="h2" style="margin-top: 14px">{t.title}</h2>
+        {i === 0 && <p class="serif italic" style="margin-top: 16px; max-width: 720px; font-size: 17px; color: var(--mist-2)">{DVD_NOTE}</p>}
+        {t.rows.map((row) => (
+          <div class="video-grid video-grid--3">
+            {row.map((id) => {
+              const v = byId.get(id);
+              return v ? (
+                <div class="stack gap-s">
+                  <VideoCard id={v.id} title={v.title} meta={v.meta} />
+                  {v.from && <a class="arrow" href={v.from.href} style="min-height: 32px">{v.from.title}</a>}
+                </div>
+              ) : (
+                <div class="video video--soon"><span class="frame"><span>Bientôt en ligne</span></span><span class="label">Nouvelle vidéo · 2026</span></div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  {talks.length > 0 && (
+    <section id="conferences" class:list={['section', themes.length % 2 ? 'sky' : 'deep']}>
+      <div class="wrap">
+        <p class="eyebrow">Radio · conférences · présentation</p>
+        <h2 class="h2" style="margin-top: 14px">Interviews et conférences</h2>
         <div class="video-grid video-grid--3">
-          {s.list.map((v) => (
+          {talks.map((v) => (
             <div class="stack gap-s">
               <VideoCard id={v.id} title={v.title} meta={v.meta} />
               {v.from && <a class="arrow" href={v.from.href} style="min-height: 32px">{v.from.title}</a>}
@@ -56,7 +98,7 @@ const sections = [
         </div>
       </div>
     </section>
-  ))}
+  )}
 
   <ContactBand heading="Organiser une conférence ?" text="Pour une conférence, un forum ou une intervention, en salle ou via Zoom" />
 </Base>

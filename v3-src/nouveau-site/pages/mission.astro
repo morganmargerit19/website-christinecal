@@ -7,6 +7,9 @@ import VideoCard from '../components/VideoCard.astro';
 import Fleur from '../components/Fleur.astro';
 import { u } from '../lib/site';
 import m from '../../src/data/mission.fr.json';
+
+/** « Jeunes Âmes galactiques » : guillemets insécables, jamais seuls en début de ligne. */
+const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\u00a0»');
 ---
 <Base title={m.metaTitle.replace(' — ', ' · ')} description={m.metaDesc} path="/mission/" image="/images/wp/5emedimension.jpg">
   <section class="page-hero sky" aria-labelledby="titre">
@@ -15,20 +18,20 @@ import m from '../../src/data/mission.fr.json';
       <nav class="crumbs" aria-label="Fil d'Ariane" style="justify-content: center"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><a href={u('/qui-suis-je/')}>Qui suis-je</a><span aria-hidden="true">/</span><span aria-current="page">Ma mission</span></nav>
       <p class="eyebrow" style="margin-top: 36px">{m.eyebrow.trim()}</p>
       <h1 id="titre" style="max-width: 900px; margin-inline: auto">{m.h1}</h1>
-      <p class="lede-serif" style="margin-inline: auto" set:html={m.lede} />
+      <p class="lede-serif" style="margin-inline: auto" set:html={m.lede.replace(/»\s+(?=\S)/, '»<br />')} />
     </div>
   </section>
 
   <section class="sky" style="padding-bottom: 20px">
     <div class="wrap">
-      <figure class="framed"><img src={u('/images/wp/5emedimension.jpg')} alt={m.bannerAlt} fetchpriority="high" /></figure>
+      <figure class="framed framed--band"><img src={u('/images/wp/5emedimension.jpg')} alt={m.bannerAlt} fetchpriority="high" /></figure>
     </div>
   </section>
 
   <section class="section sky">
     <div class="wrap split">
       <div class="txt stack gap-m">
-        <h2 class="h3" set:html={m.s1Heading} />
+        <h2 class="h3" set:html={m.s1Heading.replace(/^\s*Expérience de vie d['’]une galactique au sol\.?\s*(<br\s*\/?>)?\s*/i, '')} />
         <p style="font-size: 19px; color: var(--soft)" set:html={m.s1p1} />
         <p class="serif italic" style="font-size: 25px; line-height: 1.45; color: var(--gold-pale)" set:html={m.s1p2} />
       </div>
@@ -62,10 +65,7 @@ import m from '../../src/data/mission.fr.json';
       <div class="voices">{m.pioneerQuotes.map((q) => <p>« {q.replace(/^["«\s]+|["»\s]+$/g, '')} »</p>)}</div>
       <p class="muted center" style="margin-top: 36px; font-size: 18px" set:html={m.pioneerP2} />
       {m.pioneerAdn && <p class="serif italic center" style="margin-top: 36px; font-size: 26px; color: var(--gold-warm)" set:html={m.pioneerAdn} />}
-      <div class="hemis" style="grid-template-columns: 1fr; justify-items: center; text-align: center">
-        <div class="mid"><Lemniscate /></div>
-        <p style="max-width: 760px; font-size: 19px; color: var(--soft)" set:html={m.pioneerP3} />
-      </div>
+      <p class="center" style="max-width: 760px; margin: 44px auto 0; font-size: 19px; color: var(--soft)" set:html={m.pioneerP3} />
     </div>
   </section>
 
@@ -76,9 +76,9 @@ import m from '../../src/data/mission.fr.json';
       <h2 style="margin-top: 0">{m.callEyebrow}<span class="caret" aria-hidden="true"></span></h2>
       <p class="embark">{m.callHeading} <em style="color: var(--gold)">{m.callHeadingEm}</em></p>
       <div class="crews">
-        <div class="c1"><p class="t">{m.crewOld.title}</p><p class="label" style="margin-top: 8px">{m.crewOld.en}</p><p class="d">{m.crewOld.desc}</p></div>
+        <div class="c1"><p class="t">{nbsp(m.crewOld.title)}</p><p class="label" style="margin-top: 8px">{m.crewOld.en}</p><p class="d">{m.crewOld.desc}</p></div>
         <Lemniscate dash="40 484" />
-        <div><p class="t">{m.crewYoung.title}</p><p class="label" style="margin-top: 8px">{m.crewYoung.en}</p><p class="d">{m.crewYoung.desc}</p></div>
+        <div><p class="t">{nbsp(m.crewYoung.title)}</p><p class="label" style="margin-top: 8px">{m.crewYoung.en}</p><p class="d">{m.crewYoung.desc}</p></div>
       </div>
       <p class="muted" style="margin-top: 44px">{m.callLede}</p>
     </div>
@@ -88,7 +88,7 @@ import m from '../../src/data/mission.fr.json';
     <section class="section deep">
       <div class="wrap">
         <p class="eyebrow">{m.pressHeading || 'Vidéos'}</p>
-        <div class="video-grid">{m.videos.map((v) => <VideoCard {...v} />)}</div>
+        <div class="video-grid video-grid--3">{m.videos.map((v) => <VideoCard {...v} />)}</div>
       </div>
     </section>
   )}

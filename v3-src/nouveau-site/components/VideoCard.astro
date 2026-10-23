@@ -10,11 +10,13 @@ import Icon from './Icon.astro';
 interface Props {
   id: string; title?: string; meta?: string; credit?: 'debowska'; cover?: string; coverAlt?: string;
   size?: 'normal' | 'large';
+  /** À côté de la vidéo voisine (même sujet), au lieu de toute la largeur. */
+  half?: boolean;
 }
-const { id, title, meta, credit, cover, coverAlt } = Astro.props;
+const { id, title, meta, credit, cover, coverAlt, half = false } = Astro.props;
 const watch = `https://www.youtube.com/watch?v=${id}`;
 ---
-<figure class:list={['video', { 'video--dvd': cover }]}>
+<figure class:list={['video', { 'video--dvd': cover, 'video--half': half }]}>
   <div class={cover ? 'frame-row' : undefined}>
     <a class="frame" href={watch} data-yt={isArtifact ? undefined : id} target="_blank" rel="noopener" aria-label={`Voir la vidéo${title ? ' « ' + title + ' »' : ''}`}>
       <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" onerror="this.remove()" />
