@@ -97,3 +97,18 @@ export function imagesOf(f: CollectionEntry<'fiches'>['data']): string[] {
 /** Le visuel « carte / hublot » d'une fiche : sa première vraie photo, sinon un panorama. */
 export const visualOf = (f: CollectionEntry<'fiches'>['data']) =>
   imagesOf(f).find(isPhoto) ?? imagesOf(f).find(isPanorama);
+
+/**
+ * Recadrages choisis pour les cartes et les médaillons. Bugarach (retours du
+ * 22/10) : le pic, tout à gauche du panorama, disparaissait ; on prend la photo
+ * plus haute et on la centre sur lui.
+ */
+const REFRAME: Record<string, { src: string; pos: string }> = {
+  '/images/wp/bugarach-1280x400-1.jpg': { src: '/images/wp/bugarach.jpg', pos: '24% 45%' },
+};
+
+/** Le visuel d'une fiche et son point de cadrage (`pos`, pour object-position). */
+export function framedVisualOf(f: CollectionEntry<'fiches'>['data']): { src?: string; pos?: string } {
+  const src = visualOf(f);
+  return (src && REFRAME[src]) || { src };
+}
