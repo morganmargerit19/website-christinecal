@@ -15,10 +15,12 @@ interface Props {
 }
 const { id, title, meta, credit, cover, coverAlt, half = false } = Astro.props;
 const watch = `https://www.youtube.com/watch?v=${id}`;
+/** Vidéos dont on affiche d'office d'autres sous-titres. Mont Shasta, avril 2019 : l'anglais, pas le français (retours du 26/10). */
+const CAPTIONS: Record<string, string> = { 'ouTq-jp9NgM': 'en' };
 ---
 <figure class:list={['video', { 'video--dvd': cover, 'video--half': half }]}>
   <div class={cover ? 'frame-row' : undefined}>
-    <a class="frame" href={watch} data-yt={isArtifact ? undefined : id} target="_blank" rel="noopener" aria-label={`Voir la vidéo${title ? ' « ' + title + ' »' : ''}`}>
+    <a class="frame" href={watch} data-yt={isArtifact ? undefined : id} data-cc={CAPTIONS[id]} target="_blank" rel="noopener" aria-label={`Voir la vidéo${title ? ' « ' + title + ' »' : ''}`}>
       <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" onerror="this.remove()" />
       <span class="play" aria-hidden="true"><Icon name="play" /></span>
     </a>

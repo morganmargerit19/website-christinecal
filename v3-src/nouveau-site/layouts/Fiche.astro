@@ -9,7 +9,6 @@ import { render, type CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import ContactBand from '../components/ContactBand.astro';
 import Hublot from '../components/Hublot.astro';
-import Fleur from '../components/Fleur.astro';
 import Slideshow from '../components/Slideshow.astro';
 import VideoCard from '../components/VideoCard.astro';
 import Card from '../components/Card.astro';
@@ -51,8 +50,8 @@ const siblings = parent
 
 // Gabarit « Sortir de sa matrice » (retours du 22/10) : le médaillon prend « Old Life / New Life »,
 // le chat-lion passe dans le texte, la roue (ennéagramme) n'apparaît plus.
-// École 5D (retours du 22/10) : les 3 stages s'intercalent entre « Particularité »
-// et « Source », sous le titre « Le parcours en 3 étapes » ; « Source » passe en bas de page.
+// École 5D (retours des 22 et 26/10) : les 3 stages s'intercalent entre « Particularité »
+// et « Source », sous le titre « Le parcours en 3 étapes » ; « Source » vient ensuite, avant les vidéos.
 const isEcole = slug === ECOLE;
 // Les pages des 3 stages gardent le bandeau du parcours (étapes et géométries) ; plus la page de l'École.
 const ecole = f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
@@ -82,7 +81,8 @@ const showHublot = !heroBg && ECOLE_GEO[slug] !== 'fleur' && f.slideshow.filter(
 // (Une image recadrée pour le médaillon ne revient pas en bandeau : Bugarach.)
 const strip = [f.image, f.banner].find((s) => s && s !== visual && !(visualPos && s === f.image) && exists(s) && isStrip(s));
 // Bandeau seul, sans médaillon ni parcours (Team galactique : les Frères des étoiles) :
-// il monte dans l'en-tête, à la place de la fleur de vie de fond (retours du 22/10).
+// il monte dans l'en-tête (retours du 22/10). Plus de fleur de vie animée en fond
+// d'en-tête des fiches : elle bougeait à côté du médaillon (Bugarach, retours du 26/10).
 const heroStrip = strip && !showHublot && !heroBg && etapes.length === 0 ? strip : undefined;
 const dates = f.dates.filter((d) => d.trim());
 const hasCalendar = dates.some((d) => parseDate(d));
@@ -111,7 +111,7 @@ const anchored = [
         <img class="bg" src={u(heroBg.src)} alt="" style={`object-position:${heroBg.pos}`} fetchpriority="high" />
         <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.1) 78%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>
       </>
-    ) : !heroStrip && <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />}
+    ) : null}
     <div class:list={['wrap', 'split', { 'split--solo': !showHublot }]} style={heroBg ? 'padding-bottom: clamp(48px, 6vw, 80px)' : undefined}>
       <div class="txt">
         <nav class="crumbs" aria-label="Fil d'Ariane">
@@ -249,6 +249,13 @@ const anchored = [
     </section>
   )}
 
+  {/* École 5D : « Source » juste avant les vidéos (retours du 26/10). */}
+  {hasSource && (
+    <section class="section sky">
+      <div class="wrap wrap--narrow"><div class="prose"><ProsePart at={SOURCE} part="from"><Content components={blocks} /></ProsePart></div></div>
+    </section>
+  )}
+
   {(f.videos.length > 0 || (f.audio && exists(f.audio))) && (
     <section class="section sky">
       <div class="wrap">
@@ -282,12 +289,6 @@ const anchored = [
           ))}
         </div>
       </div>
-    </section>
-  )}
-
-  {hasSource && (
-    <section class="section sky">
-      <div class="wrap wrap--narrow"><div class="prose"><ProsePart at={SOURCE} part="from"><Content components={blocks} /></ProsePart></div></div>
     </section>
   )}
 
