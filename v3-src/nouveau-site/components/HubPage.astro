@@ -70,11 +70,13 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
-  {classic && (
-    <section class="sky" style="padding-bottom: 10px">
-      <div class="wrap"><figure class="framed"><img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" /></figure></div>
-    </section>
-  )}
+  {/* Bandeau sous l'en-tête. Éveil à Soi : création originale en bleu (retours du 27/10),
+      générée par sources/eveil-a-soi-lumiere.mjs. */}
+  <section class="sky" style="padding-bottom: 10px">
+    <div class="wrap"><figure class="framed">{classic
+      ? <img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" />
+      : <img src={u('/images/wp/eveil-a-soi-lumiere.jpg')} alt="Silhouette en méditation, le cœur rayonnant de lumière bleue" loading="lazy" />}</figure></div>
+  </section>
 
   {data.intro.length > 0 && classic && (
     <section class="section sky">
