@@ -15,6 +15,7 @@ import { ECOLE } from '../lib/ecole';
 import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
 import { HUBS, SHASTA, u, type Hub } from '../lib/site';
+import { exists } from '../lib/images';
 import aSoi from '../../src/data/eveil-a-soi.fr.json';
 import auSoi from '../../src/data/eveil-au-soi.fr.json';
 
@@ -34,9 +35,12 @@ const { entries } = buildAgenda(fiches.filter((f) => f.data.hub === hub));
 // Éveil au Soi : disposition de la page du site actuel (retours de Christine) —
 // titre, bandeau, introduction complète, cartes, phrases de clôture.
 const classic = hub === 'eveil-au-soi';
-// Éveil à Soi (retours du 22/10) : plus d'image de fond (« l'homme en énergie »
-// est déjà celle de l'École 5D), mais la spirale qui se déploie du site actuel.
-const share = hub === 'eveil-a-soi' ? '/images/geometrie/spirale-fibonacci.svg' : '/images/wp/shasta2.jpg';
+// Éveil à Soi : la spirale qui se déploie du site actuel (retours du 22/10) et, derrière,
+// une photo d'une personne dans la lumière bleue, en fond comme l'École 5D (retours du 27/10).
+// Tant que le fichier n'est pas déposé dans public/, l'en-tête reste sur fond nuit.
+const ASOI_BG = '/images/wp/eveil-a-soi-fond.jpg';
+const heroBg = hub === 'eveil-a-soi' && exists(ASOI_BG) ? { src: ASOI_BG, pos: '60% 40%' } : undefined;
+const share = hub === 'eveil-a-soi' ? (heroBg?.src ?? '/images/geometrie/spirale-fibonacci.svg') : '/images/wp/shasta2.jpg';
 
 /**
  * Introduction regroupée : la phrase d'accroche seule, puis les phrases qui se
@@ -59,7 +63,11 @@ const videos = hub === 'eveil-a-soi'
   <section class="page-hero sky" aria-labelledby="titre">
     {classic
       ? <Fleur class="fleur fleur--right" stroke="rgba(233,204,138,.16)" width={0.45} />
-      : <img class="hub-spiral" src={u('/images/geometrie/spirale-fibonacci.svg')} alt="" aria-hidden="true" />}
+      : <>
+          {heroBg && <img class="bg" src={u(heroBg.src)} alt="" style={`object-position:${heroBg.pos}`} fetchpriority="high" />}
+          {heroBg && <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.1) 78%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>}
+          <img class="hub-spiral" src={u('/images/geometrie/spirale-fibonacci.svg')} alt="" aria-hidden="true" />
+        </>}
     <div class="wrap">
       <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
       <div style="max-width: 680px">
@@ -70,13 +78,11 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
-  {/* Bandeau sous l'en-tête. Éveil à Soi : création originale en bleu (retours du 27/10),
-      générée par sources/eveil-a-soi-lumiere.mjs. */}
-  <section class="sky" style="padding-bottom: 10px">
-    <div class="wrap"><figure class="framed">{classic
-      ? <img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" />
-      : <img src={u('/images/wp/eveil-a-soi-lumiere.jpg')} alt="Silhouette en méditation, le cœur rayonnant de lumière bleue" loading="lazy" />}</figure></div>
-  </section>
+  {classic && (
+    <section class="sky" style="padding-bottom: 10px">
+      <div class="wrap"><figure class="framed"><img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" /></figure></div>
+    </section>
+  )}
 
   {data.intro.length > 0 && classic && (
     <section class="section sky">

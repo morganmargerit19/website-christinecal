@@ -471,9 +471,10 @@ main { overflow-x: clip; }
 /* Le cadre est rempli par le même bandeau agrandi et voilé, comme les autres cartes (retours du 26/10). */
 .card .img--band { display: flex; align-items: center; justify-content: center; }
 .card .img--band img.band-fill { position: absolute; inset: 0; height: 100%; object-fit: cover; object-position: 100% 50%; filter: blur(3px) brightness(.85); transform: scale(1.06); }
-/* Bords du bandeau fondus dans le fond (retours du 27/10). */
-.card .img--band img.band { position: relative; height: auto; object-fit: contain; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%), linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%), linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); mask-composite: intersect; }
+/* Bandeau au centre du cadre, bords fondus dans la galaxie (retours du 27/10). */
+.card .img--band img.band-title { position: absolute; left: 0; top: 50%; width: 100%; height: auto; transform: translateY(-50%); object-fit: contain; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%), linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%), linear-gradient(180deg, transparent 0, #000 22%, #000 78%, transparent 100%); mask-composite: intersect; }
 .card:hover .img--band img.band-fill { transform: scale(1.1); }
+.card:hover .img--band img.band-title { transform: translateY(-50%) scale(1.03); }
 .card:hover .img img { transform: scale(1.04); }
 .card .label { display: block; margin-top: 18px; }
 .card .t { display: block; margin-top: 10px; font-family: var(--serif); font-size: 28px; line-height: 1.2; transition: color .3s; }
