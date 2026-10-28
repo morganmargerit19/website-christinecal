@@ -39,7 +39,7 @@ const classic = hub === 'eveil-au-soi';
 // une photo d'une personne dans la lumière bleue, en fond comme l'École 5D (retours du 27/10).
 // Tant que le fichier n'est pas déposé dans public/, l'en-tête reste sur fond nuit.
 const ASOI_BG = '/images/wp/eveil-a-soi-fond.jpg';
-const heroBg = hub === 'eveil-a-soi' && exists(ASOI_BG) ? { src: ASOI_BG, pos: '60% 40%' } : undefined;
+const heroBg = hub === 'eveil-a-soi' && exists(ASOI_BG) ? { src: ASOI_BG } : undefined;
 const share = hub === 'eveil-a-soi' ? (heroBg?.src ?? '/images/geometrie/spirale-fibonacci.svg') : '/images/wp/shasta2.jpg';
 
 /**
@@ -64,9 +64,10 @@ const videos = hub === 'eveil-a-soi'
     {classic
       ? <Fleur class="fleur fleur--right" stroke="rgba(233,204,138,.16)" width={0.45} />
       : <>
-          {heroBg && <img class="bg" src={u(heroBg.src)} alt="" style={`object-position:${heroBg.pos}`} fetchpriority="high" />}
+          {heroBg && <img class="bg bg--right" src={u(heroBg.src)} alt="" fetchpriority="high" />}
           {heroBg && <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.92) 0%, rgba(7,6,24,.6) 45%, rgba(7,6,24,.1) 78%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 25%, rgba(7,6,24,0) 70%, var(--night) 100%)"></div>}
-          <img class="hub-spiral" src={u('/images/geometrie/spirale-fibonacci.svg')} alt="" aria-hidden="true" />
+          {/* Sur la photo, la spirale se fait plus petite, dans le coin, pour laisser le visage dégagé. */}
+          <img class:list={['hub-spiral', { 'hub-spiral--corner': heroBg }]} src={u('/images/geometrie/spirale-fibonacci.svg')} alt="" aria-hidden="true" />
         </>}
     <div class="wrap">
       <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
