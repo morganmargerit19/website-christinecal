@@ -2,7 +2,6 @@
 /** Qui suis-je : tout vient du formulaire « Page : Qui suis-je » du CMS (src/data/about.fr.json). */
 import Base from '../layouts/Base.astro';
 import ContactBand from '../components/ContactBand.astro';
-import Hublot from '../components/Hublot.astro';
 import Fleur from '../components/Fleur.astro';
 import Lemniscate from '../components/Lemniscate.astro';
 import VideoCard from '../components/VideoCard.astro';
@@ -44,18 +43,19 @@ const [first, ...otherSpecifics] = about.specifics.items;
 const trained = first?.match(/^(.*?)\s*[—–-]\s*Formation de plus de\s*([\d\s ]+)\s*personnes\s*(.*?)\.?$/);
 const specifics = trained ? otherSpecifics : about.specifics.items;
 ---
-<Base title={about.meta.title.replace(' — ', ' · ')} description={about.meta.description} path="/qui-suis-je/" image="/images/wp/christine-2026.jpg">
+<Base title={about.meta.title.replace(' — ', ' · ')} description={about.meta.description} path="/qui-suis-je/" image="/images/wp/ccal-portrait-2.jpg">
   <section class="page-hero" aria-labelledby="titre">
     <img class="bg" src={u('/images/wp/galaxie-terre.jpg')} alt="" style="object-position: 60% 50%" />
-    <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.9) 0%, rgba(7,6,24,.55) 40%, rgba(7,6,24,.05) 65%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 22%, rgba(7,6,24,0) 72%, var(--night) 100%)"></div>
-    <div class="wrap split">
+    <div class="veil" style="background: linear-gradient(90deg, rgba(7,6,24,.9) 0%, rgba(7,6,24,.72) 45%, rgba(7,6,24,.35) 75%, rgba(7,6,24,.1) 100%), linear-gradient(180deg, rgba(7,6,24,.7) 0%, rgba(7,6,24,0) 22%, rgba(7,6,24,0) 72%, var(--night) 100%)"></div>
+    {/* Retours du 28/10 : l'ancienne photo en rectangle à gauche, le titre à droite sur 2 lignes,
+        un peu plus petit. La nouvelle photo (christine-2026.jpg) est sur la page Mission. */}
+    <div class="wrap split split--portrait">
+      <figure class="framed hero-portrait"><img src={u('/images/wp/ccal-portrait-2.jpg')} alt="Portrait de Christine CAL" fetchpriority="high" /></figure>
       <div class="txt">
         <p class="eyebrow">{about.hero.eyebrow}</p>
-        <h1 id="titre">{about.hero.title}</h1>
+        <h1 id="titre" class="h1--two" set:html={about.hero.title.replace(/\s+(en contact\b)/, '<br />$1')} />
         <p class="label" style="margin-top: 32px">Coach médiumnique · Conférencière</p>
       </div>
-      {/* Photo d'octobre 2026, à l'essai (retours du 27/10). Ancienne : /images/wp/ccal-portrait-2.jpg, position 50% 22%. */}
-      <Hublot src="/images/wp/christine-2026.jpg" alt="Portrait de Christine CAL, souriante" position="50% 45%" eager />
     </div>
   </section>
 
