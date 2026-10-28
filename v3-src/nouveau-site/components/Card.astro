@@ -17,14 +17,24 @@ const geo = ECOLE_GEO[slugOf(entry.id)];
 const matrice = f.richLayout === 'sortir-matrice';
 const framed = geo || matrice ? {} : framedVisualOf(f);
 const img = geo ? undefined : matrice ? OLD_NEW : framed.src;
-// Faute de photo, un bandeau-titre plutôt que la fleur de vie (Team galactique : les Frères des étoiles).
-const band = !geo && !img && f.image && isStrip(f.image) ? f.image : undefined;
+/**
+ * Cartes avec un visuel fait sur mesure et leur titre en vrai texte (net et juste à
+ * toutes les tailles). Team galactique : une galaxie (générée par Morgan) et
+ * « Les Frères des Étoiles », à la place du bandeau d'origine (retours du 27/10).
+ */
+const COVERS: Record<string, { src: string; title: string }> = {
+  'la-team-galactique': { src: '/images/wp/freres-des-etoiles-carte.jpg', title: 'Les Frères des Étoiles' },
+};
+const cover = COVERS[slugOf(entry.id)];
+// Faute de photo, un bandeau-titre plutôt que la fleur de vie.
+const band = !geo && !img && !cover && f.image && isStrip(f.image) ? f.image : undefined;
 const date = nextDate(f);
 const label = count ? `${count} stage${count > 1 ? 's' : ''}` : (date ?? f.kicker);
 const meta = !count ? [f.place, f.format, f.duration, f.price].filter(Boolean).join(' · ') : '';
 ---
 <a class:list={['card', { 'card--feature': feature }]} href={fichePath(f.hub as Hub, slugOf(entry.id))}>
-  <span class:list={['img', { 'img--geo': geo, 'img--band': band }]}>{img ? <img src={u(img)} alt={matrice ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} loading="lazy" style={framed.pos ? `object-position:${framed.pos}` : undefined} />
+  <span class:list={['img', { 'img--geo': geo, 'img--band': band, 'img--cover': cover }]}>{cover ? <><img src={u(cover.src)} alt="" loading="lazy" /><span class="img-title" aria-hidden="true">{cover.title}</span></>
+    : img ? <img src={u(img)} alt={matrice ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} loading="lazy" style={framed.pos ? `object-position:${framed.pos}` : undefined} />
     : band ? <><img class="band-fill" src={u(band)} alt="" aria-hidden="true" loading="lazy" /><img class="band-title" src={u(band)} alt={f.imageAlt || ''} loading="lazy" /></>
     : geo === 'merkaba' ? <GeoMerkaba /> : geo === 'activation' ? <img class="activation" src={u(ACTIVATION)} alt="" loading="lazy" /> : geo === 'fleur' ? <GeoFleur /> : <Geo />}</span>
   <span>
