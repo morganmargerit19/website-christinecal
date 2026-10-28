@@ -42,11 +42,15 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
   </section>
 
   <section class="section deep">
-    <div class="wrap wrap--narrow">
-      <p class="eyebrow">{m.s2Heading}</p>
-      <p class="serif" style="margin-top: 22px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.45" set:html={m.s2Quote} />
-      {m.s2Matrix && <p class="muted italic" style="margin-top: 18px">{m.s2Matrix}</p>}
-      <ol class="points" style="margin-top: 44px">{m.points.map((p) => <li set:html={p} />)}</ol>
+    {/* Retours du 28/10 : la nouvelle photo de Christine à gauche du texte « La mission ». */}
+    <div class="wrap split split--portrait split--top">
+      <figure class="framed hero-portrait"><img src={u('/images/wp/christine-2026.jpg')} alt="Portrait de Christine CAL, souriante" loading="lazy" /></figure>
+      <div class="txt">
+        <p class="eyebrow">{m.s2Heading}</p>
+        <p class="serif" style="margin-top: 22px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.45" set:html={m.s2Quote} />
+        {m.s2Matrix && <p class="muted italic" style="margin-top: 18px">{m.s2Matrix}</p>}
+        <ol class="points" style="margin-top: 44px">{m.points.map((p) => <li set:html={p} />)}</ol>
+      </div>
     </div>
   </section>
 
