@@ -342,6 +342,7 @@ main { overflow-x: clip; }
 .split--top { align-items: flex-start; }
 .hero-portrait { width: min(340px, 100%); flex-shrink: 0; }
 .hero-portrait img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 30%; }
+.hero-portrait--sm { width: min(216px, 17vw); }
 .page-hero h1.h1--two { font-size: clamp(30px, 3.3vw, 46px); line-height: 1.18; }
 @media (max-width: 900px) { .split--portrait .hero-portrait { width: min(240px, 70%); align-self: center; } }
 .split--solo .lede-serif { max-width: 900px; }
