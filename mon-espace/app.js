@@ -60,9 +60,16 @@
   // ------------------------------------------------------------ Vues
   const TAB_OF = { edit: 'stages', page: 'pages' };
   let currentView = '';
+  // Changements pas encore enregistrés : on demande avant de quitter l'écran
+  const UNSAVED = {
+    edit: ['Vous n’avez pas enregistré vos changements sur ce stage.', () => editDirty()],
+    page: ['Vous n’avez pas enregistré vos changements sur cette page.', () => pageDirty()],
+    videos: ['Vous n’avez pas enregistré vos changements dans Mes vidéos.', () => videosDirty()],
+  };
+  const unsaved = () => UNSAVED[currentView]?.[1]() ?? false;
   function show(view) {
-    // Changements non enregistrés dans Mes vidéos : on demande avant de quitter
-    if (currentView === 'videos' && view !== 'videos' && videosDirty() && !confirm('Vos changements dans Mes vidéos ne sont pas enregistrés. Les abandonner ?')) return;
+    if (view !== currentView && view !== 'loading' && unsaved()
+      && !confirm(UNSAVED[currentView][0] + '\n\nLes abandonner ? (« Annuler » pour rester et enregistrer)')) return;
     if (currentView === 'videos' && view !== 'videos') resetVideos();
     currentView = view;
     $$('.view').forEach((v) => (v.hidden = v.id !== 'v-' + view));
@@ -270,8 +277,17 @@
     $('#edit-error').hidden = true;
     toggleHub();
     preview();
+    editBase = editSnapshot();
     show('edit');
   }
+
+  // Photo instantanée du formulaire de stage, pour savoir s'il a changé
+  let editBase = '';
+  function editSnapshot() {
+    const vals = $$('#edit-form input:not([type=file]), #edit-form select, #edit-form textarea').map((i) => (i.type === 'checkbox' ? i.checked : i.value));
+    return JSON.stringify([vals, bodyDirty ? $('#f-body').innerHTML : '', !!newPhoto, $('#photo-img').hidden, slides.map((x) => x.src || 'nouvelle')]);
+  }
+  const editDirty = () => !!current && editSnapshot() !== editBase;
 
   function toggleHub() { $('#hub-wrap').hidden = $('#f-rubrique').value !== 'aucune'; }
 
@@ -421,6 +437,7 @@
       fiches = fiches.filter((f) => f.path !== path).concat(updated);
       renderList();
       historyCache = null;
+      current = null;
       show('stages');
       followDeploy();
     } catch (e) {
@@ -768,6 +785,16 @@
     }
     showError('#page-error', '');
     show('page');
+  }
+
+  function pageDirty() {
+    if (!page) return false;
+    if (page.fields.some(([, b]) => b.pending?.())) return true;
+    try {
+      const obj = JSON.parse(JSON.stringify(page.data));
+      for (const [f, b] of page.fields) setAt(obj, f.p, b.read());
+      return JSON.stringify(obj) !== JSON.stringify(page.data);
+    } catch { return true; } // un lien YouTube en cours de saisie, par exemple
   }
 
   async function savePage(ev) {
@@ -1243,6 +1270,8 @@
   $('#vdlg-soon').addEventListener('click', () => placeVideo(SOON));
   // Le bouton « Enregistrer » s'allume dès qu'un nom de thème change
   $('#themes').addEventListener('input', () => ($('#videos-save').disabled = !videosDirty()));
+  // Fermer l'onglet ou recharger avec des changements non enregistrés : le navigateur demande
+  window.addEventListener('beforeunload', (e) => { if (unsaved()) { e.preventDefault(); e.returnValue = ''; } });
   // Boutons « aller à » (accueil, aide…)
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-go]');
