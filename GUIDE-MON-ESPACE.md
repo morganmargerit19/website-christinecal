@@ -77,7 +77,9 @@ annonce** pour la retirer.
 
 Toutes vos modifications, les plus récentes en haut. **Annuler cette modification**
 remet la page comme elle était juste avant. Si vous avez fait plusieurs changements sur
-la même page, annulez d'abord le plus récent.
+la même page, annulez d'abord le plus récent. Un nouveau stage, lui, ne s'annule pas : **Retirer ce stage
+du site** le cache (il reste dans Mes stages), et **Le remettre sur le site** le fait
+revenir.
 
 ## Rassurez-vous
 
