@@ -273,6 +273,7 @@
     slides = (d.slideshow || []).map((src) => ({ src }));
     renderSlides();
     $('#edit-see').hidden = !f || !!d.draft;
+    $('#delete-stage').hidden = !f;
     if (f) $('#edit-see').href = SITE + (d.hub || 'eveil-a-soi') + '/' + f.slug + '/';
     $('#edit-error').hidden = true;
     toggleHub();
@@ -445,6 +446,31 @@
     } finally {
       btn.disabled = false;
       btn.textContent = 'Enregistrer';
+    }
+  }
+
+  async function deleteFiche() {
+    const f = current;
+    if (!f?.path) return;
+    if (fiches.some((x) => x.data.rubrique === f.slug)) {
+      return showError('#edit-error', 'Cette page de rubrique contient d’autres stages : déplacez-les ou supprimez-les d’abord.');
+    }
+    if (!confirm(`Supprimer « ${f.data.title} » ?\n\nIl disparaît du site et de vos stages. Vous pourrez le faire revenir depuis l’Historique.`)) return;
+    const btn = $('#delete-stage');
+    btn.disabled = true;
+    try {
+      await api('delete', { path: f.path, sha: f.sha, title: f.data.title });
+      delete files[f.path];
+      fiches = fiches.filter((x) => x !== f);
+      renderList();
+      historyCache = null;
+      current = null;
+      show('stages');
+      followDeploy();
+    } catch (e) {
+      showError('#edit-error', e.message);
+    } finally {
+      btn.disabled = false;
     }
   }
 
@@ -913,7 +939,8 @@
     const what = (m.match(/«\s*(.+?)\s*»/) || [])[1] || '';
     if (/^ajoute la photo/.test(m)) return { verb: 'Photo ajoutée', what: '', undoable: false };
     if (/^annule/.test(m)) return { verb: 'Annulation', what, undoable: true };
-    if (/^ajoute/.test(m)) return { verb: 'Nouveau stage', what, undoable: false, added: true };
+    if (/^supprime/.test(m)) return { verb: 'Stage supprimé', what, undoable: true, back: 'Le stage reviendra, tel qu’il était.' };
+    if (/^ajoute/.test(m)) return { verb: 'Nouveau stage', what, undoable: true, back: 'Le stage sera supprimé.' };
     return { verb: 'Modification', what, undoable: true };
   }
 
@@ -950,40 +977,13 @@
         b.type = 'button';
         b.addEventListener('click', () => undo(c, d, b));
         row.append(b);
-      } else if (d.added) {
-        // Un nouveau stage ne s'efface pas : on le retire du site (il reste dans Mes stages)
-        const f = fiches.find((x) => x.data.title === d.what);
-        if (f) {
-          const hidden = !!f.data.draft;
-          if (hidden) txt.append(el('p', 'hm', 'Retiré du site, gardé dans Mes stages.'));
-          const b = el('button', 'btn small ghost', hidden ? 'Le remettre sur le site' : 'Retirer ce stage du site');
-          b.type = 'button';
-          b.addEventListener('click', () => setVisible(f, hidden, b));
-          row.append(b);
-        }
       }
       box.append(row);
     }
   }
 
-  async function setVisible(f, visible, btn) {
-    if (!visible && !confirm(`Retirer « ${f.data.title} » du site ?\n\nIl reste dans Mes stages, prêt à revenir.`)) return;
-    btn.disabled = true;
-    try {
-      const d = { ...f.data };
-      if (visible) delete d.draft; else d.draft = true;
-      await api('save', { path: f.path, text: serialize(d, f.body), sha: f.sha, title: f.data.title });
-      historyCache = null;
-      await load('history');
-      followDeploy();
-    } catch (e) {
-      status('err', e.message);
-      btn.disabled = false;
-    }
-  }
-
   async function undo(c, d, btn) {
-    if (!confirm(`Annuler « ${d.what} » ?\n\nLa page revient comme elle était juste avant cette modification.`)) return;
+    if (!confirm(`Annuler « ${d.what} » ?\n\n${d.back || 'La page revient comme elle était juste avant cette modification.'}`)) return;
     btn.disabled = true;
     btn.textContent = 'Annulation…';
     try {
@@ -1290,6 +1290,7 @@
   $('#f-rubrique').addEventListener('change', toggleHub);
   $('#edit-form').addEventListener('input', preview);
   $('#edit-form').addEventListener('submit', saveFiche);
+  $('#delete-stage').addEventListener('click', deleteFiche);
   $('#infos-form').addEventListener('submit', saveInfos);
   $('#page-form').addEventListener('submit', savePage);
   $('#add-theme').addEventListener('click', () => { vstate.themes.push({ title: 'Nouveau thème', rows: [[]] }); renderVideos(); $$('#themes .theme-head input').pop()?.select(); });

@@ -30,8 +30,11 @@ téléphone convient : elle est réduite automatiquement.
 **+ Ajouter des photos** (vous pouvez en choisir plusieurs d'un coup), **← →** pour l'ordre,
 **Retirer** pour en enlever une, puis **Enregistrer**.
 
-**Retirer un stage :** décochez **Afficher ce stage sur le site**, puis enregistrez. Il
-reste dans votre espace, prêt à revenir.
+**Retirer un stage pour un temps :** décochez **Afficher ce stage sur le site**, puis
+enregistrez. Il reste dans votre espace, prêt à revenir.
+
+**Supprimer un stage :** ouvrez-le et cliquez sur **Supprimer ce stage**, en bas. Il
+disparaît du site et de vos stages ; il peut revenir depuis l'Historique.
 
 ## Mes pages
 
@@ -77,9 +80,8 @@ annonce** pour la retirer.
 
 Toutes vos modifications, les plus récentes en haut. **Annuler cette modification**
 remet la page comme elle était juste avant. Si vous avez fait plusieurs changements sur
-la même page, annulez d'abord le plus récent. Un nouveau stage, lui, ne s'annule pas : **Retirer ce stage
-du site** le cache (il reste dans Mes stages), et **Le remettre sur le site** le fait
-revenir.
+la même page, annulez d'abord le plus récent. Cela marche aussi pour un nouveau stage (il est supprimé) et
+pour un stage supprimé (il revient).
 
 ## Rassurez-vous
 
