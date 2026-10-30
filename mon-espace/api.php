@@ -74,6 +74,8 @@ const DATA_FILES = [
     'v3-src/src/data/infos.json',
     'v3-src/src/data/eveil-a-soi.fr.json',
     'v3-src/src/data/eveil-au-soi.fr.json',
+    'v3-src/src/data/about.fr.json',
+    'v3-src/src/data/mission.fr.json',
 ];
 
 function allowed_text_path(string $path): bool

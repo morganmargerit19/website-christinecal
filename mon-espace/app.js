@@ -63,7 +63,7 @@
     const logged = view !== 'login' && view !== 'loading';
     $('#tabs').hidden = !logged;
     $('#top-right').hidden = !logged;
-    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === view || (view === 'edit' && b.dataset.tab === 'stages')));
+    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === view || (view === 'edit' && b.dataset.tab === 'stages') || (view === 'page' && b.dataset.tab === 'pages')));
     window.scrollTo(0, 0);
   }
 
@@ -424,6 +424,283 @@
     }
   }
 
+  // ------------------------------------------------------------ Mes pages
+  // Le site que Christine regarde : le nouveau site, encore en maquette sur Vercel.
+  // À la bascule du nouveau site sur OVH, remettre '/'.
+  const SITE = 'https://website-christinecal.vercel.app/nouveau-site/';
+  const ABOUT = 'v3-src/src/data/about.fr.json';
+  const MISSION = 'v3-src/src/data/mission.fr.json';
+  // Types de champ : line (une ligne), text (un paragraphe sans mise en forme),
+  // rich (gras, italique, retour à la ligne : le site l'affiche en HTML), list (textes),
+  // objs (liste de petits blocs), videos. « rich » seulement là où le site lit du HTML.
+  const L = (p, label, help) => ({ p, label, help, type: 'line' });
+  const P = (p, label, help) => ({ p, label, help, type: 'text' });
+  const R = (p, label, help) => ({ p, label, help, type: 'rich' });
+  const PAGES = [
+    { path: ABOUT, title: 'Qui suis-je', url: 'qui-suis-je/', accent: 'about-accent', sections: [
+      { legend: 'En haut de la page', fields: [
+        L('hero.title', 'Grand titre', 'Le site passe à la ligne avant « en contact ».'),
+        P('epigraph', 'Texte en italique sous le titre') ] },
+      { legend: 'Une galactique venue d’un futur', fields: [
+        L('galactic.heading', 'Titre'),
+        { p: 'galactic.items', label: 'Paragraphes', type: 'list', item: 'text', add: 'un paragraphe' } ] },
+      { legend: 'Un parcours en bref', fields: [
+        L('journey.heading', 'Titre'),
+        { p: 'journey.items', label: 'Étapes du parcours', type: 'objs', add: 'une étape', help: 'Les deux dernières étapes s’affichent côte à côte, en grand.',
+          item: [L('lead', 'Début (en doré)'), R('text', 'Suite')] } ] },
+      { legend: 'Activités actuelles', fields: [
+        L('activities.heading', 'Titre'),
+        { p: 'activities.items', label: 'Activités', type: 'objs', add: 'une activité',
+          item: [L('title', 'Nom de l’activité'), R('text', 'Description'),
+            { p: 'accordion.items', label: 'Exemples de conférences', type: 'lines', optional: true,
+              help: 'Une conférence par ligne. Mettez l’année à la fin (« … — 2026 ») : les plus récentes s’affichent en premier.' }] } ] },
+      { legend: 'Spécificités', fields: [
+        L('specifics.heading', 'Titre'),
+        { p: 'specifics.items', label: 'Spécificités', type: 'list', item: 'rich', add: 'une spécificité', help: 'Une date au début (« 2019 — … ») s’affiche à part, en doré.' } ] },
+      { legend: 'Une clientèle variée', fields: [L('clients.heading', 'Titre'), P('clients.text', 'Texte')] },
+      { legend: 'Actualités', fields: [
+        L('news.heading', 'Titre'),
+        { p: 'news.items', label: 'Actualités', type: 'list', item: 'rich', add: 'une actualité', help: 'Commencez par la date : « 2026 — … ».' } ] },
+      { legend: 'À venir', fields: [
+        L('upcoming.heading', 'Titre'),
+        { p: 'upcoming.items', label: 'Projets à venir', type: 'list', item: 'rich', add: 'un projet', help: 'Un mot suivi de deux-points (« YouTube : … ») s’affiche en doré.' } ] },
+      { legend: 'Vidéos de présentation', fields: [L('videos.heading', 'Titre'), { p: 'videos.list', label: 'Vidéos', type: 'videos' }] },
+    ] },
+    { path: MISSION, title: 'Ma mission', url: 'mission/', sections: [
+      { legend: 'En haut de la page', fields: [
+        L('eyebrow', 'Petit mot au-dessus du titre'), L('h1', 'Grand titre'),
+        R('lede', 'Phrase sous le titre', 'La citation entre « » est aussi reprise sur la page Qui suis-je.') ] },
+      { legend: 'L’Espace-Temps se contracte', fields: [
+        R('s1Heading', 'Titre', 'Sur le site, seule la fin s’affiche (après « au sol. »).'),
+        R('s1p1', 'Premier paragraphe'), R('s1p2', 'Paragraphe en italique doré') ] },
+      { legend: 'La mission', fields: [
+        L('s2Heading', 'Titre'), R('s2Quote', 'Grand texte'), L('s2Matrix', 'Petite phrase en italique'),
+        { p: 'points', label: 'Les points I, II, III', type: 'list', item: 'rich', add: 'un point' } ] },
+      { legend: 'Véritable pionnier', fields: [
+        L('pioneerHeading', 'Titre'), R('pioneerIntro', 'Introduction'),
+        { p: 'pioneerQuotes', label: 'Citations', type: 'list', item: 'text', add: 'une citation', help: 'Les guillemets « » sont ajoutés par le site.' },
+        R('pioneerP2', 'Phrase sous les citations'), R('pioneerAdn', 'Phrase en italique doré'), R('pioneerP3', 'Dernier paragraphe') ] },
+      { legend: 'Vous sentez l’appel ?', fields: [
+        L('callEyebrow', 'Titre'), L('callHeading', 'Phrase'), L('callHeadingEm', 'Fin de la phrase, en doré'),
+        L('crewOld.title', 'Premier équipage'), L('crewOld.en', 'Son nom en anglais'), P('crewOld.desc', 'Sa description'),
+        L('crewYoung.title', 'Second équipage'), L('crewYoung.en', 'Son nom en anglais'), P('crewYoung.desc', 'Sa description'),
+        P('callLede', 'Phrase sous les équipages') ] },
+      { legend: 'Vidéos', fields: [L('pressHeading', 'Titre'), { p: 'videos', label: 'Vidéos', type: 'videos' }] },
+      { legend: 'Vous vous reconnaissez ?', fields: [L('recognizeHeading', 'Titre'), P('recognizeBody', 'Texte')] },
+    ] },
+  ];
+  let page = null; // { def, data } page en cours
+
+  const getAt = (o, p) => p.split('.').reduce((v, k) => (v == null ? v : v[k]), o);
+  function setAt(o, p, val) {
+    const ks = p.split('.');
+    const last = ks.pop();
+    const parent = ks.reduce((v, k) => (v[k] ??= {}), o);
+    parent[last] = val;
+  }
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const escHTML = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  /** HTML d'un champ « rich », réduit à ce que le site sait afficher : gras, italique, retour à la ligne. */
+  function richHTML(root, accent) {
+    let out = '';
+    const walk = (n) => {
+      for (const c of n.childNodes) {
+        if (c.nodeType === 3) { out += escHTML(c.nodeValue); continue; }
+        if (c.nodeType !== 1) continue;
+        const tag = c.tagName.toLowerCase();
+        if (tag === 'br') { out += '<br />'; continue; }
+        if (tag === 'div' || tag === 'p') { if (out && !out.endsWith('<br />')) out += '<br />'; walk(c); continue; }
+        const wrap = tag === 'strong' || tag === 'b' ? 'strong' : tag === 'em' || tag === 'i' ? 'em'
+          : tag === 'span' && c.classList.contains('about-white') ? 'span' : null;
+        if (!wrap) { walk(c); continue; }
+        const cls = c.getAttribute('class') || (wrap === 'strong' && accent ? accent : '');
+        out += `<${wrap}${cls ? ` class="${escHTML(cls)}"` : ''}>`;
+        walk(c);
+        out += `</${wrap}>`;
+      }
+    };
+    walk(root);
+    return out.replace(/(<br \/>)+$/, '').trim();
+  }
+
+  // Un champ : renvoie { node, read } ; read() rend la valeur d'origine tant qu'on n'y a pas touché.
+  function textField(type, value, label, help) {
+    const wrap = el('div', 'field');
+    if (label) { const l = el('div', 'label-like', label); if (help) l.append(el('small', null, help)); wrap.append(l); }
+    const orig = value ?? '';
+    if (type === 'rich') {
+      const bar = el('div', 'toolbar mini');
+      const ed = el('div', 'editor rich');
+      ed.contentEditable = 'true';
+      ed.innerHTML = orig;
+      let dirty = false;
+      ed.addEventListener('input', () => (dirty = true));
+      ed.addEventListener('paste', (e) => { e.preventDefault(); document.execCommand('insertText', false, e.clipboardData.getData('text/plain')); });
+      ed.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); document.execCommand('insertLineBreak'); dirty = true; } });
+      for (const [cmd, html, title] of [['bold', '<b>G</b>', 'Gras'], ['italic', '<i>I</i>', 'Italique']]) {
+        const b = el('button');
+        b.type = 'button'; b.title = title; b.innerHTML = html;
+        b.addEventListener('mousedown', (e) => { e.preventDefault(); ed.focus(); document.execCommand(cmd); dirty = true; });
+        bar.append(b);
+      }
+      wrap.append(bar, ed);
+      return { node: wrap, focus: () => ed.focus(), read: () => (dirty ? richHTML(ed, page.def.accent) : orig) };
+    }
+    const input = type === 'text' ? el('textarea') : el('input');
+    if (type === 'text') input.rows = Math.min(8, Math.max(3, Math.ceil(orig.length / 70)));
+    else input.type = 'text';
+    input.value = orig;
+    wrap.append(input);
+    return { node: wrap, focus: () => input.focus(), read: () => (input.value === orig ? orig : input.value.trim()) };
+  }
+
+  // Une liste : des blocs qu'on peut retirer, remonter, ajouter.
+  function listField(f, values, makeItem) {
+    const wrap = el('div', 'field');
+    const l = el('div', 'label-like', f.label);
+    if (f.help) l.append(el('small', null, f.help));
+    const box = el('div', 'list');
+    const items = [];
+    const add = (v, focus) => {
+      const it = makeItem(v);
+      const row = el('div', 'item col');
+      const acts = el('div', 'item-actions');
+      const up = el('button', 'x up', '↑ Monter');
+      up.type = 'button';
+      up.addEventListener('click', () => { const i = items.indexOf(entry); if (i > 0) { items.splice(i - 1, 0, items.splice(i, 1)[0]); row.previousElementSibling.before(row); } });
+      const rm = el('button', 'x', 'Retirer');
+      rm.type = 'button';
+      rm.addEventListener('click', () => { items.splice(items.indexOf(entry), 1); row.remove(); });
+      acts.append(up, rm);
+      row.append(it.node, acts);
+      box.append(row);
+      const entry = { row, read: it.read };
+      items.push(entry);
+      if (focus) it.focus?.();
+    };
+    (values || []).forEach((v) => add(v));
+    const more = el('button', 'btn small', '+ Ajouter ' + (f.add || 'un élément'));
+    more.type = 'button';
+    more.addEventListener('click', () => add(undefined, true));
+    wrap.append(l, box, more);
+    return { node: wrap, read: () => items.map((e) => e.read()).filter((x) => x !== '') };
+  }
+
+  function buildField(f, data) {
+    const v = getAt(data, f.p);
+    if (f.type === 'lines') {
+      // Une liste courte, un élément par ligne : plus lisible qu'une pile de blocs
+      const orig = (v || []).join('\n');
+      const t = textField('text', orig, f.label, f.help);
+      t.node.querySelector('textarea').rows = Math.min(14, Math.max(4, (v || []).length + 1));
+      return { ...t, read: () => { const x = t.read(); return x === orig ? v : x.split('\n').map((l) => l.trim()).filter(Boolean); } };
+    }
+    if (f.type === 'list') {
+      return listField(f, v, (x) => {
+        const t = textField(f.item, x);
+        return { ...t, read: () => t.read() };
+      });
+    }
+    if (f.type === 'objs') {
+      return listField(f, v, (obj) => {
+        const base = obj ? JSON.parse(JSON.stringify(obj)) : {};
+        const box = el('div', 'sub');
+        const parts = f.item
+          .filter((sf) => !sf.optional || getAt(base, sf.p) !== undefined)
+          .map((sf) => { const b = buildField(sf, base); box.append(b.node); return [sf, b]; });
+        return { node: box, focus: () => box.querySelector('input,textarea,[contenteditable]')?.focus(), read: () => {
+          const o = JSON.parse(JSON.stringify(base));
+          for (const [sf, b] of parts) setAt(o, sf.p, b.read());
+          return o;
+        } };
+      });
+    }
+    if (f.type === 'videos') {
+      return listField({ ...f, add: 'une vidéo YouTube' }, v, (vid) => {
+        const base = vid ? { ...vid } : {};
+        const box = el('div', 'sub');
+        const url = textField('line', base.id ? 'https://www.youtube.com/watch?v=' + base.id : '', 'Lien YouTube');
+        const title = textField('line', base.title || '', 'Titre de la vidéo');
+        const meta = textField('line', base.meta || '', 'Date et durée', 'Ex. : Juillet 2016 · 10 min 42');
+        box.append(url.node, title.node, meta.node);
+        return { node: box, focus: url.focus, read: () => {
+          const id = youtubeId(url.read());
+          if (!id) throw new Error('Un lien de vidéo n’est pas un lien YouTube. Copiez l’adresse de la vidéo depuis YouTube.');
+          return { ...base, id, title: title.read(), meta: meta.read() };
+        } };
+      });
+    }
+    return textField(f.type, v, f.label, f.help);
+  }
+
+  function renderPages() {
+    const box = $('#page-list');
+    box.replaceChildren();
+    for (const def of PAGES) {
+      if (!files[def.path]) continue;
+      const row = el('button', 'srow srow--page');
+      row.type = 'button';
+      const txt = el('span');
+      txt.append(el('span', 't', def.title), Object.assign(el('span', 'm', def.sections.map((s) => s.legend).slice(0, 4).join(' · ') + '…'), { style: 'display:block' }));
+      row.append(txt, el('span', 'go', 'Modifier →'));
+      row.addEventListener('click', () => openPage(def));
+      box.append(row);
+    }
+  }
+
+  function openPage(def) {
+    const data = json(def.path, null);
+    if (!data) return status('err', 'Cette page n’a pas pu être lue. Rechargez, ou prévenez Morgan.');
+    page = { def, data, fields: [] };
+    $('#page-title').textContent = def.title;
+    $('#page-see').href = SITE + def.url;
+    const box = $('#page-fields');
+    box.replaceChildren();
+    // Une section par bloc de la page, repliée : on ouvre celle qu'on veut modifier.
+    for (const s of def.sections) {
+      const fs = el('details', 'card sec');
+      fs.append(el('summary', null, s.legend));
+      for (const f of s.fields) {
+        if (getAt(data, f.p) === undefined && f.type !== 'list') continue; // champ absent de ce fichier
+        const b = buildField(f, data);
+        fs.append(b.node);
+        page.fields.push([f, b]);
+      }
+      box.append(fs);
+    }
+    showError('#page-error', '');
+    show('page');
+  }
+
+  async function savePage(ev) {
+    ev.preventDefault();
+    const btn = $('#page-save');
+    showError('#page-error', '');
+    let obj;
+    try {
+      obj = JSON.parse(JSON.stringify(page.data));
+      for (const [f, b] of page.fields) setAt(obj, f.p, b.read());
+    } catch (e) { return showError('#page-error', e.message); }
+    if (JSON.stringify(obj) === JSON.stringify(page.data)) return status('ok', 'Rien n’a changé : il n’y avait rien à enregistrer.');
+    btn.disabled = true;
+    btn.textContent = 'Enregistrement…';
+    try {
+      const p = page.def.path;
+      const text = JSON.stringify(obj, null, 2) + '\n';
+      const res = await api('save', { path: p, text, sha: files[p]?.sha, title: 'Page ' + page.def.title });
+      files[p] = { sha: res.sha, text };
+      page.data = obj;
+      show('pages');
+      followDeploy();
+    } catch (e) {
+      showError('#page-error', e.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Enregistrer';
+    }
+  }
+
   // ------------------------------------------------------------ Chargement
   async function load() {
     show('loading');
@@ -433,6 +710,7 @@
     fiches = res.files.filter((f) => f.path.startsWith(FICHES)).map((f) => parseFiche(f.path, f.sha, f.text)).filter(Boolean);
     renderList();
     renderInfos();
+    renderPages();
     show('stages');
   }
 
@@ -459,6 +737,9 @@
   $('#edit-form').addEventListener('input', preview);
   $('#edit-form').addEventListener('submit', saveFiche);
   $('#infos-form').addEventListener('submit', saveInfos);
+  $('#page-form').addEventListener('submit', savePage);
+  $('#page-back').addEventListener('click', () => show('pages'));
+  $('#see-site').href = SITE;
   $('#f-photo').addEventListener('change', (e) => pickPhoto(e.target.files[0]));
   $('#photo-remove').addEventListener('click', () => { newPhoto = null; setPhoto(''); });
   const drop = $('#photo-drop');

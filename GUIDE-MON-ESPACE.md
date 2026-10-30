@@ -35,6 +35,17 @@ Cliquez sur **Choisir une photo**, ou glissez-la dans le cadre. Une photo de té
 
 Décochez **Afficher ce stage sur le site**, puis enregistrez. Le stage disparaît du site, mais il reste dans votre espace, prêt à revenir.
 
+## Mes pages
+
+L'onglet **Mes pages** contient les textes de vos pages **Qui suis-je** et **Ma mission**.
+
+1. Cliquez sur la page, puis sur **Ouvrir** à côté du bloc à modifier (par exemple « Actualités »).
+2. Changez le texte. Pour mettre un mot en gras ou en italique, sélectionnez-le puis cliquez sur **G** ou **I**.
+3. Pour ajouter une actualité, une étape ou une vidéo, cliquez sur **+ Ajouter…**. **↑ Monter** change l'ordre, **Retirer** l'enlève.
+4. Cliquez sur **Enregistrer**, en bas.
+
+Le bouton **Voir la page** ouvre la page du site, pour vérifier.
+
 ## Petites infos
 
 L'onglet **Petites infos** contient :

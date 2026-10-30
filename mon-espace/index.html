@@ -16,10 +16,11 @@
     <a class="brand" href="./">Mon espace <span>Christine CAL</span></a>
     <nav class="tabs" id="tabs" hidden>
       <button type="button" data-tab="stages" aria-current="page">Mes stages</button>
+      <button type="button" data-tab="pages">Mes pages</button>
       <button type="button" data-tab="infos">Petites infos</button>
     </nav>
     <div class="top-right" id="top-right" hidden>
-      <a class="link" href="/" target="_blank" rel="noopener">Voir mon site</a>
+      <a class="link" id="see-site" href="/" target="_blank" rel="noopener">Voir mon site</a>
       <button type="button" class="link" id="logout">Me déconnecter</button>
     </div>
   </div>
@@ -151,6 +152,28 @@
         </div>
       </aside>
     </div>
+  </section>
+
+  <!-- Mes pages : choix de la page -->
+  <section id="v-pages" class="view narrow" hidden>
+    <h1>Mes pages</h1>
+    <p class="lead">Les textes de vos pages de présentation. Cliquez sur une page pour la modifier.</p>
+    <div id="page-list" class="rows"></div>
+  </section>
+
+  <!-- Mes pages : une page -->
+  <section id="v-page" class="view narrow" hidden>
+    <button type="button" class="back" id="page-back">← Retour à mes pages</button>
+    <h1 id="page-title">Modifier la page</h1>
+    <p class="lead">Changez un texte, puis cliquez sur <strong>Enregistrer</strong> en bas. Pour mettre un mot en gras ou en italique, sélectionnez-le puis cliquez sur <b>G</b> ou <i>I</i>.</p>
+    <form id="page-form" class="form" novalidate>
+      <div id="page-fields"></div>
+      <div class="save-bar">
+        <p class="error" id="page-error" role="alert" hidden></p>
+        <a class="btn ghost" id="page-see" href="/" target="_blank" rel="noopener">Voir la page</a>
+        <button type="submit" class="btn primary" id="page-save">Enregistrer</button>
+      </div>
+    </form>
   </section>
 
   <!-- Petites infos -->
