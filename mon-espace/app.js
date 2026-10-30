@@ -263,6 +263,8 @@
     $('#body-wrap').hidden = locked;
     $('#f-body').innerHTML = locked ? '' : marked.parse(current.body || '');
     setPhoto(d.image || '');
+    slides = (d.slideshow || []).map((src) => ({ src }));
+    renderSlides();
     $('#edit-see').hidden = !f || !!d.draft;
     if (f) $('#edit-see').href = SITE + (d.hub || 'eveil-a-soi') + '/' + f.slug + '/';
     $('#edit-error').hidden = true;
@@ -295,6 +297,33 @@
     URL.revokeObjectURL(url);
     const blob = await new Promise((ok) => c.toBlob(ok, 'image/jpeg', 0.85));
     return { blob, url: URL.createObjectURL(blob), name: file.name.replace(/\.[a-z0-9]+$/i, '') };
+  }
+
+  const toB64 = (blob) => new Promise((ok) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.readAsDataURL(blob); });
+
+  // Diaporama du stage : [{ src }] déjà en ligne, ou [{ pending }] choisie, envoyée à l'enregistrement
+  let slides = [];
+  function renderSlides() {
+    const box = $('#f-slides');
+    box.replaceChildren();
+    if (!slides.length) box.append(el('p', 'hint', 'Pas de diaporama pour ce stage.'));
+    slides.forEach((x, i) => {
+      const t = el('div', 'slide');
+      const im = el('img'); im.alt = ''; im.src = x.pending ? x.pending.url : x.src;
+      const acts = el('div', 'vacts');
+      const move = (to) => { slides.splice(to, 0, slides.splice(i, 1)[0]); renderSlides(); };
+      acts.append(tool('←', 'Avant', i > 0, () => move(i - 1)), tool('→', 'Après', i < slides.length - 1, () => move(i + 1)),
+        tool('Retirer', 'Retirer du diaporama', true, () => { slides.splice(i, 1); renderSlides(); }, 'danger'));
+      t.append(im, el('span', 'vm', 'Photo ' + (i + 1) + (x.pending ? ' · nouvelle' : '')), acts);
+      box.append(t);
+    });
+  }
+  async function addSlides(list) {
+    for (const file of [...list]) {
+      if (!/^image\//.test(file.type)) continue;
+      try { slides.push({ pending: await shrink(file) }); } catch { showError('#edit-error', 'Une photo n’a pas pu être lue. Essayez une photo au format JPEG.'); }
+    }
+    renderSlides();
   }
 
   async function pickPhoto(file) {
@@ -348,13 +377,21 @@
     try {
       const d = { ...current.data };
       if (newPhoto) {
-        const b64 = await new Promise((ok) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.readAsDataURL(newPhoto.blob); });
-        const up = await api('upload', { name: slugify(title), data: b64 });
+        const up = await api('upload', { name: slugify(title), data: await toB64(newPhoto.blob) });
         d.image = up.src;
         d.imageAlt = d.imageAlt || title;
       } else if ($('#photo-img').hidden) {
         delete d.image;
       }
+      // Diaporama : on envoie d'abord les nouvelles photos, dans l'ordre choisi
+      const fresh = slides.filter((x) => x.pending);
+      for (const [i, x] of fresh.entries()) {
+        btn.textContent = `Envoi des photos ${i + 1}/${fresh.length}…`;
+        const up = await api('upload', { name: slugify(title) + '-diaporama', data: await toB64(x.pending.blob) });
+        x.src = up.src; delete x.pending;
+      }
+      btn.textContent = 'Enregistrement…';
+      if (slides.length || d.slideshow) d.slideshow = slides.map((x) => x.src);
       const rub = $('#f-rubrique').value;
       d.title = title;
       d.kicker = $('#f-kicker').value.trim() || 'Stage';
@@ -444,9 +481,9 @@
   const L = (p, label, help) => ({ p, label, help, type: 'line' });
   const P = (p, label, help) => ({ p, label, help, type: 'text' });
   const R = (p, label, help) => ({ p, label, help, type: 'rich' });
-  function hubPage(path, title, url) {
+  function hubPage(path, title, url, photo) {
     return { path, title, url, sections: [
-      { legend: 'En haut de la page', fields: [L('eyebrow', 'Petit mot au-dessus du titre'), L('h1', 'Grand titre'), P('lede', 'Phrase d’accroche')] },
+      { legend: 'En haut de la page', fields: [L('eyebrow', 'Petit mot au-dessus du titre'), L('h1', 'Grand titre'), P('lede', 'Phrase d’accroche'), photo] },
       { legend: 'Introduction', fields: [{ p: 'intro', label: 'Phrases d’introduction', type: 'list', item: 'rich', add: 'une phrase', help: 'Une phrase par bloc, dans l’ordre de la page.' }] },
       { legend: 'Phrases de clôture', fields: [{ p: 'outro', label: 'En bas de la page', type: 'list', item: 'text', add: 'une phrase', help: 'La première s’affiche en grand, entre guillemets.' }] },
     ] };
@@ -454,6 +491,7 @@
   const PAGES = [
     { path: ABOUT, title: 'Qui suis-je', url: 'qui-suis-je/', accent: 'about-accent', sections: [
       { legend: 'En haut de la page', fields: [
+        { p: 'hero.photo', label: 'Votre portrait', type: 'photo', help: 'En rectangle, à gauche du titre. Une photo en hauteur convient le mieux.' },
         L('hero.title', 'Grand titre', 'Le site passe à la ligne avant « en contact ».'),
         P('epigraph', 'Texte en italique sous le titre') ] },
       { legend: 'Une galactique venue d’un futur', fields: [
@@ -489,6 +527,7 @@
         R('s1Heading', 'Titre', 'Sur le site, seule la fin s’affiche (après « au sol. »).'),
         R('s1p1', 'Premier paragraphe'), R('s1p2', 'Paragraphe en italique doré') ] },
       { legend: 'La mission', fields: [
+        { p: 'photo', label: 'Votre photo', type: 'photo', help: 'À gauche du texte « La mission ». Une photo en hauteur convient le mieux.' },
         L('s2Heading', 'Titre'), R('s2Quote', 'Grand texte'), L('s2Matrix', 'Petite phrase en italique'),
         { p: 'points', label: 'Les points I, II, III', type: 'list', item: 'rich', add: 'un point' } ] },
       { legend: 'Véritable pionnier', fields: [
@@ -503,8 +542,8 @@
       { legend: 'Vidéos', fields: [L('pressHeading', 'Titre'), { p: 'videos', label: 'Vidéos', type: 'videos' }] },
       { legend: 'Vous vous reconnaissez ?', fields: [L('recognizeHeading', 'Titre'), P('recognizeBody', 'Texte')] },
     ] },
-    hubPage(ASOI, 'Éveil à Soi', 'eveil-a-soi/'),
-    hubPage(AUSOI, 'Éveil au Soi', 'eveil-au-soi/'),
+    hubPage(ASOI, 'Éveil à Soi', 'eveil-a-soi/', { p: 'fond', label: 'Image de fond', type: 'photo', removable: true, help: 'À droite du titre, fondue dans la nuit. Une image en largeur convient le mieux.' }),
+    hubPage(AUSOI, 'Éveil au Soi', 'eveil-au-soi/', { p: 'bandeau', label: 'Bandeau sous le titre', type: 'photo', removable: true, help: 'Une image en largeur, affichée en bandeau.' }),
   ];
   let page = null; // { def, data } page en cours
 
@@ -604,8 +643,49 @@
     return { node: wrap, read: () => items.map((e) => e.read()).filter((x) => x !== '') };
   }
 
+  /** Une photo de page : aperçu, choisir (ou glisser), retirer. Envoyée à l'enregistrement. */
+  function photoField(f, value) {
+    const wrap = el('div', 'field');
+    const l = el('div', 'label-like', f.label);
+    if (f.help) l.append(el('small', null, f.help));
+    const box = el('div', 'photo page-photo');
+    const img = el('img'); img.alt = '';
+    const empty = el('p', null, 'Aucune image.');
+    box.append(img, empty);
+    let src = value || '', pending = null;
+    const acts = el('div', 'row-actions');
+    const pick = el('label', 'btn small file', 'Choisir une photo');
+    const input = el('input'); input.type = 'file'; input.accept = 'image/jpeg,image/png,image/webp'; input.hidden = true;
+    pick.append(input);
+    const rm = el('button', 'btn small ghost', 'Retirer l’image'); rm.type = 'button';
+    acts.append(pick, rm);
+    const paint = () => {
+      const shown = pending ? pending.url : src;
+      img.hidden = !shown; empty.hidden = !!shown;
+      if (shown) img.src = shown; else img.removeAttribute('src');
+      rm.hidden = !f.removable || !shown;
+    };
+    const take = async (file) => {
+      if (!file || !/^image\//.test(file.type)) return;
+      try { pending = await shrink(file); paint(); } catch { showError('#page-error', 'Cette photo n’a pas pu être lue. Essayez une photo au format JPEG.'); }
+    };
+    input.addEventListener('change', () => take(input.files[0]));
+    box.addEventListener('dragover', (e) => { e.preventDefault(); box.classList.add('over'); });
+    box.addEventListener('dragleave', () => box.classList.remove('over'));
+    box.addEventListener('drop', (e) => { e.preventDefault(); box.classList.remove('over'); take(e.dataTransfer.files[0]); });
+    rm.addEventListener('click', () => { src = ''; pending = null; paint(); });
+    paint();
+    wrap.append(l, box, acts);
+    return { node: wrap, read: () => src, pending: () => !!pending, upload: async (name) => {
+      if (!pending) return;
+      const up = await api('upload', { name, data: await toB64(pending.blob) });
+      src = up.src; pending = null;
+    } };
+  }
+
   function buildField(f, data) {
     const v = getAt(data, f.p);
+    if (f.type === 'photo') return photoField(f, v);
     if (f.type === 'lines') {
       // Une liste courte, un élément par ligne : plus lisible qu'une pile de blocs
       const orig = (v || []).join('\n');
@@ -694,15 +774,18 @@
     ev.preventDefault();
     const btn = $('#page-save');
     showError('#page-error', '');
+    const photos = page.fields.filter(([, b]) => b.pending?.());
     let obj;
     try {
       obj = JSON.parse(JSON.stringify(page.data));
       for (const [f, b] of page.fields) setAt(obj, f.p, b.read());
     } catch (e) { return showError('#page-error', e.message); }
-    if (JSON.stringify(obj) === JSON.stringify(page.data)) return status('ok', 'Rien n’a changé : il n’y avait rien à enregistrer.');
+    if (!photos.length && JSON.stringify(obj) === JSON.stringify(page.data)) return status('ok', 'Rien n’a changé : il n’y avait rien à enregistrer.');
     btn.disabled = true;
-    btn.textContent = 'Enregistrement…';
+    btn.textContent = photos.length ? 'Envoi de la photo…' : 'Enregistrement…';
     try {
+      for (const [f, b] of photos) await b.upload(slugify(page.def.title + ' ' + f.label));
+      if (photos.length) { for (const [f, b] of photos) setAt(obj, f.p, b.read()); btn.textContent = 'Enregistrement…'; }
       const p = page.def.path;
       const text = JSON.stringify(obj, null, 2) + '\n';
       const res = await api('save', { path: p, text, sha: files[p]?.sha, title: 'Page ' + page.def.title });
@@ -1171,6 +1254,11 @@
   $('#home-see').href = SITE;
   $('#videos-see').href = SITE + 'videos/';
   $('#f-photo').addEventListener('change', (e) => pickPhoto(e.target.files[0]));
+  $('#f-slide-input').addEventListener('change', (e) => { addSlides(e.target.files); e.target.value = ''; });
+  const sdrop = $('#f-slides');
+  sdrop.addEventListener('dragover', (e) => { e.preventDefault(); sdrop.classList.add('over'); });
+  sdrop.addEventListener('dragleave', () => sdrop.classList.remove('over'));
+  sdrop.addEventListener('drop', (e) => { e.preventDefault(); sdrop.classList.remove('over'); addSlides(e.dataTransfer.files); });
   $('#photo-remove').addEventListener('click', () => { newPhoto = null; setPhoto(''); });
   const drop = $('#photo-drop');
   drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('over'); });

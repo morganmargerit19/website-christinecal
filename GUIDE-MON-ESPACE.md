@@ -26,6 +26,10 @@ dates passées. Pour un stage sans date fixe : *Me contacter*.
 **Les photos :** **Choisir une photo**, ou glissez-la dans le cadre. Une photo de
 téléphone convient : elle est réduite automatiquement.
 
+**Le diaporama :** des photos qui défilent sur la page du stage (comme au Mont Shasta).
+**+ Ajouter des photos** (vous pouvez en choisir plusieurs d'un coup), **← →** pour l'ordre,
+**Retirer** pour en enlever une, puis **Enregistrer**.
+
 **Retirer un stage :** décochez **Afficher ce stage sur le site**, puis enregistrez. Il
 reste dans votre espace, prêt à revenir.
 
@@ -40,6 +44,11 @@ Les textes de **Qui suis-je**, **Ma mission**, **Éveil à Soi** et **Éveil au 
 3. **+ Ajouter…** ajoute une actualité, une étape, une vidéo… **↑ Monter** change
    l'ordre, **Retirer** l'enlève.
 4. **Enregistrer**, en bas. **Voir la page** ouvre la page du site.
+
+Les photos des pages se changent au même endroit : votre portrait (Qui suis-je, bloc « En
+haut de la page »), votre photo de Ma mission (bloc « La mission »), l'image de fond
+d'Éveil à Soi et le bandeau d'Éveil au Soi (bloc « En haut de la page »). Cliquez sur
+**Choisir une photo**, puis **Enregistrer**.
 
 ## Mes vidéos
 

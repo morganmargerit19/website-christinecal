@@ -38,8 +38,10 @@ const classic = hub === 'eveil-au-soi';
 // Éveil à Soi : la spirale qui se déploie du site actuel (retours du 22/10) et, derrière,
 // une silhouette en méditation, remplie d'étoiles, en fond comme l'École 5D (retours du 27 et du 28/10).
 // Tant que le fichier n'est pas déposé dans public/, l'en-tête reste sur fond nuit.
-const ASOI_BG = '/images/wp/eveil-a-soi-fond.jpg';
-const heroBg = hub === 'eveil-a-soi' && exists(ASOI_BG) ? { src: ASOI_BG } : undefined;
+// Les deux images de haut de page sont modifiables dans Mon espace (Mes pages).
+const ASOI_BG = (aSoi as { fond?: string }).fond ?? '/images/wp/eveil-a-soi-fond.jpg';
+const AUSOI_BAND = (auSoi as { bandeau?: string }).bandeau ?? '/images/wp/bandeau-eveil-au-soi-2.jpg';
+const heroBg = hub === 'eveil-a-soi' && ASOI_BG && exists(ASOI_BG) ? { src: ASOI_BG } : undefined;
 const share = hub === 'eveil-a-soi' ? (heroBg?.src ?? '/images/geometrie/spirale-fibonacci.svg') : '/images/wp/shasta2.jpg';
 
 /**
@@ -79,9 +81,9 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
-  {classic && (
+  {classic && AUSOI_BAND && (
     <section class="sky" style="padding-bottom: 10px">
-      <div class="wrap"><figure class="framed"><img src={u('/images/wp/bandeau-eveil-au-soi-2.jpg')} alt="" loading="lazy" /></figure></div>
+      <div class="wrap"><figure class="framed"><img src={u(AUSOI_BAND)} alt="" loading="lazy" /></figure></div>
     </section>
   )}
 

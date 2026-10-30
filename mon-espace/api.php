@@ -325,7 +325,8 @@ switch ($action) {
         if (!$ext) fail(415, 'Format de photo non accepté (JPEG, PNG ou WebP).');
         $base = strtolower(preg_replace('/[^a-z0-9]+/i', '-', iconv('UTF-8', 'ASCII//TRANSLIT', (string) ($input['name'] ?? 'photo')) ?: 'photo'));
         $base = trim(substr($base, 0, 50), '-') ?: 'photo';
-        $file = $base . '-' . date('Ymd-His') . '.' . $ext;
+        // Un suffixe au hasard : plusieurs photos envoyées dans la même seconde (diaporama) ne s'écrasent pas
+        $file = $base . '-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '.' . $ext;
         commit_file(IMAGES_DIR . '/' . $file, $data, null, 'Mon espace : ajoute la photo ' . $file);
         ok(['src' => '/images/stages/' . $file, 'width' => $info[0], 'height' => $info[1]]);
 
@@ -335,7 +336,8 @@ switch ($action) {
         [$status, $json] = gh('GET', '/repos/' . $cfg['repo'] . '/actions/workflows/' . rawurlencode($cfg['workflow']) . '/runs?per_page=1&branch=' . rawurlencode($cfg['branch']));
         $run = $json['workflow_runs'][0] ?? null;
         if ($status >= 300 || !$run) ok(['state' => 'inconnu']);
-        $state = $run['status'] === 'completed' ? ($run['conclusion'] === 'success' ? 'en-ligne' : 'erreur') : 'en-cours';
+        // Un déploiement « annulé » a été remplacé par un plus récent (plusieurs enregistrements de suite)
+        $state = $run['status'] !== 'completed' || $run['conclusion'] === 'cancelled' ? 'en-cours' : ($run['conclusion'] === 'success' ? 'en-ligne' : 'erreur');
         ok(['state' => $state, 'since' => $run['created_at'] ?? null, 'commit' => $run['head_sha'] ?? null]);
 
     case 'history':
