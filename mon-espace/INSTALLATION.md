@@ -85,8 +85,9 @@ Tout est annulable dans l'historique GitHub.
   stages. Le code du site ne peut pas être modifié depuis l'espace.
 - Annulation (Historique) : seulement les commits signés « Mon espace », et
   seulement si le fichier n'a pas changé depuis ; sinon l'espace demande
-  d'annuler d'abord la modification la plus récente. Un nouveau stage ou une
-  photo ne s'annule pas (on décoche « Afficher ce stage sur le site »).
+  d'annuler d'abord la modification la plus récente. Fichier modifié : version
+  d'avant ; ajouté : supprimé ; supprimé (action `delete`, fiches seulement) :
+  recréé. Les photos restent dans le dépôt.
 - `.htaccess` autorise les vignettes YouTube (`https://i.ytimg.com`) pour
   l'onglet Mes vidéos.
 - Photos : JPEG, PNG ou WebP uniquement, 6 Mo au plus (elles sont réduites à

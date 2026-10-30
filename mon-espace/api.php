@@ -256,6 +256,19 @@ function change_title(string $message): string
     return preg_match('/«\s*(.+?)\s*»/u', $message, $m) ? $m[1] : 'la modification';
 }
 
+function delete_file(string $path, string $sha, string $message): void
+{
+    $cfg = config();
+    [$status, $json] = gh('DELETE', repo_path($path), [
+        'message' => $message,
+        'sha' => $sha,
+        'branch' => $cfg['branch'],
+        'committer' => ['name' => $cfg['author_name'], 'email' => $cfg['author_email']],
+    ]);
+    if ($status === 409 || $status === 422) fail(409, "Ce stage vient d'être modifié ailleurs. Rechargez la page puis réessayez.");
+    if ($status >= 300) fail(502, "La suppression a échoué (GitHub $status). Réessayez ; rien n'a été perdu.");
+}
+
 // ---------------------------------------------------------------- Actions
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail(405, 'Méthode non autorisée.');
 $input = json_decode((string) file_get_contents('php://input'), true) ?: [];
@@ -315,6 +328,16 @@ switch ($action) {
         $msg = 'Mon espace : ' . ($sha ? 'modifie' : 'ajoute') . ' « ' . mb_substr($title ?: basename($path), 0, 80) . ' »';
         ok(commit_file($path, $text, $sha, $msg));
 
+    case 'delete':
+        // Supprimer un stage (une fiche). Annulable depuis l'Historique.
+        require_login();
+        $path = (string) ($input['path'] ?? '');
+        $sha = (string) ($input['sha'] ?? '');
+        $title = trim(preg_replace('/\s+/', ' ', (string) ($input['title'] ?? '')) ?? '');
+        if (!preg_match('#^' . FICHES_DIR . '/[a-z0-9][a-z0-9-]{0,80}\.mdx?$#', $path) || $sha === '') fail(400, 'Ce stage ne peut pas être supprimé depuis cet espace.');
+        delete_file($path, $sha, 'Mon espace : supprime « ' . mb_substr($title ?: basename($path), 0, 80) . ' »');
+        ok();
+
     case 'upload':
         require_login();
         $data = base64_decode((string) ($input['data'] ?? ''), true);
@@ -369,28 +392,35 @@ switch ($action) {
         }
         $parent = (string) ($c['parents'][0]['sha'] ?? '');
         if ($parent === '') fail(400, 'Cette modification ne peut pas être annulée.');
-        $paths = [];
+        // modified : on remet la version d'avant ; added : on supprime ; removed : on recrée.
+        $plan = [];
+        $later = 'Cette page a été modifiée de nouveau depuis. Annulez d’abord la modification la plus récente, en haut de la liste.';
+        $unreadable = 'Cette modification ne peut pas être lue pour le moment. Réessayez dans un instant.';
         foreach (($c['files'] ?? []) as $f) {
             $path = (string) ($f['filename'] ?? '');
-            if (allowed_text_path($path) && ($f['status'] ?? '') === 'modified') $paths[] = $path;
-        }
-        if (!$paths) {
-            fail(400, "Un nouveau stage ou une photo ne s'annule pas ici. Pour retirer un stage du site, ouvrez-le et décochez « Afficher ce stage sur le site ».");
-        }
-        $plan = [];
-        foreach ($paths as $path) {
-            $then = gh_file($path, $sha);
+            $kind = (string) ($f['status'] ?? '');
+            if (!allowed_text_path($path) || !in_array($kind, ['modified', 'added', 'removed'], true)) continue;
             $now = gh_file($path, $cfg['branch']);
-            $before = gh_file($path, $parent);
-            if ($then === null || $now === null || $before === null) fail(502, 'Cette modification ne peut pas être lue pour le moment. Réessayez dans un instant.');
-            if ($now['text'] !== $then['text']) {
-                fail(409, 'Cette page a été modifiée de nouveau depuis. Annulez d’abord la modification la plus récente, en haut de la liste.');
+            if ($kind === 'removed') {
+                if ($now !== null) fail(409, $later);
+                $before = gh_file($path, $parent);
+                if ($before === null) fail(502, $unreadable);
+                $plan[] = ['put', $path, $before['text'], null];
+                continue;
             }
-            $plan[] = [$path, $before['text'], $now['sha']];
+            $then = gh_file($path, $sha);
+            if ($then === null) fail(502, $unreadable);
+            if ($now === null || $now['text'] !== $then['text']) fail(409, $later);
+            if ($kind === 'added') { $plan[] = ['delete', $path, '', $now['sha']]; continue; }
+            $before = gh_file($path, $parent);
+            if ($before === null) fail(502, $unreadable);
+            $plan[] = ['put', $path, $before['text'], $now['sha']];
         }
+        if (!$plan) fail(400, 'Cette modification ne concerne qu’une photo : il n’y a rien à annuler.');
         $title = change_title((string) ($c['commit']['message'] ?? ''));
+        $msg = 'Mon espace : annule « ' . mb_substr($title, 0, 80) . ' »';
         foreach ($plan as $step) {
-            commit_file($step[0], $step[1], $step[2], 'Mon espace : annule « ' . mb_substr($title, 0, 80) . ' »');
+            if ($step[0] === 'delete') delete_file($step[1], $step[3], $msg); else commit_file($step[1], $step[2], $step[3], $msg);
         }
         ok(['files' => count($plan), 'title' => $title]);
 

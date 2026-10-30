@@ -251,3 +251,5 @@ textarea { resize: vertical; }
 .slide img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--night); }
 .slide .vacts { padding-top: 4px; }
 .slide .tool { min-height: 34px; padding: 0 10px; }
+.btn.danger { color: var(--err); border-color: #E7B9C1; margin-right: auto; }
+.btn.danger:hover { background: var(--err-bg); }
