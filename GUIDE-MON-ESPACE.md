@@ -82,5 +82,6 @@ la même page, annulez d'abord le plus récent.
 ## Rassurez-vous
 
 Vous ne pouvez rien casser : chaque enregistrement est gardé, tout s'annule depuis
-l'Historique, et Morgan peut toujours revenir en arrière. L'onglet **Aide** reprend ces
+l'Historique, et Morgan peut toujours revenir en arrière. Si vous quittez un stage, une
+page ou Mes vidéos sans avoir enregistré, l'espace vous le demande d'abord. L'onglet **Aide** reprend ces
 explications. En cas de doute, appelez Morgan.
