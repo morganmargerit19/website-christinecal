@@ -15,9 +15,13 @@
   <div class="top-in">
     <a class="brand" href="./">Mon espace <span>Christine CAL</span></a>
     <nav class="tabs" id="tabs" hidden>
-      <button type="button" data-tab="stages" aria-current="page">Mes stages</button>
+      <button type="button" data-tab="home" aria-current="page">Accueil</button>
+      <button type="button" data-tab="stages">Mes stages</button>
       <button type="button" data-tab="pages">Mes pages</button>
+      <button type="button" data-tab="videos">Mes vidéos</button>
       <button type="button" data-tab="infos">Petites infos</button>
+      <button type="button" data-tab="history">Historique</button>
+      <button type="button" data-tab="help">Aide</button>
     </nav>
     <div class="top-right" id="top-right" hidden>
       <a class="link" id="see-site" href="/" target="_blank" rel="noopener">Voir mon site</a>
@@ -46,6 +50,39 @@
     <p class="lead">Un instant, je récupère vos stages…</p>
   </section>
 
+  <!-- Accueil -->
+  <section id="v-home" class="view" hidden>
+    <h1 id="hello">Bonjour Christine</h1>
+    <p class="lead">Que souhaitez-vous faire aujourd’hui ?</p>
+    <div class="actions" id="quick">
+      <button type="button" class="action" data-go="add-stage"><span class="ic" aria-hidden="true">＋</span><span class="at">Ajouter un stage</span><span class="ad">Titre, dates, lieu, photo</span></button>
+      <button type="button" class="action" data-go="stages"><span class="ic" aria-hidden="true">◷</span><span class="at">Changer une date</span><span class="ad">Ou le lieu, le tarif, le texte</span></button>
+      <button type="button" class="action" data-go="pages"><span class="ic" aria-hidden="true">✎</span><span class="at">Modifier une page</span><span class="ad">Qui suis-je, Ma mission…</span></button>
+      <button type="button" class="action" data-go="videos"><span class="ic" aria-hidden="true">▶</span><span class="at">Ajouter une vidéo</span><span class="ad">Avec le lien YouTube</span></button>
+      <button type="button" class="action" data-go="infos"><span class="ic" aria-hidden="true">✦</span><span class="at">Mettre une annonce</span><span class="ad">En haut de toutes les pages</span></button>
+    </div>
+    <div class="home-grid">
+      <section class="card panel">
+        <h2>Vos prochaines dates</h2>
+        <div id="home-dates" class="dates"></div>
+        <p class="hint" id="home-dates-more"></p>
+      </section>
+      <div class="stack-col">
+        <section class="card panel">
+          <h2>Votre site</h2>
+          <p id="home-site" class="site-state">…</p>
+          <p id="home-annonce" class="hint"></p>
+          <a class="btn small" id="home-see" href="/" target="_blank" rel="noopener">Voir mon site</a>
+        </section>
+        <section class="card panel">
+          <h2>Vos dernières modifications</h2>
+          <ul id="home-history" class="mini-history"></ul>
+          <button type="button" class="link-dark" data-go="history">Tout l’historique →</button>
+        </section>
+      </div>
+    </div>
+  </section>
+
   <!-- Liste des stages -->
   <section id="v-stages" class="view" hidden>
     <div class="head">
@@ -61,7 +98,7 @@
   <!-- Fiche d'un stage -->
   <section id="v-edit" class="view" hidden>
     <button type="button" class="back" id="back">← Retour à mes stages</button>
-    <h1 id="edit-title">Modifier le stage</h1>
+    <div class="head"><h1 id="edit-title">Modifier le stage</h1><a class="btn small ghost" id="edit-see" href="/" target="_blank" rel="noopener" hidden>Voir ce stage sur le site</a></div>
     <div class="edit-grid">
       <form id="edit-form" class="form" novalidate>
         <fieldset class="card">
@@ -176,10 +213,74 @@
     </form>
   </section>
 
+  <!-- Mes vidéos -->
+  <section id="v-videos" class="view" hidden>
+    <div class="head">
+      <div>
+        <h1>Mes vidéos</h1>
+        <p class="lead">La page Vidéos de votre site, thème par thème et ligne par ligne, comme elle s’affiche. Ajoutez une vidéo avec son lien YouTube, puis cliquez sur <strong>Enregistrer</strong>.</p>
+      </div>
+      <a class="btn small ghost" id="videos-see" href="/" target="_blank" rel="noopener">Voir la page Vidéos</a>
+    </div>
+    <div id="themes"></div>
+    <button type="button" class="btn small" id="add-theme">+ Ajouter un thème</button>
+    <section class="card others">
+      <h2>Les autres vidéos</h2>
+      <p class="hint">Vos vidéos déjà présentes dans vos stages, mais rangées dans aucun thème. Celles qui sont « affichées » apparaissent en bas de la page Vidéos, sous « Autres forums et conférences ».</p>
+      <div id="others" class="rows"></div>
+    </section>
+    <div class="save-bar">
+      <p class="error" id="videos-error" role="alert" hidden></p>
+      <button type="button" class="btn ghost" id="videos-reset">Annuler mes changements</button>
+      <button type="button" class="btn primary" id="videos-save">Enregistrer</button>
+    </div>
+  </section>
+
+  <!-- Ajouter une vidéo -->
+  <dialog id="vdlg" class="dlg">
+    <form method="dialog" id="vdlg-form" class="form">
+      <h2 id="vdlg-title">Ajouter une vidéo</h2>
+      <label>Lien de la vidéo YouTube <small>Sur YouTube : bouton « Partager », puis « Copier ».</small><input type="text" id="v-url" placeholder="https://youtu.be/…" autocomplete="off"></label>
+      <div class="vprev" id="v-prev" hidden><img id="v-thumb" alt=""><p id="v-known" class="hint"></p></div>
+      <label>Titre de la vidéo<input type="text" id="v-title" maxlength="160"></label>
+      <label>Date <small>Ex. : Juin 2026, ou Juin 2026 · 45 min</small><input type="text" id="v-meta" maxlength="80"></label>
+      <p class="error" id="vdlg-error" role="alert" hidden></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn ghost" id="vdlg-soon">Réserver une place « Bientôt en ligne »</button>
+        <span class="grow"></span>
+        <button type="button" class="btn ghost" id="vdlg-cancel">Annuler</button>
+        <button type="submit" class="btn primary" id="vdlg-ok">Ajouter</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Historique -->
+  <section id="v-history" class="view narrow" hidden>
+    <h1>Historique</h1>
+    <p class="lead">Toutes vos modifications, les plus récentes en haut. Une erreur ? Cliquez sur <strong>Annuler cette modification</strong> : la page revient comme avant.</p>
+    <div id="history" class="rows"></div>
+  </section>
+
+  <!-- Aide -->
+  <section id="v-help" class="view narrow" hidden>
+    <h1>Aide</h1>
+    <p class="lead">Vous ne pouvez rien casser : chaque enregistrement est gardé, et tout s’annule depuis l’<button type="button" class="link-dark inline" data-go="history">Historique</button>. Au moindre doute, appelez Morgan.</p>
+    <div class="faq">
+      <details class="card"><summary>Changer la date d’un stage</summary><ol><li>Ouvrez <b>Mes stages</b> et cliquez sur le stage.</li><li>Dans « Dates », changez la date ou cliquez sur <b>+ Ajouter une date</b>. Écrivez-la en clair : <em>14–15 mars 2027</em>, <em>Août 2027</em>.</li><li>Cliquez sur <b>Enregistrer</b>.</li></ol><p>Les dates passées disparaissent toutes seules du site. Pour un stage sans date fixe, écrivez <em>Me contacter</em>.</p></details>
+      <details class="card"><summary>Ajouter un nouveau stage</summary><ol><li>Sur l’accueil, cliquez sur <b>Ajouter un stage</b>.</li><li>Remplissez le titre, la phrase de présentation et la rubrique, puis les dates, le lieu, le tarif.</li><li>Ajoutez une photo (une photo de téléphone convient), puis <b>Enregistrer</b>.</li></ol><p>À droite, l’aperçu montre la carte telle qu’elle apparaîtra.</p></details>
+      <details class="card"><summary>Retirer un stage du site</summary><p>Ouvrez le stage, décochez <b>Afficher ce stage sur le site</b>, puis enregistrez. Il reste dans votre espace, prêt à revenir.</p></details>
+      <details class="card"><summary>Modifier un texte de Qui suis-je ou de Ma mission</summary><ol><li>Ouvrez <b>Mes pages</b>, puis la page.</li><li>Cliquez sur <b>Ouvrir</b> à côté du bloc à changer (par exemple « Actualités »).</li><li>Changez le texte. Pour mettre un mot en gras, sélectionnez-le puis cliquez sur <b>G</b>.</li><li>Cliquez sur <b>Enregistrer</b>.</li></ol></details>
+      <details class="card"><summary>Ajouter une vidéo</summary><ol><li>Sur YouTube, ouvrez la vidéo, cliquez sur <b>Partager</b> puis <b>Copier</b>.</li><li>Dans <b>Mes vidéos</b>, cliquez sur <b>+ Ajouter une vidéo</b> dans la ligne de votre choix, ou sur une place « Bientôt en ligne ».</li><li>Collez le lien, donnez un titre et une date, puis <b>Ajouter</b> et <b>Enregistrer</b>.</li></ol><p>Pour la vidéo d’un stage, ajoutez-la plutôt dans le stage lui-même (bloc « Vidéos ») : elle apparaîtra sur sa page.</p></details>
+      <details class="card"><summary>Mettre une annonce en haut du site</summary><p>Dans <b>Petites infos</b>, cochez <b>Afficher une annonce</b>, écrivez-la (par exemple « Je serai au forum de Sarlat les 24 et 25 octobre »), puis enregistrez. Décochez pour la retirer.</p></details>
+      <details class="card"><summary>Combien de temps avant de voir le changement ?</summary><p>3 à 5 minutes. Un bandeau en haut de l’espace vous dit quand c’est en ligne. Si vous ne voyez pas encore le changement, rechargez la page de votre site.</p></details>
+      <details class="card"><summary>Je me suis trompée</summary><p>Ouvrez l’<b>Historique</b> et cliquez sur <b>Annuler cette modification</b> à côté de la bonne ligne. Si vous avez fait plusieurs changements sur la même page, annulez d’abord le plus récent, en haut de la liste.</p></details>
+    </div>
+  </section>
+
   <!-- Petites infos -->
   <section id="v-infos" class="view narrow" hidden>
     <h1>Petites infos</h1>
-    <p class="lead">Vos coordonnées, une annonce en haut du site, et les phrases d'accueil de vos deux univers.</p>
+    <p class="lead">Vos coordonnées, et une annonce en haut de toutes les pages du site. Les textes de vos univers Éveil à Soi et Éveil au Soi sont dans <button type="button" class="link-dark inline" data-go="pages">Mes pages</button>.</p>
     <form id="infos-form" class="form">
       <fieldset class="card">
         <legend>Mes coordonnées</legend>
@@ -191,16 +292,6 @@
         <label class="switch"><input type="checkbox" id="i-annonce-on"> <span>Afficher une annonce</span></label>
         <label>Texte de l'annonce <small>Ex. : Je serai au forum de Sarlat les 24 et 25 octobre</small><input type="text" id="i-annonce" maxlength="160"></label>
         <label>Lien (facultatif) <small>Une page du site ou une adresse web</small><input type="text" id="i-annonce-link" placeholder="Ex. : /agenda/"></label>
-      </fieldset>
-      <fieldset class="card">
-        <legend>Éveil à Soi</legend>
-        <label>Grand titre<input type="text" id="i-asoi-h1"></label>
-        <label>Phrase d'accroche<textarea id="i-asoi-lede" rows="3"></textarea></label>
-      </fieldset>
-      <fieldset class="card">
-        <legend>Éveil au Soi</legend>
-        <label>Grand titre<input type="text" id="i-ausoi-h1"></label>
-        <label>Phrase d'accroche<textarea id="i-ausoi-lede" rows="3"></textarea></label>
       </fieldset>
       <div class="save-bar">
         <p class="error" id="infos-error" role="alert" hidden></p>

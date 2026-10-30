@@ -58,12 +58,21 @@
   }
 
   // ------------------------------------------------------------ Vues
+  const TAB_OF = { edit: 'stages', page: 'pages' };
+  let currentView = '';
   function show(view) {
+    // Changements non enregistrés dans Mes vidéos : on demande avant de quitter
+    if (currentView === 'videos' && view !== 'videos' && videosDirty() && !confirm('Vos changements dans Mes vidéos ne sont pas enregistrés. Les abandonner ?')) return;
+    if (currentView === 'videos' && view !== 'videos') resetVideos();
+    currentView = view;
     $$('.view').forEach((v) => (v.hidden = v.id !== 'v-' + view));
     const logged = view !== 'login' && view !== 'loading';
     $('#tabs').hidden = !logged;
     $('#top-right').hidden = !logged;
-    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === view || (view === 'edit' && b.dataset.tab === 'stages') || (view === 'page' && b.dataset.tab === 'pages')));
+    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === (TAB_OF[view] || view)));
+    if (view === 'home') renderHome();
+    if (view === 'history') renderHistory();
+    if (view === 'videos') renderVideos();
     window.scrollTo(0, 0);
   }
 
@@ -79,6 +88,7 @@
   function followDeploy() {
     clearInterval(statusTimer);
     status('wait', 'C’est enregistré. Votre site se met à jour, comptez 3 à 5 minutes…');
+    siteState = { state: 'en-cours' };
     const started = Date.now();
     statusTimer = setInterval(async () => {
       if (Date.now() - started < 20000) return; // laisse le temps au déploiement de démarrer
@@ -87,6 +97,7 @@
         if (s.state === 'en-ligne' && Date.parse(s.since) > started - 60000) {
           clearInterval(statusTimer);
           status('ok', 'C’est en ligne : votre site est à jour.');
+          siteState = null;
         } else if (s.state === 'erreur') {
           clearInterval(statusTimer);
           status('err', 'La mise en ligne a rencontré un souci. Rien n’est perdu : prévenez Morgan.');
@@ -252,6 +263,8 @@
     $('#body-wrap').hidden = locked;
     $('#f-body').innerHTML = locked ? '' : marked.parse(current.body || '');
     setPhoto(d.image || '');
+    $('#edit-see').hidden = !f || !!d.draft;
+    if (f) $('#edit-see').href = SITE + (d.hub || 'eveil-a-soi') + '/' + f.slug + '/';
     $('#edit-error').hidden = true;
     toggleHub();
     preview();
@@ -370,6 +383,7 @@
       const updated = parseFiche(path, res.sha, text);
       fiches = fiches.filter((f) => f.path !== path).concat(updated);
       renderList();
+      historyCache = null;
       show('stages');
       followDeploy();
     } catch (e) {
@@ -389,9 +403,6 @@
     $('#i-annonce-on').checked = !!infos.annonce?.actif;
     $('#i-annonce').value = infos.annonce?.texte || '';
     $('#i-annonce-link').value = infos.annonce?.lien || '';
-    const a = json(ASOI, {}), b = json(AUSOI, {});
-    $('#i-asoi-h1').value = a.h1 || ''; $('#i-asoi-lede').value = a.lede || '';
-    $('#i-ausoi-h1').value = b.h1 || ''; $('#i-ausoi-lede').value = b.lede || '';
   }
 
   async function saveInfos(ev) {
@@ -404,10 +415,7 @@
       infos.telephone = $('#i-phone').value.trim();
       infos.email = $('#i-email').value.trim();
       infos.annonce = { actif: $('#i-annonce-on').checked, texte: $('#i-annonce').value.trim(), lien: $('#i-annonce-link').value.trim() };
-      const a = json(ASOI, null), b = json(AUSOI, null);
       const changes = [[INFOS, infos, 'Petites infos']];
-      if (a) changes.push([ASOI, { ...a, h1: $('#i-asoi-h1').value.trim(), lede: $('#i-asoi-lede').value.trim() }, 'Page Éveil à Soi']);
-      if (b) changes.push([AUSOI, { ...b, h1: $('#i-ausoi-h1').value.trim(), lede: $('#i-ausoi-lede').value.trim() }, 'Page Éveil au Soi']);
       let saved = 0;
       for (const [p, obj, title] of changes) {
         const text = JSON.stringify(obj, null, 2) + '\n';
@@ -416,7 +424,7 @@
         files[p] = { sha: res.sha, text };
         saved++;
       }
-      if (saved) followDeploy(); else status('ok', 'Rien n’a changé : il n’y avait rien à enregistrer.');
+      if (saved) { followDeploy(); historyCache = null; } else status('ok', 'Rien n’a changé : il n’y avait rien à enregistrer.');
     } catch (e) {
       showError('#infos-error', e.message);
     } finally {
@@ -436,6 +444,13 @@
   const L = (p, label, help) => ({ p, label, help, type: 'line' });
   const P = (p, label, help) => ({ p, label, help, type: 'text' });
   const R = (p, label, help) => ({ p, label, help, type: 'rich' });
+  function hubPage(path, title, url) {
+    return { path, title, url, sections: [
+      { legend: 'En haut de la page', fields: [L('eyebrow', 'Petit mot au-dessus du titre'), L('h1', 'Grand titre'), P('lede', 'Phrase d’accroche')] },
+      { legend: 'Introduction', fields: [{ p: 'intro', label: 'Phrases d’introduction', type: 'list', item: 'rich', add: 'une phrase', help: 'Une phrase par bloc, dans l’ordre de la page.' }] },
+      { legend: 'Phrases de clôture', fields: [{ p: 'outro', label: 'En bas de la page', type: 'list', item: 'text', add: 'une phrase', help: 'La première s’affiche en grand, entre guillemets.' }] },
+    ] };
+  }
   const PAGES = [
     { path: ABOUT, title: 'Qui suis-je', url: 'qui-suis-je/', accent: 'about-accent', sections: [
       { legend: 'En haut de la page', fields: [
@@ -488,6 +503,8 @@
       { legend: 'Vidéos', fields: [L('pressHeading', 'Titre'), { p: 'videos', label: 'Vidéos', type: 'videos' }] },
       { legend: 'Vous vous reconnaissez ?', fields: [L('recognizeHeading', 'Titre'), P('recognizeBody', 'Texte')] },
     ] },
+    hubPage(ASOI, 'Éveil à Soi', 'eveil-a-soi/'),
+    hubPage(AUSOI, 'Éveil au Soi', 'eveil-au-soi/'),
   ];
   let page = null; // { def, data } page en cours
 
@@ -691,6 +708,7 @@
       const res = await api('save', { path: p, text, sha: files[p]?.sha, title: 'Page ' + page.def.title });
       files[p] = { sha: res.sha, text };
       page.data = obj;
+      historyCache = null;
       show('pages');
       followDeploy();
     } catch (e) {
@@ -701,8 +719,402 @@
     }
   }
 
+  // ------------------------------------------------------------ Dates lisibles
+  const DAY = 86400000;
+  function when(iso) {
+    const d = new Date(iso);
+    if (isNaN(d)) return '';
+    const t = new Date(); t.setHours(0, 0, 0, 0);
+    const hour = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }).replace(':', ' h ');
+    if (d >= t) return 'aujourd’hui à ' + hour;
+    if (d >= t - DAY) return 'hier à ' + hour;
+    return 'le ' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: d.getFullYear() === t.getFullYear() ? undefined : 'numeric' });
+  }
+
+  // ------------------------------------------------------------ Accueil
+  let siteState = null; // dernier état de la mise en ligne
+  function renderHome() {
+    const h = new Date().getHours();
+    $('#hello').textContent = (h >= 18 || h < 5 ? 'Bonsoir' : 'Bonjour') + ' Christine';
+
+    // Prochaines dates de tous les stages affichés, de la plus proche à la plus lointaine
+    const today = Date.now() - DAY;
+    const upcoming = [];
+    let onRequest = 0;
+    for (const f of fiches) {
+      if (f.data.draft) continue;
+      const ds = (f.data.dates || []).map(String);
+      const next = ds.map((d) => ({ d, end: endOf(d) })).filter((x) => x.end !== null && x.end >= today);
+      if (!next.length) { if (ds.length) onRequest++; continue; }
+      for (const x of next) upcoming.push({ ...x, f });
+    }
+    upcoming.sort((a, b) => a.end - b.end);
+    const box = $('#home-dates');
+    box.replaceChildren();
+    for (const x of upcoming.slice(0, 7)) {
+      const row = el('button', 'date-row');
+      row.type = 'button';
+      row.append(el('span', 'dd', x.d), el('span', 'dt', x.f.data.title));
+      row.addEventListener('click', () => openEditor(x.f));
+      box.append(row);
+    }
+    if (!upcoming.length) box.append(el('p', 'hint', 'Aucune date à venir pour l’instant.'));
+    const more = [];
+    if (upcoming.length > 7) more.push(`et ${upcoming.length - 7} autre${upcoming.length - 7 > 1 ? 's' : ''} date${upcoming.length - 7 > 1 ? 's' : ''}`);
+    if (onRequest) more.push(`${onRequest} stage${onRequest > 1 ? 's' : ''} sur demande`);
+    $('#home-dates-more').textContent = more.length ? more.join(' · ').replace(/^./, (c) => c.toUpperCase()) + '.' : '';
+
+    const infos = json(INFOS, {});
+    $('#home-annonce').textContent = infos.annonce?.actif && infos.annonce.texte
+      ? 'Annonce affichée : « ' + infos.annonce.texte + ' »'
+      : 'Pas d’annonce en haut du site en ce moment.';
+    showSiteState();
+    homeHistory();
+  }
+
+  async function showSiteState() {
+    const p = $('#home-site');
+    try {
+      if (!siteState) siteState = await api('status');
+      const s = siteState;
+      p.className = 'site-state ' + s.state;
+      p.textContent = s.state === 'en-ligne' ? '✓ Votre site est à jour' + (s.since ? ' (mis à jour ' + when(s.since) + ')' : '') + '.'
+        : s.state === 'en-cours' ? 'Mise en ligne en cours… Comptez 3 à 5 minutes.'
+        : s.state === 'erreur' ? 'La dernière mise en ligne a rencontré un souci. Rien n’est perdu : prévenez Morgan.'
+        : 'Votre site est en ligne.';
+    } catch { p.className = 'site-state'; p.textContent = 'Votre site est en ligne.'; }
+  }
+
+  // ------------------------------------------------------------ Historique
+  let historyCache = null;
+  // Les essais de Morgan du 18/10 (installation de l'espace) ne sont pas montrés à Christine.
+  const HISTORY_FROM = '2026-10-30';
+  async function getHistory() {
+    if (!historyCache) historyCache = (await api('history')).commits.filter((c) => !c.date || c.date >= HISTORY_FROM);
+    return historyCache;
+  }
+  /** « Mon espace : modifie « X » » → { verb: 'Modification', what: 'X', undoable } */
+  function describe(message) {
+    const m = message.replace(/^Mon espace : /, '');
+    const what = (m.match(/«\s*(.+?)\s*»/) || [])[1] || '';
+    if (/^ajoute la photo/.test(m)) return { verb: 'Photo ajoutée', what: '', undoable: false };
+    if (/^annule/.test(m)) return { verb: 'Annulation', what, undoable: true };
+    if (/^ajoute/.test(m)) return { verb: 'Ajout', what, undoable: false };
+    return { verb: 'Modification', what, undoable: true };
+  }
+
+  async function homeHistory() {
+    const ul = $('#home-history');
+    try {
+      const list = (await getHistory()).filter((c) => describe(c.message).what).slice(0, 5);
+      ul.replaceChildren();
+      for (const c of list) {
+        const d = describe(c.message);
+        const li = el('li');
+        li.append(el('span', 'hv', d.verb + ' : '), el('span', 'hw', d.what), el('span', 'hd', ' · ' + when(c.date)));
+        ul.append(li);
+      }
+      if (!list.length) ul.append(el('li', 'hint', 'Aucune modification pour l’instant.'));
+    } catch { ul.replaceChildren(el('li', 'hint', 'L’historique n’a pas pu être lu pour le moment.')); }
+  }
+
+  async function renderHistory() {
+    const box = $('#history');
+    box.replaceChildren(el('p', 'hint', 'Un instant, je récupère vos modifications…'));
+    let list;
+    try { list = await getHistory(); } catch (e) { box.replaceChildren(el('p', 'error', e.message)); return; }
+    box.replaceChildren();
+    if (!list.length) box.append(el('p', 'hint', 'Aucune modification pour l’instant.'));
+    for (const c of list) {
+      const d = describe(c.message);
+      const row = el('div', 'hrow');
+      const txt = el('div');
+      txt.append(el('p', 'ht', d.verb + (d.what ? ' : ' + d.what : '')), el('p', 'hm', when(c.date)));
+      row.append(txt);
+      if (d.undoable) {
+        const b = el('button', 'btn small ghost', 'Annuler cette modification');
+        b.type = 'button';
+        b.addEventListener('click', () => undo(c, d, b));
+        row.append(b);
+      }
+      box.append(row);
+    }
+  }
+
+  async function undo(c, d, btn) {
+    if (!confirm(`Annuler « ${d.what} » ?\n\nLa page revient comme elle était juste avant cette modification.`)) return;
+    btn.disabled = true;
+    btn.textContent = 'Annulation…';
+    try {
+      await api('undo', { sha: c.sha });
+      historyCache = null;
+      await load('history');
+      followDeploy();
+    } catch (e) {
+      status('err', e.message);
+      btn.disabled = false;
+      btn.textContent = 'Annuler cette modification';
+    }
+  }
+
+  // ------------------------------------------------------------ Mes vidéos
+  // La page Vidéos du site : thèmes → lignes (3 vidéos au plus) → identifiants YouTube
+  // ou « soon » (place « Bientôt en ligne »). Les vidéos DVD des stages sont reprises
+  // telles quelles ; les autres sont enregistrées dans `videos`. Fichier : videos.fr.json.
+  const VIDEOS = 'v3-src/src/data/videos.fr.json';
+  const SOON = 'soon';
+  const PER_ROW = 3;
+  let vstate = null;   // { themes, videos, hidden } en cours de modification
+  let vdialog = null;  // où ajouter la vidéo : { ti, ri, ii } (ii = place à remplacer)
+  const thumb = (id) => `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+
+  /** Les vidéos des stages, comme la page Vidéos les lit (DVD Debowska à part). */
+  function catalog() {
+    const map = new Map();
+    const ordered = [...fiches].sort((a, b) => (a.data.order ?? 50) - (b.data.order ?? 50));
+    for (const f of ordered) {
+      const vids = [...(f.data.videos || []), ...(f.data.inlineMedia || []).map((m) => m && m.video).filter(Boolean)];
+      for (const v of vids) {
+        if (!v.id || map.has(v.id)) continue;
+        map.set(v.id, { id: v.id, title: v.title || f.data.title, meta: v.meta || '', from: f.data.title, dvd: v.credit === 'debowska' });
+      }
+    }
+    return map;
+  }
+  const videoInfo = (id) => vstate.videos.find((v) => v.id === id) || catalog().get(id) || { id, title: '', meta: '' };
+
+  function resetVideos() {
+    const d = json(VIDEOS, null);
+    vstate = d ? { themes: d.themes || [], videos: d.videos || [], hidden: d.hidden || [], ...d } : null;
+    if (vstate) vstate = JSON.parse(JSON.stringify(vstate));
+  }
+  function normalized(st) {
+    const used = new Set(st.themes.flatMap((t) => t.rows.flat()));
+    return {
+      ...st,
+      themes: st.themes.map((t) => ({ ...t, rows: t.rows.filter((r) => r.length) })),
+      videos: st.videos.filter((v) => used.has(v.id)),
+      hidden: [...new Set(st.hidden)].filter((id) => !used.has(id)),
+    };
+  }
+  function videosDirty() {
+    const d = json(VIDEOS, null);
+    return !!(vstate && d) && JSON.stringify(normalized(vstate)) !== JSON.stringify(normalized({ themes: [], videos: [], hidden: [], ...d }));
+  }
+
+  function renderVideos() {
+    if (!vstate) resetVideos();
+    const box = $('#themes');
+    box.replaceChildren();
+    if (!vstate) { box.append(el('p', 'error', 'La page Vidéos n’a pas pu être lue. Rechargez, ou prévenez Morgan.')); return; }
+    const cat = catalog();
+    vstate.themes.forEach((t, ti) => {
+      const card = el('section', 'card theme');
+      const head = el('div', 'theme-head');
+      const title = el('input');
+      title.type = 'text';
+      title.value = t.title;
+      title.setAttribute('aria-label', 'Nom du thème');
+      title.addEventListener('input', () => { t.title = title.value; });
+      head.append(title, tool('↑', 'Monter ce thème', ti > 0, () => { vstate.themes.splice(ti - 1, 0, vstate.themes.splice(ti, 1)[0]); renderVideos(); }),
+        tool('Supprimer le thème', 'Supprimer ce thème', true, () => {
+          const n = t.rows.flat().filter((id) => id !== SOON).length;
+          if (n && !confirm(`Supprimer le thème « ${t.title} » et ses ${n} vidéo${n > 1 ? 's' : ''} de la page Vidéos ?`)) return;
+          for (const id of t.rows.flat()) if (cat.get(id)?.dvd) vstate.hidden.push(id);
+          vstate.themes.splice(ti, 1); renderVideos();
+        }, 'danger'));
+      card.append(head);
+      t.rows.forEach((row, ri) => {
+        const line = el('div', 'vline');
+        const lab = el('div', 'vline-head');
+        lab.append(el('span', 'eyebrow', 'Ligne ' + (ri + 1)),
+          tool('↑ Monter la ligne', 'Monter cette ligne', ri > 0, () => { t.rows.splice(ri - 1, 0, t.rows.splice(ri, 1)[0]); renderVideos(); }),
+          tool('Retirer la ligne', 'Retirer cette ligne', true, () => { for (const id of row) if (cat.get(id)?.dvd) vstate.hidden.push(id); t.rows.splice(ri, 1); renderVideos(); }, 'danger'));
+        const tiles = el('div', 'vtiles');
+        row.forEach((id, ii) => tiles.append(tile(id, t, ti, ri, ii, cat)));
+        if (row.length < PER_ROW) {
+          const add = el('button', 'vtile vadd');
+          add.type = 'button';
+          add.append(el('span', 'plus', '+'), el('span', null, 'Ajouter une vidéo'));
+          add.addEventListener('click', () => openVideoDialog({ ti, ri, ii: -1 }));
+          tiles.append(add);
+        }
+        line.append(lab, tiles);
+        card.append(line);
+      });
+      const addRow = el('button', 'btn small', '+ Ajouter une ligne');
+      addRow.type = 'button';
+      addRow.addEventListener('click', () => { t.rows.push([]); renderVideos(); });
+      card.append(addRow);
+      box.append(card);
+    });
+
+    // Vidéos DVD des stages rangées dans aucun thème
+    const placed = new Set(vstate.themes.flatMap((t) => t.rows.flat()));
+    const others = [...cat.values()].filter((v) => v.dvd && !placed.has(v.id));
+    const ob = $('#others');
+    ob.replaceChildren();
+    if (!others.length) ob.append(el('p', 'hint', 'Toutes vos vidéos DVD sont rangées dans un thème.'));
+    for (const v of others) {
+      const hiddenNow = vstate.hidden.includes(v.id);
+      const r = el('div', 'orow');
+      const im = el('img'); im.src = thumb(v.id); im.alt = ''; im.loading = 'lazy';
+      const txt = el('div');
+      txt.append(el('p', 'ot', v.title), el('p', 'om', (hiddenNow ? 'Pas affichée sur la page Vidéos' : 'Affichée sous « Autres forums et conférences »') + ' · vient de la page « ' + v.from + ' »'));
+      const sel = el('select');
+      sel.setAttribute('aria-label', 'Ranger dans un thème');
+      sel.append(new Option('Ranger dans le thème…', ''));
+      vstate.themes.forEach((t, ti) => sel.append(new Option(t.title, String(ti))));
+      sel.addEventListener('change', () => {
+        if (sel.value === '') return;
+        const t = vstate.themes[+sel.value];
+        const last = t.rows[t.rows.length - 1];
+        if (last && last.length < PER_ROW) last.push(v.id); else t.rows.push([v.id]);
+        vstate.hidden = vstate.hidden.filter((x) => x !== v.id);
+        renderVideos();
+      });
+      const tog = el('button', 'btn small ghost', hiddenNow ? 'Afficher' : 'Ne pas afficher');
+      tog.type = 'button';
+      tog.addEventListener('click', () => {
+        vstate.hidden = hiddenNow ? vstate.hidden.filter((x) => x !== v.id) : [...vstate.hidden, v.id];
+        renderVideos();
+      });
+      const acts = el('div', 'oacts');
+      acts.append(sel, tog);
+      r.append(im, txt, acts);
+      ob.append(r);
+    }
+    $('#videos-save').disabled = !videosDirty();
+  }
+
+  function tool(label, title, enabled, fn, kind) {
+    const b = el('button', 'tool' + (kind ? ' ' + kind : ''), label);
+    b.type = 'button';
+    b.title = title;
+    b.disabled = !enabled;
+    b.addEventListener('click', fn);
+    return b;
+  }
+
+  function tile(id, t, ti, ri, ii, cat) {
+    const row = t.rows[ri];
+    const move = (to) => { row.splice(to, 0, row.splice(ii, 1)[0]); renderVideos(); };
+    const box = el('div', 'vtile' + (id === SOON ? ' vsoon' : ''));
+    if (id === SOON) {
+      box.append(el('span', 'vs', 'Bientôt en ligne'), el('span', 'hint', 'Place réservée à une nouvelle vidéo'));
+      const put = el('button', 'btn small', 'Mettre la vidéo');
+      put.type = 'button';
+      put.addEventListener('click', () => openVideoDialog({ ti, ri, ii }));
+      box.append(put);
+    } else {
+      const v = videoInfo(id);
+      const im = el('img'); im.src = thumb(id); im.alt = ''; im.loading = 'lazy';
+      box.append(im, el('span', 'vt', v.title || 'Vidéo sans titre'), el('span', 'vm', [v.meta, cat.get(id) ? 'page « ' + cat.get(id).from + ' »' : ''].filter(Boolean).join(' · ')));
+      if (!cat.get(id)) {
+        const edit = el('button', 'link-dark', 'Changer le titre ou la date');
+        edit.type = 'button';
+        edit.addEventListener('click', () => openVideoDialog({ ti, ri, ii, edit: true }));
+        box.append(edit);
+      }
+    }
+    const acts = el('div', 'vacts');
+    acts.append(tool('←', 'Vers la gauche', ii > 0, () => move(ii - 1)), tool('→', 'Vers la droite', ii < row.length - 1, () => move(ii + 1)),
+      tool('Retirer', 'Retirer de la page Vidéos', true, () => { if (cat.get(id)?.dvd) vstate.hidden.push(id); row.splice(ii, 1); renderVideos(); }, 'danger'));
+    box.append(acts);
+    return box;
+  }
+
+  function openVideoDialog(where) {
+    vdialog = where;
+    const id = where.ii >= 0 ? vstate.themes[where.ti].rows[where.ri][where.ii] : null;
+    const v = id && id !== SOON ? videoInfo(id) : null;
+    $('#vdlg-title').textContent = where.edit ? 'Changer la vidéo' : id === SOON ? 'Mettre la vidéo à la place de « Bientôt en ligne »' : 'Ajouter une vidéo';
+    $('#v-url').value = v ? 'https://www.youtube.com/watch?v=' + v.id : '';
+    $('#v-title').value = v?.title || '';
+    $('#v-meta').value = v?.meta || '';
+    $('#vdlg-soon').hidden = where.ii >= 0;
+    $('#vdlg-ok').textContent = where.ii >= 0 ? 'Valider' : 'Ajouter';
+    showError('#vdlg-error', '');
+    vPreview();
+    $('#vdlg').showModal();
+    $('#v-url').focus();
+  }
+
+  function vPreview() {
+    const id = youtubeId($('#v-url').value.trim());
+    $('#v-prev').hidden = !id;
+    if (!id) return;
+    $('#v-thumb').src = thumb(id);
+    const known = catalog().get(id);
+    $('#v-known').textContent = known ? `Cette vidéo est déjà sur la page « ${known.from} ».` : '';
+    if (known && !$('#v-title').value) $('#v-title').value = known.title;
+    if (known && !$('#v-meta').value) $('#v-meta').value = known.meta;
+  }
+
+  function placeVideo(id) {
+    const { ti, ri, ii } = vdialog;
+    const row = vstate.themes[ti].rows[ri];
+    if (ii >= 0) row[ii] = id; else row.push(id);
+    vstate.hidden = vstate.hidden.filter((x) => x !== id);
+    $('#vdlg').close();
+    renderVideos();
+  }
+
+  function submitVideo(e) {
+    e.preventDefault();
+    const id = youtubeId($('#v-url').value.trim());
+    if (!id) return showError('#vdlg-error', 'Ce lien n’est pas un lien YouTube. Sur YouTube, cliquez sur « Partager » puis « Copier », et collez ici.');
+    const title = $('#v-title').value.trim();
+    if (!title) return showError('#vdlg-error', 'Donnez un titre à la vidéo.');
+    const { ti, ri, ii } = vdialog;
+    const current = ii >= 0 ? vstate.themes[ti].rows[ri][ii] : null;
+    const elsewhere = vstate.themes.find((t) => t.rows.some((r) => r.includes(id)));
+    if (elsewhere && id !== current) return showError('#vdlg-error', `Cette vidéo est déjà dans le thème « ${elsewhere.title} ».`);
+    const known = catalog().get(id);
+    if (!known?.dvd) {
+      const meta = $('#v-meta').value.trim();
+      const existing = vstate.videos.find((v) => v.id === id);
+      if (existing) Object.assign(existing, { title, meta }); else vstate.videos.push({ id, title, meta });
+    }
+    placeVideo(id);
+  }
+
+  async function saveVideos() {
+    const btn = $('#videos-save');
+    showError('#videos-error', '');
+    const used = new Set();
+    for (const t of vstate.themes) {
+      if (!t.title.trim()) return showError('#videos-error', 'Un thème n’a pas de nom.');
+      t.title = t.title.trim();
+      if (!t.id) {
+        let base = slugify(t.title), id = base, n = 2;
+        while (vstate.themes.some((o) => o !== t && o.id === id)) id = base + '-' + n++;
+        t.id = id;
+      }
+      if (used.has(t.id)) t.id += '-' + vstate.themes.indexOf(t);
+      used.add(t.id);
+    }
+    btn.disabled = true;
+    btn.textContent = 'Enregistrement…';
+    try {
+      const obj = normalized(vstate);
+      const text = JSON.stringify(obj, null, 2) + '\n';
+      const res = await api('save', { path: VIDEOS, text, sha: files[VIDEOS]?.sha, title: 'Page Vidéos' });
+      files[VIDEOS] = { sha: res.sha, text };
+      resetVideos();
+      historyCache = null;
+      renderVideos();
+      followDeploy();
+    } catch (e) {
+      showError('#videos-error', e.message);
+    } finally {
+      btn.textContent = 'Enregistrer';
+      btn.disabled = !videosDirty();
+    }
+  }
+
   // ------------------------------------------------------------ Chargement
-  async function load() {
+  async function load(view = 'home') {
     show('loading');
     const res = await api('load');
     files = {};
@@ -711,7 +1123,8 @@
     renderList();
     renderInfos();
     renderPages();
-    show('stages');
+    resetVideos();
+    show(view);
   }
 
   // ------------------------------------------------------------ Événements
@@ -738,8 +1151,25 @@
   $('#edit-form').addEventListener('submit', saveFiche);
   $('#infos-form').addEventListener('submit', saveInfos);
   $('#page-form').addEventListener('submit', savePage);
+  $('#add-theme').addEventListener('click', () => { vstate.themes.push({ title: 'Nouveau thème', rows: [[]] }); renderVideos(); $$('#themes .theme-head input').pop()?.select(); });
+  $('#videos-save').addEventListener('click', saveVideos);
+  $('#videos-reset').addEventListener('click', () => { if (!videosDirty() || confirm('Abandonner vos changements dans Mes vidéos ?')) { resetVideos(); renderVideos(); } });
+  $('#v-url').addEventListener('input', vPreview);
+  $('#vdlg-form').addEventListener('submit', submitVideo);
+  $('#vdlg-cancel').addEventListener('click', () => $('#vdlg').close());
+  $('#vdlg-soon').addEventListener('click', () => placeVideo(SOON));
+  // Le bouton « Enregistrer » s'allume dès qu'un nom de thème change
+  $('#themes').addEventListener('input', () => ($('#videos-save').disabled = !videosDirty()));
+  // Boutons « aller à » (accueil, aide…)
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (!b) return;
+    if (b.dataset.go === 'add-stage') openEditor(null); else show(b.dataset.go);
+  });
   $('#page-back').addEventListener('click', () => show('pages'));
   $('#see-site').href = SITE;
+  $('#home-see').href = SITE;
+  $('#videos-see').href = SITE + 'videos/';
   $('#f-photo').addEventListener('change', (e) => pickPhoto(e.target.files[0]));
   $('#photo-remove').addEventListener('click', () => { newPhoto = null; setPhoto(''); });
   const drop = $('#photo-drop');

@@ -76,6 +76,7 @@ const DATA_FILES = [
     'v3-src/src/data/eveil-au-soi.fr.json',
     'v3-src/src/data/about.fr.json',
     'v3-src/src/data/mission.fr.json',
+    'v3-src/src/data/videos.fr.json',
 ];
 
 function allowed_text_path(string $path): bool
@@ -241,6 +242,20 @@ function commit_file(string $path, string $bytes, ?string $sha, string $message)
     return ['sha' => $json['content']['sha'] ?? null, 'commit' => $json['commit']['sha'] ?? null];
 }
 
+/** Un fichier du dépôt à une version donnée (branche ou commit), ou null. */
+function gh_file(string $path, string $ref): ?array
+{
+    [$status, $json] = gh('GET', repo_path($path) . '?ref=' . rawurlencode($ref));
+    if ($status >= 300 || !is_array($json) || !isset($json['content'], $json['sha'])) return null;
+    return ['sha' => $json['sha'], 'text' => base64_decode(str_replace("\n", '', $json['content']))];
+}
+
+/** « Mon espace : modifie « Le Nouveau Bugarach » » → « Le Nouveau Bugarach ». */
+function change_title(string $message): string
+{
+    return preg_match('/«\s*(.+?)\s*»/u', $message, $m) ? $m[1] : 'la modification';
+}
+
 // ---------------------------------------------------------------- Actions
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail(405, 'Méthode non autorisée.');
 $input = json_decode((string) file_get_contents('php://input'), true) ?: [];
@@ -322,6 +337,60 @@ switch ($action) {
         if ($status >= 300 || !$run) ok(['state' => 'inconnu']);
         $state = $run['status'] === 'completed' ? ($run['conclusion'] === 'success' ? 'en-ligne' : 'erreur') : 'en-cours';
         ok(['state' => $state, 'since' => $run['created_at'] ?? null, 'commit' => $run['head_sha'] ?? null]);
+
+    case 'history':
+        // Les dernières modifications faites depuis Mon espace, les plus récentes d'abord.
+        require_login();
+        $cfg = config();
+        [$status, $list] = gh('GET', '/repos/' . $cfg['repo'] . '/commits?sha=' . rawurlencode($cfg['branch'])
+            . '&author=' . rawurlencode($cfg['author_email']) . '&per_page=40');
+        if ($status >= 300 || !is_array($list)) fail(502, "L'historique ne peut pas être lu pour le moment. Réessayez dans un instant.");
+        $out = [];
+        foreach ($list as $c) {
+            $msg = (string) ($c['commit']['message'] ?? '');
+            if (strpos($msg, 'Mon espace : ') !== 0) continue;
+            $out[] = ['sha' => (string) ($c['sha'] ?? ''), 'message' => $msg, 'date' => $c['commit']['committer']['date'] ?? ($c['commit']['author']['date'] ?? null)];
+        }
+        ok(['commits' => $out]);
+
+    case 'undo':
+        // Remet les fichiers comme avant une modification de Christine. Refusé si un de ces
+        // fichiers a changé depuis : on n'efface jamais une modification plus récente.
+        require_login();
+        $cfg = config();
+        $sha = (string) ($input['sha'] ?? '');
+        if (!preg_match('/^[0-9a-f]{40}$/', $sha)) fail(400, 'Modification inconnue.');
+        [$status, $c] = gh('GET', '/repos/' . $cfg['repo'] . '/commits/' . $sha);
+        if ($status >= 300 || !is_array($c)) fail(502, 'Cette modification ne peut pas être lue pour le moment. Réessayez dans un instant.');
+        if (strtolower((string) ($c['commit']['author']['email'] ?? '')) !== strtolower($cfg['author_email'])) {
+            fail(403, 'Seules les modifications faites depuis Mon espace peuvent être annulées ici.');
+        }
+        $parent = (string) ($c['parents'][0]['sha'] ?? '');
+        if ($parent === '') fail(400, 'Cette modification ne peut pas être annulée.');
+        $paths = [];
+        foreach (($c['files'] ?? []) as $f) {
+            $path = (string) ($f['filename'] ?? '');
+            if (allowed_text_path($path) && ($f['status'] ?? '') === 'modified') $paths[] = $path;
+        }
+        if (!$paths) {
+            fail(400, "Un nouveau stage ou une photo ne s'annule pas ici. Pour retirer un stage du site, ouvrez-le et décochez « Afficher ce stage sur le site ».");
+        }
+        $plan = [];
+        foreach ($paths as $path) {
+            $then = gh_file($path, $sha);
+            $now = gh_file($path, $cfg['branch']);
+            $before = gh_file($path, $parent);
+            if ($then === null || $now === null || $before === null) fail(502, 'Cette modification ne peut pas être lue pour le moment. Réessayez dans un instant.');
+            if ($now['text'] !== $then['text']) {
+                fail(409, 'Cette page a été modifiée de nouveau depuis. Annulez d’abord la modification la plus récente, en haut de la liste.');
+            }
+            $plan[] = [$path, $before['text'], $now['sha']];
+        }
+        $title = change_title((string) ($c['commit']['message'] ?? ''));
+        foreach ($plan as $step) {
+            commit_file($step[0], $step[1], $step[2], 'Mon espace : annule « ' . mb_substr($title, 0, 80) . ' »');
+        }
+        ok(['files' => count($plan), 'title' => $title]);
 
     default:
         fail(400, 'Action inconnue.');

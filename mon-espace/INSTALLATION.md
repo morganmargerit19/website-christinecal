@@ -1,9 +1,20 @@
 # Installer « Mon espace » (pour Morgan, environ 15 min)
 
 « Mon espace » est l'espace de gestion de Christine, à l'adresse
-`https://www.christinecal.com/mon-espace/`. Elle y ajoute et modifie ses
-stages (dates, lieu, tarif, photo, texte, vidéos, témoignages) et ses petites
-infos (téléphone, e-mail, annonce en haut du site, accroches des univers).
+`https://www.christinecal.com/mon-espace/`. Onglets :
+
+- **Accueil** : prochaines dates, état de la mise en ligne, dernières
+  modifications, raccourcis.
+- **Mes stages** : dates, lieu, tarif, photo, texte, vidéos, témoignages.
+- **Mes pages** : textes de Qui suis-je, Ma mission, Éveil à Soi, Éveil au Soi.
+- **Mes vidéos** : la page Vidéos du nouveau site (`src/data/videos.fr.json`).
+- **Petites infos** : téléphone, e-mail, annonce en haut du site.
+- **Historique** : ses modifications, et « Annuler cette modification ».
+- **Aide** : mode d'emploi intégré.
+
+Les liens « Voir mon site » ouvrent le nouveau site, encore sur Vercel
+(constante `SITE` en haut de la partie « Mes pages » d'`app.js`). **À la
+bascule, remettre `SITE = '/'`.**
 
 Chaque enregistrement devient un commit sur `main`. Le déploiement OVH
 existant se lance tout seul, et le site est à jour 3 à 5 minutes plus tard.
@@ -65,9 +76,16 @@ Tout est annulable dans l'historique GitHub.
 - Session en cookie sécurisé (HTTPS, HttpOnly, SameSite Strict) et jeton
   anti-falsification sur chaque action.
 - La clé GitHub reste sur le serveur : le navigateur ne la voit jamais.
-- Chemins modifiables limités aux fiches françaises, à 3 fichiers de données
-  et au dossier des photos de stages. Le code du site ne peut pas être modifié
-  depuis l'espace.
+- Chemins modifiables limités aux fiches françaises, à 6 fichiers de données
+  (`infos.json`, `about.fr.json`, `mission.fr.json`, `eveil-a-soi.fr.json`,
+  `eveil-au-soi.fr.json`, `videos.fr.json`) et au dossier des photos de
+  stages. Le code du site ne peut pas être modifié depuis l'espace.
+- Annulation (Historique) : seulement les commits signés « Mon espace », et
+  seulement si le fichier n'a pas changé depuis ; sinon l'espace demande
+  d'annuler d'abord la modification la plus récente. Un nouveau stage ou une
+  photo ne s'annule pas (on décoche « Afficher ce stage sur le site »).
+- `.htaccess` autorise les vignettes YouTube (`https://i.ytimg.com`) pour
+  l'onglet Mes vidéos.
 - Photos : JPEG, PNG ou WebP uniquement, 6 Mo au plus (elles sont réduites à
   1600 px dans le navigateur avant l'envoi).
 - `.htaccess` : HTTPS forcé, seuls les fichiers de l'espace sont servis,
@@ -91,4 +109,5 @@ Tout est annulable dans l'historique GitHub.
 MON_ESPACE_CONFIG=/chemin/vers/config-de-test.php php -S 127.0.0.1:8898 -t mon-espace
 ```
 Avec `'api_base' => 'http://127.0.0.1:8899'` et `'secure_cookie' => false`
-dans la configuration de test, et un faux serveur GitHub sur le port 8899.
+dans la configuration de test, et un faux serveur GitHub sur le port 8899
+(contenus, commits et versions, pour tester aussi l'Historique).
