@@ -45,7 +45,7 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
     {/* Retours du 28/10 : la nouvelle photo de Christine à gauche du texte « La mission »,
         petite, sans descendre plus bas que le texte d'introduction. */}
     <div class="wrap split split--portrait split--top">
-      <figure class="framed hero-portrait hero-portrait--sm"><img src={u('/images/wp/christine-2026.jpg')} alt="Portrait de Christine CAL, souriante" loading="lazy" /></figure>
+      <figure class="framed hero-portrait hero-portrait--sm"><img src={u((m as { photo?: string }).photo || '/images/wp/christine-2026.jpg')} alt="Portrait de Christine CAL, souriante" loading="lazy" /></figure>
       <div class="txt">
         <p class="eyebrow">{m.s2Heading}</p>
         <p class="serif" style="margin-top: 22px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.45" set:html={m.s2Quote} />

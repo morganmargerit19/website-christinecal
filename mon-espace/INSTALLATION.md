@@ -6,7 +6,10 @@
 - **Accueil** : prochaines dates, état de la mise en ligne, dernières
   modifications, raccourcis.
 - **Mes stages** : dates, lieu, tarif, photo, texte, vidéos, témoignages.
-- **Mes pages** : textes de Qui suis-je, Ma mission, Éveil à Soi, Éveil au Soi.
+- **Mes pages** : textes et photos de Qui suis-je, Ma mission, Éveil à Soi,
+  Éveil au Soi (champs `hero.photo`, `photo`, `fond`, `bandeau` des fichiers
+  de données ; le site garde l'image d'origine si le champ manque).
+- **Mes stages** : en plus, le diaporama (`slideshow` de la fiche).
 - **Mes vidéos** : la page Vidéos du nouveau site (`src/data/videos.fr.json`).
 - **Petites infos** : téléphone, e-mail, annonce en haut du site.
 - **Historique** : ses modifications, et « Annuler cette modification ».
@@ -87,7 +90,10 @@ Tout est annulable dans l'historique GitHub.
 - `.htaccess` autorise les vignettes YouTube (`https://i.ytimg.com`) pour
   l'onglet Mes vidéos.
 - Photos : JPEG, PNG ou WebP uniquement, 6 Mo au plus (elles sont réduites à
-  1600 px dans le navigateur avant l'envoi).
+  1600 px dans le navigateur avant l'envoi). Nom unique (date + suffixe au
+  hasard), dans `v3-src/public/images/stages/`. Chaque photo est un commit :
+  le déploiement OVH annule les précédents (`cancel-in-progress`), et
+  l'espace lit un déploiement annulé comme « en cours ».
 - `.htaccess` : HTTPS forcé, seuls les fichiers de l'espace sont servis,
   politique de sécurité du contenu stricte, pas d'indexation.
 

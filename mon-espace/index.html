@@ -137,6 +137,16 @@
         </fieldset>
 
         <fieldset class="card">
+          <legend>Diaporama <small>(facultatif)</small></legend>
+          <p class="hint">Des photos qui défilent sur la page du stage. Quand il y a un diaporama, il remplace la photo ronde en haut de la page.</p>
+          <div id="f-slides" class="slides-edit"></div>
+          <div class="row-actions">
+            <label class="btn small file">+ Ajouter des photos<input type="file" id="f-slide-input" accept="image/jpeg,image/png,image/webp" multiple hidden></label>
+          </div>
+          <p class="hint">Vous pouvez en choisir plusieurs d’un coup. Les flèches changent l’ordre.</p>
+        </fieldset>
+
+        <fieldset class="card">
           <legend>Texte de la page</legend>
           <div id="body-locked" class="notice" hidden>Ce texte a une mise en page particulière (colonnes, images placées…). Pour le modifier, écrivez à Morgan. Tout le reste de cette fiche est modifiable ici.</div>
           <div id="body-wrap">
