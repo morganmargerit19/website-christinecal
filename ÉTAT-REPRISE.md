@@ -52,7 +52,9 @@ des étapes passées._
    existantes de `src/`.
 3. **Bascule** : faire construire `astro.nouveau-site.config.mjs` (sortie
    `dist/`) par `.github/workflows/deploy-ovh.yml`. Retour arrière : revenir à
-   `astro.config.mjs`. Voir `NOUVEAU-SITE.md`.
+   `astro.config.mjs`. Voir `NOUVEAU-SITE.md`. Dans `mon-espace/app.js`,
+   remettre `SITE = '/'` (les liens « Voir mon site » pointent pour l'instant
+   sur la maquette Vercel).
 4. Envoyer le mail à Christine (texte ci-dessous), avec le mot de passe **par
    SMS**.
 5. Ensuite, éventuellement : retirer Tina, condenser les textes (étape 2).
