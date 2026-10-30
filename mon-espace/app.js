@@ -897,10 +897,14 @@
 
   // ------------------------------------------------------------ Historique
   let historyCache = null;
-  // Les essais de Morgan du 18/10 (installation de l'espace) ne sont pas montrés à Christine.
-  const HISTORY_FROM = '2026-10-30';
+  // Les essais de Morgan (installation de l'espace, 18 et 30/10) ne sont pas montrés à Christine.
+  const HISTORY_FROM = '2026-10-30T17:20:00Z';
   async function getHistory() {
-    if (!historyCache) historyCache = (await api('history')).commits.filter((c) => !c.date || c.date >= HISTORY_FROM);
+    if (!historyCache) {
+      historyCache = (await api('history')).commits
+        // Une photo seule va toujours avec l'enregistrement du stage ou de la page : on ne la montre pas
+        .filter((c) => (!c.date || c.date >= HISTORY_FROM) && !/^Mon espace : ajoute la photo/.test(c.message));
+    }
     return historyCache;
   }
   /** « Mon espace : modifie « X » » → { verb: 'Modification', what: 'X', undoable } */
@@ -909,7 +913,7 @@
     const what = (m.match(/«\s*(.+?)\s*»/) || [])[1] || '';
     if (/^ajoute la photo/.test(m)) return { verb: 'Photo ajoutée', what: '', undoable: false };
     if (/^annule/.test(m)) return { verb: 'Annulation', what, undoable: true };
-    if (/^ajoute/.test(m)) return { verb: 'Ajout', what, undoable: false };
+    if (/^ajoute/.test(m)) return { verb: 'Nouveau stage', what, undoable: false, added: true };
     return { verb: 'Modification', what, undoable: true };
   }
 
@@ -946,8 +950,35 @@
         b.type = 'button';
         b.addEventListener('click', () => undo(c, d, b));
         row.append(b);
+      } else if (d.added) {
+        // Un nouveau stage ne s'efface pas : on le retire du site (il reste dans Mes stages)
+        const f = fiches.find((x) => x.data.title === d.what);
+        if (f) {
+          const hidden = !!f.data.draft;
+          if (hidden) txt.append(el('p', 'hm', 'Retiré du site, gardé dans Mes stages.'));
+          const b = el('button', 'btn small ghost', hidden ? 'Le remettre sur le site' : 'Retirer ce stage du site');
+          b.type = 'button';
+          b.addEventListener('click', () => setVisible(f, hidden, b));
+          row.append(b);
+        }
       }
       box.append(row);
+    }
+  }
+
+  async function setVisible(f, visible, btn) {
+    if (!visible && !confirm(`Retirer « ${f.data.title} » du site ?\n\nIl reste dans Mes stages, prêt à revenir.`)) return;
+    btn.disabled = true;
+    try {
+      const d = { ...f.data };
+      if (visible) delete d.draft; else d.draft = true;
+      await api('save', { path: f.path, text: serialize(d, f.body), sha: f.sha, title: f.data.title });
+      historyCache = null;
+      await load('history');
+      followDeploy();
+    } catch (e) {
+      status('err', e.message);
+      btn.disabled = false;
     }
   }
 
