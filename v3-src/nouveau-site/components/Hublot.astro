@@ -6,9 +6,10 @@
 import { u } from '../lib/site';
 import Geo from './Geo.astro';
 import GeoFleur from './GeoFleur.astro';
+import Lumiere from './Lumiere.astro';
 import GeoMerkaba from './GeoMerkaba.astro';
 import GeoFibonacci from './GeoFibonacci.astro';
-interface Props { src?: string; alt?: string; portrait?: boolean; halo?: boolean; class?: string; eager?: boolean; position?: string; geo?: 'fleur' | 'merkaba' | 'spirale' }
+interface Props { src?: string; alt?: string; portrait?: boolean; halo?: boolean; class?: string; eager?: boolean; position?: string; geo?: 'fleur' | 'merkaba' | 'spirale' | 'lumiere' }
 const { src, alt = '', portrait = false, halo = true, class: cls, eager = false, position, geo } = Astro.props;
 ---
 <div class:list={['hublot', cls]}>
@@ -24,6 +25,7 @@ const { src, alt = '', portrait = false, halo = true, class: cls, eager = false,
       : geo === 'merkaba' ? <GeoMerkaba label="Merkaba : deux tétraèdres qui tournent en sens contraire" />
       : geo === 'spirale' ? <GeoFibonacci label="Spirale d'or, le vortex" />
       : geo === 'fleur' ? <GeoFleur label="Fleur de vie" />
+      : geo === 'lumiere' ? <Lumiere alt={alt} eager={eager} />
       : <Geo />}
   </div>
 </div>

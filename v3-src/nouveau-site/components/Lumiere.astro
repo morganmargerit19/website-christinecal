@@ -1,0 +1,19 @@
+---
+/**
+ * Stage n°1 de l'École 5D (Corps de Lumière) : la silhouette aux chakras, image
+ * envoyée par Morgan le 01/11, à la place de la fleur de vie. Légèrement animée pour
+ * vivre à côté des géométries des stages 2 et 3 : la silhouette respire, la lumière
+ * du cœur pulse, de fins rayons tournent très lentement. Rien ne bouge si le visiteur
+ * a demandé moins d'animations.
+ * `card` : toute la silhouette, fondue dans la nuit ; `round` : recadrée au centre.
+ */
+import { u } from '../lib/site';
+import { LUMIERE } from '../lib/ecole';
+interface Props { variant?: 'card' | 'round'; alt?: string; eager?: boolean }
+const { variant = 'round', alt = '', eager = false } = Astro.props;
+---
+<span class:list={['lumiere', `lumiere--${variant}`]}>
+  <img class="lumiere-corps" src={u(LUMIERE)} alt={alt} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+  <span class="lumiere-rayons" aria-hidden="true"></span>
+  <span class="lumiere-halo" aria-hidden="true"></span>
+</span>

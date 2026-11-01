@@ -30,6 +30,7 @@ import { parseDate } from '../lib/agenda';
 import { ACTIVATION, ECOLE, ECOLE_GEO } from '../lib/ecole';
 import ProsePart from '../components/ProsePart.astro';
 import GeoFleur from '../components/GeoFleur.astro';
+import Lumiere from '../components/Lumiere.astro';
 import GeoMerkaba from '../components/GeoMerkaba.astro';
 
 // Mêmes noms que les blocs de l'éditeur (cf. tina/config.ts → bodyTemplates).
@@ -68,15 +69,15 @@ const visual =
   f.richLayout === 'sortir-matrice' ? OLD_NEW
   : ECOLE_GEO[slug] === 'fleur' ? undefined
   : ECOLE_GEO[slug] === 'activation' ? ACTIVATION
-  : ECOLE_GEO[slug] ? undefined // Corps de lumière, Merkaba : leur géométrie animée
+  : ECOLE_GEO[slug] ? undefined // Corps de lumière, Merkaba : leur visuel animé
   : framedVisualOf(f).src;
 const visualPos = framedVisualOf(f).pos;
 // En-tête avec une image de fond plutôt qu'un médaillon (retours de Christine) :
 // l'École 5D sur « l'homme en énergie ».
 const heroBg = slug === ECOLE ? { src: '/images/wp/vaisseaulumiere.webp', pos: '50% 38%' } : undefined;
 // Pas de médaillon quand la page a déjà son visuel : diaporama (Mont Shasta),
-// bandeau seul (Team galactique), image de fond (École 5D). Stage n°1 : pas de
-// fleur de vie animée dans le cercle, son bandeau-titre suffit (retours du 22/10).
+// bandeau seul (Team galactique), image de fond (École 5D). Stage n°1 : sa silhouette
+// aux chakras dans le cercle (01/11 ; plus de fleur de vie, retours du 22/10).
 const showHublot = !heroBg && ECOLE_GEO[slug] !== 'fleur' && f.slideshow.filter(exists).length === 0 && (visual || ECOLE_GEO[slug] || !isStrip(f.image));
 // (Une image recadrée pour le médaillon ne revient pas en bandeau : Bugarach.)
 const strip = [f.image, f.banner].find((s) => s && s !== visual && !(visualPos && s === f.image) && exists(s) && isStrip(s));
@@ -155,7 +156,7 @@ const anchored = [
             return (
               <li aria-current={s === slug ? 'step' : undefined}>
                 <a href={fichePath(e.data.hub as Hub, s)}>
-                  <span class="etape-geo">{g === 'merkaba' ? <GeoMerkaba /> : g === 'activation' ? <img src={u(ACTIVATION)} alt="" loading="lazy" /> : <GeoFleur />}</span>
+                  <span class="etape-geo">{g === 'merkaba' ? <GeoMerkaba /> : g === 'activation' ? <img src={u(ACTIVATION)} alt="" loading="lazy" /> : g === 'lumiere' ? <Lumiere /> : <GeoFleur />}</span>
                   <span class="label">Étape {i + 1}</span>
                   <span class="t">{e.data.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</span>
                   <span class="m">{e.data.kicker.replace(/^Stage\s*·\s*/, '')}</span>
