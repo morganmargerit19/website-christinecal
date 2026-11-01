@@ -1,8 +1,9 @@
 ---
 /**
  * Merkaba : deux tétraèdres imbriqués (masculin / féminin) qui tournent en sens
- * contraire. Calculée en 3D ; sans JavaScript ou si le visiteur réduit les
- * animations, l'étoile reste dessinée, immobile.
+ * contraire, traversés par la lemniscate (le signe de l'infini) que parcourt une
+ * lumière, au plus près du travail de Christine (01/11). Calculée en 3D ; sans
+ * JavaScript ou si le visiteur réduit les animations, l'étoile reste dessinée, immobile.
  */
 interface Props { class?: string; label?: string }
 const { class: cls, label } = Astro.props;
@@ -25,12 +26,19 @@ function project(v: number[], spin: number) {
 }
 const lines = (verts: number[][], spin: number) =>
   EDGES.map(([i, j]) => [...project(verts[i], spin), ...project(verts[j], spin)].map((n) => n.toFixed(1)));
+// Lemniscate de Bernoulli, horizontale, centrée sur le cœur de l'étoile
+const LEM = Array.from({ length: 97 }, (_, i) => {
+  const t = (i / 96) * Math.PI * 2, d = 1 + Math.sin(t) ** 2;
+  return `${i ? 'L' : 'M'}${((176 * Math.cos(t)) / d).toFixed(1)} ${((176 * Math.sin(t) * Math.cos(t)) / d).toFixed(1)}`;
+}).join('') + 'Z';
 const la = lines(A, 0.5);
 const lb = lines(B, -0.5);
 ---
 <svg class:list={['geo-anim geo-merkaba', cls]} viewBox="-200 -200 400 400" data-merkaba role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'}>
   <circle class="gf-core" r="150" fill="url(#gm-core)" />
   <circle r="182" fill="none" stroke="rgba(233,204,138,.35)" stroke-dasharray="2 8" class="gfi-rings" />
+  <path class="gm-lem" d={LEM} fill="none" stroke="rgba(240,214,150,.9)" stroke-width="2" />
+  <path class="gm-lem-flow" d={LEM} pathLength="1" fill="none" stroke="#FFF1C9" stroke-width="2.6" stroke-linecap="round" stroke-dasharray=".07 .93" />
   <g data-tetra="a" stroke="#FFF1C9" stroke-width="1.8" stroke-linecap="round">
     {la.map(([x1, y1, x2, y2]) => <line x1={x1} y1={y1} x2={x2} y2={y2} />)}
   </g>
