@@ -1,7 +1,9 @@
 ---
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import { u } from '../lib/site';
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import { u } from '../../lib/site';
 ---
 <Base title="Politique de confidentialité · Christine CAL" description="Comment Christine CAL traite les données transmises via le site." path="/politique-de-confidentialite/">
   <section class="page-hero sky">

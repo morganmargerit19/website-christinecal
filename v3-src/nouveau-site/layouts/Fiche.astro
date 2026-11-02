@@ -5,6 +5,7 @@
  * présentation, dates, lieu, durée, tarif, photos, texte, vidéos, témoignages.
  * Une case vide n'affiche rien (jamais de « à préciser »).
  */
+import { getFichesL } from '../lib/i18n';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import ContactBand from '../components/ContactBand.astro';
@@ -23,7 +24,7 @@ import SlideshowBlock from '../components/blocks/SlideshowBlock.astro';
 import GalleryBlock from '../components/blocks/GalleryBlock.astro';
 import Lead from '../components/blocks/Lead.astro';
 import Note from '../components/blocks/Note.astro';
-import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
+import { slugOf, stagesOf } from '../../src/lib/fiches';
 import { HUBS, ECOLE_PATH, OLD_NEW, SHASTA_PATH, fichePath, mailto, u, type Hub } from '../lib/site';
 import { exists, framedVisualOf, isStrip } from '../lib/images';
 import { parseDate } from '../lib/agenda';
@@ -42,7 +43,7 @@ const { Content, headings } = await render(entry);
 const f = entry.data;
 const slug = slugOf(entry.id);
 const hub = HUBS[f.hub as Hub];
-const all = await getFiches('fr');
+const all = await getFichesL();
 const parent = f.rubrique ? all.find((e) => slugOf(e.id) === f.rubrique) : undefined;
 const children = stagesOf(entry, all);
 const siblings = parent

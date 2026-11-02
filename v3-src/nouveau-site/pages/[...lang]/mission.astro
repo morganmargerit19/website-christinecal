@@ -1,12 +1,14 @@
 ---
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
 /** Ma mission : formulaire « Page : Ma mission » du CMS (src/data/mission.fr.json). */
-import Base from '../layouts/Base.astro';
-import ContactBand from '../components/ContactBand.astro';
-import Lemniscate from '../components/Lemniscate.astro';
-import VideoCard from '../components/VideoCard.astro';
-import Fleur from '../components/Fleur.astro';
-import { u } from '../lib/site';
-import m from '../../src/data/mission.fr.json';
+import Base from '../../layouts/Base.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Lemniscate from '../../components/Lemniscate.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import Fleur from '../../components/Fleur.astro';
+import { u } from '../../lib/site';
+import m from '../../../src/data/mission.fr.json';
 
 /** « Jeunes Âmes galactiques » : guillemets insécables, jamais seuls en début de ligne. */
 const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\u00a0»');

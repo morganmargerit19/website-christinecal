@@ -1,9 +1,11 @@
 ---
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import Hublot from '../components/Hublot.astro';
-import Icon from '../components/Icon.astro';
-import { CONTACT } from '../lib/site';
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import Hublot from '../../components/Hublot.astro';
+import Icon from '../../components/Icon.astro';
+import { CONTACT } from '../../lib/site';
 ---
 <Base title="Contact · Christine CAL" description="Contacter Christine CAL pour une consultation médiumnique, un stage ou une question, par e-mail ou téléphone." path="/contact/">
   <section class="page-hero sky" aria-labelledby="titre">

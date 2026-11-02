@@ -1,7 +1,9 @@
 ---
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import { u } from '../lib/site';
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import { u } from '../../lib/site';
 ---
 <Base title="Cookies · Christine CAL" description="Le site de Christine CAL ne dépose aucun cookie de traçage." path="/cookies/">
   <section class="page-hero sky">

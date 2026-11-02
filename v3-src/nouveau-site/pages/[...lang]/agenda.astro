@@ -1,18 +1,21 @@
 ---
+import { getFichesL } from '../../lib/i18n';
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
 /**
  * Agenda : toutes les dates de toutes les fiches, dans l'ordre, sans les dates
  * passées. Christine n'a rien à faire ici : elle remplit les dates de ses stages.
  */
-import Base from '../layouts/Base.astro';
-import ContactBand from '../components/ContactBand.astro';
-import AgendaList from '../components/AgendaList.astro';
-import Fleur from '../components/Fleur.astro';
-import Icon from '../components/Icon.astro';
-import { getFiches, slugOf } from '../../src/lib/fiches';
-import { buildAgenda } from '../lib/agenda';
-import { fichePath, u } from '../lib/site';
+import Base from '../../layouts/Base.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import AgendaList from '../../components/AgendaList.astro';
+import Fleur from '../../components/Fleur.astro';
+import Icon from '../../components/Icon.astro';
+import { slugOf } from '../../../src/lib/fiches';
+import { buildAgenda } from '../../lib/agenda';
+import { fichePath, u } from '../../lib/site';
 
-const fiches = await getFiches('fr');
+const fiches = await getFichesL();
 const { entries, onDemand } = buildAgenda(fiches);
 const consult = fiches.find((f) => f.data.category === 'consultation');
 ---

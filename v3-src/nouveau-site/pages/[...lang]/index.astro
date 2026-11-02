@@ -1,11 +1,13 @@
 ---
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
 /**
  * Accueil : le portail, comme sur le site actuel (souhait de Christine) — la
  * Terre, son nom, ses deux portes. Un seul écran, le menu donne accès à tout.
  */
-import Base from '../layouts/Base.astro';
-import { ui } from '../../src/i18n/ui';
-import { HUBS, u } from '../lib/site';
+import Base from '../../layouts/Base.astro';
+import { ui } from '../../../src/i18n/ui';
+import { HUBS, u } from '../../lib/site';
 
 const t = ui.fr;
 const portes = [

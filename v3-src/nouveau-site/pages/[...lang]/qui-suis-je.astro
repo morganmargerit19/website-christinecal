@@ -1,15 +1,17 @@
 ---
+import { langPaths } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
 /** Qui suis-je : tout vient du formulaire « Page : Qui suis-je » du CMS (src/data/about.fr.json). */
-import Base from '../layouts/Base.astro';
-import ContactBand from '../components/ContactBand.astro';
-import Fleur from '../components/Fleur.astro';
-import Lemniscate from '../components/Lemniscate.astro';
-import VideoCard from '../components/VideoCard.astro';
-import { clauses } from '../lib/content';
-import { splitDated, u } from '../lib/site';
-import about from '../../src/data/about.fr.json';
-import mission from '../../src/data/mission.fr.json';
-import Icon from '../components/Icon.astro';
+import Base from '../../layouts/Base.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import Fleur from '../../components/Fleur.astro';
+import Lemniscate from '../../components/Lemniscate.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import { clauses } from '../../lib/content';
+import { splitDated, u } from '../../lib/site';
+import about from '../../../src/data/about.fr.json';
+import mission from '../../../src/data/mission.fr.json';
+import Icon from '../../components/Icon.astro';
 
 /** « UN PARCOURS EN BREF » → « Un parcours en bref » (les titres en capitales restent lisibles en serif). */
 const sentence = (s: string) =>

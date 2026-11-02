@@ -3,6 +3,7 @@
  * Page d'un univers (Éveil à Soi / Éveil au Soi). Textes : formulaire
  * « Page : Éveil à Soi / au Soi » du CMS. Cartes et dates : les fiches.
  */
+import { getFichesL } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import ContactBand from './ContactBand.astro';
 import Card from './Card.astro';
@@ -10,7 +11,7 @@ import VideoCard from './VideoCard.astro';
 import AgendaList from './AgendaList.astro';
 import Icon from './Icon.astro';
 import Fleur from './Fleur.astro';
-import { getFiches, slugOf, stagesOf } from '../../src/lib/fiches';
+import { slugOf, stagesOf } from '../../src/lib/fiches';
 import { ECOLE } from '../lib/ecole';
 import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
@@ -23,7 +24,7 @@ interface Props { hub: Hub }
 const { hub } = Astro.props;
 const data = hub === 'eveil-a-soi' ? aSoi : auSoi;
 const outro = 'outro' in data ? (data.outro as string[]) : [];
-const fiches = await getFiches('fr');
+const fiches = await getFichesL();
 // L'École 5D et le Mont Shasta ont leur propre onglet : pas de carte en double (retours du 22/10).
 const OWN_TAB = [ECOLE, SHASTA];
 const cards = topLevel(fiches, hub).filter((c) => !OWN_TAB.includes(slugOf(c.id)));
