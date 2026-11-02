@@ -838,5 +838,29 @@
   "es": "Grabación",
   "it": "Registrazione",
   "pl": "Nagranie"
+ },
+ "Interview du {d} par {p}": {
+  "en": "Interview of {d} by {p}",
+  "es": "Entrevista del {d} por {p}",
+  "it": "Intervista del {d} di {p}",
+  "pl": "Wywiad z {d}, prowadzący: {p}"
+ },
+ "Conférence en ligne pour l'Association Communauté de l'Abondance (janvier 2022)": {
+  "en": "Online talk for the Communauté de l'Abondance association (January 2022)",
+  "es": "Conferencia en línea para la asociación Communauté de l'Abondance (enero de 2022)",
+  "it": "Conferenza online per l'associazione Communauté de l'Abondance (gennaio 2022)",
+  "pl": "Wykład online dla stowarzyszenia Communauté de l'Abondance (styczeń 2022)"
+ },
+ "Présentation du stage": {
+  "en": "Workshop introduction",
+  "es": "Presentación del taller",
+  "it": "Presentazione del seminario",
+  "pl": "Prezentacja warsztatu"
+ },
+ "Séance de coaching médiumnique": {
+  "en": "Mediumistic coaching session",
+  "es": "Sesión de coaching mediúmnico",
+  "it": "Sessione di coaching medianico",
+  "pl": "Sesja coachingu mediumicznego"
  }
 }

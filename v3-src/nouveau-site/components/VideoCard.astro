@@ -7,7 +7,7 @@
  */
 import { isArtifact, u } from '../lib/site';
 import Icon from './Icon.astro';
-import { localDate, tr } from '../lib/i18n';
+import { hasTr, localDate, tr } from '../lib/i18n';
 interface Props {
   id: string; title?: string; meta?: string; credit?: 'debowska'; cover?: string; coverAlt?: string;
   size?: 'normal' | 'large';
@@ -18,8 +18,13 @@ const { id, title, meta, credit, cover, coverAlt, half = false } = Astro.props;
 const watch = `https://www.youtube.com/watch?v=${id}`;
 /** Vidéos dont on affiche d'office d'autres sous-titres. Mont Shasta, avril 2019 : l'anglais, pas le français (retours du 26/10). */
 const CAPTIONS: Record<string, string> = { 'ouTq-jp9NgM': 'en' };
-/** « Juin 2017 · 10 min 42 », « Conférence — 29 novembre 2021 » dans la langue de la page. */
-const localMeta = (m: string) => localDate(m.replace(/^Conférence\b/, tr('Conférence')).replace(/^Interview\b/, tr('Interview')).replace(/^Radio\b/, tr('Radio')));
+/** « Juin 2017 · 10 min 42 », « Interview du 11 avril 2017 par … » dans la langue de la page. */
+const localMeta = (m: string) => {
+  if (hasTr(m)) return tr(m);
+  const iv = m.match(/^Interview du (.+?) par (.+)$/);
+  if (iv) return tr('Interview du {d} par {p}', { d: localDate(iv[1]), p: iv[2] });
+  return localDate(m.replace(/^Conférence\b/, tr('Conférence')));
+};
 ---
 <figure class:list={['video', { 'video--dvd': cover, 'video--half': half }]}>
   <div class={cover ? 'frame-row' : undefined}>

@@ -44,6 +44,8 @@ export function tr(fr: string, vars?: Record<string, string | number>): string {
   if (vars) for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, String(v));
   return s;
 }
+/** Le dictionnaire connaît-il ce texte ? (pour les textes libres de Christine, traduits seulement s'ils sont connus) */
+export const hasTr = (fr: string) => fr in ui;
 /** Pluriel simple : trn('{n} stage', '{n} stages', n). */
 export const trn = (one: string, many: string, n: number) => tr(n === 1 ? one : many, { n });
 /** Textes sans traduction rencontrés pendant le build (affichés à la fin). */
@@ -109,13 +111,20 @@ export function localPractical(s: string | undefined): string | undefined {
 
 // ------------------------------------------------------------------ Contenus
 type Fiche = CollectionEntry<'fiches'>;
-const TEXT_FIELDS = ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'testimonials'] as const;
+type D = Fiche['data'];
+const TEXT_FIELDS = ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'testimonials', 'videosHeading', 'audioTitle'] as const;
+
+/** Textes d'une image (légende, description) pris dans la traduction, l'image restant celle du français. */
+const imgText = <T extends { alt?: string; caption?: string }>(fr: T, t?: { alt?: string; caption?: string }): T =>
+  t ? { ...fr, alt: t.alt ?? fr.alt, caption: t.caption ?? fr.caption } : fr;
 
 /**
  * Fiches dans la langue de la page. La liste et tout le pratique viennent du
  * français (ce que Christine gère dans Mon espace : dates, lieu, tarif, photos,
  * vidéos, stage masqué ou supprimé) ; les textes viennent de la traduction
  * quand elle existe. Le corps de la page est celui de la traduction.
+ * Photos et vidéos placées « après tel titre » : même rang dans les deux
+ * langues, le repère (titre) est celui de la traduction.
  */
 export async function getFichesL(): Promise<Fiche[]> {
   const fr = await getFiches('fr');
@@ -124,13 +133,25 @@ export async function getFichesL(): Promise<Fiche[]> {
   const own = new Map((await getFiches(l)).filter((e) => e.data.lang === l).map((e) => [slugOf(e.id), e]));
   return fr.map((f) => {
     const t = own.get(slugOf(f.id));
-    const data = { ...f.data, place: localPractical(f.data.place), format: localPractical(f.data.format), duration: localPractical(f.data.duration), price: localPractical(f.data.price) } as Fiche['data'];
+    const data = { ...f.data, place: localPractical(f.data.place), format: localPractical(f.data.format), duration: localPractical(f.data.duration), price: localPractical(f.data.price) } as D;
     if (!t) return { ...f, data };
-    for (const k of TEXT_FIELDS) if ((t.data as Record<string, unknown>)[k] !== undefined && (t.data as Record<string, unknown>)[k] !== '') (data as Record<string, unknown>)[k] = (t.data as Record<string, unknown>)[k];
+    const td = t.data;
+    for (const k of TEXT_FIELDS) if ((td as Record<string, unknown>)[k] !== undefined && (td as Record<string, unknown>)[k] !== '') (data as Record<string, unknown>)[k] = (td as Record<string, unknown>)[k];
     // Vidéos : celles du français (Christine), avec le titre traduit quand la vidéo existe dans la traduction
-    const vt = new Map([...t.data.videos, ...t.data.inlineMedia.map((m) => m.video).filter(Boolean)].map((v) => [v!.id, v!]));
-    data.videos = f.data.videos.map((v) => ({ ...v, title: vt.get(v.id)?.title ?? v.title }));
-    data.inlineMedia = t.data.inlineMedia.length === f.data.inlineMedia.length ? t.data.inlineMedia : f.data.inlineMedia;
+    const vt = new Map([...td.videos, ...td.inlineMedia.map((m) => m.video).filter(Boolean)].map((v) => [v!.id, v!]));
+    data.videos = f.data.videos.map((v) => ({ ...v, title: vt.get(v.id)?.title ?? v.title, coverAlt: vt.get(v.id)?.coverAlt || v.coverAlt }));
+    data.inlineMedia = f.data.inlineMedia.map((m, i) => {
+      const tm = td.inlineMedia[i];
+      return {
+        ...m,
+        section: tm?.section ?? m.section,
+        video: m.video && { ...m.video, title: vt.get(m.video.id)?.title ?? m.video.title },
+        images: m.images.map((im, j) => imgText(im, tm?.images[j])),
+      };
+    });
+    data.sideImages = f.data.sideImages.map((s, i) => ({ ...imgText(s, td.sideImages[i]), section: td.sideImages[i]?.section ?? s.section }));
+    data.gallery = f.data.gallery.map((g, i) => imgText(g, td.gallery[i]));
+    data.bodyImage = f.data.bodyImage && imgText(f.data.bodyImage, td.bodyImage);
     data.richLayout = f.data.richLayout;
     return { ...t, id: t.id, data } as Fiche;
   });

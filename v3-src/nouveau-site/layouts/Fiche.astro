@@ -62,7 +62,7 @@ const etapes = ecole ? stagesOf(ecole, all) : [];
 const SOURCE = headings.find((h) => h.depth === 2 && ['source', 'fuente', 'fonte', 'zrodlo', 'źródło'].includes(h.slug))?.slug ?? 'source';
 const hasSource = isEcole && headings.some((h) => h.depth === 2 && h.slug === SOURCE);
 // « … (même sujet) » : la vidéo se place à côté de la précédente (Mémoire galactique, École 5D).
-const sameTopic = (t?: string) => /\(même sujet/i.test(t ?? '');
+const sameTopic = (t?: string) => /\((même sujet|same topic|mismo tema|stesso argomento|ten sam temat)/i.test(t ?? '');
 const half = (i: number) => sameTopic(f.videos[i]?.title) || sameTopic(f.videos[i + 1]?.title);
 const ownPath = `/${f.hub}/${slug}/`;
 const parentPath = parent ? `/${parent.data.hub}/${slugOf(parent.id)}/` : undefined;
