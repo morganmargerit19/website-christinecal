@@ -5,7 +5,7 @@
  * présentation, dates, lieu, durée, tarif, photos, texte, vidéos, témoignages.
  * Une case vide n'affiche rien (jamais de « à préciser »).
  */
-import { getFichesL } from '../lib/i18n';
+import { getFichesL, localDate, tr, trn } from '../lib/i18n';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import ContactBand from '../components/ContactBand.astro';
@@ -58,7 +58,8 @@ const isEcole = slug === ECOLE;
 // Les pages des 3 stages gardent le bandeau du parcours (étapes et géométries) ; plus la page de l'École.
 const ecole = f.rubrique === ECOLE ? all.find((e) => slugOf(e.id) === ECOLE) : undefined;
 const etapes = ecole ? stagesOf(ecole, all) : [];
-const SOURCE = 'source';
+// Le titre « Source » dans chaque langue (son ancre dépend de la traduction).
+const SOURCE = headings.find((h) => h.depth === 2 && ['source', 'fuente', 'fonte', 'zrodlo', 'źródło'].includes(h.slug))?.slug ?? 'source';
 const hasSource = isEcole && headings.some((h) => h.depth === 2 && h.slug === SOURCE);
 // « … (même sujet) » : la vidéo se place à côté de la précédente (Mémoire galactique, École 5D).
 const sameTopic = (t?: string) => /\(même sujet/i.test(t ?? '');
@@ -91,15 +92,15 @@ const hasCalendar = dates.some((d) => parseDate(d));
 const isConsult = f.category === 'consultation';
 // Seule la consultation garde son bouton en haut de page : « Participer ou en savoir
 // plus » et « Voir le programme » alourdissaient les autres (retours du 22/10).
-const cta = isConsult ? 'Réserver une consultation' : undefined;
+const cta = isConsult ? tr('Réserver une consultation') : undefined;
 const subject = isConsult ? `Consultation médiumnique` : `${f.title}${dates[0] ? ` (${dates[0]})` : ''}`;
 
 const facts = [
-  dates.length && { label: dates.length === 1 && hasCalendar ? 'Date' : 'Dates', values: dates },
-  f.place && { label: 'Lieu', values: [f.place] },
-  f.format && { label: 'Format', values: [f.format] },
-  f.duration && { label: 'Durée', values: [f.duration] },
-  f.price && { label: 'Tarif', values: [f.price] },
+  dates.length && { label: tr(dates.length === 1 && hasCalendar ? 'Date' : 'Dates'), values: dates.map(localDate) },
+  f.place && { label: tr('Lieu'), values: [f.place] },
+  f.format && { label: tr('Format'), values: [f.format] },
+  f.duration && { label: tr('Durée'), values: [f.duration] },
+  f.price && { label: tr('Tarif'), values: [f.price] },
 ].filter(Boolean) as { label: string; values: string[] }[];
 
 const anchored = [
@@ -116,8 +117,8 @@ const anchored = [
     ) : null}
     <div class:list={['wrap', 'split', { 'split--solo': !showHublot }]} style={heroBg ? 'padding-bottom: clamp(48px, 6vw, 80px)' : undefined}>
       <div class="txt">
-        <nav class="crumbs" aria-label="Fil d'Ariane">
-          <a href={u('/')}>Accueil</a><span aria-hidden="true">/</span>
+        <nav class="crumbs" aria-label={tr("Fil d'Ariane")}>
+          <a href={u('/')}>{tr('Accueil')}</a><span aria-hidden="true">/</span>
           <a href={u(hub.path)}>{hub.label}</a>
           {parent && <><span aria-hidden="true">/</span><a href={fichePath(parent.data.hub as Hub, slugOf(parent.id))}>{parent.data.title}</a></>}
         </nav>
@@ -132,13 +133,13 @@ const anchored = [
         )}
       </div>
       {showHublot && (
-        <Hublot src={visual} position={visualPos} alt={f.richLayout === 'sortir-matrice' ? "D'une ancienne vie à une nouvelle vie" : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
+        <Hublot src={visual} position={visualPos} alt={f.richLayout === 'sortir-matrice' ? tr("D'une ancienne vie à une nouvelle vie") : f.imageAlt || ''} geo={ECOLE_GEO[slug] === 'activation' ? undefined : ECOLE_GEO[slug]} eager />
       )}
     </div>
   </section>
 
   {facts.length > 0 && !f.practicalFooter && (
-    <section class="sky" aria-label="Infos pratiques" style="padding-block: 10px 40px">
+    <section class="sky" aria-label={tr('Infos pratiques')} style="padding-block: 10px 40px">
       <div class="wrap">
         <dl class="facts" style={`--cols:${facts.length}`}>
           {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
@@ -148,9 +149,9 @@ const anchored = [
   )}
 
   {etapes.length > 0 && (
-    <section class="sky" aria-label="Le parcours de l'École 5D" style="padding-block: 20px 50px">
+    <section class="sky" aria-label={tr("Le parcours de l'École 5D")} style="padding-block: 20px 50px">
       <div class="wrap">
-        <p class="eyebrow">École 5D · le parcours en {etapes.length} étapes</p>
+        <p class="eyebrow">{tr('École 5D · le parcours en {n} étapes', { n: etapes.length })}</p>
         <ol class="etapes">
           {etapes.map((e, i) => {
             const s = slugOf(e.id), g = ECOLE_GEO[s];
@@ -158,9 +159,9 @@ const anchored = [
               <li aria-current={s === slug ? 'step' : undefined}>
                 <a href={fichePath(e.data.hub as Hub, s)}>
                   <span class="etape-geo">{g === 'merkaba' ? <GeoMerkaba /> : g === 'activation' ? <img src={u(ACTIVATION)} alt="" loading="lazy" /> : g === 'lumiere' ? <Lumiere /> : <GeoFleur />}</span>
-                  <span class="label">Étape {i + 1}</span>
-                  <span class="t">{e.data.title.replace(/^Stage n°\d+\s*[—–-]\s*/, '')}</span>
-                  <span class="m">{e.data.kicker.replace(/^Stage\s*·\s*/, '')}</span>
+                  <span class="label">{tr('Étape {n}', { n: i + 1 })}</span>
+                  <span class="t">{e.data.title.replace(/^[^—–]{0,30}\d+\s*[—–-]\s*/, '')}</span>
+                  <span class="m">{e.data.kicker.replace(/^[^·]{1,20}·\s*/, '')}</span>
                 </a>
               </li>
             );
@@ -186,16 +187,16 @@ const anchored = [
     <div class:list={['wrap', 'wrap--narrow']} style={f.wideBody ? 'max-width: 1040px' : undefined}>
       {f.richLayout === 'sortir-matrice' ? (
         <div class="prose">
-          <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/chat-mirroir.jpg')} alt="Le chat qui se voit lion dans le miroir" loading="lazy" /></figure>
-          <p class="b-center b-center--italic">Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.</p>
-          <p class="b-lead b-lead--line">Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.</p>
-          <h2 style="clear: both; letter-spacing: .04em">STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1</h2>
-          <p><em>— Avec une approche différente de cet outil connu —</em></p>
+          <figure class="b-img b-img--center b-img--medium"><img src={u('/images/wp/chat-mirroir.jpg')} alt={tr('Le chat qui se voit lion dans le miroir')} loading="lazy" /></figure>
+          <p class="b-center b-center--italic">{tr('Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.')}</p>
+          <p class="b-lead b-lead--line">{tr("Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.")}</p>
+          <h2 style="clear: both; letter-spacing: .04em">{tr("STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1")}</h2>
+          <p><em>{tr('— Avec une approche différente de cet outil connu —')}</em></p>
           <ul>
-            <li>Découvrir cette source de souffrances permanentes.</li>
-            <li>Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.</li>
-            <li>Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.</li>
-            <li>S'offrir des relations harmonieuses et joyeuses avec soi et les autres.</li>
+            <li>{tr('Découvrir cette source de souffrances permanentes.')}</li>
+            <li>{tr("Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.")}</li>
+            <li>{tr('Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.')}</li>
+            <li>{tr("S'offrir des relations harmonieuses et joyeuses avec soi et les autres.")}</li>
           </ul>
         </div>
       ) : (
@@ -244,8 +245,8 @@ const anchored = [
   {children.length > 0 && (
     <section id="programme" class="section deep">
       <div class="wrap">
-        <p class="eyebrow">{isEcole ? 'École 5D' : 'Au programme'}</p>
-        <h2 class="h2" style="margin-top: 14px">{isEcole ? `Le parcours en ${children.length} étapes` : `${children.length} rendez-vous`}</h2>
+        <p class="eyebrow">{tr(isEcole ? 'École 5D' : 'Au programme')}</p>
+        <h2 class="h2" style="margin-top: 14px">{isEcole ? tr('Le parcours en {n} étapes', { n: children.length }) : trn('{n} rendez-vous', '{n} rendez-vous', children.length)}</h2>
         <div class:list={['cards', { 'cards--4': children.length === 4 }]}>{children.map((c) => <Card entry={c} />)}</div>
       </div>
     </section>
@@ -261,7 +262,7 @@ const anchored = [
   {(f.videos.length > 0 || (f.audio && exists(f.audio))) && (
     <section class="section sky">
       <div class="wrap">
-        <p class="eyebrow">Voir et écouter</p>
+        <p class="eyebrow">{tr('Voir et écouter')}</p>
         {f.videosHeading && <h2 class="h2" style="margin-top: 14px">{f.videosHeading}</h2>}
         {/* Interviews sans jaquette : 3 par ligne, comme sur le site actuel (Mont Shasta). */}
         <div class:list={['video-grid', { 'video-grid--3': f.videos.filter((v) => !v.cover).length >= 3 }]}>
@@ -270,7 +271,7 @@ const anchored = [
             <figure class="video">
               {f.audioCover && exists(f.audioCover) && <img src={u(f.audioCover)} alt="" loading="lazy" style="width: 100%; max-width: 360px; border-radius: 4px" />}
               <figcaption>
-                <span class="label">Enregistrement</span>
+                <span class="label">{tr('Enregistrement')}</span>
                 {f.audioTitle && <span class="vt">{f.audioTitle}</span>}
                 <audio controls preload="none" src={u(f.audio)} style="width: 100%"></audio>
               </figcaption>
@@ -284,7 +285,7 @@ const anchored = [
   {f.testimonials.length > 0 && (
     <section class="section deep">
       <div class="wrap">
-        <p class="eyebrow center">Témoignages</p>
+        <p class="eyebrow center">{tr('Témoignages')}</p>
         <div class:list={['quotes', { 'quotes--2': f.testimonials.length % 3 !== 0 && f.testimonials.length % 2 === 0 }]}>
           {f.testimonials.map((t) => (
             <figure><span class="mark" aria-hidden="true">«</span><blockquote>{t.quote}</blockquote>{t.author && <figcaption>{t.author}</figcaption>}</figure>
@@ -295,7 +296,7 @@ const anchored = [
   )}
 
   {facts.length > 0 && f.practicalFooter && (
-    <section class="sky section--tight" aria-label="Infos pratiques">
+    <section class="sky section--tight" aria-label={tr('Infos pratiques')}>
       <div class="wrap">
         <dl class="facts" style={`--cols:${facts.length}`}>
           {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
@@ -308,15 +309,15 @@ const anchored = [
     <section class="section sky">
       <div class="wrap">
         <div class="head-row">
-          <div><p class="eyebrow">Dans la même rubrique</p><h2 class="h2" style="margin-top: 14px">{parent.data.title}</h2></div>
-          <a class="arrow" href={fichePath(parent.data.hub as Hub, slugOf(parent.id))}>Toute la rubrique<Icon name="arrow" /></a>
+          <div><p class="eyebrow">{tr('Dans la même rubrique')}</p><h2 class="h2" style="margin-top: 14px">{parent.data.title}</h2></div>
+          <a class="arrow" href={fichePath(parent.data.hub as Hub, slugOf(parent.id))}>{tr('Toute la rubrique')}<Icon name="arrow" /></a>
         </div>
         <div class="cards">{siblings.map((c) => <Card entry={c} />)}</div>
       </div>
     </section>
   )}
 
-  <ContactBand heading={cta} text="Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi" subject={subject} motto={false} />
+  <ContactBand heading={cta} text={tr('Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi')} subject={subject} motto={false} />
 
   {(anchored.length > 0 || f.inlineMedia.length > 0) && (
     <script is:inline define:vars={{ anchored }}>

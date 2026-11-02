@@ -8,7 +8,8 @@
  */
 import { defineMiddleware } from 'astro:middleware';
 import { base } from './lib/site';
-import { OTHER_LANGS, isLang, withLang, type Lang } from './lib/i18n';
+import { writeFileSync } from 'node:fs';
+import { OTHER_LANGS, isLang, missingTranslations, withLang, type Lang } from './lib/i18n';
 
 const ASSET = /^\/(_astro|images|audio|mon-espace|favicon)|\.[a-z0-9]{2,5}$/i;
 
@@ -30,6 +31,8 @@ export const onRequest = defineMiddleware((context, next) => {
       });
     }
     html = html.replaceAll('href="§', 'href="');
+    // I18N_REPORT=fichier : liste des textes encore sans traduction (vérification avant mise en ligne).
+    if (process.env.I18N_REPORT) writeFileSync(process.env.I18N_REPORT, JSON.stringify(missingTranslations(), null, 1));
     return new Response(html, { status: res.status, statusText: res.statusText, headers: res.headers });
   });
 });

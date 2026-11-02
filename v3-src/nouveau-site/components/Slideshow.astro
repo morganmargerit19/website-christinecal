@@ -2,6 +2,7 @@
 /** Diaporama en fondu (points de navigation, pause si mouvement réduit). */
 import { u } from '../lib/site';
 import { sizeOf } from '../lib/images';
+import { tr } from '../lib/i18n';
 interface Props { images: string[]; alt?: string }
 const { images, alt = '' } = Astro.props;
 const first = sizeOf(images[0]);
@@ -16,7 +17,7 @@ const ratio = first ? Math.min(Math.max(first.w / first.h, 1.2), 2.6) : 16 / 9;
   ))}
   {images.length > 1 && (
     <div class="dots">
-      {images.map((_, i) => <button type="button" aria-label={`Photo ${i + 1} sur ${images.length}`} data-active={i === 0 ? 'true' : 'false'}></button>)}
+      {images.map((_, i) => <button type="button" aria-label={tr('Photo {i} sur {n}', { i: i + 1, n: images.length })} data-active={i === 0 ? 'true' : 'false'}></button>)}
     </div>
   )}
 </div>

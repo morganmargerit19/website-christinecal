@@ -1,20 +1,21 @@
 ---
-import { langPaths } from '../../lib/i18n';
+import { lang, langPaths, tr } from '../../lib/i18n';
+import { legal } from '../../lib/legal';
 export const getStaticPaths = langPaths;
 import Base from '../../layouts/Base.astro';
 import Footer from '../../components/Footer.astro';
 import { u } from '../../lib/site';
 ---
-<Base title="Cookies · Christine CAL" description="Le site de Christine CAL ne dépose aucun cookie de traçage." path="/cookies/">
+<Base title={`${tr('Cookies')} · Christine CAL`} description={tr("Le site de Christine CAL ne dépose aucun cookie de traçage.")} path="/cookies/">
   <section class="page-hero sky">
     <div class="wrap wrap--narrow">
-      <p class="eyebrow">Informations légales</p>
-      <h1>Cookies</h1>
+      <p class="eyebrow">{tr('Informations légales')}</p>
+      <h1>{tr('Cookies')}</h1>
     </div>
   </section>
   <section class="section sky legal" style="padding-top: 0">
     <div class="wrap wrap--narrow">
-      <div class="prose">
+      {lang() !== 'fr' ? <div class="prose" set:html={legal('cookies')} /> : <div class="prose">
         <h2>Aucun cookie de traçage</h2>
         <p>
           Ce site est volontairement sobre&nbsp;: il ne dépose <strong>aucun cookie</strong>
@@ -44,7 +45,7 @@ import { u } from '../../lib/site';
           Le traitement de vos données est décrit dans la
           <a href={u('/politique-de-confidentialite/')}>politique de confidentialité</a>.
         </p>
-      </div>
+      </div>}
     </div>
   </section>
   <Footer />

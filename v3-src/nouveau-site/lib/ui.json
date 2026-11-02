@@ -1,1 +1,842 @@
-{}
+{
+ "Agenda des stages": {
+  "en": "Workshop calendar",
+  "es": "Agenda de talleres",
+  "it": "Calendario dei seminari",
+  "pl": "Kalendarz warsztatów"
+ },
+ "Les prochains stages, ateliers et rendez-vous de Christine CAL, en présentiel ou via Zoom.": {
+  "en": "Christine CAL's upcoming workshops, sessions and events, in person or via Zoom.",
+  "es": "Los próximos talleres, encuentros y citas de Christine CAL, presenciales o por Zoom.",
+  "it": "I prossimi seminari, laboratori e appuntamenti di Christine CAL, in presenza o su Zoom.",
+  "pl": "Najbliższe warsztaty, spotkania i wydarzenia z Christine CAL, stacjonarnie lub przez Zoom."
+ },
+ "Fil d'Ariane": {
+  "en": "Breadcrumb",
+  "es": "Ruta de navegación",
+  "it": "Percorso di navigazione",
+  "pl": "Ścieżka nawigacji"
+ },
+ "Accueil": {
+  "en": "Home",
+  "es": "Inicio",
+  "it": "Home",
+  "pl": "Strona główna"
+ },
+ "Agenda": {
+  "en": "Calendar",
+  "es": "Agenda",
+  "it": "Calendario",
+  "pl": "Kalendarz"
+ },
+ "Prochains stages et rendez-vous": {
+  "en": "Upcoming workshops and events",
+  "es": "Próximos talleres y citas",
+  "it": "Prossimi seminari e appuntamenti",
+  "pl": "Najbliższe warsztaty i spotkania"
+ },
+ "En présentiel ou via Zoom. Pour vous inscrire, cliquez sur « S'inscrire » : votre messagerie s'ouvre avec le nom du stage et la date.": {
+  "en": "In person or via Zoom. To sign up, click “Sign up”: your e-mail opens with the workshop name and date already filled in.",
+  "es": "Presencial o por Zoom. Para inscribirse, haga clic en «Inscribirse»: se abrirá su correo con el nombre del taller y la fecha.",
+  "it": "In presenza o su Zoom. Per iscrivervi, cliccate su «Iscriviti»: si apre la vostra e-mail con il nome del seminario e la data.",
+  "pl": "Stacjonarnie lub przez Zoom. Aby się zapisać, kliknij „Zapisz się”: otworzy się Twoja poczta z nazwą warsztatu i datą."
+ },
+ "Sur demande, en présentiel ou via Zoom :": {
+  "en": "On request, in person or via Zoom:",
+  "es": "Bajo petición, presencial o por Zoom:",
+  "it": "Su richiesta, in presenza o su Zoom:",
+  "pl": "Na zapytanie, stacjonarnie lub przez Zoom:"
+ },
+ "Me contacter": {
+  "en": "Contact me",
+  "es": "Contactarme",
+  "it": "Contattatemi",
+  "pl": "Skontaktuj się ze mną"
+ },
+ "Toute l'année :": {
+  "en": "All year round:",
+  "es": "Todo el año:",
+  "it": "Tutto l'anno:",
+  "pl": "Przez cały rok:"
+ },
+ "Une question sur un stage ?": {
+  "en": "A question about a workshop?",
+  "es": "¿Una pregunta sobre un taller?",
+  "it": "Una domanda su un seminario?",
+  "pl": "Masz pytanie o warsztat?"
+ },
+ "Écrivez-moi ou appelez-moi : je vous réponds personnellement": {
+  "en": "Write to me or call me: I reply personally",
+  "es": "Escríbame o llámeme: le respondo personalmente",
+  "it": "Scrivetemi o chiamatemi: rispondo personalmente",
+  "pl": "Napisz lub zadzwoń: odpowiadam osobiście"
+ },
+ "S'inscrire": {
+  "en": "Sign up",
+  "es": "Inscribirse",
+  "it": "Iscriviti",
+  "pl": "Zapisz się"
+ },
+ "Les prochaines dates arrivent bientôt. Écrivez-moi pour être prévenu(e).": {
+  "en": "New dates are coming soon. Write to me to be notified.",
+  "es": "Pronto habrá nuevas fechas. Escríbame para que le avise.",
+  "it": "Le prossime date arriveranno presto. Scrivetemi per essere avvisati.",
+  "pl": "Nowe terminy już wkrótce. Napisz do mnie, a dam Ci znać."
+ },
+ "M'écrire": {
+  "en": "Write to me",
+  "es": "Escribirme",
+  "it": "Scrivetemi",
+  "pl": "Napisz do mnie"
+ },
+ "Aller au contenu": {
+  "en": "Skip to content",
+  "es": "Ir al contenido",
+  "it": "Vai al contenuto",
+  "pl": "Przejdź do treści"
+ },
+ "Tous droits réservés": {
+  "en": "All rights reserved",
+  "es": "Todos los derechos reservados",
+  "it": "Tutti i diritti riservati",
+  "pl": "Wszelkie prawa zastrzeżone"
+ },
+ "Plan du site": {
+  "en": "Site map",
+  "es": "Mapa del sitio",
+  "it": "Mappa del sito",
+  "pl": "Mapa strony"
+ },
+ "Ma mission": {
+  "en": "My mission",
+  "es": "Mi misión",
+  "it": "La mia missione",
+  "pl": "Moja misja"
+ },
+ "Vidéos": {
+  "en": "Videos",
+  "es": "Vídeos",
+  "it": "Video",
+  "pl": "Filmy"
+ },
+ "Informations légales": {
+  "en": "Legal information",
+  "es": "Información legal",
+  "it": "Informazioni legali",
+  "pl": "Informacje prawne"
+ },
+ "Mentions légales": {
+  "en": "Legal notice",
+  "es": "Aviso legal",
+  "it": "Note legali",
+  "pl": "Nota prawna"
+ },
+ "Politique de confidentialité": {
+  "en": "Privacy policy",
+  "es": "Política de privacidad",
+  "it": "Informativa sulla privacy",
+  "pl": "Polityka prywatności"
+ },
+ "Cookies": {
+  "en": "Cookies",
+  "es": "Cookies",
+  "it": "Cookie",
+  "pl": "Pliki cookie"
+ },
+ "Site conçu et réalisé par": {
+  "en": "Website designed and built by",
+  "es": "Sitio diseñado y realizado por",
+  "it": "Sito progettato e realizzato da",
+  "pl": "Strona zaprojektowana i wykonana przez"
+ },
+ "Christine CAL, accueil": {
+  "en": "Christine CAL, home",
+  "es": "Christine CAL, inicio",
+  "it": "Christine CAL, home",
+  "pl": "Christine CAL, strona główna"
+ },
+ "Navigation principale": {
+  "en": "Main navigation",
+  "es": "Navegación principal",
+  "it": "Navigazione principale",
+  "pl": "Nawigacja główna"
+ },
+ "Qui suis-je": {
+  "en": "About me",
+  "es": "Quién soy",
+  "it": "Chi sono",
+  "pl": "Kim jestem"
+ },
+ "Mission": {
+  "en": "Mission",
+  "es": "Misión",
+  "it": "Missione",
+  "pl": "Misja"
+ },
+ "Éveil à Soi": {
+  "en": "Self-Awakening",
+  "es": "Despertar a Sí",
+  "it": "Risveglio a Sé",
+  "pl": "Przebudzenie Siebie"
+ },
+ "École 5D": {
+  "en": "5D School",
+  "es": "Escuela 5D",
+  "it": "Scuola 5D",
+  "pl": "Szkoła 5D"
+ },
+ "Éveil au Soi": {
+  "en": "Awakening to the Self",
+  "es": "Despertar al Sí",
+  "it": "Risveglio al Sé",
+  "pl": "Przebudzenie do Jaźni"
+ },
+ "Mont Shasta": {
+  "en": "Mount Shasta",
+  "es": "Monte Shasta",
+  "it": "Monte Shasta",
+  "pl": "Góra Shasta"
+ },
+ "Contact": {
+  "en": "Contact",
+  "es": "Contacto",
+  "it": "Contatti",
+  "pl": "Kontakt"
+ },
+ "Ouvrir le menu": {
+  "en": "Open menu",
+  "es": "Abrir el menú",
+  "it": "Apri il menu",
+  "pl": "Otwórz menu"
+ },
+ "Fermer le menu": {
+  "en": "Close menu",
+  "es": "Cerrar el menú",
+  "it": "Chiudi il menu",
+  "pl": "Zamknij menu"
+ },
+ "Menu": {
+  "en": "Menu",
+  "es": "Menú",
+  "it": "Menu",
+  "pl": "Menu"
+ },
+ "Langue": {
+  "en": "Language",
+  "es": "Idioma",
+  "it": "Lingua",
+  "pl": "Język"
+ },
+ "Contacter Christine CAL pour une consultation médiumnique, un stage ou une question, par e-mail ou téléphone.": {
+  "en": "Contact Christine CAL for a mediumistic consultation, a workshop or a question, by e-mail or phone.",
+  "es": "Contacte con Christine CAL para una consulta mediúmnica, un taller o una pregunta, por correo o teléfono.",
+  "it": "Contattate Christine CAL per una consulenza medianica, un seminario o una domanda, per e-mail o telefono.",
+  "pl": "Skontaktuj się z Christine CAL w sprawie konsultacji mediumicznej, warsztatu lub pytania — e-mailem lub telefonicznie."
+ },
+ "Entrer en contact": {
+  "en": "Get in touch",
+  "es": "Ponerse en contacto",
+  "it": "Mettersi in contatto",
+  "pl": "Skontaktuj się"
+ },
+ "Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi.": {
+  "en": "A question, a consultation, a workshop? Write to me or call me.",
+  "es": "¿Una pregunta, una consulta, un taller? Escríbame o llámeme.",
+  "it": "Una domanda, una consulenza, un seminario? Scrivetemi o chiamatemi.",
+  "pl": "Pytanie, konsultacja, warsztat? Napisz lub zadzwoń."
+ },
+ "E-mail": {
+  "en": "E-mail",
+  "es": "Correo electrónico",
+  "it": "E-mail",
+  "pl": "E-mail"
+ },
+ "Téléphone": {
+  "en": "Phone",
+  "es": "Teléfono",
+  "it": "Telefono",
+  "pl": "Telefon"
+ },
+ "Adresse": {
+  "en": "Address",
+  "es": "Dirección",
+  "it": "Indirizzo",
+  "pl": "Adres"
+ },
+ "Deux mains de nuage qui se rejoignent dans le ciel": {
+  "en": "Two hands of cloud meeting in the sky",
+  "es": "Dos manos de nube que se unen en el cielo",
+  "it": "Due mani di nuvola che si incontrano nel cielo",
+  "pl": "Dwie dłonie z chmur spotykające się na niebie"
+ },
+ "M'écrire un message": {
+  "en": "Send me a message",
+  "es": "Escríbame un mensaje",
+  "it": "Scrivetemi un messaggio",
+  "pl": "Napisz do mnie wiadomość"
+ },
+ "Votre nom": {
+  "en": "Your name",
+  "es": "Su nombre",
+  "it": "Il vostro nome",
+  "pl": "Imię i nazwisko"
+ },
+ "Votre e-mail": {
+  "en": "Your e-mail",
+  "es": "Su correo electrónico",
+  "it": "La vostra e-mail",
+  "pl": "Twój e-mail"
+ },
+ "Votre message": {
+  "en": "Your message",
+  "es": "Su mensaje",
+  "it": "Il vostro messaggio",
+  "pl": "Twoja wiadomość"
+ },
+ "Envoyer": {
+  "en": "Send",
+  "es": "Enviar",
+  "it": "Invia",
+  "pl": "Wyślij"
+ },
+ "Votre messagerie s'ouvre avec le message pré-rempli, prêt à m'être envoyé. Aucune donnée n'est enregistrée par le site.": {
+  "en": "Your e-mail app opens with the message filled in, ready to send to me. The website stores no data.",
+  "es": "Se abrirá su correo con el mensaje ya redactado, listo para enviármelo. El sitio no guarda ningún dato.",
+  "it": "Si apre la vostra e-mail con il messaggio già compilato, pronto da inviarmi. Il sito non registra alcun dato.",
+  "pl": "Otworzy się Twoja poczta z gotową wiadomością do wysłania. Strona nie zapisuje żadnych danych."
+ },
+ "Le site de Christine CAL ne dépose aucun cookie de traçage.": {
+  "en": "Christine CAL's website sets no tracking cookies.",
+  "es": "El sitio de Christine CAL no instala ninguna cookie de seguimiento.",
+  "it": "Il sito di Christine CAL non installa alcun cookie di tracciamento.",
+  "pl": "Strona Christine CAL nie zapisuje żadnych śledzących plików cookie."
+ },
+ "Le parcours en {n} étapes": {
+  "en": "The path in {n} stages",
+  "es": "El recorrido en {n} etapas",
+  "it": "Il percorso in {n} tappe",
+  "pl": "Ścieżka w {n} etapach"
+ },
+ "Voir et écouter": {
+  "en": "Watch and listen",
+  "es": "Ver y escuchar",
+  "it": "Guardare e ascoltare",
+  "pl": "Oglądaj i słuchaj"
+ },
+ "Témoignages": {
+  "en": "Testimonials",
+  "es": "Testimonios",
+  "it": "Testimonianze",
+  "pl": "Świadectwa"
+ },
+ "Une question, une consultation, un stage ? Écrivez-moi ou appelez-moi": {
+  "en": "A question, a consultation, a workshop? Write to me or call me",
+  "es": "¿Una pregunta, una consulta, un taller? Escríbame o llámeme",
+  "it": "Una domanda, una consulenza, un seminario? Scrivetemi o chiamatemi",
+  "pl": "Pytanie, konsultacja, warsztat? Napisz lub zadzwoń"
+ },
+ "Les Frères des Étoiles": {
+  "en": "The Star Brothers",
+  "es": "Los Hermanos de las Estrellas",
+  "it": "I Fratelli delle Stelle",
+  "pl": "Bracia z Gwiazd"
+ },
+ "Voir la vidéo « {t} »": {
+  "en": "Watch the video “{t}”",
+  "es": "Ver el vídeo «{t}»",
+  "it": "Guarda il video «{t}»",
+  "pl": "Obejrzyj film „{t}”"
+ },
+ "Voir la vidéo": {
+  "en": "Watch the video",
+  "es": "Ver el vídeo",
+  "it": "Guarda il video",
+  "pl": "Obejrzyj film"
+ },
+ "Jaquette du DVD « {t} »": {
+  "en": "DVD cover “{t}”",
+  "es": "Carátula del DVD «{t}»",
+  "it": "Copertina del DVD «{t}»",
+  "pl": "Okładka DVD „{t}”"
+ },
+ "Jaquette du DVD": {
+  "en": "DVD cover",
+  "es": "Carátula del DVD",
+  "it": "Copertina del DVD",
+  "pl": "Okładka DVD"
+ },
+ "Conférence": {
+  "en": "Talk",
+  "es": "Conferencia",
+  "it": "Conferenza",
+  "pl": "Wykład"
+ },
+ "Interview": {
+  "en": "Interview",
+  "es": "Entrevista",
+  "it": "Intervista",
+  "pl": "Wywiad"
+ },
+ "Radio": {
+  "en": "Radio",
+  "es": "Radio",
+  "it": "Radio",
+  "pl": "Radio"
+ },
+ "DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.": {
+  "en": "DEBOWSKA DVD, shown by special permission of Konstanty UDALA DEBOWSKA in tribute to his wife Malgorzata Debowska.",
+  "es": "DVD DEBOWSKA, con autorización excepcional de difusión de Konstanty UDALA DEBOWSKA en homenaje a su esposa Malgorzata Debowska.",
+  "it": "DVD DEBOWSKA, con autorizzazione eccezionale alla diffusione di Konstanty UDALA DEBOWSKA in omaggio alla moglie Malgorzata Debowska.",
+  "pl": "DVD DEBOWSKA, udostępnione dzięki wyjątkowej zgodzie Konstantego UDALI DEBOWSKIEGO, w hołdzie dla jego żony Małgorzaty Dębowskiej."
+ },
+ "Visiter son site": {
+  "en": "Visit his website",
+  "es": "Visitar su sitio",
+  "it": "Visita il suo sito",
+  "pl": "Odwiedź jego stronę"
+ },
+ "Vous vous reconnaissez ?": {
+  "en": "Does this speak to you?",
+  "es": "¿Se reconoce en esto?",
+  "it": "Vi riconoscete?",
+  "pl": "Odnajdujesz się w tym?"
+ },
+ "Réserver une consultation": {
+  "en": "Book a consultation",
+  "es": "Reservar una consulta",
+  "it": "Prenota una consulenza",
+  "pl": "Zarezerwuj konsultację"
+ },
+ "Format": {
+  "en": "Format",
+  "es": "Formato",
+  "it": "Formato",
+  "pl": "Forma"
+ },
+ "Durée": {
+  "en": "Duration",
+  "es": "Duración",
+  "it": "Durata",
+  "pl": "Czas trwania"
+ },
+ "Tarif": {
+  "en": "Price",
+  "es": "Tarifa",
+  "it": "Tariffa",
+  "pl": "Cena"
+ },
+ "Lieu": {
+  "en": "Venue",
+  "es": "Lugar",
+  "it": "Luogo",
+  "pl": "Miejsce"
+ },
+ "Infos pratiques": {
+  "en": "Practical information",
+  "es": "Información práctica",
+  "it": "Informazioni pratiche",
+  "pl": "Informacje praktyczne"
+ },
+ "Dates": {
+  "en": "Dates",
+  "es": "Fechas",
+  "it": "Date",
+  "pl": "Terminy"
+ },
+ "Date": {
+  "en": "Date",
+  "es": "Fecha",
+  "it": "Data",
+  "pl": "Termin"
+ },
+ "Le parcours de l'École 5D": {
+  "en": "The 5D School path",
+  "es": "El recorrido de la Escuela 5D",
+  "it": "Il percorso della Scuola 5D",
+  "pl": "Ścieżka Szkoły 5D"
+ },
+ "École 5D · le parcours en {n} étapes": {
+  "en": "5D School · the path in {n} stages",
+  "es": "Escuela 5D · el recorrido en {n} etapas",
+  "it": "Scuola 5D · il percorso in {n} tappe",
+  "pl": "Szkoła 5D · ścieżka w {n} etapach"
+ },
+ "Étape {n}": {
+  "en": "Stage {n}",
+  "es": "Etapa {n}",
+  "it": "Tappa {n}",
+  "pl": "Etap {n}"
+ },
+ "D'une ancienne vie à une nouvelle vie": {
+  "en": "From an old life to a new life",
+  "es": "De una vida antigua a una vida nueva",
+  "it": "Da una vecchia vita a una nuova vita",
+  "pl": "Od dawnego życia do nowego życia"
+ },
+ "Le chat qui se voit lion dans le miroir": {
+  "en": "The cat who sees a lion in the mirror",
+  "es": "El gato que se ve león en el espejo",
+  "it": "Il gatto che si vede leone allo specchio",
+  "pl": "Kot, który widzi w lustrze lwa"
+ },
+ "Osez ! Vous ne vous reconnaîtrez plus, et votre entourage non plus.": {
+  "en": "Dare! You won't recognise yourself any more, and neither will those around you.",
+  "es": "¡Atrévase! Ya no se reconocerá, y su entorno tampoco.",
+  "it": "Osate! Non vi riconoscerete più, e nemmeno chi vi sta intorno.",
+  "pl": "Odważ się! Nie poznasz samego siebie, a Twoi bliscy też Cię nie poznają."
+ },
+ "Transmuter la peur en énergie positive et passer d'une vie réactive à une vie créative.": {
+  "en": "Transmute fear into positive energy and move from a reactive life to a creative life.",
+  "es": "Transmutar el miedo en energía positiva y pasar de una vida reactiva a una vida creativa.",
+  "it": "Trasmutare la paura in energia positiva e passare da una vita reattiva a una vita creativa.",
+  "pl": "Przemienić lęk w pozytywną energię i przejść od życia reaktywnego do życia twórczego."
+ },
+ "STAGE — TRANSMUTER SA PEUR DE BASE = MOTEUR D'INCARNATION N°1": {
+  "en": "WORKSHOP — TRANSMUTING YOUR CORE FEAR = THE NO. 1 DRIVER OF INCARNATION",
+  "es": "TALLER — TRANSMUTAR EL MIEDO DE BASE = MOTOR DE ENCARNACIÓN N.º 1",
+  "it": "SEMINARIO — TRASMUTARE LA PROPRIA PAURA DI BASE = MOTORE D'INCARNAZIONE N. 1",
+  "pl": "WARSZTAT — PRZEMIANA LĘKU PODSTAWOWEGO = SILNIK WCIELENIA NR 1"
+ },
+ "— Avec une approche différente de cet outil connu —": {
+  "en": "— With a different approach to this well-known tool —",
+  "es": "— Con un enfoque diferente de esta herramienta conocida —",
+  "it": "— Con un approccio diverso a questo strumento conosciuto —",
+  "pl": "— Z innym podejściem do tego znanego narzędzia —"
+ },
+ "Découvrir cette source de souffrances permanentes.": {
+  "en": "Discover this source of constant suffering.",
+  "es": "Descubrir esta fuente de sufrimientos permanentes.",
+  "it": "Scoprire questa fonte di sofferenze permanenti.",
+  "pl": "Odkryć to źródło nieustannego cierpienia."
+ },
+ "Transmuter le continuum d'énergie dépensé à lutter contre la peur et le mettre à disposition de la mission.": {
+  "en": "Transmute the continuous energy spent fighting fear and put it at the service of the mission.",
+  "es": "Transmutar el continuo de energía gastado en luchar contra el miedo y ponerlo al servicio de la misión.",
+  "it": "Trasmutare il continuum di energia spesa a lottare contro la paura e metterlo a disposizione della missione.",
+  "pl": "Przemienić nieustanny strumień energii zużywanej na walkę z lękiem i oddać go do dyspozycji misji."
+ },
+ "Reconsidérer sa vie et ses relations du passé, dans le présent pour le futur.": {
+  "en": "Reconsider your life and past relationships, in the present, for the future.",
+  "es": "Reconsiderar la propia vida y las relaciones del pasado, en el presente, para el futuro.",
+  "it": "Riconsiderare la propria vita e le relazioni del passato, nel presente per il futuro.",
+  "pl": "Spojrzeć na nowo na swoje życie i dawne relacje — w teraźniejszości, z myślą o przyszłości."
+ },
+ "S'offrir des relations harmonieuses et joyeuses avec soi et les autres.": {
+  "en": "Treat yourself to harmonious, joyful relationships with yourself and others.",
+  "es": "Regalarse relaciones armoniosas y alegres con uno mismo y con los demás.",
+  "it": "Concedersi relazioni armoniose e gioiose con se stessi e con gli altri.",
+  "pl": "Podarować sobie harmonijne i radosne relacje ze sobą i z innymi."
+ },
+ "La transition planétaire terrestre à l'ère du Verseau": {
+  "en": "Earth's planetary transition into the Age of Aquarius",
+  "es": "La transición planetaria terrestre en la era de Acuario",
+  "it": "La transizione planetaria terrestre nell'era dell'Acquario",
+  "pl": "Planetarna transformacja Ziemi w erze Wodnika"
+ },
+ "Le défi de l'humanité actuelle": {
+  "en": "The challenge facing humanity today",
+  "es": "El desafío de la humanidad actual",
+  "it": "La sfida dell'umanità di oggi",
+  "pl": "Wyzwanie dzisiejszej ludzkości"
+ },
+ "Consultations et ateliers": {
+  "en": "Consultations and workshops",
+  "es": "Consultas y talleres",
+  "it": "Consulenze e laboratori",
+  "pl": "Konsultacje i warsztaty"
+ },
+ "Par où commencer": {
+  "en": "Where to begin",
+  "es": "Por dónde empezar",
+  "it": "Da dove cominciare",
+  "pl": "Od czego zacząć"
+ },
+ "Écrivez-moi : nous verrons ensemble par où commencer votre voyage": {
+  "en": "Write to me: together we will see where to begin your journey",
+  "es": "Escríbame: veremos juntos por dónde empezar su viaje",
+  "it": "Scrivetemi: vedremo insieme da dove cominciare il vostro viaggio",
+  "pl": "Napisz do mnie: razem zobaczymy, od czego zacząć Twoją podróż"
+ },
+ "Dans la même rubrique": {
+  "en": "In the same section",
+  "es": "En la misma sección",
+  "it": "Nella stessa sezione",
+  "pl": "W tym samym dziale"
+ },
+ "Toute la rubrique": {
+  "en": "The whole section",
+  "es": "Toda la sección",
+  "it": "Tutta la sezione",
+  "pl": "Cały dział"
+ },
+ "Au programme": {
+  "en": "On the programme",
+  "es": "En el programa",
+  "it": "In programma",
+  "pl": "W programie"
+ },
+ "{n} rendez-vous": {
+  "en": "{n} sessions",
+  "es": "{n} encuentros",
+  "it": "{n} appuntamenti",
+  "pl": "Spotkania: {n}"
+ },
+ "Photo {i} sur {n}": {
+  "en": "Photo {i} of {n}",
+  "es": "Foto {i} de {n}",
+  "it": "Foto {i} di {n}",
+  "pl": "Zdjęcie {i} z {n}"
+ },
+ "Rubriques et stages": {
+  "en": "Sections and workshops",
+  "es": "Secciones y talleres",
+  "it": "Sezioni e seminari",
+  "pl": "Działy i warsztaty"
+ },
+ "Explorer": {
+  "en": "Explore",
+  "es": "Explorar",
+  "it": "Esplorare",
+  "pl": "Odkrywaj"
+ },
+ "{n} stages": {
+  "en": "{n} workshops",
+  "es": "{n} talleres",
+  "it": "{n} seminari",
+  "pl": "Warsztaty: {n}"
+ },
+ "{n} stage": {
+  "en": "{n} workshop",
+  "es": "{n} taller",
+  "it": "{n} seminario",
+  "pl": "{n} warsztat"
+ },
+ "Galactique": {
+  "en": "Galactic",
+  "es": "Galáctico",
+  "it": "Galattico",
+  "pl": "Galaktyczny"
+ },
+ "Coaching · Stages d'Éveil": {
+  "en": "Coaching · Awakening workshops",
+  "es": "Coaching · Talleres de Despertar",
+  "it": "Coaching · Seminari di Risveglio",
+  "pl": "Coaching · Warsztaty Przebudzenia"
+ },
+ "Éveil à sa multidimensionnalité": {
+  "en": "Awakening to your multidimensionality",
+  "es": "Despertar a tu multidimensionalidad",
+  "it": "Risveglio alla propria multidimensionalità",
+  "pl": "Przebudzenie do swojej wielowymiarowości"
+ },
+ "Christine CAL, coach d'Éveil à la Multidimensionnalité de l'Être. Éveil à Soi (coaching, consultations, stages) et Éveil au Soi (Mont Shasta, TELOS, Nouvelle Terre).": {
+  "en": "Christine CAL, coach in Awakening to the Multidimensionality of Being. Self-Awakening (coaching, consultations, workshops) and Awakening to the Self (Mount Shasta, TELOS, New Earth).",
+  "es": "Christine CAL, coach de Despertar a la Multidimensionalidad del Ser. Despertar a Sí (coaching, consultas, talleres) y Despertar al Sí (Monte Shasta, TELOS, Nueva Tierra).",
+  "it": "Christine CAL, coach del Risveglio alla Multidimensionalità dell'Essere. Risveglio a Sé (coaching, consulenze, seminari) e Risveglio al Sé (Monte Shasta, TELOS, Nuova Terra).",
+  "pl": "Christine CAL, coach Przebudzenia do Wielowymiarowości Istoty. Przebudzenie Siebie (coaching, konsultacje, warsztaty) i Przebudzenie do Jaźni (Góra Shasta, TELOS, Nowa Ziemia)."
+ },
+ "Portail": {
+  "en": "Gateway",
+  "es": "Portal",
+  "it": "Portale",
+  "pl": "Portal"
+ },
+ "La Terre vue de l'espace, un point de lumière se lève sur l'horizon": {
+  "en": "The Earth seen from space, a point of light rising over the horizon",
+  "es": "La Tierra vista desde el espacio, un punto de luz se alza sobre el horizonte",
+  "it": "La Terra vista dallo spazio, un punto di luce sorge all'orizzonte",
+  "pl": "Ziemia widziana z kosmosu, punkt światła wschodzi nad horyzontem"
+ },
+ "Une galactique venue du futur…": {
+  "en": "A galactic soul from the future…",
+  "es": "Una galáctica venida del futuro…",
+  "it": "Una galattica venuta dal futuro…",
+  "pl": "Istota galaktyczna z przyszłości…"
+ },
+ "Confidentialité": {
+  "en": "Privacy",
+  "es": "Privacidad",
+  "it": "Privacy",
+  "pl": "Prywatność"
+ },
+ "Site réalisé par": {
+  "en": "Website by",
+  "es": "Sitio realizado por",
+  "it": "Sito realizzato da",
+  "pl": "Stronę wykonało"
+ },
+ "Mentions légales du site de Christine CAL : éditeur, hébergeur et propriété intellectuelle.": {
+  "en": "Legal notice for Christine CAL's website: publisher, host and intellectual property.",
+  "es": "Aviso legal del sitio de Christine CAL: editor, alojamiento y propiedad intelectual.",
+  "it": "Note legali del sito di Christine CAL: editore, hosting e proprietà intellettuale.",
+  "pl": "Nota prawna strony Christine CAL: wydawca, hosting i własność intelektualna."
+ },
+ "Cadran de montre doré : l'Espace-Temps se contracte": {
+  "en": "Golden watch face: Space-Time is contracting",
+  "es": "Esfera de reloj dorada: el Espacio-Tiempo se contrae",
+  "it": "Quadrante d'orologio dorato: lo Spazio-Tempo si contrae",
+  "pl": "Złota tarcza zegara: Czasoprzestrzeń się kurczy"
+ },
+ "Portrait de Christine CAL, souriante": {
+  "en": "Portrait of Christine CAL, smiling",
+  "es": "Retrato de Christine CAL, sonriente",
+  "it": "Ritratto di Christine CAL, sorridente",
+  "pl": "Portret uśmiechniętej Christine CAL"
+ },
+ "« {t} »": {
+  "en": "“{t}”",
+  "es": "«{t}»",
+  "it": "«{t}»",
+  "pl": "„{t}”"
+ },
+ "Comment Christine CAL traite les données transmises via le site.": {
+  "en": "How Christine CAL handles the data sent through the website.",
+  "es": "Cómo trata Christine CAL los datos transmitidos a través del sitio.",
+  "it": "Come Christine CAL tratta i dati trasmessi tramite il sito.",
+  "pl": "Jak Christine CAL przetwarza dane przekazane przez stronę."
+ },
+ "Portrait de Christine CAL": {
+  "en": "Portrait of Christine CAL",
+  "es": "Retrato de Christine CAL",
+  "it": "Ritratto di Christine CAL",
+  "pl": "Portret Christine CAL"
+ },
+ "Coach médiumnique · Conférencière": {
+  "en": "Mediumistic coach · Speaker",
+  "es": "Coach mediúmnica · Conferenciante",
+  "it": "Coach medianica · Conferenziera",
+  "pl": "Coach mediumiczna · Prelegentka"
+ },
+ "Lire ma mission": {
+  "en": "Read my mission",
+  "es": "Leer mi misión",
+  "it": "Leggere la mia missione",
+  "pl": "Przeczytaj o mojej misji"
+ },
+ "Toutes les conférences": {
+  "en": "All talks",
+  "es": "Todas las conferencias",
+  "it": "Tutte le conferenze",
+  "pl": "Wszystkie wykłady"
+ },
+ "Plus de": {
+  "en": "Over",
+  "es": "Más de",
+  "it": "Più di",
+  "pl": "Ponad"
+ },
+ "Depuis {y}": {
+  "en": "Since {y}",
+  "es": "Desde {y}",
+  "it": "Dal {y}",
+  "pl": "Od {y} r."
+ },
+ "Informations · Presse": {
+  "en": "Information · Press",
+  "es": "Información · Prensa",
+  "it": "Informazioni · Stampa",
+  "pl": "Informacje · Prasa"
+ },
+ "Les Galactiques": {
+  "en": "The Galactics",
+  "es": "Los Galácticos",
+  "it": "I Galattici",
+  "pl": "Galaktyczni"
+ },
+ "Devenir multidimensionnel": {
+  "en": "Becoming multidimensional",
+  "es": "Volverse multidimensional",
+  "it": "Diventare multidimensionali",
+  "pl": "Stać się wielowymiarowym"
+ },
+ "Vidéos et DVD": {
+  "en": "Videos and DVDs",
+  "es": "Vídeos y DVD",
+  "it": "Video e DVD",
+  "pl": "Filmy i DVD"
+ },
+ "Les vidéos de Christine CAL : DVD Debowska, conférences, interviews radio et présentation.": {
+  "en": "Christine CAL's videos: Debowska DVDs, talks, radio interviews and introductions.",
+  "es": "Los vídeos de Christine CAL: DVD Debowska, conferencias, entrevistas de radio y presentación.",
+  "it": "I video di Christine CAL: DVD Debowska, conferenze, interviste radio e presentazione.",
+  "pl": "Filmy Christine CAL: DVD Debowska, wykłady, wywiady radiowe i prezentacje."
+ },
+ "Vidéos · DVD · Radio": {
+  "en": "Videos · DVD · Radio",
+  "es": "Vídeos · DVD · Radio",
+  "it": "Video · DVD · Radio",
+  "pl": "Filmy · DVD · Radio"
+ },
+ "{n} vidéos : forums, conférences, interviews, classées par thème. Chacune renvoie à la page qui en parle.": {
+  "en": "{n} videos: forums, talks and interviews, sorted by theme. Each one links to the page that covers it.",
+  "es": "{n} vídeos: foros, conferencias, entrevistas, clasificados por tema. Cada uno remite a la página que trata de él.",
+  "it": "{n} video: forum, conferenze, interviste, ordinati per tema. Ognuno rimanda alla pagina che ne parla.",
+  "pl": "Filmy ({n}): fora, wykłady, wywiady, uporządkowane tematycznie. Każdy prowadzi do strony, która o nim opowiada."
+ },
+ "Interviews et conférences": {
+  "en": "Interviews and talks",
+  "es": "Entrevistas y conferencias",
+  "it": "Interviste e conferenze",
+  "pl": "Wywiady i wykłady"
+ },
+ "Bientôt en ligne": {
+  "en": "Coming soon",
+  "es": "Próximamente",
+  "it": "Presto online",
+  "pl": "Wkrótce w sieci"
+ },
+ "Nouvelle vidéo · 2026": {
+  "en": "New video · 2026",
+  "es": "Nuevo vídeo · 2026",
+  "it": "Nuovo video · 2026",
+  "pl": "Nowy film · 2026"
+ },
+ "Radio · conférences · présentation": {
+  "en": "Radio · talks · introduction",
+  "es": "Radio · conferencias · presentación",
+  "it": "Radio · conferenze · presentazione",
+  "pl": "Radio · wykłady · prezentacja"
+ },
+ "Organiser une conférence ?": {
+  "en": "Organising a talk?",
+  "es": "¿Organizar una conferencia?",
+  "it": "Organizzare una conferenza?",
+  "pl": "Chcesz zorganizować wykład?"
+ },
+ "Pour une conférence, un forum ou une intervention, en salle ou via Zoom": {
+  "en": "For a talk, a forum or a guest appearance, in person or via Zoom",
+  "es": "Para una conferencia, un foro o una intervención, en sala o por Zoom",
+  "it": "Per una conferenza, un forum o un intervento, in sala o su Zoom",
+  "pl": "Wykład, forum lub wystąpienie — na sali lub przez Zoom"
+ },
+ "Autres forums et conférences": {
+  "en": "Other forums and talks",
+  "es": "Otros foros y conferencias",
+  "it": "Altri forum e conferenze",
+  "pl": "Inne fora i wykłady"
+ },
+ "Invitation au discernement et aux questionnements": {
+  "en": "An invitation to discernment and questioning",
+  "es": "Invitación al discernimiento y al cuestionamiento",
+  "it": "Invito al discernimento e agli interrogativi",
+  "pl": "Zaproszenie do rozeznania i zadawania pytań"
+ },
+ "Respect de la libre pensée": {
+  "en": "Respect for free thought",
+  "es": "Respeto del libre pensamiento",
+  "it": "Rispetto del libero pensiero",
+  "pl": "Szacunek dla wolnej myśli"
+ },
+ "Mont Shasta · Telos · Bugarach": {
+  "en": "Mount Shasta · Telos · Bugarach",
+  "es": "Monte Shasta · Telos · Bugarach",
+  "it": "Monte Shasta · Telos · Bugarach",
+  "pl": "Góra Shasta · Telos · Bugarach"
+ },
+ "Enregistrement": {
+  "en": "Recording",
+  "es": "Grabación",
+  "it": "Registrazione",
+  "pl": "Nagranie"
+ }
+}

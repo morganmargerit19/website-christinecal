@@ -7,6 +7,7 @@
 import type { AgendaEntry } from '../lib/agenda';
 import { mailto } from '../lib/site';
 import Icon from './Icon.astro';
+import { tr } from '../lib/i18n';
 interface Props { entries: AgendaEntry[]; limit?: number; spare?: number }
 const { entries, limit, spare = 4 } = Astro.props;
 // On rend quelques entrées de plus que la limite : si une date passe, la suivante prend sa place.
@@ -21,8 +22,8 @@ const shown = limit ? entries.slice(0, limit + spare) : entries;
         {e.rubrique && <span class="rub">{e.rubrique}</span>}
       </span>
       <span class="info">{e.info}</span>
-      <a class="book" href={mailto(e.subject)} aria-label={`S'inscrire : ${e.title}, ${e.label}`}>S'inscrire<Icon name="arrow" /></a>
+      <a class="book" href={mailto(e.subject)} aria-label={`${tr("S'inscrire")} : ${e.title}, ${e.label}`}>{tr("S'inscrire")}<Icon name="arrow" /></a>
     </li>
   ))}
 </ol>
-<p class="agenda-empty" data-agenda-empty hidden={shown.length > 0}>Les prochaines dates arrivent bientôt. Écrivez-moi pour être prévenu(e).</p>
+<p class="agenda-empty" data-agenda-empty hidden={shown.length > 0}>{tr('Les prochaines dates arrivent bientôt. Écrivez-moi pour être prévenu(e).')}</p>

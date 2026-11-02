@@ -1,4 +1,5 @@
 /** Chemins, coordonnées et petites aides partagées par toutes les pages. */
+import { tr } from './i18n';
 
 /** Préfixe `base` d'Astro (« /nouveau-site » sur l'aperçu Vercel), sans slash final. */
 export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -14,9 +15,10 @@ export const SHOW_PROPOSITION = false;
 
 export type Hub = 'eveil-a-soi' | 'eveil-au-soi';
 
+// Libellés lus à la volée : ils suivent la langue de la page.
 export const HUBS: Record<Hub, { label: string; path: string; sub: string }> = {
-  'eveil-a-soi': { label: 'Éveil à Soi', path: '/eveil-a-soi/', sub: "Coaching · Stages d'Éveil" },
-  'eveil-au-soi': { label: 'Éveil au Soi', path: '/eveil-au-soi/', sub: 'Mont Shasta · Telos · Bugarach' },
+  'eveil-a-soi': { get label() { return tr('Éveil à Soi'); }, path: '/eveil-a-soi/', get sub() { return tr("Coaching · Stages d'Éveil"); } },
+  'eveil-au-soi': { get label() { return tr('Éveil au Soi'); }, path: '/eveil-au-soi/', get sub() { return tr('Mont Shasta · Telos · Bugarach'); } },
 };
 
 export const fichePath = (hub: Hub, slug: string) => u(`/${hub}/${slug}/`);

@@ -1,5 +1,5 @@
 ---
-import { langPaths } from '../../lib/i18n';
+import { langPaths, pageData, tr } from '../../lib/i18n';
 export const getStaticPaths = langPaths;
 /** Ma mission : formulaire « Page : Ma mission » du CMS (src/data/mission.fr.json). */
 import Base from '../../layouts/Base.astro';
@@ -8,19 +8,24 @@ import Lemniscate from '../../components/Lemniscate.astro';
 import VideoCard from '../../components/VideoCard.astro';
 import Fleur from '../../components/Fleur.astro';
 import { u } from '../../lib/site';
-import m from '../../../src/data/mission.fr.json';
+import mFr from '../../../src/data/mission.fr.json';
+
+// Textes dans la langue de la page ; la photo reste celle choisie par Christine.
+const m = { ...pageData<typeof mFr>('mission'), photo: (mFr as { photo?: string }).photo };
 
 /** « Jeunes Âmes galactiques » : guillemets insécables, jamais seuls en début de ligne. */
 const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\u00a0»');
+/** Guillemets de la langue de la page. */
+const q = (t: string) => tr('« {t} »', { t });
 ---
 <Base title={m.metaTitle.replace(' — ', ' · ')} description={m.metaDesc} path="/mission/" image="/images/wp/5emedimension.jpg">
   <section class="page-hero sky" aria-labelledby="titre">
     <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
     <div class="wrap center" style="padding-bottom: 50px">
-      <nav class="crumbs" aria-label="Fil d'Ariane" style="justify-content: center"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><a href={u('/qui-suis-je/')}>Qui suis-je</a><span aria-hidden="true">/</span><span aria-current="page">Ma mission</span></nav>
+      <nav class="crumbs" aria-label={tr("Fil d'Ariane")} style="justify-content: center"><a href={u('/')}>{tr('Accueil')}</a><span aria-hidden="true">/</span><a href={u('/qui-suis-je/')}>{tr('Qui suis-je')}</a><span aria-hidden="true">/</span><span aria-current="page">{tr('Ma mission')}</span></nav>
       <p class="eyebrow" style="margin-top: 36px">{m.eyebrow.trim()}</p>
       <h1 id="titre" style="max-width: 900px; margin-inline: auto">{m.h1}</h1>
-      <p class="lede-serif" style="margin-inline: auto" set:html={m.lede.replace(/»\s+(?=\S)/, '»<br />')} />
+      <p class="lede-serif" style="margin-inline: auto" set:html={m.lede.replace(/([»”])\s+(?=\S)/, '$1<br />')} />
     </div>
   </section>
 
@@ -38,7 +43,7 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
         <p class="serif italic" style="font-size: 25px; line-height: 1.45; color: var(--gold-pale)" set:html={m.s1p2} />
       </div>
       <figure class="framed" style="width: min(360px, 100%); flex-shrink: 0">
-        <img src={u('/images/geometrie/spirale-temps.svg')} alt="Cadran de montre doré : l'Espace-Temps se contracte" loading="lazy" style="box-shadow: none" />
+        <img src={u('/images/geometrie/spirale-temps.svg')} alt={tr("Cadran de montre doré : l'Espace-Temps se contracte")} loading="lazy" style="box-shadow: none" />
       </figure>
     </div>
   </section>
@@ -47,7 +52,7 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
     {/* Retours du 28/10 : la nouvelle photo de Christine à gauche du texte « La mission »,
         petite, sans descendre plus bas que le texte d'introduction. */}
     <div class="wrap split split--portrait split--top">
-      <figure class="framed hero-portrait hero-portrait--sm"><img src={u((m as { photo?: string }).photo || '/images/wp/christine-2026.jpg')} alt="Portrait de Christine CAL, souriante" loading="lazy" /></figure>
+      <figure class="framed hero-portrait hero-portrait--sm"><img src={u((m as { photo?: string }).photo || '/images/wp/christine-2026.jpg')} alt={tr('Portrait de Christine CAL, souriante')} loading="lazy" /></figure>
       <div class="txt">
         <p class="eyebrow">{m.s2Heading}</p>
         <p class="serif" style="margin-top: 22px; font-size: clamp(26px, 2.8vw, 34px); line-height: 1.45" set:html={m.s2Quote} />
@@ -69,7 +74,7 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
           <img src={u('/images/wp/ascencion-396x600-1.jpg')} alt={m.pioneerAlt} loading="lazy" />
         </figure>
       </div>
-      <div class="voices">{m.pioneerQuotes.map((q) => <p>« {q.replace(/^["«\s]+|["»\s]+$/g, '')} »</p>)}</div>
+      <div class="voices">{m.pioneerQuotes.map((p) => <p>{q(p.replace(/^["«“„\s]+|["»”\s]+$/g, ''))}</p>)}</div>
       <p class="muted center" style="margin-top: 36px; font-size: 18px" set:html={m.pioneerP2} />
       {m.pioneerAdn && <p class="serif italic center" style="margin-top: 36px; font-size: 26px; color: var(--gold-warm)" set:html={m.pioneerAdn} />}
       <p class="center" style="max-width: 760px; margin: 44px auto 0; font-size: 19px; color: var(--soft)" set:html={m.pioneerP3} />
@@ -94,7 +99,7 @@ const nbsp = (t: string) => t.replace(/«\s*/g, '«\u00a0').replace(/\s*»/g, '\
   {m.videos.length > 0 && (
     <section class="section deep">
       <div class="wrap">
-        <p class="eyebrow">{m.pressHeading || 'Vidéos'}</p>
+        <p class="eyebrow">{m.pressHeading || tr('Vidéos')}</p>
         <div class="video-grid video-grid--3">{m.videos.map((v) => <VideoCard {...v} />)}</div>
       </div>
     </section>

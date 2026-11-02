@@ -1,5 +1,5 @@
 ---
-import { langPaths } from '../../lib/i18n';
+import { langPaths, pageData, tr } from '../../lib/i18n';
 export const getStaticPaths = langPaths;
 /** Qui suis-je : tout vient du formulaire « Page : Qui suis-je » du CMS (src/data/about.fr.json). */
 import Base from '../../layouts/Base.astro';
@@ -9,9 +9,14 @@ import Lemniscate from '../../components/Lemniscate.astro';
 import VideoCard from '../../components/VideoCard.astro';
 import { clauses } from '../../lib/content';
 import { splitDated, u } from '../../lib/site';
-import about from '../../../src/data/about.fr.json';
-import mission from '../../../src/data/mission.fr.json';
+import aboutFr from '../../../src/data/about.fr.json';
+import missionFr from '../../../src/data/mission.fr.json';
 import Icon from '../../components/Icon.astro';
+
+// Textes dans la langue de la page ; le portrait reste celui choisi par Christine.
+const about = pageData<typeof aboutFr>('about');
+about.hero = { ...about.hero, photo: (aboutFr.hero as { photo?: string }).photo } as typeof about.hero;
+const mission = pageData<typeof missionFr>('mission');
 
 /** « UN PARCOURS EN BREF » → « Un parcours en bref » (les titres en capitales restent lisibles en serif). */
 const sentence = (s: string) =>
@@ -25,8 +30,8 @@ const [left, right] = journey.slice(-2);
 const dated = (item: string) => {
   const d = splitDated(item);
   if (d.date) return d;
-  const m = item.match(/^(.*?)\s+depuis\s+(\d{4})\s*\.?$/i);
-  return m ? { date: `Depuis ${m[2]}`, text: m[1] + '.' } : d;
+  const m = item.match(/^(.*?)\s+(?:depuis|since|desde|dal|od)\s+(\d{4})\s*(?:r\.)?\s*\.?$/i);
+  return m ? { date: tr('Depuis {y}', { y: m[2] }), text: m[1] + '.' } : d;
 };
 
 /**
@@ -35,14 +40,17 @@ const dated = (item: string) => {
  * suivis de « Et bien d'autres sujets… ».
  */
 const talks = (items: string[]) => {
-  const tail = /^et bien d/i.test(items.at(-1) ?? '') ? items.slice(-1) : [];
+  const tail = /^(et bien d|and many|y muchos|e molti|i wiele)/i.test(items.at(-1) ?? '') ? items.slice(-1) : [];
   const list = items.slice(0, items.length - tail.length);
   const older = list.slice(0, 8), recent = list.slice(8);
   return recent.length ? { shown: recent, folded: [...older, ...tail] } : { shown: older, folded: tail };
 };
 
 const [first, ...otherSpecifics] = about.specifics.items;
-const trained = first?.match(/^(.*?)\s*[—–-]\s*Formation de plus de\s*([\d\s ]+)\s*personnes\s*(.*?)\.?$/);
+// « … — Formation de plus de 1000 personnes depuis 2013. » ; dans les traductions : « … — <mots> 1000 <suite>. »
+const trainedFr = first?.match(/^(.*?)\s*[—–-]\s*Formation de plus de\s*([\d\s ]+)\s*personnes\s*(.*?)\.?$/);
+const trainedAny = first?.match(/^(.*?)\s*[—–]\s*\D*?(\d[\d\s ]*\d)\s+(.+?)\.?$/);
+const trained = trainedFr ? [trainedFr[0], trainedFr[1], trainedFr[2], `personnes formées ${trainedFr[3]}`] : trainedAny;
 const specifics = trained ? otherSpecifics : about.specifics.items;
 // Portrait du haut de page : modifiable dans Mon espace (Mes pages › Qui suis-je).
 const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-portrait-2.jpg';
@@ -54,11 +62,11 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
     {/* Retours du 28/10 : l'ancienne photo en rectangle à gauche, le titre à droite sur 2 lignes,
         un peu plus petit. La nouvelle photo (christine-2026.jpg) est sur la page Mission. */}
     <div class="wrap split split--portrait">
-      <figure class="framed hero-portrait"><img src={u(portrait)} alt="Portrait de Christine CAL" fetchpriority="high" /></figure>
+      <figure class="framed hero-portrait"><img src={u(portrait)} alt={tr('Portrait de Christine CAL')} fetchpriority="high" /></figure>
       <div class="txt">
         <p class="eyebrow">{about.hero.eyebrow}</p>
-        <h1 id="titre" class="h1--two" set:html={about.hero.title.replace(/\s+(en contact\b)/, '<br />$1')} />
-        <p class="label" style="margin-top: 32px">Coach médiumnique · Conférencière</p>
+        <h1 id="titre" class="h1--two" set:html={about.hero.title.replace(/\s+(en contact\b|in contact\b|en contacto\b|in contatto\b|w kontakcie\b)/, '<br />$1')} />
+        <p class="label" style="margin-top: 32px">{tr('Coach médiumnique · Conférencière')}</p>
       </div>
     </div>
   </section>
@@ -66,7 +74,7 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
   <section class="section sky epi-section">
     <Fleur class="fleur" />
     <div class="wrap">
-      <p class="epigraph">{clauses(about.epigraph).map((c, i) => <><span class:list={['w', { hl: /relier/i.test(c) }]} style={`--d:${(0.2 + i * 0.3).toFixed(1)}s`}>{c}</span>{' '}</>)}</p>
+      <p class="epigraph">{clauses(about.epigraph).map((c, i) => <><span class:list={['w', { hl: /relier|connect|unir|unire|łącz/i.test(c) }]} style={`--d:${(0.2 + i * 0.3).toFixed(1)}s`}>{c}</span>{' '}</>)}</p>
     </div>
   </section>
 
@@ -106,10 +114,10 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
     <img class="bg" src={u('/images/wp/homme-debout-etoiles.jpg')} alt="" aria-hidden="true" loading="lazy" />
     <div class="veil"></div>
     <div class="wrap">
-      <p class="eyebrow">Ma mission</p>
-      <p class="quote">« {mission.lede.match(/«\s*([^»]+?)\s*»/)?.[1]} »</p>
+      <p class="eyebrow">{tr('Ma mission')}</p>
+      <p class="quote">{tr('« {t} »', { t: mission.lede.match(/[«“„]\s*([^»”"]+?)\s*[»”"]/)?.[1] ?? '' })}</p>
       <p class="embark">{mission.callEyebrow} {mission.callHeading} <em style="color: var(--gold)">{mission.callHeadingEm}</em></p>
-      <a class="btn" href={u('/mission/')} style="margin-top: 32px">Lire ma mission<Icon name="arrow" /></a>
+      <a class="btn" href={u('/mission/')} style="margin-top: 32px">{tr('Lire ma mission')}<Icon name="arrow" /></a>
     </div>
   </section>
 
@@ -128,7 +136,7 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
               <ul class="pills">{talks(a.accordion!.items).shown.map((c) => <li>{c}</li>)}</ul>
               {talks(a.accordion!.items).folded.length > 0 && (
                 <details class="more">
-                  <summary>Toutes les conférences</summary>
+                  <summary>{tr('Toutes les conférences')}</summary>
                   <ul class="pills">{talks(a.accordion!.items).folded.map((c) => <li>{c}</li>)}</ul>
                 </details>
               )}
@@ -145,9 +153,9 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
       <div class="two-cols" style="margin-top: 36px; align-items: center">
         {trained ? (
           <div class="stack">
-            <p class="label" style="color: var(--mist)">Plus de</p>
+            <p class="label" style="color: var(--mist)">{tr('Plus de')}</p>
             <p class="big-num">{trained[2].trim()}</p>
-            <p style="margin-top: 14px; font-size: 18px; color: var(--soft)">personnes formées {trained[3]}</p>
+            <p style="margin-top: 14px; font-size: 18px; color: var(--soft)">{trained[3]}</p>
             <p class="serif" style="margin-top: 14px; font-size: 26px; line-height: 1.3" set:html={trained[1]} />
             {/* Retours du 22/10 : la clientèle sous « … MULTIDIMENSIONNEL », et plus en bas de page. */}
             <p class="eyebrow" style="margin-top: 40px">{about.clients.heading}</p>
@@ -184,7 +192,7 @@ const portrait = (about.hero as { photo?: string }).photo || '/images/wp/ccal-po
   {about.videos.list.length > 0 && (
     <section class="section sky">
       <div class="wrap">
-        <p class="eyebrow">Informations · Presse</p>
+        <p class="eyebrow">{tr('Informations · Presse')}</p>
         <h2 class="h2" style="margin-top: 14px">{about.videos.heading}</h2>
         <div class="video-grid">{about.videos.list.map((v) => <VideoCard {...v} />)}</div>
       </div>

@@ -10,6 +10,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { slugOf } from '../../src/lib/fiches';
 import { fichePath, type Hub } from './site';
+import { localDate, tr } from './i18n';
 
 type Fiche = CollectionEntry<'fiches'>;
 
@@ -111,8 +112,9 @@ export function buildAgenda(fiches: Fiche[], today = new Date()) {
       if (end && end < todayIso) continue; // déjà passé au moment du build
       const sortDate = p.precision === 'year' && !p.ongoing ? p.end! : p.start;
       entries.push({
-        label, title: d.title, href, rubrique, info, end,
+        label: localDate(label), title: d.title, href, rubrique, info, end,
         sort: iso(sortDate) + d.title,
+        // L'objet du mail reste en français : c'est Christine qui le lit.
         subject: `Inscription : ${d.title} (${label})`,
       });
     }
@@ -122,11 +124,12 @@ export function buildAgenda(fiches: Fiche[], today = new Date()) {
   return { entries, onDemand };
 }
 
-/** Prochaine date à venir d'une fiche (texte de Christine), s'il y en a une. */
+/** Prochaine date à venir d'une fiche (texte de Christine, dans la langue de la page), s'il y en a une. */
 export function nextDate(f: Fiche['data'], today = new Date()) {
   const todayIso = iso(today);
-  return f.dates.find((label) => {
+  const label = f.dates.find((label) => {
     const p = parseDate(label, today);
     return p && (!p.end || iso(p.end) >= todayIso);
   });
+  return label ? localDate(label) : undefined;
 }

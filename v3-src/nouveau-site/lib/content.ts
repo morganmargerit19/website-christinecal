@@ -6,6 +6,7 @@ import type { CollectionEntry } from 'astro:content';
 import { childSlugs, slugOf, stagesOf } from '../../src/lib/fiches';
 import { nextDate, parseDate } from './agenda';
 import { fichePath, type Hub } from './site';
+import { trn } from './i18n';
 
 type Fiche = CollectionEntry<'fiches'>;
 
@@ -22,7 +23,7 @@ export function metaLine(f: Fiche, fiches: Fiche[]) {
   const kids = stagesOf(f, fiches);
   if (kids.length) {
     const next = kids.map((k) => nextDate(k.data)).find(Boolean);
-    return [`${kids.length} stage${kids.length > 1 ? 's' : ''}`, next].filter(Boolean).join(' · ');
+    return [trn('{n} stage', '{n} stages', kids.length), next].filter(Boolean).join(' · ');
   }
   const facts = [f.data.format, f.data.duration, f.data.price].filter(Boolean).join(' · ');
   return [nextDate(f.data), facts].filter(Boolean).join(' · ');

@@ -3,7 +3,7 @@
  * Page d'un univers (Éveil à Soi / Éveil au Soi). Textes : formulaire
  * « Page : Éveil à Soi / au Soi » du CMS. Cartes et dates : les fiches.
  */
-import { getFichesL } from '../lib/i18n';
+import { getFichesL, pageData, tr } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import ContactBand from './ContactBand.astro';
 import Card from './Card.astro';
@@ -17,11 +17,14 @@ import { buildAgenda } from '../lib/agenda';
 import { topLevel } from '../lib/content';
 import { HUBS, SHASTA, u, type Hub } from '../lib/site';
 import { exists } from '../lib/images';
-import aSoi from '../../src/data/eveil-a-soi.fr.json';
-import auSoi from '../../src/data/eveil-au-soi.fr.json';
+import aSoiFr from '../../src/data/eveil-a-soi.fr.json';
+import auSoiFr from '../../src/data/eveil-au-soi.fr.json';
 
 interface Props { hub: Hub }
 const { hub } = Astro.props;
+// Textes dans la langue de la page ; les images restent celles choisies par Christine (version française).
+const aSoi = { ...pageData<typeof aSoiFr>('eveil-a-soi'), fond: (aSoiFr as { fond?: string }).fond };
+const auSoi = { ...pageData<typeof auSoiFr>('eveil-au-soi'), bandeau: (auSoiFr as { bandeau?: string }).bandeau };
 const data = hub === 'eveil-a-soi' ? aSoi : auSoi;
 const outro = 'outro' in data ? (data.outro as string[]) : [];
 const fiches = await getFichesL();
@@ -57,8 +60,8 @@ const flow = (lines: string[]) =>
 // Vidéos de présentation de la page Éveil à Soi (identiques au site actuel)
 const videos = hub === 'eveil-a-soi'
   ? [
-      { id: 'AvtWBNRF8vE', title: "La transition planétaire terrestre à l'ère du Verseau", meta: 'Juin 2017' },
-      { id: 'rALVl8lKlBs', title: "Le défi de l'humanité actuelle", meta: 'Juin 2017' },
+      { id: 'AvtWBNRF8vE', title: tr("La transition planétaire terrestre à l'ère du Verseau"), meta: 'Juin 2017' },
+      { id: 'rALVl8lKlBs', title: tr("Le défi de l'humanité actuelle"), meta: 'Juin 2017' },
     ]
   : [];
 ---
@@ -73,7 +76,7 @@ const videos = hub === 'eveil-a-soi'
           <img class:list={['hub-spiral', { 'hub-spiral--corner': heroBg }]} src={u('/images/geometrie/spirale-fibonacci.svg')} alt="" aria-hidden="true" />
         </>}
     <div class="wrap">
-      <nav class="crumbs" aria-label="Fil d'Ariane"><a href={u('/')}>Accueil</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
+      <nav class="crumbs" aria-label={tr("Fil d'Ariane")}><a href={u('/')}>{tr('Accueil')}</a><span aria-hidden="true">/</span><span aria-current="page">{HUBS[hub].label}</span></nav>
       <div style="max-width: 680px">
         <p class="eyebrow" style="margin-top: 44px">{data.eyebrow}</p>
         <h1 id="titre">{data.h1}</h1>
@@ -114,8 +117,8 @@ const videos = hub === 'eveil-a-soi'
 
   <section class="section deep">
     <div class="wrap">
-      <p class="eyebrow">{hub === 'eveil-a-soi' ? 'Consultations et ateliers' : 'Rubriques et stages'}</p>
-      <h2 class="h2" style="margin-top: 14px">{hub === 'eveil-a-soi' ? 'Par où commencer' : 'Explorer'}</h2>
+      <p class="eyebrow">{tr(hub === 'eveil-a-soi' ? 'Consultations et ateliers' : 'Rubriques et stages')}</p>
+      <h2 class="h2" style="margin-top: 14px">{tr(hub === 'eveil-a-soi' ? 'Par où commencer' : 'Explorer')}</h2>
       <div class:list={['cards', { 'cards--2': regular % 3 !== 0 && regular % 2 === 0 }]}>
         {cards.map((c, i) => <Card entry={c} feature={feature(i)} count={stagesOf(c, fiches).length || undefined} />)}
       </div>
@@ -126,8 +129,8 @@ const videos = hub === 'eveil-a-soi'
     <section class="section sky">
       <div class="wrap">
         <div class="head-row">
-          <div><p class="eyebrow">Agenda</p><h2 class="h2" style="margin-top: 14px">Prochaines dates</h2></div>
-          <a class="btn" href={u('/agenda/')}>Tout l'agenda<Icon name="arrow" /></a>
+          <div><p class="eyebrow">{tr('Agenda')}</p><h2 class="h2" style="margin-top: 14px">{tr('Prochaines dates')}</h2></div>
+          <a class="btn" href={u('/agenda/')}>{tr("Tout l'agenda")}<Icon name="arrow" /></a>
         </div>
         <div><AgendaList entries={entries} limit={6} /></div>
       </div>
