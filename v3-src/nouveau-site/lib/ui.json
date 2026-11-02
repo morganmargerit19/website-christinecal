@@ -840,7 +840,7 @@
   "pl": "Nagranie"
  },
  "Interview du {d} par {p}": {
-  "en": "Interview of {d} by {p}",
+  "en": "Interview on {d} by {p}",
   "es": "Entrevista del {d} por {p}",
   "it": "Intervista del {d} di {p}",
   "pl": "Wywiad z {d}, prowadzący: {p}"
