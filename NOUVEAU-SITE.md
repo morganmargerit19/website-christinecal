@@ -44,3 +44,23 @@ toujours `astro.config.mjs` (dossier `src/`).
 3. Bascule : faire construire `astro.nouveau-site.config.mjs` (sortie `dist/`)
    par le déploiement OVH, `.github/workflows/deploy-ovh.yml`. Retour arrière :
    revenir à `astro.config.mjs` ; l'ancien design reste intact dans `src/`.
+
+## Traductions (EN, ES, IT, PL)
+
+Le français fait référence ; chaque page existe aussi sous `/en/`, `/es/`, `/it/`, `/pl/`.
+
+- **Textes de l'interface** (menus, boutons, libellés) : `v3-src/nouveau-site/lib/ui.json`,
+  rangés par leur texte français. Dans le code : `tr('Texte français')`.
+- **Pages** Qui suis-je, Mission, Éveil à Soi, Éveil au Soi :
+  `v3-src/src/data/<page>.<langue>.json` (mêmes clés que le `.fr.json`, sans les photos).
+- **Fiches** (stages, ateliers…) : `v3-src/src/content/fiches/<langue>/<slug>.mdx`.
+  Seuls les textes y comptent : dates, lieu, durée, tarif, photos, vidéos, stage masqué
+  ou supprimé viennent toujours du français (Mon espace), dates et infos pratiques
+  traduites automatiquement (`localDate`, `localPractical` dans `lib/i18n.ts`).
+- **Pages légales** : `v3-src/nouveau-site/lib/legal.ts` (le français fait foi).
+- Un texte sans traduction reste en français (rien ne disparaît). Pour lister les
+  textes d'interface manquants : `I18N_REPORT=/tmp/manquants.json NOUVEAU_SITE_TARGET=artifact
+  npx astro build --config astro.nouveau-site.config.mjs`.
+- **Mon espace ne modifie que le français.** Un nouveau stage ajouté par Christine
+  apparaît dans toutes les langues avec son texte français, jusqu'à sa traduction.
+

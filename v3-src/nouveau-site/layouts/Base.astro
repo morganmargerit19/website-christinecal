@@ -29,8 +29,10 @@ const alt = (l: string) => '§' + site + base + (l === 'fr' ? '' : '/' + l) + pa
     {import.meta.env.NOUVEAU_SITE_TARGET === 'ovh'
       ? <link rel="canonical" href={site + Astro.url.pathname} />
       : <meta name="robots" content="noindex, nofollow" />}
-    {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={alt(l)} />)}
-    <link rel="alternate" hreflang="x-default" href={alt('fr')} />
+    {path !== '/404/' && <>
+      {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={alt(l)} />)}
+      <link rel="alternate" hreflang="x-default" href={alt('fr')} />
+    </>}
     <meta name="theme-color" content="#070618" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

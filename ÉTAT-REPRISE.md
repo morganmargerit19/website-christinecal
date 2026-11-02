@@ -13,16 +13,18 @@ _Mise à jour : 2 novembre 2026. Ce fichier fait référence._
 - **Retour arrière** vers l'ancien design : dans ce workflow, remettre l'étape de
   build `npm run build` avec `DEPLOY_TARGET=ovh` (astro.config.mjs, dossier `src/`).
   L'ancien design reste intact dans `v3-src/src/`.
-- Versions **EN / ES / IT / PL** : pas encore traduites. `v3-src/public/.htaccess`
-  redirige temporairement (302) `/en/…`, `/es/…`, `/it/…`, `/pl/…` vers la page
-  française. À retirer quand les traductions seront en ligne.
+- Versions **EN / ES / IT / PL** en ligne en même temps (`/en/…`, `/es/…`,
+  `/it/…`, `/pl/…`, mêmes adresses que l'ancien site). Les anciennes pages
+  « About » (`/en/about/`, `/pl/o-mnie/`…) redirigent (301) vers `qui-suis-je`.
+  Fonctionnement : voir « Traductions » dans `NOUVEAU-SITE.md`.
 - L'aperçu Vercel (https://website-christinecal.vercel.app/nouveau-site/) reste
   disponible, toujours en `noindex`.
 
 ## Prochaines étapes
 
-1. Traductions EN / ES / IT / PL du nouveau site (reprendre celles de `src/`),
-   puis retirer les redirections temporaires.
+1. Traductions : quand Christine modifie un **texte** en français dans Mon espace
+   (pas les dates, lieux, tarifs, photos, vidéos : ceux-là suivent tout seuls),
+   mettre à jour la traduction correspondante (voir `NOUVEAU-SITE.md`).
 2. Renouveler la clé GitHub de Mon espace avant le **18/10/2027**.
 3. Ensuite, éventuellement : retirer Tina et l'ancien design.
 

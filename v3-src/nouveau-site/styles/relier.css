@@ -112,6 +112,11 @@ main { overflow-x: clip; }
 .mobile-nav { background: var(--deep); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .mobile-nav a { display: block; padding: 16px var(--gutter); font-size: 13px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light); border-bottom: 1px solid var(--line); }
 .mobile-nav a[aria-current="page"] { color: var(--gold-pale); }
+/* Libellés plus longs en anglais et en polonais : un peu moins d'espace juste avant le passage au menu. */
+@media (max-width: 1260px) {
+  html:is([lang="en"], [lang="pl"]) .main-nav { gap: 10px; letter-spacing: 0.1em; }
+  html:is([lang="en"], [lang="pl"]) .site-header .bar { gap: 16px; }
+}
 @media (max-width: 1180px) {
   .main-nav, .lang { display: none; }
   .burger { display: inline-flex; }
