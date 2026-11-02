@@ -94,7 +94,7 @@
   // Après un enregistrement : suit la mise en ligne automatique.
   function followDeploy() {
     clearInterval(statusTimer);
-    status('wait', 'C’est enregistré. Votre site se met à jour, comptez 3 à 5 minutes…');
+    status('wait', 'C’est enregistré. Votre site se met à jour dans toutes les langues, comptez 5 minutes environ…');
     siteState = { state: 'en-cours' };
     const started = Date.now();
     statusTimer = setInterval(async () => {
@@ -914,7 +914,7 @@
       const s = siteState;
       p.className = 'site-state ' + s.state;
       p.textContent = s.state === 'en-ligne' ? '✓ Votre site est à jour' + (s.since ? ' (mis à jour ' + when(s.since) + ')' : '') + '.'
-        : s.state === 'en-cours' ? 'Mise en ligne en cours… Comptez 3 à 5 minutes.'
+        : s.state === 'en-cours' ? 'Mise en ligne en cours… Comptez 5 minutes environ.'
         : s.state === 'erreur' ? 'La dernière mise en ligne a rencontré un souci. Rien n’est perdu : prévenez Morgan.'
         : 'Votre site est en ligne.';
     } catch { p.className = 'site-state'; p.textContent = 'Votre site est en ligne.'; }

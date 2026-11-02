@@ -2,18 +2,20 @@
 import { ANNONCE, NAV, u } from '../lib/site';
 import Icon from './Icon.astro';
 import LangSwitch from './LangSwitch.astro';
-import { tr } from '../lib/i18n';
+import { autoData, tr } from '../lib/i18n';
 interface Props { current?: string }
 const { current } = Astro.props;
 // Une seule entrée active : la plus précise (la consultation n'allume pas aussi « Éveil à Soi »).
 const active = NAV.filter((n) => current && [n.path, ...(n.also ?? [])].some((p) => current.startsWith(p)))
   .sort((a, b) => b.path.length - a.path.length)[0];
 const isCurrent = (path: string) => (active?.path === path ? 'page' : undefined);
+// Annonce écrite par Christine en français, traduite automatiquement (scripts/traduire.mjs).
+const texte = autoData<{ annonce?: string }>('infos')?.annonce ?? ANNONCE?.texte;
 ---
 <header class="site-header">
   {ANNONCE && (
     <p class="annonce">
-      {ANNONCE.lien ? <a href={/^\//.test(ANNONCE.lien) ? u(ANNONCE.lien) : ANNONCE.lien}>{ANNONCE.texte}</a> : ANNONCE.texte}
+      {ANNONCE.lien ? <a href={/^\//.test(ANNONCE.lien) ? u(ANNONCE.lien) : ANNONCE.lien}>{texte}</a> : texte}
     </p>
   )}
   <div class="wrap bar">

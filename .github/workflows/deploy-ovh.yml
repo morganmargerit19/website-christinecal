@@ -21,8 +21,13 @@ jobs:
   deploy:
     if: vars.OVH_DEPLOY == 'true'
     runs-on: ubuntu-latest
+    # Écriture : les traductions automatiques sont enregistrées dans le dépôt.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
 
       - uses: actions/setup-node@v4
         with:
@@ -33,6 +38,35 @@ jobs:
       - name: Installer les dépendances
         working-directory: v3-src
         run: npm ci
+
+      # Christine écrit en français (Mon espace) : ce qui a changé est traduit en
+      # anglais, espagnol, italien et polonais avant la construction du site
+      # (scripts/traduire.mjs, secret ANTHROPIC_API_KEY). Sans clé ou en cas d'échec,
+      # le site part avec les traductions précédentes : la mise en ligne n'est jamais bloquée.
+      - name: Traductions automatiques (EN, ES, IT, PL)
+        working-directory: v3-src
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/traduire.mjs
+
+      # Les traductions sont gardées dans le dépôt : la prochaine mise en ligne ne
+      # retraduit que ce qui aura encore changé. Auteur distinct de Christine, donc
+      # absent de son Historique dans Mon espace. Un push fait avec GITHUB_TOKEN ne
+      # relance pas ce workflow.
+      - name: Enregistrer les traductions
+        continue-on-error: true
+        run: |
+          git config user.name "Traductions automatiques"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A v3-src/src/content/fiches v3-src/src/data
+          if git diff --cached --quiet; then echo "Rien de nouveau."; exit 0; fi
+          git commit -q -m "Traductions automatiques (EN, ES, IT, PL)"
+          for i in 1 2 3; do
+            git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          echo "::warning::Traductions non enregistrées dans le dépôt (elles sont quand même en ligne)."
 
       # Nouveau site « Relier » (en ligne depuis le 02/11/2026). Retour à l'ancien
       # design : remplacer cette étape par `npm run build` avec DEPLOY_TARGET=ovh

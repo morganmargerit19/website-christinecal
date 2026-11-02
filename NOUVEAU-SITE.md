@@ -58,9 +58,16 @@ Le français fait référence ; chaque page existe aussi sous `/en/`, `/es/`, `/
   ou supprimé viennent toujours du français (Mon espace), dates et infos pratiques
   traduites automatiquement (`localDate`, `localPractical` dans `lib/i18n.ts`).
 - **Pages légales** : `v3-src/nouveau-site/lib/legal.ts` (le français fait foi).
-- Un texte sans traduction reste en français (rien ne disparaît). Pour lister les
-  textes d'interface manquants : `I18N_REPORT=/tmp/manquants.json NOUVEAU_SITE_TARGET=artifact
-  npx astro build --config astro.nouveau-site.config.mjs`.
-- **Mon espace ne modifie que le français.** Un nouveau stage ajouté par Christine
-  apparaît dans toutes les langues avec son texte français, jusqu'à sa traduction.
-
+- **Traduction automatique** : à chaque mise en ligne (`.github/workflows/deploy-ovh.yml`),
+  `v3-src/scripts/traduire.mjs` fait traduire par Claude (`claude-opus-5-5`) tout texte
+  français modifié depuis sa dernière traduction (empreinte `sourceHash` / `_source` dans
+  chaque fichier traduit), puis enregistre les traductions dans le dépôt. Il faut le secret
+  de dépôt **`ANTHROPIC_API_KEY`**. Sans clé ou en cas d'échec, le site part avec les
+  traductions précédentes (un texte jamais traduit reste en français).
+  - `node scripts/traduire.mjs --verifier` : ce qui serait traduit, sans appel.
+  - `node scripts/traduire.mjs --marquer` : après une retouche à la main d'une traduction,
+    la marquer comme à jour (sinon elle reste telle quelle jusqu'au prochain changement
+    du français, qui la remplacera).
+- Textes de l'interface (`ui.json`) : écrits dans le code, pas par Christine ; à compléter
+  à la main (liste des manquants : `I18N_REPORT=/tmp/manquants.json NOUVEAU_SITE_TARGET=artifact
+  npx astro build --config astro.nouveau-site.config.mjs`).

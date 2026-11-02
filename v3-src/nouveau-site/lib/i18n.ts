@@ -164,3 +164,10 @@ export function pageData<T = Record<string, unknown>>(name: string): T {
   const pick = (code: string) => DATA[`../../src/data/${name}.${code}.json`]?.default;
   return (pick(l) ?? pick('fr')) as T;
 }
+
+/** Traduction automatique d'un fichier de données (videos, infos) dans la langue en cours, s'il y en a une. */
+export function autoData<T>(name: string): T | undefined {
+  const l = lang();
+  return l === 'fr' ? undefined : (DATA[`../../src/data/${name}.${l}.json`]?.default as T | undefined);
+}
+

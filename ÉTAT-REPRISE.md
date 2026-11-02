@@ -22,9 +22,9 @@ _Mise à jour : 2 novembre 2026. Ce fichier fait référence._
 
 ## Prochaines étapes
 
-1. Traductions : quand Christine modifie un **texte** en français dans Mon espace
-   (pas les dates, lieux, tarifs, photos, vidéos : ceux-là suivent tout seuls),
-   mettre à jour la traduction correspondante (voir `NOUVEAU-SITE.md`).
+1. Traductions automatiques : vérifier que le secret de dépôt `ANTHROPIC_API_KEY` est
+   en place (sinon les modifications de Christine restent en français dans les autres
+   langues). Voir `NOUVEAU-SITE.md`.
 2. Renouveler la clé GitHub de Mon espace avant le **18/10/2027**.
 3. Ensuite, éventuellement : retirer Tina et l'ancien design.
 

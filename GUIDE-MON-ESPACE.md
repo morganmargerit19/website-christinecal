@@ -6,7 +6,9 @@ Connectez-vous avec votre e-mail et votre mot de passe. Vous arrivez sur l'**Acc
 vos prochaines dates, l'état de votre site, vos dernières modifications, et des boutons
 pour les gestes les plus courants.
 
-Après chaque enregistrement, votre site est à jour 3 à 5 minutes plus tard. Un bandeau
+Après chaque enregistrement, votre site est à jour 5 minutes environ plus tard, dans
+toutes les langues : vous écrivez en français, la traduction en anglais, espagnol,
+italien et polonais se fait toute seule. Un bandeau
 en haut de l'espace vous dit quand c'est en ligne.
 
 ## Mes stages
