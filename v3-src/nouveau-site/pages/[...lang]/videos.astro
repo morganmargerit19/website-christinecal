@@ -1,0 +1,114 @@
+---
+import { autoData, getFichesL, langPaths, pageData, tr } from '../../lib/i18n';
+export const getStaticPaths = langPaths;
+/**
+ * Vidéos, DVD, radio : tout au même endroit (au lieu d'être dispersé dans les
+ * pages), en préparation du projet 2027 de Christine (vidéos et audios).
+ * Généré à partir des vidéos déjà renseignées dans les fiches et les pages.
+ */
+import Base from '../../layouts/Base.astro';
+import ContactBand from '../../components/ContactBand.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import Fleur from '../../components/Fleur.astro';
+import { allVideos } from '../../lib/content';
+import { u } from '../../lib/site';
+import type aboutFr from '../../../src/data/about.fr.json';
+import type missionFr from '../../../src/data/mission.fr.json';
+import videosData from '../../../src/data/videos.fr.json';
+
+const fiches = await getFichesL();
+const about = pageData<typeof aboutFr>('about');
+const mission = pageData<typeof missionFr>('mission');
+const presentation = about.videos.list.map((v) => ({ ...v, from: { title: tr('Qui suis-je'), href: u('/qui-suis-je/') } }));
+const press = [
+  ...mission.videos.map((v) => ({ ...v, from: { title: tr('Ma mission'), href: u('/mission/') } })),
+  { id: 'AvtWBNRF8vE', title: tr("La transition planétaire terrestre à l'ère du Verseau"), meta: 'Juin 2017', from: { title: tr('Éveil à Soi'), href: u('/eveil-a-soi/') } },
+  { id: 'rALVl8lKlBs', title: tr("Le défi de l'humanité actuelle"), meta: 'Juin 2017', from: { title: tr('Éveil à Soi'), href: u('/eveil-a-soi/') } },
+];
+const { dvd, talks } = allVideos(fiches, [...presentation, ...press]);
+
+/**
+ * Les vidéos classées par thème, ligne par ligne, comme Christine les a présentées
+ * (mail « VIDEOS » du 22/10). Modifiable par Christine dans « Mon espace » (Mes vidéos) :
+ * src/data/videos.fr.json. Une ligne contient l'identifiant YouTube d'une vidéo déjà
+ * dans une fiche, d'une vidéo ajoutée dans `videos`, ou « soon » (place réservée à une
+ * vidéo annoncée). Une vidéo DVD absente des thèmes s'affiche en fin de liste (« Autres »),
+ * sauf si elle est dans `hidden`.
+ */
+const SOON = 'soon';
+// Titres des thèmes traduits quand ils sont connus (un thème ajouté par Christine reste en français).
+const auto = autoData<{ themes?: Record<string, string>; videos?: Record<string, string> }>('videos');
+const THEMES: { id: string; title: string; rows: string[][] }[] = videosData.themes.map((t) => ({ ...t, title: auto?.themes?.[t.id] ?? tr(t.title) }));
+const fromFiches = new Set(dvd.map((v) => v.id));
+const added = (videosData.videos as { id: string; title?: string; meta?: string }[]).filter((v) => v.id && !fromFiches.has(v.id)).map((v) => ({ ...v, title: auto?.videos?.[v.id] ?? v.title }));
+const pool = [...dvd, ...added];
+const byId = new Map(pool.map((v) => [v.id, v]));
+const placed = new Set(THEMES.flatMap((t) => t.rows.flat()));
+const hidden = new Set<string>(videosData.hidden ?? []);
+const others = pool.filter((v) => !placed.has(v.id) && !hidden.has(v.id));
+const themes = [
+  ...THEMES.map((t) => ({ ...t, rows: t.rows.map((row) => row.filter((id) => id === SOON || byId.has(id))).filter((row) => row.length > 0) })),
+  ...(others.length ? [{ id: 'autres', title: tr('Autres forums et conférences'), rows: [others.map((v) => v.id)] }] : []),
+].filter((t) => t.rows.length > 0);
+const shown = new Set(themes.flatMap((t) => t.rows.flat()).filter((id) => id !== SOON));
+const DVD_NOTE = tr('DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.');
+---
+<Base title={`${tr('Vidéos et DVD')} · Christine CAL`} description={tr('Les vidéos de Christine CAL : DVD Debowska, conférences, interviews radio et présentation.')} path="/videos/">
+  <section class="page-hero sky" aria-labelledby="titre">
+    <Fleur class="fleur" stroke="rgba(233,204,138,.1)" width={0.4} />
+    <div class="wrap">
+      <nav class="crumbs" aria-label={tr("Fil d'Ariane")}><a href={u('/')}>{tr('Accueil')}</a><span aria-hidden="true">/</span><span aria-current="page">{tr('Vidéos')}</span></nav>
+      <p class="eyebrow" style="margin-top: 44px">{tr('Vidéos · DVD · Radio')}</p>
+      <h1 id="titre">{tr('Voir et écouter')}</h1>
+      <p class="lede-serif">{tr('{n} vidéos : forums, conférences, interviews, classées par thème. Chacune renvoie à la page qui en parle.', { n: shown.size + talks.length })}</p>
+      <div class="toc" style="margin-top: 28px">
+        {themes.map((t) => <a href={`#${t.id}`}>{t.title}</a>)}
+        {talks.length > 0 && <a href="#conferences">{tr('Interviews et conférences')}</a>}
+      </div>
+    </div>
+  </section>
+
+  {themes.map((t, i) => (
+    <section id={t.id} class:list={['section', i % 2 ? 'sky' : 'deep']}>
+      <div class="wrap">
+        <p class="eyebrow">DVD DEBOWSKA</p>
+        <h2 class="h2" style="margin-top: 14px">{t.title}</h2>
+        {i === 0 && <p class="serif italic" style="margin-top: 16px; max-width: 720px; font-size: 17px; color: var(--mist-2)">{DVD_NOTE}</p>}
+        {t.rows.map((row) => (
+          <div class="video-grid video-grid--3">
+            {row.map((id) => {
+              const v = byId.get(id);
+              return v ? (
+                <div class="stack gap-s">
+                  <VideoCard id={v.id} title={v.title} meta={v.meta} />
+                  {v.from && <a class="arrow" href={v.from.href} style="min-height: 32px">{v.from.title}</a>}
+                </div>
+              ) : (
+                <div class="video video--soon"><span class="frame"><span>{tr('Bientôt en ligne')}</span></span><span class="label">{tr('Nouvelle vidéo · 2026')}</span></div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  {talks.length > 0 && (
+    <section id="conferences" class:list={['section', themes.length % 2 ? 'sky' : 'deep']}>
+      <div class="wrap">
+        <p class="eyebrow">{tr('Radio · conférences · présentation')}</p>
+        <h2 class="h2" style="margin-top: 14px">{tr('Interviews et conférences')}</h2>
+        <div class="video-grid video-grid--3">
+          {talks.map((v) => (
+            <div class="stack gap-s">
+              <VideoCard id={v.id} title={v.title} meta={v.meta} />
+              {v.from && <a class="arrow" href={v.from.href} style="min-height: 32px">{v.from.title}</a>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <ContactBand heading={tr('Organiser une conférence ?')} text={tr('Pour une conférence, un forum ou une intervention, en salle ou via Zoom')} />
+</Base>

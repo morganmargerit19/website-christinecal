@@ -2,11 +2,12 @@
 /** Bandeau de fin de page : l'appel, les deux boutons, puis le pied de page. */
 import { CONTACT, mailto } from '../lib/site';
 import Footer from './Footer.astro';
+import { tr } from '../lib/i18n';
 interface Props { heading?: string; text?: string; subject?: string; cta?: string; motto?: boolean }
 const {
-  heading = 'Vous vous reconnaissez ?',
-  text = 'Écrivez-moi : nous verrons ensemble par où commencer votre voyage',
-  subject, cta = "M'écrire", motto = false,
+  heading = tr('Vous vous reconnaissez ?'),
+  text = tr('Écrivez-moi : nous verrons ensemble par où commencer votre voyage'),
+  subject, cta = tr("M'écrire"), motto = false,
 } = Astro.props;
 ---
 <section id="contact" class="contact sky">
@@ -18,7 +19,7 @@ const {
       <a class="btn" href={`tel:${CONTACT.tel}`}>{CONTACT.phone}</a>
     </div>
     <p class="coords">{CONTACT.email} · {CONTACT.phone}</p>
-    {motto && <p class="motto">Invitation au discernement et aux questionnements<br />Respect de la libre pensée</p>}
+    {motto && <p class="motto">{tr('Invitation au discernement et aux questionnements')}<br />{tr('Respect de la libre pensée')}</p>}
   </div>
   <Footer />
 </section>

@@ -1,20 +1,22 @@
 ---
 import { u } from '../lib/site';
+import { tr } from '../lib/i18n';
+import LangSwitch from './LangSwitch.astro';
 ---
 <footer class="site-footer">
   <div class="wrap">
-    <span>© {new Date().getFullYear()} Christine CAL · Tous droits réservés</span>
-    <nav aria-label="Plan du site">
-      <a href={u('/mission/')}>Ma mission</a>
-      <a href={u('/agenda/')}>Agenda</a>
-      <a href={u('/videos/')}>Vidéos</a>
+    <span>© {new Date().getFullYear()} Christine CAL · {tr('Tous droits réservés')}</span>
+    <nav aria-label={tr('Plan du site')}>
+      <a href={u('/mission/')}>{tr('Ma mission')}</a>
+      <a href={u('/agenda/')}>{tr('Agenda')}</a>
+      <a href={u('/videos/')}>{tr('Vidéos')}</a>
     </nav>
-    <nav aria-label="Informations légales">
-      <a href={u('/mentions-legales/')}>Mentions légales</a>
-      <a href={u('/politique-de-confidentialite/')}>Politique de confidentialité</a>
-      <a href={u('/cookies/')}>Cookies</a>
+    <nav aria-label={tr('Informations légales')}>
+      <a href={u('/mentions-legales/')}>{tr('Mentions légales')}</a>
+      <a href={u('/politique-de-confidentialite/')}>{tr('Politique de confidentialité')}</a>
+      <a href={u('/cookies/')}>{tr('Cookies')}</a>
     </nav>
-    <span style="letter-spacing: .2em">FR</span>
-    <p class="credit">Site conçu et réalisé par <a href="https://studio-margerit.fr" target="_blank" rel="noopener">Studio Margerit</a></p>
+    <LangSwitch variant="list" />
+    <p class="credit">{tr('Site conçu et réalisé par')} <a href="https://studio-margerit.fr" target="_blank" rel="noopener">Studio Margerit</a></p>
   </div>
 </footer>

@@ -1,4 +1,6 @@
-# Nouveau site « Relier » (proposition de refonte)
+# Nouveau site « Relier »
+
+**En ligne sur christinecal.com depuis le 2 novembre 2026** (voir `ÉTAT-REPRISE.md`). Le texte ci-dessous date de la proposition.
 
 Proposition de nouveau design, construite **à côté** du site en ligne, sans le
 modifier. Elle lit **les mêmes contenus** que le site actuel : les fiches de
@@ -42,3 +44,30 @@ toujours `astro.config.mjs` (dossier `src/`).
 3. Bascule : faire construire `astro.nouveau-site.config.mjs` (sortie `dist/`)
    par le déploiement OVH, `.github/workflows/deploy-ovh.yml`. Retour arrière :
    revenir à `astro.config.mjs` ; l'ancien design reste intact dans `src/`.
+
+## Traductions (EN, ES, IT, PL)
+
+Le français fait référence ; chaque page existe aussi sous `/en/`, `/es/`, `/it/`, `/pl/`.
+
+- **Textes de l'interface** (menus, boutons, libellés) : `v3-src/nouveau-site/lib/ui.json`,
+  rangés par leur texte français. Dans le code : `tr('Texte français')`.
+- **Pages** Qui suis-je, Mission, Éveil à Soi, Éveil au Soi :
+  `v3-src/src/data/<page>.<langue>.json` (mêmes clés que le `.fr.json`, sans les photos).
+- **Fiches** (stages, ateliers…) : `v3-src/src/content/fiches/<langue>/<slug>.mdx`.
+  Seuls les textes y comptent : dates, lieu, durée, tarif, photos, vidéos, stage masqué
+  ou supprimé viennent toujours du français (Mon espace), dates et infos pratiques
+  traduites automatiquement (`localDate`, `localPractical` dans `lib/i18n.ts`).
+- **Pages légales** : `v3-src/nouveau-site/lib/legal.ts` (le français fait foi).
+- **Traduction automatique** : à chaque mise en ligne (`.github/workflows/deploy-ovh.yml`),
+  `v3-src/scripts/traduire.mjs` fait traduire par Claude (`claude-opus-5-5`) tout texte
+  français modifié depuis sa dernière traduction (empreinte `sourceHash` / `_source` dans
+  chaque fichier traduit), puis enregistre les traductions dans le dépôt. Il faut le secret
+  de dépôt **`ANTHROPIC_API_KEY`**. Sans clé ou en cas d'échec, le site part avec les
+  traductions précédentes (un texte jamais traduit reste en français).
+  - `node scripts/traduire.mjs --verifier` : ce qui serait traduit, sans appel.
+  - `node scripts/traduire.mjs --marquer` : après une retouche à la main d'une traduction,
+    la marquer comme à jour (sinon elle reste telle quelle jusqu'au prochain changement
+    du français, qui la remplacera).
+- Textes de l'interface (`ui.json`) : écrits dans le code, pas par Christine ; à compléter
+  à la main (liste des manquants : `I18N_REPORT=/tmp/manquants.json NOUVEAU_SITE_TARGET=artifact
+  npx astro build --config astro.nouveau-site.config.mjs`).

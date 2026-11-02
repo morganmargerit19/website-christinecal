@@ -1,0 +1,26 @@
+---
+/**
+ * Choix de la langue : la même page dans chaque langue. Les liens sont marqués
+ * « § » pour que le middleware ne les fasse pas passer dans la langue en cours.
+ */
+import { base } from '../lib/site';
+import { LANGS, LANG_NAMES, lang, tr } from '../lib/i18n';
+interface Props { variant?: 'menu' | 'list' }
+const { variant = 'menu' } = Astro.props;
+const here = lang();
+// Page introuvable (404) : elle n'existe qu'en français, on renvoie à l'accueil de chaque langue.
+const rest = /^\/?404/.test(Astro.url.pathname.slice(base.length)) ? '/' : Astro.url.pathname.slice(base.length).replace(/^\/(en|es|it|pl)(?=\/|$)/, '') || '/';
+const href = (l: string) => '§' + base + (l === 'fr' ? '' : '/' + l) + rest;
+---
+{variant === 'menu' ? (
+  <details class="lang-switch">
+    <summary aria-label={tr('Langue')}>{here.toUpperCase()}</summary>
+    <ul>
+      {LANGS.map((l) => <li><a href={href(l)} hreflang={l} lang={l} aria-current={l === here ? 'true' : undefined}>{LANG_NAMES[l]}</a></li>)}
+    </ul>
+  </details>
+) : (
+  <nav class="lang-list" aria-label={tr('Langue')}>
+    {LANGS.map((l) => <a href={href(l)} hreflang={l} lang={l} aria-current={l === here ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+  </nav>
+)}

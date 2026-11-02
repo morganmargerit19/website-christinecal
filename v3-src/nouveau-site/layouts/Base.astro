@@ -1,7 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Sprites from '../components/Sprites.astro';
-import { ANNONCE, SHOW_PROPOSITION, u } from '../lib/site';
+import { ANNONCE, SHOW_PROPOSITION, base, u } from '../lib/site';
+import { HTML_LANG, LANGS, lang, tr } from '../lib/i18n';
 import '../styles/relier.css';
 
 interface Props {
@@ -13,16 +14,25 @@ interface Props {
 }
 const { title, description, path, image = '/images/wp/portail-terre.png' } = Astro.props;
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+const here = lang();
+// Même page dans chaque langue (hreflang) ; « § » : lien laissé tel quel par le middleware
+const alt = (l: string) => '§' + site + base + (l === 'fr' ? '' : '/' + l) + path;
 ---
 <!doctype html>
-<html lang="fr">
+<html lang={HTML_LANG[here]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <!-- Proposition de refonte : jamais indexée tant qu'elle n'est pas validée -->
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- Indexé seulement en production (christinecal.com) ; aperçus jamais indexés -->
+    {import.meta.env.NOUVEAU_SITE_TARGET === 'ovh'
+      ? <link rel="canonical" href={site + Astro.url.pathname} />
+      : <meta name="robots" content="noindex, nofollow" />}
+    {path !== '/404/' && <>
+      {LANGS.map((l) => <link rel="alternate" hreflang={HTML_LANG[l]} href={alt(l)} />)}
+      <link rel="alternate" hreflang="x-default" href={alt('fr')} />
+    </>}
     <meta name="theme-color" content="#070618" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -35,7 +45,7 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body class={ANNONCE ? 'has-annonce' : undefined}>
-    <a class="skip-link" href="#main">Aller au contenu</a>
+    <a class="skip-link" href="#main">{tr('Aller au contenu')}</a>
     <Sprites />
     <Header current={path} />
     <main id="main">
@@ -54,7 +64,7 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
           const open = panel.hidden;
           panel.hidden = !open;
           b.setAttribute('aria-expanded', String(open));
-          b.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+          b.setAttribute('aria-label', (open ? b.dataset.close : b.dataset.open) ?? '');
         });
       }
 
@@ -66,7 +76,7 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
           // data-cc : langue des sous-titres à afficher d'office (ex. « en » plutôt que le français)
           const cc = a.dataset.cc ? `&cc_load_policy=1&cc_lang_pref=${a.dataset.cc}&hl=${a.dataset.cc}` : '';
           f.src = `https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&rel=0${cc}`;
-          f.title = a.getAttribute('aria-label') ?? 'Vidéo';
+          f.title = a.getAttribute('aria-label') ?? '';
           f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
           f.allowFullscreen = true;
           a.replaceChildren(f);

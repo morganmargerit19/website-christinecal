@@ -1,0 +1,14 @@
+---
+import Fiche from '../../../layouts/Fiche.astro';
+import { getFiches, slugOf } from '../../../../src/lib/fiches';
+import { getFichesL, langPaths } from '../../../lib/i18n';
+
+export async function getStaticPaths() {
+  const fiches = await getFiches('fr');
+  const slugs = fiches.filter((e) => e.data.hub === 'eveil-au-soi').map((e) => slugOf(e.id));
+  return langPaths().flatMap(({ params }) => slugs.map((slug) => ({ params: { ...params, slug } })));
+}
+// La fiche dans la langue de la page (textes traduits, pratique repris du français)
+const entry = (await getFichesL()).find((e) => slugOf(e.id) === Astro.params.slug)!;
+---
+<Fiche entry={entry} />

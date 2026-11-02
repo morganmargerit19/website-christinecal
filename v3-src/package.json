@@ -19,6 +19,7 @@
     "gsap": "^3.12.0"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "@tinacms/cli": "^2.5.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
