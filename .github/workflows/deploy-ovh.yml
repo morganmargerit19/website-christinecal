@@ -1,6 +1,6 @@
 name: Déploiement OVH (christinecal.com)
 
-# Construit le site V3 (cible racine) et l'envoie en FTP sur l'hébergement
+# Construit le nouveau site « Relier » (cible racine) et l'envoie en SFTP sur l'hébergement
 # mutualisé OVH. Reste DORMANT tant que la variable de dépôt OVH_DEPLOY != 'true'
 # (Settings → Secrets and variables → Actions → Variables).
 
@@ -34,16 +34,14 @@ jobs:
         working-directory: v3-src
         run: npm ci
 
-      - name: Build (cible OVH, racine)
+      # Nouveau site « Relier » (en ligne depuis le 02/11/2026). Retour à l'ancien
+      # design : remplacer cette étape par `npm run build` avec DEPLOY_TARGET=ovh
+      # (astro.config.mjs, dossier src/), comme avant le 02/11.
+      - name: Build (nouveau site, cible OVH, racine)
         working-directory: v3-src
         env:
-          DEPLOY_TARGET: ovh
-          # Identifiants Tina Cloud (cf. DEPLOY-CMS-TINA.md). Absents = le site
-          # se build quand même, sans la page /admin (build découplé).
-          NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
-          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
-          GITHUB_BRANCH: main
-        run: npm run build
+          NOUVEAU_SITE_TARGET: ovh
+        run: npx astro build --config astro.nouveau-site.config.mjs
 
       # « Mon espace » (gestion du site par Christine) : ajouté au site publié.
       # Sa configuration (mot de passe, clé GitHub) n'est PAS dans le dépôt :

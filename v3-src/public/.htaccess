@@ -9,6 +9,12 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !https [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteRule ^ https://www.christinecal.com%{REQUEST_URI} [L,R=301]
 
+# Versions EN / ES / IT / PL : pas encore traduites dans le nouveau site (02/11/2026).
+# Redirection TEMPORAIRE (302) vers la page française correspondante, à retirer quand
+# les traductions seront en ligne.
+RewriteRule ^en/about/?$ https://www.christinecal.com/qui-suis-je/ [L,R=302]
+RewriteRule ^(en|es|it|pl)(/(.*))?$ https://www.christinecal.com/$3 [L,R=302]
+
 # Redirections SEO « ancien WordPress → V3 » (301). URLs relevées dans l'export
 # WP du site (sources/wp-v2). En V3 les fiches sont passées de la racine à leur
 # hub (eveil-a-soi / eveil-au-soi). Les pages inchangées (/, /contact/, /mission/,

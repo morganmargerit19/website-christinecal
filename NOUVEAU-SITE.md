@@ -1,4 +1,6 @@
-# Nouveau site « Relier » (proposition de refonte)
+# Nouveau site « Relier »
+
+**En ligne sur christinecal.com depuis le 2 novembre 2026** (voir `ÉTAT-REPRISE.md`). Le texte ci-dessous date de la proposition.
 
 Proposition de nouveau design, construite **à côté** du site en ligne, sans le
 modifier. Elle lit **les mêmes contenus** que le site actuel : les fiches de

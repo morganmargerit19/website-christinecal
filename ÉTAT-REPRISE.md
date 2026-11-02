@@ -1,5 +1,36 @@
 # État du projet : reprise
 
+_Mise à jour : 2 novembre 2026. Ce fichier fait référence._
+
+## Où on en est
+
+**Le nouveau site « Relier » est en ligne sur christinecal.com depuis le 2 novembre
+2026**, validé par Christine. Elle le gère elle-même dans Mon espace
+(www.christinecal.com/mon-espace).
+
+- Le déploiement OVH (`.github/workflows/deploy-ovh.yml`) construit
+  `v3-src/astro.nouveau-site.config.mjs` avec `NOUVEAU_SITE_TARGET=ovh`.
+- **Retour arrière** vers l'ancien design : dans ce workflow, remettre l'étape de
+  build `npm run build` avec `DEPLOY_TARGET=ovh` (astro.config.mjs, dossier `src/`).
+  L'ancien design reste intact dans `v3-src/src/`.
+- Versions **EN / ES / IT / PL** : pas encore traduites. `v3-src/public/.htaccess`
+  redirige temporairement (302) `/en/…`, `/es/…`, `/it/…`, `/pl/…` vers la page
+  française. À retirer quand les traductions seront en ligne.
+- L'aperçu Vercel (https://website-christinecal.vercel.app/nouveau-site/) reste
+  disponible, toujours en `noindex`.
+
+## Prochaines étapes
+
+1. Traductions EN / ES / IT / PL du nouveau site (reprendre celles de `src/`),
+   puis retirer les redirections temporaires.
+2. Renouveler la clé GitHub de Mon espace avant le **18/10/2027**.
+3. Ensuite, éventuellement : retirer Tina et l'ancien design.
+
+---
+
+_Historique (avant la mise en ligne) :_
+
+
 _Mise à jour : 18 octobre 2026. Ce fichier fait référence. Les autres fichiers
 `REPRISE-*.md`, `SESSION-STATE.md`, `REPRENONS.md` et `GO-LIVE.md` décrivent
 des étapes passées._

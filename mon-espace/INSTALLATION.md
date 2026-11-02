@@ -15,9 +15,8 @@
 - **Historique** : ses modifications, et « Annuler cette modification ».
 - **Aide** : mode d'emploi intégré.
 
-Les liens « Voir mon site » ouvrent le nouveau site, encore sur Vercel
-(constante `SITE` en haut de la partie « Mes pages » d'`app.js`). **À la
-bascule, remettre `SITE = '/'`.**
+Les liens « Voir mon site » ouvrent christinecal.com (constante `SITE` dans
+`app.js`).
 
 Chaque enregistrement devient un commit sur `main`. Le déploiement OVH
 existant se lance tout seul, et le site est à jour 3 à 5 minutes plus tard.

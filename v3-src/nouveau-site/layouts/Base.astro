@@ -21,8 +21,10 @@ const site = Astro.site?.href.replace(/\/$/, '') ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <!-- Proposition de refonte : jamais indexée tant qu'elle n'est pas validée -->
-    <meta name="robots" content="noindex, nofollow" />
+    <!-- Indexé seulement en production (christinecal.com) ; aperçus jamais indexés -->
+    {import.meta.env.NOUVEAU_SITE_TARGET === 'ovh'
+      ? <link rel="canonical" href={site + Astro.url.pathname} />
+      : <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#070618" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

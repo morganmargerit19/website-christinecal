@@ -513,9 +513,8 @@
   }
 
   // ------------------------------------------------------------ Mes pages
-  // Le site que Christine regarde : le nouveau site, encore en maquette sur Vercel.
-  // À la bascule du nouveau site sur OVH, remettre '/'.
-  const SITE = 'https://website-christinecal.vercel.app/nouveau-site/';
+  // Le site que Christine regarde : christinecal.com (nouveau site en ligne depuis le 02/11).
+  const SITE = '/';
   const ABOUT = 'v3-src/src/data/about.fr.json';
   const MISSION = 'v3-src/src/data/mission.fr.json';
   // Types de champ : line (une ligne), text (un paragraphe sans mise en forme),
