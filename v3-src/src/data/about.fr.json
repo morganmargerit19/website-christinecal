@@ -20,54 +20,89 @@
   "videos": {
     "heading": "Vidéos de présentation",
     "list": [
-      { "id": "0QL8ive6NuU", "title": "Qui est Christine CAL", "meta": "Juillet 2016 · 10 min 42" },
-      { "id": "2oEYgOGBH7o", "title": "Témoignage de vie de C.C.", "meta": "Juillet 2016 · 4 min 39" }
+      {
+        "id": "0QL8ive6NuU",
+        "title": "Qui est Christine CAL",
+        "meta": "Juillet 2016 · 10 min 42"
+      },
+      {
+        "id": "2oEYgOGBH7o",
+        "title": "Témoignage de vie de C.C.",
+        "meta": "Juillet 2016 · 4 min 39"
+      }
     ]
   },
   "journey": {
     "heading": "UN PARCOURS EN BREF",
     "items": [
-      { "lead": "Une petite fille", "text": "choquée par un monde inversé." },
-      { "lead": "Une adolescente", "text": "consciente du Jeu Matriciel, lectrice insatiable de sciences et psychologie humaines, de religions et idéologies contemporaines." },
-      { "lead": "Une chercheuse pragmatique indépendante", "text": "passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI.<br /><em>Sortir du Jeu par le JE.</em>" },
-      { "lead": "Une maman", "text": "en contact avec l'Âme de sa fille durant sa grossesse." },
-      { "lead": "Un cerveau gauche musclé", "text": "<strong class=\"about-accent\">Expert comptable</strong> en libéral de 1993 à 2013<br /><span class=\"about-white\">Toujours présent pour veiller au maintien de l'esprit critique dans toutes mes approches</span>" },
-      { "lead": "Un cerveau droit déployé", "text": "<strong class=\"about-accent\">Médium clairvoyante et clairaudiente</strong> en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie" }
+      {
+        "lead": "Une petite fille",
+        "text": "choquée par un monde inversé."
+      },
+      {
+        "lead": "Une adolescente",
+        "text": "consciente du Jeu Matriciel, lectrice insatiable de sciences et psychologie humaines, de religions et idéologies contemporaines."
+      },
+      {
+        "lead": "Une chercheuse pragmatique indépendante",
+        "text": "passionnée par le rapprochement entre la science et le mystique, ayant expérimenté un renversement de conscience, une révélation du SOI.<br /><em>Sortir du Jeu par le JE.</em>"
+      },
+      {
+        "lead": "Une maman",
+        "text": "en contact avec l'Âme de sa fille durant sa grossesse."
+      },
+      {
+        "lead": "Un cerveau gauche musclé",
+        "text": "<strong class=\"about-accent\">Expert comptable</strong> en libéral de 1993 à 2013<br /><span class=\"about-white\">Toujours présent pour veiller au maintien de l'esprit critique dans toutes mes approches</span>"
+      },
+      {
+        "lead": "Un cerveau droit déployé",
+        "text": "<strong class=\"about-accent\">Médium clairvoyante et clairaudiente</strong> en contact avec de nombreux mondes parallèles via le voyage astral et la télépathie"
+      }
     ]
   },
   "activities": {
     "heading": "ACTIVITÉS ACTUELLES",
     "items": [
-      { "title": "Coach Consultant", "text": "Création et animation de stages d'Éveil depuis plus de 20 ans. PNL — diplômée de l'INLPTA (International NLP Trainers Association), 1997." },
-      { "title": "Consultations médiumniques", "text": "Coaching individuel, de couple ou professionnel." },
+      {
+        "title": "Coach Consultant",
+        "text": "Création et animation de stages d'Éveil depuis plus de 20 ans. PNL — diplômée de l'INLPTA (International NLP Trainers Association), 1997."
+      },
+      {
+        "title": "Consultations médiumniques",
+        "text": "Coaching individuel, de couple ou professionnel."
+      },
       {
         "title": "Conférencière depuis 2013",
-        "text": "Sujets présentés en France et via Zoom ou des Associations.",
+        "text": "Paris/Rennes/Toulouse/Limoges/Plazac/Périgueux/Nîmes/Tarn...et via Zoom pour des Associations.",
         "accordion": {
           "summary": "Quelques exemples de conférence (cliquez)",
           "items": [
-            "Processus d'incarnation et de désincarnation avec anecdotes personnelles",
-            "Le voyage de l'Âme et le monde de l'Astral",
-            "Du couple intérieur au couple extérieur",
-            "Du couple psycho karmique au couple cosmique",
-            "Alignements planétaires et galactiques du 21/12/2012",
-            "Conférence et Ateliers sur le féminin / Symposium International de Biarritz 2014",
-            "Mondes parallèles, Perceptions extra-sensorielles et voyage astral",
-            "Passage en 5D : compte à rebours",
-            "Apocalypse Now : révélations vers la 5D",
-            "La Sagesse Lémurienne au service de la 5D",
-            "La Terre Creuse et le Mont Shasta",
+            "Starseeds et Equipes Galactiques au sol = Action ! Novembre 2026",
+            "La mutation des corps et de l'ADN - Juin 2026",
+            "Organisatrice du Forum 2025 « Expériences d'autres mondes » avec Anne Givaudan à Rennes-les-Bains - Multiples Conférences",
             "Devenir un Humain Quantique — 2025",
-            "La multidimensionnalité de l'Être — 2025",
+            "La Multi dimensionnalité de l'Être — 2025",
+            "L'état de Terra : Actualités Intra et Extra en 2024 et idem en 2025",
             "Le Champ Unifié de la Conscience — 2022",
-            "L'état de Terra : actualités intra et extra en 2024, idem en 2025",
-            "Organisatrice de Forums : 2025 « Expériences d'autres mondes » avec Anne Givaudan à Rennes-les-Bains et interventions",
-            "La mutation des corps et de l'ADN — juin 2026",
-            "Et bien d'autres sujets… dont de nombreux DVD chez DEBOWSKA Productions à découvrir dans le site."
+            "Apocalypse Now : Révélations vers la 5D - 2021",
+            "Nombreuses conférences sur TELOS et le MONT SHASTA depuis 2013",
+            "Le Nouveau TELOS - 2026 / 2025",
+            "La Sagesse de la Lémurie au service de la 5D",
+            "Processus d'incarnation et de désincarnation avec anecdotes personnelles",
+            "Mondes parallèles, Perceptions extra-sensorielles et voyage astral",
+            "Le voyage de l'Âme et le monde de l'Astral",
+            "Du couple psycho karmique au couple cosmique",
+            "Conférence et Atelier / Symposium International sur le Féminin - Biarritz 2014",
+            ".../...",
+            "Et bien d'autres sujets à retrouver dans les Vidéos (dont DVD DEBOWSKA)"
           ]
         }
       },
-      { "title": "Organisatrice", "text": "Séminaires Initiatiques au Mont Shasta de 2014 à 2019 et Rencontres Internationales avec la Fondation et le Réseau TELOS Mondial." }
+      {
+        "title": "Organisatrice",
+        "text": "Séminaires Initiatiques au Mont Shasta de 2014 à 2019 et Rencontres Internationales avec la Fondation et le Réseau TELOS Mondial."
+      }
     ]
   },
   "specifics": {
