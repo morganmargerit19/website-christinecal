@@ -65,12 +65,14 @@
     edit: ['Vous n’avez pas enregistré vos changements sur ce stage.', () => editDirty()],
     page: ['Vous n’avez pas enregistré vos changements sur cette page.', () => pageDirty()],
     videos: ['Vous n’avez pas enregistré vos changements dans Mes vidéos.', () => videosDirty()],
+    agenda: ['Vous n’avez pas enregistré cette date.', () => agDirty()],
   };
   const unsaved = () => UNSAVED[currentView]?.[1]() ?? false;
   function show(view) {
     if (view !== currentView && view !== 'loading' && unsaved()
       && !confirm(UNSAVED[currentView][0] + '\n\nLes abandonner ? (« Annuler » pour rester et enregistrer)')) return;
     if (currentView === 'videos' && view !== 'videos') resetVideos();
+    if (currentView === 'agenda' && view !== 'agenda') closeAgForm();
     currentView = view;
     $$('.view').forEach((v) => (v.hidden = v.id !== 'v-' + view));
     const logged = view !== 'login' && view !== 'loading';
@@ -80,6 +82,7 @@
     if (view === 'home') renderHome();
     if (view === 'history') renderHistory();
     if (view === 'videos') renderVideos();
+    if (view === 'agenda') renderAgenda();
     window.scrollTo(0, 0);
   }
 
@@ -250,9 +253,11 @@
     $('#f-duration').value = d.duration || '';
     $('#f-price').value = d.price || '';
     $('#f-format').value = d.format || '';
-    $('#f-dates').replaceChildren();
-    (d.dates || []).forEach((x) => addItem('#f-dates', '#t-date', (n) => ($('.date', n).value = String(x))));
-    if (!(d.dates || []).length && !f) addItem('#f-dates', '#t-date');
+    // Dates : gérées dans Mon agenda (demande de Christine, 10/11), affichées ici pour mémoire
+    const ds = (d.dates || []).map(String).filter((x) => x.trim());
+    $('#f-dates-now').textContent = !f ? 'Enregistrez d’abord le stage, puis ajoutez ses dates dans Mon agenda.'
+      : ds.length ? 'Actuellement : ' + ds.join(' · ') : 'Aucune date pour l’instant.';
+    $('#edit-agenda').hidden = !f;
     $('#f-videos').replaceChildren();
     (d.videos || []).forEach((v) => addItem('#f-videos', '#t-video', (n) => {
       n.dataset.extra = JSON.stringify(v);
@@ -354,10 +359,9 @@
   }
 
   function preview() {
-    const dates = $$('#f-dates .date').map((i) => i.value.trim()).filter(Boolean);
     const img = $('#photo-img').hidden ? '' : $('#photo-img').src;
     $('#p-img').style.backgroundImage = img ? `url("${img}")` : '';
-    $('#p-label').textContent = nextDate(dates) || $('#f-kicker').value || 'Stage';
+    $('#p-label').textContent = $('#f-kicker').value || 'Stage';
     $('#p-title').textContent = $('#f-title').value || 'Titre du stage';
     $('#p-lede').textContent = $('#f-lede').value;
     $('#p-meta').textContent = [$('#f-place').value, $('#f-format').value, $('#f-duration').value, $('#f-price').value].map((s) => s.trim()).filter(Boolean).join(' · ');
@@ -414,7 +418,6 @@
       d.kicker = $('#f-kicker').value.trim() || 'Stage';
       if (rub === 'aucune') { delete d.rubrique; d.hub = $('#f-hub').value; } else { d.rubrique = rub; d.hub = bySlug(rub)?.data.hub || d.hub; }
       d.lede = lede;
-      d.dates = $$('#f-dates .date').map((i) => i.value.trim()).filter(Boolean);
       for (const k of ['place', 'duration', 'price', 'format']) {
         const v = $('#f-' + k).value.trim();
         if (v) d[k] = v; else if (k in d) d[k] = '';
@@ -866,6 +869,236 @@
     return 'le ' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: d.getFullYear() === t.getFullYear() ? undefined : 'numeric' });
   }
 
+
+  // ------------------------------------------------------------ Mon agenda
+  // Les dates d'un stage restent dans sa fiche (champ `dates`, texte en clair que le
+  // site sait lire). Ici, Christine les choisit dans un calendrier : on écrit la date
+  // comme elle l'écrirait (« 14–15 mars 2027 »). Une date à part reste modifiable en
+  // texte libre. Chaque date enregistrée part en ligne tout de suite.
+  const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+  const jour = (n) => (n === 1 ? '1er' : String(n));
+  const ymd = (v) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ''); return m ? { y: +m[1], m: +m[2] - 1, d: +m[3] } : null; };
+  const ym = (v) => { const m = /^(\d{4})-(\d{2})$/.exec(v || ''); return m ? { y: +m[1], m: +m[2] - 1 } : null; };
+  const pad = (n) => String(n).padStart(2, '0');
+  const isoDay = (t) => { const d = new Date(t); return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`; };
+  const isoMonth = (t) => isoDay(t).slice(0, 7);
+
+  function daysLabel(a, b) {
+    if (!b || (a.y === b.y && a.m === b.m && a.d === b.d)) return `${jour(a.d)} ${MOIS[a.m]} ${a.y}`;
+    if (a.y === b.y && a.m === b.m) return `${jour(a.d)}–${b.d} ${MOIS[a.m]} ${a.y}`;
+    if (a.y === b.y) return `${jour(a.d)} ${MOIS[a.m]} – ${jour(b.d)} ${MOIS[b.m]} ${a.y}`;
+    return `${jour(a.d)} ${MOIS[a.m]} ${a.y} – ${jour(b.d)} ${MOIS[b.m]} ${b.y}`;
+  }
+  const monthLabel = (x) => `${cap(MOIS[x.m])} ${x.y}`;
+  const fromLabel = (x) => `À partir ${/^[aeiou]/.test(MOIS[x.m]) ? 'd’' : 'de '}${MOIS[x.m]} ${x.y}`;
+
+  /** Début d'une date en clair (pour l'ordre et le calendrier), comme endOf pour la fin. */
+  function startOf(label) {
+    const n = label.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/(\d)\s*(er|eme|e)\b/g, '$1');
+    const num = /\b(\d{1,2})[/.](\d{1,2})[/.](\d{2,4})\b/.exec(n);
+    if (num) return Date.UTC(+num[3] < 100 ? 2000 + +num[3] : +num[3], +num[2] - 1, +num[1]);
+    const toks = n.match(/[a-z]+|\d+/g) || [];
+    const yi = toks.map((t, i) => (/^20\d\d$/.test(t) ? i : -1)).filter((i) => i >= 0);
+    const mi = toks.map((t, i) => (MONTHS.findIndex((r) => r.test(t)) >= 0 ? i : -1)).filter((i) => i >= 0);
+    if (!yi.length) return null;
+    if (!mi.length) return Date.UTC(+toks[yi[0]], 0, 1);
+    const first = mi[0];
+    const y = +(toks[yi.find((i) => i > first)] ?? toks[yi[yi.length - 1]]);
+    const m = MONTHS.findIndex((r) => r.test(toks[first]));
+    const d = toks.slice(0, first).find((t) => /^\d{1,2}$/.test(t));
+    return Date.UTC(y, m, d ? +d : 1);
+  }
+
+  /** Une date en clair → réglages du formulaire (le calendrier quand c'est possible). */
+  function kindOf(label) {
+    const t = String(label).trim();
+    if (/^me contacter$/i.test(t) || /^sur demande$/i.test(t)) return { kind: 'request' };
+    const a = startOf(t), b = endOf(t);
+    if (a !== null) {
+      const A = ymd(isoDay(a));
+      if (b !== Infinity && b !== null) {
+        const B = ymd(isoDay(b));
+        if (daysLabel(A, B) === t) return { kind: 'days', from: isoDay(a), to: a === b ? '' : isoDay(b) };
+        if (monthLabel(A) === t) return { kind: 'month', month: isoMonth(a) };
+      }
+      if (fromLabel(A) === t) return { kind: 'from', month: isoMonth(a) };
+    }
+    return { kind: 'text', text: t };
+  }
+
+  let agEdit = null;   // { f, i } : date en cours (i = null pour une nouvelle date)
+  let agBase = '';
+  const agKind = () => $('input[name="ag-kind"]:checked')?.value || 'days';
+  const agSnap = () => JSON.stringify([$('#ag-stage').value, agKind(), $('#ag-from').value, $('#ag-to').value, $('#ag-month').value, $('#ag-text').value]);
+  const agDirty = () => !$('#ag-form').hidden && agSnap() !== agBase;
+
+  /** Le texte qui partira sur le site, ou un message d'erreur. */
+  function agLabel() {
+    const k = agKind();
+    if (k === 'request') return { label: 'Me contacter' };
+    if (k === 'text') { const t = $('#ag-text').value.trim(); return t ? { label: t } : { error: 'Écrivez la date.' }; }
+    if (k === 'days') {
+      const a = ymd($('#ag-from').value), b = ymd($('#ag-to').value);
+      if (!a) return { error: 'Choisissez le premier jour.' };
+      if (b && Date.UTC(b.y, b.m, b.d) < Date.UTC(a.y, a.m, a.d)) return { error: 'Le dernier jour est avant le premier.' };
+      return { label: daysLabel(a, b) };
+    }
+    const x = ym($('#ag-month').value);
+    if (!x) return { error: 'Choisissez le mois.' };
+    return { label: k === 'month' ? monthLabel(x) : fromLabel(x) };
+  }
+
+  function agPreview() {
+    const k = agKind();
+    $('#ag-days').hidden = k !== 'days';
+    $('#ag-month-wrap').hidden = k !== 'month' && k !== 'from';
+    $('#ag-month-label').textContent = k === 'from' ? 'À partir du mois de' : 'Mois';
+    $('#ag-text-wrap').hidden = k !== 'text';
+    const r = agLabel();
+    $('#ag-preview').textContent = r.label || '—';
+    if ($('#ag-from').value && !$('#ag-to').value) $('#ag-to').min = $('#ag-from').value;
+  }
+
+  function fillStages(selected) {
+    const sel = $('#ag-stage');
+    sel.replaceChildren(new Option('Choisissez un stage…', ''));
+    for (const h of ['eveil-a-soi', 'eveil-au-soi']) {
+      const g = document.createElement('optgroup');
+      g.label = hubLabel[h];
+      fiches.filter((f) => f.data.hub === h)
+        .sort((a, b) => (a.data.order ?? 50) - (b.data.order ?? 50))
+        .forEach((f) => g.append(new Option(f.data.title + (f.data.draft ? ' (masqué)' : ''), f.path)));
+      sel.append(g);
+    }
+    sel.value = selected?.path || '';
+  }
+
+  function openAgForm(f, i) {
+    agEdit = { f, i };
+    const editing = f && i !== null && i !== undefined;
+    $('#ag-form-title').textContent = editing ? 'Modifier la date' : 'Nouvelle date';
+    fillStages(f);
+    $('#ag-stage').disabled = editing;
+    const k = editing ? kindOf(f.data.dates[i]) : { kind: 'days' };
+    $$('input[name="ag-kind"]').forEach((r) => (r.checked = r.value === k.kind));
+    $('#ag-from').value = k.from || '';
+    $('#ag-to').value = k.to || '';
+    $('#ag-month').value = k.month || '';
+    $('#ag-text').value = k.text || '';
+    $('#ag-remove').hidden = !editing;
+    showError('#ag-error', '');
+    $('#ag-form').hidden = false;
+    agPreview();
+    agBase = agSnap();
+    $('#ag-form').scrollIntoView({ block: 'start' });
+    (f ? $('#ag-from') : $('#ag-stage')).focus();
+  }
+  function closeAgForm() { $('#ag-form').hidden = true; agEdit = null; agBase = ''; }
+
+  /** Enregistre la liste des dates d'un stage (le reste de la fiche ne bouge pas). */
+  async function saveDates(f, dates) {
+    const text = serialize({ ...f.data, dates }, f.body);
+    const res = await api('save', { path: f.path, text, sha: f.sha, title: f.data.title + ' (dates)' });
+    files[f.path] = { sha: res.sha, text };
+    const updated = parseFiche(f.path, res.sha, text);
+    fiches = fiches.map((x) => (x.path === f.path ? updated : x));
+    renderList();
+    historyCache = null;
+    followDeploy();
+    return updated;
+  }
+
+  async function saveAgForm(ev) {
+    ev.preventDefault();
+    const f = agEdit?.f && agEdit.i !== null && agEdit.i !== undefined ? agEdit.f : fiches.find((x) => x.path === $('#ag-stage').value);
+    if (!f) return showError('#ag-error', 'Choisissez le stage.');
+    const r = agLabel();
+    if (r.error) return showError('#ag-error', r.error);
+    const dates = (f.data.dates || []).map(String);
+    const i = agEdit?.i;
+    if (i !== null && i !== undefined) dates[i] = r.label;
+    else {
+      if (dates.includes(r.label)) return showError('#ag-error', 'Cette date est déjà dans l’agenda de ce stage.');
+      // « Me contacter » n'a plus de sens à côté d'une vraie date
+      const real = r.label !== 'Me contacter';
+      if (real) for (let j = dates.length - 1; j >= 0; j--) if (/^me contacter$/i.test(dates[j])) dates.splice(j, 1);
+      dates.push(r.label);
+    }
+    const btn = $('#ag-save');
+    btn.disabled = true; btn.textContent = 'Enregistrement…';
+    try {
+      await saveDates(f, dates);
+      closeAgForm();
+      renderAgenda();
+    } catch (e) {
+      showError('#ag-error', e.message);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Enregistrer cette date';
+    }
+  }
+
+  async function removeDate(f, i) {
+    const label = String(f.data.dates[i]);
+    if (!confirm(`Retirer « ${label} » de l’agenda de « ${f.data.title} » ?`)) return;
+    try {
+      const dates = (f.data.dates || []).map(String).filter((_, j) => j !== i);
+      await saveDates(f, dates);
+      if (agEdit?.f?.path === f.path) closeAgForm();
+      renderAgenda();
+    } catch (e) { showError('#ag-error', e.message); $('#ag-form').hidden = false; }
+  }
+
+  function renderAgenda() {
+    const today = Date.now() - DAY;
+    const upcoming = [], past = [], other = [];
+    for (const f of fiches) {
+      (f.data.dates || []).map(String).forEach((d, i) => {
+        if (!d.trim()) return;
+        const end = endOf(d), start = startOf(d);
+        const x = { f, i, d, start: start ?? end };
+        if (end === null) other.push(x);
+        else if (end >= today) upcoming.push(x);
+        else past.push(x);
+      });
+    }
+    upcoming.sort((a, b) => a.start - b.start);
+    past.sort((a, b) => b.start - a.start);
+    const row = (x, cls) => {
+      const r = el('div', 'ag-row' + (cls ? ' ' + cls : ''));
+      const s = el('span', 's', x.f.data.title);
+      if (x.f.data.draft) s.append(el('span', 'badge', 'Masqué'));
+      const acts = el('span', 'acts');
+      const mod = el('button', 'btn small', 'Modifier'); mod.type = 'button';
+      mod.addEventListener('click', () => openAgForm(x.f, x.i));
+      const del = el('button', 'btn small ghost', 'Retirer'); del.type = 'button';
+      del.addEventListener('click', () => removeDate(x.f, x.i));
+      acts.append(mod, del);
+      r.append(el('span', 'd', x.d === 'Me contacter' ? 'Sur demande' : x.d), s, acts);
+      return r;
+    };
+    const box = $('#ag-list');
+    box.replaceChildren();
+    if (!upcoming.length) box.append(el('p', 'hint ag-empty', 'Aucune date à venir. Cliquez sur « + Ajouter une date ».'));
+    let month = '';
+    for (const x of upcoming) {
+      const m = x.start === Infinity || x.start === null ? 'En cours' : cap(new Date(x.start).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' }));
+      if (m !== month) { month = m; box.append(el('h2', 'ag-month', m)); }
+      box.append(row(x));
+    }
+    if (other.length) {
+      box.append(el('h2', 'ag-month', 'Sur demande et autres mentions'));
+      box.append(el('p', 'hint', 'Sur le site, ces stages sont indiqués « sur demande » en bas de la page Agenda.'));
+      other.forEach((x) => box.append(row(x)));
+    }
+    if (past.length) {
+      const det = el('details', 'ag-past');
+      det.append(el('summary', 'link-dark', `Dates passées (${past.length}) : elles ne s’affichent plus sur le site`));
+      past.forEach((x) => det.append(row(x, 'ag-row--past')));
+      box.append(det);
+    }
+  }
+
   // ------------------------------------------------------------ Accueil
   let siteState = null; // dernier état de la mise en ligne
   function renderHome() {
@@ -881,7 +1114,7 @@
       const ds = (f.data.dates || []).map(String);
       const next = ds.map((d) => ({ d, end: endOf(d) })).filter((x) => x.end !== null && x.end >= today);
       if (!next.length) { if (ds.length) onRequest++; continue; }
-      for (const x of next) upcoming.push({ ...x, f });
+      for (const x of next) upcoming.push({ ...x, f, i: ds.indexOf(x.d) });
     }
     upcoming.sort((a, b) => a.end - b.end);
     const box = $('#home-dates');
@@ -890,7 +1123,7 @@
       const row = el('button', 'date-row');
       row.type = 'button';
       row.append(el('span', 'dd', x.d), el('span', 'dt', x.f.data.title));
-      row.addEventListener('click', () => openEditor(x.f));
+      row.addEventListener('click', () => { show('agenda'); if (currentView === 'agenda') openAgForm(x.f, x.i); });
       box.append(row);
     }
     if (!upcoming.length) box.append(el('p', 'hint', 'Aucune date à venir pour l’instant.'));
@@ -1283,7 +1516,12 @@
   $('#add-stage').addEventListener('click', () => openEditor(null));
   $('#back').addEventListener('click', () => show('stages'));
   $('#cancel').addEventListener('click', () => show('stages'));
-  $('#add-date').addEventListener('click', () => $('.date', addItem('#f-dates', '#t-date')).focus());
+  $('#edit-agenda').addEventListener('click', () => { const f = current; if (f?.path) { show('agenda'); if (currentView === 'agenda') openAgForm(f, null); } });
+  $('#ag-add').addEventListener('click', () => openAgForm(null, null));
+  $('#ag-cancel').addEventListener('click', closeAgForm);
+  $('#ag-remove').addEventListener('click', () => agEdit && removeDate(agEdit.f, agEdit.i));
+  $('#ag-form').addEventListener('input', agPreview);
+  $('#ag-form').addEventListener('submit', saveAgForm);
   $('#add-video').addEventListener('click', () => $('.v-url', addItem('#f-videos', '#t-video')).focus());
   $('#add-testimonial').addEventListener('click', () => $('.t-quote', addItem('#f-testimonials', '#t-testimonial')).focus());
   $('#f-rubrique').addEventListener('change', toggleHub);

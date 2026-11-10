@@ -8,7 +8,6 @@ import Base from '../layouts/Base.astro';
 import ContactBand from './ContactBand.astro';
 import Card from './Card.astro';
 import VideoCard from './VideoCard.astro';
-import AgendaList from './AgendaList.astro';
 import Icon from './Icon.astro';
 import Fleur from './Fleur.astro';
 import { slugOf, stagesOf } from '../../src/lib/fiches';
@@ -125,14 +124,14 @@ const videos = hub === 'eveil-a-soi'
     </div>
   </section>
 
+  {/* Les dates elles-mêmes ne sont que sur la page Agenda (10/11) : ici, le lien. */}
   {entries.length > 0 && !classic && (
     <section class="section sky">
       <div class="wrap">
         <div class="head-row">
           <div><p class="eyebrow">{tr('Agenda')}</p><h2 class="h2" style="margin-top: 14px">{tr('Prochaines dates')}</h2></div>
-          <a class="btn" href={u('/agenda/')}>{tr("Tout l'agenda")}<Icon name="arrow" /></a>
+          <a class="btn" href={u('/agenda/')}>{tr("Voir l'agenda")}<Icon name="arrow" /></a>
         </div>
-        <div><AgendaList entries={entries} limit={6} /></div>
       </div>
     </section>
   )}
