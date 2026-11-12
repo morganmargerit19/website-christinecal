@@ -78,7 +78,7 @@
     const logged = view !== 'login' && view !== 'loading';
     $('#tabs').hidden = !logged;
     $('#top-right').hidden = !logged;
-    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === (TAB_OF[view] || view)));
+    $$('#tabs button').forEach((b) => b.toggleAttribute('aria-current', b.dataset.tab === (view === 'edit' && editFrom === 'pages' ? 'pages' : TAB_OF[view] || view)));
     if (view === 'home') renderHome();
     if (view === 'history') renderHistory();
     if (view === 'videos') renderVideos();
@@ -215,7 +215,7 @@
         go.className = 'go';
         go.textContent = 'Modifier →';
         row.append(thumb, txt, go);
-        row.addEventListener('click', () => openEditor(f));
+        row.addEventListener('click', () => { editFrom = 'stages'; openEditor(f); });
         rows.append(row);
       }
       sec.append(h, rows);
@@ -241,6 +241,7 @@
     bodyDirty = false;
     const d = current.data;
     $('#edit-title').textContent = f ? 'Modifier : ' + d.title : 'Nouveau stage';
+    $('#back').textContent = editFrom === 'pages' ? '← Retour à mes pages' : '← Retour à mes stages';
     $('#f-title').value = d.title || '';
     $('#f-kicker').value = d.kicker || '';
     const sel = $('#f-rubrique');
@@ -271,9 +272,12 @@
     }));
     $('#f-visible').checked = !d.draft;
     const locked = hasLayout(current.body);
-    $('#body-locked').hidden = !locked;
+    // Mise en page particulière (colonnes, photos placées…) : le texte se modifie par blocs
+    blocks = locked ? splitBlocks(current.body) : null;
+    $('#body-blocks').hidden = !locked;
     $('#body-wrap').hidden = locked;
     $('#f-body').innerHTML = locked ? '' : marked.parse(current.body || '');
+    renderBlocks();
     setPhoto(d.image || '');
     slides = (d.slideshow || []).map((src) => ({ src }));
     renderSlides();
@@ -291,7 +295,7 @@
   let editBase = '';
   function editSnapshot() {
     const vals = $$('#edit-form input:not([type=file]), #edit-form select, #edit-form textarea').map((i) => (i.type === 'checkbox' ? i.checked : i.value));
-    return JSON.stringify([vals, bodyDirty ? $('#f-body').innerHTML : '', !!newPhoto, $('#photo-img').hidden, slides.map((x) => x.src || 'nouvelle')]);
+    return JSON.stringify([vals, bodyDirty ? $('#f-body').innerHTML : '', $$('#f-blocks .editor').map((e) => (e.dataset.dirty ? e.innerHTML : '')), !!newPhoto, $('#photo-img').hidden, slides.map((x) => x.src || 'nouvelle')]);
   }
   const editDirty = () => !!current && editSnapshot() !== editBase;
 
@@ -427,7 +431,7 @@
       d.draft = !$('#f-visible').checked;
       if (!d.draft && current.data.draft === undefined) delete d.draft;
 
-      const body = bodyDirty ? turndown.turndown($('#f-body').innerHTML) : current.body;
+      const body = blocks ? (blocksDirty() ? joinBlocks() : current.body) : bodyDirty ? mdxSafe(turndown.turndown($('#f-body').innerHTML)) : current.body;
       let path = current.path;
       if (!path) {
         let slug = slugify(title), n = 2;
@@ -442,7 +446,7 @@
       renderList();
       historyCache = null;
       current = null;
-      show('stages');
+      show(editFrom);
       followDeploy();
     } catch (e) {
       showError('#edit-error', e.message);
@@ -468,7 +472,7 @@
       renderList();
       historyCache = null;
       current = null;
-      show('stages');
+      show(editFrom);
       followDeploy();
     } catch (e) {
       showError('#edit-error', e.message);
@@ -789,7 +793,23 @@
       row.addEventListener('click', () => openPage(def));
       box.append(row);
     }
+    for (const [slug, title, desc] of FICHE_PAGES) {
+      const f = bySlug(slug);
+      if (!f) continue;
+      const row = el('button', 'srow srow--page');
+      row.type = 'button';
+      const txt = el('span');
+      txt.append(el('span', 't', title), Object.assign(el('span', 'm', desc), { style: 'display:block' }));
+      row.append(txt, el('span', 'go', 'Modifier →'));
+      // La fiche est relue au clic : après un enregistrement, c'est la nouvelle version
+      row.addEventListener('click', () => { editFrom = 'pages'; openEditor(bySlug(slug)); });
+      box.append(row);
+    }
   }
+  const FICHE_PAGES = [
+    ['construire-son-vaisseau', 'École 5D', 'Présentation, colonnes « Comment ? / Effets », Particularité, Source, vidéos, témoignages…'],
+    ['les-intra-telos-mont-shasta', 'Mont Shasta', 'Le texte de la page, le diaporama, les vidéos…'],
+  ];
 
   function openPage(def) {
     const data = json(def.path, null);
@@ -869,6 +889,121 @@
     return 'le ' + d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: d.getFullYear() === t.getFullYear() ? undefined : 'numeric' });
   }
 
+
+
+  // ------------------------------------------------------------ Texte par blocs (pages à mise en page)
+  // École 5D, Mont Shasta… : le texte mêle Markdown et blocs de mise en page
+  // (<TwoColumns>, <CenteredText>, photos placées). On le découpe en blocs ; seuls les
+  // blocs modifiés sont réécrits, les autres repartent exactement comme ils étaient.
+  let blocks = null;
+  let editFrom = 'stages'; // écran de retour de l'éditeur de stage
+  /** Un texte saisi ne doit pas casser la page (MDX) : accolades et chevrons neutralisés. */
+  const mdxSafe = (md) => md.replace(/[{}]/g, (c) => '\\' + c).replace(/<(?![a-z]+:\/\/)/gi, '&lt;');
+  const attr = (a, name) => (a.match(new RegExp(name + '="([^"]*)"')) || [])[1] || '';
+
+  function splitBlocks(body) {
+    const out = [];
+    const md = (txt) => {
+      // Un bloc de texte par titre « ## », pour s'y retrouver
+      const parts = txt.split(/\n(?=## )/).map((x) => x.trim()).filter(Boolean);
+      for (const p of parts) out.push({ type: 'md', src: p, md: p });
+    };
+    const re = /<TwoColumns>([\s\S]*?)<\/TwoColumns>|<CenteredText([^>]*)>([\s\S]*?)<\/CenteredText>|<([A-Z][A-Za-z]*)\b[^>]*?\/>|<([A-Z][A-Za-z]*)\b[^>]*>[\s\S]*?<\/\5>/g;
+    let last = 0, m;
+    while ((m = re.exec(body))) {
+      md(body.slice(last, m.index));
+      if (m[1] !== undefined) {
+        const cols = [...m[1].matchAll(/<Column([^>]*)>([\s\S]*?)<\/Column>/g)].map((c) => ({ title: attr(c[1], 'title'), subtitle: attr(c[1], 'subtitle'), md: c[2].trim() }));
+        out.push(cols.length ? { type: 'cols', src: m[0], cols } : { type: 'raw', src: m[0] });
+      } else if (m[3] !== undefined) {
+        out.push({ type: 'center', src: m[0], attrs: m[2], md: m[3].trim() });
+      } else {
+        out.push({ type: 'raw', src: m[0] });
+      }
+      last = m.index + m[0].length;
+    }
+    md(body.slice(last));
+    return out;
+  }
+
+  const blocksDirty = () => $$('#f-blocks .editor').some((e) => e.dataset.dirty) || $$('#f-blocks input').some((x) => x.value !== x.dataset.orig);
+  const q = (t) => t.replace(/"/g, '”');
+  function joinBlocks() {
+    return blocks.map((b, i) => {
+      const node = $(`#f-blocks [data-i="${i}"]`);
+      if (!node) return b.src;
+      const eds = $$('.editor', node);
+      const inputsChanged = $$('input', node).some((x) => x.value !== x.dataset.orig);
+      if (!eds.some((e) => e.dataset.dirty) && !inputsChanged) return b.src;
+      const mdOf = (e, orig) => (e.dataset.dirty ? mdxSafe(turndown.turndown(e.innerHTML)).trim() : orig);
+      if (b.type === 'md') return mdOf(eds[0], b.md);
+      if (b.type === 'center') return `<CenteredText${b.attrs}>\n\n${mdOf(eds[0], b.md)}\n\n</CenteredText>`;
+      if (b.type === 'cols') {
+        const cols = b.cols.map((c, j) => {
+          const t = q($(`.c-title[data-j="${j}"]`, node).value.trim());
+          const st = q($(`.c-sub[data-j="${j}"]`, node).value.trim());
+          return `<Column title="${t}"${st ? ` subtitle="${st}"` : ''}>\n\n${mdOf(eds[j], c.md)}\n\n</Column>`;
+        });
+        return `<TwoColumns>\n${cols.join('\n')}\n</TwoColumns>`;
+      }
+      return b.src;
+    }).join('\n\n');
+  }
+
+  function rte(md) {
+    const wrap = el('div', 'rte');
+    wrap.append($('#body-wrap .toolbar').cloneNode(true));
+    const ed = el('div', 'editor');
+    ed.contentEditable = 'true';
+    ed.innerHTML = marked.parse(md || '');
+    ed.addEventListener('input', () => { ed.dataset.dirty = '1'; });
+    wrap.append(ed);
+    return wrap;
+  }
+  const firstWords = (md) => md.replace(/^#+\s*/gm, '').replace(/[*_>#[\]]/g, '').replace(/\(https?:[^)]*\)/g, '').replace(/\s+/g, ' ').trim().slice(0, 70);
+
+  function input(cls, value, j) {
+    const i = el('input', cls);
+    i.type = 'text';
+    i.value = value;
+    i.dataset.orig = value;
+    i.dataset.j = j;
+    return i;
+  }
+
+  function renderBlocks() {
+    const box = $('#f-blocks');
+    box.replaceChildren();
+    if (!blocks) return;
+    blocks.forEach((b, i) => {
+      const d = el('details', 'blk blk--' + b.type);
+      d.dataset.i = i;
+      const head = b.type === 'md' ? ((b.md.match(/^#{2,5}\s+(.+)$/m) || [])[1] || firstWords(b.md)).replace(/[*_]/g, '')
+        : b.type === 'cols' ? b.cols.map((c) => c.title).filter(Boolean).join(' / ')
+        : b.type === 'center' ? firstWords(b.md) : 'placées dans le texte';
+      const kind = { md: 'Texte', cols: 'Deux colonnes', center: 'Phrase centrée', raw: 'Photos' }[b.type];
+      const sum = el('summary');
+      sum.append(el('span', 'bk', kind), el('span', 'bt', head || '…'));
+      d.append(sum);
+      if (b.type === 'md' || b.type === 'center') d.append(rte(b.md));
+      else if (b.type === 'cols') {
+        const grid = el('div', 'blk-cols');
+        b.cols.forEach((c, j) => {
+          const col = el('div', 'blk-col');
+          const l1 = el('label', null, 'Titre de la colonne'); l1.append(input('c-title', c.title, j));
+          const l2 = el('label', null, 'Sous-titre (facultatif)'); l2.append(input('c-sub', c.subtitle, j));
+          col.append(l1, l2, rte(c.md));
+          grid.append(col);
+        });
+        d.append(grid);
+      } else {
+        const strip = el('div', 'blk-imgs');
+        for (const x of b.src.matchAll(/src[:=]\s*["']([^"']+)["']/g)) { const im = el('img'); im.src = x[1]; im.alt = ''; strip.append(im); }
+        d.append(strip, el('p', 'hint', 'Ces photos restent à leur place. Pour les changer, demandez à Morgan.'));
+      }
+      box.append(d);
+    });
+  }
 
   // ------------------------------------------------------------ Mon agenda
   // Les dates d'un stage restent dans sa fiche (champ `dates`, texte en clair que le
@@ -1513,9 +1648,9 @@
   });
   $('#logout').addEventListener('click', async () => { try { await api('logout'); } catch {} csrf = ''; status('', ''); show('login'); });
   $$('#tabs button').forEach((b) => b.addEventListener('click', () => show(b.dataset.tab)));
-  $('#add-stage').addEventListener('click', () => openEditor(null));
-  $('#back').addEventListener('click', () => show('stages'));
-  $('#cancel').addEventListener('click', () => show('stages'));
+  $('#add-stage').addEventListener('click', () => { editFrom = 'stages'; openEditor(null); });
+  $('#back').addEventListener('click', () => show(editFrom));
+  $('#cancel').addEventListener('click', () => show(editFrom));
   $('#edit-agenda').addEventListener('click', () => { const f = current; if (f?.path) { show('agenda'); if (currentView === 'agenda') openAgForm(f, null); } });
   $('#ag-add').addEventListener('click', () => openAgForm(null, null));
   $('#ag-cancel').addEventListener('click', closeAgForm);
@@ -1545,7 +1680,7 @@
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-go]');
     if (!b) return;
-    if (b.dataset.go === 'add-stage') openEditor(null); else show(b.dataset.go);
+    if (b.dataset.go === 'add-stage') { editFrom = 'stages'; openEditor(null); } else show(b.dataset.go);
   });
   $('#page-back').addEventListener('click', () => show('pages'));
   $('#see-site').href = SITE;
@@ -1566,13 +1701,18 @@
   // Éditeur de texte
   const editor = $('#f-body');
   editor.addEventListener('input', () => (bodyDirty = true));
-  editor.addEventListener('paste', (e) => {
-    // Colle le texte seul : pas de mise en forme parasite venue d'un traitement de texte
+  // Colle le texte seul : pas de mise en forme parasite venue d'un traitement de texte
+  document.addEventListener('paste', (e) => {
+    if (!e.target.closest?.('#v-edit .editor')) return;
     e.preventDefault();
     document.execCommand('insertText', false, e.clipboardData.getData('text/plain'));
   });
-  $$('.toolbar button').forEach((b) => b.addEventListener('mousedown', (e) => {
+  // Barre de mise en forme : agit sur l'éditeur qu'elle accompagne (texte du stage ou bloc)
+  document.addEventListener('mousedown', (e) => {
+    const b = e.target.closest?.('#v-edit .toolbar button');
+    if (!b) return;
     e.preventDefault();
+    const editor = b.closest('.rte').querySelector('.editor');
     editor.focus();
     const cmd = b.dataset.cmd;
     if (cmd === 'bold' || cmd === 'italic') document.execCommand(cmd);
@@ -1584,8 +1724,8 @@
       const url = prompt('Adresse du lien (https://…)');
       if (url && /^(https?:\/\/|\/|mailto:)/.test(url)) document.execCommand('createLink', false, url);
     }
-    bodyDirty = true;
-  }));
+    if (editor === $('#f-body')) bodyDirty = true; else editor.dataset.dirty = '1';
+  });
 
   // Démarrage
   api('me').then((r) => { csrf = r.csrf; return r.loggedIn ? load() : show('login'); })
