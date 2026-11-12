@@ -51,7 +51,7 @@ const themes = [
   ...(others.length ? [{ id: 'autres', title: tr('Autres forums et conférences'), rows: [others.map((v) => v.id)] }] : []),
 ].filter((t) => t.rows.length > 0);
 const shown = new Set(themes.flatMap((t) => t.rows.flat()).filter((id) => id !== SOON));
-const DVD_NOTE = tr('DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.');
+const DVD_NOTE = tr('DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage à son épouse Malgorzata Debowska.');
 ---
 <Base title={`${tr('Vidéos et DVD')} · Christine CAL`} description={tr('Les vidéos de Christine CAL : DVD Debowska, conférences, interviews radio et présentation.')} path="/videos/">
   <section class="page-hero sky" aria-labelledby="titre">

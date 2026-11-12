@@ -97,7 +97,8 @@
     </div>
     <form id="ag-form" class="card form ag-form" novalidate hidden>
       <h2 id="ag-form-title">Nouvelle date</h2>
-      <label>Stage<select id="ag-stage"></select></label>
+      <label>Stage ou conférence<select id="ag-stage"></select></label>
+      <label id="ag-title-wrap" hidden>Titre de la conférence <span class="req">obligatoire</span><input type="text" id="ag-title" maxlength="140"></label>
       <fieldset class="ag-kinds">
         <legend>Quand ?</legend>
         <label><input type="radio" name="ag-kind" value="days" checked> Des jours précis</label>
@@ -112,6 +113,10 @@
       </div>
       <label id="ag-month-wrap" hidden><span id="ag-month-label">Mois</span><input type="month" id="ag-month"></label>
       <label id="ag-text-wrap" hidden>La date, écrite en clair <small>Ex. : 14–15 mars 2027, Août 2027</small><input type="text" id="ag-text" maxlength="120"></label>
+      <div id="ag-extra">
+          <label>Modalités <small>Facultatif. Ex. : Visioconférence via l’association Debowska Arts, à contacter pour l’inscription</small><textarea id="ag-modalites" rows="2" maxlength="300"></textarea></label>
+          <label>Inscription auprès de… <small>Facultatif. Si quelqu’un d’autre s’occupe des inscriptions : son e-mail ou l’adresse de son site. Le bouton « S’inscrire » de l’agenda y mènera (sinon, vers vous).</small><input type="text" id="ag-inscription" maxlength="200" placeholder="Ex. : contact@debowska-arts.fr"></label>
+      </div>
       <p class="ag-preview">Sur le site : <b id="ag-preview">—</b></p>
       <p class="error" id="ag-error" hidden></p>
       <div class="bar">
@@ -161,6 +166,8 @@
             <label>Tarif<input type="text" id="f-price" placeholder="Ex. : 220 €"></label>
           </div>
           <label>Format <small>Facultatif</small><input type="text" id="f-format" placeholder="Ex. : Présentiel ou Zoom"></label>
+          <label>Modalités <small>Facultatif. Ex. : Visioconférence via l’association Debowska Arts, à contacter pour l’inscription</small><textarea id="f-modalites" rows="2" maxlength="300"></textarea></label>
+          <label>Inscription auprès de… <small>Facultatif. Si quelqu’un d’autre s’occupe des inscriptions : son e-mail ou l’adresse de son site. Le bouton « S’inscrire » de l’agenda y mènera (sinon, vers vous).</small><input type="text" id="f-inscription" maxlength="200" placeholder="Ex. : contact@debowska-arts.fr"></label>
         </fieldset>
 
         <fieldset class="card">
@@ -322,6 +329,7 @@
     <div class="faq">
       <details class="card"><summary>Ajouter ou changer une date</summary><ol><li>Ouvrez <b>Mon agenda</b>.</li><li>Pour une nouvelle date : <b>+ Ajouter une date</b>, choisissez le stage. Pour en changer une : cliquez sur <b>Modifier</b> à côté.</li><li>Choisissez « Des jours précis » et les jours dans le calendrier (ou « Un mois », « À partir d’un mois », « Sur demande »).</li><li>Cliquez sur <b>Enregistrer cette date</b>.</li></ol><p>Les dates n’apparaissent que sur la page Agenda du site, dans l’ordre, et disparaissent toutes seules une fois passées. Un stage peut avoir plusieurs dates.</p></details>
       <details class="card"><summary>Ajouter un nouveau stage</summary><ol><li>Sur l’accueil, cliquez sur <b>Ajouter un stage</b>.</li><li>Remplissez le titre, la phrase de présentation et la rubrique, puis le lieu, le tarif.</li><li>Ajoutez une photo (une photo de téléphone convient), puis <b>Enregistrer</b>.</li><li>Ajoutez ses dates dans <b>Mon agenda</b>.</li></ol><p>À droite, l’aperçu montre la carte telle qu’elle apparaîtra.</p></details>
+      <details class="card"><summary>Ajouter une conférence</summary><ol><li>Ouvrez <b>Mon agenda</b>, puis <b>+ Ajouter une date</b>.</li><li>Dans la liste, choisissez <b>＋ Nouvelle conférence</b> et écrivez son titre.</li><li>Choisissez le jour, puis écrivez les <b>Modalités</b> (par exemple « Visioconférence via l’association Debowska Arts, à contacter pour l’inscription »).</li><li>Si l’association gère les inscriptions, mettez son e-mail ou son site dans <b>Inscription auprès de…</b> : le bouton « S’inscrire » de l’agenda y mènera.</li><li><b>Enregistrer cette date</b>.</li></ol><p>La conférence apparaît dans l’agenda du site et dans la rubrique <b>Conférences</b> (Éveil au Soi). Vous pouvez lui ajouter une photo ou un texte depuis <b>Mes stages</b>.</p></details>
       <details class="card"><summary>Retirer ou supprimer un stage</summary><p><b>Le retirer pour un temps :</b> ouvrez le stage, décochez <b>Afficher ce stage sur le site</b>, puis enregistrez. Il reste dans votre espace, prêt à revenir.</p><p><b>Le supprimer :</b> ouvrez le stage et cliquez sur <b>Supprimer ce stage</b>, en bas. Une erreur ? Il revient depuis l’<b>Historique</b>.</p></details>
       <details class="card"><summary>Modifier un texte de Qui suis-je ou de Ma mission</summary><ol><li>Ouvrez <b>Mes pages</b>, puis la page.</li><li>Cliquez sur <b>Ouvrir</b> à côté du bloc à changer (par exemple « Actualités »).</li><li>Changez le texte. Pour mettre un mot en gras, sélectionnez-le puis cliquez sur <b>G</b>.</li><li>Cliquez sur <b>Enregistrer</b>.</li></ol></details>
       <details class="card"><summary>Modifier la page École 5D ou Mont Shasta</summary><ol><li>Ouvrez <b>Mes pages</b>, puis <b>École 5D</b> ou <b>Mont Shasta</b>.</li><li>En bas, dans « Texte de la page », le texte est découpé en blocs (textes, deux colonnes, phrases centrées). Cliquez sur un bloc pour l’ouvrir et changez le texte.</li><li>Cliquez sur <b>Enregistrer</b>.</li></ol><p>Les blocs que vous ne touchez pas restent exactement comme ils étaient. Les photos placées dans le texte ne bougent pas. Le reste (titre, vidéos, témoignages, diaporama) se modifie plus haut sur la même page.</p></details>

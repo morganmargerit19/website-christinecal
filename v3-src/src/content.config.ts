@@ -121,6 +121,10 @@ const fiches = defineCollection({
     place: z.string().optional(),
     price: z.string().optional(),
     format: z.string().optional(),
+    // Modalités en clair (« Visioconférence via l'association… ») et, si quelqu'un d'autre
+    // gère les inscriptions, son e-mail ou son lien (le bouton « S'inscrire » y mène).
+    modalites: z.string().optional(),
+    inscription: z.string().optional(),
     // Bandeau large en tête de page (full-bleed, ratio ~3.2:1), optionnel
     banner: z.string().optional(),
     bannerAlt: z.string().optional(),

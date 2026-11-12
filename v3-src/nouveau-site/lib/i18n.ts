@@ -112,7 +112,7 @@ export function localPractical(s: string | undefined): string | undefined {
 // ------------------------------------------------------------------ Contenus
 type Fiche = CollectionEntry<'fiches'>;
 type D = Fiche['data'];
-const TEXT_FIELDS = ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'testimonials', 'videosHeading', 'audioTitle'] as const;
+const TEXT_FIELDS = ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'testimonials', 'videosHeading', 'audioTitle', 'modalites'] as const;
 
 /** Textes d'une image (légende, description) pris dans la traduction, l'image restant celle du français. */
 const imgText = <T extends { alt?: string; caption?: string }>(fr: T, t?: { alt?: string; caption?: string }): T =>

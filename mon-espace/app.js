@@ -254,6 +254,8 @@
     $('#f-duration').value = d.duration || '';
     $('#f-price').value = d.price || '';
     $('#f-format').value = d.format || '';
+    $('#f-modalites').value = d.modalites || '';
+    $('#f-inscription').value = d.inscription || '';
     // Dates : gérées dans Mon agenda (demande de Christine, 10/11), affichées ici pour mémoire
     const ds = (d.dates || []).map(String).filter((x) => x.trim());
     $('#f-dates-now').textContent = !f ? 'Enregistrez d’abord le stage, puis ajoutez ses dates dans Mon agenda.'
@@ -422,7 +424,7 @@
       d.kicker = $('#f-kicker').value.trim() || 'Stage';
       if (rub === 'aucune') { delete d.rubrique; d.hub = $('#f-hub').value; } else { d.rubrique = rub; d.hub = bySlug(rub)?.data.hub || d.hub; }
       d.lede = lede;
-      for (const k of ['place', 'duration', 'price', 'format']) {
+      for (const k of ['place', 'duration', 'price', 'format', 'modalites', 'inscription']) {
         const v = $('#f-' + k).value.trim();
         if (v) d[k] = v; else if (k in d) d[k] = '';
       }
@@ -1065,7 +1067,7 @@
   let agEdit = null;   // { f, i } : date en cours (i = null pour une nouvelle date)
   let agBase = '';
   const agKind = () => $('input[name="ag-kind"]:checked')?.value || 'days';
-  const agSnap = () => JSON.stringify([$('#ag-stage').value, agKind(), $('#ag-from').value, $('#ag-to').value, $('#ag-month').value, $('#ag-text').value]);
+  const agSnap = () => JSON.stringify([$('#ag-stage').value, agKind(), $('#ag-from').value, $('#ag-to').value, $('#ag-month').value, $('#ag-text').value, $('#ag-title').value, $('#ag-modalites').value, $('#ag-inscription').value]);
   const agDirty = () => !$('#ag-form').hidden && agSnap() !== agBase;
 
   /** Le texte qui partira sur le site, ou un message d'erreur. */
@@ -1097,7 +1099,7 @@
 
   function fillStages(selected) {
     const sel = $('#ag-stage');
-    sel.replaceChildren(new Option('Choisissez un stage…', ''));
+    sel.replaceChildren(new Option('Choisissez un stage ou une conférence…', ''), new Option('＋ Nouvelle conférence (titre à écrire)', NEW_CONF));
     for (const h of ['eveil-a-soi', 'eveil-au-soi']) {
       const g = document.createElement('optgroup');
       g.label = hubLabel[h];
@@ -1107,6 +1109,16 @@
       sel.append(g);
     }
     sel.value = selected?.path || '';
+  }
+
+  const NEW_CONF = '__conference__';
+  const CONF_RUB = 'conferences';
+  /** Modalités et inscription du stage choisi, à jour dans le formulaire. */
+  function agFillExtra() {
+    const f = fiches.find((x) => x.path === $('#ag-stage').value);
+    $('#ag-title-wrap').hidden = $('#ag-stage').value !== NEW_CONF;
+    $('#ag-modalites').value = f?.data.modalites || '';
+    $('#ag-inscription').value = f?.data.inscription || '';
   }
 
   function openAgForm(f, i) {
@@ -1121,6 +1133,8 @@
     $('#ag-to').value = k.to || '';
     $('#ag-month').value = k.month || '';
     $('#ag-text').value = k.text || '';
+    $('#ag-title').value = '';
+    agFillExtra();
     $('#ag-remove').hidden = !editing;
     showError('#ag-error', '');
     $('#ag-form').hidden = false;
@@ -1132,12 +1146,15 @@
   function closeAgForm() { $('#ag-form').hidden = true; agEdit = null; agBase = ''; }
 
   /** Enregistre la liste des dates d'un stage (le reste de la fiche ne bouge pas). */
-  async function saveDates(f, dates) {
-    const text = serialize({ ...f.data, dates }, f.body);
-    const res = await api('save', { path: f.path, text, sha: f.sha, title: f.data.title + ' (dates)' });
+  async function saveDates(f, dates, extra) {
+    const data = { ...f.data, dates };
+    // Modalités et inscription saisies dans l'agenda (vides : on les retire)
+    if (extra) for (const [k, v] of Object.entries(extra)) { if (v) data[k] = v; else delete data[k]; }
+    const text = serialize(data, f.body);
+    const res = await api('save', { path: f.path, text, sha: f.sha, title: f.data.title + (f.sha ? ' (dates)' : '') });
     files[f.path] = { sha: res.sha, text };
     const updated = parseFiche(f.path, res.sha, text);
-    fiches = fiches.map((x) => (x.path === f.path ? updated : x));
+    fiches = fiches.some((x) => x.path === f.path) ? fiches.map((x) => (x.path === f.path ? updated : x)) : fiches.concat(updated);
     renderList();
     historyCache = null;
     followDeploy();
@@ -1146,8 +1163,17 @@
 
   async function saveAgForm(ev) {
     ev.preventDefault();
-    const f = agEdit?.f && agEdit.i !== null && agEdit.i !== undefined ? agEdit.f : fiches.find((x) => x.path === $('#ag-stage').value);
-    if (!f) return showError('#ag-error', 'Choisissez le stage.');
+    const isNew = !(agEdit?.f && agEdit.i !== null && agEdit.i !== undefined) && $('#ag-stage').value === NEW_CONF;
+    let f = agEdit?.f && agEdit.i !== null && agEdit.i !== undefined ? agEdit.f : fiches.find((x) => x.path === $('#ag-stage').value);
+    if (isNew) {
+      const title = $('#ag-title').value.trim();
+      if (!title) return showError('#ag-error', 'Écrivez le titre de la conférence.');
+      let slug = slugify(title), n = 2;
+      while (fiches.some((x) => x.slug === slug)) slug = slugify(title) + '-' + n++;
+      const rub = bySlug(CONF_RUB);
+      f = { path: FICHES + slug + '.mdx', sha: null, slug, body: '', data: { lang: 'fr', title, kicker: 'Conférence', hub: rub?.data.hub || 'eveil-au-soi', ...(rub ? { rubrique: CONF_RUB } : {}), category: 'conference', order: 50, lede: $('#ag-modalites').value.trim() || 'Conférence de Christine CAL.', dates: [] } };
+    }
+    if (!f) return showError('#ag-error', 'Choisissez le stage ou la conférence.');
     const r = agLabel();
     if (r.error) return showError('#ag-error', r.error);
     const dates = (f.data.dates || []).map(String);
@@ -1163,7 +1189,7 @@
     const btn = $('#ag-save');
     btn.disabled = true; btn.textContent = 'Enregistrement…';
     try {
-      await saveDates(f, dates);
+      await saveDates(f, dates, { modalites: $('#ag-modalites').value.trim(), inscription: $('#ag-inscription').value.trim() });
       closeAgForm();
       renderAgenda();
     } catch (e) {
@@ -1656,6 +1682,7 @@
   $('#ag-cancel').addEventListener('click', closeAgForm);
   $('#ag-remove').addEventListener('click', () => agEdit && removeDate(agEdit.f, agEdit.i));
   $('#ag-form').addEventListener('input', agPreview);
+  $('#ag-stage').addEventListener('change', agFillExtra);
   $('#ag-form').addEventListener('submit', saveAgForm);
   $('#add-video').addEventListener('click', () => $('.v-url', addItem('#f-videos', '#t-video')).focus());
   $('#add-testimonial').addEventListener('click', () => $('.t-quote', addItem('#f-testimonials', '#t-testimonial')).focus());

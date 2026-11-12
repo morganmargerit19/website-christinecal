@@ -383,12 +383,6 @@
   "it": "Radio",
   "pl": "Radio"
  },
- "DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage pour son épouse Malgorzata Debowska.": {
-  "en": "DEBOWSKA DVD, shown by special permission of Konstanty UDALA DEBOWSKA in tribute to his wife Malgorzata Debowska.",
-  "es": "DVD DEBOWSKA, con autorización excepcional de difusión de Konstanty UDALA DEBOWSKA en homenaje a su esposa Malgorzata Debowska.",
-  "it": "DVD DEBOWSKA, con autorizzazione eccezionale alla diffusione di Konstanty UDALA DEBOWSKA in omaggio alla moglie Malgorzata Debowska.",
-  "pl": "DVD DEBOWSKA, udostępnione dzięki wyjątkowej zgodzie Konstantego UDALI DEBOWSKIEGO, w hołdzie dla jego żony Małgorzaty Dębowskiej."
- },
  "Visiter son site": {
   "en": "Visit his website",
   "es": "Visitar su sitio",
@@ -880,5 +874,23 @@
   "es": "Próximas fechas",
   "it": "Prossime date",
   "pl": "Najbliższe terminy"
+ },
+ "DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion de Konstanty UDALA DEBOWSKA en hommage à son épouse Malgorzata Debowska.": {
+  "en": "DEBOWSKA DVD, shown by special permission of Konstanty UDALA DEBOWSKA in tribute to his wife Malgorzata Debowska.",
+  "es": "DVD DEBOWSKA, con autorización excepcional de difusión de Konstanty UDALA DEBOWSKA en homenaje a su esposa Malgorzata Debowska.",
+  "it": "DVD DEBOWSKA, con autorizzazione eccezionale alla diffusione di Konstanty UDALA DEBOWSKA in omaggio alla moglie Malgorzata Debowska.",
+  "pl": "DVD DEBOWSKA, udostępnione dzięki wyjątkowej zgodzie Konstantego UDALI DEBOWSKIEGO, w hołdzie dla jego żony Małgorzaty Dębowskiej."
+ },
+ "Modalités": {
+  "en": "How it works",
+  "es": "Modalidades",
+  "it": "Modalità",
+  "pl": "Szczegóły"
+ },
+ "Inscription": {
+  "en": "Registration",
+  "es": "Inscripción",
+  "it": "Iscrizione",
+  "pl": "Zapisy"
  }
 }
