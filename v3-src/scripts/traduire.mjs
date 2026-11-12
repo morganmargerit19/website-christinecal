@@ -129,7 +129,7 @@ function ficheUnits() {
         if (d.bodyImage && tr.bodyImage) Object.assign(d.bodyImage, prune(tr.bodyImage));
         (d.testimonials ?? []).forEach((t, i) => { if (tr.testimonials?.[i]) t.quote = tr.testimonials[i]; });
         fs.mkdirSync(path.dirname(p), { recursive: true });
-        fs.writeFileSync(p, '---\n' + YAML.stringify(d, { lineWidth: 0 }) + '---\n\n' + tr.body.trim() + '\n');
+        fs.writeFileSync(p, '---\n' + YAML.stringify(d, { lineWidth: 0 }) + '---\n\n' + (tr.body ?? '').trim() + '\n');
       },
     });
   }
