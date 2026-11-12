@@ -862,5 +862,23 @@
   "es": "Sesión de coaching mediúmnico",
   "it": "Sessione di coaching medianico",
   "pl": "Sesja coachingu mediumicznego"
+ },
+ "Voir l'agenda": {
+  "en": "See the calendar",
+  "es": "Ver la agenda",
+  "it": "Vedi il calendario",
+  "pl": "Zobacz kalendarz"
+ },
+ "Sur demande": {
+  "en": "On request",
+  "es": "Bajo petición",
+  "it": "Su richiesta",
+  "pl": "Na zapytanie"
+ },
+ "Prochaines dates": {
+  "en": "Upcoming dates",
+  "es": "Próximas fechas",
+  "it": "Prossime date",
+  "pl": "Najbliższe terminy"
  }
 }

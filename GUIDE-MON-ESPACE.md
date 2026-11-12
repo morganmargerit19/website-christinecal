@@ -11,19 +11,34 @@ toutes les langues : vous écrivez en français, la traduction en anglais, espag
 italien et polonais se fait toute seule. Un bandeau
 en haut de l'espace vous dit quand c'est en ligne.
 
+## Mon agenda
+
+Toutes les dates de vos stages, dans l'ordre. Sur le site, les dates n'apparaissent
+**que sur la page Agenda** (plus sur les cartes ni sur les pages des stages, qui
+renvoient vers l'agenda).
+
+- **Ajouter une date :** **+ Ajouter une date**, choisissez le stage, puis :
+  - **Des jours précis** : choisissez le premier et le dernier jour dans le calendrier
+    (laissez « Au » vide pour un seul jour) ;
+  - **Un mois** (*Août 2027*), **À partir d'un mois** (*À partir de septembre 2026*),
+    **Sur demande**, ou **Je l'écris moi-même**.
+  « Sur le site » montre la date telle qu'elle s'affichera. Puis **Enregistrer cette date**.
+- **Changer une date :** **Modifier** à côté de la date (ou un clic sur la date depuis
+  l'Accueil).
+- **Retirer une date :** **Retirer**. Les dates passées disparaissent toutes seules du site.
+
+Un stage peut avoir plusieurs dates. Chaque date enregistrée part en ligne tout de suite.
+
 ## Mes stages
 
-**Modifier un stage :** cliquez sur le stage, changez ce que vous voulez (dates, lieu,
-tarif, photo, texte…), puis **Enregistrer**. Depuis l'accueil, un clic sur une date
-ouvre directement le bon stage.
+**Modifier un stage :** cliquez sur le stage, changez ce que vous voulez (lieu, tarif,
+photo, texte…), puis **Enregistrer**. Ses dates se gèrent dans **Mon agenda** (bouton
+« Gérer les dates de ce stage »).
 
 **Ajouter un stage :** **+ Ajouter un stage**. Remplissez le titre, la phrase de
-présentation et la rubrique, puis les dates, le lieu, le tarif et une photo. À droite,
-l'aperçu montre la carte telle qu'elle apparaîtra.
-
-**Les dates** s'écrivent en clair, une par ligne : *14–15 mars 2027*, *Août 2027*,
-*À partir de septembre 2026*. Le site les range tout seul dans l'agenda et retire les
-dates passées. Pour un stage sans date fixe : *Me contacter*.
+présentation et la rubrique, puis le lieu, le tarif et une photo. Enregistrez, puis
+ajoutez ses dates dans **Mon agenda**. À droite, l'aperçu montre la carte telle qu'elle
+apparaîtra.
 
 **Les photos :** **Choisir une photo**, ou glissez-la dans le cadre. Une photo de
 téléphone convient : elle est réduite automatiquement.

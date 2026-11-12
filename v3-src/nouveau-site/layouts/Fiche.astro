@@ -5,7 +5,7 @@
  * présentation, dates, lieu, durée, tarif, photos, texte, vidéos, témoignages.
  * Une case vide n'affiche rien (jamais de « à préciser »).
  */
-import { getFichesL, localDate, tr, trn } from '../lib/i18n';
+import { getFichesL, tr, trn } from '../lib/i18n';
 import { render, type CollectionEntry } from 'astro:content';
 import Base from './Base.astro';
 import ContactBand from '../components/ContactBand.astro';
@@ -27,7 +27,7 @@ import Note from '../components/blocks/Note.astro';
 import { slugOf, stagesOf } from '../../src/lib/fiches';
 import { HUBS, ECOLE_PATH, OLD_NEW, SHASTA_PATH, fichePath, mailto, u, type Hub } from '../lib/site';
 import { exists, framedVisualOf, isStrip } from '../lib/images';
-import { parseDate } from '../lib/agenda';
+import { nextDate, parseDate } from '../lib/agenda';
 import { ACTIVATION, ECOLE, ECOLE_GEO } from '../lib/ecole';
 import ProsePart from '../components/ProsePart.astro';
 import GeoFleur from '../components/GeoFleur.astro';
@@ -96,12 +96,15 @@ const cta = isConsult ? tr('Réserver une consultation') : undefined;
 const subject = isConsult ? `Consultation médiumnique` : `${f.title}${dates[0] ? ` (${dates[0]})` : ''}`;
 
 const facts = [
-  dates.length && { label: tr(dates.length === 1 && hasCalendar ? 'Date' : 'Dates'), values: dates.map(localDate) },
+  // Les dates ne s'affichent que sur la page Agenda (demande de Christine, 10/11) : ici, un lien.
+  dates.length && (nextDate(f)
+    ? { label: tr('Dates'), values: [], link: { href: u('/agenda/'), text: tr("Voir l'agenda") } }
+    : !hasCalendar ? { label: tr('Dates'), values: [tr('Sur demande')] } : undefined),
   f.place && { label: tr('Lieu'), values: [f.place] },
   f.format && { label: tr('Format'), values: [f.format] },
   f.duration && { label: tr('Durée'), values: [f.duration] },
   f.price && { label: tr('Tarif'), values: [f.price] },
-].filter(Boolean) as { label: string; values: string[] }[];
+].filter(Boolean) as { label: string; values: string[]; link?: { href: string; text: string } }[];
 
 const anchored = [
   ...f.sideImages.filter((s) => exists(s.src)).map((s) => ({ ...s, src: u(s.src) })),
@@ -142,7 +145,7 @@ const anchored = [
     <section class="sky" aria-label={tr('Infos pratiques')} style="padding-block: 10px 40px">
       <div class="wrap">
         <dl class="facts" style={`--cols:${facts.length}`}>
-          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
+          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}{x.link && <dd><a href={x.link.href}>{x.link.text}</a></dd>}</div>)}
         </dl>
       </div>
     </section>
@@ -299,7 +302,7 @@ const anchored = [
     <section class="sky section--tight" aria-label={tr('Infos pratiques')}>
       <div class="wrap">
         <dl class="facts" style={`--cols:${facts.length}`}>
-          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}</div>)}
+          {facts.map((x) => <div><dt>{x.label}</dt>{x.values.map((v) => <dd>{v}</dd>)}{x.link && <dd><a href={x.link.href}>{x.link.text}</a></dd>}</div>)}
         </dl>
       </div>
     </section>

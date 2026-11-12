@@ -48,7 +48,7 @@ legend small { font: 400 15px var(--sans); color: var(--muted); }
 .form label, .label-like { display: block; margin: 16px 0 0; font-weight: 500; }
 .form label small, .label-like small { display: block; font-weight: 400; font-size: 15px; color: var(--muted); }
 .req { font-weight: 400; font-size: 13px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; margin-left: 6px; }
-input[type=text], input[type=email], input[type=password], input[type=tel], select, textarea {
+input[type=text], input[type=email], input[type=password], input[type=tel], input[type=date], input[type=month], select, textarea {
   display: block; width: 100%; margin-top: 6px; padding: 12px 14px; border: 1px solid #CFC5B0; border-radius: 10px; background: #FFFDF8; font-size: 18px;
 }
 textarea { resize: vertical; }
@@ -233,13 +233,13 @@ textarea { resize: vertical; }
 .dlg-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 22px; }
 .dlg-actions .grow { flex: 1; }
 /* En-tête sur une seule ligne quand la place le permet */
-@media (min-width: 1100px) {
+@media (min-width: 1400px) {
   .top-in { flex-wrap: nowrap; gap: 20px; }
   .tabs { flex: 1; min-width: 0; }
   .top-right { flex-shrink: 0; }
   .brand span { display: none; }
 }
-@media (min-width: 1100px) and (max-width: 1260px) { .tabs button { padding: 10px 11px; font-size: 15px; } }
+@media (min-width: 1400px) and (max-width: 1560px) { .tabs button { padding: 10px 11px; font-size: 15px; } }
 .hrow .btn { flex-shrink: 0; white-space: nowrap; }
 
 /* Photos de page et diaporama */
@@ -253,3 +253,26 @@ textarea { resize: vertical; }
 .slide .tool { min-height: 34px; padding: 0 10px; }
 .btn.danger { color: var(--err); border-color: #E7B9C1; margin-right: auto; }
 .btn.danger:hover { background: var(--err-bg); }
+
+/* ---------- Mon agenda ---------- */
+.ag-form { margin: 0 0 28px; border: 2px solid var(--gold); }
+.ag-form h2 { font: 500 26px/1.2 var(--serif); margin: 0; }
+.ag-kinds { border: 0; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ag-kinds legend { font-weight: 500; margin-bottom: 8px; padding: 0; }
+.ag-form .ag-kinds label { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; font-weight: 400; cursor: pointer; background: var(--card); }
+.ag-kinds label:has(input:checked) { border-color: var(--gold); background: var(--gold-soft); font-weight: 500; }
+.ag-kinds input { accent-color: var(--gold); width: 18px; height: 18px; margin: 0; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+@media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+.ag-preview { margin: 18px 0 0; font-size: 17px; }
+.ag-preview b { font: 500 22px var(--serif); }
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 20px; }
+.bar .btn.danger { margin: 0 0 0 auto; }
+.ag-month { font: 500 24px/1.2 var(--serif); margin: 26px 0 10px; }
+.ag-row { display: grid; grid-template-columns: 210px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-top: 8px; }
+.ag-row .d { font: 500 21px/1.2 var(--serif); }
+.ag-row .s { color: var(--ink-2); }
+.ag-row .acts { display: flex; gap: 8px; }
+.ag-row--past { opacity: .7; }
+@media (max-width: 640px) { .ag-row { grid-template-columns: 1fr; gap: 6px; } }
+.ag-empty { margin-top: 24px; }
