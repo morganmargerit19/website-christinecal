@@ -65,6 +65,11 @@ Les textes de **Qui suis-je**, **Ma mission**, **Éveil à Soi** et **Éveil au 
    l'ordre, **Retirer** l'enlève.
 4. **Enregistrer**, en bas. **Voir la page** ouvre la page du site.
 
+**École 5D** et **Mont Shasta** sont aussi dans Mes pages. Leur texte est découpé en
+blocs (textes, deux colonnes, phrases centrées) : cliquez sur un bloc pour l'ouvrir,
+changez le texte, puis **Enregistrer**. Les blocs non touchés et les photos placées dans
+le texte ne bougent pas.
+
 Les photos des pages se changent au même endroit : votre portrait (Qui suis-je, bloc « En
 haut de la page »), votre photo de Ma mission (bloc « La mission »), l'image de fond
 d'Éveil à Soi et le bandeau d'Éveil au Soi (bloc « En haut de la page »). Cliquez sur
