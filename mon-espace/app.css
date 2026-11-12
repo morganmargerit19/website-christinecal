@@ -48,7 +48,7 @@ legend small { font: 400 15px var(--sans); color: var(--muted); }
 .form label, .label-like { display: block; margin: 16px 0 0; font-weight: 500; }
 .form label small, .label-like small { display: block; font-weight: 400; font-size: 15px; color: var(--muted); }
 .req { font-weight: 400; font-size: 13px; color: var(--gold); text-transform: uppercase; letter-spacing: .08em; margin-left: 6px; }
-input[type=text], input[type=email], input[type=password], input[type=tel], input[type=date], input[type=month], select, textarea {
+input[type=text], input[type=email], input[type=password], input[type=tel], input[type=date], input[type=month], input[type=time], select, textarea {
   display: block; width: 100%; margin-top: 6px; padding: 12px 14px; border: 1px solid #CFC5B0; border-radius: 10px; background: #FFFDF8; font-size: 18px;
 }
 textarea { resize: vertical; }
@@ -263,6 +263,8 @@ textarea { resize: vertical; }
 .ag-kinds label:has(input:checked) { border-color: var(--gold); background: var(--gold-soft); font-weight: 500; }
 .ag-kinds input { accent-color: var(--gold); width: 18px; height: 18px; margin: 0; }
 .row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
+#ag-days { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; }
+@media (max-width: 720px) { #ag-days { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
 .ag-preview { margin: 18px 0 0; font-size: 17px; }
 .ag-preview b { font: 500 22px var(--serif); }

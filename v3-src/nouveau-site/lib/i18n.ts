@@ -65,10 +65,10 @@ const MONTHS_ALONE: Partial<Record<Exclude<Lang, 'fr'>, string[]>> = {
   pl: ['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'],
 };
 const WORDS: Record<Exclude<Lang, 'fr'>, [RegExp, string][]> = {
-  en: [[/^à partir d[e'’]\s*/i, 'From '], [/^dès\s+/i, 'From '], [/^depuis\s+/i, 'Since '], [/^me contacter$/i, 'Contact me'], [/^sur demande$/i, 'On request'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'and'], [/\bau\b/g, 'to']],
-  es: [[/^à partir d[e'’]\s*/i, 'A partir de '], [/^dès\s+/i, 'Desde '], [/^depuis\s+/i, 'Desde '], [/^me contacter$/i, 'Contactarme'], [/^sur demande$/i, 'Bajo petición'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'y'], [/\bau\b/g, 'al']],
-  it: [[/^à partir d[e'’]\s*/i, 'A partire da '], [/^dès\s+/i, 'Da '], [/^depuis\s+/i, 'Da '], [/^me contacter$/i, 'Contattatemi'], [/^sur demande$/i, 'Su richiesta'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'e'], [/\bau\b/g, 'al']],
-  pl: [[/^à partir d[e'’]\s*/i, 'Od '], [/^dès\s+/i, 'Od '], [/^depuis\s+/i, 'Od '], [/^me contacter$/i, 'Proszę o kontakt'], [/^sur demande$/i, 'Na zapytanie'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'i'], [/\bau\b/g, 'do']],
+  en: [[/^à partir d[e'’]\s*/i, 'From '], [/ à (\d{1,2}) h (\d{2})$/, ' at $1:$2'], [/ à (\d{1,2}) h$/, ' at $1:00'], [/^dès\s+/i, 'From '], [/^depuis\s+/i, 'Since '], [/^me contacter$/i, 'Contact me'], [/^sur demande$/i, 'On request'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'and'], [/\bau\b/g, 'to']],
+  es: [[/^à partir d[e'’]\s*/i, 'A partir de '], [/ à (\d{1,2}) h (\d{2})$/, ' a las $1:$2'], [/ à (\d{1,2}) h$/, ' a las $1:00'], [/^dès\s+/i, 'Desde '], [/^depuis\s+/i, 'Desde '], [/^me contacter$/i, 'Contactarme'], [/^sur demande$/i, 'Bajo petición'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'y'], [/\bau\b/g, 'al']],
+  it: [[/^à partir d[e'’]\s*/i, 'A partire da '], [/ à (\d{1,2}) h (\d{2})$/, ' alle $1:$2'], [/ à (\d{1,2}) h$/, ' alle $1:00'], [/^dès\s+/i, 'Da '], [/^depuis\s+/i, 'Da '], [/^me contacter$/i, 'Contattatemi'], [/^sur demande$/i, 'Su richiesta'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'e'], [/\bau\b/g, 'al']],
+  pl: [[/^à partir d[e'’]\s*/i, 'Od '], [/ à (\d{1,2}) h (\d{2})$/, ' o $1:$2'], [/ à (\d{1,2}) h$/, ' o $1:00'], [/^dès\s+/i, 'Od '], [/^depuis\s+/i, 'Od '], [/^me contacter$/i, 'Proszę o kontakt'], [/^sur demande$/i, 'Na zapytanie'], [/\b(\d+)er\b/g, '$1'], [/\bet\b/g, 'i'], [/\bau\b/g, 'do']],
 };
 const MONTH_RE = /(janvier|janv\.?|f[ée]vrier|f[ée]vr?\.?|mars|avril|avr\.?|mai|juin|juillet|juil\.?|ao[uû]t|septembre|sept?\.?|octobre|oct\.?|novembre|nov\.?|d[ée]cembre|d[ée]c\.?)(?![a-zà-ÿ])/giu;
 const MONTH_KEYS = ['jan', 'fev', 'mar', 'avr', 'mai', 'juin', 'juil', 'aou', 'sep', 'oct', 'nov', 'dec'];

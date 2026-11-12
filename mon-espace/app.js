@@ -444,12 +444,19 @@
       const res = await api('save', { path, text, sha: current.sha, title });
       files[path] = { sha: res.sha, text };
       const updated = parseFiche(path, res.sha, text);
+      const wasNew = !current.path;
       fiches = fiches.filter((f) => f.path !== path).concat(updated);
       renderList();
       historyCache = null;
       current = null;
-      show(editFrom);
       followDeploy();
+      // Nouveau stage ou conférence sans date : on enchaîne sur sa date, sinon il n'apparaît pas dans l'agenda
+      if (wasNew && !(updated.data.dates || []).length) {
+        show('agenda');
+        openAgForm(updated, null);
+        showError('#ag-error', '');
+        $('#ag-form-title').textContent = 'Et maintenant, sa date : « ' + updated.data.title + ' »';
+      } else show(editFrom);
     } catch (e) {
       showError('#edit-error', e.message);
     } finally {
@@ -1049,6 +1056,9 @@
 
   /** Une date en clair → réglages du formulaire (le calendrier quand c'est possible). */
   function kindOf(label) {
+    // « 22 novembre 2026 à 18 h 30 » : l'heure à part, la date dans le calendrier
+    const h = /^(.*\d{4}) à (\d{1,2}) h(?: (\d{2}))?$/.exec(String(label).trim());
+    if (h) { const k = kindOf(h[1]); if (k.kind === 'days') return { ...k, time: `${String(h[2]).padStart(2, '0')}:${h[3] || '00'}` }; }
     const t = String(label).trim();
     if (/^me contacter$/i.test(t) || /^sur demande$/i.test(t)) return { kind: 'request' };
     const a = startOf(t), b = endOf(t);
@@ -1067,7 +1077,7 @@
   let agEdit = null;   // { f, i } : date en cours (i = null pour une nouvelle date)
   let agBase = '';
   const agKind = () => $('input[name="ag-kind"]:checked')?.value || 'days';
-  const agSnap = () => JSON.stringify([$('#ag-stage').value, agKind(), $('#ag-from').value, $('#ag-to').value, $('#ag-month').value, $('#ag-text').value, $('#ag-title').value, $('#ag-modalites').value, $('#ag-inscription').value]);
+  const agSnap = () => JSON.stringify([$('#ag-stage').value, agKind(), $('#ag-from').value, $('#ag-to').value, $('#ag-time').value, $('#ag-month').value, $('#ag-text').value, $('#ag-title').value, $('#ag-modalites').value, $('#ag-inscription').value]);
   const agDirty = () => !$('#ag-form').hidden && agSnap() !== agBase;
 
   /** Le texte qui partira sur le site, ou un message d'erreur. */
@@ -1079,7 +1089,8 @@
       const a = ymd($('#ag-from').value), b = ymd($('#ag-to').value);
       if (!a) return { error: 'Choisissez le premier jour.' };
       if (b && Date.UTC(b.y, b.m, b.d) < Date.UTC(a.y, a.m, a.d)) return { error: 'Le dernier jour est avant le premier.' };
-      return { label: daysLabel(a, b) };
+      const t = /^(\d{2}):(\d{2})$/.exec($('#ag-time').value);
+      return { label: daysLabel(a, b) + (t ? ` à ${+t[1]} h${t[2] !== '00' ? ' ' + t[2] : ''}` : '') };
     }
     const x = ym($('#ag-month').value);
     if (!x) return { error: 'Choisissez le mois.' };
@@ -1133,6 +1144,7 @@
     $('#ag-to').value = k.to || '';
     $('#ag-month').value = k.month || '';
     $('#ag-text').value = k.text || '';
+    $('#ag-time').value = k.time || '';
     $('#ag-title').value = '';
     agFillExtra();
     $('#ag-remove').hidden = !editing;
