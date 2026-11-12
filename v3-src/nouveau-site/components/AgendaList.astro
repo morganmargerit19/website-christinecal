@@ -11,6 +11,13 @@ import { tr } from '../lib/i18n';
 interface Props { entries: AgendaEntry[]; limit?: number; spare?: number }
 const { entries, limit, spare = 4 } = Astro.props;
 // On rend quelques entrées de plus que la limite : si une date passe, la suivante prend sa place.
+/** S'inscrire : auprès de l'organisateur quand la fiche en donne un (e-mail ou lien), sinon auprès de Christine. */
+const bookHref = (e: AgendaEntry) => {
+  const i = e.inscription?.trim();
+  if (!i) return mailto(e.subject);
+  if (/^[^\s@]+@[^\s@]+$/.test(i)) return `mailto:${i}?subject=${encodeURIComponent(e.subject)}`;
+  return /^https?:\/\//.test(i) ? i : 'https://' + i;
+};
 const shown = limit ? entries.slice(0, limit + spare) : entries;
 ---
 <ol class="agenda" data-agenda data-limit={limit}>
@@ -21,8 +28,8 @@ const shown = limit ? entries.slice(0, limit + spare) : entries;
         <a class="title" href={e.href}>{e.title}</a>
         {e.rubrique && <span class="rub">{e.rubrique}</span>}
       </span>
-      <span class="info">{e.info}</span>
-      <a class="book" href={mailto(e.subject)} aria-label={`${tr("S'inscrire")} : ${e.title}, ${e.label}`}>{tr("S'inscrire")}<Icon name="arrow" /></a>
+      <span class="info">{e.modalites ?? e.info}</span>
+      <a class="book" href={bookHref(e)} target={e.inscription && !e.inscription.includes('@') ? '_blank' : undefined} rel={e.inscription && !e.inscription.includes('@') ? 'noopener' : undefined} aria-label={`${tr("S'inscrire")} : ${e.title}, ${e.label}`}>{tr("S'inscrire")}<Icon name="arrow" /></a>
     </li>
   ))}
 </ol>

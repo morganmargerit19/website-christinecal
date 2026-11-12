@@ -90,6 +90,9 @@ export type AgendaEntry = {
   end?: string;
   sort: string;
   subject: string;
+  modalites?: string;
+  /** E-mail ou lien de l'organisateur, sinon l'inscription se fait auprès de Christine. */
+  inscription?: string;
 };
 
 export function buildAgenda(fiches: Fiche[], today = new Date()) {
@@ -116,6 +119,7 @@ export function buildAgenda(fiches: Fiche[], today = new Date()) {
         sort: iso(sortDate) + d.title,
         // L'objet du mail reste en français : c'est Christine qui le lit.
         subject: `Inscription : ${d.title} (${label})`,
+        modalites: d.modalites || undefined, inscription: d.inscription || undefined,
       });
     }
     if (!dated && d.dates.some((x) => x.trim())) onDemand.push({ title: d.title, href });

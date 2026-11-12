@@ -27,6 +27,12 @@ renvoient vers l'agenda).
   l'Accueil).
 - **Retirer une date :** **Retirer**. Les dates passées disparaissent toutes seules du site.
 
+**Une conférence :** dans la liste des stages, choisissez **＋ Nouvelle conférence**, écrivez
+son titre, la date et les **Modalités** (*Visioconférence via l'association…*). Si un
+organisateur gère les inscriptions, mettez son e-mail ou son site dans **Inscription
+auprès de…** : le bouton « S'inscrire » de l'agenda y mènera. Elle se range dans la
+rubrique **Conférences** (Éveil au Soi).
+
 Un stage peut avoir plusieurs dates. Chaque date enregistrée part en ligne tout de suite.
 
 ## Mes stages

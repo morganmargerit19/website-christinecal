@@ -84,7 +84,7 @@ function fichePayload(fm, body) {
   const img = (i) => prune({ alt: i?.alt, caption: i?.caption });
   return prune({
     title: fm.title, kicker: fm.kicker, lede: fm.lede, cardLede: fm.cardLede, imageAlt: fm.imageAlt,
-    bannerAlt: fm.bannerAlt, videosHeading: fm.videosHeading, audioTitle: fm.audioTitle,
+    bannerAlt: fm.bannerAlt, videosHeading: fm.videosHeading, audioTitle: fm.audioTitle, modalites: fm.modalites,
     videos: Object.fromEntries((fm.videos ?? []).filter((v) => v.title).map((v) => [v.id, v.title])),
     inline: (fm.inlineMedia ?? []).map((m) => prune({ section: m.section, video: m.video?.title, images: (m.images ?? []).map(img) })),
     side: (fm.sideImages ?? []).map((s) => prune({ section: s.section, alt: s.alt, caption: s.caption })),
@@ -116,7 +116,7 @@ function ficheUnits() {
         const d = structuredClone(fm);
         d.lang = l;
         d.sourceHash = h;
-        for (const k of ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'videosHeading', 'audioTitle']) if (tr[k]) d[k] = tr[k];
+        for (const k of ['title', 'kicker', 'lede', 'cardLede', 'imageAlt', 'bannerAlt', 'videosHeading', 'audioTitle', 'modalites']) if (tr[k]) d[k] = tr[k];
         for (const v of d.videos ?? []) if (tr.videos?.[v.id]) v.title = tr.videos[v.id];
         (d.inlineMedia ?? []).forEach((m, i) => {
           const t = tr.inline?.[i]; if (!t) return;

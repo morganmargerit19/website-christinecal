@@ -100,6 +100,8 @@ const facts = [
   dates.length && (nextDate(f)
     ? { label: tr('Dates'), values: [], link: { href: u('/agenda/'), text: tr("Voir l'agenda") } }
     : !hasCalendar ? { label: tr('Dates'), values: [tr('Sur demande')] } : undefined),
+  f.modalites && { label: tr('Modalités'), values: [f.modalites] },
+  f.inscription && { label: tr('Inscription'), values: [], link: { href: /@/.test(f.inscription) ? 'mailto:' + f.inscription.trim() : /^https?:\/\//.test(f.inscription) ? f.inscription : 'https://' + f.inscription, text: f.inscription.replace(/^https?:\/\//, '') } },
   f.place && { label: tr('Lieu'), values: [f.place] },
   f.format && { label: tr('Format'), values: [f.format] },
   f.duration && { label: tr('Durée'), values: [f.duration] },
