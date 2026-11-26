@@ -105,6 +105,8 @@ le guide, faire un essai ensemble (week-end du 3–4 octobre).
    → /eveil-au-soi/) : fichiers `redirects/*.htaccess` prêts ET **déposés auto sur OVH**
    par le workflow dans `coach-redir` / `coach-quantique-redir`. Il reste à **repointer
    ces 2 domaines** (+ www) sur ces dossiers dans Multisite (WP conservé = rollback).
+   _Mise à jour du 26/11/2026 : fait ; les 2 domaines sont résiliés à l'échéance du
+   07/09/2027. Voir `DEPLOY-OVH.md`._
 3. **Facture** juillet : **EURL Christine CAL Coach Consultant**, mention
    **« TVA non applicable, art. 293 B du CGI »**.
 4. Soumettre `https://www.christinecal.com/sitemap-index.xml` à la Search Console.

@@ -19,6 +19,8 @@ _Mise à jour : 2 novembre 2026. Ce fichier fait référence._
   Fonctionnement : voir « Traductions » dans `NOUVEAU-SITE.md`.
 - L'aperçu Vercel (https://website-christinecal.vercel.app/nouveau-site/) reste
   disponible, toujours en `noindex`.
+- **Compte OVH** (ménage du 26/11/2026) : hébergement Pro (cluster106), domaines,
+  e-mails et budget sont décrits dans `DEPLOY-OVH.md` (« État de l'infrastructure OVH »).
 
 ## Prochaines étapes
 
@@ -26,7 +28,11 @@ _Mise à jour : 2 novembre 2026. Ce fichier fait référence._
    en place (sinon les modifications de Christine restent en français dans les autres
    langues). Voir `NOUVEAU-SITE.md`.
 2. Renouveler la clé GitHub de Mon espace avant le **18/10/2027**.
-3. Ensuite, éventuellement : retirer Tina et l'ancien design.
+3. Après le **7 septembre 2027** (fin des domaines coach-medium / coach-quantique) :
+   retirer l'étape « Déploiement SFTP des redirections » de `deploy-ovh.yml`, les
+   fichiers `redirects/*.htaccess` et, sur OVH, les dossiers `coach-redir` /
+   `coach-quantique-redir`. Pas avant.
+4. Ensuite, éventuellement : retirer Tina et l'ancien design.
 
 ---
 
