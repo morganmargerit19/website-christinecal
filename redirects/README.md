@@ -1,5 +1,12 @@
 # Redirections SEO des anciens domaines → christinecal.com (V3)
 
+> **Mise à jour du 26/11/2026 :** les domaines christinecal-coach-medium.com et
+> christinecal-coach-quantique.com sont **résiliés à l'échéance du 07/09/2027**.
+> Les redirections ci-dessous fonctionnent jusqu'à cette date, puis disparaissent.
+> Ne pas supprimer ces fichiers ni les dossiers `coach-redir` / `coach-quantique-redir`
+> avant. Ensuite, ils pourront partir avec l'étape correspondante de
+> `deploy-ovh.yml`. Détails : `DEPLOY-OVH.md` (« État de l'infrastructure OVH »).
+
 L'ancienne présence de Christine était éclatée sur **3 domaines** ; la V3 les
 unifie sous `christinecal.com` :
 

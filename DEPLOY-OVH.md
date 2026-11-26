@@ -1,9 +1,87 @@
 # Mise en ligne sur OVH — christinecal.com
 
-Le site V3 est **statique** (HTML/CSS/JS) : il se pose sur l'hébergement mutualisé
-OVH sans base de données ni PHP. Le déploiement est **automatique** via GitHub
+Le site est **statique** (HTML/CSS/JS ; seul Mon espace utilise PHP) et se pose sur
+l'hébergement mutualisé OVH. Le déploiement est **automatique** via GitHub
 Actions (`.github/workflows/deploy-ovh.yml`) : à chaque `push` sur `main`, le site
-est rebuildé (cible racine) et envoyé en FTP dans le dossier `www/` d'OVH.
+est reconstruit (cible racine) et envoyé en **SFTP** dans le dossier **`www-v3`** d'OVH.
+
+## État de l'infrastructure OVH (vérifié le 26/11/2026)
+
+> Référence à jour après le ménage du compte OVH de Christine (26/11/2026).
+> Côté hébergement, SFTP et dossier `www-v3`, **rien n'a changé** : le
+> déploiement fonctionne comme avant.
+
+### Hébergement
+
+- Hébergement mutualisé OVH, offre **Pro** (250 Go, ~6,8 Go utilisés),
+  **cluster106** (`ftp.cluster106.hosting.ovh.net`, SFTP port 22).
+- Nom du service chez OVH : **« christkal5d.com »** (nom historique, créé en 2012).
+- Échéance **01/11/2027**, renouvellement automatique, 119,88 € HT/an.
+- ⚠️ **L'offre Pro est nécessaire** : accès SSH/SFTP pour le déploiement, et
+  3 bases de données. Ne pas descendre en offre Perso sans revoir tout cela.
+
+**Multisite (domaine → dossier) :**
+
+| Domaine | Dossier | Rôle |
+|---|---|---|
+| christinecal.com, www.christinecal.com | `www-v3` (SSL actif) | **Le site en production** |
+| christinecal-coach-medium.com (+ www) | `coach-redir` (SSL) | Redirections 301 SEO, jusqu'au 07/09/2027 |
+| christinecal-coach-quantique.com (+ www) | `coach-quantique-redir` (SSL) | Redirections 301 SEO, jusqu'au 07/09/2027 |
+| coach.christkal5d.com | `coach` | Redirige vers christinecal.com |
+| christkal5d.com, www.christkal5d.com, 5d.christkal5d.com | anciens dossiers (`coach-quantique`, `www`) | Non utilisés |
+
+- `mon-espace-config.php` (mot de passe et clé GitHub de Mon espace) est dans le
+  dossier parent de `www-v3`, hors déploiement. Inchangé.
+- **3 bases MySQL** conservées, dont celle de l'ancien WordPress, gardée
+  volontairement comme sauvegarde. Aucune n'a été touchée.
+- Déploiement : GitHub Actions → SFTP vers `www-v3` (voir plus bas). Inchangé.
+
+### Domaines
+
+| Domaine | Rôle | Échéance | Statut |
+|---|---|---|---|
+| christinecal.com | Site + Mon espace | 19/11/2027 | Renouvellement auto : **à garder** |
+| christkal5d.com | Domaine technique de l'hébergement (gratuit avec l'offre Pro) | 15/02/2027 | Renouvellement auto : **à garder** |
+| christinecal-coach-medium.com | Redirection 301 SEO → christinecal.com/eveil-a-soi/ | 07/09/2027 | **Résilié à l'échéance** (décidé le 26/11/2026) |
+| christinecal-coach-quantique.com | Redirection 301 SEO → christinecal.com/eveil-au-soi/ | 07/09/2027 | **Résilié à l'échéance** (décidé le 26/11/2026) |
+
+Conséquences :
+- Les deux anciens domaines et leurs redirections fonctionnent jusqu'au
+  **7 septembre 2027**, puis disparaissent.
+- Les dossiers `coach-redir` et `coach-quantique-redir` deviendront inutiles après
+  cette date. **Ne pas les supprimer avant.** Après le 7 septembre 2027, on pourra
+  retirer l'étape « Déploiement SFTP des redirections (anciens domaines) » de
+  `deploy-ovh.yml`, les fichiers `redirects/*.htaccess` et ces deux dossiers.
+- Leurs zones DNS (gratuites) restent volontairement en renouvellement automatique :
+  elles arrivent à échéance avant les domaines (1er et 2 septembre), et les résilier
+  couperait les redirections trop tôt.
+
+### E-mails
+
+- Christine utilise uniquement **cc.christinecal@gmail.com** (l'adresse affichée sur
+  `/contact/`).
+- **contact@christinecal.com** est une simple redirection OVH (pas de boîte).
+  Modifiée le 26/11/2026 : elle pointait vers une ancienne adresse Fastmail (morte),
+  elle pointe maintenant vers **cc.christinecal@gmail.com**.
+- Aucune autre boîte OVH n'est utilisée (`postmaster@christkal5d.com` : vide,
+  inutilisée depuis 2019, incluse gratuitement).
+- MX de christinecal.com : OVH (`mx3.mail.ovh.net`, `mx4.mail.ovh.net`). **Ne pas
+  les changer**, sinon contact@christinecal.com ne fonctionne plus.
+
+### Budget OVH
+
+- Avant le ménage : **192,42 € TTC/an** (hébergement Pro + 3 domaines payants).
+  L'accès Internet xDSL est déjà arrêté depuis le 01/05/2026.
+- À partir de septembre 2027 : **~160 € TTC/an**.
+
+### Points connus, non corrigés (DNS non touché)
+
+- christinecal-coach-medium.com : `www` a à la fois un enregistrement A et un CNAME
+  (incohérent, sans effet visible).
+- www.christkal5d.com pointe vers une ancienne IP OVH (erreur). Sans importance.
+
+---
+
 
 > Tant que la variable `OVH_DEPLOY` n'est pas à `true`, l'Action ne fait rien.
 > On peut donc tout préparer sans risque, et basculer le jour J en un clic.
