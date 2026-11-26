@@ -72,8 +72,8 @@ const DVD_NOTE = tr('DVD DEBOWSKA avec Autorisation exceptionnelle de diffusion 
     <section id={t.id} class:list={['section', i % 2 ? 'sky' : 'deep']}>
       <div class="wrap">
         <p class="eyebrow">DVD DEBOWSKA</p>
+        {i === 0 && <p class="dvd-note">{DVD_NOTE} <a href="https://www.debowska.fr/" target="_blank" rel="noopener">{tr('Visiter son site')}</a></p>}
         <h2 class="h2" style="margin-top: 14px">{t.title}</h2>
-        {i === 0 && <p class="serif italic" style="margin-top: 16px; max-width: 720px; font-size: 17px; color: var(--mist-2)">{DVD_NOTE}</p>}
         {t.rows.map((row) => (
           <div class="video-grid video-grid--3">
             {row.map((id) => {
